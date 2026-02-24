@@ -74,7 +74,7 @@
   --font-size-content: 1.5rem;
   --font-size-icon: 2.5rem;
 
-  --font-size-multiplier-xxxl: 1.75;
+  --font-size-multiplier-xxxl: 1.65;
   --font-size-multiplier-xxl: 1.5;
   --font-size-multiplier-xl: 1.3;
   --font-size-multiplier-lg: 1.15;
@@ -82,7 +82,7 @@
   --font-size-multiplier-sm: 0.85;
   --font-size-multiplier-xs: 0.7;
   --font-size-multiplier-xxs: 0.5;
-  --font-size-multiplier-xxxs: 0.4;
+  --font-size-multiplier-xxxs: 0.35;
 
   --font-weight-boldest: 700;
   --font-weight-bolder: 600;
@@ -948,5 +948,9 @@ footer {
 @media (max-width: 386px) {
   .tip:hover::before {
     font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  }
+
+  .postscriptum-container p {
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   }
 }

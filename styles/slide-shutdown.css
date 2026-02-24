@@ -64,6 +64,10 @@ ul.nav-list {
   font-weight: var(--font-weight-boldest);
 }
 
+.nav-list li:not(.selected-item) p {
+  color: var(--color-white-alpha-75);
+}
+
 .nav-list li.selected-item {
   background-color: var(--background-green-alpha-50);
   transition: background-color 0.3s ease-out;

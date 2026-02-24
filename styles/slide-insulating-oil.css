@@ -1,1 +1,7 @@
 /* media content configuration */
+/* Small devices (portrait phones, 496px and below) */
+@media (max-width: 496px) {
+  .img-cell-3 img {
+    object-position: 100% 0%;
+  }
+}

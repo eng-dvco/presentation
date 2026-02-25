@@ -3,6 +3,10 @@
   max-width: 1080px;
 }
 
+.postscriptum-container {
+  grid-column: span 2;
+}
+
 .img-cell-1,
 .img-cell-2 {
   grid-area: 1 / 1 / 3 / -1;

@@ -307,7 +307,7 @@ a.flex-logo-container {
   overflow: hidden;
 }
 
-.img:not(.transient) > img {
+.img > img {
   object-fit: cover;
   object-position: center;
   width: 100%;
@@ -316,9 +316,14 @@ a.flex-logo-container {
   transition: transform 0.3s ease-out;
 }
 
-.img:not(.transient) > img:hover,
-.img:not(.transient) > img:focus {
+.img > img:hover,
+.img > img:focus {
   transform: scale(1.03);
+}
+
+.img.transient > img:hover,
+.img.transient > img:focus {
+  transform: scale(1);
 }
 
 .img:not(.unresizable) {

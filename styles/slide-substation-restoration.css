@@ -20,10 +20,6 @@
   grid-column: span 2;
 }
 
-.img > img {
-  object-fit: cover;
-}
-
 .img-cell-5 > img {
   object-position: 0% 0%;
 }

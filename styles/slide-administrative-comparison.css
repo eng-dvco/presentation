@@ -3,13 +3,6 @@
   max-width: 1080px;
 }
 
-.mosaic-container {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
 .img-cell-1,
 .img-cell-2 {
   grid-area: 1 / 1 / 3 / -1;
@@ -17,19 +10,16 @@
 }
 
 .img-cell-1 > img,
-.img-cell-2 > img {
-  width: 100%;
+.img-cell-2 > img,
+.img-cell-3 > img,
+.img-cell-4 > img {
+  object-fit: contain;
+  object-position: center 0%;
 }
 
 .img-cell-3,
 .img-cell-4 {
   grid-column: span 2;
-  height: auto;
-}
-
-.img-cell-3 > img,
-.img-cell-4 > img {
-  width: 100%;
   height: auto;
 }
 

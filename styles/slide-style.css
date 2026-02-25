@@ -682,6 +682,7 @@ a.flex-logo-container {
   background-color: var(--background-black-alpha-75);
   padding: 12px 24px;
   border-radius: var(--border-general);
+  pointer-events: none;
 }
 
 .notes-list {
@@ -697,19 +698,27 @@ a.flex-logo-container {
 
 .note-item {
   display: flex;
+  align-items: center;
+}
+
+.note-item p {
+  pointer-events: none;
+}
+
+.note-item > span {
+  color: var(--color-white-alpha-75);
+  white-space: pre;
 }
 
 .note-acronym {
   min-width: max-content;
+  padding: var(--padding-general-small);
+  border-radius: var(--border-item);
+  background-color: var(--background-white-alpha-10);
 }
 
 .note-meaning {
   color: var(--color-grey);
-}
-
-.note-acronym::after {
-  content: " → ";
-  white-space: pre;
 }
 
 /* additional information on hovering */
@@ -951,6 +960,6 @@ footer {
   }
 
   .postscriptum-container p {
-    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   }
 }

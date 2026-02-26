@@ -1,0 +1,49 @@
+/* media content configuration */
+.content-wrapper {
+  max-width: 1080px;
+}
+
+.mosaic-container {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.img-cell-4 > img {
+  object-position: 25% 0%;
+}
+
+.img-cell-5,
+.img-cell-6 {
+  grid-column: span 4;
+}
+
+.img-cell-5 > img,
+.img-cell-6 > img {
+  object-fit: scale-down;
+}
+
+/* Medium devices (tablets, 992px and below) */
+@media (max-width: 992px) {
+  .content-wrapper {
+    max-width: 720px;
+  }
+  .mosaic-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .img-cell-5,
+  .img-cell-6 {
+    grid-column: span 2;
+  }
+}
+
+/* Small devices (landscape phones, 576px and below) */
+@media (max-width: 576px) {
+  .mosaic-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .img-cell-5 > img,
+  .img-cell-6 > img {
+    object-fit: scale-down;
+  }
+}

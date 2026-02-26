@@ -1,0 +1,110 @@
+/* media content configuration */
+.content-wrapper {
+  max-width: 960px;
+  gap: 12px;
+}
+
+.activity-container {
+  width: 100%;
+}
+
+.mosaic-container {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  height: fit-content;
+}
+
+.mosaic-column {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.mosaic-column.row-1 {
+  grid-template-rows: 1fr;
+}
+
+.mosaic-column.row-2 {
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.mosaic-column.row-3 {
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.title-header-h2 {
+  margin-bottom: 24px;
+}
+
+.content-wrapper > .title-header-h3:not(:nth-of-type(2)) {
+  margin-top: 24px;
+}
+
+ul.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.nav-list li {
+  margin: 8px;
+  background-color: var(--background-black-alpha-50);
+  padding: var(--padding-general-normal);
+  border-radius: var(--border-general);
+  transition: background-color 0.3s ease-out;
+}
+
+.nav-list li:hover,
+.nav-list li:focus {
+  background-color: var(--background-green-alpha-25);
+}
+
+.nav-list p {
+  font-weight: var(--font-weight-boldest);
+}
+
+.nav-list li:not(.selected-item) p {
+  color: var(--color-white-alpha-75);
+}
+
+.nav-list li.selected-item {
+  background-color: var(--background-green-alpha-50);
+  transition: background-color 0.3s ease-out;
+}
+
+.nav-list li.selected-item:hover,
+.nav-list li.selected-item:focus {
+  background-color: var(--background-green-alpha-75);
+}
+
+.list {
+  border-radius: var(--border-general);
+  padding: var(--padding-general-normal);
+  grid-column: span 2;
+  background-color: var(--background-black-alpha-50);
+  height: 100%;
+}
+
+.list li {
+  margin: 12px;
+  font-size: calc(var(--font-size-default) * var(--font-size-multiplier-sm));
+  font-weight: var(--font-weight-bold);
+  list-style-type: disc;
+
+  transition:
+    background-color 0.15s ease-out,
+    padding 0.15s ease-out;
+}
+
+.list li:hover,
+.list li:focus {
+  background-color: var(--background-black-alpha-50);
+  border-radius: var(--border-smaller);
+  padding-left: 8px;
+  cursor: default;
+}
+
+div .img {
+  max-height: 240px;
+}

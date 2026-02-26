@@ -1,0 +1,43 @@
+/* media content configuration */
+.content-wrapper {
+  max-width: 1080px;
+}
+
+.mosaic-container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.img-cell-1,
+.img-cell-2,
+.img-cell-3,
+.img-cell-4,
+.img-cell-5,
+.img-cell-6,
+.img-cell-7 {
+  grid-column: span 2;
+}
+
+.img-cell-5 > img {
+  object-position: 0% 0%;
+}
+
+/* Medium devices (tablets, 992px and below) */
+@media (max-width: 992px) {
+  .content-wrapper {
+    max-width: 720px;
+  }
+  .mosaic-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small devices (portrait phones, 496px and below) */
+@media (max-width: 496px) {
+    .img-cell-8,
+    .img-cell-9 {
+      grid-column: span 2;
+    }
+}

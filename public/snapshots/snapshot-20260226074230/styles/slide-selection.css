@@ -43,6 +43,22 @@
   color: var(--color-white-alpha-75);
 }
 
+.alert-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 var(--padding-around-general);
+
+  background-color: var(--background-purple-alpha-75);
+  color: var(--color-white);
+  font-family: var(--font-family-general);
+  
+  & > p {
+    font-weight: var(--font-weight-boldest);
+  }
+}
+
 .legend-container {
   display: flex;
   flex-wrap: wrap;

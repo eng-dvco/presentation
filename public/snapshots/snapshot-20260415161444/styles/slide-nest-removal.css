@@ -1,0 +1,8 @@
+/* media content configuration */
+.content-wrapper {
+  max-width: 960px;
+}
+
+.img-h-stretch {
+  grid-column: span 2;
+}

@@ -1,0 +1,1 @@
+A proteção 50/62BF, ou simplesmente 50BF, refere-se a função de proteção de falha de disjuntor (breaker failure) em sistemas elétricos de subestações, detectando quando um disjuntor falha ao abrir e ainda há correte elétrica atuando com um retardo de tempo (geralmente 200-300 ms) para tripar o disjuntor de retaguarda, evitando a propagação de falhas pelo sistema elétrico.

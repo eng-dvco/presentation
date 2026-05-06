@@ -1,0 +1,9 @@
+/* media content configuration */
+.content-wrapper {
+  max-width: 960px;
+}
+
+.img-v-stretch {
+  height: auto;
+  grid-row: span 2;
+}

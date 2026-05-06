@@ -1,0 +1,14 @@
+/* media content configuration */
+.content-wrapper {
+  max-width: 1080px;
+}
+
+.img-cell-1,
+.img-cell-2 {
+  grid-column: span 2;
+  height: auto;
+}
+
+.img > img {
+  object-fit: contain;
+}

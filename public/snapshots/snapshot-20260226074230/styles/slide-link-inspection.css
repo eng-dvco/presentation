@@ -1,0 +1,8 @@
+/* media content configuration */
+/* Medium devices (tablets, 768px and below) */
+@media (max-width: 768px) {
+  .img-cell-1 > img,
+  .img-cell-2 > img {
+    object-fit: fill;
+  }
+}

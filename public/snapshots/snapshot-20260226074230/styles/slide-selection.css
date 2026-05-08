@@ -604,4 +604,10 @@
   .legend-container li:nth-child(1n)::before {
     text-align: left;
   }
+
+  .alert-banner {
+    & > p {
+      font-size: calc(var(--font-size-content)*var(--font-size-multiplier-xxs));
+    }
+  }
 }

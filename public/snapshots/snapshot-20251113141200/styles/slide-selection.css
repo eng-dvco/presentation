@@ -582,6 +582,12 @@
   .opener-item {
     font-size: calc(var(--font-size-content)*var(--font-size-multiplier-xxs));
   }
+
+  .alert-banner {
+    & > p {
+      font-size: calc(var(--font-size-content)*var(--font-size-multiplier-xxs));
+    }
+  }
 }
 
 /* Small devices (portrait phones, 386px and below) */

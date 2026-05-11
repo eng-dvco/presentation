@@ -507,12 +507,12 @@
 }
 
 /* documents list */
-.selection-grid > .title-header-h3,
+.selection-grid > .title-header-h2,
 .selection-grid > .mosaic-container {
   grid-column: span 4;
 }
 
-.selection-grid > .title-header-h3 {
+.selection-grid > .title-header-h2 {
   border-radius: var(--border-general);
 }
 

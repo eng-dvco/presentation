@@ -137,6 +137,18 @@
   }
 }
 
+/* Medium devices (tablets, 768px and below) */
+@media (max-width: 768px) {
+  .img.img-duo-column,
+  .img.img-tri-column,
+  .img.img-quad-column,
+  .img.img-stretch,
+  .img.img-largest {
+    height: 360px;
+    grid-column: auto;
+  }
+}
+
 /* Small devices (landscape phones, 576px and below) */
 @media (max-width: 576px) {
   .mosaic-container {

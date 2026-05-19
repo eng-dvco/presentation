@@ -53,3 +53,19 @@ ul.nav-list {
 .content-wrapper > .title-header-h3 {
   margin-top: 24px;
 }
+
+.date-subtitle {
+  width: 100%;
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: var(--color-black-alpha-50);
+  border-radius: var(--border-general);
+  text-align: center;
+}
+
+.date-subtitle h4 {
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+}

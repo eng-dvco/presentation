@@ -553,6 +553,21 @@
 }
 
 /* media configuration */
+/* X-Large devices (large desktops, 1200px and below) */
+@media (max-width: 1200px) {
+  .section-substation .column-1 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-administration .column-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .section-obstacles {
+    min-width: 0;
+  }
+}
+
 /* Large devices (desktops, 992px and below) */
 @media (max-width: 992px){
   .selection-grid:not(.invisible) {

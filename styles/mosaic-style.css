@@ -157,8 +157,7 @@
   .img.img-duo-column,
   .img.img-tri-column,
   .img.img-quad-column,
-  .img.img-stretch,
-  .img.img-largest {
+  .img.img-stretch {
     height: 360px;
     grid-column: auto;
   }
@@ -170,5 +169,13 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+  }
+
+  .img.img-duo-column,
+  .img.img-tri-column,
+  .img.img-quad-column,
+  .img.img-stretch,
+  .img.img-largest {
+    height: 360px;
   }
 }

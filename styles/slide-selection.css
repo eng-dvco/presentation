@@ -205,15 +205,15 @@
     opacity: 1;
   }
 
-  /* struggling to centralize */
   &:not(.pending)::before {
     content: "›";
     position: absolute;
     top: 50%;
-    right: -.5%;
+    right: 8px;
     transform:
-      translateY(-65%);
+      translateY(calc(-50% - 0.15em));
 
+    line-height: 1;
     font-size: calc(var(--font-size-icon)*var(--font-size-multiplier-md));
     color: var(--color-black);
 

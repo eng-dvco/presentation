@@ -96,6 +96,21 @@
     grid-column: 1 / -1;
   }
 
+  &.img-mid-top > img {
+    object-fit: cover;
+    object-position: center 0%;
+  }
+
+  &.img-mid-mid > img {
+    object-fit: cover;
+    object-position: center 50%;
+  }
+
+  &.img-mid-bottom > img {
+    object-fit: cover;
+    object-position: center 100%;
+  }
+
   /* a11y: position indicator (top-left of each mosaic image) */
   &::before {
     counter-increment: img-position;

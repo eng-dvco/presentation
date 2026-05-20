@@ -172,18 +172,23 @@ h6 {
 h1 {
   font-size: calc(var(--font-size-h1) * var(--font-multiplier));
 }
+
 h2 {
   font-size: calc(var(--font-size-h2) * var(--font-multiplier));
 }
+
 h3 {
   font-size: calc(var(--font-size-h3) * var(--font-multiplier));
 }
+
 h4 {
   font-size: calc(var(--font-size-h4) * var(--font-multiplier));
 }
+
 h5 {
   font-size: calc(var(--font-size-h5) * var(--font-multiplier));
 }
+
 h6 {
   font-size: calc(var(--font-size-h6) * var(--font-multiplier));
 }

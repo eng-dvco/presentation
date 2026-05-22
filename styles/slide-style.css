@@ -238,6 +238,62 @@ hr {
   margin-left: 24px;
   text-align: left;
   align-content: center;
+
+  /* when a section icon precedes the title, lay them out in a row:
+     the existing margin-left gives the icon its fixed left distance,
+     align-items centers it vertically against the title */
+  &:has(.section-icon) {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+}
+
+/* leading section icon, shared by index.html headers and individual slides:
+   recolor the dark source SVGs to the title color (--color-white) by
+   painting a solid background clipped to the icon shape via mask */
+.section-icon {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  background-color: var(--color-white);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  pointer-events: none;
+
+  &.icon-substation {
+    -webkit-mask-image: url(../assets/icons/substation.svg);
+    mask-image: url(../assets/icons/substation.svg);
+  }
+
+  &.icon-transmission {
+    -webkit-mask-image: url(../assets/icons/lt-tower.svg);
+    mask-image: url(../assets/icons/lt-tower.svg);
+  }
+
+  &.icon-distribution {
+    -webkit-mask-image: url(../assets/icons/ld-pole.svg);
+    mask-image: url(../assets/icons/ld-pole.svg);
+  }
+
+  &.icon-events {
+    -webkit-mask-image: url(../assets/icons/events.svg);
+    mask-image: url(../assets/icons/events.svg);
+  }
+
+  &.icon-obstacles {
+    -webkit-mask-image: url(../assets/icons/obstacle.svg);
+    mask-image: url(../assets/icons/obstacle.svg);
+  }
+
+  &.icon-documents {
+    -webkit-mask-image: url(../assets/icons/documents.svg);
+    mask-image: url(../assets/icons/documents.svg);
+  }
 }
 
 .title-header-h2 {

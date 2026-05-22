@@ -31,6 +31,26 @@
   min-width: max-content;
 }
 
+/* section headers with leading icon: icon fixed-left + vertically centered,
+   title shares the remaining space (flex) so neither overlaps the other */
+.title-header-h2:has(.section-icon) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 16px;
+  /* mirrors the left-occupied space (padding + icon + gap) so the
+     centered title stays optically centered within the whole header */
+  padding-right: 56px;
+
+  & .title-h2 {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+}
+/* .section-icon base + per-icon mask rules live in slide-style.css so the
+   individual slides (which don't load this file) can reuse them */
+
 .update-info {
   padding: 4px 0 4px 24px;
   background-color: var(--background-white-alpha-10);

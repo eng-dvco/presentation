@@ -441,6 +441,23 @@ a.flex-logo-container {
   font-weight: var(--font-weight-bold);
   text-align: center;
   color: var(--color-white);
+
+  &.obs-done {
+    background: var(--color-green-alpha-50);
+    color: var(--color-black);
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-right: 8px;
+      vertical-align: -0.15em;
+      background-color: currentColor;
+      -webkit-mask: url(../assets/icons/circle-check.svg) center / contain no-repeat;
+      mask: url(../assets/icons/circle-check.svg) center / contain no-repeat;
+    }
+  }
 }
 
 /* general carousel configuration */

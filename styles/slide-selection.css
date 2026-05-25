@@ -564,6 +564,12 @@
       padding 0.15s ease-out;
   }
 
+  & .li-subtitle {
+    list-style: none;
+    font-weight: var(--font-weight-boldest);
+    color: var(--color-green-alpha-75);
+  }
+
   & li:hover,
   & li:focus {
     border-radius: var(--border-smaller);

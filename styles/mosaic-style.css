@@ -111,6 +111,16 @@
     object-position: center 100%;
   }
 
+  &.img-contain > img {
+    object-fit: contain;
+    object-position: center 50%;
+  }
+
+  &.img-fill > img {
+    object-fit: fill;
+    object-position: center 50%;
+  }
+
   /* a11y: position indicator (top-left of each mosaic image) */
   &::before {
     counter-increment: img-position;

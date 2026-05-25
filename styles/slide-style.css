@@ -253,9 +253,9 @@ hr {
    recolor the dark source SVGs to the title color (--color-white) by
    painting a solid background clipped to the icon shape via mask */
 .section-icon {
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
   background-color: var(--color-white);
   -webkit-mask-position: center;
   mask-position: center;
@@ -288,6 +288,11 @@ hr {
   &.icon-obstacles {
     -webkit-mask-image: url(../assets/icons/obstacle.svg);
     mask-image: url(../assets/icons/obstacle.svg);
+  }
+
+  &.icon-safety {
+    -webkit-mask-image: url(../assets/icons/safety.svg);
+    mask-image: url(../assets/icons/safety.svg);
   }
 
   &.icon-documents {
@@ -810,6 +815,31 @@ footer {
   pointer-events: none;
 }
 
+/* a11y: keyboard focus indicator */
+*:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+/* a11y: skip link (visible only on focus) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  padding: var(--padding-general-normal);
+  border-radius: 0 0 var(--border-general) 0;
+  background-color: var(--color-black);
+  color: var(--color-green);
+  font-weight: var(--font-weight-bold);
+  z-index: 9999;
+
+  transition: top 150ms ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* Large devices (desktops, 992px and below) */
 @media (max-width: 992px) {
   :root {
@@ -882,6 +912,10 @@ footer {
 
 /* Small devices (portrait phones, 386px and below) */
 @media (max-width: 386px) {
+  :root {
+    --font-multiplier: var(--font-size-multiplier-xxs);
+  }
+
   .tip {
     &:hover::before {
       font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
@@ -891,31 +925,6 @@ footer {
   .postscriptum-container p {
     font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   }
-}
-
-/* a11y: keyboard focus indicator */
-*:focus-visible {
-  outline: 2px solid var(--color-green);
-  outline-offset: 2px;
-}
-
-/* a11y: skip link (visible only on focus) */
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: 0;
-  padding: var(--padding-general-normal);
-  border-radius: 0 0 var(--border-general) 0;
-  background-color: var(--color-black);
-  color: var(--color-green);
-  font-weight: var(--font-weight-bold);
-  z-index: 9999;
-
-  transition: top 150ms ease;
-}
-
-.skip-link:focus {
-  top: 0;
 }
 
 /* a11y: respect prefers-reduced-motion */

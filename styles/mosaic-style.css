@@ -106,6 +106,11 @@
     object-position: center 50%;
   }
 
+  &.img-mid-right > img {
+    object-fit: cover;
+    object-position: 75% 50%;
+  }
+
   &.img-mid-bottom > img {
     object-fit: cover;
     object-position: center 100%;

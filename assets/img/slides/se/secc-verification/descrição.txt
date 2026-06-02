@@ -1,0 +1,5 @@
+secc-1, secc-2: Verificação dos ajustes do acionamento dos conectores dos pulos em “T” com o barramento desligado e aterrado.
+
+secc-3: Verificação dos contra pinos (cupilhas) com o barramento desligado e aterrado.
+
+secc-4, secc-5: Realização de limpeza dos conectores e contatos com a chave totalmente desenergizada.

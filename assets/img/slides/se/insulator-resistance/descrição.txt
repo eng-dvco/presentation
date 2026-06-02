@@ -1,0 +1,1 @@
+insulator-1, insulator-2: Aferição da resistência de isolamento dos cabos de alimentação do cubículo 6,9 kV.

@@ -307,8 +307,9 @@ a.flex-logo-container {
   color: var(--color-white);
 
   &.obs-done {
-    background: var(--color-green-alpha-50);
+    background: var(--color-green-alpha-75);
     color: var(--color-black);
+    font-weight: var(--font-weight-boldest);
 
     &::before {
       content: "";
@@ -320,6 +321,24 @@ a.flex-logo-container {
       background-color: currentColor;
       -webkit-mask: url(../assets/icons/circle-check.svg) center / contain no-repeat;
       mask: url(../assets/icons/circle-check.svg) center / contain no-repeat;
+    }
+  }
+
+  &.obs-pending {
+    background: var(--color-red-alpha-75);
+    color: var(--color-black);
+    font-weight: var(--font-weight-boldest);
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      margin-right: 8px;
+      vertical-align: -0.15em;
+      background-color: currentColor;
+      -webkit-mask: url(../assets/icons/circle-xmark.svg) center / contain no-repeat;
+      mask: url(../assets/icons/circle-xmark.svg) center / contain no-repeat;
     }
   }
 }

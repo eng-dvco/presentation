@@ -455,6 +455,13 @@
   }
 }
 
+/* símbolo (❮) do atalho "IR PARA O HISTÓRICO": herda a formatação do texto
+   do link (sobrepõe o reset universal `*`, que o deixaria branco e normal) */
+.reunion span {
+  color: inherit;
+  font: inherit;
+}
+
 .reunion-collection {
   display: flex;
   scroll-snap-type: inline proximity;

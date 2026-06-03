@@ -224,7 +224,8 @@ a.flex-logo-container {
 .crumb {
   line-height: var(--font-line-ui);
 
-  & a {
+  & a,
+  & [aria-current="page"] {
     font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
     font-weight: var(--font-weight-bolder);
     font-style: italic;
@@ -240,13 +241,13 @@ a.flex-logo-container {
     }
   }
 
-  &:active {
-    translate: 0.5px 0.5px;
+  /* último item (página atual): mesma aparência dos demais, porém não clicável */
+  & [aria-current="page"] {
+    cursor: default;
   }
 
-  &:last-child a {
-    opacity: 0.5;
-    pointer-events: none;
+  &:active {
+    translate: 0.5px 0.5px;
   }
 
   &::after {

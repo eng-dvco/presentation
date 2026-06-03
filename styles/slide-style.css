@@ -193,11 +193,13 @@ a.flex-logo-container {
 
 .cmt {
   width: 4.6rem;
+  height: auto;
   border-radius: var(--border-smaller);
 }
 
 .midr {
   width: 3.6rem;
+  height: auto;
 }
 
 /* breadcrumb configuration */
@@ -689,6 +691,7 @@ footer {
 
   & img {
     height: 2.5rem;
+    width: auto;
   }
 }
 

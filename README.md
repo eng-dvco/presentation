@@ -199,8 +199,8 @@ A página de conteúdo (`slides/index.html`) organiza os slides em uma grade (`s
 
 | # | Classe CSS               | Título (H2)         | Ícone                | Itens |
 | - | ------------------------ | -------------------- | --------------------- | ----- |
-| 1 | `section-safety`       | ST — Segurança     | `icon-safety`       | 2     |
-| 2 | `section-substation`   | SE — Subestação   | `icon-substation`   | 11    |
+| 1 | `section-safety`       | ST — Segurança     | `icon-safety`       | 3     |
+| 2 | `section-substation`   | SE — Subestação   | `icon-substation`   | 10    |
 | 3 | `section-transmission` | LT — Transmissão   | `icon-transmission` | 8     |
 | 4 | `section-distribution` | LD — Distribuição | `icon-distribution` | 7     |
 | 5 | `section-events`       | Eventos              | `icon-events`       | 1     |
@@ -208,7 +208,7 @@ A página de conteúdo (`slides/index.html`) organiza os slides em uma grade (`s
 
 Total: 31 slides.
 
-> Alguns slides agregam mais de um tópico num único arquivo (vários blocos `title-header-h2` + `mosaic-container`): `slide-transformer-cleaning.html` reúne 4 tópicos (buchas do transformador, retificador, chave-seccionadora e isoladores), `slide-tag-replacement.html` reúne 2 (etiquetas de identificação e meio-fio/canaleta) e `slide-resistance-measurement.html` reúne 2 (medição com megômetro no cubículo de 6,9 kV e com micro-ohmímetro nas seccionadoras), cada um com pasta de imagens distinta em `assets/img/slides/se/`.
+> Alguns slides agregam mais de um tópico num único arquivo (vários blocos `title-header-h2` + `mosaic-container`): `slide-equipment-cleaning.html` reúne 4 tópicos (buchas do transformador, retificador, chave-seccionadora e isoladores), `slide-tag-replacement.html` reúne 2 (etiquetas de identificação e meio-fio/canaleta) e `slide-resistance-measurement.html` reúne 2 (medição com megômetro no cubículo de 6,9 kV e com micro-ohmímetro nas seccionadoras), cada um com pasta de imagens distinta em `assets/img/slides/se/`.
 
 Após a grade vem o bloco "Documentos Recebidos" (`div.title-header-h2` com `icon-documents` + `div.mosaic-container > div.list.list-cell-1` contendo um `<ol>`), que lista 11 PDFs e 5 planilhas XLSX (os mesmos arquivos de `.documents/`). O cabeçalho da página exibe um `update-info` ("Última atualização em 03-06-26 (quarta-feira, às 11h56)") e um `alert-banner` ("Versão demonstrativa | Apenas imagens disponíveis").
 

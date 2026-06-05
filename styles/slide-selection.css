@@ -306,14 +306,14 @@
 /* needs to update background image */
 .section-events {
   grid-column: span 4;
-  background-image: url("../assets/img/banner/documents.png");
+  background-image: url("../assets/img/banner/documents.jpg");
   background-position: center 75%;
 }
 
 /* needs to update background image */
 .section-safety {
   grid-area: 1 / 1 / 2 / -1;
-  background-image: url("../assets/img/banner/documents.png");
+  background-image: url("../assets/img/banner/documents.jpg");
   background-position: center 50%;
 
   & .column-6 {
@@ -333,19 +333,19 @@
 
 .section-worksheets {
   grid-column: span 4;
-  background-image: url("../assets/img/banner/documents.png");
+  background-image: url("../assets/img/banner/documents.jpg");
   background-position: 0% 25%;
 }
 
 .section-documentation {
   grid-column: span 4;
-  background-image: url("../assets/img/banner/documents.png");
+  background-image: url("../assets/img/banner/documents.jpg");
   background-position: 0% 50%;
 }
 
 .section-media {
   grid-column: span 4;
-  background-image: url("../assets/img/banner/documents.png");
+  background-image: url("../assets/img/banner/documents.jpg");
   background-position: 0% 75%;
 }
 

@@ -1,0 +1,3 @@
+replacement-1, replacement-2, replacement-3, replacement-4: Substituição do relé temporizado do painel do disjuntor DJ6-03 instalado no painel da Subestação SE-E4.
+
+replacement-5, replacement-6, replacement-7, replacement-8: Substituição de 01 (um) refletor LED de 200 W no vão AY do pátio de equipamentos da Subestação SE-E4.

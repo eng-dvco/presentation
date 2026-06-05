@@ -1,0 +1,7 @@
+paint-1, paint-2: Restauração da pintura dos meios-fios.
+
+paint-3, paint-4: Restauração da pintura das cabanas de extintores de incêndio.
+
+paint-5, paint-6: Restauração da pintura do cubículo de média tensão.
+
+paint-7, paint-8: Restauração da pintura de degraus e rampas.

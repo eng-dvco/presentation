@@ -65,14 +65,6 @@
 
   &.img-default {
     cursor: zoom-in;
-
-    &:active {
-      max-height: 50dvh;
-      transform: scale(1.75);
-      box-shadow: 0px 4px 12px 4px var(--color-black);
-      cursor: zoom-out;
-      z-index: 9999;
-    }
   }
 
   &.img-duo-column {
@@ -151,19 +143,6 @@
 
     pointer-events: none;
     z-index: 1;
-  }
-}
-
-/* X-Large devices (large desktops, 1350px and below) */
-@media (max-width: 1350px) {
-  .img.img-default {
-    cursor: default;
-
-    &:active {
-      transform: scale(1);
-      box-shadow: none;
-      cursor: default;
-    }
   }
 }
 

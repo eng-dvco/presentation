@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../styles/variables.css" />
     <link rel="stylesheet" href="../styles/slide-style.css" />
     <link rel="stylesheet" href="../styles/slide-selection.css" />
+    <script src="../scripts/slide-selection.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -41,7 +42,7 @@
         <p>Versão demonstrativa | Apenas imagens disponíveis</p>
       </div>
       <div class="update-info">
-        <p>Última atualização em 10-06-26 (quarta-feira, às 14h23)</p>
+        <p>Última atualização em 15-06-26 (segunda-feira, às 15h57)</p>
       </div>
       <div class="content-container">
         <div class="content-wrapper">
@@ -51,27 +52,47 @@
                     <span aria-hidden="true">❮</span> IR PARA O HISTÓRICO</a>
             </div>
           </div>
+          <div class="index-controls">
+            <label class="index-search-label">
+              <input id="slide-search" type="search" placeholder="Filtrar por nome…" autocomplete="off" aria-label="Filtrar slides por nome" />
+              <button id="search-clear" hidden aria-label="Limpar busca">✕</button>
+            </label>
+            <div class="section-filter-bar" role="group" aria-label="Filtrar por seção">
+              <button class="filter-btn active" data-filter="all">Todos</button>
+              <button class="filter-btn" data-filter="st">ST</button>
+              <button class="filter-btn" data-filter="se">SE</button>
+              <button class="filter-btn" data-filter="lt">LT</button>
+              <button class="filter-btn" data-filter="ld">LD</button>
+              <button class="filter-btn" data-filter="events">Eventos</button>
+              <button class="filter-btn" data-filter="obstacles">Óbices</button>
+              <button class="filter-btn" data-filter="docs">Documentos</button>
+            </div>
+          </div>
           <div class="selection-grid">
-            <section class="section section-safety">
+            <section class="section section-safety" data-section="st">
               <div class="title-header-h2">
                 <span class="section-icon icon-safety" aria-hidden="true"></span>
-                <h2 class="title-h2">ST — Segurança</h2>
+                <h2 class="title-h2">ST — Seg. do Trabalho</h2>
               </div>
               <div class="column column-6">
                 <a class="item item-1" href="../slides/slide-contact-label.html">
-                  Crachá com contatos de emergência</a>
+                  Contatos e orientações em banner</a>
                 <a class="item item-1" href="../slides/slide-fire-extinguisher-replacement.html">
                   Reposição de extintor de incêndio</a>
-                <a class="item item-1" href="../slides/slide-paint-restoration.html">
-                  Restauração de pintura</a>
               </div>
             </section>
-            <section class="section section-substation">
+            <section class="section section-substation" data-section="se">
               <div class="title-header-h2">
                 <span class="section-icon icon-substation" aria-hidden="true"></span>
                 <h2 class="title-h2">SE — Subestação</h2>
               </div>
               <div class="column column-1">
+                <a class="item item-1" href="../slides/slide-crushed-stone.html">
+                  Recomposição de brita das subestações</a>
+                <a class="item item-1" href="../slides/slide-thermography-inspection.html">
+                  Inspeção com VANT e câmera termográficos</a>
+                <a class="item item-1" href="../slides/slide-resistance-measurement.html">
+                  Uso do megômetro e micro-ohmímetro; tangente delta (Δ)</a>
                 <a class="item item-1" href="../slides/slide-gmg-maintenance.html">
                   Manutenção no GMG da SE-E3</a>
                 <a class="item item-1" href="../slides/slide-sage-normalization.html">
@@ -86,19 +107,15 @@
                   Correção de oxidação na caixa de alta tensão do TSA-01</a>
                 <a class="item item-1" href="../slides/slide-ac-repair.html">
                   Reparo nos ACs da sala de baterias da SE-E5</a>
-                <a class="item item-1" href="../slides/slide-crushed-stone.html">
-                  Recomposição de brita das subestações</a>
                 <a class="item item-1" href="../slides/slide-screw-tightening.html">
                   Reaperto de conectores e bornes</a>
-                <a class="item item-1" href="../slides/slide-resistance-measurement.html">
-                  Uso do megômetro e micro-ohmímetro; tangente delta (Δ)</a>
-                <a class="item item-1" href="../slides/slide-thermography-inspection.html">
-                  Inspeção termográfica de equipamentos</a>
                 <a class="item item-1" href="../slides/slide-component-replacement.html">
                   Substituição de relé temporizado e refletor LED</a>
+                <a class="item item-1" href="../slides/slide-paint-restoration.html">
+                  Revitalização da pintura</a>
               </div>
             </section>
-            <section class="section section-transmission">
+            <section class="section section-transmission" data-section="lt">
               <div class="title-header-h2">
                 <span class="section-icon icon-transmission" aria-hidden="true"></span>
                 <h2 class="title-h2">LT — Transmissão</h2>
@@ -108,21 +125,17 @@
                   Manutenção dos acessos da LT</a>
                 <a class="item item-1" href="../slides/slide-anchor-block.html">
                   Fabricação de blocos de ancoragem</a>
-                <a class="item item-1" href="../slides/slide-cable-retensioning.html">
-                  Retensionamento de estai</a>
-                <a class="item item-1" href="../slides/slide-concrete-base-repair.html">
+                <a class="item item-1 outdated" href="../slides/slide-concrete-base-repair.html">
                   Reparo estrutural nas fundações</a>
                 <a class="item item-1" href="../slides/slide-tower-identification.html">
                   Identificação de torres</a>
                 <a class="item item-1" href="../slides/slide-waterproofing.html">
                   Impermeabilização das bases</a>
-                <a class="item item-1" href="../slides/slide-grounding-mesh-repair.html">
-                  Recomposição da malha de aterramento</a>
                 <a class="item item-1" href="../slides/slide-uav-inspection.html">
                   Inspeção visual e termográfica com VANT</a>
               </div>
             </section>
-            <section class="section section-distribution">
+            <section class="section section-distribution" data-section="ld">
               <div class="title-header-h2">
                 <span class="section-icon icon-distribution" aria-hidden="true"></span>
                 <h2 class="title-h2">LD — Distribuição</h2>
@@ -130,74 +143,106 @@
               <div class="column column-3">
                 <a class="item item-1" href="../slides/slide-flooded-pole.html">
                   Manutenção nos postes inundados</a>
-                <a class="item item-1" href="../slides/slide-fuse-switch.html">
-                  Substituição de chave fusível</a>
-                <a class="item item-1" href="../slides/slide-nest-removal.html">
-                  Remoção de resíduos de ninho</a>
+                <a class="item item-1" href="../slides/slide-atalho-connection.html">
+                  Energização de Atalho</a>
                 <a class="item item-1" href="../slides/slide-optical-fiber.html">
-                  Manutenção na fibra ótica</a>
-                <a class="item item-1" href="../slides/slide-pole-cable.html">
-                  Manutenção na ancoragem</a>
+                  Manutenção na fibra ótica rompida</a>
                 <a class="item item-1" href="../slides/slide-pole-repair.html">
                   Reparo estrutural do fuste</a>
-                <a class="item item-1" href="../slides/slide-secc-knife.html">
-                  Regulagem de chave faca</a>
               </div>
             </section>
-            <section class="section section-events">
+            <section class="section section-events" data-section="events">
               <div class="title-header-h2">
                 <span class="section-icon icon-events" aria-hidden="true"></span>
                 <h2 class="title-h2">Eventos</h2>
               </div>
               <div class="column column-9">
-                <a
-                  class="item item-1"
-                  href="../slides/slide-lecture.html"
-                >
-                  Palestra de conscientização sobre descarte de lixo na LT
-                </a>
+                <a class="item item-1" href="../slides/slide-equipment-acquisition.html">
+                  Aquisição de equipamentos de medição e inspeção</a>
+                <a class="item item-1" href="../slides/slide-lecture.html">
+                  Palestra de conscientização sobre descarte de lixo na LT</a>
+                <a class="item item-1" href="../slides/slide-shutdown-timeline.html">
+                  Cronograma de desligamentos das SEs</a>
               </div>
             </section>
-            <section class="section section-obstacles">
+            <section class="section section-obstacles" data-section="obstacles">
               <div class="title-header-h2">
                 <span class="section-icon icon-obstacles" aria-hidden="true"></span>
                 <h2 class="title-h2">Óbices</h2>
               </div>
               <div class="column column-6">
-                <a class="item item-1" href="../slides/slide-circuit-breaker-pins.html">
-                  Pinos encontrados no disjuntor DJ6-02</a>
                 <a class="item item-1" href="../slides/slide-insulator-coating.html">
                   Deterioração do esmalte vitrificado do isolador</a>
+                <a class="item item-1" href="../slides/slide-hot-spot-fixing.html">
+                  Correção de ponto quente</a>
+                <a class="item item-1" href="../slides/slide-circuit-breaker-pins.html">
+                  Pinos encontrados no disjuntor DJ6-02</a>
+                <a class="item item-1" href="../slides/slide-parts-replacement.html">
+                  Substituição de peças avariadas</a>
+                <a class="item item-1" href="../slides/slide-pisf-situation-overview.html">
+                  Situação geral do PISF</a>
               </div>
             </section>
+            <section class="section section-documents" data-section="docs">
             <div class="title-header-h2">
               <span class="section-icon icon-documents" aria-hidden="true"></span>
               <h2 class="title-h2">Documentos Recebidos</h2>
             </div>
             <div class="mosaic-container">
               <div class="list list-cell-1">
-                <ol>
-                  <li class="li-subtitle">documentos de texto</li>
-                  <li><span class="ext-tag doc-text">pdf</span>2026-04-28_1379-RDC-2825-20-04-099-R00</li>
-                  <li><span class="ext-tag doc-text">pdf</span>Ficha — Aplicação de vedapren em bases com trinca</li>
-                  <li><span class="ext-tag doc-text">pdf</span>Ficha — Emenda da malha de aterramento da torre 59-3</li>
-                  <li><span class="ext-tag doc-text">pdf</span>Ficha — Instalação de placa de identificação da 49-1</li>
-                  <li><span class="ext-tag doc-text">pdf</span>Ficha — Instalação de placa de identificação</li>
-                  <li><span class="ext-tag doc-text">pdf</span>LT — Checklist de Execução de Atividades da Linha de Transmissão v1.94 – Norte e Leste</li>
-                  <li><span class="ext-tag doc-text">pdf</span>LT — Diagrama das Estruturas da Linha de Transmissão v1.94 – Norte e Leste</li>
-                  <li><span class="ext-tag doc-text">pdf</span>LT — Listagem das Estruturas da Linha de Transmissão v1.94 – Norte e Leste</li>
-                  <li><span class="ext-tag doc-text">pdf</span>LT — Manutenções nas Ancoragens das Torres Estaiadas v1.94 – Norte e Leste</li>
-                  <li><span class="ext-tag doc-text">pdf</span>LT — Manutenções nas Bases das Torres Estaiadas e Autoportantes v1.94 – Norte e Leste</li>
-                  <li><span class="ext-tag doc-text">pdf</span>Recomendações eletromecânica — COP Elétrico</li>
-                  <li class="li-subtitle">planilhas eletrônicas</li>
-                  <li><span class="ext-tag">xlsx</span>Controle Autoportante Leste</li>
-                  <li><span class="ext-tag">xlsx</span>LT — Controle de Serviços da Linha de Transmissão v1.94 – Norte e Leste</li>
-                  <li><span class="ext-tag">xlsx</span>Plano e sequência LD Norte</li>
-                  <li><span class="ext-tag">xlsx</span>SE — Recomposição de Brita das Subestações – Norte</li>
-                  <li><span class="ext-tag">xlsx</span>Tabela de km dos acessos manutenidos</li>
-                </ol>
+                <details class="doc-group" open>
+                  <summary class="li-subtitle">
+                    <span>documentos de texto</span>
+                    <span class="doc-chevron" aria-hidden="true">▾</span>
+                  </summary>
+                  <ol class="doc-items">
+                    <li><span class="ext-tag doc-text">pdf</span>2026-04-28_1379-RDC-2825-20-04-099-R00</li>
+                    <li><span class="ext-tag doc-text">pdf</span>Ficha — Aplicação de vedapren em bases com trinca</li>
+                    <li><span class="ext-tag doc-text">pdf</span>Ficha — Emenda da malha de aterramento da torre 59-3</li>
+                    <li><span class="ext-tag doc-text">pdf</span>Ficha — Instalação de placa de identificação da 49-1</li>
+                    <li><span class="ext-tag doc-text">pdf</span>Ficha — Instalação de placa de identificação</li>
+                    <li><span class="ext-tag doc-text">pdf</span>LT — Checklist de Execução de Atividades da Linha de Transmissão v1.94 – Norte e Leste</li>
+                    <li><span class="ext-tag doc-text">pdf</span>LT — Diagrama das Estruturas da Linha de Transmissão v1.94 – Norte e Leste</li>
+                    <li><span class="ext-tag doc-text">pdf</span>LT — Listagem das Estruturas da Linha de Transmissão v1.94 – Norte e Leste</li>
+                    <li><span class="ext-tag doc-text">pdf</span>LT — Manutenções nas Ancoragens das Torres Estaiadas v1.94 – Norte e Leste</li>
+                    <li><span class="ext-tag doc-text">pdf</span>LT — Manutenções nas Bases das Torres Estaiadas e Autoportantes v1.94 – Norte e Leste</li>
+                    <li><span class="ext-tag doc-text">pdf</span>Recomendações eletromecânica — COP Elétrico</li>
+                  </ol>
+                </details>
+                <details class="doc-group" open>
+                  <summary class="li-subtitle">
+                    <span>planilhas eletrônicas</span>
+                    <span class="doc-chevron" aria-hidden="true">▾</span>
+                  </summary>
+                  <ol class="doc-items">
+                    <li><span class="ext-tag">xlsx</span>Controle Autoportante Leste</li>
+                    <li><span class="ext-tag">xlsx</span>Cronograma de Manutenção das Torres Estaiadas</li>
+                    <li><span class="ext-tag">xlsx</span>LT — Controle de Serviços da Linha de Transmissão v1.94 – Norte e Leste</li>
+                    <li><span class="ext-tag">xlsx</span>Painel de Controle das Torres Autoportantes</li>
+                    <li><span class="ext-tag">xlsx</span>Painel de Controle LD 13,8 kV — Eixo Leste</li>
+                    <li><span class="ext-tag">xlsx</span>Painel de Controle LD 13,8 kV — Eixo Norte</li>
+                    <li><span class="ext-tag">xlsx</span>Plano e sequência LD Norte</li>
+                    <li><span class="ext-tag">xlsx</span>Quantitativo de Placas de Identificação das Torres — Eixos Norte e Leste</li>
+                    <li><span class="ext-tag">xlsx</span>SE — Recomposição de Brita das Subestações – Norte</li>
+                    <li><span class="ext-tag">xlsx</span>Tabela de km dos acessos manutenidos</li>
+                  </ol>
+                </details>
+                <details class="doc-group" open>
+                  <summary class="li-subtitle">
+                    <span>documento em slides</span>
+                    <span class="doc-chevron" aria-hidden="true">▾</span>
+                  </summary>
+                  <ol class="doc-items">
+                    <li><span class="ext-tag slides">pptx</span>Análise de gases e furfural</li>
+                    <li><span class="ext-tag slides">pptx</span>Relatório 6TR1 — N1 2026</li>
+                    <li><span class="ext-tag slides">pptx</span>Relatório 6TR1 — N2 2026</li>
+                    <li><span class="ext-tag slides">pptx</span>Relatório 6TR1 — N3 2026</li>
+                    <li><span class="ext-tag slides">pptx</span>Relatório 6TR2 — N3 2026</li>
+                  </ol>
+                </details>
               </div>
             </div>
+            </section>
           </div>
         </div>
       </div>

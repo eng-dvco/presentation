@@ -14,11 +14,23 @@
 body {
   padding: 0;
   margin: 0;
-  background-image: url(../assets/img/hero/hero-clean_blur.jpg);
-  background-attachment: fixed;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url(../assets/img/hero/hero-clean_blur.jpg) center center / cover no-repeat;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 100%) top center / 100% 60% no-repeat;
+  pointer-events: none;
 }
 
 h1,
@@ -843,7 +855,6 @@ footer {
 
   .img > img:hover,
   .img > img:focus,
-  .img.img-default:active,
   .redirect:hover,
   .item:active,
   .opener-item:active,
@@ -854,8 +865,590 @@ footer {
     transform: none;
     translate: 0;
   }
+}
 
-  .img.img-default:active {
-    max-height: none;
+/* ---- slide-nav.js: lightbox, navegação por teclado, copiar link ----------- */
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.92);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &.lightbox-visible { opacity: 1; }
+  &[hidden] { display: none; }
+}
+
+/* área que envolve imagem + botões de navegação lateral */
+.lightbox-stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 72px;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--border-general);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.lightbox-close,
+.lightbox-nav {
+  background: var(--background-black-alpha-75);
+  border: 1px solid var(--color-white-alpha-25);
+  color: var(--color-white);
+  cursor: pointer;
+  border-radius: 50%;
+  line-height: 1;
+  transition: background-color 0.15s;
+
+  &:hover { background: var(--color-green); color: var(--color-black); }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
+  z-index: 1;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  font-size: 1.75rem;
+  display: none;
+
+  &.lightbox-nav-prev { left: 16px; }
+  &.lightbox-nav-next { right: 16px; }
+  &:disabled { opacity: 0.3; pointer-events: none; }
+}
+
+/* legenda da imagem atual */
+.lightbox-caption {
+  flex-shrink: 0;
+  padding: 8px 24px 10px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
+  font-style: italic;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  &.lightbox-caption--empty { color: rgba(255, 255, 255, 0.28); }
+  &.lightbox-caption--done    { color: var(--color-green); }
+  &.lightbox-caption--pending { color: var(--color-red); }
+}
+
+/* tira de miniaturas */
+.lightbox-thumbs {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+  padding: 8px 24px 20px;
+  overflow-x: auto;
+  justify-content: safe center;
+  align-items: center;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.lightbox-thumb-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.lightbox-thumb-progress {
+  height: 3px;
+  width: 0%;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 0 0 2px 2px;
+  flex-shrink: 0;
+}
+
+.lightbox-thumb {
+  width: 80px;
+  height: 56px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.4;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+  transition: opacity 0.15s, border-color 0.15s, scale 0.15s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 60%);
+    pointer-events: none;
   }
+  background: transparent;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  &:hover { opacity: 0.75; }
+
+  &.active {
+    border-color: rgba(255, 255, 255, 0.85);
+    opacity: 1;
+    scale: 1.1;
+  }
+}
+
+.nav-hint-ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  width: calc(var(--r, 60px) * 2);
+  height: calc(var(--r, 60px) * 2);
+  margin-left: calc(var(--r, 60px) * -1);
+  margin-top: calc(var(--r, 60px) * -1);
+  background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 70%);
+  animation: nav-ripple 0.65s ease-out forwards;
+}
+
+@keyframes nav-ripple {
+  0%   { transform: scale(0);   opacity: 0.9; filter: blur(0px); }
+  65%  { transform: scale(1.1); opacity: 0.4; filter: blur(2px); }
+  100% { transform: scale(1.2); opacity: 0;   filter: blur(5px); }
+}
+
+.copy-url-btn {
+  margin-left: auto;
+  background: none;
+  border: 1px solid var(--color-white-alpha-25);
+  border-radius: var(--border-general);
+  color: var(--color-white-alpha-50);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  padding: 2px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+
+  &:hover { color: var(--color-white); border-color: var(--color-green); }
+}
+
+/* ---- sidebar de navegação por seção -------------------------------------- */
+
+.content-container.has-sidebar {
+  gap: 24px;
+}
+
+.content-container.has-sidebar .content-wrapper {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+}
+
+.slide-sidebar {
+  flex-shrink: 0;
+  width: 200px;
+  position: sticky;
+  top: 56px;
+  max-height: calc(100vh - 68px);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-black-alpha-50);
+  border-radius: var(--border-general);
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+}
+
+@media (max-width: 992px) {
+  .slide-sidebar { width: 160px; }
+}
+
+@media (max-width: 768px) {
+  .slide-sidebar { display: none; }
+  .content-container.has-sidebar { gap: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-overlay { transition: none; }
+  .lightbox-close,
+  .lightbox-nav,
+  .lightbox-thumb,
+  .copy-url-btn { transition: none; }
+}
+
+/* ---- navegação entre seções (barra lateral) ------------------------------ */
+/* reutiliza o posicionamento de .slide-sidebar (sticky, largura, responsivo) e
+   substitui o conteúdo por dois botões "anterior"/"próximo". */
+
+.slide-secnav {
+  gap: 12px;
+  padding: 0;
+  background-color: transparent;
+  backdrop-filter: none;
+  /* herda max-height/overflow:hidden de .slide-sidebar: a lista de itens rola
+     internamente quando a seção tem muitos slides */
+}
+
+/* sidebar colapsível com todas as seções — mesma formatação dos demais botões */
+.secnav-all {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.secnav-all-toggle {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+
+  & .secnav-dir { justify-content: space-between; }
+}
+
+.secnav-all-chevron {
+  font-size: 1.1em;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .secnav-all.is-open & { transform: rotate(180deg); }
+}
+
+/* corpo colapsível: anima de 0fr→1fr sem precisar medir a altura */
+.secnav-all-list {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .secnav-all.is-open & { grid-template-rows: 1fr; }
+}
+
+/* caixa que recorta o conteúdo durante a animação (sem padding próprio, para
+   colapsar a exatamente 0) */
+.secnav-all-list-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.secnav-all-links {
+  display: flex;
+  flex-direction: column;
+  gap: 3px; /* lista compacta: itens próximos, parte do mesmo bloco da sidebar */
+  padding-top: 12px; /* respiro até os botões — recortado pelo pai ao colapsar */
+}
+
+/* itens do menu de seções: mais compactos verticalmente que os demais links */
+.secnav-all-link {
+  padding: 5px 12px;
+}
+
+/* atalho "Seleção de conteúdo": vão maior para separá-lo da lista de seções */
+.secnav-all-home {
+  margin-bottom: 11px;
+}
+
+/* seção atual em destaque (mesma ênfase do hover/itens) */
+.secnav-all-link.active {
+  border-color: var(--color-white-alpha-25);
+  background: var(--background-white-alpha-10);
+  color: var(--color-white);
+  cursor: default;
+}
+
+.secnav-sections {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* navegação entre os itens da seção atual — mesma formatação dos botões */
+.secnav-items {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.secnav-items-title {
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 2px 4px 6px;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-white-alpha-50);
+
+  /* total de slides da seção, alinhado à direita */
+  & .secnav-items-count {
+    flex-shrink: 0;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0;
+  }
+}
+
+.secnav-items-list {
+  position: relative; /* âncora do marcador deslizante */
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.secnav-item-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 8px 12px;
+  border-radius: var(--border-general);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: var(--background-black-alpha-50);
+  backdrop-filter: blur(4px);
+  color: var(--color-white-alpha-75);
+  text-decoration: none;
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  line-height: var(--font-line-ui);
+  transition: border-color 0.15s, background-color 0.15s, color 0.15s, transform 0.1s;
+}
+
+.secnav-item-link:hover,
+.secnav-item-link:focus-visible {
+  border-color: var(--color-white-alpha-25);
+  background: var(--background-white-alpha-10);
+  color: var(--color-white);
+}
+
+.secnav-item-link:active { transform: scale(0.97); }
+
+.secnav-item-link.active {
+  color: var(--color-white);
+  cursor: default;
+}
+
+/* nome do slide: no máximo 2 linhas de altura (recortado em overflow: hidden) */
+.secnav-items-list .secnav-item-link {
+  flex-shrink: 0; /* não deixa o flex comprimir o item: a altura é regida pelo nome */
+}
+
+.secnav-item-name {
+  --nav-item-line: 1.4;
+  display: block;
+  overflow: hidden;
+  line-height: var(--nav-item-line);
+  /* 2 linhas + 2px de folga para arredondamento da line-box (sem revelar a 3ª) */
+  max-height: calc(2em * var(--nav-item-line) + 2px);
+}
+
+/* span interno: contém o texto e desliza verticalmente ao pairar */
+.secnav-item-name-inner {
+  display: block;
+}
+
+/* paradas do gradiente da máscara, registradas para poderem ser animadas
+   (transição suave do esmaecimento ao pairar/sair) */
+@property --secnav-fade-a {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 8%;
+}
+@property --secnav-fade-b {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 55%;
+}
+
+/* nomes mais extensos: a 2ª linha esmaece de baixo para cima até desaparecer.
+   Em vez de uma camada escura sobreposta (que contrastava com o fundo
+   translúcido do botão), aplica-se uma máscara ao próprio texto: ele fica
+   transparente na base, revelando o fundo do botão — sem contraste entre
+   camadas. .is-clamped é aplicada via JS só quando o nome passa de 2 linhas. */
+.secnav-items-list .secnav-item-link.is-clamped .secnav-item-name {
+  --secnav-fade-a: 8%;
+  --secnav-fade-b: 55%;
+  -webkit-mask-image: linear-gradient(to top, transparent var(--secnav-fade-a), #000 var(--secnav-fade-b));
+          mask-image: linear-gradient(to top, transparent var(--secnav-fade-a), #000 var(--secnav-fade-b));
+  transition: --secnav-fade-a 0.45s ease, --secnav-fade-b 0.45s ease;
+}
+
+.secnav-items-list .secnav-item-link.is-clamped .secnav-item-name-inner {
+  transition: transform var(--reveal-duration, 2s) linear;
+}
+
+/* pairar/focar: desliza o texto lentamente para revelar o nome completo e
+   ameniza o gradiente para deixá-lo mais legível. Sair reverte com a mesma
+   transição (sem saltos). */
+.secnav-items-list .secnav-item-link.is-clamped:hover .secnav-item-name,
+.secnav-items-list .secnav-item-link.is-clamped:focus-visible .secnav-item-name {
+  --secnav-fade-a: 0%;
+  --secnav-fade-b: 0%;
+}
+
+.secnav-items-list .secnav-item-link.is-clamped:hover .secnav-item-name-inner,
+.secnav-items-list .secnav-item-link.is-clamped:focus-visible .secnav-item-name-inner {
+  transform: translateY(calc(-1 * var(--reveal-distance, 0px)));
+}
+
+/* marcador do item ativo: barra vertical de 4px à esquerda. A posição
+   (translateY) e a altura são definidas em slide-nav.js e fazem a transição
+   suave de um item para outro (sem salto direto). */
+.secnav-marker {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--color-green);
+  transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1),
+              height 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.secnav-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  overflow: hidden;
+  padding: 10px 14px;
+  border-radius: var(--border-general);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: var(--background-black-alpha-50);
+  backdrop-filter: blur(4px);
+  color: var(--color-white-alpha-75);
+  text-decoration: none;
+  transition: border-color 0.15s, background-color 0.15s, transform 0.1s;
+}
+
+.secnav-btn:hover,
+.secnav-btn:focus-visible {
+  border-color: var(--color-white-alpha-25);
+  background: var(--background-white-alpha-10);
+  color: var(--color-white);
+}
+
+.secnav-btn:active { transform: scale(0.97); }
+
+.secnav-btn.secnav-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.secnav-dir {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-white-alpha-50);
+}
+
+.secnav-next .secnav-dir { justify-content: flex-end; }
+
+.secnav-arrow { font-size: 1.15em; line-height: 1; }
+
+/* 1ª linha: nome da seção de destino */
+.secnav-section {
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  font-weight: var(--font-weight-boldest);
+  color: var(--color-white);
+  line-height: var(--font-line-ui);
+}
+
+/* 2ª linha: item que será exibido — desliza quando excede a largura do botão */
+.secnav-item {
+  overflow: hidden;
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--color-white-alpha-50);
+  line-height: var(--font-line-ui);
+}
+
+/* trilha que desliza: contém o nome e (quando há overflow) a 2ª cópia.
+   A animação é aplicada via Web Animations API em slide-nav.js. */
+.secnav-item-track {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 48px;
+  will-change: transform;
+}
+
+.secnav-item-text {
+  white-space: nowrap;
+}
+
+.secnav-item.is-overflowing {
+  --edge: 16px;
+  /* fade só na borda final (direita): o começo do nome fica sempre nítido */
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - var(--edge)), transparent 100%);
+          mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - var(--edge)), transparent 100%);
+}
+
+@media (max-width: 768px) {
+  .content-container.has-sidebar { flex-direction: column; gap: 16px; }
+  .slide-secnav {
+    display: flex;
+    position: static;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    order: 1;
+  }
+  .secnav-sections { flex-direction: row; gap: 8px; }
+  .secnav-sections .secnav-btn { flex: 1 1 0; min-width: 0; }
+  .secnav-items,
+  .secnav-items-list { overflow: visible; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .secnav-btn { transition: none; }
+  .secnav-marker { transition: none; }
+  .secnav-all-chevron,
+  .secnav-all-list { transition: none; }
+  /* sem animação: o deslize e o esmaecimento mudam instantaneamente ao pairar */
+  .secnav-item-name,
+  .secnav-item-name-inner { transition: none; }
+  /* sem o deslize, o nome completo precisa continuar legível: deixa quebrar em
+     várias linhas em vez de ficar permanentemente cortado dentro do botão */
+  .secnav-item.is-overflowing {
+    overflow: visible;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .secnav-item.is-overflowing .secnav-item-track { display: block; }
+  .secnav-item.is-overflowing .secnav-item-text { white-space: normal; }
 }

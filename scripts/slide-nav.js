@@ -79,97 +79,6 @@ function findCurrentSectionIndex(sections, slug) {
   return -1;
 }
 
-function buildSectionButton(dir, section) {
-  const isPrev = dir === 'prev';
-  const target = section ? section.items[0] : null;
-  const btn = document.createElement(target ? 'a' : 'div');
-  btn.className = `secnav-btn secnav-${dir}` + (target ? '' : ' secnav-disabled');
-
-  const dirLabel = isPrev ? 'anterior' : 'próximo';
-  const arrow = `<span class="secnav-arrow" aria-hidden="true">${isPrev ? '←' : '→'}</span>`;
-  const kicker = document.createElement('span');
-  kicker.className = 'secnav-dir';
-  kicker.innerHTML = isPrev ? `${arrow}<span>${dirLabel}</span>` : `<span>${dirLabel}</span>${arrow}`;
-  btn.appendChild(kicker);
-
-  // 1ª linha de informação: a seção de destino
-  const secLine = document.createElement('span');
-  secLine.className = 'secnav-section';
-  secLine.textContent = section ? section.title : '—';
-  btn.appendChild(secLine);
-
-  // 2ª linha de informação: o item que será exibido (nome completo + ticker)
-  const itemLine = document.createElement('span');
-  itemLine.className = 'secnav-item';
-  const itemTrack = document.createElement('span');
-  itemTrack.className = 'secnav-item-track';
-  const itemText = document.createElement('span');
-  itemText.className = 'secnav-item-text';
-  itemText.textContent = target ? target.label
-    : (isPrev ? 'início da apresentação' : 'fim da apresentação');
-  itemTrack.appendChild(itemText);
-  itemLine.appendChild(itemTrack);
-  btn.appendChild(itemLine);
-
-  if (target) {
-    btn.href = target.slug;
-    btn.title = target.label;
-    // inclui a palavra visível ("anterior"/"próximo") no nome acessível (WCAG 2.5.3)
-    btn.setAttribute('aria-label', `${dirLabel}: ${section.title} — ${target.label}`);
-    if (!reducedMotion) {
-      btn.addEventListener('mousedown', spawnRipple);
-      btn.addEventListener('touchstart', spawnRipple, { passive: true });
-    }
-  } else {
-    // limite da apresentação: indicador decorativo, ocultado dos leitores de tela
-    btn.setAttribute('aria-disabled', 'true');
-    btn.setAttribute('aria-hidden', 'true');
-  }
-
-  return { btn, itemLine, itemTrack, itemText, hasTarget: !!target };
-}
-
-// ---- ticker da 2ª linha dos botões de seção -------------------------------
-// Quando o nome excede a largura do botão, ele desliza eternamente para a
-// esquerda; uma 2ª cópia entra pela direita e, ao chegar ao ponto inicial, a
-// volta se completa e o nome descansa 3 s antes de deslizar de novo (loop).
-let marqueeNodes = [];
-
-function measureMarquee(node) {
-  const { line, track, text } = node;
-  if (node.anim) { node.anim.cancel(); node.anim = null; }
-  const oldClone = track.querySelector('.secnav-item-clone');
-  if (oldClone) oldClone.remove();
-  line.classList.remove('is-overflowing');
-
-  const overflow = text.scrollWidth - line.clientWidth;
-  if (overflow <= 1) return;
-  line.classList.add('is-overflowing');
-  if (reducedMotion) return; // CSS deixa o nome quebrar e ficar legível, sem movimento
-
-  // 2ª cópia: aparece pela direita à medida que a 1ª sai pela esquerda
-  const clone = text.cloneNode(true);
-  clone.classList.add('secnav-item-clone');
-  clone.setAttribute('aria-hidden', 'true');
-  track.appendChild(clone);
-
-  // distância para a 2ª cópia ocupar exatamente o lugar da 1ª (nome + intervalo)
-  const shift = clone.getBoundingClientRect().left - text.getBoundingClientRect().left;
-  const totalMs = (shift / 45 + 3) * 1000; // ~45 px/s de deslize + 3 s de pausa
-  node.anim = track.animate(
-    [
-      { transform: 'translateX(0)', offset: 0 },
-      { transform: 'translateX(0)', offset: 3000 / totalMs }, // pausa de 3 s no início
-      { transform: `translateX(${-shift}px)`, offset: 1 },    // volta completa → ponto inicial
-    ],
-    { duration: totalMs, iterations: Infinity, easing: 'linear' }
-  );
-}
-
-function refreshMarquees() {
-  marqueeNodes.forEach(measureMarquee);
-}
-
 // Marca os itens cujo nome ultrapassa as 2 linhas: só nesses o gradiente de
 // esmaecimento/truncamento (CSS .is-clamped::after) é exibido.
 function markClampedItems(list) {
@@ -389,25 +298,13 @@ function buildAllSectionsNav(sections, currentIndex) {
 }
 
 function buildSectionNav(sections, currentIndex, currentSlug) {
-  const prevSection = currentIndex > 0 ? sections[currentIndex - 1] : null;
-  const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex + 1] : null;
-
   const nav = document.createElement('nav');
   nav.className = 'slide-sidebar slide-secnav';
   nav.setAttribute('aria-label', 'Navegação dos slides');
 
-  // sidebar colapsível com todas as seções (acima de anterior/próximo)
+  // sidebar colapsível com todas as seções
   const allNav = buildAllSectionsNav(sections, currentIndex);
   if (allNav) nav.appendChild(allNav);
-
-  // saltos entre seções (anterior / próximo)
-  const sectionsGroup = document.createElement('div');
-  sectionsGroup.className = 'secnav-sections';
-  const prev = buildSectionButton('prev', prevSection);
-  const next = buildSectionButton('next', nextSection);
-  sectionsGroup.appendChild(prev.btn);
-  sectionsGroup.appendChild(next.btn);
-  nav.appendChild(sectionsGroup);
 
   // navegação entre os itens da seção atual
   const itemNav = buildItemNav(sections[currentIndex], currentSlug);
@@ -418,19 +315,13 @@ function buildSectionNav(sections, currentIndex, currentSlug) {
   container.insertAdjacentElement('afterbegin', nav);
   container.classList.add('has-sidebar');
 
-  marqueeNodes = [];
-  if (prev.hasTarget) marqueeNodes.push({ line: prev.itemLine, track: prev.itemTrack, text: prev.itemText });
-  if (next.hasTarget) marqueeNodes.push({ line: next.itemLine, track: next.itemTrack, text: next.itemText });
   const settle = () => {
-    refreshMarquees();
     if (itemNav) markClampedItems(itemNav.list);
-    // rola a lista (após o layout) para o item atual ficar visível
     if (itemNav && itemNav.activeLink) itemNav.activeLink.scrollIntoView({ block: 'nearest' });
   };
   requestAnimationFrame(settle);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle);
 
-  // marcador do item ativo: posicionado uma única vez, após layout/fontes
   if (itemNav && itemNav.marker) {
     const initOnce = () => requestAnimationFrame(() => initMarker(itemNav));
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(initOnce);
@@ -441,7 +332,6 @@ function buildSectionNav(sections, currentIndex, currentSlug) {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      refreshMarquees();
       if (itemNav) markClampedItems(itemNav.list);
       if (itemNav && itemNav.marker && itemNav.activeLink) {
         moveMarkerTo(itemNav.marker, itemNav.activeLink, false);

@@ -1,8 +1,10 @@
 'use strict';
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 const search = document.getElementById('slide-search');
 const clearBtn = document.getElementById('search-clear');
-const filterBtns = document.querySelectorAll('.filter-btn');
+const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
 const sections = document.querySelectorAll('[data-section]');
 const items = document.querySelectorAll('.item');
 let activeFilter = 'all';
@@ -73,9 +75,169 @@ filterBtns.forEach(btn => {
   });
 });
 
-// ---- ripple nos itens -----------------------------------------------------
+// ---- filtro e controles de documentos ---------------------------------------
 
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const docSearch    = document.getElementById('doc-search');
+const docClearBtn  = document.getElementById('doc-search-clear');
+const docTypeBtns  = document.querySelectorAll('[data-doc-type]');
+const docGroups    = document.querySelectorAll('.doc-group');
+const docNoResults = document.querySelector('.doc-no-results');
+const docCount     = document.querySelector('.doc-count');
+const docToggleAll = document.getElementById('doc-toggle-all');
+const docTotal     = Array.from(docGroups).reduce((n, g) => n + g.querySelectorAll('.doc-items li').length, 0);
+let activeDocType  = 'all';
+
+function syncToggleBtn() {
+  if (!docToggleAll) return;
+  const allOpen = Array.from(docGroups).every(g => g.open);
+  docToggleAll.textContent = allOpen ? 'Recolher todos' : 'Expandir todos';
+}
+
+function applyDocFilters() {
+  const q        = docSearch.value.trim().toLowerCase();
+  const filtered = q || activeDocType !== 'all';
+  docClearBtn.hidden = !q;
+
+  let totalVisible = 0;
+
+  docGroups.forEach(group => {
+    const docItems = group.querySelectorAll('.doc-items li');
+    let groupVisible = 0;
+
+    docItems.forEach(li => {
+      const typeTag     = li.querySelector('.ext-tag');
+      const type        = typeTag ? typeTag.textContent.trim().toLowerCase() : '';
+      const matchType   = activeDocType === 'all' || type === activeDocType;
+      const nameEl = li.querySelector('.doc-name-text');
+      const matchSearch = !q || (nameEl ? nameEl.textContent : li.textContent).toLowerCase().includes(q);
+      const visible     = matchType && matchSearch;
+      li.style.display  = visible ? '' : 'none';
+      if (visible) groupVisible++;
+    });
+
+    group.style.display = (filtered && groupVisible === 0) ? 'none' : '';
+    if (filtered && groupVisible > 0) group.open = true;
+    totalVisible += groupVisible;
+  });
+
+  if (docNoResults) docNoResults.hidden = totalVisible > 0 || !filtered;
+  if (docCount) docCount.textContent = filtered
+    ? `${totalVisible} de ${docTotal} documentos`
+    : `${docTotal} documentos`;
+  syncToggleBtn();
+  requestAnimationFrame(() => { refreshDocNameTruncation(); refreshDocMarquees(); });
+}
+
+if (docSearch) {
+  docSearch.addEventListener('input', applyDocFilters);
+
+  docClearBtn.addEventListener('click', () => {
+    docSearch.value = '';
+    applyDocFilters();
+    docSearch.focus();
+  });
+
+  docTypeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeDocType = btn.dataset.docType;
+      docTypeBtns.forEach(b => b.classList.toggle('active', b === btn));
+      applyDocFilters();
+    });
+  });
+
+  applyDocFilters();
+}
+
+if (docToggleAll) {
+  docToggleAll.addEventListener('click', () => {
+    const allOpen = Array.from(docGroups).every(g => g.open);
+    docGroups.forEach(g => { g.open = !allOpen; });
+    syncToggleBtn();
+  });
+
+  docGroups.forEach(g => g.addEventListener('toggle', syncToggleBtn));
+}
+
+docGroups.forEach(group => {
+  group.addEventListener('click', e => {
+    if (group.open || e.target.closest('summary')) return;
+    group.open = true;
+  });
+});
+
+
+// ---- tooltip e truncamento dos títulos de documentos ------------------------
+
+document.querySelectorAll('.doc-name-text').forEach(el => {
+  const wrap = el.closest('.doc-name-wrap');
+  if (wrap) wrap.title = el.textContent.trim();
+});
+
+function refreshDocNameTruncation() {
+  document.querySelectorAll('.doc-name-wrap').forEach(wrap => {
+    const text = wrap.querySelector('.doc-name-text');
+    if (!text) return;
+    wrap.classList.toggle('is-truncated', text.scrollWidth > wrap.clientWidth + 1);
+  });
+}
+
+// ---- marquee da descrição dos documentos ------------------------------------
+
+function initDocDescMarquee(row) {
+  if (row._descInitDone) return;
+  row._descInitDone = true;
+  const text = document.createElement('span');
+  text.className = 'doc-desc-text';
+  text.textContent = row.textContent;
+  const track = document.createElement('span');
+  track.className = 'doc-desc-track';
+  track.appendChild(text);
+  row.textContent = '';
+  row.appendChild(track);
+}
+
+function measureDocDescMarquee(row) {
+  if (!row._descInitDone) initDocDescMarquee(row);
+  if (row._descAnim) { row._descAnim.cancel(); row._descAnim = null; }
+  const track = row.querySelector('.doc-desc-track');
+  const text  = row.querySelector('.doc-desc-text');
+  if (!track || !text) return;
+  const oldClone = track.querySelector('.doc-desc-clone');
+  if (oldClone) oldClone.remove();
+  row.classList.remove('is-overflowing');
+
+  if (text.scrollWidth - row.clientWidth <= 1) return;
+  row.classList.add('is-overflowing');
+  if (reducedMotion) return;
+
+  const clone = text.cloneNode(true);
+  clone.classList.add('doc-desc-clone');
+  clone.setAttribute('aria-hidden', 'true');
+  track.appendChild(clone);
+
+  const shift   = clone.getBoundingClientRect().left - text.getBoundingClientRect().left;
+  const totalMs = (shift / 45 + 3) * 1000;
+  row._descAnim = track.animate(
+    [
+      { transform: 'translateX(0)',            offset: 0              },
+      { transform: 'translateX(0)',            offset: 3000 / totalMs },
+      { transform: `translateX(${-shift}px)`, offset: 1              },
+    ],
+    { duration: totalMs, iterations: Infinity, easing: 'linear' }
+  );
+}
+
+function refreshDocMarquees() {
+  document.querySelectorAll('.doc-desc-row').forEach(measureDocDescMarquee);
+}
+
+let docResizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(docResizeTimer);
+  docResizeTimer = setTimeout(() => { refreshDocNameTruncation(); refreshDocMarquees(); }, 150);
+});
+
+// ---- ripple nos itens -----------------------------------------------------
 
 if (!reducedMotion) {
   const spawnItemRipple = e => {
@@ -101,9 +263,15 @@ if (!reducedMotion) {
   });
 
   // mesma animação de clique nos filtros clicáveis (exceto os indisponíveis)
-  filterBtns.forEach(btn => {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
     if (btn.classList.contains('is-empty')) return;
     btn.addEventListener('mousedown', spawnItemRipple);
     btn.addEventListener('touchstart', spawnItemRipple, { passive: true });
+  });
+
+  // itens individuais de documento
+  document.querySelectorAll('.doc-items li').forEach(li => {
+    li.addEventListener('mousedown', spawnItemRipple);
+    li.addEventListener('touchstart', spawnItemRipple, { passive: true });
   });
 }

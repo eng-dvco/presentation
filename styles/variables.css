@@ -76,6 +76,11 @@
   --font-size-content: 1.5rem;
   --font-size-icon: 2.5rem;
 
+  /* tamanho único (absoluto, p/ renderizar igual em qualquer contexto) das
+     setinhas de itens colapsáveis — documentos recebidos, menu de seções etc.
+     Fonte de verdade: alterar aqui propaga para todas. */
+  --collapsible-icon-size: 1.275rem;
+
   --font-size-multiplier-xxxl: 1.65;
   --font-size-multiplier-xxl: 1.5;
   --font-size-multiplier-xl: 1.3;

@@ -744,7 +744,7 @@
 
 .doc-chevron {
   flex-shrink: 0;
-  font-size: 1.5em;
+  font-size: var(--collapsible-icon-size);
   line-height: 1;
   color: var(--color-white-alpha-50);
   transition: transform 0.38s cubic-bezier(0.65, 0, 0.35, 1);
@@ -862,8 +862,8 @@
 /* ícones de metadados via mask-image (SVG monocromático, cor = background-color) */
 .doc-icon {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   background-color: var(--color-green-alpha-75); /* padrão: xlsx */
 }
 

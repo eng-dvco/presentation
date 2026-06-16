@@ -176,11 +176,9 @@ hr {
     mask-image: url(../assets/icons/documents.svg);
   }
 
-  /* projeto de integração (PISF): reaproveita o ícone da torre da LT, pois o
-     conteúdo é estrutural/transmissão (estruturas, quantitativos de torres) */
   &.icon-integration {
-    -webkit-mask-image: url(../assets/icons/lt-tower.svg);
-    mask-image: url(../assets/icons/lt-tower.svg);
+    -webkit-mask-image: url(../assets/icons/info.svg);
+    mask-image: url(../assets/icons/info.svg);
   }
 }
 
@@ -1139,7 +1137,7 @@ footer {
 }
 
 .secnav-all-chevron {
-  font-size: 1.1em;
+  font-size: var(--collapsible-icon-size);
   line-height: 1;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 

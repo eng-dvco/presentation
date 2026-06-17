@@ -7,7 +7,8 @@ let prevUrl = null;
 let nextUrl = null;
 let lightboxOpen = false;
 let currentImgIdx = 0;
-let overlay, overlayStage, overlayImg, overlayCaption, overlayClose, overlayPrev, overlayNext;
+let overlay, overlayStage, overlayImg, overlayCaption, overlayTitle, overlayCount, overlayClose, overlayPrev, overlayNext;
+let imgGroupInfo = [];
 let autoTimer = null;
 let autoStart = null;
 let autoRemaining = 10000;
@@ -361,6 +362,17 @@ initNav();
 
 // ---- 2. AUTO-AVANÇO DO LIGHTBOX ------------------------------------------
 
+function flashPlayIndicator() {
+  if (mosaicImages.length <= 1 || reducedMotion) return;
+  const thumbs = overlay?.querySelectorAll('.lightbox-thumb');
+  const thumbPlayIcon = thumbs?.[currentImgIdx]?.querySelector('.thumb-play-icon');
+  if (thumbPlayIcon) {
+    thumbPlayIcon.classList.remove('is-playing');
+    void thumbPlayIcon.offsetWidth;
+    thumbPlayIcon.classList.add('is-playing');
+  }
+}
+
 function clearAutoTimer() {
   if (autoTimer !== null) { clearInterval(autoTimer); autoTimer = null; }
 }
@@ -387,7 +399,32 @@ function resetAutoProgress() {
 
 // ---- 3. LIGHTBOX ----------------------------------------------------------
 
+function getGroupTitle(img) {
+  const mosaic = img.closest('.mosaic-container');
+  if (!mosaic) return '';
+  let el = mosaic.previousElementSibling;
+  while (el) {
+    if (el.classList.contains('title-header-h2') || el.classList.contains('title-header-h3')) {
+      return el.querySelector('h2, h3')?.textContent.trim() ?? '';
+    }
+    el = el.previousElementSibling;
+  }
+  return '';
+}
+
 function buildLightbox() {
+  const groupMap = new Map();
+  mosaicImages.forEach((img, i) => {
+    const title = getGroupTitle(img);
+    if (!groupMap.has(title)) groupMap.set(title, []);
+    groupMap.get(title).push(i);
+  });
+  imgGroupInfo = mosaicImages.map((img, i) => {
+    const title = getGroupTitle(img);
+    const indices = groupMap.get(title);
+    return { posInGroup: indices.indexOf(i) + 1, groupTotal: indices.length };
+  });
+
   overlay = document.createElement('div');
   overlay.className = 'lightbox-overlay';
   overlay.setAttribute('role', 'dialog');
@@ -423,6 +460,11 @@ function buildLightbox() {
   const thumbsBar = document.createElement('div');
   thumbsBar.className = 'lightbox-thumbs';
   thumbsBar.setAttribute('aria-label', 'Miniaturas');
+
+  const sharedTooltip = document.createElement('div');
+  sharedTooltip.className = 'thumb-tooltip';
+  document.body.appendChild(sharedTooltip);
+
   mosaicImages.forEach((img, i) => {
     const wrap = document.createElement('div');
     wrap.className = 'lightbox-thumb-wrap';
@@ -434,20 +476,100 @@ function buildLightbox() {
     thumb.src = img.src;
     thumb.alt = '';
     btn.appendChild(thumb);
+    const pauseIcon = document.createElement('span');
+    pauseIcon.className = 'thumb-pause-icon';
+    pauseIcon.setAttribute('aria-hidden', 'true');
+    btn.appendChild(pauseIcon);
+    const playIcon = document.createElement('span');
+    playIcon.className = 'thumb-play-icon';
+    playIcon.setAttribute('aria-hidden', 'true');
+    btn.appendChild(playIcon);
     btn.addEventListener('click', () => showImage(i));
 
     const bar = document.createElement('span');
     bar.className = 'lightbox-thumb-progress';
+
+    const groupTitle = getGroupTitle(img);
+    const obsEl = img.closest('.img')?.querySelector('.obs');
+    const obsText = (obsEl && !obsEl.classList.contains('invisible')) ? obsEl.textContent.trim() : '';
+    const obsCls = obsEl?.classList.contains('obs-done') ? 'obs-done'
+                 : obsEl?.classList.contains('obs-pending') ? 'obs-pending' : '';
+
+    if (groupTitle || obsText) {
+      wrap.addEventListener('mouseenter', () => {
+        if (sharedTooltip._titleAnim) { sharedTooltip._titleAnim.cancel(); sharedTooltip._titleAnim = null; }
+        sharedTooltip.innerHTML = '';
+        if (groupTitle) {
+          const titleEl = document.createElement('span');
+          titleEl.className = 'thumb-tooltip-title';
+          const track = document.createElement('span');
+          track.className = 'tooltip-title-track';
+          const text = document.createElement('span');
+          text.className = 'tooltip-title-text';
+          text.textContent = groupTitle;
+          track.appendChild(text);
+          titleEl.appendChild(track);
+          sharedTooltip.appendChild(titleEl);
+        }
+        if (obsText) {
+          const s = document.createElement('span');
+          s.className = 'thumb-tooltip-obs' + (obsCls ? ' ' + obsCls : '');
+          s.textContent = obsText;
+          sharedTooltip.appendChild(s);
+        }
+        const rect = btn.getBoundingClientRect();
+        sharedTooltip.style.left = `${rect.left + rect.width / 2}px`;
+        sharedTooltip.style.bottom = `${window.innerHeight - rect.top + 8}px`;
+        sharedTooltip.classList.add('is-visible');
+        if (groupTitle && !reducedMotion) {
+          requestAnimationFrame(() => {
+            const container = sharedTooltip.querySelector('.thumb-tooltip-title');
+            const track     = sharedTooltip.querySelector('.tooltip-title-track');
+            const text      = sharedTooltip.querySelector('.tooltip-title-text');
+            if (!container || !track || !text) return;
+            const oldClone = track.querySelector('.tooltip-title-clone');
+            if (oldClone) oldClone.remove();
+            if (text.scrollWidth - container.clientWidth <= 1) return;
+            const clone = text.cloneNode(true);
+            clone.className = 'tooltip-title-clone';
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+            const shift    = clone.getBoundingClientRect().left - text.getBoundingClientRect().left;
+            const totalMs  = (shift / 45 + 3) * 1000;
+            sharedTooltip._titleAnim = track.animate(
+              [
+                { transform: 'translateX(0)',            offset: 0              },
+                { transform: 'translateX(0)',            offset: 3000 / totalMs },
+                { transform: `translateX(${-shift}px)`, offset: 1              },
+              ],
+              { duration: totalMs, iterations: Infinity, easing: 'linear' }
+            );
+          });
+        }
+      });
+      wrap.addEventListener('mouseleave', () => {
+        if (sharedTooltip._titleAnim) { sharedTooltip._titleAnim.cancel(); sharedTooltip._titleAnim = null; }
+        sharedTooltip.classList.remove('is-visible');
+      });
+    }
 
     wrap.appendChild(btn);
     wrap.appendChild(bar);
     thumbsBar.appendChild(wrap);
   });
 
+  overlayTitle = document.createElement('p');
+  overlayTitle.className = 'lightbox-title';
+
+  overlayCount = document.createElement('p');
+  overlayCount.className = 'lightbox-title-count';
+
   overlayCaption = document.createElement('p');
   overlayCaption.className = 'lightbox-caption';
 
   overlay.appendChild(overlayClose);
+  overlay.appendChild(overlayTitle);
+  overlay.appendChild(overlayCount);
   overlay.appendChild(overlayStage);
   overlay.appendChild(overlayCaption);
   if (mosaicImages.length > 1) overlay.appendChild(thumbsBar);
@@ -470,6 +592,20 @@ function buildLightbox() {
   overlayStage.addEventListener('mouseleave', () => {
     isHoveringMain = false;
     startAutoProgress();
+    flashPlayIndicator();
+  });
+
+  thumbsBar.addEventListener('mouseenter', () => {
+    isHoveringMain = true;
+    if (autoTimer !== null) {
+      autoRemaining = AUTO_DURATION - (Date.now() - autoStart);
+      clearAutoTimer();
+    }
+  });
+  thumbsBar.addEventListener('mouseleave', () => {
+    isHoveringMain = false;
+    startAutoProgress();
+    flashPlayIndicator();
   });
 }
 
@@ -481,6 +617,13 @@ function showImage(idx) {
   overlayImg.alt = img.alt;
   overlayPrev.disabled = mosaicImages.length <= 1;
   overlayNext.disabled = mosaicImages.length <= 1;
+
+  const titleText = getGroupTitle(img);
+  overlayTitle.textContent = titleText || 'subgrupo não identificado';
+  overlayTitle.classList.toggle('lightbox-title--empty', !titleText);
+
+  const { posInGroup, groupTotal } = imgGroupInfo[currentImgIdx] ?? { posInGroup: 1, groupTotal: 1 };
+  overlayCount.textContent = `exibindo ${posInGroup} de ${groupTotal} de um total de ${mosaicImages.length} (${currentImgIdx + 1}/${mosaicImages.length})`;
 
   const obsEl = img.closest('.img')?.querySelector('.obs');
   const obsText = (obsEl && !obsEl.classList.contains('invisible')) ? obsEl.textContent.trim() : '';
@@ -556,6 +699,25 @@ if (breadcrumb && navigator.clipboard) {
 // ---- teclado global -------------------------------------------------------
 // prevUrl/nextUrl são null até initNav() resolver; o handler já está ativo
 // mas as teclas de navegação não disparam enquanto ambos são null.
+
+// ---- botão retornar ao topo ------------------------------------------------
+
+const backToTop = document.getElementById('back-to-top');
+if (backToTop) {
+  const SCROLL_THRESHOLD = 400;
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      backToTop.classList.toggle('is-visible', window.scrollY >= SCROLL_THRESHOLD);
+      scrollTicking = false;
+    });
+  }, { passive: true });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+  });
+}
 
 document.addEventListener('keydown', e => {
   if (e.altKey || e.ctrlKey || e.metaKey) return;

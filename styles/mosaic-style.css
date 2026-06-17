@@ -80,7 +80,7 @@
   }
 
   &.img-stretch {
-    height: 540px;
+    height: clamp(200px, calc(75vw - 180px), 540px);
   }
 
   &.img-largest {
@@ -146,12 +146,15 @@
   }
 }
 
+.mosaic-container.tri-column .img.img-stretch {
+  height: min(456px, calc(50vw - 72px));
+}
+
 /* Medium devices (tablets, 768px and below) */
 @media (max-width: 768px) {
   .img.img-duo-column,
   .img.img-tri-column,
-  .img.img-quad-column,
-  .img.img-stretch {
+  .img.img-quad-column {
     height: 360px;
     grid-column: auto;
   }
@@ -168,7 +171,6 @@
   .img.img-duo-column,
   .img.img-tri-column,
   .img.img-quad-column,
-  .img.img-stretch,
   .img.img-largest {
     height: 360px;
   }

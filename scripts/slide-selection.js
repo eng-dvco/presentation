@@ -148,11 +148,32 @@ if (docSearch) {
   applyDocFilters();
 }
 
+function collapseGroup(group) {
+  if (!group.open || group.dataset.closing) return;
+  if (reducedMotion) { group.open = false; return; }
+  const lis = [...group.querySelectorAll('.doc-items li')].filter(li => li.style.display !== 'none');
+  if (!lis.length) { group.open = false; return; }
+  group.dataset.closing = '1';
+  const total = lis.length;
+  const anims = lis.map((li, i) => li.animate(
+    [{ opacity: 1 }, { opacity: 0 }],
+    { duration: 180, delay: (total - 1 - i) * 35, fill: 'forwards', easing: 'ease-in' }
+  ));
+  // lis[0] tem o maior delay — aguarda o último a terminar
+  anims[0].finished
+    .then(() => { delete group.dataset.closing; group.open = false; })
+    .catch(() => { delete group.dataset.closing; });
+}
+
 if (docToggleAll) {
   docToggleAll.addEventListener('click', () => {
     const allOpen = Array.from(docGroups).every(g => g.open);
-    docGroups.forEach(g => { g.open = !allOpen; });
-    syncToggleBtn();
+    if (allOpen) {
+      docGroups.forEach(g => collapseGroup(g));
+    } else {
+      docGroups.forEach(g => { g.open = true; });
+      syncToggleBtn();
+    }
   });
 
   docGroups.forEach(g => g.addEventListener('toggle', syncToggleBtn));
@@ -163,7 +184,33 @@ docGroups.forEach(group => {
     if (group.open || e.target.closest('summary')) return;
     group.open = true;
   });
+
+  // saída: delega para collapseGroup (animada ou imediata conforme reducedMotion)
+  group.querySelector('summary').addEventListener('click', e => {
+    if (!group.open) return;
+    e.preventDefault();
+    collapseGroup(group);
+  });
 });
+
+if (!reducedMotion) {
+  docGroups.forEach(group => {
+    group.addEventListener('toggle', () => {
+      if (!group.open) return;
+      delete group.dataset.closing;
+      const lis = [...group.querySelectorAll('.doc-items li')].filter(li => li.style.display !== 'none');
+      // cancela animações de saída pendentes (fill: forwards manteria opacity: 0)
+      lis.forEach(li => li.getAnimations().forEach(a => a.cancel()));
+      // fill: 'backwards' aplica opacity: 0 imediatamente, antes do primeiro render
+      lis.forEach((li, i) => {
+        li.animate(
+          [{ opacity: 0 }, { opacity: 1 }],
+          { duration: 200, delay: i * 38, fill: 'backwards', easing: 'ease-out' }
+        );
+      });
+    });
+  });
+}
 
 
 // ---- tooltip e truncamento dos títulos de documentos ------------------------
@@ -273,5 +320,26 @@ if (!reducedMotion) {
   document.querySelectorAll('.doc-items li').forEach(li => {
     li.addEventListener('mousedown', spawnItemRipple);
     li.addEventListener('touchstart', spawnItemRipple, { passive: true });
+  });
+}
+
+// ---- botão retornar ao topo ------------------------------------------------
+
+const backToTop = document.getElementById('back-to-top');
+if (backToTop) {
+  const SCROLL_THRESHOLD = 400;
+  let scrollTicking = false;
+
+  window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      backToTop.classList.toggle('is-visible', window.scrollY >= SCROLL_THRESHOLD);
+      scrollTicking = false;
+    });
+  }, { passive: true });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
   });
 }

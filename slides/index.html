@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>Conteúdo da Apresentação</title>
-    <meta name="description" content="" />
     <meta
       name="keywords"
       content="apresentação, subestação, transmissão, distribuição, manutenção, pisf"
@@ -24,25 +23,24 @@
   </head>
   <body>
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <header class="flex-header-container">
+      <div class="title-header-h1">
+        <h1 class="title-h1">Conteúdo</h1>
+      </div>
+      <a class="flex-logo-container" href="../apresentação.html">
+        <img width="480" height="290"
+          class="logo cmt"
+          src="../assets/logos/cmt-hd.jpg"
+          alt="Logo CMT Engenharia"
+        />
+      </a>
+    </header>
     <main class="main-container" id="main-content">
-      <header class="flex-header-container">
-        <div class="title-header-h1">
-          <h1 class="title-h1">Conteúdo</h1>
-        </div>
-        <a class="flex-logo-container" href="../apresentação.html">
-          <img width="480" height="290"
-            class="logo cmt"
-            src="../assets/logos/cmt-hd.jpg"
-            alt="Logo CMT Engenharia"
-            loading="eager"
-          />
-        </a>
-      </header>
       <div class="alert-banner" role="status">
         <p>Versão demonstrativa | Apenas imagens disponíveis</p>
       </div>
       <div class="update-info">
-        <p>Última atualização em 16-06-26 (terça-feira, às 16h45)</p>
+        <p>Última atualização em 17-06-26 (quarta-feira, às 04h33)</p>
       </div>
       <div class="content-container">
         <div class="content-wrapper">
@@ -54,6 +52,7 @@
           </div>
           <div class="index-controls">
             <label class="index-search-label">
+              <span class="search-icon" aria-hidden="true"></span>
               <input id="slide-search" type="search" placeholder="Filtrar por nome…" autocomplete="off" aria-label="Filtrar slides por nome" />
               <button id="search-clear" hidden aria-label="Limpar busca">✕</button>
             </label>
@@ -205,6 +204,7 @@
             </div>
             <div class="doc-controls">
               <label class="doc-search-label">
+                <span class="search-icon" aria-hidden="true"></span>
                 <input id="doc-search" type="search" placeholder="Filtrar documentos…" autocomplete="off" aria-label="Filtrar documentos por nome" />
                 <button id="doc-search-clear" hidden aria-label="Limpar busca">✕</button>
               </label>
@@ -220,7 +220,7 @@
             <div class="mosaic-container">
               <div class="list list-cell-1">
                 <details class="doc-group">
-                  <summary class="li-subtitle">
+                  <summary class="doc-group-title">
                     <span>documentos de texto</span>
                     <span class="doc-chevron" aria-hidden="true">▾</span>
                   </summary>
@@ -360,7 +360,7 @@
                   </ol>
                 </details>
                 <details class="doc-group">
-                  <summary class="li-subtitle">
+                  <summary class="doc-group-title">
                     <span>planilhas eletrônicas</span>
                     <span class="doc-chevron" aria-hidden="true">▾</span>
                   </summary>
@@ -476,7 +476,7 @@
                   </ol>
                 </details>
                 <details class="doc-group">
-                  <summary class="li-subtitle">
+                  <summary class="doc-group-title">
                     <span>documento em slides</span>
                     <span class="doc-chevron" aria-hidden="true">▾</span>
                   </summary>
@@ -551,36 +551,40 @@
         </div>
       </div>
     </main>
-  </body>
-  <footer>
-    <div class="footer-wrapper">
-      <div class="personal-info">
-        <a href="https://www.instagram.com/eng.danielcarvalho/" target="_blank" rel="noreferrer noopener">
-          <img width="2560" height="1440"
-            src="../assets/logos/dc-logo-white.png"
-            alt="logo do eng. daniel carvalho composta pelas letras 'd' e 'c' estilizadas como 'arame' (outline)"
-            loading="lazy"
-          />
-        </a>
-        <p>© 2026 Eng. Daniel Carvalho</p>
+
+    <footer>
+      <div class="footer-wrapper">
+        <div class="personal-info">
+          <a href="https://www.instagram.com/eng.danielcarvalho/" target="_blank" rel="noopener noreferrer">
+            <img width="160" height="90"
+              src="../assets/logos/dc-logo-white.png"
+              alt="logo do eng. daniel carvalho composta pelas letras 'd' e 'c' estilizadas como 'arame' (outline)"
+              loading="lazy"
+            />
+          </a>
+          <p>© 2026 Eng. Daniel Carvalho</p>
+        </div>
+        <nav class="footer-nav invisible" hidden aria-label="Links externos">
+          <ul class="more-info">
+            <li>
+              <a href="https://www.linkedin.com/in/dvco/" target="_blank" rel="noopener noreferrer">Contacts</a>
+            </li>
+            <li>
+              <a href="https://github.com/eng-dvco/presentation/commits?author=eng-dvco" target="_blank" rel="noopener noreferrer">
+                Commits
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/eng-dvco/presentation" target="_blank" rel="noopener noreferrer">
+                Docs
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <button id="back-to-top" aria-label="Retornar ao topo da página">
+          <span class="back-top-icon" aria-hidden="true"></span>
+        </button>
       </div>
-      <nav class="footer-nav invisible" aria-label="Links externos">
-        <ul class="more-info">
-          <li>
-            <a href="https://www.linkedin.com/in/dvco/">Contacts</a>
-          </li>
-          <li>
-            <a href="https://github.com/eng-dvco/presentation/commits?author=eng-dvco">
-              Commits
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/eng-dvco/presentation" target="_blank">
-              Docs
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </footer>
+    </footer>
+  </body>
 </html>

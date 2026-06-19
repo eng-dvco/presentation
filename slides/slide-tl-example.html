@@ -20,7 +20,10 @@
       .tl-scroll.is-grabbing { cursor: grabbing; }
 
       /* ── filtros do cronograma ── */
-      .tl-filters { position: relative; z-index: 100; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.6rem 1rem; width: 100%; padding: 0.75rem 1rem; margin-bottom: 0.85rem; box-sizing: border-box; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--border-general); backdrop-filter: blur(6px); }
+      /* NB: sem backdrop-filter aqui — ele criaria um "backdrop root" e impediria
+         os menus flutuantes (que transbordam sobre o cronograma) de ofuscar o
+         conteúdo atrás deles. O fundo escuro semitransparente é mantido. */
+      .tl-filters { position: relative; z-index: 100; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.6rem 1rem; width: 100%; padding: 0.75rem 1rem; margin-bottom: 0.85rem; box-sizing: border-box; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--border-general); }
       .tlf-field { display: flex; flex-direction: column; gap: 0.3rem; }
       .tlf-label { font-family: var(--font-family-general); font-size: 0.58rem; font-weight: var(--font-weight-bold); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-grey-alpha-75); }
       .tl-filters input[type="search"], .tl-filters input[type="date"], .tl-filters select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--border-smaller); color: var(--color-white); font-family: var(--font-family-general); font-size: 0.72rem; padding: 0.32rem 0.5rem; outline: none; }
@@ -50,7 +53,13 @@
       .tlf-dd-opt { padding: 0.34rem 0.6rem; border-radius: var(--border-smaller); color: var(--color-grey-alpha-75); font-family: var(--font-family-general); font-size: 0.72rem; line-height: 1.2; cursor: pointer; white-space: nowrap; outline: none; }
       .tlf-dd-opt:hover, .tlf-dd-opt:focus-visible { background: var(--color-green-alpha-25); color: var(--color-white); }
       .tlf-dd-opt.is-selected { background: var(--color-green); color: #000; font-weight: var(--font-weight-bold); }
-      .tlf-dd-placeholder { color: var(--color-grey-alpha-75); }
+      /* data vazia: placeholder "dd/mm/aaaa" quase invisível e semitransparente */
+      .tlf-dd-placeholder { color: var(--color-white-alpha-25); }
+      /* data selecionada: exibida como valor ativo (fundo verde, texto preto),
+         no mesmo padrão do item ativo de "Eixo"/"Trecho" */
+      .tlf-date .tlf-dd-trigger.tlf-dd-filled { background: var(--color-green); border-color: var(--color-green); color: #000; }
+      .tlf-date .tlf-dd-trigger.tlf-dd-filled .tlf-dd-value { color: #000; }
+      .tlf-date .tlf-dd-trigger.tlf-dd-filled .tlf-dd-arrow { color: rgba(0, 0, 0, 0.55); }
 
       /* calendário customizado (datas): mesmo menu flutuante escuro semitransparente */
       .tlf-cal-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; width: max-content; padding: 8px; background: rgba(0,0,0,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--border-smaller); box-shadow: 0 8px 24px rgba(0,0,0,0.45); }
@@ -61,7 +70,7 @@
       .tlf-cal-nav:hover { background: var(--color-green-alpha-25); color: var(--color-white); }
       .tlf-cal-grid { display: grid; grid-template-columns: repeat(7, 26px); gap: 2px; }
       .tlf-cal-wd { font-family: var(--font-family-general); font-size: 0.54rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-grey-alpha-75); text-align: center; padding: 2px 0; }
-      .tlf-cal-day { font-family: var(--font-family-general); font-size: 0.66rem; color: var(--color-grey-alpha-75); text-align: center; padding: 4px 0; border-radius: var(--border-smaller); border: 1px solid transparent; cursor: pointer; outline: none; }
+      .tlf-cal-day { font-family: var(--font-family-general); font-size: 0.66rem; color: var(--color-grey-alpha-75); background: rgba(0, 0, 0, 0.35); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); text-align: center; padding: 4px 0; border-radius: var(--border-smaller); border: 1px solid var(--color-white-alpha-25); cursor: pointer; outline: none; }
       .tlf-cal-day:hover, .tlf-cal-day:focus-visible { background: var(--color-green-alpha-25); color: var(--color-white); }
       .tlf-cal-day.is-today { border-color: var(--color-green-alpha-75); }
       .tlf-cal-day.is-selected { background: var(--color-green); color: #000; font-weight: var(--font-weight-bold); }
@@ -576,6 +585,7 @@
             const d = parse(input.value);
             valSpan.textContent = d ? pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear() : 'dd/mm/aaaa';
             valSpan.classList.toggle('tlf-dd-placeholder', !d);
+            trigger.classList.toggle('tlf-dd-filled', !!d); // valor ativo → fundo verde
           }
           function render() {
             const sel = parse(input.value), today = new Date();

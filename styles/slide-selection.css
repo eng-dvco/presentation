@@ -691,6 +691,11 @@
       color: var(--color-yellow-alpha-75);
       background-color: var(--color-yellow-alpha-10);
     }
+
+    &.kmz {
+      color: var(--color-purple-alpha-75);
+      background-color: var(--color-purple-alpha-10);
+    }
   }
 }
 
@@ -833,6 +838,13 @@
   white-space: nowrap;
 }
 
+/* espaço mínimo reservado por tipo de metadado (mesmo quando o valor é "—"),
+   garantindo o alinhamento dos ícones entre todos os itens e grupos */
+.doc-meta:has(.doc-icon--version)    { min-width: 54px; }
+.doc-meta:has(.doc-icon--pages)      { min-width: 32px; }
+.doc-meta:has(.doc-icon--size)       { min-width: 66px; }
+.doc-meta:has(.doc-icon--date-added) { min-width: 86px; }
+
 .doc-desc-row {
   font-size: calc(var(--font-size-default) * var(--font-size-multiplier-xs));
   font-weight: var(--font-weight-normal);
@@ -869,6 +881,7 @@
 
 .doc-items li:has(.ext-tag.doc-text) .doc-icon { background-color: var(--color-red-alpha-75);    }
 .doc-items li:has(.ext-tag.slides)   .doc-icon { background-color: var(--color-yellow-alpha-75); }
+.doc-items li:has(.ext-tag.kmz)      .doc-icon { background-color: var(--color-purple-alpha-75); }
 
 .doc-icon {
   -webkit-mask-position: center;
@@ -1173,3 +1186,20 @@
   60%  { transform: scale(1.0); opacity: 0.25; filter: blur(1px); }
   100% { transform: scale(1.05); opacity: 0;  filter: blur(2px); }
 }
+
+/* ---- section-timelines (linhas do tempo) ----------------------------------- */
+
+.section-timelines {
+  grid-area: auto / span 4 / auto / auto;
+  backdrop-filter: blur(4px);
+
+  & .title-header-h2 {
+    background-color: var(--background-black-alpha-25);
+  }
+
+  & .column {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* (estilos internos de cada slide de timeline ficam no CSS do slide respectivo) */

@@ -53,8 +53,12 @@ clearBtn.addEventListener('click', () => {
 // filtros cuja seção está ausente ou presente sem itens ficam indisponíveis
 // (preenchimento transparente + cursor indicando a ausência da ação)
 function sectionHasItems(sec) {
-  // slides: ao menos um .item; documentos: ao menos uma entrada na lista
-  return !!sec && !!(sec.querySelector('.item') || sec.querySelector('.list li:not(.li-subtitle)'));
+  // slides: ao menos um .item; documentos: ao menos uma entrada na lista; timelines: ao menos uma entrada
+  return !!sec && !!(
+    sec.querySelector('.item') ||
+    sec.querySelector('.list li:not(.li-subtitle)') ||
+    sec.querySelector('.tl-entry')
+  );
 }
 
 filterBtns.forEach(btn => {
@@ -74,6 +78,49 @@ filterBtns.forEach(btn => {
     applyFilters();
   });
 });
+
+// ---- persistência da seleção (rolagem + filtro + busca) ------------------
+// Ao voltar pelo "conteúdo" do breadcrumb de um slide, reabre a seleção no mesmo
+// estado: mesmo filtro de seção, mesma busca e mesmo ponto de rolagem. Visitas
+// novas continuam no topo e sem filtro — só restaura quando o retorno foi
+// sinalizado pelo slide (sessionStorage), nunca em uma carga comum.
+(() => {
+  const ss = {
+    get: (k, d = '') => { try { const v = sessionStorage.getItem(k); return v === null ? d : v; } catch { return d; } },
+    set: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} },
+    del: (k) => { try { sessionStorage.removeItem(k); } catch {} },
+  };
+
+  // salva o estado atual ao sair da seleção (clique em item, breadcrumb, logo…)
+  window.addEventListener('pagehide', () => {
+    ss.set('indexScrollY', String(Math.round(window.scrollY)));
+    ss.set('indexFilter', activeFilter);
+    ss.set('indexQuery', search.value);
+  });
+
+  if (ss.get('indexRestoreScroll') !== '1') return;   // retorno não sinalizado → topo
+  ss.del('indexRestoreScroll');
+
+  // 1) reaplica a busca e o filtro salvos antes de posicionar a rolagem
+  const savedQuery = ss.get('indexQuery');
+  const savedFilter = ss.get('indexFilter', 'all');
+  if (savedQuery) search.value = savedQuery;
+  const btn = Array.from(filterBtns).find(b => b.dataset.filter === savedFilter && !b.classList.contains('is-empty'));
+  if (btn && savedFilter !== 'all') {
+    activeFilter = savedFilter;
+    filterBtns.forEach(b => b.classList.toggle('active', b === btn));
+  }
+  if (savedQuery || activeFilter !== 'all') applyFilters();
+
+  // 2) restaura a rolagem depois que o layout filtrado já está aplicado
+  const y = parseInt(ss.get('indexScrollY', '0'), 10) || 0;
+  if (y > 0) {
+    const apply = () => window.scrollTo(0, y);
+    apply();
+    requestAnimationFrame(apply);
+    window.addEventListener('load', apply, { once: true });
+  }
+})();
 
 // ---- filtro e controles de documentos ---------------------------------------
 

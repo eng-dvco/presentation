@@ -2,6 +2,25 @@
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Navegações novas (clique em link da sidebar, setas, digitar a URL) devem
+// iniciar pelo topo; já voltar/avançar pelo navegador deve RESTAURAR a posição
+// onde o usuário estava (onde clicou). É exatamente o que o modo 'auto' faz:
+// navegação nova → topo (rolagem 0); travessia de histórico → posição salva.
+// O bug de "iniciar no fim da página" era causado pelo scrollIntoView da
+// navegação lateral (agora restrito à própria lista via scrollActiveIntoNav),
+// não pela restauração — por isso não forçamos mais o topo aqui.
+if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+
+// Voltar à seleção pelo "conteúdo" do breadcrumb deve reabrir o índice no ponto
+// de onde o usuário saiu (onde clicou no item da seção) — como o botão "voltar"
+// do navegador. Aqui apenas sinalizamos a intenção; o índice restaura a posição
+// salva (ver slide-selection.js).
+document.querySelectorAll('.breadcrumb a[href$="index.html"]').forEach((a) => {
+  a.addEventListener('click', () => {
+    try { sessionStorage.setItem('indexRestoreScroll', '1'); } catch {}
+  });
+});
+
 // state shared between keyboard handler and lightbox
 let prevUrl = null;
 let nextUrl = null;
@@ -298,6 +317,20 @@ function buildAllSectionsNav(sections, currentIndex) {
   return wrap;
 }
 
+// Rola o item ativo para dentro da própria lista da sidebar SEM mexer na rolagem
+// da janela. (scrollIntoView afetaria todos os ancestrais roláveis, inclusive a
+// janela — o que jogava a página para o fim em viewports menores, onde a lista
+// flui no documento, abaixo do conteúdo, em vez de rolar internamente.)
+function scrollActiveIntoNav(link) {
+  if (!link) return;
+  const list = link.closest('.secnav-items-list');
+  if (!list || list.scrollHeight <= list.clientHeight + 1) return; // não rolável → nada a fazer
+  const linkRect = link.getBoundingClientRect();
+  const listRect = list.getBoundingClientRect();
+  const within = (linkRect.top - listRect.top) + list.scrollTop;
+  list.scrollTop = within - (list.clientHeight - linkRect.height) / 2;
+}
+
 function buildSectionNav(sections, currentIndex, currentSlug) {
   const nav = document.createElement('nav');
   nav.className = 'slide-sidebar slide-secnav';
@@ -318,7 +351,7 @@ function buildSectionNav(sections, currentIndex, currentSlug) {
 
   const settle = () => {
     if (itemNav) markClampedItems(itemNav.list);
-    if (itemNav && itemNav.activeLink) itemNav.activeLink.scrollIntoView({ block: 'nearest' });
+    if (itemNav && itemNav.activeLink) scrollActiveIntoNav(itemNav.activeLink);
   };
   requestAnimationFrame(settle);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle);
@@ -578,9 +611,39 @@ function buildLightbox() {
   overlayClose.addEventListener('click', closeLightbox);
   overlayPrev.addEventListener('click', () => showImage(currentImgIdx - 1));
   overlayNext.addEventListener('click', () => showImage(currentImgIdx + 1));
+  let swipeSuppressClick = false;
   overlay.addEventListener('click', e => {
+    if (swipeSuppressClick) { swipeSuppressClick = false; return; }
     if (e.target === overlay || e.target === overlayStage) closeLightbox();
   });
+
+  // Gestos de deslize na imagem (toque e mouse, via Pointer Events):
+  //   • deslizar para a esquerda/direita → alterna entre as imagens
+  //   • deslizar para cima/baixo → fecha o lightbox
+  // O pointerdown inicia no palco; pointerup/cancel escutam na janela para que
+  // a soltura conte mesmo fora do palco (ex.: deslize vertical longo).
+  overlayStage.style.touchAction = 'none';
+  (() => {
+    let sx = 0, sy = 0, active = false;
+    const TH = 45; // distância mínima (px) para diferenciar deslize de toque
+    overlayStage.addEventListener('pointerdown', e => {
+      if (e.button > 0) return; // ignora botões secundários do mouse
+      if (e.target.closest && e.target.closest('.lightbox-nav, .lightbox-close')) return;
+      active = true; sx = e.clientX; sy = e.clientY;
+    });
+    window.addEventListener('pointerup', e => {
+      if (!active) return;
+      active = false;
+      if (!lightboxOpen) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      const adx = Math.abs(dx), ady = Math.abs(dy);
+      if (Math.max(adx, ady) < TH) return; // foi um toque/clique, não um deslize
+      swipeSuppressClick = true;            // impede o clique de fechar após o deslize
+      if (adx > ady) showImage(currentImgIdx + (dx < 0 ? 1 : -1)); // ← próxima / → anterior
+      else closeLightbox();                                        // ↑ ou ↓ fecha
+    });
+    window.addEventListener('pointercancel', () => { active = false; });
+  })();
 
   overlayStage.addEventListener('mouseenter', () => {
     isHoveringMain = true;

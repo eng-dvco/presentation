@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linha do Tempo — Exemplo</title>
+    <meta name="description" content="Linha do tempo hipotética para demonstração do formato de cronograma de atividades." />
+    <meta name="keywords" content="apresentação, transmissão, linha do tempo, manutenção, pisf" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="../assets/icons/favicon.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="../assets/icons/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="stylesheet" href="../styles/variables.css" />
+    <link rel="stylesheet" href="../styles/slide-style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&family=Fondamento:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+    <style>
+      .content-wrapper { max-width: none; justify-items: stretch; }
+
+      .tl-scroll { overflow-x: auto; overflow-y: clip; padding-bottom: 1.5rem; cursor: grab; user-select: none; -webkit-overflow-scrolling: touch; }
+      .tl-scroll.is-grabbing { cursor: grabbing; }
+
+      /* ── filtros do cronograma ── */
+      .tl-filters { position: relative; z-index: 100; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.6rem 1rem; width: 100%; padding: 0.75rem 1rem; margin-bottom: 0.85rem; box-sizing: border-box; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--border-general); backdrop-filter: blur(6px); }
+      .tlf-field { display: flex; flex-direction: column; gap: 0.3rem; }
+      .tlf-label { font-family: var(--font-family-general); font-size: 0.58rem; font-weight: var(--font-weight-bold); letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-grey-alpha-75); }
+      .tl-filters input[type="search"], .tl-filters input[type="date"], .tl-filters select { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--border-smaller); color: var(--color-white); font-family: var(--font-family-general); font-size: 0.72rem; padding: 0.32rem 0.5rem; outline: none; }
+      .tl-filters input[type="date"] { color-scheme: dark; width: 8.4rem; }
+      .tl-filters input[type="search"] { min-width: 8rem; }
+      .tl-filters input:focus, .tl-filters select:focus { border-color: var(--color-green-alpha-75); }
+      .tlf-chips { display: flex; gap: 0.35rem; }
+      .tlf-chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.18); border-radius: 99px; color: var(--color-grey-alpha-75); font-family: var(--font-family-general); font-size: 0.66rem; padding: 0.32rem 0.62rem; cursor: pointer; transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
+      .tlf-chip[data-status="done"].active    { background: var(--color-green-alpha-25);  border-color: var(--color-green-alpha-75);  color: var(--color-green); }
+      .tlf-chip[data-status="running"].active { background: var(--color-purple-alpha-25); border-color: var(--color-purple-alpha-75); color: rgba(188,178,255,1); }
+      .tlf-chip[data-status="pending"].active { background: var(--color-orange-alpha-25); border-color: var(--color-orange-alpha-75); color: var(--color-orange); }
+      .tlf-range { display: flex; align-items: center; gap: 0.3rem; color: var(--color-grey-alpha-75); font-size: 0.7rem; }
+      .tlf-clear { align-self: flex-end; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.22); border-radius: var(--border-smaller); color: var(--color-white-alpha-75); font-family: var(--font-family-general); font-size: 0.68rem; padding: 0.4rem 0.7rem; cursor: pointer; transition: background-color 0.15s; }
+      .tlf-clear:hover { background: rgba(255,255,255,0.12); }
+      .tlf-count { align-self: flex-end; margin-left: auto; font-family: var(--font-family-general); font-size: 0.66rem; color: var(--color-grey-alpha-75); white-space: nowrap; }
+
+      /* dropdown customizado (Eixo/Trecho): menu flutuante escuro semitransparente,
+         item ativo verde com texto preto, demais itens em cinza sobre o fundo escuro */
+      .tlf-native-hidden { display: none !important; }
+      .tlf-dd { position: relative; }
+      .tlf-dd-trigger { display: inline-flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-width: 6rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--border-smaller); color: var(--color-white); font-family: var(--font-family-general); font-size: 0.72rem; padding: 0.32rem 0.5rem; cursor: pointer; outline: none; }
+      .tlf-dd-trigger:focus-visible, .tlf-dd-trigger[aria-expanded="true"] { border-color: var(--color-green-alpha-75); }
+      .tlf-dd-arrow { color: var(--color-grey-alpha-75); font-size: 0.7em; transition: transform 0.15s ease; }
+      .tlf-dd-trigger[aria-expanded="true"] .tlf-dd-arrow { transform: rotate(180deg); }
+      .tlf-dd-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; min-width: 100%; max-height: 240px; overflow-y: auto; margin: 0; padding: 4px; list-style: none; background: rgba(0,0,0,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--border-smaller); box-shadow: 0 8px 24px rgba(0,0,0,0.45); scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.25) transparent; }
+      .tlf-dd-menu[hidden] { display: none; }
+      .tlf-dd-opt { padding: 0.34rem 0.6rem; border-radius: var(--border-smaller); color: var(--color-grey-alpha-75); font-family: var(--font-family-general); font-size: 0.72rem; line-height: 1.2; cursor: pointer; white-space: nowrap; outline: none; }
+      .tlf-dd-opt:hover, .tlf-dd-opt:focus-visible { background: var(--color-green-alpha-25); color: var(--color-white); }
+      .tlf-dd-opt.is-selected { background: var(--color-green); color: #000; font-weight: var(--font-weight-bold); }
+      .tlf-dd-placeholder { color: var(--color-grey-alpha-75); }
+
+      /* calendário customizado (datas): mesmo menu flutuante escuro semitransparente */
+      .tlf-cal-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; width: max-content; padding: 8px; background: rgba(0,0,0,0.72); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--border-smaller); box-shadow: 0 8px 24px rgba(0,0,0,0.45); }
+      .tlf-cal-menu[hidden] { display: none; }
+      .tlf-cal-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 6px; }
+      .tlf-cal-title { font-family: var(--font-family-general); font-size: 0.7rem; font-weight: var(--font-weight-bold); color: var(--color-white); text-transform: capitalize; white-space: nowrap; }
+      .tlf-cal-nav { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--border-smaller); color: var(--color-grey-alpha-75); width: 22px; height: 22px; line-height: 1; cursor: pointer; }
+      .tlf-cal-nav:hover { background: var(--color-green-alpha-25); color: var(--color-white); }
+      .tlf-cal-grid { display: grid; grid-template-columns: repeat(7, 26px); gap: 2px; }
+      .tlf-cal-wd { font-family: var(--font-family-general); font-size: 0.54rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-grey-alpha-75); text-align: center; padding: 2px 0; }
+      .tlf-cal-day { font-family: var(--font-family-general); font-size: 0.66rem; color: var(--color-grey-alpha-75); text-align: center; padding: 4px 0; border-radius: var(--border-smaller); border: 1px solid transparent; cursor: pointer; outline: none; }
+      .tlf-cal-day:hover, .tlf-cal-day:focus-visible { background: var(--color-green-alpha-25); color: var(--color-white); }
+      .tlf-cal-day.is-today { border-color: var(--color-green-alpha-75); }
+      .tlf-cal-day.is-selected { background: var(--color-green); color: #000; font-weight: var(--font-weight-bold); }
+      .tlf-cal-day.is-empty { visibility: hidden; cursor: default; }
+      .tlf-cal-clear { margin-top: 6px; width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--border-smaller); color: var(--color-white-alpha-75); font-family: var(--font-family-general); font-size: 0.62rem; padding: 0.3rem; cursor: pointer; }
+      .tlf-cal-clear:hover { background: rgba(255,255,255,0.12); }
+
+      /* ── orientação HORIZONTAL: faixas (trechos) empilhadas; o tempo flui na horizontal (mais recente à esquerda) ── */
+      .tl-grid { display: flex; flex-direction: column; width: max-content; min-width: 100%; }
+
+      /* cabeçalho do eixo — fixo à esquerda (sticky) durante a rolagem horizontal */
+      .tl-axis { position: sticky; left: 0; z-index: 12; width: max-content; display: flex; align-items: center; padding: 0.45rem 1rem; font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-white); background: rgba(0,0,0,0.82); backdrop-filter: blur(8px); border-top: 1px solid rgba(255,255,255,0.08); }
+      .tl-axis--norte { margin-top: 0.5rem; }
+
+      /* grupo = conjunto de faixas (sem ramificação visual no modo horizontal) */
+      .tl-group { display: flex; flex-direction: column; background: rgba(0,0,0,0.6); }
+      .tl-branch { display: none; }
+
+      /* faixas empilhadas verticalmente */
+      .tl-trechos { display: flex; flex-direction: column; }
+      .tl-trecho { display: grid; grid-template-columns: 5rem max-content; align-items: stretch; }
+      .tl-trecho:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+      /* label da faixa: fixa à esquerda (sticky) — sempre visível ao rolar pelo tempo */
+      .tl-trecho-name { display: flex; align-items: center; justify-content: center; position: sticky; left: 0; z-index: 10; padding: 0 0.6rem; font-family: var(--font-family-general); font-size: 0.66rem; font-weight: var(--font-weight-bold); letter-spacing: 0.06em; color: var(--color-white); border-right: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); }
+
+      /* espinha HORIZONTAL: linha que conecta os pontos ao longo do tempo */
+      .tl-entries { position: relative; display: flex; flex-direction: row; align-items: flex-start; gap: 1.1rem; padding: 1rem 1.5rem 1.25rem; }
+      .tl-entries::before { content: ''; position: absolute; left: 1.5rem; right: 1.5rem; top: calc(1rem + var(--tl-dot-r, 6px)); height: 1px; background: rgba(255,255,255,0.12); pointer-events: none; }
+
+      /* entrada: coluna (ponto sobre a espinha, card abaixo) */
+      .tl-entry { --tl-dot-r: 6px; display: flex; flex-direction: column; align-items: center; gap: 0.55rem; position: relative; }
+
+      /* conector curto do ponto até o card */
+      .tl-entry::after { content: ''; position: absolute; left: 50%; top: calc(var(--tl-dot-r)*2); width: 1.5px; height: 0.55rem; background: rgba(255,255,255,0.2); transform: translateX(-50%); border-radius: 99px; pointer-events: none; }
+
+      /* dot */
+      .tl-dot { flex-shrink: 0; width: calc(var(--tl-dot-r)*2); height: calc(var(--tl-dot-r)*2); border-radius: 50%; background-color: var(--tl-color, var(--color-grey-alpha-50)); box-shadow: 0 0 0 5px var(--tl-color-a, transparent); position: relative; z-index: 1; }
+      .tl-entry--done    { --tl-color: var(--color-green);  --tl-color-a: var(--color-green-alpha-25); }
+      .tl-entry--running { --tl-color: var(--color-purple); --tl-color-a: var(--color-purple-alpha-25); }
+      .tl-entry--pending { --tl-color: var(--color-orange); --tl-color-a: var(--color-orange-alpha-25); }
+
+      /* pulsação suave do círculo concêntrico: um anel emana do ponto e esmaece */
+      .tl-dot::after { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 0 0 3px var(--tl-color, transparent); opacity: 0; pointer-events: none; animation: tl-dot-pulse 3s ease-out infinite; }
+      .tl-entry:nth-child(3n+2) .tl-dot::after { animation-delay: 1s; }
+      .tl-entry:nth-child(3n+3) .tl-dot::after { animation-delay: 2s; }
+      @keyframes tl-dot-pulse { 0% { opacity: 0.5; transform: scale(0.85); } 70%, 100% { opacity: 0; transform: scale(1.9); } }
+      @media (prefers-reduced-motion: reduce) { .tl-dot::after { animation: none; } }
+
+      /* card abaixo do ponto */
+      .tl-card { display: flex; flex-direction: column; width: 5.5rem; }
+
+      /* badge — fundo na cor do status */
+      .tl-badge { background: var(--tl-badge-bg, var(--tl-color)); display: flex; align-items: center; justify-content: center; padding: 0 0.4rem; height: 1.05rem; border-radius: 3px 3px 0 0; }
+      /* roxo é escuro: clareia só o fundo do badge "em execução" p/ o código escuro continuar legível (o ponto permanece roxo vivo) */
+      .tl-entry--running { --tl-badge-bg: rgba(154, 141, 255, 1); }
+      .tl-code  { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bold); color: rgba(0,0,0,0.82); letter-spacing: 0.03em; white-space: nowrap; }
+
+      /* sem separador no card vertical (badge colorido encosta direto nas datas) */
+      .tl-sep { display: none; }
+
+      /* dates — fundo branco, texto escuro */
+      .tl-dates { background: rgba(255,255,255,0.92); border-radius: 0 0 3px 3px; padding: 0.25rem 0.4rem; display: flex; flex-direction: column; gap: 0.1rem; min-height: 2rem; justify-content: center; }
+      .tl-date { font-family: var(--font-family-general); font-size: 0.58rem; color: rgba(0,0,0,0.65); white-space: nowrap; display: flex; align-items: baseline; gap: 0.25em; }
+      .tl-lbl  { font-size: 0.52rem; color: rgba(0,0,0,0.4); flex-shrink: 0; }
+      .tl-date--empty { color: rgba(0,0,0,0.35); font-style: italic; justify-content: center; }
+
+      /* legend */
+      .tl-legend { display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; padding: 0.75rem 0; margin-top: 0.25rem; border-top: 1px solid rgba(255,255,255,0.08); }
+      .tl-legend-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-family-general); font-size: 0.68rem; color: var(--color-grey); }
+      .tl-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+      .tl-legend-dot--done    { background: var(--color-green);  box-shadow: 0 0 0 4px var(--color-green-alpha-25); }
+      .tl-legend-dot--running { background: var(--color-purple); box-shadow: 0 0 0 4px var(--color-purple-alpha-25); }
+      .tl-legend-dot--pending { background: var(--color-orange); box-shadow: 0 0 0 4px var(--color-orange-alpha-25); }
+    </style>
+  </head>
+  <body data-prev="../slides/index.html">
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <main class="main-container" id="main-content">
+      <header class="flex-header-container" aria-label="Cabeçalho">
+        <div class="title-header-h1">
+          <span class="section-icon icon-timelines" aria-hidden="true"></span>
+          <h1 class="title-h1">Linha do Tempo — Exemplo</h1>
+        </div>
+        <a class="flex-logo-container" href="../slides/index.html" aria-label="Voltar para a seleção">
+          <img width="480" height="290" class="logo cmt" src="../assets/logos/cmt-hd.jpg" alt="Logo CMT" loading="eager" />
+        </a>
+      </header>
+      <nav class="breadcrumb" aria-label="Navegação estrutural">
+        <ol>
+          <li class="crumb crumb-1"><a href="../apresentação.html">início</a></li>
+          <li class="crumb crumb-2"><a href="../slides/index.html">conteúdo</a></li>
+          <li class="crumb crumb-3"><span aria-current="page">linha do tempo — exemplo</span></li>
+        </ol>
+      </nav>
+      <div class="content-container">
+        <div class="content-wrapper">
+          <div class="tl-filters" role="group" aria-label="Filtros do cronograma">
+            <label class="tlf-field">
+              <span class="tlf-label">Código</span>
+              <input type="search" id="tlf-code" placeholder="ex.: 058/003" autocomplete="off" />
+            </label>
+            <div class="tlf-field">
+              <span class="tlf-label">Status</span>
+              <div class="tlf-chips" id="tlf-status">
+                <button type="button" class="tlf-chip active" data-status="done">Executada</button>
+                <button type="button" class="tlf-chip active" data-status="running">Em execução</button>
+                <button type="button" class="tlf-chip active" data-status="pending">Pendente</button>
+              </div>
+            </div>
+            <div class="tlf-field">
+              <span class="tlf-label" id="tlf-eixo-label">Eixo</span>
+              <select id="tlf-eixo" aria-labelledby="tlf-eixo-label">
+                <option value="">Todos</option>
+                <option value="Eixo Leste">Leste</option>
+                <option value="Eixo Norte">Norte</option>
+              </select>
+            </div>
+            <div class="tlf-field">
+              <span class="tlf-label" id="tlf-trecho-label">Trecho</span>
+              <select id="tlf-trecho" aria-labelledby="tlf-trecho-label"><option value="">Todos</option></select>
+            </div>
+            <div class="tlf-field">
+              <span class="tlf-label">Data inicial</span>
+              <div class="tlf-range">
+                <input type="date" id="tlf-ini-de" aria-label="Data inicial — de" />
+                <span aria-hidden="true">–</span>
+                <input type="date" id="tlf-ini-ate" aria-label="Data inicial — até" />
+              </div>
+            </div>
+            <div class="tlf-field">
+              <span class="tlf-label">Conclusão</span>
+              <div class="tlf-range">
+                <input type="date" id="tlf-fim-de" aria-label="Data de conclusão — de" />
+                <span aria-hidden="true">–</span>
+                <input type="date" id="tlf-fim-ate" aria-label="Data de conclusão — até" />
+              </div>
+            </div>
+            <button type="button" class="tlf-clear" id="tlf-clear">Limpar</button>
+            <span class="tlf-count" id="tlf-count" aria-live="polite"></span>
+          </div>
+          <div class="tl-scroll" role="region" aria-label="Cronograma — role horizontalmente para ver todas as colunas">
+            <div class="tl-grid">
+
+              <div class="tl-axis tl-axis--leste">Eixo Leste</div>
+
+              <!-- ══ GRUPO 1 ══════════════════════════════════════════════ -->
+              <div class="tl-group tl-group--1">
+                <div class="tl-branch" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 52" preserveAspectRatio="none">
+                    <path d="M382,0 C382,26 130,26 130,52 M390,0 V52 M398,0 C398,26 650,26 650,52" stroke="rgba(255,255,255,0.45)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="tl-trechos">
+
+                  <!-- E0-E1 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">E0–E1</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">058/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">057/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">050/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/04/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">052/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">045/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/03/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">051/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/03/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">055/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>27/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">048/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>08/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>25/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">047/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>03/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">043/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>28/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">054/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">060/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                  <!-- E0-E2 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">E0–E2</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">021/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>02/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>19/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">019/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">009/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/04/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">013/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>15/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">011/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>12/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>29/03/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">001/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>20/03/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">007/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">017/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>06/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">005/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>28/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">003/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">015/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">023/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                  <!-- E2-E3 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">E2–E3</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">078/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">064/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>14/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">076/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">072/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>02/05/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">062/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>08/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>29/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">070/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">069/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/03/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">067/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>27/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">075/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>25/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>11/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">066/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>31/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">073/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">079/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- ══ GRUPO 2 ══════════════════════════════════════════════ -->
+              <div class="tl-group tl-group--2">
+                <div class="tl-branch" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 52" preserveAspectRatio="none">
+                    <path d="M382,0 C382,26 130,26 130,52 M390,0 V52 M398,0 C398,26 650,26 650,52" stroke="rgba(255,255,255,0.45)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="tl-trechos">
+
+                  <!-- E3-E4 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">E3–E4</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">094/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>27/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">093/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">088/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>03/05/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">086/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">085/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>25/03/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">079/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>15/03/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">083/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">091/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>31/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">082/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>28/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">081/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">089/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">096/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                  <!-- E4-E6 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">E4–E6</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">093/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/06/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">111/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">109/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">103/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>07/05/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">091/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>25/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">101/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">099/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/03/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">097/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">095/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>31/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">107/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>28/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">105/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">113/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                  <!-- E6-E5 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">E6–E5</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">130/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>27/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">129/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">122/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/04/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">125/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>06/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">115/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>12/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>02/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">123/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/03/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">120/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">128/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>06/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">119/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>27/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">117/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">126/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">132/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="tl-axis tl-axis--norte">Eixo Norte</div>
+
+              <!-- ══ GRUPO 3 ══════════════════════════════════════════════ -->
+              <div class="tl-group tl-group--3">
+                <div class="tl-branch" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 52" preserveAspectRatio="none">
+                    <path d="M382,0 C382,26 130,26 130,52 M390,0 V52 M398,0 C398,26 650,26 650,52" stroke="rgba(255,255,255,0.45)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="tl-trechos">
+
+                  <!-- BNM-N3 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">BNM–N3</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">009/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>02/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>19/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">008/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">004/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/04/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">006/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/04/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">005/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">003/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>01/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">002/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/03/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">004/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>28/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">011/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">007/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>31/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">002/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>31/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">006/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">010/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                  <!-- N3-N2 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">N3–N2</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">031/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">030/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">027/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>02/05/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">026/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">021/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>10/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">025/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/03/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">024/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">029/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>25/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>11/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">022/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>28/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">023/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">028/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">032/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                  <!-- N2-N1 -->
+                  <div class="tl-trecho">
+                    <h3 class="tl-trecho-name">N2–N1</h3>
+                    <div class="tl-entries">
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">046/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/06/25</span><span class="tl-date"><span class="tl-lbl">fim</span>27/06/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">042/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>22/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">045/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/05/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">041/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/04/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">040/004</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/03/25</span><span class="tl-date"><span class="tl-lbl">fim</span>01/04/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--running"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">039/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>15/03/25</span><span class="tl-date tl-date--empty">em execução</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">038/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>28/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">037/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>05/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>22/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">048/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>01/02/25</span><span class="tl-date"><span class="tl-lbl">fim</span>18/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--right tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">044/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>20/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>06/02/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--done"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">036/003</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date"><span class="tl-lbl">ini</span>10/01/25</span><span class="tl-date"><span class="tl-lbl">fim</span>28/01/25</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">043/001</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                      <div class="tl-entry tl-entry--left tl-entry--pending"><div class="tl-dot" aria-hidden="true"></div><div class="tl-card"><div class="tl-badge"><span class="tl-code">047/002</span></div><div class="tl-sep" aria-hidden="true"><div class="tl-sep-arrow"></div></div><div class="tl-dates"><span class="tl-date tl-date--empty">pendente</span></div></div></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="tl-legend" role="list" aria-label="Legenda de status">
+            <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--done" aria-hidden="true"></span><span>Executada</span></div>
+            <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--running" aria-hidden="true"></span><span>Em execução</span></div>
+            <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--pending" aria-hidden="true"></span><span>Pendente</span></div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <script src="../scripts/slide-nav.js" defer></script>
+    <script>
+      const scroll = document.querySelector('.tl-scroll');
+      if (scroll) {
+        let active = false, startX, startLeft;
+        scroll.addEventListener('mousedown', e => { active = true; startX = e.pageX - scroll.offsetLeft; startLeft = scroll.scrollLeft; scroll.classList.add('is-grabbing'); });
+        const stop = () => { active = false; scroll.classList.remove('is-grabbing'); };
+        scroll.addEventListener('mouseleave', stop);
+        scroll.addEventListener('mouseup', stop);
+        scroll.addEventListener('mousemove', e => { if (!active) return; e.preventDefault(); scroll.scrollLeft = startLeft - (e.pageX - scroll.offsetLeft - startX) * 1.4; });
+      }
+
+      // No modo horizontal as labels dos eixos e dos trechos ficam fixas à
+      // esquerda via position: sticky; left: 0 (CSS) — permanecem visíveis
+      // durante toda a rolagem pelo tempo, sem necessidade de JS.
+
+      // ── Filtros do cronograma: código, status, eixo, trecho, data inicial e
+      // data de conclusão. Uma estrutura aparece se satisfizer TODOS os filtros.
+      (function tlFilters() {
+        const root = document.querySelector('.tl-filters');
+        if (!root) return;
+        const codeInput = root.querySelector('#tlf-code');
+        const statusChips = Array.from(root.querySelectorAll('.tlf-chip'));
+        const eixoSel = root.querySelector('#tlf-eixo');
+        const trechoSel = root.querySelector('#tlf-trecho');
+        const iniDe = root.querySelector('#tlf-ini-de'), iniAte = root.querySelector('#tlf-ini-ate');
+        const fimDe = root.querySelector('#tlf-fim-de'), fimAte = root.querySelector('#tlf-fim-ate');
+        const clearBtn = root.querySelector('#tlf-clear');
+        const countEl = root.querySelector('#tlf-count');
+
+        const dmy = s => { const m = s && s.match(/(\d{2})\/(\d{2})\/(\d{2})/); return m ? (2000 + +m[3]) * 10000 + (+m[2]) * 100 + (+m[1]) : null; };
+        const iso = s => { const m = s && s.match(/(\d{4})-(\d{2})-(\d{2})/); return m ? (+m[1]) * 10000 + (+m[2]) * 100 + (+m[3]) : null; };
+
+        const entries = Array.from(document.querySelectorAll('.tl-entry')).map(el => {
+          const txt = el.querySelector('.tl-dates').textContent;
+          return {
+            el,
+            code: el.querySelector('.tl-code').textContent.trim().toLowerCase(),
+            status: el.classList.contains('tl-entry--done') ? 'done' : el.classList.contains('tl-entry--running') ? 'running' : 'pending',
+            ini: dmy((txt.match(/ini\s*(\d{2}\/\d{2}\/\d{2})/) || [])[1]),
+            fim: dmy((txt.match(/fim\s*(\d{2}\/\d{2}\/\d{2})/) || [])[1]),
+            trecho: el.closest('.tl-trecho').querySelector('.tl-trecho-name').textContent.trim(),
+            eixo: el.closest('.tl-group').classList.contains('tl-group--3') ? 'Eixo Norte' : 'Eixo Leste',
+          };
+        });
+
+        // popula o seletor de trechos a partir do DOM (mantém em sincronia)
+        for (const t of [...new Set(entries.map(e => e.trecho))]) {
+          const o = document.createElement('option'); o.value = t; o.textContent = t; trechoSel.appendChild(o);
+        }
+
+        // ── dropdown customizado p/ Eixo e Trecho: menu flutuante escuro
+        // semitransparente, item ativo verde (texto preto) e demais em cinza.
+        // O <select> nativo é mantido oculto como fonte do valor — a lógica de
+        // filtro continua lendo .value e ouvindo 'change'.
+        function enhanceSelect(select, labelId) {
+          const field = select.closest('.tlf-field');
+          const dd = document.createElement('div'); dd.className = 'tlf-dd';
+          const trigger = document.createElement('button');
+          trigger.type = 'button'; trigger.className = 'tlf-dd-trigger';
+          trigger.setAttribute('aria-haspopup', 'listbox');
+          trigger.setAttribute('aria-expanded', 'false');
+          if (labelId) trigger.setAttribute('aria-labelledby', labelId);
+          const valSpan = document.createElement('span'); valSpan.className = 'tlf-dd-value';
+          const arrow = document.createElement('span'); arrow.className = 'tlf-dd-arrow'; arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '▾';
+          trigger.append(valSpan, arrow);
+          const menu = document.createElement('ul'); menu.className = 'tlf-dd-menu'; menu.setAttribute('role', 'listbox'); menu.hidden = true;
+          dd.append(trigger, menu);
+
+          function sync() {
+            const opt = [...select.options].find(o => o.value === select.value) || select.options[0];
+            valSpan.textContent = opt ? opt.textContent : '';
+            for (const li of menu.children) {
+              const on = li.dataset.value === select.value;
+              li.classList.toggle('is-selected', on);
+              li.setAttribute('aria-selected', on ? 'true' : 'false');
+            }
+          }
+          function rebuild() {
+            menu.innerHTML = '';
+            for (const opt of select.options) {
+              const li = document.createElement('li');
+              li.className = 'tlf-dd-opt'; li.setAttribute('role', 'option'); li.tabIndex = -1;
+              li.dataset.value = opt.value; li.textContent = opt.textContent;
+              li.addEventListener('click', () => choose(opt.value));
+              menu.appendChild(li);
+            }
+            sync();
+          }
+          function open() {
+            document.querySelectorAll('.tlf-dd-menu, .tlf-cal-menu').forEach(m => { if (m !== menu) { m.hidden = true; const tg = m.previousElementSibling; if (tg) tg.setAttribute('aria-expanded', 'false'); } });
+            menu.hidden = false; trigger.setAttribute('aria-expanded', 'true');
+            const cur = menu.querySelector('.is-selected') || menu.firstElementChild; if (cur) cur.focus();
+          }
+          function close(focusTrigger) { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); if (focusTrigger) trigger.focus(); }
+          function choose(v) { select.value = v; select.dispatchEvent(new Event('change', { bubbles: true })); close(true); }
+
+          trigger.addEventListener('click', () => { menu.hidden ? open() : close(false); });
+          trigger.addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+          menu.addEventListener('keydown', e => {
+            const opts = [...menu.children]; const i = opts.indexOf(document.activeElement);
+            if (e.key === 'ArrowDown') { e.preventDefault(); (opts[i + 1] || opts[0]).focus(); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); (opts[i - 1] || opts[opts.length - 1]).focus(); }
+            else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (opts[i]) choose(opts[i].dataset.value); }
+            else if (e.key === 'Escape') { e.preventDefault(); close(true); }
+            else if (e.key === 'Tab') { close(false); }
+          });
+          document.addEventListener('click', e => { if (!dd.contains(e.target)) close(false); });
+          select.addEventListener('change', sync);
+
+          select.classList.add('tlf-native-hidden');
+          field.appendChild(dd);
+          rebuild();
+        }
+        enhanceSelect(eixoSel, 'tlf-eixo-label');
+        enhanceSelect(trechoSel, 'tlf-trecho-label');
+
+        // ── calendário customizado p/ os seletores de data: mesmo menu flutuante
+        // escuro semitransparente, dia selecionado em verde (texto preto), demais
+        // em cinza. O <input type="date"> nativo é mantido oculto como fonte do
+        // valor (YYYY-MM-DD), então a lógica de filtro segue inalterada.
+        function enhanceDate(input) {
+          const WD = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+          const MO = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+          const pad = n => String(n).padStart(2, '0');
+          const toISO = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+          const parse = s => { const m = s && s.match(/(\d{4})-(\d{2})-(\d{2})/); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+
+          const dd = document.createElement('span'); dd.className = 'tlf-dd tlf-date';
+          const trigger = document.createElement('button');
+          trigger.type = 'button'; trigger.className = 'tlf-dd-trigger';
+          trigger.setAttribute('aria-haspopup', 'dialog'); trigger.setAttribute('aria-expanded', 'false');
+          const al = input.getAttribute('aria-label'); if (al) trigger.setAttribute('aria-label', al);
+          const valSpan = document.createElement('span'); valSpan.className = 'tlf-dd-value';
+          const arrow = document.createElement('span'); arrow.className = 'tlf-dd-arrow'; arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '▾';
+          trigger.append(valSpan, arrow);
+          const menu = document.createElement('div'); menu.className = 'tlf-cal-menu'; menu.hidden = true; menu.setAttribute('role', 'dialog');
+          dd.append(trigger, menu);
+          let view;
+
+          function syncTrigger() {
+            const d = parse(input.value);
+            valSpan.textContent = d ? pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear() : 'dd/mm/aaaa';
+            valSpan.classList.toggle('tlf-dd-placeholder', !d);
+          }
+          function render() {
+            const sel = parse(input.value), today = new Date();
+            menu.innerHTML = '';
+            const head = document.createElement('div'); head.className = 'tlf-cal-head';
+            const prev = document.createElement('button'); prev.type = 'button'; prev.className = 'tlf-cal-nav'; prev.textContent = '‹'; prev.setAttribute('aria-label', 'mês anterior');
+            const title = document.createElement('span'); title.className = 'tlf-cal-title'; title.textContent = MO[view.getMonth()] + ' ' + view.getFullYear();
+            const next = document.createElement('button'); next.type = 'button'; next.className = 'tlf-cal-nav'; next.textContent = '›'; next.setAttribute('aria-label', 'próximo mês');
+            prev.addEventListener('click', () => { view.setMonth(view.getMonth() - 1); render(); });
+            next.addEventListener('click', () => { view.setMonth(view.getMonth() + 1); render(); });
+            head.append(prev, title, next);
+            const grid = document.createElement('div'); grid.className = 'tlf-cal-grid';
+            for (const w of WD) { const c = document.createElement('div'); c.className = 'tlf-cal-wd'; c.textContent = w; grid.appendChild(c); }
+            const startDow = new Date(view.getFullYear(), view.getMonth(), 1).getDay();
+            const days = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+            for (let i = 0; i < startDow; i++) { const e = document.createElement('div'); e.className = 'tlf-cal-day is-empty'; grid.appendChild(e); }
+            for (let d = 1; d <= days; d++) {
+              const cell = document.createElement('button'); cell.type = 'button'; cell.className = 'tlf-cal-day'; cell.textContent = d; cell.tabIndex = -1;
+              const dt = new Date(view.getFullYear(), view.getMonth(), d);
+              if (sel && toISO(sel) === toISO(dt)) cell.classList.add('is-selected');
+              if (toISO(today) === toISO(dt)) cell.classList.add('is-today');
+              cell.addEventListener('click', () => { input.value = toISO(dt); input.dispatchEvent(new Event('change', { bubbles: true })); close(true); });
+              grid.appendChild(cell);
+            }
+            const clr = document.createElement('button'); clr.type = 'button'; clr.className = 'tlf-cal-clear'; clr.textContent = 'limpar';
+            clr.addEventListener('click', () => { input.value = ''; input.dispatchEvent(new Event('change', { bubbles: true })); close(true); });
+            menu.append(head, grid, clr);
+          }
+          function open() {
+            document.querySelectorAll('.tlf-dd-menu, .tlf-cal-menu').forEach(m => { if (m !== menu) { m.hidden = true; const tg = m.previousElementSibling; if (tg) tg.setAttribute('aria-expanded', 'false'); } });
+            const sel = parse(input.value), now = new Date();
+            view = sel ? new Date(sel.getFullYear(), sel.getMonth(), 1) : new Date(now.getFullYear(), now.getMonth(), 1);
+            render(); menu.hidden = false; trigger.setAttribute('aria-expanded', 'true');
+            menu.style.left = '0'; menu.style.right = 'auto';
+            if (menu.getBoundingClientRect().right > window.innerWidth - 8) { menu.style.left = 'auto'; menu.style.right = '0'; }
+          }
+          function close(focus) { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); if (focus) trigger.focus(); }
+          trigger.addEventListener('click', () => { menu.hidden ? open() : close(false); });
+          trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); open(); } });
+          menu.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); close(true); } });
+          document.addEventListener('click', e => { if (!dd.contains(e.target)) close(false); });
+          input.addEventListener('change', syncTrigger);
+
+          input.classList.add('tlf-native-hidden');
+          input.parentElement.insertBefore(dd, input.nextSibling);
+          syncTrigger();
+        }
+        [iniDe, iniAte, fimDe, fimAte].forEach(enhanceDate);
+
+        function apply() {
+          const q = codeInput.value.trim().toLowerCase();
+          const st = new Set(statusChips.filter(c => c.classList.contains('active')).map(c => c.dataset.status));
+          const eixo = eixoSel.value, trecho = trechoSel.value;
+          const id = iso(iniDe.value), ia = iso(iniAte.value), fd = iso(fimDe.value), fa = iso(fimAte.value);
+          let vis = 0;
+          for (const e of entries) {
+            let ok = (!q || e.code.includes(q)) && st.has(e.status) && (!eixo || e.eixo === eixo) && (!trecho || e.trecho === trecho);
+            if (ok && (id || ia)) ok = e.ini !== null && (!id || e.ini >= id) && (!ia || e.ini <= ia);
+            if (ok && (fd || fa)) ok = e.fim !== null && (!fd || e.fim >= fd) && (!fa || e.fim <= fa);
+            e.el.style.display = ok ? '' : 'none';
+            if (ok) vis++;
+          }
+          // recolhe faixas, grupos e cabeçalhos de eixo sem estruturas visíveis
+          document.querySelectorAll('.tl-trecho').forEach(tr => { tr.style.display = [...tr.querySelectorAll('.tl-entry')].some(x => x.style.display !== 'none') ? '' : 'none'; });
+          document.querySelectorAll('.tl-group').forEach(g => { g.style.display = [...g.querySelectorAll('.tl-entry')].some(x => x.style.display !== 'none') ? '' : 'none'; });
+          const seen = { 'Eixo Leste': false, 'Eixo Norte': false };
+          for (const e of entries) if (e.el.style.display !== 'none') seen[e.eixo] = true;
+          const axL = document.querySelector('.tl-axis--leste'), axN = document.querySelector('.tl-axis--norte');
+          if (axL) axL.style.display = seen['Eixo Leste'] ? '' : 'none';
+          if (axN) axN.style.display = seen['Eixo Norte'] ? '' : 'none';
+          countEl.textContent = vis + ' de ' + entries.length + ' estruturas';
+        }
+
+        statusChips.forEach(c => c.addEventListener('click', () => { c.classList.toggle('active'); apply(); }));
+        [codeInput, eixoSel, trechoSel, iniDe, iniAte, fimDe, fimAte].forEach(el => { el.addEventListener('input', apply); el.addEventListener('change', apply); });
+        clearBtn.addEventListener('click', () => {
+          codeInput.value = ''; eixoSel.value = ''; trechoSel.value = '';
+          iniDe.value = iniAte.value = fimDe.value = fimAte.value = '';
+          statusChips.forEach(c => c.classList.add('active'));
+          // sincroniza os dropdowns e calendários customizados
+          eixoSel.dispatchEvent(new Event('change', { bubbles: true }));
+          trechoSel.dispatchEvent(new Event('change', { bubbles: true }));
+          [iniDe, iniAte, fimDe, fimAte].forEach(el => el.dispatchEvent(new Event('change', { bubbles: true })));
+          apply();
+        });
+        apply();
+      })();
+    </script>
+
+    <button id="back-to-top" aria-label="Retornar ao topo da página">
+      <span class="back-top-icon" aria-hidden="true"></span>
+    </button>
+  </body>
+  <footer>
+    <div class="footer-wrapper">
+      <div class="personal-info">
+        <a href="https://www.instagram.com/eng.danielcarvalho/" target="_blank" rel="noreferrer noopener">
+          <img width="2560" height="1440" src="../assets/logos/dc-logo-white.png" alt="logo do eng. daniel carvalho" loading="lazy" />
+        </a>
+        <p>© 2026 Eng. Daniel Carvalho</p>
+      </div>
+      <nav class="footer-nav invisible" aria-label="Links externos">
+        <ul class="more-info">
+          <li><a href="https://www.linkedin.com/in/dvco/" target="_blank" rel="noreferrer noopener">Contacts</a></li>
+          <li><a href="https://github.com/eng-dvco/presentation/commits?author=eng-dvco" target="_blank" rel="noreferrer noopener">Commits</a></li>
+          <li><a href="https://github.com/eng-dvco/presentation" target="_blank" rel="noreferrer noopener">Docs</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</html>

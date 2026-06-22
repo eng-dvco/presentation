@@ -2,18 +2,18 @@
    be loaded before this file in every page. responsive token overrides
    (e.g. --font-multiplier per breakpoint) remain below in this file. */
 
-* {
+*, *::before, *::after {
   position: relative;
-  font-family: var(--font-family-general);
-  font-weight: var(--font-weight-normal);
-  line-height: var(--font-line-general);
-  color: var(--color-white);
   box-sizing: border-box;
 }
 
 body {
   padding: 0;
   margin: 0;
+  font-family: var(--font-family-general);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--font-line-general);
+  color: var(--color-white);
 }
 
 body::before {

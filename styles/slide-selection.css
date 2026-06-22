@@ -832,18 +832,19 @@
   display: flex;
   align-items: center;
   gap: 3px;
+  /* espaço reservado padrão (= o maior dos metadados longos: tamanho e data),
+     mantendo os ícones alinhados entre todos os itens e grupos de documentos */
+  min-width: 72px;
   font-size: calc(var(--font-size-default) * var(--font-size-multiplier-xs));
   font-weight: var(--font-weight-normal);
   color: var(--color-white-alpha-50);
   white-space: nowrap;
 }
 
-/* espaço mínimo reservado por tipo de metadado (mesmo quando o valor é "—"),
-   garantindo o alinhamento dos ícones entre todos os itens e grupos */
-.doc-meta:has(.doc-icon--version)    { min-width: 54px; }
-.doc-meta:has(.doc-icon--pages)      { min-width: 32px; }
-.doc-meta:has(.doc-icon--size)       { min-width: 66px; }
-.doc-meta:has(.doc-icon--date-added) { min-width: 86px; }
+/* "versão" e "quantidade de páginas" (valores curtos) compartilham a mesma
+   largura — a maior das duas (versão) — em vez do padrão de 72px */
+.doc-meta:has(.doc-icon--version),
+.doc-meta:has(.doc-icon--pages) { min-width: 52px; }
 
 .doc-desc-row {
   font-size: calc(var(--font-size-default) * var(--font-size-multiplier-xs));

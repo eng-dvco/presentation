@@ -283,6 +283,11 @@ function buildAllSectionsNav(sections, currentIndex) {
   }
   links.appendChild(home);
 
+  const divider = document.createElement('div');
+  divider.className = 'secnav-all-divider';
+  divider.setAttribute('aria-hidden', 'true');
+  links.appendChild(divider);
+
   sections.forEach((sec, idx) => {
     const isCurrent = idx === currentIndex;
     const link = document.createElement('a');
@@ -338,11 +343,17 @@ function buildSectionNav(sections, currentIndex, currentSlug) {
 
   // sidebar colapsível com todas as seções
   const allNav = buildAllSectionsNav(sections, currentIndex);
-  if (allNav) nav.appendChild(allNav);
-
-  // navegação entre os itens da seção atual
+  // navegação entre os itens da seção atual — incluída dentro do container colapsível
   const itemNav = buildItemNav(sections[currentIndex], currentSlug);
-  if (itemNav) nav.appendChild(itemNav.group);
+  if (allNav) {
+    if (itemNav) {
+      const listInner = allNav.querySelector('.secnav-all-list-inner');
+      if (listInner) listInner.appendChild(itemNav.group);
+    }
+    nav.appendChild(allNav);
+  } else if (itemNav) {
+    nav.appendChild(itemNav.group);
+  }
 
   const container = document.querySelector('.content-container');
   if (!container) return;

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Recuperação Estrutural dos Estais</title>
+    <meta name="description" content="Linha do tempo da recuperação estrutural dos estais das torres nos eixos Leste e Norte do PISF." />
+    <meta name="keywords" content="apresentação, transmissão, linha do tempo, manutenção, pisf, estais, recuperação estrutural" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="../assets/icons/favicon.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="../assets/icons/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="stylesheet" href="../styles/variables.css" />
+    <link rel="stylesheet" href="../styles/slide-style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&family=Fondamento:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/slide-tl.css" />
+  </head>
+  <body data-prev="../slides/index.html">
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <main class="main-container" id="main-content">
+      <header class="flex-header-container" aria-label="Cabeçalho">
+        <div class="title-header-h1">
+          <span class="section-icon icon-timelines" aria-hidden="true"></span>
+          <h1 class="title-h1">Recuperação estrutural dos estais</h1>
+        </div>
+        <a class="flex-logo-container" href="../slides/index.html" aria-label="Voltar para a seleção">
+          <img width="480" height="290" class="logo cmt" src="../assets/logos/cmt-hd.jpg" alt="Logo CMT" loading="eager" />
+          <img width="600" height="600" class="logo midr" src="../assets/logos/midr-hd.png" alt="Logo MIDR" loading="lazy" />
+        </a>
+      </header>
+      <nav class="breadcrumb" aria-label="Navegação estrutural">
+        <ol>
+          <li class="crumb crumb-1"><a href="../apresentação.html">início</a></li>
+          <li class="crumb crumb-2"><a href="../slides/index.html">conteúdo</a></li>
+          <li class="crumb crumb-3"><span aria-current="page">recuperação estrutural dos estais</span></li>
+        </ol>
+      </nav>
+      <div class="content-container">
+        <div class="content-wrapper">
+          <div class="tl-filters" role="group" aria-label="Filtros do cronograma">
+            <div class="tlf-field">
+              <span class="tlf-label">Data inicial</span>
+              <div class="tlf-range">
+                <input type="date" id="tlf-ini-de" aria-label="Data inicial — de" />
+                <span aria-hidden="true">–</span>
+                <input type="date" id="tlf-ini-ate" aria-label="Data inicial — até" />
+              </div>
+            </div>
+            <div class="tlf-field">
+              <span class="tlf-label">Conclusão</span>
+              <div class="tlf-range">
+                <input type="date" id="tlf-fim-de" aria-label="Data de conclusão — de" />
+                <span aria-hidden="true">–</span>
+                <input type="date" id="tlf-fim-ate" aria-label="Data de conclusão — até" />
+              </div>
+            </div>
+            <button type="button" class="tlf-clear" id="tlf-clear">Limpar</button>
+          </div>
+          <div class="tl-scroll" role="region" aria-label="Cronograma — role horizontalmente para ver todas as colunas">
+            <div class="tl-grid tlsr">
+
+              <div class="tl-axis-section tl-axis-section--leste">
+                <div class="tl-axis tl-axis--leste"><div class="tl-axis-title-row"><span class="tl-axis-title">Eixo Leste</span><div class="tl-axis-search"><svg class="tl-axis-search-icon" viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="4" cy="4" r="2.5"/><line x1="6.5" y1="6.5" x2="9" y2="9"/></svg><input type="search" class="tl-axis-code" placeholder="ex.: 042/002" autocomplete="off" /></div></div><div class="tlf-chips tlf-chips--axis"><button type="button" class="tlf-chip active" data-status="done">Executada</button><button type="button" class="tlf-chip active" data-status="running">Em execução</button><button type="button" class="tlf-chip active" data-status="pending">Pendente</button></div></div>
+
+                <div class="tl-group tl-group--1">
+                  <div class="tl-trechos">
+
+                    <!-- SE-E4 → SE-E6 -->
+                    <div class="tl-trecho">
+                      <h3 class="tl-trecho-name">E4–E6</h3>
+                      <div class="tl-entries-scroll">
+                      <div class="tl-entries">
+                        <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">042/002</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>18/08/25</span><span class="tl-date"><span class="tl-lbl">fim</span>16/10/25</span></div>
+                          </div>
+                        </div>
+                        <div class="tl-entry tl-entry--left tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">046/002</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>03/12/25</span><span class="tl-date"><span class="tl-lbl">fim</span>14/12/25</span></div>
+                          </div>
+                        </div>
+                        <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">050/001</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>06/01/26</span><span class="tl-date"><span class="tl-lbl">fim</span>16/01/26</span></div>
+                          </div>
+                        </div>
+                        <div class="tl-entry tl-entry--left tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">051/002</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>26/01/26</span><span class="tl-date"><span class="tl-lbl">fim</span>04/02/26</span></div>
+                          </div>
+                        </div>
+                        <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">053/002</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>02/03/26</span><span class="tl-date"><span class="tl-lbl">fim</span>12/03/26</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      </div><!-- end tl-entries-scroll -->
+                    </div>
+
+                    <!-- SE-E2 → SE-E3 -->
+                    <div class="tl-trecho">
+                      <h3 class="tl-trecho-name">E2–E3</h3>
+                      <div class="tl-entries-scroll">
+                      <div class="tl-entries">
+                        <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">004/001</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>21/04/26</span><span class="tl-date"><span class="tl-lbl">fim</span>02/05/26</span></div>
+                          </div>
+                        </div>
+                        <div class="tl-entry tl-entry--left tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">005/002</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>27/04/26</span><span class="tl-date"><span class="tl-lbl">fim</span>09/05/26</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      </div><!-- end tl-entries-scroll -->
+                    </div>
+
+                  </div>
+                </div>
+              </div><!-- end tl-axis-section--leste -->
+
+              <div class="tl-axis-section tl-axis-section--norte">
+                <div class="tl-axis tl-axis--norte"><div class="tl-axis-title-row"><span class="tl-axis-title">Eixo Norte</span><div class="tl-axis-search"><svg class="tl-axis-search-icon" viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="4" cy="4" r="2.5"/><line x1="6.5" y1="6.5" x2="9" y2="9"/></svg><input type="search" class="tl-axis-code" placeholder="ex.: 009/001" autocomplete="off" /></div></div><div class="tlf-chips tlf-chips--axis"><button type="button" class="tlf-chip active" data-status="done">Executada</button><button type="button" class="tlf-chip active" data-status="running">Em execução</button><button type="button" class="tlf-chip active" data-status="pending">Pendente</button></div></div>
+
+                <div class="tl-group tl-group--2">
+                  <div class="tl-trechos">
+
+                    <!-- SE-BNM → SE-N3 -->
+                    <div class="tl-trecho">
+                      <h3 class="tl-trecho-name">BNM–N3</h3>
+                      <div class="tl-entries-scroll">
+                      <div class="tl-entries">
+                        <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">009/001</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>19/11/25</span><span class="tl-date"><span class="tl-lbl">fim</span>01/12/25</span></div>
+                          </div>
+                        </div>
+                        <div class="tl-entry tl-entry--left tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">006/002</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>28/01/26</span><span class="tl-date"><span class="tl-lbl">fim</span>09/02/26</span></div>
+                          </div>
+                        </div>
+                        <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">007/001</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>26/05/26</span><span class="tl-date"><span class="tl-lbl">fim</span>12/06/26</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      </div><!-- end tl-entries-scroll -->
+                    </div>
+
+                  </div>
+                </div>
+              </div><!-- end tl-axis-section--norte -->
+
+            </div>
+          </div>
+          <div class="tl-legend" aria-label="Legenda de status">
+            <span class="tl-legend-title" aria-hidden="true">Legenda</span>
+            <span class="tl-legend-sep" aria-hidden="true"></span>
+            <div class="tl-legend-items" role="list">
+              <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--done" aria-hidden="true"></span><span>Executada</span></div>
+              <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--running" aria-hidden="true"></span><span>Em execução</span></div>
+              <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--pending" aria-hidden="true"></span><span>Pendente</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <script src="../scripts/slide-nav.js" defer></script>
+    <script src="../scripts/slide-tl.js" defer></script>
+
+    <button id="back-to-top" aria-label="Retornar ao topo da página">
+      <span class="back-top-icon" aria-hidden="true"></span>
+    </button>
+  </body>
+  <footer>
+    <div class="footer-wrapper">
+      <div class="personal-info">
+        <a href="https://www.instagram.com/eng.danielcarvalho/" target="_blank" rel="noreferrer noopener">
+          <img width="2560" height="1440" src="../assets/logos/dc-logo-frame-black.png" alt="logo do eng. daniel carvalho" loading="lazy" />
+        </a>
+        <p>© 2026 Eng. Daniel Carvalho</p>
+      </div>
+      <nav class="footer-nav invisible" aria-label="Links externos">
+        <ul class="more-info">
+          <li><a href="https://www.linkedin.com/in/dvco/" target="_blank" rel="noreferrer noopener">Contacts</a></li>
+          <li><a href="https://github.com/eng-dvco/presentation/commits?author=eng-dvco" target="_blank" rel="noreferrer noopener">Commits</a></li>
+          <li><a href="https://github.com/eng-dvco/presentation" target="_blank" rel="noreferrer noopener">Docs</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</html>

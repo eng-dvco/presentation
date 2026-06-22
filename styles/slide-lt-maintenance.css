@@ -7,7 +7,7 @@
 
   & hr {
     border: none;
-    border-top: 1px solid var(--color-white-alpha-25);
+    border-top: 1px solid var(--lt-border);
     margin: 12px 0;
   }
 }
@@ -22,7 +22,7 @@ ul.nav-list {
 .nav-list {
   & li {
     margin: 8px;
-    background-color: var(--color-black-alpha-50);
+    background-color: var(--lt-surface-muted);
     padding: var(--padding-general-normal);
     border-radius: var(--border-general);
     transition: background-color 0.3s ease-out;
@@ -33,7 +33,7 @@ ul.nav-list {
     }
 
     &:not(.selected-item) p {
-      color: var(--color-white-alpha-75);
+      color: var(--lt-text-muted);
     }
 
     &.selected-item {
@@ -61,13 +61,13 @@ ul.nav-list {
   grid-column: 1 / -1;
   margin-top: 8px;
   padding: 8px 16px;
-  background-color: var(--color-black-alpha-50);
+  background-color: var(--lt-surface-muted);
   border-radius: var(--border-general);
   text-align: center;
 
   & h4 {
     margin: 0;
     font-weight: var(--font-weight-bold);
-    color: var(--color-white);
+    color: var(--lt-text);
   }
 }

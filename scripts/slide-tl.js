@@ -624,6 +624,10 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
   function buildSectionTable(section) {
     const allEntries = [...section.querySelectorAll('.tl-entry')];
     if (!allEntries.length) return null;
+    // As colunas de bases A–D só aparecem se a seção tiver estruturas com bases
+    // (ex.: recuperação de bases). Cronogramas sem bases (ex.: recuperação dos
+    // estais) usam apenas as colunas básicas — trecho, código, status e datas.
+    const hasBases = !!section.querySelector('.tl-base');
 
     const container = document.createElement('div');
     container.className = 'tl-axis-table';
@@ -632,11 +636,12 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
     table.className = 'tl-data-table';
 
     const thead = document.createElement('thead');
+    const baseHead = hasBases
+      ? `<th class="tlt-th-base">A</th><th class="tlt-th-base">B</th><th class="tlt-th-base">C</th><th class="tlt-th-base">D</th>`
+      : '';
     thead.innerHTML = `<tr>
       <th>Trecho</th><th>Código</th><th>Status</th>
-      <th>Início</th><th>Conclusão</th>
-      <th class="tlt-th-base">A</th><th class="tlt-th-base">B</th>
-      <th class="tlt-th-base">C</th><th class="tlt-th-base">D</th>
+      <th>Início</th><th>Conclusão</th>${baseHead}
     </tr>`;
     table.appendChild(thead);
 
@@ -667,7 +672,7 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
       if (prevTrecho !== null && trechoName !== prevTrecho) {
         const sep = document.createElement('tr');
         sep.className = 'tlt-sep-row';
-        sep.innerHTML = '<td colspan="9"></td>';
+        sep.innerHTML = `<td colspan="${hasBases ? 9 : 5}"></td>`;
         tbody.appendChild(sep);
       }
       prevTrecho = trechoName;
@@ -697,8 +702,8 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
       tdF.className = fimVal ? 'tlt-date' : 'tlt-date--empty';
       tdF.textContent = fimVal || '—'; tr.appendChild(tdF);
 
-      // Bases A–D
-      for (const lbl of ['A', 'B', 'C', 'D']) {
+      // Bases A–D (somente quando a seção possui bases)
+      if (hasBases) for (const lbl of ['A', 'B', 'C', 'D']) {
         const td = document.createElement('td');
         td.className = 'tlt-base-cell';
         const b = basesMap[lbl];

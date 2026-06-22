@@ -44,6 +44,7 @@ Todas as páginas compartilham a mesma carcaça (head com CSS/fontes; `skip-link
 - **Fotos** — qualquer `slide-*.html`; usa `mosaic-style.css`.
 - **Documento** — `document-template.html`; PDF embutido via `<object>`.
 - **Vídeo** — `video-template.html`; `<video>` com legendas.
+- **Linha do tempo** — `timeline-template.html`; cronograma de atividades com `slide-tl.css` (filtros e alternância cronograma/tabela).
 
 `slide-template.html` é o molde da **grade de seleção** (não um slide de fotos).
 

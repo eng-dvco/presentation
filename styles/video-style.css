@@ -8,9 +8,11 @@
   width: 100%;
   margin: 0;
 
-  border: 4px solid rgba(255, 255, 255, 0.15);
+  /* moldura clara, coesa com os demais containers do tema (mesma borda e sombra) */
+  border: 1px solid var(--lt-border);
   border-radius: var(--border-item);
-  background-color: var(--color-black);
+  background-color: var(--lt-surface);
+  box-shadow: var(--lt-shadow);
   overflow: hidden;
 
   & > video {
@@ -18,17 +20,17 @@
     height: auto;
     max-height: 70dvh;
     display: block;
-    background-color: var(--color-black);
+    background-color: var(--color-black); /* vídeo permanece sobre fundo preto (letterbox) */
   }
 }
 
 .video-caption {
   padding: var(--padding-general-normal);
-  background-color: var(--background-black-alpha-50);
+  background-color: var(--lt-surface-muted);
 
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
   text-align: center;
-  color: var(--color-white-alpha-75);
+  color: var(--lt-text-muted);
 }
 
 /* Small devices (landscape phones, 576px and below) */

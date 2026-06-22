@@ -187,6 +187,10 @@ body { color: rgba(0,0,0,0.75); }
 .tl-dates--hdr .tl-date { font-size: 0.54rem; color: rgba(0,0,0,0.6); }
 .tl-dates--hdr .tl-lbl { font-size: 0.48rem; color: rgba(0,0,0,0.38); }
 
+/* Cronograma sem cartão de bases (ex.: recuperação dos estais): a faixa de datas
+   é o último elemento do painel — arredonda seu canto inferior para fechar o cartão. */
+.tl-grid.tlsr .tl-entry-panel .tl-dates--hdr { border-radius: 0 0 3px 3px; }
+
 /* card de bases: gap de 4px (0.25rem) acima; mesma largura via align-items:stretch no painel */
 .tl-card--bases { width: auto; margin-top: 0.25rem; background: #fff; border-radius: 0 0 3px 3px; padding: 0.22rem 0.45rem 0.28rem; display: flex; flex-direction: column; gap: 0.14rem; }
 .tl-base { display: grid; grid-template-columns: 0.85rem 0.9rem 1fr auto; align-items: center; gap: 0.25rem; }

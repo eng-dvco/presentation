@@ -13,7 +13,7 @@ body {
   font-family: var(--font-family-general);
   font-weight: var(--font-weight-normal);
   line-height: var(--font-line-general);
-  color: var(--color-white);
+  color: var(--color-black);
 }
 
 body::before {
@@ -24,13 +24,15 @@ body::before {
   background: url(../assets/img/hero/hero-clean_blur.jpg) center center / cover no-repeat;
 }
 
+/* light theme: a light wash over the hero image so text reads dark-on-light.
+   A slightly brighter fade at the top mirrors the old dark top gradient. */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 100%) top center / 100% 60% no-repeat;
-  background-color: rgba(0, 0, 0, 0.15);
+  background: linear-gradient(to bottom, var(--lt-hero-overlay-top) 0%, transparent 100%) top center / 100% 60% no-repeat;
+  background-color: var(--lt-hero-overlay);
   pointer-events: none;
 }
 
@@ -85,7 +87,7 @@ ol {
 }
 
 hr {
-  color: var(--color-white-alpha-25);
+  color: var(--lt-border);
   margin-inline: 12px;
 }
 
@@ -104,8 +106,10 @@ hr {
   justify-content: space-between;
   align-items: center;
 
-  background-color: var(--background-black-alpha-75);
+  background-color: var(--lt-surface);
   backdrop-filter: blur(4px);
+  border-bottom: 1px solid var(--lt-border);
+  box-shadow: var(--lt-shadow);
 }
 
 .title-header-h1 {
@@ -126,13 +130,13 @@ hr {
 }
 
 /* leading section icon, shared by index.html headers and individual slides:
-   recolor the dark source SVGs to the title color (--color-white) by
-   painting a solid background clipped to the icon shape via mask */
+   recolor the source SVGs to the (now dark) title color by painting a solid
+   background clipped to the icon shape via mask */
 .section-icon {
   flex: 0 0 24px;
   width: 24px;
   height: 24px;
-  background-color: var(--color-white);
+  background-color: var(--lt-icon);
   -webkit-mask-position: center;
   mask-position: center;
   -webkit-mask-repeat: no-repeat;
@@ -191,10 +195,11 @@ hr {
   width: 100%;
   min-height: 64px;
   padding-inline: 12px;
-  background-color: var(--background-black-alpha-50);
+  background-color: var(--lt-surface-muted);
   text-align: center;
   align-content: center;
   object-position: 0% 0%;
+  box-shadow: var(--lt-shadow);
 }
 
 .title-header-h3 {
@@ -202,9 +207,10 @@ hr {
   min-height: 64px;
   grid-column: 1 / -1;
   padding-inline: 12px;
-  background: var(--background-black-alpha-50);
+  background: var(--lt-surface-muted);
   text-align: center;
   align-content: center;
+  box-shadow: var(--lt-shadow);
 }
 
 a.flex-logo-container {
@@ -218,6 +224,9 @@ a.flex-logo-container {
   width: 4.6rem;
   height: auto;
   border-radius: var(--border-smaller);
+  /* thin light-gray border on every page's CMT logo, matching the timeline
+     page (slide-tl.css applies the same border there) */
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .midr {
@@ -234,8 +243,9 @@ a.flex-logo-container {
   justify-content: center;
   padding: 4px 24px;
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
-  background-color: var(--background-black-alpha-50);
+  background-color: var(--lt-surface);
   backdrop-filter: blur(4px);
+  border-bottom: 1px solid var(--lt-border);
   z-index: 1000;
 
   & ol {
@@ -255,7 +265,7 @@ a.flex-logo-container {
     font-weight: var(--font-weight-bolder);
     font-style: italic;
 
-    color: var(--color-green);
+    color: var(--lt-accent);
     opacity: 0.75;
 
     transition: opacity 0.3s ease;
@@ -283,7 +293,7 @@ a.flex-logo-container {
   &:not(:last-child)::after {
     content: "›";
     display: inline-block;
-    color: var(--color-green);
+    color: var(--lt-accent);
     margin-right: 8px;
     opacity: 0.75;
   }
@@ -322,14 +332,16 @@ a.flex-logo-container {
 
   padding: 8px 12px;
   border-radius: var(--border-general);
-  background: var(--background-black-alpha-50);
+  background: var(--lt-surface);
   backdrop-filter: blur(4px);
+  border: 1px solid var(--lt-border);
+  box-shadow: var(--lt-shadow);
   pointer-events: none;
 
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   font-weight: var(--font-weight-bold);
   text-align: center;
-  color: var(--color-white);
+  color: var(--color-black);
 
   &.obs-done {
     background: var(--color-green-alpha-75);
@@ -377,7 +389,8 @@ a.flex-logo-container {
   width: 100%;
   max-height: var(--h);
   padding-block: var(--padding-around-general);
-  background-color: var(--background-black-alpha-50);
+  background-color: var(--lt-surface-muted);
+  border: 1px solid var(--lt-border);
   border-radius: var(--border-general);
   overflow: hidden;
 }
@@ -415,7 +428,7 @@ a.flex-logo-container {
   width: 100%;
   height: 100%;
   border-radius: var(--border-item);
-  border: 4px solid rgba(255, 255, 255, 0.15);
+  border: 4px solid var(--lt-border);
   overflow: hidden;
 
   & > img {
@@ -440,6 +453,9 @@ a.flex-logo-container {
     border: 0;
     border-radius: var(--border-round);
     background-color: var(--background-black-alpha-50);
+    /* buttons float over photographic slides, so they stay dark with a light
+       glyph for contrast against the image (not against the light page) */
+    color: var(--color-white);
 
     font-size: calc(var(--font-size-icon) * var(--font-size-multiplier-xxs));
     font-weight: var(--font-weight-boldest);
@@ -512,10 +528,11 @@ a.flex-logo-container {
   max-width: 720px;
   margin: 24px;
   margin-bottom: 48px;
-  border: 1.5px dashed var(--color-white);
+  border: 1.5px dashed var(--lt-border-strong);
   border-radius: var(--border-big);
-  background-color: var(--background-black-alpha-50);
+  background-color: var(--lt-surface);
   backdrop-filter: blur(24px);
+  box-shadow: var(--lt-shadow);
   overflow: hidden;
   cursor: default;
 
@@ -535,12 +552,14 @@ a.flex-logo-container {
   }
 }
 
+/* status callouts on light: soft tinted fills (alpha-25) keep each hue's
+   meaning, with text darkened to read on the light surface */
 .post-alert {
-  background-color: var(--color-dark-yellow-alpha-50);
-  border: 1.5px dashed var(--color-yellow);
+  background-color: var(--color-yellow-alpha-25);
+  border: 1.5px dashed var(--color-yellow-alpha-75);
 
   & p {
-    color: var(--color-yellow);
+    color: var(--color-dark-yellow);
 
     &::before {
       content: "🟡";
@@ -549,11 +568,11 @@ a.flex-logo-container {
 }
 
 .post-details {
-  background-color: var(--color-dark-green-alpha-50);
+  background-color: var(--color-green-alpha-25);
   border: 1.5px dashed var(--color-green);
 
   & p {
-    color: var(--color-green);
+    color: var(--color-dark-green);
 
     &::before {
       content: "🟢";
@@ -562,11 +581,11 @@ a.flex-logo-container {
 }
 
 .post-critical {
-  background-color: var(--color-dark-red-alpha-50);
+  background-color: var(--color-red-alpha-25);
   border: 1.5px dashed var(--color-red);
 
   & p {
-    color: var(--color-red);
+    color: var(--color-dark-red);
 
     &::before {
       content: "🔴";
@@ -587,7 +606,9 @@ a.flex-logo-container {
 .notes-container {
   width: 100%;
   max-width: 480px;
-  background-color: var(--background-black-alpha-75);
+  background-color: var(--lt-surface);
+  border: 1px solid var(--lt-border);
+  box-shadow: var(--lt-shadow);
   padding: 12px 24px;
   border-radius: var(--border-general);
   pointer-events: none;
@@ -613,7 +634,7 @@ a.flex-logo-container {
   }
 
   & > span {
-    color: var(--color-white-alpha-75);
+    color: var(--lt-text-muted);
     white-space: pre;
   }
 }
@@ -622,11 +643,11 @@ a.flex-logo-container {
   min-width: max-content;
   padding: var(--padding-general-small);
   border-radius: var(--border-item);
-  background-color: var(--background-white-alpha-10);
+  background-color: var(--color-black-alpha-10);
 }
 
 .note-meaning {
-  color: var(--color-grey);
+  color: var(--lt-text-muted);
 }
 
 /* additional information on hovering */
@@ -635,7 +656,7 @@ a.flex-logo-container {
   padding: 0px 12px;
   font-weight: var(--font-weight-bold);
   font-style: italic;
-  color: var(--color-green);
+  color: var(--lt-accent);
   background-color: var(--color-green-alpha-10);
   cursor: help;
 
@@ -657,10 +678,12 @@ a.flex-logo-container {
     border-radius: var(--border-general);
     padding: 12px;
     transform: translateX(-50%);
+    /* floating tooltip stays dark for contrast as a popover; force light text */
     background-color: var(--color-black);
+    color: var(--color-white);
 
     font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
-    box-shadow: 0px 4px 12px 0.5px var(--color-black);
+    box-shadow: 0px 4px 12px 0.5px var(--color-black-alpha-50);
     text-align: justify;
     visibility: hidden;
     pointer-events: none;
@@ -694,14 +717,14 @@ footer {
   & a {
     font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
     font-weight: var(--font-weight-bold);
-    color: var(--color-white);
+    color: var(--color-black);
   }
 
   & a:hover,
   & a:focus {
-    color: var(--color-green);
+    color: var(--lt-accent);
     text-decoration: underline;
-    text-decoration-color: var(--color-green);
+    text-decoration-color: var(--lt-accent);
   }
 }
 
@@ -734,14 +757,14 @@ footer {
 
 .disabled {
   /* width: 100%; */
-  color: var(--color-white-alpha-50);
-  background-color: var(--color-grey-alpha-25);
+  color: var(--lt-text-faint);
+  background-color: var(--color-black-alpha-10);
   pointer-events: none;
 }
 
 /* a11y: keyboard focus indicator */
 *:focus-visible {
-  outline: 2px solid var(--color-green);
+  outline: 2px solid var(--lt-accent);
   outline-offset: 2px;
 }
 
@@ -1230,9 +1253,11 @@ footer {
   max-height: calc(100vh - 68px);
   display: flex;
   flex-direction: column;
-  background-color: var(--background-black-alpha-50);
+  background-color: var(--lt-surface);
+  border: 1px solid var(--lt-border);
   border-radius: var(--border-general);
   backdrop-filter: blur(4px);
+  box-shadow: var(--lt-shadow);
   overflow: hidden;
 }
 
@@ -1261,9 +1286,10 @@ footer {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid var(--color-white-alpha-25);
-  background: var(--background-black-alpha-75);
+  border: 1px solid var(--lt-border);
+  background: var(--lt-surface);
   backdrop-filter: blur(8px);
+  box-shadow: var(--lt-shadow);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1291,10 +1317,11 @@ footer {
     white-space: nowrap;
     padding: 4px 10px;
     border-radius: var(--border-smaller);
-    border: 1px solid var(--color-white-alpha-25);
-    background: var(--background-black-alpha-75);
+    border: 1px solid var(--lt-border);
+    background: var(--lt-surface);
     backdrop-filter: blur(4px);
-    color: var(--color-white);
+    box-shadow: var(--lt-shadow);
+    color: var(--color-black);
     font-family: var(--font-family-general);
     font-size: calc(var(--font-size-default) * var(--font-size-multiplier-xs));
     pointer-events: none;
@@ -1304,8 +1331,8 @@ footer {
   }
 
   &:hover {
-    background: var(--background-black-alpha-50);
-    border-color: var(--color-white-alpha-50);
+    background: var(--lt-surface-strong);
+    border-color: var(--lt-border-strong);
   }
 
   &:hover::before,
@@ -1327,7 +1354,7 @@ body:has(.has-sidebar) #back-to-top {
   width: 14px;
   height: 14px;
   pointer-events: none;
-  background-color: var(--color-white);
+  background-color: var(--lt-icon);
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='black' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='6' y1='9.5' x2='6' y2='2.5'/%3E%3Cpolyline points='3,5.5 6,2.5 9,5.5'/%3E%3C/svg%3E");
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
@@ -1371,6 +1398,13 @@ body:has(.has-sidebar) #back-to-top {
   -webkit-appearance: none;
 
   & .secnav-dir { justify-content: space-between; }
+
+  /* colapsado: cantos inferiores retos (só os de cima arredondados), sinalizando
+     que a lista ainda pode se expandir abaixo; ao abrir mantém o raio padrão */
+  .secnav-all:not(.is-open) & {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 
 .secnav-all-chevron {
@@ -1416,9 +1450,10 @@ body:has(.has-sidebar) #back-to-top {
 
 /* seção atual em destaque (mesma ênfase do hover/itens) */
 .secnav-all-link.active {
-  border-color: var(--color-white-alpha-25);
-  background: var(--background-white-alpha-10);
-  color: var(--color-white);
+  border-color: var(--lt-border);
+  background: var(--lt-surface-strong);
+  color: var(--lt-text);
+  font-weight: var(--font-weight-boldest);
   cursor: default;
 }
 
@@ -1429,6 +1464,17 @@ body:has(.has-sidebar) #back-to-top {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+/* espaçador entre a lista de seções (acima) e o subtítulo "slides desta seção":
+   afasta o subtítulo/itens dos links de seção para a navegação não ficar
+   apinhada. Escala proporcional ao respiro dos botões (~1.3× o padding-top da
+   lista de seções) + divisor tracejado sutil; em px, mantém-se clara também
+   nas telas menores, onde a sidebar flui no documento. */
+.secnav-all-links + .secnav-items {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--lt-border);
 }
 
 .secnav-items-title {
@@ -1442,7 +1488,7 @@ body:has(.has-sidebar) #back-to-top {
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-white-alpha-50);
+  color: var(--lt-text-muted);
 
   /* total de slides da seção, alinhado à direita */
   & .secnav-items-count {
@@ -1462,7 +1508,7 @@ body:has(.has-sidebar) #back-to-top {
   gap: 8px;
   padding: 2px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  scrollbar-color: var(--lt-border-strong) transparent;
 }
 
 .secnav-item-link {
@@ -1471,10 +1517,10 @@ body:has(.has-sidebar) #back-to-top {
   overflow: hidden;
   padding: 8px 12px;
   border-radius: var(--border-general);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: var(--background-black-alpha-50);
+  border: 1px solid var(--lt-border);
+  background-color: var(--lt-surface-muted);
   backdrop-filter: blur(4px);
-  color: var(--color-white-alpha-75);
+  color: var(--lt-text-muted);
   text-decoration: none;
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   line-height: var(--font-line-ui);
@@ -1483,17 +1529,50 @@ body:has(.has-sidebar) #back-to-top {
 
 .secnav-item-link:hover,
 .secnav-item-link:focus-visible {
-  border-color: var(--color-white-alpha-25);
-  background: var(--background-white-alpha-10);
-  color: var(--color-white);
+  border-color: var(--lt-border-strong);
+  background: var(--lt-hover);
+  color: var(--color-black);
 }
 
 .secnav-item-link:active { transform: scale(0.97); }
 
 .secnav-item-link.active {
-  color: var(--color-white);
+  color: var(--color-black);
+  font-weight: var(--font-weight-boldest);
   cursor: default;
 }
+
+/* item atual sob hover: mantém texto escuro legível sobre o fundo claro (#e4e4e4) */
+.secnav-item-link.active:hover,
+.secnav-item-link.active:focus-visible {
+  color: var(--color-black);
+}
+
+/* seta direcional (→): sinaliza que o item leva (redireciona) a outra página.
+   Fica oculta e ligeiramente deslocada à direita; ao pairar/focar desliza para
+   dentro e aparece. Posicionada em absoluto para não interferir no recorte do
+   nome (2 linhas + máscara). Não aparece no item atual (.active), que não navega. */
+.secnav-item-link::after {
+  content: "→";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  line-height: 1;
+  color: currentColor;
+  opacity: 0;
+  transform: translate(4px, -50%);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+}
+
+.secnav-item-link:hover::after,
+.secnav-item-link:focus-visible::after {
+  opacity: 0.75;
+  transform: translate(0, -50%);
+}
+
+/* item atual não redireciona: sem seta */
+.secnav-item-link.active::after { content: none; }
 
 /* nome do slide: no máximo 2 linhas de altura (recortado em overflow: hidden) */
 .secnav-items-list .secnav-item-link {
@@ -1567,7 +1646,7 @@ body:has(.has-sidebar) #back-to-top {
   left: 2px;
   width: 4px;
   border-radius: 2px;
-  background: var(--color-green);
+  background: var(--lt-accent);
   transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1),
               height 0.34s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
@@ -1581,19 +1660,29 @@ body:has(.has-sidebar) #back-to-top {
   overflow: hidden;
   padding: 10px 14px;
   border-radius: var(--border-general);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background-color: var(--background-black-alpha-50);
+  border: 1px solid var(--lt-border);
+  background-color: var(--lt-surface-strong);
   backdrop-filter: blur(4px);
-  color: var(--color-white-alpha-75);
+  box-shadow: var(--lt-shadow);
+  color: var(--lt-text);
   text-decoration: none;
   transition: border-color 0.15s, background-color 0.15s, transform 0.1s;
 }
 
 .secnav-btn:hover,
 .secnav-btn:focus-visible {
-  border-color: var(--color-white-alpha-25);
-  background: var(--background-white-alpha-10);
-  color: var(--color-white);
+  border-color: var(--lt-border-strong);
+  background: var(--lt-hover);
+  color: var(--color-black);
+}
+
+/* no hover do botão principal, escurece também o kicker e o nome da seção
+   (que têm cor própria clara) para contraste sobre o fundo claro */
+.secnav-btn:hover .secnav-dir,
+.secnav-btn:focus-visible .secnav-dir,
+.secnav-btn:hover .secnav-section,
+.secnav-btn:focus-visible .secnav-section {
+  color: var(--color-black);
 }
 
 .secnav-btn:active { transform: scale(0.97); }
@@ -1606,16 +1695,41 @@ body:has(.has-sidebar) #back-to-top {
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-white-alpha-50);
+  color: var(--lt-text-muted);
 }
 
 /* nome da seção atual (exibido no toggle do menu de seções) */
 .secnav-section {
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   font-weight: var(--font-weight-boldest);
-  color: var(--color-white);
+  color: var(--lt-text);
   line-height: var(--font-line-ui);
 }
+
+/* ── formatação unificada da navegação lateral entre seções (global) ─────────
+   Antes vivia só em slide-tl.css (páginas de cronograma); movida para cá para
+   valer em TODAS as páginas. Botão principal branco com sombra; itens em
+   #f5f5f5 com texto suave; hover #e4e4e4 (faixas do cronograma); painel
+   expandido como "cartão" branco conectado ao botão; divisor tracejado.
+   (As setas direcionais e o espaçador acima continuam definidos no bloco
+   secnav base; aqui ficam apenas superfícies/cores/sombras.) */
+.slide-sidebar { background-color: transparent !important; backdrop-filter: none !important; }
+.secnav-btn { background-color: #fff !important; border-color: rgba(0,0,0,0.18) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; color: rgba(0,0,0,0.88) !important; position: relative !important; z-index: 2 !important; box-shadow: var(--lt-shadow) !important; }
+.secnav-item-link { background-color: #f5f5f5 !important; border-color: rgba(0,0,0,0.12) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; color: #8c8c8c !important; position: relative !important; z-index: 1 !important; }
+.secnav-btn:hover, .secnav-btn:focus-visible { border-color: rgba(0,0,0,0.22) !important; background: #e4e4e4 !important; color: rgba(0,0,0,0.88) !important; }
+.secnav-item-link:hover, .secnav-item-link:focus-visible, .secnav-all-link:hover, .secnav-all-link:focus-visible { border-color: rgba(0,0,0,0.22) !important; background: #e4e4e4 !important; color: rgba(0,0,0,0.88) !important; }
+.secnav-item-link.active, .secnav-all-link.active { color: rgba(0,0,0,0.88) !important; border-color: rgba(0,0,0,0.18) !important; background: #fff !important; cursor: default; }
+.secnav-marker { z-index: 3 !important; }
+.secnav-all-list-inner { background: #fff; border-radius: 0 0 8px 8px; padding: 0 12px 12px; }
+.secnav-all.is-open .secnav-btn { border-radius: 8px 8px 0 0 !important; border-bottom-color: transparent !important; }
+.secnav-all-home { margin-bottom: 0 !important; }
+.secnav-all-divider { border: none; border-top: 1.5px dashed rgba(160,160,160,0.65); margin: 2px 0; }
+.secnav-all-list .secnav-item-link { box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
+.secnav-items-title { color: rgba(0,0,0,0.45); }
+.secnav-items-list { scrollbar-color: rgba(0,0,0,0.18) transparent; }
+.secnav-dir { color: rgba(0,0,0,0.4) !important; }
+.secnav-section { color: rgba(0,0,0,0.75) !important; }
+.nav-hint-ripple { background: radial-gradient(circle, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0) 70%); }
 
 @media (max-width: 768px) {
   .content-container.has-sidebar { flex-direction: column; gap: 16px; }
@@ -1639,6 +1753,11 @@ body:has(.has-sidebar) #back-to-top {
   /* sem animação: o deslize e o esmaecimento mudam instantaneamente ao pairar */
   .secnav-item-name,
   .secnav-item-name-inner { transition: none; }
+  /* a seta direcional surge sem deslizar (apenas aparece) */
+  .secnav-item-link::after {
+    transition: none;
+    transform: translate(0, -50%);
+  }
   /* sem o deslize, o nome completo precisa continuar legível: deixa quebrar em
      várias linhas em vez de ficar permanentemente cortado dentro do botão */
   .secnav-item.is-overflowing {

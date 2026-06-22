@@ -2,6 +2,9 @@
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// busca sem acentuação: normaliza removendo diacríticos (ã/á/à/â → a, ç → c, …) e caixa
+function foldAccents(s) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+
 const search = document.getElementById('slide-search');
 const clearBtn = document.getElementById('search-clear');
 const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
@@ -12,13 +15,13 @@ let activeFilter = 'all';
 // ---- filtro e busca -------------------------------------------------------
 
 function applyFilters() {
-  const q = search.value.trim().toLowerCase();
+  const q = foldAccents(search.value.trim());
   clearBtn.hidden = !q;
 
   items.forEach(item => {
     const sec = item.closest('[data-section]');
     const inFilter = activeFilter === 'all' || (sec && sec.dataset.section === activeFilter);
-    const inSearch = !q || item.textContent.toLowerCase().includes(q);
+    const inSearch = !q || foldAccents(item.textContent).includes(q);
     item.style.display = inFilter && inSearch ? '' : 'none';
   });
 
@@ -141,7 +144,7 @@ function syncToggleBtn() {
 }
 
 function applyDocFilters() {
-  const q        = docSearch.value.trim().toLowerCase();
+  const q        = foldAccents(docSearch.value.trim());
   const filtered = q || activeDocType !== 'all';
   docClearBtn.hidden = !q;
 
@@ -156,7 +159,7 @@ function applyDocFilters() {
       const type        = typeTag ? typeTag.textContent.trim().toLowerCase() : '';
       const matchType   = activeDocType === 'all' || type === activeDocType;
       const nameEl = li.querySelector('.doc-name-text');
-      const matchSearch = !q || (nameEl ? nameEl.textContent : li.textContent).toLowerCase().includes(q);
+      const matchSearch = !q || foldAccents(nameEl ? nameEl.textContent : li.textContent).includes(q);
       const visible     = matchType && matchSearch;
       li.style.display  = visible ? '' : 'none';
       if (visible) groupVisible++;
@@ -319,10 +322,49 @@ function measureDocDescMarquee(row) {
     ],
     { duration: totalMs, iterations: Infinity, easing: 'linear' }
   );
+  // por-documento: a animação não toca sozinha — fica pausada até o cursor
+  // passar sobre a linha (hover) ou, em toque/clique, até tocar a linha
+  row._descAnim.pause();
+}
+
+// inicia (ou reinicia do começo) o deslizamento da descrição de UMA linha
+function playDocDescMarquee(row) {
+  const anim = row && row._descAnim;
+  if (!anim) return;
+  anim.currentTime = 0;
+  anim.play();
+}
+
+// pausa e recolhe o deslizamento de UMA linha (ao sair com o cursor)
+function resetDocDescMarquee(row) {
+  const anim = row && row._descAnim;
+  if (!anim) return;
+  anim.pause();
+  anim.currentTime = 0;
 }
 
 function refreshDocMarquees() {
   document.querySelectorAll('.doc-desc-row').forEach(measureDocDescMarquee);
+}
+
+// gatilho por documento: cada <li> aciona somente a própria descrição.
+// hover (mouse) toca enquanto o cursor permanece; em dispositivos sem hover,
+// um clique/toque na linha também dispara o deslizamento.
+if (!reducedMotion) {
+  document.querySelectorAll('.doc-items li').forEach(li => {
+    const row = li.querySelector('.doc-desc-row');
+    if (!row) return;
+
+    li.addEventListener('pointerenter', e => {
+      if (e.pointerType === 'mouse') playDocDescMarquee(row);
+    });
+    li.addEventListener('pointerleave', e => {
+      if (e.pointerType === 'mouse') resetDocDescMarquee(row);
+    });
+
+    // toque/clique (touch, pen ou mouse sem hover): reinicia do começo
+    li.addEventListener('click', () => playDocDescMarquee(row));
+  });
 }
 
 let docResizeTimer;

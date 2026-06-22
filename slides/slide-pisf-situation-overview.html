@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8" />
@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="../styles/variables.css" />
     <link rel="stylesheet" href="../styles/slide-style.css" />
-    <link rel="stylesheet" href="../styles/mosaic-style.css" />
+    <link rel="stylesheet" href="../styles/slide-tl.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -48,18 +48,534 @@
       <div class="content-container">
         <div class="content-wrapper">
           <div class="title-header-h2">
-            <h2 class="title-h2">Visão geral</h2>
+            <h2 class="title-h2">Materiais e sobressalentes por subestação</h2>
           </div>
-          <div class="mosaic-container">
-            <div class="img img-largest img-contain">
-              <img width="6346" height="2724" src="../assets/img/slides/issues/pisf-situation-overview/pisf-1.png" alt="Situação geral do PISF" loading="eager" />
-              <p class="obs obs-default invisible"></p>
+          <div class="tlp-controls" role="group" aria-label="Controles da tabela">
+            <div class="tlp-controls-group">
+              <div class="tl-axis-search">
+                <svg class="tl-axis-search-icon" viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="4" cy="4" r="2.5" /><line x1="6.5" y1="6.5" x2="9" y2="9" /></svg>
+                <input type="search" class="tl-axis-code" id="tlp-search" placeholder="buscar equipamento / referência" autocomplete="off" aria-label="Buscar por equipamento ou referência de fabricação" title="Buscar por equipamento ou referência de fabricação" />
+              </div>
+            </div>
+            <div class="tlp-controls-group">
+              <span class="tlp-group-label">Ordenar</span>
+              <div class="tl-sort-toggle" role="group" aria-label="Ordenar tabela">
+                <button type="button" class="tl-sort-btn is-active" data-sort="item" aria-pressed="true" title="Ordenar por item nº (clique novamente para inverter)">Item nº <span class="tlp-dir" aria-hidden="true">▲</span></button>
+                <button type="button" class="tl-sort-btn" data-sort="crit" aria-pressed="false" title="Ordenar por criticidade (clique novamente para inverter)">Criticidade <span class="tlp-dir" aria-hidden="true">▲</span></button>
+                <button type="button" class="tl-sort-btn" data-sort="valor" aria-pressed="false" title="Ordenar por valor total (clique novamente para inverter)">Valor total <span class="tlp-dir" aria-hidden="true">▲</span></button>
+              </div>
+            </div>
+            <div class="tlp-controls-group">
+              <span class="tlp-group-label">Detalhamento</span>
+              <div class="tl-view-toggle" role="group" aria-label="Nível de detalhamento das colunas">
+                <button type="button" class="tl-view-btn is-active" data-view="simples" aria-pressed="true" title="Visão simples — quantidades agregadas por eixo (Norte/Leste)">Simples</button>
+                <button type="button" class="tl-view-btn" data-view="completa" aria-pressed="false" title="Visão completa — quantidades detalhadas por subestação">Completa</button>
+              </div>
+            </div>
+            <span class="tlp-count" id="tlp-count" aria-live="polite"></span>
+          </div>
+          <div class="tl-axis-section is-table-view">
+            <div class="tl-axis-table">
+              <table class="tl-data-table tlp-table">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Equipamento</th>
+                    <th>Und</th>
+                    <th>Criticidade</th>
+                    <th>Referência de fabricação</th>
+                    <th class="tlt-th-base tlt-se-col">SE-N3</th>
+                    <th class="tlt-th-base tlt-se-col">SE-N2</th>
+                    <th class="tlt-th-base tlt-se-col">SE-N1</th>
+                    <th class="tlt-th-base tlt-eixo-col">Eixo Norte</th>
+                    <th class="tlt-th-base tlt-se-col">SE-E6</th>
+                    <th class="tlt-th-base tlt-se-col">SE-E5</th>
+                    <th class="tlt-th-base tlt-se-col">SE-E4</th>
+                    <th class="tlt-th-base tlt-se-col">SE-E3</th>
+                    <th class="tlt-th-base tlt-se-col">SE-E2</th>
+                    <th class="tlt-th-base tlt-se-col">SE-E1</th>
+                    <th class="tlt-th-base tlt-eixo-col">Eixo Leste</th>
+                    <th class="tlt-th-base">Sobressalentes</th>
+                    <th class="tlt-th-base">Total</th>
+                    <th>Valor unitário</th>
+                    <th>Valor total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="tlt-code">001</td>
+                    <td>Baterias de chumbo-ácido reguladas por válvula, 250 Ah, 2 V</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>GETPOWER / GP2-250</td>
+                    <td class="tlt-base-cell">120</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">120</td>
+                    <td class="tlt-base-cell">240</td>
+                    <td class="tlt-date">R$ 720,03</td>
+                    <td class="tlt-date">R$ 172.806,08</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">002</td>
+                    <td>URs</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>FSE / KNE-12520 A</td>
+                    <td class="tlt-base-cell">34</td>
+                    <td class="tlt-base-cell">42</td>
+                    <td class="tlt-base-cell">12</td>
+                    <td class="tlt-base-cell">88</td>
+                    <td class="tlt-date">R$ 31.607,00</td>
+                    <td class="tlt-date">R$ 2.781.416,00</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">003</td>
+                    <td>Módulo Supervisor</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>FSE / EFA POWER PSN OU ADELCO MS 125</td>
+                    <td class="tlt-base-cell">6</td>
+                    <td class="tlt-base-cell">8</td>
+                    <td class="tlt-base-cell">6</td>
+                    <td class="tlt-base-cell">20</td>
+                    <td class="tlt-date">R$ 19.240,00</td>
+                    <td class="tlt-date">R$ 384.800,00</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">004</td>
+                    <td>URs</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>CTRLTECH / CPCR 11E-125/050A</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">15</td>
+                    <td class="tlt-base-cell">5</td>
+                    <td class="tlt-base-cell">20</td>
+                    <td class="tlt-date">R$ 7.853,48</td>
+                    <td class="tlt-date">R$ 157.069,60</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">005</td>
+                    <td>Módulo Supervisor</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>CTRLTECH / CPCR 01E-125/25</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">4</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">6</td>
+                    <td class="tlt-date">R$ 4.992,88</td>
+                    <td class="tlt-date">R$ 29.957,28</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">006</td>
+                    <td>Transformador 6,9/380 kV; 150 kVA (TSA)</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--media">Média</span></td>
+                    <td>—</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-date">R$ 54.200,00</td>
+                    <td class="tlt-date">R$ 108.400,00</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">007</td>
+                    <td>Transformador 6,9/13,8 kV; 750 kVA</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--baixa">Baixa</span></td>
+                    <td>—</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">1</td>
+                    <td class="tlt-base-cell">1</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-date">R$ 89.000,00</td>
+                    <td class="tlt-date">R$ 178.000,00</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">008</td>
+                    <td>Transformador 6,9/13,8 kV; 300 kVA</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--baixa">Baixa</span></td>
+                    <td>—</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">5</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">7</td>
+                    <td class="tlt-date">R$ 65.000,00</td>
+                    <td class="tlt-date">R$ 455.000,00</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">009</td>
+                    <td>GPS</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--media">Média</span></td>
+                    <td>REASON RT420 — GPS-based time reference</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">1</td>
+                    <td class="tlt-base-cell">3</td>
+                    <td class="tlt-base-cell">6</td>
+                    <td class="tlt-date">R$ 32.600,42</td>
+                    <td class="tlt-date">R$ 195.602,52</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">010</td>
+                    <td>Ar-condicionado 30.000 BTUs</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--media">Média</span></td>
+                    <td>—</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">11</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">13</td>
+                    <td class="tlt-date">R$ 4.498,00</td>
+                    <td class="tlt-date">R$ 58.474,00</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">011</td>
+                    <td>Ar-condicionado 18.000 BTUs</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--media">Média</span></td>
+                    <td>—</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">4</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">6</td>
+                    <td class="tlt-date">R$ 2.803,90</td>
+                    <td class="tlt-date">R$ 16.823,40</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">012</td>
+                    <td>Ar-condicionado 17.000 BTUs</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--media">Média</span></td>
+                    <td>—</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">9</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">11</td>
+                    <td class="tlt-date">R$ 2.803,90</td>
+                    <td class="tlt-date">R$ 30.842,90</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">013</td>
+                    <td>Chave seccionadora 15 kV (chaves 289)</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>—</td>
+                    <td class="tlt-base-cell">4</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">6</td>
+                    <td class="tlt-date">R$ 25.607,41</td>
+                    <td class="tlt-date">R$ 153.644,46</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">014</td>
+                    <td>Disjuntor trifásico, instalação exterior, isolamento em SF6, 245 kV, 1250 A, 40 kA, 60 Hz. (Substituição do disjuntor DJ6-02 da SE-N2 e sobressalente.)</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>TOSHIBA</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">1</td>
+                    <td class="tlt-base-cell">3</td>
+                    <td class="tlt-date">R$ 495.000,00</td>
+                    <td class="tlt-date">R$ 1.485.000,00</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">015</td>
+                    <td>Polo de transformador de corrente, monofásico, instalação exterior, 242 kV, 60 Hz, relação de transformação 150/300x300/600x600/1200:5-5-5-5-5 A, com conectores na alta. Equipamento sobressalente.</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>ARTECHE</td>
+                    <td class="tlt-base-cell">1</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">1</td>
+                    <td class="tlt-base-cell">2</td>
+                    <td class="tlt-date">R$ 137.132,38</td>
+                    <td class="tlt-date">R$ 274.264,76</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">016</td>
+                    <td>Cabo de alumínio Grosbeak, CAA, 636 MCM, 26 fios, diâmetro 25,16 mm, seção 374,79 mm², peso 1,302 kgf/m, carga de ruptura 11.402 kgf, módulo de elasticidade final 7593 kgf/mm², coeficiente de dilatação final 0,0000189/°C</td>
+                    <td>m</td>
+                    <td><span class="crit crit--media">Média</span></td>
+                    <td>Grosbeak</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">5.610</td>
+                    <td class="tlt-base-cell">5.610</td>
+                    <td class="tlt-date">R$ 41,38</td>
+                    <td class="tlt-date">R$ 232.123,07</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">017</td>
+                    <td>Transformador de corrente 6,9 kV — 03 unidades RTC 1500-5 A; 03 unidades RTC 2000-5 A; 03 unidades RTC 2500-5 A</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--alta">Alta</span></td>
+                    <td>BRASFORMER</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">9</td>
+                    <td class="tlt-base-cell">9</td>
+                    <td class="tlt-date">R$ 11.120,73</td>
+                    <td class="tlt-date">R$ 100.086,57</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">018</td>
+                    <td>CFTV</td>
+                    <td>CJ</td>
+                    <td><span class="crit crit--baixa">Baixa</span></td>
+                    <td>INTELBRAS</td>
+                    <td class="tlt-base-cell">3</td>
+                    <td class="tlt-base-cell">6</td>
+                    <td class="tlt-base-cell">1</td>
+                    <td class="tlt-base-cell">10</td>
+                    <td class="tlt-date">R$ 27.981,30</td>
+                    <td class="tlt-date">R$ 279.813,00</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">019</td>
+                    <td>Disjuntor motor 110/125 V.P/T4/5</td>
+                    <td>un.</td>
+                    <td><span class="crit crit--media">Média</span></td>
+                    <td>ABB</td>
+                    <td class="tlt-base-cell">1</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">4</td>
+                    <td class="tlt-base-cell">5</td>
+                    <td class="tlt-date">R$ 3.806,55</td>
+                    <td class="tlt-date">R$ 19.032,73</td>
+                  </tr>
+                  <tr>
+                    <td class="tlt-code">020</td>
+                    <td>Brita nº 2 — pátio da subestação (600 m³ por SE)</td>
+                    <td>m³</td>
+                    <td><span class="crit crit--baixa">Baixa</span></td>
+                    <td>N/A</td>
+                    <td class="tlt-base-cell">1.800</td>
+                    <td class="tlt-base-cell">3.400</td>
+                    <td class="tlt-base-cell">0</td>
+                    <td class="tlt-base-cell">5.200</td>
+                    <td class="tlt-date">R$ 185,00</td>
+                    <td class="tlt-date">R$ 962.000,00</td>
+                  </tr>
+                  <tr class="tlt-total-row">
+                    <td class="tlt-code"></td>
+                    <td class="tlt-trecho">Valor total</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="tlt-base-cell"></td>
+                    <td class="tlt-base-cell"></td>
+                    <td class="tlt-base-cell"></td>
+                    <td class="tlt-base-cell"></td>
+                    <td></td>
+                    <td class="tlt-date">R$ 8.075.156,37</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </main>
     <script src="../scripts/slide-nav.js" defer></script>
+    <script>
+      /* ── Tabela PISF: colunas por SE (Completa), busca, ordenação e zebra ──
+         Escopo local a esta página; não toca slide-tl.js. Quantidades por SE
+         AUTORITATIVAS (índices N1,N2,N3 / E1..E6); some + sobressalentes = total.
+         Exibição em ordem decrescente (N3,N2,N1 / E6..E1) → arrays revertidos. */
+      (function () {
+        // busca sem acentuação: normaliza removendo diacríticos (ã/á/à/â → a, ç → c, …) e caixa
+        function foldAccents(s) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+        'use strict';
+
+        var SE_QTY = {
+          1:  { n: [60, 0, 60],  e: [0, 0, 0, 0, 0, 0] },
+          2:  { n: [12, 12, 10], e: [10, 10, 10, 12, 0, 0] },
+          3:  { n: [2, 2, 2],    e: [2, 2, 2, 2, 0, 0] },
+          4:  { n: [0, 0, 0],    e: [1, 0, 0, 0, 4, 10] },
+          5:  { n: [0, 0, 0],    e: [0, 0, 0, 0, 2, 2] },
+          6:  { n: [0, 0, 0],    e: [0, 0, 0, 0, 0, 0] },
+          7:  { n: [0, 0, 0],    e: [0, 0, 0, 0, 0, 1] },
+          8:  { n: [0, 0, 0],    e: [1, 1, 1, 1, 1, 0] },
+          9:  { n: [0, 1, 1],    e: [0, 1, 0, 0, 0, 0] },
+          10: { n: [0, 0, 0],    e: [3, 2, 2, 1, 0, 3] },
+          11: { n: [0, 0, 0],    e: [1, 1, 1, 0, 1, 0] },
+          12: { n: [0, 0, 0],    e: [1, 2, 0, 2, 0, 4] },
+          13: { n: [1, 1, 2],    e: [0, 0, 0, 0, 0, 0] },
+          14: { n: [0, 1, 1],    e: [0, 0, 0, 0, 0, 0] },
+          15: { n: [0, 1, 0],    e: [0, 0, 0, 0, 0, 0] },
+          16: { n: [0, 0, 0],    e: [0, 0, 0, 0, 0, 0] },
+          17: { n: [0, 0, 0],    e: [0, 0, 0, 0, 0, 0] },
+          18: { n: [1, 1, 1],    e: [1, 1, 1, 1, 1, 1] },
+          19: { n: [0, 1, 0],    e: [0, 0, 0, 0, 0, 0] },
+          20: { n: [600, 600, 600], e: [600, 600, 600, 600, 400, 600] }
+        };
+
+        var CRIT_RANK = { alta: 3, media: 2, baixa: 1 };
+
+        var table = document.querySelector('.tl-axis-table .tl-data-table');
+        if (!table) return;
+        var tbody = table.tBodies[0];
+        var wrap = table.closest('.tl-axis-table');
+        if (!tbody || !wrap) return;
+
+        /* formata número no padrão pt-BR (milhar com ponto) p/ casar com a tabela */
+        var fmt = function (v) { return v.toLocaleString('pt-BR'); };
+
+        /* cria uma célula de base SE (mesmo estilo das células agregadas).
+           text === null → célula vazia (linha de total). */
+        var seCell = function (val) {
+          var td = document.createElement('td');
+          td.className = 'tlt-base-cell tlt-se-col';
+          if (val !== null) td.textContent = fmt(val);
+          return td;
+        };
+
+        var dataRows = [];
+
+        Array.prototype.forEach.call(tbody.rows, function (row) {
+          /* células agregadas de eixo: índices estáveis em ambos os tipos de linha
+             [0]item [1]equip [2]und [3]crit [4]ref [5]EixoNorte [6]EixoLeste … */
+          var eixoNorteCell = row.cells[5];
+          var eixoLesteCell = row.cells[6];
+
+          if (row.classList.contains('tlt-total-row')) {
+            /* linha de total: células SE vazias, mesma estrutura/alinhamento */
+            for (var a = 2; a >= 0; a--) row.insertBefore(seCell(null), eixoNorteCell);
+            for (var b = 5; b >= 0; b--) row.insertBefore(seCell(null), eixoLesteCell);
+            eixoNorteCell.classList.add('tlt-eixo-col');
+            eixoLesteCell.classList.add('tlt-eixo-col');
+            return;
+          }
+
+          var num = parseInt(row.querySelector('.tlt-code').textContent.trim(), 10);
+          var q = SE_QTY[num];
+          if (!q) return;
+
+          /* SE-N em ordem decrescente: N3, N2, N1 (array é N1,N2,N3) */
+          for (var i = 2; i >= 0; i--) row.insertBefore(seCell(q.n[i]), eixoNorteCell);
+          eixoNorteCell.classList.add('tlt-eixo-col');
+
+          /* SE-E em ordem decrescente: E6..E1 (array é E1..E6) */
+          for (var j = 5; j >= 0; j--) row.insertBefore(seCell(q.e[j]), eixoLesteCell);
+          eixoLesteCell.classList.add('tlt-eixo-col');
+
+          /* selo de criticidade: insere o ponto pastel (status-dot) */
+          var crit = row.querySelector('.crit');
+          if (crit && !crit.querySelector('.tlt-status-dot')) {
+            var dot = document.createElement('span');
+            dot.className = 'tlt-status-dot';
+            dot.setAttribute('aria-hidden', 'true');
+            crit.insertBefore(dot, crit.firstChild);
+          }
+
+          /* chaves de ordenação/busca pré-computadas */
+          var critKey = crit ? (crit.classList.contains('crit--alta') ? 'alta' : crit.classList.contains('crit--media') ? 'media' : 'baixa') : '';
+          var valorCell = row.cells[row.cells.length - 1];
+          var valorNum = parseFloat(valorCell.textContent.replace(/[^\d,]/g, '').replace(/\./g, '').replace(',', '.')) || 0;
+          var equip = foldAccents(row.cells[1].textContent || '');
+          var ref = foldAccents(row.cells[4].textContent || '');
+
+          dataRows.push({
+            el: row,
+            item: num,
+            crit: CRIT_RANK[critKey] || 0,
+            valor: valorNum,
+            haystack: equip + ' ' + ref
+          });
+        });
+
+        var totalRow = tbody.querySelector('.tlt-total-row');
+
+        /* ── estado de ordenação e busca ── */
+        var sortKey = 'item';
+        var sortDir = 1; // 1 = asc, -1 = desc
+        var query = '';
+
+        var compare = function (a, b) {
+          var d;
+          if (sortKey === 'item') d = a.item - b.item;
+          else if (sortKey === 'crit') d = a.crit - b.crit || a.item - b.item;
+          else d = a.valor - b.valor || a.item - b.item;
+          return d * sortDir;
+        };
+
+        var render = function () {
+          var visible = dataRows.filter(function (r) {
+            var ok = !query || r.haystack.indexOf(query) !== -1;
+            r.el.classList.toggle('is-hidden', !ok);
+            return ok;
+          });
+          visible.sort(compare);
+
+          /* reordena no DOM e aplica zebra por classe sobre as VISÍVEIS */
+          visible.forEach(function (r, idx) {
+            r.el.classList.remove('is-row-odd', 'is-row-even');
+            r.el.classList.add(idx % 2 === 0 ? 'is-row-odd' : 'is-row-even');
+            tbody.insertBefore(r.el, totalRow); // mantém o total fixado ao fim
+          });
+
+          var countEl = document.getElementById('tlp-count');
+          if (countEl) {
+            countEl.textContent = visible.length === dataRows.length
+              ? dataRows.length + ' itens'
+              : visible.length + ' de ' + dataRows.length + ' itens';
+          }
+        };
+
+        /* ── busca ── */
+        var searchInput = document.getElementById('tlp-search');
+        if (searchInput) {
+          searchInput.addEventListener('input', function () {
+            query = foldAccents(this.value.trim());
+            render();
+          });
+        }
+
+        /* ── ordenação (segmented): reclica inverte direção ── */
+        var sortBtns = document.querySelectorAll('.tlp-controls .tl-sort-btn');
+        Array.prototype.forEach.call(sortBtns, function (btn) {
+          btn.addEventListener('click', function () {
+            var key = btn.getAttribute('data-sort');
+            if (sortKey === key) {
+              sortDir = -sortDir;
+            } else {
+              sortKey = key;
+              sortDir = 1;
+            }
+            Array.prototype.forEach.call(sortBtns, function (b) {
+              var active = b === btn;
+              b.classList.toggle('is-active', active);
+              b.setAttribute('aria-pressed', active ? 'true' : 'false');
+              var dir = b.querySelector('.tlp-dir');
+              if (dir) dir.textContent = active ? (sortDir === 1 ? '▲' : '▼') : '▲';
+            });
+            render();
+          });
+        });
+
+        /* ── toggle Simples ↔ Completa ── */
+        var viewBtns = document.querySelectorAll('.tl-view-toggle .tl-view-btn');
+        Array.prototype.forEach.call(viewBtns, function (btn) {
+          btn.addEventListener('click', function () {
+            var detailed = btn.getAttribute('data-view') === 'completa';
+            wrap.classList.toggle('is-detailed', detailed);
+            Array.prototype.forEach.call(viewBtns, function (b) {
+              var active = b === btn;
+              b.classList.toggle('is-active', active);
+              b.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+          });
+        });
+
+        render();
+      })();
+    </script>
     <button id="back-to-top" aria-label="Retornar ao topo da página">
       <span class="back-top-icon" aria-hidden="true"></span>
     </button>

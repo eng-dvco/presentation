@@ -1,5 +1,8 @@
 'use strict';
 
+// busca sem acentuação: normaliza removendo diacríticos (ã/á/à/â → a, ç → c, …) e caixa
+function foldAccents(s) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+
 // ── scroll drag horizontal: por trecho (cada faixa rola de forma independente) ──
 document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
   const trecho = scroll.closest('.tl-trecho');
@@ -50,7 +53,7 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
     const txt = el.querySelector('.tl-dates').textContent;
     return {
       el,
-      code: el.querySelector('.tl-code').textContent.trim().toLowerCase(),
+      code: foldAccents(el.querySelector('.tl-code').textContent.trim()),
       status: el.classList.contains('tl-entry--done') ? 'done' : el.classList.contains('tl-entry--running') ? 'running' : 'pending',
       ini: dmy((txt.match(/ini\s*(\d{2}\/\d{2}\/\d{2})/) || [])[1]),
       fim: dmy((txt.match(/fim\s*(\d{2}\/\d{2}\/\d{2})/) || [])[1]),
@@ -222,7 +225,7 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
       stByAxis[ax] = new Set(chips.filter(c => c.classList.contains('active')).map(c => c.dataset.status));
     }
     for (const [ax, inp] of Object.entries(axisCodeInputs)) {
-      qByAxis[ax] = inp ? inp.value.trim().toLowerCase() : '';
+      qByAxis[ax] = inp ? foldAccents(inp.value.trim()) : '';
     }
     const id = iso(iniDe.value), ia = iso(iniAte.value), fd = iso(fimDe.value), fa = iso(fimAte.value);
     let vis = 0;
@@ -298,12 +301,13 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
 // ── eixo toggle: expandir/colapsar todas as bases do eixo ────────────────────
 (function tlAxisToggle() {
   document.querySelectorAll('.tl-axis-toggle').forEach(btn => {
-    // inicializa o label de acordo com o estado atual (todas colapsadas = "Expandir")
+    // inicializa o label de acordo com o estado atual (todas colapsadas = "expandir tudo")
     const initLabel = btn.querySelector('.tl-axis-toggle-label');
     const initSec = btn.closest('.tl-axis-section');
     const initCollapsed = initSec && [...initSec.querySelectorAll('.tl-card--bases')].some(c => c.classList.contains('is-collapsed'));
-    if (initLabel) initLabel.textContent = initCollapsed ? 'Expandir' : 'Colapsar';
-    btn.title = initCollapsed ? 'Expandir todos os painéis' : 'Colapsar todos os painéis';
+    if (initLabel) initLabel.textContent = initCollapsed ? 'expandir tudo' : 'colapsar tudo';
+    btn.title = initCollapsed ? 'expandir tudo' : 'colapsar tudo';
+    btn.setAttribute('aria-label', initCollapsed ? 'expandir tudo' : 'colapsar tudo');
 
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -316,10 +320,13 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
         c.setAttribute('aria-expanded', String(anyCollapsed));
       });
       const icon = btn.querySelector('.tl-axis-toggle-icon');
-      if (icon) icon.style.transform = anyCollapsed ? 'rotate(0deg)' : 'rotate(-90deg)';
+      // conteúdo expande verticalmente: seta para BAIXO quando colapsado (expandir),
+      // para CIMA quando expandido (colapsar)
+      if (icon) icon.style.transform = anyCollapsed ? 'rotate(180deg)' : 'rotate(0deg)';
       const label = btn.querySelector('.tl-axis-toggle-label');
-      if (label) label.textContent = anyCollapsed ? 'Colapsar' : 'Expandir';
-      btn.title = anyCollapsed ? 'Colapsar todos os painéis' : 'Expandir todos os painéis';
+      if (label) label.textContent = anyCollapsed ? 'colapsar tudo' : 'expandir tudo';
+      btn.title = anyCollapsed ? 'colapsar tudo' : 'expandir tudo';
+      btn.setAttribute('aria-label', anyCollapsed ? 'colapsar tudo' : 'expandir tudo');
     });
   });
 })();
@@ -806,6 +813,50 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
     cronBtn.addEventListener('click', () => setView('cronograma'));
     tabBtn.addEventListener('click', () => setView('tabela'));
   });
+})();
+
+// ── zebra dinâmica: alterna a cor sempre seguindo a ordem VISÍVEL ─────────────
+// :nth-child segue a ordem no DOM, não a ordem visível; ao filtrar (linhas
+// ocultas) ou ordenar (linhas reordenadas) duas linhas visíveis adjacentes
+// podem cair na mesma paridade. Recalculamos is-row-odd/is-row-even sobre as
+// linhas realmente visíveis, e o CSS dirige o fundo por essas classes.
+(function tlZebraStriping() {
+  function stripe(rows) {
+    let i = 0;
+    for (const row of rows) {
+      const odd = i % 2 === 0; // 1ª visível = ímpar (#f5f5f5), como no :nth-child(odd) original
+      row.classList.toggle('is-row-odd', odd);
+      row.classList.toggle('is-row-even', !odd);
+      i++;
+    }
+  }
+
+  function update() {
+    // cronograma: cada .tl-trechos tem sua própria sequência (zebra reinicia por grupo)
+    document.querySelectorAll('.tl-trechos').forEach(container => {
+      const visible = [...container.children].filter(el =>
+        el.classList.contains('tl-trecho') && el.style.display !== 'none');
+      stripe(visible);
+    });
+    // tabela: ignora as linhas separadoras (.tlt-sep-row) e as ocultas
+    document.querySelectorAll('.tl-data-table tbody').forEach(tbody => {
+      const visible = [...tbody.children].filter(el =>
+        el.matches('tr:not(.tlt-sep-row)') && el.style.display !== 'none');
+      stripe(visible);
+    });
+  }
+
+  window._tlUpdateStriping = update;
+
+  // Encapsula _tlUpdateTableView: ele já é chamado após cada filtro (apply),
+  // ordenação (sortSection) e troca de visão (setView) — restripamos junto.
+  const _orig = window._tlUpdateTableView;
+  window._tlUpdateTableView = function() {
+    if (_orig) _orig();
+    update();
+  };
+
+  update();
 })();
 
 (function tlSortToggle() {

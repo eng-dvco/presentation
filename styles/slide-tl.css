@@ -1,6 +1,6 @@
 /* ── light theme overrides (timeline page only) ────────────────────────── */
 body { color: rgba(0,0,0,0.75); }
-.flex-header-container { background-color: rgba(255,255,255,0.97); backdrop-filter: none; border-bottom: 1px solid rgba(0,0,0,0.08); box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+.flex-header-container { background-color: rgba(255,255,255,0.97); backdrop-filter: none; border-bottom: 1px solid rgba(0,0,0,0.08); box-shadow: var(--lt-shadow); }
 .section-icon { background-color: rgba(0,0,0,0.6); }
 .breadcrumb { background-color: rgba(255,255,255,0.97); backdrop-filter: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
 .crumb a, .crumb [aria-current="page"] { color: rgba(0,0,0,0.5); opacity: 1; }
@@ -9,32 +9,8 @@ body { color: rgba(0,0,0,0.75); }
 .crumb:not(:last-child)::after { color: rgba(0,0,0,0.25); opacity: 1; }
 .cmt { border: 1px solid rgba(0,0,0,0.15); }
 
-/* sidebar de navegação por seção — light theme */
-.slide-sidebar { background-color: transparent !important; backdrop-filter: none !important; }
-.secnav-btn { background-color: #fff !important; border-color: rgba(0,0,0,0.18) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; color: rgba(0,0,0,0.88) !important; position: relative !important; z-index: 2 !important; box-shadow: 0 2px 6px rgba(0,0,0,0.1) !important; }
-.secnav-item-link { background-color: #f5f5f5 !important; border-color: rgba(0,0,0,0.12) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; color: #c8c8c8 !important; position: relative !important; z-index: 1 !important; }
-.secnav-btn:hover, .secnav-btn:focus-visible { border-color: rgba(0,0,0,0.22) !important; background: #b4b4b4 !important; color: rgba(0,0,0,0.88) !important; }
-.secnav-item-link:hover, .secnav-item-link:focus-visible { border-color: rgba(0,0,0,0.22) !important; background: #f5f5f5 !important; color: rgba(0,0,0,0.88) !important; }
-.secnav-item-link.active, .secnav-all-link.active { color: rgba(0,0,0,0.88) !important; border-color: rgba(0,0,0,0.18) !important; background: #fff !important; cursor: default; }
-.secnav-marker { z-index: 3 !important; }
-/* container dos botões — fundo branco, raios inferiores, padding lateral e inferior = mesmo gap entre seleção e botão principal (12px) */
-.secnav-all-list-inner { background: #fff; border-radius: 0 0 8px 8px; padding: 0 12px 12px; }
-
-/* botão principal: bordas inferiores retangulares ao expandir, conectando ao container */
-.secnav-all.is-open .secnav-btn { border-radius: 8px 8px 0 0 !important; border-bottom-color: transparent !important; }
-
-/* divisor entre seleção e demais seções */
-.secnav-all-home { margin-bottom: 0 !important; }
-.secnav-all-divider { border: none; border-top: 1.5px dashed rgba(160,160,160,0.65); margin: 2px 0; }
-
-/* sombra suave nos botões internos */
-.secnav-all-list .secnav-item-link { box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
-
-.secnav-items-title { color: rgba(0,0,0,0.45); }
-.secnav-items-list { scrollbar-color: rgba(0,0,0,0.18) transparent; }
-.secnav-dir { color: rgba(0,0,0,0.4) !important; }
-.secnav-section { color: rgba(0,0,0,0.75) !important; }
-.nav-hint-ripple { background: radial-gradient(circle, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0) 70%); }
+/* navegação lateral entre seções (e o ripple dos botões): estilo unificado
+   movido para slide-style.css, valendo em TODAS as páginas (antes só aqui). */
 
 /* botão retornar ao topo — light theme */
 #back-to-top { background: rgba(255,255,255,0.97); border-color: rgba(0,0,0,0.12); backdrop-filter: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
@@ -109,7 +85,8 @@ body { color: rgba(0,0,0,0.75); }
 /* cabeçalho do eixo — duas linhas: título (cima) + controles scrolláveis (baixo) */
 .tl-axis { display: flex; flex-direction: column; align-items: stretch; background: rgba(255,255,255,0.97); border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px dashed rgba(0,0,0,0.12); position: relative; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.10); }
 .tl-axis-title-row { display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 1rem; gap: 0.75rem; }
-.tl-axis-title { display: block; padding: 0; font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0,0,0,0.75); }
+/* nomes dos eixos (Eixo Norte / Eixo Leste) em negrito */
+.tl-axis-title { display: block; padding: 0; font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-boldest); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0,0,0,0.75); }
 .tl-axis-search { display: flex; align-items: center; gap: 0.35rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.12); border-radius: 99px; padding: 0.15rem 0.5rem; flex-shrink: 0; }
 .tl-axis-search-icon { color: rgba(0,0,0,0.35); flex-shrink: 0; }
 .tl-axis-code { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.58rem; width: 7.5rem; color: rgba(0,0,0,0.75); }
@@ -281,9 +258,13 @@ body { color: rgba(0,0,0,0.75); }
   .tl-axis-toggle-label { display: inline; }
 }
 
-/* ── preenchimento das faixas e hover (zebra) ── */
-.tl-trechos > .tl-trecho:nth-child(odd)  { --tl-row-bg: #f5f5f5; background: var(--tl-row-bg); }
-.tl-trechos > .tl-trecho:nth-child(even) { --tl-row-bg: #ececec; background: var(--tl-row-bg); }
+/* ── preenchimento das faixas e hover (zebra) ──
+   A alternância segue a ordem VISÍVEL via classes is-row-odd/is-row-even
+   aplicadas pelo JS (window._tlUpdateStriping) após cada filtro/ordenação.
+   :nth-child seguiria a ordem do DOM, deixando duas faixas visíveis
+   adjacentes com a mesma cor quando há linhas ocultas/reordenadas. */
+.tl-trechos > .tl-trecho.is-row-odd  { --tl-row-bg: #f5f5f5; background: var(--tl-row-bg); }
+.tl-trechos > .tl-trecho.is-row-even { --tl-row-bg: #ececec; background: var(--tl-row-bg); }
 .tl-trechos > .tl-trecho:hover { --tl-row-bg: #e4e4e4; background: var(--tl-row-bg); }
 
 /* ── gradiente direito: indica mais conteúdo ao scrollar ── */
@@ -325,12 +306,70 @@ body { color: rgba(0,0,0,0.75); }
 .tl-data-table thead th { background: rgba(255,255,255,0.97); padding: 0.42rem 0.7rem; text-align: left; font-size: 0.58rem; font-weight: var(--font-weight-bold); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.55); border-bottom: 1px solid rgba(0,0,0,0.12); white-space: nowrap; }
 .tl-data-table thead th.tlt-th-base { text-align: center; padding-left: 0.3rem; padding-right: 0.3rem; }
 .tl-data-table tbody tr { transition: background 0.12s; }
-.tl-data-table tbody tr:nth-child(odd) { background: #f5f5f5; }
-.tl-data-table tbody tr:nth-child(even) { background: #ececec; }
+/* zebra pela ordem VISÍVEL (classes do JS), não por :nth-child — assim
+   filtros/ordenação nunca deixam duas linhas visíveis adjacentes iguais */
+.tl-data-table tbody tr.is-row-odd { background: #f5f5f5; }
+.tl-data-table tbody tr.is-row-even { background: #ececec; }
 .tl-data-table tbody tr:hover { background: #e4e4e4; }
 .tl-data-table tbody tr.tlt-sep-row { background: transparent !important; }
 .tl-data-table tbody tr.tlt-sep-row td { padding: 0; height: 1px; background: transparent !important; border-bottom: 1px dashed rgba(0,0,0,0.15); }
 .tl-data-table tbody td { padding: 0.35rem 0.7rem; border-bottom: 1px solid rgba(0,0,0,0.06); color: rgba(0,0,0,0.75); vertical-align: middle; white-space: nowrap; }
+
+/* ───────── PISF — tabela "Situação geral" (slide-pisf-situation-overview) ─────────
+   Reaproveita .tl-data-table + os controles do cronograma. Componentes
+   reutilizáveis (.crit, .tlp-controls) ficam globais (compartilháveis entre
+   slides); regras estruturais ficam escopadas em .tlp-table para não afetar a
+   tabela do cronograma. O zebrado/hover reutilizam as regras
+   .tl-data-table tbody tr.is-row-odd / .is-row-even / :hover acima. */
+
+/* selo de criticidade em tons pastel (Alta = laranja, Média = roxo, Baixa = verde) */
+.crit { display: inline-flex; align-items: center; gap: 0.35rem; min-width: 62px; padding: 3px 9px; border-radius: 99px; font-weight: var(--font-weight-bold); white-space: nowrap; color: rgba(0,0,0,0.72); }
+.crit .tlt-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.crit--alta  { background: var(--color-orange-alpha-25); }
+.crit--media { background: var(--color-purple-alpha-25); }
+.crit--baixa { background: var(--color-green-alpha-25); }
+.crit--alta  .tlt-status-dot { background: var(--color-orange); }
+.crit--media .tlt-status-dot { background: var(--color-purple); }
+.crit--baixa .tlt-status-dot { background: var(--color-green); }
+
+/* largura mínima das colunas: evita compressão excessiva do conteúdo. Como o
+   .tl-axis-table tem overflow-x:auto, o que exceder (sobretudo na visão
+   Completa, mais larga) vira scroll horizontal em vez de espremer as células. */
+.tlp-table thead th,
+.tlp-table tbody td { min-width: 3em; }
+/* coluna 'Equipamento' (2ª): piso maior + quebra (~10 palavras/linha) */
+.tlp-table thead th:nth-child(2),
+.tlp-table tbody td:nth-child(2) { min-width: 15em; width: 32em; white-space: normal; overflow-wrap: anywhere; }
+/* coluna 'Referência de fabricação' (5ª): piso de largura p/ textos de modelo */
+.tlp-table thead th:nth-child(5),
+.tlp-table tbody td:nth-child(5) { min-width: 9em; }
+
+/* linha de total fixada no rodapé, fora do zebrado */
+.tlp-table tbody tr.tlt-total-row,
+.tlp-table tbody tr.tlt-total-row:hover { background: rgba(255,255,255,0.97); }
+.tlp-table tbody tr.is-hidden { display: none; }
+
+/* colunas por subestação: ocultas no modo Simples; subtotais de eixo somem no Completo */
+.tlp-table .tlt-se-col { display: none; }
+.tl-axis-table.is-detailed .tlp-table .tlt-se-col { display: table-cell; }
+.tl-axis-table.is-detailed .tlp-table .tlt-eixo-col { display: none; }
+.tlp-table thead th.tlt-se-col { font-size: 0.54rem; color: rgba(0,0,0,0.42); }
+
+/* barra de controles (busca + ordenação + visão) — mesmo visual do cronograma */
+/* container dos filtros (busca + ordenação + visão) — mesma "caixa" do
+   cronograma (.tl-filters): superfície clara, borda fina, cantos e sombra.
+   Sem margin-bottom: o espaçamento até a tabela usa o row-gap (24px) do
+   .content-wrapper, igual ao espaçamento padrão entre subtítulo e conteúdo. */
+.tlp-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; width: 100%; padding: 0.75rem 1rem; box-sizing: border-box; background: rgba(255,255,255,0.97); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--border-general); box-shadow: 0 2px 8px rgba(0,0,0,0.09); }
+.tlp-controls .tlp-controls-group { display: flex; align-items: center; gap: 0.5rem; }
+.tlp-controls .tlp-group-label { font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.45); }
+.tlp-controls .tlp-count { margin-left: auto; font-family: var(--font-family-general); font-size: 0.66rem; color: rgba(0,0,0,0.45); white-space: nowrap; }
+.tlp-controls .tl-sort-btn { gap: 0.3rem; }
+.tlp-controls .tl-sort-btn .tlp-dir { font-size: 0.8em; opacity: 0; transition: opacity 0.15s; }
+.tlp-controls .tl-sort-btn.is-active .tlp-dir { opacity: 0.75; }
+@media (prefers-reduced-motion: reduce) {
+  .tlp-controls .tl-sort-btn .tlp-dir { transition: none; }
+}
 .tlt-trecho { font-size: 0.65rem; font-weight: var(--font-weight-bold); color: rgba(0,0,0,0.72); letter-spacing: 0.04em; }
 .tlt-code { font-weight: var(--font-weight-bold); letter-spacing: 0.03em; }
 .tlt-status { display: inline-flex; align-items: center; gap: 0.35rem; white-space: nowrap; }

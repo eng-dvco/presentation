@@ -69,8 +69,8 @@
             <div class="tlp-controls-group">
               <span class="tlp-group-label">Detalhamento</span>
               <div class="tl-view-toggle" role="group" aria-label="Nível de detalhamento das colunas">
-                <button type="button" class="tl-view-btn is-active" data-view="simples" aria-pressed="true" title="Visão simples — quantidades agregadas por eixo (Norte/Leste)">Simples</button>
-                <button type="button" class="tl-view-btn" data-view="completa" aria-pressed="false" title="Visão completa — quantidades detalhadas por subestação">Completa</button>
+                <button type="button" class="tl-view-btn is-active" data-view="reduzido" aria-pressed="true" title="Visão reduzida — quantidades agregadas por eixo (Norte/Leste)">Reduzido</button>
+                <button type="button" class="tl-view-btn" data-view="expandido" aria-pressed="false" title="Visão expandida — quantidades detalhadas por subestação">Expandido</button>
               </div>
             </div>
             <span class="tlp-count" id="tlp-count" aria-live="polite"></span>
@@ -84,7 +84,7 @@
                     <th>Equipamento</th>
                     <th>Und</th>
                     <th>Criticidade</th>
-                    <th>Referência de fabricação</th>
+                    <th>Referência de&nbsp;fabricação</th>
                     <th class="tlt-th-base tlt-se-col">SE-N3</th>
                     <th class="tlt-th-base tlt-se-col">SE-N2</th>
                     <th class="tlt-th-base tlt-se-col">SE-N1</th>
@@ -385,7 +385,7 @@
     </main>
     <script src="../scripts/slide-nav.js" defer></script>
     <script>
-      /* ── Tabela PISF: colunas por SE (Completa), busca, ordenação e zebra ──
+      /* ── Tabela PISF: colunas por SE (Expandido), busca, ordenação e zebra ──
          Escopo local a esta página; não toca slide-tl.js. Quantidades por SE
          AUTORITATIVAS (índices N1,N2,N3 / E1..E6); some + sobressalentes = total.
          Exibição em ordem decrescente (N3,N2,N1 / E6..E1) → arrays revertidos. */
@@ -560,11 +560,11 @@
           });
         });
 
-        /* ── toggle Simples ↔ Completa ── */
+        /* ── toggle Reduzido ↔ Expandido ── */
         var viewBtns = document.querySelectorAll('.tl-view-toggle .tl-view-btn');
         Array.prototype.forEach.call(viewBtns, function (btn) {
           btn.addEventListener('click', function () {
-            var detailed = btn.getAttribute('data-view') === 'completa';
+            var detailed = btn.getAttribute('data-view') === 'expandido';
             wrap.classList.toggle('is-detailed', detailed);
             Array.prototype.forEach.call(viewBtns, function (b) {
               var active = b === btn;
@@ -585,7 +585,7 @@
     <div class="footer-wrapper">
       <div class="personal-info">
         <a href="https://www.instagram.com/eng.danielcarvalho/" target="_blank" rel="noreferrer noopener">
-          <img width="2560" height="1440" src="../assets/logos/dc-logo-frame-black.png" alt="logo do eng. daniel carvalho composta pelas letras 'd' e 'c' estilizadas como 'arame' (outline)" loading="lazy" />
+          <img width="2560" height="1440" src="../assets/logos/dc-logo-white.png" alt="logo do eng. daniel carvalho composta pelas letras 'd' e 'c' estilizadas" loading="lazy" />
         </a>
         <p>© 2026 Eng. Daniel Carvalho</p>
       </div>

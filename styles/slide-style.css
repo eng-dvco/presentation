@@ -216,6 +216,11 @@ hr {
 a.flex-logo-container {
   display: flex;
   align-items: center;
+  /* reforço defensivo de centralização vertical no cabeçalho: o pai
+     .flex-header-container já usa align-items:center, mas declarar
+     align-self:center aqui garante o bloco de logos centrado mesmo se o
+     cross-axis do pai mudar; margens verticais simétricas evitam deslocamento */
+  align-self: center;
   gap: 12px;
   margin: 12px;
 }
@@ -834,12 +839,21 @@ footer {
     --font-multiplier: var(--font-size-multiplier-xxs);
   }
 
+  /* empilha CMT e MIDR verticalmente para economizar espaço horizontal;
+     dimensões levemente reduzidas + gap/margem menores para o bloco empilhado
+     caber na altura do cabeçalho (96px aqui) sem forçá-lo a crescer */
+  a.flex-logo-container {
+    flex-direction: column;
+    gap: 4px;
+    margin: 8px 12px;
+  }
+
   .cmt {
-    width: 4rem;
+    width: 3.2rem;
   }
 
   .midr {
-    width: 3rem;
+    width: 2.6rem;
   }
 
   .postscriptum-container p {
@@ -1434,7 +1448,7 @@ body:has(.has-sidebar) #back-to-top {
 .secnav-all-links {
   display: flex;
   flex-direction: column;
-  gap: 3px; /* lista compacta: itens próximos, parte do mesmo bloco da sidebar */
+  gap: 8px; /* mesmo respiro entre itens da lista de slides (.secnav-items-list) */
   padding-top: 12px; /* respiro até os botões — recortado pelo pai ao colapsar */
 }
 
@@ -1723,7 +1737,11 @@ body:has(.has-sidebar) #back-to-top {
 .secnav-all-list-inner { background: #fff; border-radius: 0 0 8px 8px; padding: 0 12px 12px; }
 .secnav-all.is-open .secnav-btn { border-radius: 8px 8px 0 0 !important; border-bottom-color: transparent !important; }
 .secnav-all-home { margin-bottom: 0 !important; }
-.secnav-all-divider { border: none; border-top: 1.5px dashed rgba(160,160,160,0.65); margin: 2px 0; }
+/* divisor tracejado abaixo do botão "Seleção de conteúdo": o respiro até os
+   itens adjacentes deve igualar o do segundo espaçador (16px acima + 16px abaixo
+   da linha). Como a lista (.secnav-all-links) tem gap 8px, a margem de 8px do
+   divisor soma 8+8 = 16px de cada lado. */
+.secnav-all-divider { border: none; border-top: 1.5px dashed rgba(160,160,160,0.65); margin: 8px 0; }
 .secnav-all-list .secnav-item-link { box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
 .secnav-items-title { color: rgba(0,0,0,0.45); }
 .secnav-items-list { scrollbar-color: rgba(0,0,0,0.18) transparent; }

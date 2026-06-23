@@ -52,6 +52,21 @@
 /* .section-icon base + per-icon mask rules live in slide-style.css so the
    individual slides (which don't load this file) can reuse them */
 
+/* na página de seleção, padroniza a cor do ícone de cada cabeçalho de seção
+   com a cor do TEXTO do título (.title-h2 herda body { color: --color-black }).
+   Escopo restrito à .selection-grid para NÃO alterar os ícones dos cabeçalhos
+   dos slides individuais nem da timeline, que usam --lt-icon de propósito. */
+.selection-grid .title-header-h2 .section-icon {
+  background-color: var(--color-black);
+}
+
+/* nome da seção ST: desktop exibe "ST — Segurança do Trabalho" (prefixo +
+   nome por extenso); a abreviação ("Segurança") fica oculta por padrão e só
+   aparece no mobile (ver media query em max-width: 576px) */
+.st-name-abbr {
+  display: none;
+}
+
 .update-info {
   padding: 4px 0 4px 24px;
   background-color: var(--color-black-alpha-10);
@@ -280,7 +295,10 @@
      section keeps a faint hint of its image identity while reading light.
      A hairline + soft shadow give separation on the light page. */
   background-blend-mode: lighten;
-  background-color: var(--lt-surface-muted);
+  /* camada branca do blend `lighten`: alfa um pouco menor que --lt-surface-muted
+     (0.97) para a foto de fundo aparecer mais e aumentar o contraste entre os
+     itens listados e o fundo da seção. Aplicada a todas as seções (regra única). */
+  background-color: rgba(245, 245, 245, 0.88);
   background-size: cover;
   border: 1px solid var(--lt-border);
   box-shadow: var(--lt-shadow);
@@ -841,8 +859,16 @@
   }
 }
 
+/* trilho animável do nome: inline-flex + gap permite encostar um CLONE após o
+   texto original (separados pelo gap), de modo que o translateX(-shift) produza
+   um loop CONTÍNUO — o nome reaparece sem corte, igual à descrição (.doc-desc-track).
+   O .doc-name-wrap continua cortando o overflow. Pausado por padrão — o JS
+   controla a animação por documento (hover/toque). */
 .doc-name-track {
-  display: contents;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 48px;
+  will-change: transform;
 }
 
 .doc-name-text {
@@ -853,7 +879,19 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
+}
+
+/* cada par "estreito + largo" (versão+tamanho, páginas+data) é uma unidade que
+   nunca se separa: ao faltar espaço horizontal, o 2º par cai inteiro para a
+   linha de baixo, mantendo o alinhamento vertical (versão acima de páginas,
+   tamanho acima de data) e tornando a quebra harmônica. */
+.doc-meta-pair {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .doc-meta {
@@ -1031,6 +1069,56 @@
   }
 }
 
+/* Abaixo de ~800px o título, a descrição e o grupo de ícones não cabem na mesma
+   linha: o <li> passa a empilhá-los em 3 faixas — título (1), descrição (2) e
+   ícones (3). O .doc-main-row vira display:contents para que o nome e o grupo
+   de ícones se tornem itens diretos do grid do <li> e possam ser reordenados
+   individualmente; o ext-tag permanece como badge à esquerda do título. */
+@media (max-width: 800px) {
+  .doc-items li {
+    /* coluna 1: badge ext-tag (auto) | coluna 2: conteúdo (restante)
+       linha 1: título · linha 2: descrição · linha 3: grupo de ícones */
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+    align-items: center;
+    row-gap: 4px;
+  }
+
+  /* badge à esquerda, alinhado ao título (linha 1) e não mais esticado */
+  .doc-items li > .ext-tag {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+
+  /* dissolve o flex do .doc-main-row: o nome e o grupo de ícones passam a ser
+     itens do grid do <li>, posicionáveis de forma independente */
+  .doc-main-row {
+    display: contents;
+  }
+
+  .doc-name-wrap {
+    grid-column: 2;
+    grid-row: 1;
+    order: 1;
+  }
+
+  .doc-desc-row {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    order: 2;
+  }
+
+  .doc-meta-inline {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    order: 3;
+    /* o grupo de ícones ganha a faixa inteira; mantém-se à esquerda, alinhado
+       ao restante do conteúdo e com leve espaçamento do texto acima */
+    flex-wrap: wrap;
+  }
+}
+
 /* ---- controles de busca e filtro (index.html) ------------------------------- */
 
 .index-controls {
@@ -1189,6 +1277,17 @@
       min-width: 0;
       text-align: left;
     }
+  }
+
+  /* nome da seção ST no mobile: oculta prefixo ("ST — ") e nome por extenso,
+     exibindo apenas a abreviação ("Segurança") */
+  .st-name-prefix,
+  .st-name-full {
+    display: none;
+  }
+
+  .st-name-abbr {
+    display: inline;
   }
 }
 

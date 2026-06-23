@@ -34,9 +34,10 @@ body { color: rgba(0,0,0,0.75); }
 .tl-filters input[type="search"] { min-width: 8rem; }
 .tl-filters input:focus, .tl-filters select:focus { border-color: var(--color-green); }
 .tlf-chips { display: flex; gap: 0.35rem; }
-.tlf-chips--axis { margin-right: auto; }
+.tlf-chips--axis { margin-right: auto; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; cursor: grab; }
+.tlf-chips--axis.is-grabbing { cursor: grabbing; }
 .tl-axis-controls .tlf-chip { font-size: 0.55rem; padding: 0.18rem 0.45rem; }
-.tlf-chip { background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.14); border-radius: 99px; color: rgba(0,0,0,0.55); font-family: var(--font-family-general); font-size: 0.66rem; padding: 0.32rem 0.62rem; cursor: pointer; transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
+.tlf-chip { background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.14); border-radius: 99px; color: rgba(0,0,0,0.55); font-family: var(--font-family-general); font-size: 0.66rem; padding: 0.32rem 0.62rem; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
 .tlf-chip[data-status="done"].active    { background: var(--color-green-alpha-10);  border: 1.5px solid var(--color-green);  color: rgba(0,0,0,0.75); }
 .tlf-chip[data-status="running"].active { background: var(--color-purple-alpha-10); border: 1.5px solid var(--color-purple); color: rgba(0,0,0,0.75); }
 .tlf-chip[data-status="pending"].active { background: var(--color-orange-alpha-25); border: 1.5px solid var(--color-orange); color: rgba(0,0,0,0.75); }
@@ -78,6 +79,34 @@ body { color: rgba(0,0,0,0.75); }
 .tlf-cal-day.is-empty { visibility: hidden; cursor: default; }
 .tlf-cal-clear { margin-top: 6px; width: 100%; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.14); border-radius: var(--border-smaller); color: rgba(0,0,0,0.6); font-family: var(--font-family-general); font-size: 0.62rem; padding: 0.3rem; cursor: pointer; }
 .tlf-cal-clear:hover { background: rgba(0,0,0,0.08); }
+
+/* ── barras de filtro no mobile: rolagem horizontal em vez de comprimir ──
+   Em telas estreitas o flex-wrap:wrap espremia/deformava os controles e os
+   tornava inacessíveis. Aqui (<=640px) trocamos por nowrap + scroll horizontal
+   e travamos os filhos diretos (flex-shrink:0) p/ manterem o tamanho natural,
+   ficando acessíveis via rolagem. Desktop mantém o wrap padrão.
+   Trade-off conhecido: definir overflow-x:auto faz o navegador computar
+   overflow-y como auto (spec: se um eixo não é visible, o "visible" do outro
+   vira auto). Logo os menus suspensos .tlf-dd-menu/.tlf-cal-menu (position:
+   absolute, abrindo p/ baixo) ficam dentro do contexto de scroll da .tl-filters
+   e podem ser cortados/rolados em vez de transbordar. Priorizamos a
+   acessibilidade dos filtros no mobile (decisão consciente). */
+@media (max-width: 640px) {
+  .tl-filters,
+  .tlp-controls {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .tl-filters > *,
+  .tl-filters .tlf-field,
+  .tl-filters .tlf-chips,
+  .tlp-controls > *,
+  .tlp-controls .tlp-controls-group {
+    flex-shrink: 0;
+  }
+}
 
 /* ── orientação HORIZONTAL: faixas (trechos) empilhadas; o tempo flui na horizontal (mais recente à esquerda) ── */
 .tl-grid { display: flex; flex-direction: column; width: 100%; gap: 0.75rem; }
@@ -186,6 +215,12 @@ body { color: rgba(0,0,0,0.75); }
 .tl-dates--hdr { background: rgba(228,228,228,0.95); min-height: auto; border-radius: 0; padding: 0.1rem 0.4rem; flex-direction: row; gap: 0.5rem; justify-content: center; }
 .tl-dates--hdr .tl-date { font-size: 0.54rem; color: rgba(0,0,0,0.6); }
 .tl-dates--hdr .tl-lbl { font-size: 0.48rem; color: rgba(0,0,0,0.38); }
+
+/* mobile/tablet: empilha as datas (ini acima, fim abaixo) sob o código.
+   A faixa fica mais alta — desejado — e o painel (grid auto) acomoda. */
+@media (max-width: 768px) {
+  .tl-dates--hdr { flex-direction: column; align-items: center; gap: 0.1rem; }
+}
 
 /* Cronograma sem cartão de bases (ex.: recuperação dos estais): a faixa de datas
    é o último elemento do painel — arredonda seu canto inferior para fechar o cartão. */
@@ -319,6 +354,17 @@ body { color: rgba(0,0,0,0.75); }
 .tl-data-table tbody tr.tlt-sep-row td { padding: 0; height: 1px; background: transparent !important; border-bottom: 1px dashed rgba(0,0,0,0.15); }
 .tl-data-table tbody td { padding: 0.35rem 0.7rem; border-bottom: 1px solid rgba(0,0,0,0.06); color: rgba(0,0,0,0.75); vertical-align: middle; white-space: nowrap; }
 
+/* ── divisor tracejado suave entre as colunas (mesmo estilo do .secnav-all-divider:
+   dashed, cinza ~rgba(160,160,160)). border-right tracejada SOMENTE nas linhas de
+   itens (tbody td), exceto a última coluna; o cabeçalho (thead th) NÃO recebe o
+   divisor — a divisão entre colunas só é perceptível nas informações listadas.
+   Preserva as bordas horizontais existentes. A linha separadora (.tlt-sep-row),
+   de largura total, fica de fora p/ não ganhar ticks verticais. */
+.tl-data-table tbody td:not(:last-child),
+.tlp-table tbody td:not(:last-child) { border-right: 1px dashed rgba(160,160,160,0.55); }
+.tl-data-table tbody tr.tlt-sep-row td,
+.tlp-table tbody tr.tlt-sep-row td { border-right: none; }
+
 /* ───────── PISF — tabela "Situação geral" (slide-pisf-situation-overview) ─────────
    Reaproveita .tl-data-table + os controles do cronograma. Componentes
    reutilizáveis (.crit, .tlp-controls) ficam globais (compartilháveis entre
@@ -344,9 +390,15 @@ body { color: rgba(0,0,0,0.75); }
 /* coluna 'Equipamento' (2ª): piso maior + quebra (~10 palavras/linha) */
 .tlp-table thead th:nth-child(2),
 .tlp-table tbody td:nth-child(2) { min-width: 15em; width: 32em; white-space: normal; overflow-wrap: anywhere; }
-/* coluna 'Referência de fabricação' (5ª): piso de largura p/ textos de modelo */
+/* coluna 'Referência de fabricação' (5ª): piso + teto de largura e quebra de
+   linha (espelha a coluna 'Equipamento') p/ não esticar com textos de modelo */
 .tlp-table thead th:nth-child(5),
-.tlp-table tbody td:nth-child(5) { min-width: 9em; }
+.tlp-table tbody td:nth-child(5) { min-width: 13em; width: 18em; max-width: 18em; white-space: normal; overflow-wrap: anywhere; }
+/* cabeçalho da 5ª coluna nunca quebra no meio da palavra: combinado com o nbsp
+   em "de&nbsp;fabricação" (no HTML) e o min-width acima, o título fica em no
+   máximo 2 linhas ("Referência" / "de fabricação"). overflow-wrap:anywhere
+   segue valendo p/ os VALORES (td), que podem ter modelos longos sem espaço. */
+.tlp-table thead th:nth-child(5) { overflow-wrap: normal; }
 
 /* linha de total fixada no rodapé, fora do zebrado */
 .tlp-table tbody tr.tlt-total-row,

@@ -509,6 +509,25 @@ function buildLightbox() {
   sharedTooltip.className = 'thumb-tooltip';
   document.body.appendChild(sharedTooltip);
 
+  // Mantém a tooltip dentro da viewport: o CSS a centraliza com translateX(-50%)
+  // sobre o `left`; aqui medimos o rect resultante e, se estourar uma borda,
+  // adicionamos um deslocamento horizontal ao transform para reentrá-la (margem
+  // de 8px), mesmo que isso a descentralize em relação à miniatura.
+  const clampTooltipIntoView = () => {
+    const margin = 8;
+    sharedTooltip.style.transform = 'translateX(-50%)';
+    const rect = sharedTooltip.getBoundingClientRect();
+    let shift = 0;
+    if (rect.left < margin) {
+      shift = margin - rect.left;                          // estourou à esquerda → empurra p/ direita
+    } else if (rect.right > window.innerWidth - margin) {
+      shift = (window.innerWidth - margin) - rect.right;   // estourou à direita → empurra p/ esquerda
+    }
+    sharedTooltip.style.transform = shift
+      ? `translateX(-50%) translateX(${shift}px)`
+      : 'translateX(-50%)';
+  };
+
   mosaicImages.forEach((img, i) => {
     const wrap = document.createElement('div');
     wrap.className = 'lightbox-thumb-wrap';
@@ -565,6 +584,7 @@ function buildLightbox() {
         sharedTooltip.style.left = `${rect.left + rect.width / 2}px`;
         sharedTooltip.style.bottom = `${window.innerHeight - rect.top + 8}px`;
         sharedTooltip.classList.add('is-visible');
+        clampTooltipIntoView();
         if (groupTitle && !reducedMotion) {
           requestAnimationFrame(() => {
             const container = sharedTooltip.querySelector('.thumb-tooltip-title');
@@ -622,17 +642,13 @@ function buildLightbox() {
   overlayClose.addEventListener('click', closeLightbox);
   overlayPrev.addEventListener('click', () => showImage(currentImgIdx - 1));
   overlayNext.addEventListener('click', () => showImage(currentImgIdx + 1));
-  let swipeSuppressClick = false;
-  overlay.addEventListener('click', e => {
-    if (swipeSuppressClick) { swipeSuppressClick = false; return; }
-    if (e.target === overlay || e.target === overlayStage) closeLightbox();
-  });
+  // Por requisito: APENAS a tecla ESC e o botão ✕ fecham o lightbox.
+  // Clicar/tocar na imagem, no backdrop ou no palco NÃO fecha.
 
   // Gestos de deslize na imagem (toque e mouse, via Pointer Events):
   //   • deslizar para a esquerda/direita → alterna entre as imagens
-  //   • deslizar para cima/baixo → fecha o lightbox
   // O pointerdown inicia no palco; pointerup/cancel escutam na janela para que
-  // a soltura conte mesmo fora do palco (ex.: deslize vertical longo).
+  // a soltura conte mesmo fora do palco (ex.: deslize horizontal longo).
   overlayStage.style.touchAction = 'none';
   (() => {
     let sx = 0, sy = 0, active = false;
@@ -649,9 +665,8 @@ function buildLightbox() {
       const dx = e.clientX - sx, dy = e.clientY - sy;
       const adx = Math.abs(dx), ady = Math.abs(dy);
       if (Math.max(adx, ady) < TH) return; // foi um toque/clique, não um deslize
-      swipeSuppressClick = true;            // impede o clique de fechar após o deslize
+      // Apenas deslize horizontal navega; deslize vertical NÃO fecha (só ESC/✕ fecham).
       if (adx > ady) showImage(currentImgIdx + (dx < 0 ? 1 : -1)); // ← próxima / → anterior
-      else closeLightbox();                                        // ↑ ou ↓ fecha
     });
     window.addEventListener('pointercancel', () => { active = false; });
   })();

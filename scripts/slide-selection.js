@@ -278,6 +278,59 @@ function refreshDocNameTruncation() {
   });
 }
 
+// ---- marquee do nome dos documentos ----------------------------------------
+// espelha o marquee da descrição (loop CONTÍNUO via clone): quando o .doc-name-text
+// excede a largura visível do .doc-name-wrap, um clone é encostado após o texto
+// (separado pelo gap do .doc-name-track) e o trilho desliza -shift, fazendo o nome
+// reaparecer sem corte. Sem espera inicial e a ~55 px/s, igual à descrição.
+
+function measureDocNameMarquee(wrap) {
+  if (wrap._nameAnim) { wrap._nameAnim.cancel(); wrap._nameAnim = null; }
+  const track = wrap.querySelector('.doc-name-track');
+  const text  = wrap.querySelector('.doc-name-text');
+  if (!track || !text) return;
+  const oldClone = track.querySelector('.doc-name-clone');
+  if (oldClone) oldClone.remove();
+
+  // só anima quando o texto está realmente truncado (mesma condição da máscara)
+  if (text.scrollWidth - wrap.clientWidth <= 1 || reducedMotion) return;
+
+  // clone que segue o original: ao transladar -shift (= largura do texto + gap),
+  // o clone ocupa a posição inicial do texto → reinício contínuo, sem salto
+  const clone = text.cloneNode(true);
+  clone.classList.add('doc-name-clone');
+  clone.setAttribute('aria-hidden', 'true');
+  track.appendChild(clone);
+
+  const shift   = clone.getBoundingClientRect().left - text.getBoundingClientRect().left;
+  const totalMs = (shift / 55) * 1000;
+  wrap._nameAnim = track.animate(
+    [
+      { transform: 'translateX(0)',           offset: 0 },
+      { transform: `translateX(${-shift}px)`, offset: 1 },
+    ],
+    { duration: totalMs, iterations: Infinity, easing: 'linear' }
+  );
+  // pausada por padrão: só desliza no hover (mouse) ou ao tocar/clicar a linha
+  wrap._nameAnim.pause();
+}
+
+// inicia (ou reinicia do começo) o deslizamento do nome de UMA linha
+function playDocNameMarquee(wrap) {
+  const anim = wrap && wrap._nameAnim;
+  if (!anim) return;
+  anim.currentTime = 0;
+  anim.play();
+}
+
+// pausa e recolhe o deslizamento do nome de UMA linha (ao sair com o cursor)
+function resetDocNameMarquee(wrap) {
+  const anim = wrap && wrap._nameAnim;
+  if (!anim) return;
+  anim.pause();
+  anim.currentTime = 0;
+}
+
 // ---- marquee da descrição dos documentos ------------------------------------
 
 function initDocDescMarquee(row) {
@@ -313,12 +366,13 @@ function measureDocDescMarquee(row) {
   track.appendChild(clone);
 
   const shift   = clone.getBoundingClientRect().left - text.getBoundingClientRect().left;
-  const totalMs = (shift / 45 + 3) * 1000;
+  // velocidade levemente maior (55 px/s) e SEM espera inicial: ao tocar/clicar
+  // (ou passar o cursor), o deslizamento começa imediatamente do offset 0
+  const totalMs = (shift / 55) * 1000;
   row._descAnim = track.animate(
     [
-      { transform: 'translateX(0)',            offset: 0              },
-      { transform: 'translateX(0)',            offset: 3000 / totalMs },
-      { transform: `translateX(${-shift}px)`, offset: 1              },
+      { transform: 'translateX(0)',           offset: 0 },
+      { transform: `translateX(${-shift}px)`, offset: 1 },
     ],
     { duration: totalMs, iterations: Infinity, easing: 'linear' }
   );
@@ -345,25 +399,34 @@ function resetDocDescMarquee(row) {
 
 function refreshDocMarquees() {
   document.querySelectorAll('.doc-desc-row').forEach(measureDocDescMarquee);
+  document.querySelectorAll('.doc-name-wrap').forEach(measureDocNameMarquee);
 }
 
-// gatilho por documento: cada <li> aciona somente a própria descrição.
-// hover (mouse) toca enquanto o cursor permanece; em dispositivos sem hover,
-// um clique/toque na linha também dispara o deslizamento.
+// gatilho por documento: cada <li> aciona a PRÓPRIA descrição E o próprio nome,
+// que deslizam juntos. hover (mouse) toca enquanto o cursor permanece; em
+// dispositivos sem hover, um clique/toque na linha também dispara o deslizamento.
 if (!reducedMotion) {
   document.querySelectorAll('.doc-items li').forEach(li => {
-    const row = li.querySelector('.doc-desc-row');
-    if (!row) return;
+    const row  = li.querySelector('.doc-desc-row');
+    const wrap = li.querySelector('.doc-name-wrap');
+    if (!row && !wrap) return;
 
     li.addEventListener('pointerenter', e => {
-      if (e.pointerType === 'mouse') playDocDescMarquee(row);
+      if (e.pointerType !== 'mouse') return;
+      playDocDescMarquee(row);
+      playDocNameMarquee(wrap);
     });
     li.addEventListener('pointerleave', e => {
-      if (e.pointerType === 'mouse') resetDocDescMarquee(row);
+      if (e.pointerType !== 'mouse') return;
+      resetDocDescMarquee(row);
+      resetDocNameMarquee(wrap);
     });
 
     // toque/clique (touch, pen ou mouse sem hover): reinicia do começo
-    li.addEventListener('click', () => playDocDescMarquee(row));
+    li.addEventListener('click', () => {
+      playDocDescMarquee(row);
+      playDocNameMarquee(wrap);
+    });
   });
 }
 

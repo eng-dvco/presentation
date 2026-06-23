@@ -3,23 +3,33 @@
 // busca sem acentuação: normaliza removendo diacríticos (ã/á/à/â → a, ç → c, …) e caixa
 function foldAccents(s) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
 
-// ── scroll drag horizontal: por trecho (cada faixa rola de forma independente) ──
-document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
-  const trecho = scroll.closest('.tl-trecho');
-  const updateFade = () => {
-    if (!trecho) return;
-    const atEnd = scroll.scrollLeft >= scroll.scrollWidth - scroll.clientWidth - 1;
-    trecho.classList.toggle('tl-scroll-end', atEnd);
-  };
-  scroll.addEventListener('scroll', updateFade, { passive: true });
-  requestAnimationFrame(updateFade);
-
-  let active = false, startX, startLeft;
-  scroll.addEventListener('mousedown', e => { active = true; startX = e.pageX - scroll.offsetLeft; startLeft = scroll.scrollLeft; scroll.classList.add('is-grabbing'); });
+// ── scroll drag horizontal: clicar-segurar-arrastar + swipe de touchpad ──
+// Lógica reutilizável aplicada às faixas de estruturas (.tl-entries-scroll) e
+// aos containers de chips de status (.tlf-chips--axis). Para os chips, que são
+// botões clicáveis, suprime-se o click se o ponteiro tiver se movido além de um
+// pequeno limiar durante o arraste (um clique parado continua alternando o filtro).
+const DRAG_THRESHOLD = 5; // px — abaixo disso o gesto conta como clique, não arraste
+function makeDragScroll(scroll, onScroll) {
+  let active = false, startX, startLeft, moved = false;
+  scroll.addEventListener('mousedown', e => {
+    active = true; moved = false;
+    startX = e.pageX - scroll.offsetLeft; startLeft = scroll.scrollLeft;
+    scroll.classList.add('is-grabbing');
+  });
   const stop = () => { active = false; scroll.classList.remove('is-grabbing'); };
   scroll.addEventListener('mouseleave', stop);
   scroll.addEventListener('mouseup', stop);
-  scroll.addEventListener('mousemove', e => { if (!active) return; e.preventDefault(); scroll.scrollLeft = startLeft - (e.pageX - scroll.offsetLeft - startX) * 1.4; });
+  scroll.addEventListener('mousemove', e => {
+    if (!active) return;
+    e.preventDefault();
+    const delta = e.pageX - scroll.offsetLeft - startX;
+    if (Math.abs(delta) > DRAG_THRESHOLD) moved = true;
+    scroll.scrollLeft = startLeft - delta * 1.4;
+  });
+  // suprime o click que segue um arraste (capture-phase, antes do listener do chip)
+  scroll.addEventListener('click', e => {
+    if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
+  }, true);
   // touchpad horizontal swipe (dois dedos)
   scroll.addEventListener('wheel', e => {
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
@@ -27,7 +37,21 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
       scroll.scrollLeft += e.deltaX;
     }
   }, { passive: false });
+  if (onScroll) { scroll.addEventListener('scroll', onScroll, { passive: true }); requestAnimationFrame(onScroll); }
+}
+
+// faixas de estruturas: cada trecho rola de forma independente + atualiza fade
+document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
+  const trecho = scroll.closest('.tl-trecho');
+  makeDragScroll(scroll, () => {
+    if (!trecho) return;
+    const atEnd = scroll.scrollLeft >= scroll.scrollWidth - scroll.clientWidth - 1;
+    trecho.classList.toggle('tl-scroll-end', atEnd);
+  });
 });
+
+// containers de chips de status (filtros por eixo): arrastáveis como as faixas
+document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(chips));
 
 // ── Filtros do cronograma: código, status, eixo, trecho, data inicial e
 // data de conclusão. Uma estrutura aparece se satisfizer TODOS os filtros.

@@ -1271,13 +1271,14 @@
     }
   }
 
-  /* nome da seção ST no mobile: oculta prefixo ("ST — ") e nome por extenso,
-     exibindo apenas a abreviação ("Segurança") */
-  .st-name-prefix,
+  /* nome da seção ST no mobile: mantém o prefixo ("ST — ") e oculta apenas o
+     nome por extenso, exibindo a abreviação ("ST — Segurança") — consistente
+     com as demais seções (SE, LT, LD) que mantêm o prefixo "XX —" */
   .st-name-full {
     display: none;
   }
 
+  .st-name-prefix,
   .st-name-abbr {
     display: inline;
   }

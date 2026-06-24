@@ -379,6 +379,9 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       const visible = [...entries.children]
         .filter(el => el.classList.contains('tl-entry') && el.style.display !== 'none');
       if (!visible.length) return;
+      // oculto (ex.: visão tabela: .tl-group display:none): offsets/scrollWidth = 0 →
+      // não recalcula (seria clobbered com valores errados; recomputa ao reexibir)
+      if (entries.offsetParent === null) return;
       const first = visible[0];
       // Spine sólida termina no último entry não-pendente; pending zone é coberta pelas linhas tracejadas
       const lastSolid = [...visible].reverse().find(e => !e.classList.contains('tl-entry--pending'));
@@ -442,6 +445,11 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   function push(svg, el) { if (el) svg.appendChild(el); }
 
   function drawSpine(entriesEl) {
+    // Não redesenha enquanto o .tl-entries está OCULTO (ex.: visão tabela, em que o
+    // .tl-group fica display:none): os offsetLeft seriam 0 e a spine sairia vazia
+    // (segmentos nulos), clobberando a existente. Preserva-a; será redesenhada ao
+    // voltar ao cronograma (vide setView → _tlUpdateSpineRange).
+    if (entriesEl.offsetParent === null) return;
     const old = entriesEl._tlSpineSvg;
     if (old) { old.remove(); entriesEl._tlSpineSvg = null; }
 
@@ -579,6 +587,24 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   });
 })();
 
+// ── fade de rolagem horizontal nas duas bordas de um scroller ────────────────
+// Envolve o scroller (.tl-axis-table) num .tl-scrollfade, insere as duas bordas
+// gradiente e alterna .has-left/.has-right conforme a posição de rolagem. O
+// ResizeObserver cobre o caso de a tabela ficar visível (clientWidth muda ao
+// trocar p/ a visão tabular) e os resizes. Idêntico ao usado na página de óbices.
+function addScrollFade(scroller) {
+  if (!scroller || scroller.dataset.fadeInit) return;
+  scroller.dataset.fadeInit = '1';
+  var wrap = document.createElement('div'); wrap.className = 'tl-scrollfade';
+  scroller.parentNode.insertBefore(wrap, scroller); wrap.appendChild(scroller);
+  ['left','right'].forEach(function(side){ var d=document.createElement('div'); d.className='tl-scrollfade-edge tl-scrollfade-'+side; d.setAttribute('aria-hidden','true'); wrap.appendChild(d); });
+  var update = function(){ var max = scroller.scrollWidth - scroller.clientWidth; wrap.classList.toggle('has-left', scroller.scrollLeft > 1); wrap.classList.toggle('has-right', scroller.scrollLeft < max - 1); };
+  scroller.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  if ('ResizeObserver' in window) new ResizeObserver(update).observe(scroller);
+  update();
+}
+
 // ── alternância de visualização: cronograma ↔ tabela ─────────────────────────
 (function tlViewToggle() {
   const STATUS_LABEL = { done: 'Executada', running: 'Em execução', pending: 'Pendente' };
@@ -602,8 +628,11 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
     const baseHead = hasBases
       ? `<th class="tlt-th-base">A</th><th class="tlt-th-base">B</th><th class="tlt-th-base">C</th><th class="tlt-th-base">D</th>`
       : '';
+    // Cabeçalho de Status: ícone (círculo com ponto central — "estado"), com
+    // tooltip "Status" no hover E no toque (elemento focável via tabindex).
+    const statusTh = `<span class="tlt-th-tip" tabindex="0" role="img" aria-label="Status"><svg class="tlt-th-tip-icon" viewBox="0 0 14 14" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="7" cy="7" r="5.2"/><circle cx="7" cy="7" r="1.7" fill="currentColor" stroke="none"/></svg><span class="tlt-th-tip-bubble">Status</span></span>`;
     thead.innerHTML = `<tr>
-      <th class="tlt-th-status">Status</th><th>Trecho</th><th>Código</th>
+      <th class="tlt-th-status">${statusTh}</th><th>Trecho</th><th>Código</th>
       <th>Início</th><th>Conclusão</th>${baseHead}
     </tr>`;
     table.appendChild(thead);
@@ -696,11 +725,46 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
     return container;
   }
 
+  // Tooltip do cabeçalho "Status": portal + position:fixed com clamp de viewport
+  // (a coluna Status é a 1ª/mais à esquerda; o balão centralizado transbordaria a
+  // borda esquerda da tabela, recortado pelo overflow). Mesmo fix robusto da página
+  // de óbices: move o balão para o <body> (escapa overflow/transform) e o posiciona
+  // por JS, fixado dentro do viewport.
+  function attachTip(trigger, tip) {
+    document.body.appendChild(tip);   // portal: escapes table overflow/transform
+    function place() {
+      tip.style.display = 'block';
+      var r = trigger.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight, m = 8;
+      var left = Math.max(m, Math.min(r.left + r.width / 2 - tw / 2, innerWidth - tw - m));
+      var top = r.bottom + 6; if (top + th > innerHeight - m) top = r.top - th - 6;
+      tip.style.left = left + 'px'; tip.style.top = Math.max(m, top) + 'px';
+    }
+    function hide() { tip.style.display = 'none'; }
+    trigger.addEventListener('mouseenter', place); trigger.addEventListener('focus', place);
+    trigger.addEventListener('mouseleave', hide); trigger.addEventListener('blur', hide);
+    addEventListener('scroll', hide, true);
+  }
+
+  // Localiza o gatilho do tooltip de Status numa tabela e ativa o portal (uma vez).
+  // Guarda o balão portado na seção p/ que um rebuild da tabela possa removê-lo
+  // antes de criar o novo (evita balões órfãos acumulados no <body>).
+  function wireTableTip(section, table) {
+    if (!table) return;
+    const trigger = table.querySelector('.tlt-th-tip');
+    const tip = trigger && trigger.querySelector('.tlt-th-tip-bubble');
+    if (!trigger || !tip || trigger.dataset.tipInit) return;
+    trigger.dataset.tipInit = '1';
+    attachTip(trigger, tip);
+    if (section) section._tlTipBubble = tip;
+  }
+
   // Gera as tabelas e as insere em cada seção (ocultas por padrão)
   document.querySelectorAll('.tl-axis-section').forEach(section => {
     const tbl = buildSectionTable(section);
-    if (tbl) section.appendChild(tbl);
+    if (tbl) { section.appendChild(tbl); wireTableTip(section, tbl); }
   });
+  // Fade de rolagem horizontal nas duas bordas de cada tabela
+  document.querySelectorAll('.tl-axis-table').forEach(addScrollFade);
 
   // Espelha a visibilidade das .tl-entry nas linhas da tabela
   window._tlUpdateTableView = function() {
@@ -715,9 +779,14 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 
   window._tlRebuildTable = function(section) {
     const old = section._tlTableContainer;
-    if (old && old.parentNode) old.parentNode.removeChild(old);
+    // remove também o wrapper de fade (.tl-scrollfade) que envolve a tabela antiga
+    const oldWrap = old && old.parentNode && old.parentNode.classList.contains('tl-scrollfade') ? old.parentNode : old;
+    if (oldWrap && oldWrap.parentNode) oldWrap.parentNode.removeChild(oldWrap);
+    // remove o balão de tooltip portado para o <body> pela tabela antiga
+    if (section._tlTipBubble && section._tlTipBubble.parentNode) section._tlTipBubble.parentNode.removeChild(section._tlTipBubble);
+    section._tlTipBubble = null;
     const tbl = buildSectionTable(section);
-    if (tbl) section.appendChild(tbl);
+    if (tbl) { section.appendChild(tbl); addScrollFade(tbl); wireTableTip(section, tbl); }
   };
 
   // Adiciona os botões de seleção de visualização em cada cabeçalho de eixo
@@ -799,6 +868,10 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       if (existingToggle) existingToggle.style.display = isTable ? 'none' : '';
       // Sincroniza a tabela com o estado atual dos filtros
       if (isTable) window._tlUpdateTableView && window._tlUpdateTableView();
+      // Ao VOLTAR ao cronograma, redesenha as spines: enquanto a visão tabular
+      // ocultava as .tl-entries, ordenações/filtros as deixaram puladas/desatualizadas
+      // (offsets 0). Agora visíveis, recalculam com offsets corretos.
+      else window._tlUpdateSpineRange && window._tlUpdateSpineRange();
     }
 
     cronBtn.addEventListener('click', () => setView('cronograma'));
@@ -1007,6 +1080,10 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       [...sec.querySelectorAll('.tl-code')].map(el => el.textContent.trim()).filter(c => CODE_RE.test(c))
     )];
     if (!codes.length) return;
+
+    // largura fixa do campo: mínimo de 10 caracteres ou o maior código (ex.: "000/000 A"),
+    // para a caixa não "pular" enquanto o placeholder digita/apaga
+    input.style.width = Math.max(10, ...codes.map(c => c.length)) + 'ch';
 
     if (reduce) { input.placeholder = codes[0]; return; }
 

@@ -217,7 +217,9 @@ hr {
   width: 100%;
   min-height: 64px;
   padding-inline: 12px;
-  background-color: var(--lt-surface-muted);
+  /* mesmo branco (#fefefe) das demais superfícies dos slides (filtros, breadcrumb,
+     cabeçalhos de tabela): --lt-surface, antes era o cinza --lt-surface-muted */
+  background-color: var(--lt-surface);
   text-align: center;
   align-content: center;
   object-position: 0% 0%;
@@ -349,6 +351,17 @@ a.flex-logo-container {
   margin: 48px;
   margin-bottom: 196px;
 }
+
+/* ── conjunto de seções correlatas (padrão reusável) ──────────────────────────
+   Containers empilhados (ex.: óbices = filtros+tabela+legenda; linhas do tempo =
+   filtros+cronograma+legenda) lidos como UM grupo conectado: gap de 4px, cantos
+   internos retos e apenas as extremidades (topo do 1º filho, base do último)
+   arredondadas. A margem dos filhos é zerada — o respiro vem do gap do flex. */
+.tlp-group { display: flex; flex-direction: column; gap: 4px; }
+.tlp-group > * { margin: 0; border-radius: 0; }
+.tlp-group > :first-child { border-radius: var(--border-general) var(--border-general) 0 0; }
+.tlp-group > :last-child  { border-radius: 0 0 var(--border-general) var(--border-general); }
+.tlp-group > :only-child  { border-radius: var(--border-general); }
 
 .content-wrapper {
   display: grid;
@@ -1457,10 +1470,17 @@ body:has(.has-sidebar) #back-to-top {
    substitui o conteúdo por dois botões "anterior"/"próximo". */
 
 .slide-secnav {
-  gap: 12px;
+  gap: 4px;
   padding: 0;
   background-color: transparent;
   backdrop-filter: none;
+  /* T7: sem borda no container externo da navegação lateral (toda a nav). O
+     elemento herda .slide-sidebar { border: 1px solid }; aqui é removida para que
+     não haja contorno cinza ao redor das DUAS caixas. A borda de .slide-sidebar
+     permanece para o sidebar das imagens. Os cartões internos (.secnav-btn /
+     .secnav-all-list-inner / .secnav-section-content) continuam definidos por
+     superfície branca + box-shadow. */
+  border: none;
   /* herda max-height/overflow:hidden de .slide-sidebar: a lista de itens rola
      internamente quando a seção tem muitos slides */
 
@@ -1522,7 +1542,10 @@ body:has(.has-sidebar) #back-to-top {
   min-height: 0;
   overflow: hidden;
   background: var(--lt-surface-strong); /* #fff */
-  border-radius: 0 0 8px 8px;
+  /* T3: painel aberto com a base RETA — esta é a face que encara o container
+     inferior ("slides desta seção") através do gap de 8px. Os cantos superiores
+     já são retos (fundem com o toggle). */
+  border-radius: 0;
   padding: 0 12px 12px;
 }
 
@@ -1594,8 +1617,13 @@ body:has(.has-sidebar) #back-to-top {
   flex-direction: column;
   overflow: hidden;
   padding: 12px;
-  border-radius: var(--border-general);
-  border: 1px solid rgba(0, 0, 0, 0.18);
+  /* T3: topo RETO (face que encara o container superior através do gap de 8px) e
+     base arredondada (extremidade externa inferior do grupo conectado). */
+  border-radius: 0 0 var(--border-general) var(--border-general);
+  /* sem borda no container externo da navegação lateral — o cartão é definido
+     apenas pela superfície branca + box-shadow (mantidos). Itens internos
+     (.secnav-item-link) conservam suas próprias bordas. */
+  border: none;
   background-color: var(--lt-surface-strong); /* #fff — mesmo cartão do botão */
   box-shadow: var(--lt-shadow);
 }
@@ -1869,10 +1897,14 @@ body:has(.has-sidebar) #back-to-top {
   gap: 3px;
   overflow: hidden;
   padding: 10px 14px;
-  border-radius: var(--border-general);
-  /* borda 0.18 (entre --lt-border 0.12 e --lt-border-strong 0.22): sem token de
-     valor idêntico, mantém-se o literal consolidado da antiga regra unificada */
-  border: 1px solid rgba(0, 0, 0, 0.18);
+  /* T3: topo arredondado, base reta — a base do container superior encara o
+     container inferior (8px de gap) e deve ler como faces planas de um grupo
+     conectado; só as extremidades externas permanecem arredondadas. */
+  border-radius: var(--border-general) var(--border-general) 0 0;
+  /* sem borda no container externo da navegação lateral (cartão "SEÇÕES"): o
+     contorno é dado apenas pela superfície branca + box-shadow (mantidos). Os
+     itens internos (.secnav-item-link) conservam suas próprias bordas. */
+  border: none;
   background-color: var(--lt-surface-strong); /* #fff */
   /* navegação lateral fica sobre superfície transparente: sem blur próprio */
   backdrop-filter: none;
@@ -1941,7 +1973,6 @@ body:has(.has-sidebar) #back-to-top {
    especificidade que .secnav-btn e .secnav-btn:hover — dispensa !important. */
 .secnav-all.is-open .secnav-btn {
   border-radius: 8px 8px 0 0;
-  border-bottom-color: transparent;
 }
 
 /* divisor tracejado abaixo do botão "Seleção de conteúdo": o respiro até os

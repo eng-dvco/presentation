@@ -110,9 +110,17 @@ body { color: rgba(0,0,0,0.75); }
   .tl-filters .tlf-field { flex-shrink: 0; }
   .tl-filters .tlf-clear { margin-left: auto; align-self: flex-end; }
 
-  /* controles do eixo: permite quebra e deixa o menu do funil transbordar;
-     z-index garante que o menu suspenso fique acima do conteúdo do eixo */
-  .tl-axis-controls { overflow: visible; flex-wrap: wrap; position: relative; z-index: 3; }
+  /* controles do eixo: permite quebra e deixa o menu do funil transbordar.
+     Especificidade elevada (.tl-axis prefixo) para vencer a regra-base
+     .tl-axis-controls { overflow-x:auto; overflow-y:clip } que vem DEPOIS na
+     ordem do código e, com igual especificidade, recortaria o dropdown.
+     z-index garante que o menu suspenso fique acima do conteúdo do eixo. */
+  .tl-axis .tl-axis-controls { overflow: visible; flex-wrap: wrap; position: relative; z-index: 3; }
+  /* o eixo e a seção não podem recortar o dropdown do funil ao transbordar
+     para baixo; no mobile dispensamos o overflow:hidden (clipping do raio de
+     borda) em favor da visibilidade do menu suspenso */
+  .tl-axis { overflow: visible; }
+  .tl-grid .tl-axis-section { overflow: visible; }
 
   /* chips de status num menu acionado pelo funil (à extrema esquerda) */
   .tlf-filter { display: flex; position: relative; align-items: center; flex-shrink: 0; order: -1; }
@@ -137,7 +145,7 @@ body { color: rgba(0,0,0,0.75); }
 }
 
 /* ── orientação HORIZONTAL: faixas (trechos) empilhadas; o tempo flui na horizontal (mais recente à esquerda) ── */
-.tl-grid { display: flex; flex-direction: column; width: 100%; gap: 0.75rem; }
+.tl-grid { display: flex; flex-direction: column; width: 100%; gap: 4px; }
 
 /* cabeçalho do eixo — duas linhas: título (cima) + controles scrolláveis (baixo) */
 .tl-axis { display: flex; flex-direction: column; align-items: stretch; background: var(--lt-surface); border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px dashed var(--lt-border); position: relative; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.10); }
@@ -146,7 +154,7 @@ body { color: rgba(0,0,0,0.75); }
 .tl-axis-title { display: block; padding: 0; font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-boldest); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0,0,0,0.75); }
 .tl-axis-search { display: flex; align-items: center; gap: 0.35rem; background: rgba(0,0,0,0.04); border: 1px solid var(--lt-border); border-radius: 99px; padding: 0.15rem 0.5rem; flex-shrink: 0; }
 .tl-axis-search-icon { color: rgba(0,0,0,0.35); flex-shrink: 0; }
-.tl-axis-code { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.58rem; width: 3.75rem; color: rgba(0,0,0,0.75); }
+.tl-axis-code { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.58rem; width: 10ch; color: rgba(0,0,0,0.75); }
 .tl-axis-code::placeholder { color: rgba(0,0,0,0.3); }
 .tl-axis-code::-webkit-search-decoration, .tl-axis-code::-webkit-search-cancel-button { display: none; }
 
@@ -286,6 +294,9 @@ body { color: rgba(0,0,0,0.75); }
 
 /* ── axis sections ── */
 .tl-axis-section { display: flex; flex-direction: column; border-radius: var(--border-general); overflow: hidden; }
+/* num conjunto de seções (.tlp-group), as seções de eixo do cronograma (aninhadas
+   no .tl-scroll) também ficam com cantos retos — só as extremidades do grupo arredondam */
+.tlp-group .tl-axis-section { border-radius: 0; }
 
 /* ── per-trecho independent horizontal scroll ── */
 .tl-entries-scroll { flex: 1; min-width: 0; overflow-x: auto; overflow-y: clip; overscroll-behavior-x: contain; cursor: grab; user-select: none; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.2) transparent; }
@@ -368,6 +379,18 @@ body { color: rgba(0,0,0,0.75); }
 /* ── container da visualização tabular ── */
 .tl-axis-table { display: none; overflow-x: auto; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.2) transparent; }
 
+/* ── fade de rolagem horizontal em AMBAS as bordas (mesmo efeito do gradiente
+   das faixas, mas nas duas pontas): aparece/some conforme a rolagem e some por
+   completo nos limites. JS (addScrollFade) envolve cada .tl-axis-table num
+   .tl-scrollfade e alterna .has-left/.has-right. Classes idênticas às da página
+   de óbices — manter sincronizadas. */
+.tl-scrollfade { position: relative; }
+.tl-scrollfade-edge { position: absolute; top: 0; bottom: 0; width: 2.5rem; pointer-events: none; z-index: 4; opacity: 0; transition: opacity 0.25s ease; }
+.tl-scrollfade-left  { left: 0;  background: linear-gradient(to right, var(--lt-surface), transparent); }
+.tl-scrollfade-right { right: 0; background: linear-gradient(to right, transparent, var(--lt-surface)); }
+.tl-scrollfade.has-left  .tl-scrollfade-left  { opacity: 1; }
+.tl-scrollfade.has-right .tl-scrollfade-right { opacity: 1; }
+
 /* ── tabela de dados ── */
 .tl-data-table { width: 100%; border-collapse: collapse; font-family: var(--font-family-general); font-size: 0.72rem; }
 .tl-data-table thead th { background: var(--lt-surface); padding: 0.42rem 0.7rem; text-align: left; font-size: 0.58rem; font-weight: var(--font-weight-bold); letter-spacing: 0.1em; text-transform: uppercase; color: var(--lt-text-muted); border-bottom: 1px solid var(--lt-border); white-space: nowrap; }
@@ -380,7 +403,7 @@ body { color: rgba(0,0,0,0.75); }
 .tl-data-table tbody tr:hover { background: #e4e4e4; }
 .tl-data-table tbody tr.tlt-sep-row { background: transparent !important; }
 .tl-data-table tbody tr.tlt-sep-row td { padding: 0; height: 1px; background: transparent !important; border-bottom: 1px dashed rgba(0,0,0,0.15); }
-.tl-data-table tbody td { padding: 0.35rem 0.7rem; border-bottom: 1px solid rgba(0,0,0,0.06); color: rgba(0,0,0,0.75); vertical-align: middle; white-space: nowrap; }
+.tl-data-table tbody td { padding: 0.35rem 0.7rem; border-bottom: 1px dashed var(--lt-border); color: rgba(0,0,0,0.75); vertical-align: middle; white-space: nowrap; }
 
 /* ── divisor tracejado suave entre as colunas (mesmo estilo do .secnav-all-divider:
    dashed, cinza ~rgba(160,160,160)). border-right tracejada SOMENTE nas linhas de
@@ -403,11 +426,11 @@ body { color: rgba(0,0,0,0.75); }
 /* selo de criticidade em tons pastel (Alta = laranja, Média = roxo, Baixa = verde) */
 .crit { display: inline-flex; align-items: center; gap: 0.35rem; min-width: 62px; padding: 3px 9px; border-radius: 99px; font-weight: var(--font-weight-bold); white-space: nowrap; color: rgba(0,0,0,0.72); }
 .crit .tlt-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.crit--alta  { background: var(--color-orange-alpha-25); }
-.crit--media { background: var(--color-purple-alpha-25); }
+.crit--alta  { background: var(--color-red-alpha-25); }
+.crit--media { background: var(--color-orange-alpha-25); }
 .crit--baixa { background: var(--color-green-alpha-25); }
-.crit--alta  .tlt-status-dot { background: var(--color-orange); }
-.crit--media .tlt-status-dot { background: var(--color-purple); }
+.crit--alta  .tlt-status-dot { background: var(--color-red); }
+.crit--media .tlt-status-dot { background: var(--color-orange); }
 .crit--baixa .tlt-status-dot { background: var(--color-green); }
 
 /* largura mínima das colunas: evita compressão excessiva do conteúdo. Como o
@@ -415,9 +438,9 @@ body { color: rgba(0,0,0,0.75); }
    Completa, mais larga) vira scroll horizontal em vez de espremer as células. */
 .tlp-table thead th,
 .tlp-table tbody td { min-width: 3em; }
-/* coluna 'Equipamento' (2ª): piso maior + quebra (~10 palavras/linha) */
-.tlp-table thead th:nth-child(2),
-.tlp-table tbody td:nth-child(2) { min-width: 15em; width: 32em; white-space: normal; overflow-wrap: anywhere; }
+/* coluna 'Equipamento' (3ª, após 'Criticidade' migrar p/ a 1ª): piso maior + quebra */
+.tlp-table thead th:nth-child(3),
+.tlp-table tbody td:nth-child(3) { min-width: 15em; width: 32em; white-space: normal; overflow-wrap: anywhere; }
 /* coluna 'Referência de fabricação' (5ª): piso + teto de largura e quebra de
    linha (espelha a coluna 'Equipamento') p/ não esticar com textos de modelo */
 .tlp-table thead th:nth-child(5),
@@ -461,7 +484,11 @@ body { color: rgba(0,0,0,0.75); }
 
 /* coluna STATUS (1ª): cabeçalho e célula centralizados, largura estreita —
    exibe somente o dot colorido (sem rótulo de texto) */
-.tl-data-table thead th.tlt-th-status { text-align: center; width: 1px; padding-left: 0.4rem; padding-right: 0.4rem; }
+.tl-data-table thead th.tlt-th-status { text-align: center; width: 1px; padding-left: 0.4rem; padding-right: 0.4rem; position: relative; }
+/* cabeçalho de Status: ícone com tooltip (hover E foco/toque) */
+.tlt-th-tip { display: inline-flex; align-items: center; justify-content: center; cursor: help; outline: none; }
+.tlt-th-tip-icon { color: rgba(0,0,0,0.55); display: block; }
+.tlt-th-tip-bubble { position: fixed; display: none; z-index: 9999; padding: 0.2rem 0.45rem; background: rgba(0,0,0,0.85); color: #fff; font-size: 0.56rem; font-weight: var(--font-weight-normal); letter-spacing: 0.06em; text-transform: none; white-space: nowrap; border-radius: var(--border-smaller); box-shadow: 0 4px 12px rgba(0,0,0,0.25); pointer-events: none; }
 .tl-data-table tbody td.tlt-status-cell { text-align: center; width: 1px; padding-left: 0.4rem; padding-right: 0.4rem; }
 .tlt-status-cell .tlt-status { display: inline-flex; justify-content: center; gap: 0; }
 .tlt-status--done    .tlt-status-dot { background: var(--color-green); }

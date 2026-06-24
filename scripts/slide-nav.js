@@ -703,6 +703,9 @@ function buildLightbox() {
   (() => {
     const SWIPE_TH = 45;   // distância mínima (px) p/ diferenciar deslize de toque
     const FRICTION = 0.55; // atrito do deslize-navega: imagem acompanha ~55% do dedo
+    // resposta tátil (Vibration API) ao cruzar o limiar de navegação — só onde há
+    // suporte (Android Chrome/Edge/Firefox; iOS Safari NÃO implementa navigator.vibrate)
+    const canVibrate = typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function';
     const MIN_SCALE = 1, MAX_SCALE = 3;
     const ZOOM_LEVEL = 2.2;   // ampliação aplicada no duplo toque
     const DOUBLE_TAP_MS = 300, DOUBLE_TAP_DIST = 30;
@@ -711,6 +714,7 @@ function buildLightbox() {
     const pointers = new Map();
     // gesto de deslize/pan com 1 ponteiro
     let dragId = null, sx = 0, sy = 0, baseTX = 0, baseTY = 0, dragging = false, swiping = false;
+    let swipeHapticDone = false; // garante UMA vibração por deslize ao cruzar o limiar
     // gesto de pinça com 2 ponteiros
     let pinching = false, pinchStartDist = 0, pinchStartScale = 1;
     // detecção de duplo toque
@@ -778,6 +782,7 @@ function buildLightbox() {
       sx = e.clientX; sy = e.clientY;
       baseTX = gestureTX; baseTY = gestureTY;
       dragging = true; swiping = gestureScale === 1;
+      swipeHapticDone = false; // re-arma o haptic para este novo deslize
       overlayImg.style.transition = 'none';
     });
 
@@ -809,7 +814,17 @@ function buildLightbox() {
         gestureTX = dx * FRICTION;
         gestureTY = 0;
         paint(false);
+        // resposta tátil ao ATINGIR o limiar de navegação (uma única vez por deslize,
+        // no mesmo instante em que soltar passará a navegar). Re-arma se voltar aquém.
+        const adx = Math.abs(dx);
+        if (adx >= SWIPE_TH && Math.abs(dy) < adx) {
+          if (canVibrate && !swipeHapticDone) { try { navigator.vibrate(8); } catch {} }
+          swipeHapticDone = true;
+        } else if (adx < SWIPE_TH) {
+          swipeHapticDone = false;
+        }
       }
+
     });
 
     const endPointer = e => {

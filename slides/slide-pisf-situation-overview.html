@@ -19,6 +19,83 @@
       href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&family=Fondamento:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
       rel="stylesheet"
     />
+
+    <style>
+      /* Cabeçalho de criticidade: ícone de alerta + tooltip (hover e toque) */
+      .crit-th {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(0, 0, 0, 0.55);
+        cursor: help;
+        outline: none;
+      }
+      .crit-th:focus-visible { outline: 2px solid var(--color-green); outline-offset: 2px; border-radius: 4px; }
+      .crit-th svg { width: 14px; height: 14px; display: block; }
+      .crit-th-tip {
+        position: fixed;
+        display: none;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.85);
+        color: #fff;
+        font-size: 0.62rem;
+        font-weight: var(--font-weight-bold);
+        line-height: 1;
+        letter-spacing: 0.02em;
+        padding: 5px 7px;
+        border-radius: 5px;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* Coluna de criticidade (1ª): ponto centralizado na coluna (igual ao status do cronograma) */
+      .tlp-table thead th:first-child,
+      .tlp-table tbody td:first-child { text-align: center; }
+      /* Célula de criticidade: apenas o ponto colorido */
+      .tlp-table td .crit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        padding: 0;
+        background: none;
+        border-radius: 0;
+        color: transparent;
+        gap: 0;
+      }
+      .tlp-table td .crit .tlt-status-dot {
+        width: 9px;
+        height: 9px;
+      }
+      /* anel leve e semitransparente, no MESMO padrão dos ícones circulares do
+         cronograma (.tl-dot / .tl-legend-dot): box-shadow colorido em baixa opacidade */
+      .tlp-table td .crit--alta  .tlt-status-dot { box-shadow: 0 0 0 2.5px var(--color-red-alpha-25);    background: var(--color-red); }
+      .tlp-table td .crit--media .tlt-status-dot { box-shadow: 0 0 0 2.5px var(--color-orange-alpha-25); background: var(--color-orange); }
+      .tlp-table td .crit--baixa .tlt-status-dot { box-shadow: 0 0 0 2.5px var(--color-green-alpha-25);  background: var(--color-green); }
+
+      /* Legenda de criticidade: reutiliza a estrutura .tl-legend* do cronograma
+         (definida em slide-tl.css). Aqui só damos cor + anel aos pontos. */
+      .tl-legend-dot.crit-legend-dot--alta  { background: var(--color-red);    box-shadow: 0 0 0 2.5px var(--color-red-alpha-25); }
+      .tl-legend-dot.crit-legend-dot--media { background: var(--color-orange); box-shadow: 0 0 0 2.5px var(--color-orange-alpha-25); }
+      .tl-legend-dot.crit-legend-dot--baixa { background: var(--color-green);  box-shadow: 0 0 0 2.5px var(--color-green-alpha-25); }
+
+      /* conjunto conectado de containers (filtros + tabela + legenda): o padrão
+         .tlp-group (gap 4px, cantos internos retos, extremidades arredondadas)
+         agora é compartilhado/reusável em slide-style.css. */
+
+      /* campo de busca: largura fixa ajustada ao placeholder longo (a base .tl-axis-code = 10ch) */
+      #tlp-search { width: 32ch; }
+
+      /* ── fade de rolagem horizontal nas duas bordas da tabela (igual aos
+         cronogramas): gradiente surface→transparent que some no limite ── */
+      .tl-scrollfade { position: relative; }
+      .tl-scrollfade-edge { position: absolute; top: 0; bottom: 0; width: 2.5rem; pointer-events: none; z-index: 4; opacity: 0; transition: opacity 0.25s ease; }
+      .tl-scrollfade-left  { left: 0;  background: linear-gradient(to right, var(--lt-surface), transparent); }
+      .tl-scrollfade-right { right: 0; background: linear-gradient(to right, transparent, var(--lt-surface)); }
+      .tl-scrollfade.has-left  .tl-scrollfade-left  { opacity: 1; }
+      .tl-scrollfade.has-right .tl-scrollfade-right { opacity: 1; }
+    </style>
   </head>
   <body data-prev="../slides/slide-parts-replacement.html">
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -49,8 +126,9 @@
       <div class="content-container">
         <div class="content-wrapper">
           <div class="title-header-h2">
-            <h2 class="title-h2">Materiais e sobressalentes por subestação</h2>
+            <h2 class="title-h2">Materiais e sobressalentes</h2>
           </div>
+          <div class="tlp-group">
           <div class="tlp-controls" role="group" aria-label="Controles da tabela">
             <div class="tlp-controls-group">
               <div class="tl-axis-search">
@@ -80,22 +158,31 @@
               <table class="tl-data-table tlp-table">
                 <thead>
                   <tr>
+                    <th>
+                      <span class="crit-th" tabindex="0" role="img" aria-label="Criticidade">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+                          <line x1="12" y1="9" x2="12" y2="13" />
+                          <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
+                        <span class="crit-th-tip">Criticidade</span>
+                      </span>
+                    </th>
                     <th>Item</th>
                     <th>Equipamento</th>
                     <th>Und</th>
-                    <th>Criticidade</th>
-                    <th>Referência de&nbsp;fabricação</th>
+                    <th>Referência</th>
                     <th class="tlt-th-base tlt-se-col">SE-N3</th>
                     <th class="tlt-th-base tlt-se-col">SE-N2</th>
                     <th class="tlt-th-base tlt-se-col">SE-N1</th>
-                    <th class="tlt-th-base tlt-eixo-col">Eixo Norte</th>
+                    <th class="tlt-th-base tlt-eixo-col">Norte</th>
                     <th class="tlt-th-base tlt-se-col">SE-E6</th>
                     <th class="tlt-th-base tlt-se-col">SE-E5</th>
                     <th class="tlt-th-base tlt-se-col">SE-E4</th>
                     <th class="tlt-th-base tlt-se-col">SE-E3</th>
                     <th class="tlt-th-base tlt-se-col">SE-E2</th>
                     <th class="tlt-th-base tlt-se-col">SE-E1</th>
-                    <th class="tlt-th-base tlt-eixo-col">Eixo Leste</th>
+                    <th class="tlt-th-base tlt-eixo-col">Leste</th>
                     <th class="tlt-th-base">Sobressalentes</th>
                     <th class="tlt-th-base">Total</th>
                     <th>Valor unitário</th>
@@ -104,10 +191,10 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">001</td>
                     <td>Baterias de chumbo-ácido reguladas por válvula, 250 Ah, 2 V</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>GETPOWER / GP2-250</td>
                     <td class="tlt-base-cell">120</td>
                     <td class="tlt-base-cell">0</td>
@@ -117,10 +204,10 @@
                     <td class="tlt-date">R$ 172.806,08</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">002</td>
                     <td>URs</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>FSE / KNE-12520 A</td>
                     <td class="tlt-base-cell">34</td>
                     <td class="tlt-base-cell">42</td>
@@ -130,10 +217,10 @@
                     <td class="tlt-date">R$ 2.781.416,00</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">003</td>
                     <td>Módulo Supervisor</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>FSE / EFA POWER PSN OU ADELCO MS 125</td>
                     <td class="tlt-base-cell">6</td>
                     <td class="tlt-base-cell">8</td>
@@ -143,10 +230,10 @@
                     <td class="tlt-date">R$ 384.800,00</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">004</td>
                     <td>URs</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>CTRLTECH / CPCR 11E-125/050A</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">15</td>
@@ -156,10 +243,10 @@
                     <td class="tlt-date">R$ 157.069,60</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">005</td>
                     <td>Módulo Supervisor</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>CTRLTECH / CPCR 01E-125/25</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">4</td>
@@ -169,10 +256,10 @@
                     <td class="tlt-date">R$ 29.957,28</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--media" title="Média"></span></td>
                     <td class="tlt-code">006</td>
                     <td>Transformador 6,9/380 kV; 150 kVA (TSA)</td>
                     <td>un.</td>
-                    <td><span class="crit crit--media">Média</span></td>
                     <td>—</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">0</td>
@@ -182,10 +269,10 @@
                     <td class="tlt-date">R$ 108.400,00</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--baixa" title="Baixa"></span></td>
                     <td class="tlt-code">007</td>
                     <td>Transformador 6,9/13,8 kV; 750 kVA</td>
                     <td>un.</td>
-                    <td><span class="crit crit--baixa">Baixa</span></td>
                     <td>—</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">1</td>
@@ -195,10 +282,10 @@
                     <td class="tlt-date">R$ 178.000,00</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--baixa" title="Baixa"></span></td>
                     <td class="tlt-code">008</td>
                     <td>Transformador 6,9/13,8 kV; 300 kVA</td>
                     <td>un.</td>
-                    <td><span class="crit crit--baixa">Baixa</span></td>
                     <td>—</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">5</td>
@@ -208,10 +295,10 @@
                     <td class="tlt-date">R$ 455.000,00</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--media" title="Média"></span></td>
                     <td class="tlt-code">009</td>
                     <td>GPS</td>
                     <td>un.</td>
-                    <td><span class="crit crit--media">Média</span></td>
                     <td>REASON RT420 — GPS-based time reference</td>
                     <td class="tlt-base-cell">2</td>
                     <td class="tlt-base-cell">1</td>
@@ -221,10 +308,10 @@
                     <td class="tlt-date">R$ 195.602,52</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--media" title="Média"></span></td>
                     <td class="tlt-code">010</td>
                     <td>Ar-condicionado 30.000 BTUs</td>
                     <td>un.</td>
-                    <td><span class="crit crit--media">Média</span></td>
                     <td>—</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">11</td>
@@ -234,10 +321,10 @@
                     <td class="tlt-date">R$ 58.474,00</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--media" title="Média"></span></td>
                     <td class="tlt-code">011</td>
                     <td>Ar-condicionado 18.000 BTUs</td>
                     <td>un.</td>
-                    <td><span class="crit crit--media">Média</span></td>
                     <td>—</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">4</td>
@@ -247,10 +334,10 @@
                     <td class="tlt-date">R$ 16.823,40</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--media" title="Média"></span></td>
                     <td class="tlt-code">012</td>
                     <td>Ar-condicionado 17.000 BTUs</td>
                     <td>un.</td>
-                    <td><span class="crit crit--media">Média</span></td>
                     <td>—</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">9</td>
@@ -260,10 +347,10 @@
                     <td class="tlt-date">R$ 30.842,90</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">013</td>
                     <td>Chave seccionadora 15 kV (chaves 289)</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>—</td>
                     <td class="tlt-base-cell">4</td>
                     <td class="tlt-base-cell">0</td>
@@ -273,10 +360,10 @@
                     <td class="tlt-date">R$ 153.644,46</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">014</td>
                     <td>Disjuntor trifásico, instalação exterior, isolamento em SF6, 245 kV, 1250 A, 40 kA, 60 Hz. (Substituição do disjuntor DJ6-02 da SE-N2 e sobressalente.)</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>TOSHIBA</td>
                     <td class="tlt-base-cell">2</td>
                     <td class="tlt-base-cell">0</td>
@@ -286,10 +373,10 @@
                     <td class="tlt-date">R$ 1.485.000,00</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">015</td>
                     <td>Polo de transformador de corrente, monofásico, instalação exterior, 242 kV, 60 Hz, relação de transformação 150/300x300/600x600/1200:5-5-5-5-5 A, com conectores na alta. Equipamento sobressalente.</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>ARTECHE</td>
                     <td class="tlt-base-cell">1</td>
                     <td class="tlt-base-cell">0</td>
@@ -299,10 +386,10 @@
                     <td class="tlt-date">R$ 274.264,76</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--media" title="Média"></span></td>
                     <td class="tlt-code">016</td>
                     <td>Cabo de alumínio Grosbeak, CAA, 636 MCM, 26 fios, diâmetro 25,16 mm, seção 374,79 mm², peso 1,302 kgf/m, carga de ruptura 11.402 kgf, módulo de elasticidade final 7593 kgf/mm², coeficiente de dilatação final 0,0000189/°C</td>
                     <td>m</td>
-                    <td><span class="crit crit--media">Média</span></td>
                     <td>Grosbeak</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">0</td>
@@ -312,10 +399,10 @@
                     <td class="tlt-date">R$ 232.123,07</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--alta" title="Alta"></span></td>
                     <td class="tlt-code">017</td>
                     <td>Transformador de corrente 6,9 kV — 03 unidades RTC 1500-5 A; 03 unidades RTC 2000-5 A; 03 unidades RTC 2500-5 A</td>
                     <td>un.</td>
-                    <td><span class="crit crit--alta">Alta</span></td>
                     <td>BRASFORMER</td>
                     <td class="tlt-base-cell">0</td>
                     <td class="tlt-base-cell">0</td>
@@ -325,10 +412,10 @@
                     <td class="tlt-date">R$ 100.086,57</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--baixa" title="Baixa"></span></td>
                     <td class="tlt-code">018</td>
                     <td>CFTV</td>
                     <td>CJ</td>
-                    <td><span class="crit crit--baixa">Baixa</span></td>
                     <td>INTELBRAS</td>
                     <td class="tlt-base-cell">3</td>
                     <td class="tlt-base-cell">6</td>
@@ -338,10 +425,10 @@
                     <td class="tlt-date">R$ 279.813,00</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--media" title="Média"></span></td>
                     <td class="tlt-code">019</td>
                     <td>Disjuntor motor 110/125 V.P/T4/5</td>
                     <td>un.</td>
-                    <td><span class="crit crit--media">Média</span></td>
                     <td>ABB</td>
                     <td class="tlt-base-cell">1</td>
                     <td class="tlt-base-cell">0</td>
@@ -351,10 +438,10 @@
                     <td class="tlt-date">R$ 19.032,73</td>
                   </tr>
                   <tr>
+                    <td><span class="crit crit--baixa" title="Baixa"></span></td>
                     <td class="tlt-code">020</td>
                     <td>Brita nº 2 — pátio da subestação (600 m³ por SE)</td>
                     <td>m³</td>
-                    <td><span class="crit crit--baixa">Baixa</span></td>
                     <td>N/A</td>
                     <td class="tlt-base-cell">1.800</td>
                     <td class="tlt-base-cell">3.400</td>
@@ -364,9 +451,9 @@
                     <td class="tlt-date">R$ 962.000,00</td>
                   </tr>
                   <tr class="tlt-total-row">
+                    <td></td>
                     <td class="tlt-code"></td>
                     <td class="tlt-trecho">Valor total</td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td class="tlt-base-cell"></td>
@@ -379,6 +466,16 @@
                 </tbody>
               </table>
             </div>
+          </div>
+          <div class="tl-legend" aria-label="Legenda de criticidade">
+            <span class="tl-legend-title">Criticidade</span>
+            <span class="tl-legend-sep" aria-hidden="true"></span>
+            <div class="tl-legend-items">
+              <span class="tl-legend-item"><span class="tl-legend-dot crit-legend-dot--alta" aria-hidden="true"></span>Alta</span>
+              <span class="tl-legend-item"><span class="tl-legend-dot crit-legend-dot--media" aria-hidden="true"></span>Média</span>
+              <span class="tl-legend-item"><span class="tl-legend-dot crit-legend-dot--baixa" aria-hidden="true"></span>Baixa</span>
+            </div>
+          </div>
           </div>
         </div>
       </div>
@@ -441,7 +538,7 @@
 
         Array.prototype.forEach.call(tbody.rows, function (row) {
           /* células agregadas de eixo: índices estáveis em ambos os tipos de linha
-             [0]item [1]equip [2]und [3]crit [4]ref [5]EixoNorte [6]EixoLeste … */
+             [0]crit [1]item [2]equip [3]und [4]ref [5]EixoNorte [6]EixoLeste … */
           var eixoNorteCell = row.cells[5];
           var eixoLesteCell = row.cells[6];
 
@@ -479,7 +576,7 @@
           var critKey = crit ? (crit.classList.contains('crit--alta') ? 'alta' : crit.classList.contains('crit--media') ? 'media' : 'baixa') : '';
           var valorCell = row.cells[row.cells.length - 1];
           var valorNum = parseFloat(valorCell.textContent.replace(/[^\d,]/g, '').replace(/\./g, '').replace(',', '.')) || 0;
-          var equip = foldAccents(row.cells[1].textContent || '');
+          var equip = foldAccents(row.cells[2].textContent || '');
           var ref = foldAccents(row.cells[4].textContent || '');
 
           dataRows.push({
@@ -575,6 +672,103 @@
         });
 
         render();
+
+        /* ── placeholder "máquina de escrever" no #tlp-search: cicla valores REAIS
+           da tabela (equipamento + referência) enquanto o campo está INATIVO
+           (vazio + sem foco). É só visual — altera input.placeholder, nunca
+           input.value, então não interfere no filtro. Espelha o tlCodePlaceholder
+           do cronograma; respeita prefers-reduced-motion. ── */
+        (function tlpSearchPlaceholder() {
+          var input = document.getElementById('tlp-search');
+          if (!input) return;
+          var FALLBACK = input.getAttribute('placeholder') || 'buscar equipamento / referência';
+
+          /* coleta candidatos da tabela: equipamento (cells[2]) e referência (cells[4])
+             de cada linha de dados; descarta vazios/—/N/A; dedup; preferindo curtos */
+          var MAX = 26; // o campo tem ~32ch — mantém só os que cabem sem "pular"
+          var seen = {}, candidates = [], overflow = [];
+          Array.prototype.forEach.call(tbody.rows, function (row) {
+            if (row.classList.contains('tlt-total-row')) return;
+            [row.cells[2], row.cells[4]].forEach(function (cell) {
+              if (!cell) return;
+              var t = (cell.textContent || '').trim();
+              if (!t || t === '—' || t === '-' || /^n\/a$/i.test(t)) return;
+              if (seen[t]) return;
+              seen[t] = 1;
+              if (t.length <= MAX) candidates.push(t);
+              else overflow.push(t.slice(0, MAX - 1).trim() + '…');
+            });
+          });
+          /* se houver poucos candidatos curtos, completa com versões truncadas */
+          if (candidates.length < 3) candidates = candidates.concat(overflow);
+          if (!candidates.length) return;
+
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (reduce) { input.placeholder = candidates[0]; return; }
+
+          var TYPE = 95, ERASE = 45, HOLD = 1400, GAP = 480, POLL = 350; // ms
+          var ci = 0, pos = 0, typing = true;
+
+          function step() {
+            /* anima só enquanto INATIVO; ativo (foco ou texto) → pausa e reinicia limpo */
+            if (input.value !== '' || document.activeElement === input) {
+              if (document.activeElement === input) input.placeholder = '';
+              typing = true; pos = 0;
+              setTimeout(step, POLL);
+              return;
+            }
+            var val = candidates[ci];
+            if (typing) {
+              input.placeholder = val.slice(0, ++pos);
+              if (pos >= val.length) { typing = false; setTimeout(step, HOLD); }
+              else setTimeout(step, TYPE);
+            } else {
+              input.placeholder = val.slice(0, --pos);
+              if (pos <= 0) { typing = true; ci = (ci + 1) % candidates.length; setTimeout(step, GAP); }
+              else setTimeout(step, ERASE);
+            }
+          }
+          setTimeout(step, 500);
+        })();
+
+        /* ── fade de rolagem horizontal nas duas bordas do contêiner da tabela ── */
+        function addScrollFade(scroller) {
+          if (!scroller || scroller.dataset.fadeInit) return;
+          scroller.dataset.fadeInit = '1';
+          var fadeWrap = document.createElement('div'); fadeWrap.className = 'tl-scrollfade';
+          scroller.parentNode.insertBefore(fadeWrap, scroller); fadeWrap.appendChild(scroller);
+          ['left', 'right'].forEach(function (side) { var d = document.createElement('div'); d.className = 'tl-scrollfade-edge tl-scrollfade-' + side; d.setAttribute('aria-hidden', 'true'); fadeWrap.appendChild(d); });
+          var update = function () { var max = scroller.scrollWidth - scroller.clientWidth; fadeWrap.classList.toggle('has-left', scroller.scrollLeft > 1); fadeWrap.classList.toggle('has-right', scroller.scrollLeft < max - 1); };
+          scroller.addEventListener('scroll', update, { passive: true });
+          window.addEventListener('resize', update);
+          if ('ResizeObserver' in window) new ResizeObserver(update).observe(scroller);
+          update();
+        }
+        document.querySelectorAll('.tl-axis-table').forEach(addScrollFade);
+
+        /* ── tooltip do cabeçalho de criticidade: portamos o balão para
+           <body> (escapa o overflow da tabela) e posicionamos via position:fixed
+           com clamping na viewport, evitando o corte e o transbordo de borda. ── */
+        function attachTip(trigger, tip) {
+          document.body.appendChild(tip);
+          function place() {
+            tip.style.display = 'block';
+            var r = trigger.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight, m = 8;
+            var left = Math.max(m, Math.min(r.left + r.width / 2 - tw / 2, innerWidth - tw - m));
+            var top = r.bottom + 6;
+            if (top + th > innerHeight - m) top = r.top - th - 6;
+            tip.style.left = left + 'px';
+            tip.style.top = Math.max(m, top) + 'px';
+          }
+          function hide() { tip.style.display = 'none'; }
+          trigger.addEventListener('mouseenter', place);
+          trigger.addEventListener('focus', place);
+          trigger.addEventListener('mouseleave', hide);
+          trigger.addEventListener('blur', hide);
+          addEventListener('scroll', hide, true);
+        }
+        var _cth = document.querySelector('.crit-th'), _ctt = document.querySelector('.crit-th-tip');
+        if (_cth && _ctt) attachTip(_cth, _ctt);
       })();
     </script>
     <button id="back-to-top" aria-label="Retornar ao topo da página">

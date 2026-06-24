@@ -42,9 +42,9 @@ body { color: rgba(0,0,0,0.75); }
 /* ativo: texto = cor da borda (mesma cor); variante mais ESCURA da família p/
    garantir legibilidade no fundo claro/tingido (verde e laranja puros ficam
    ilegíveis; o roxo já é escuro o bastante). Negrito herdado de .tlf-chip. */
-.tlf-chip[data-status="done"].active    { background: var(--color-green-alpha-10);  border: 1.5px solid var(--color-dark-green);  color: var(--color-dark-green); }
-.tlf-chip[data-status="running"].active { background: var(--color-purple-alpha-10); border: 1.5px solid var(--color-purple);      color: var(--color-purple); }
-.tlf-chip[data-status="pending"].active { background: var(--color-orange-alpha-25); border: 1.5px solid rgb(150, 95, 0);          color: rgb(150, 95, 0); }
+.tlf-chip[data-status="done"].active    { background: var(--color-green-alpha-10);  border: 1px solid var(--color-dark-green);  color: var(--color-dark-green); }
+.tlf-chip[data-status="running"].active { background: var(--color-purple-alpha-10); border: 1px solid var(--color-purple);      color: var(--color-purple); }
+.tlf-chip[data-status="pending"].active { background: var(--color-orange-alpha-25); border: 1px solid rgb(150, 95, 0);          color: rgb(150, 95, 0); }
 .tlf-range { display: flex; align-items: center; gap: 0.3rem; color: rgba(0,0,0,0.5); font-size: 0.7rem; }
 .tlf-clear { margin-left: auto; align-self: flex-end; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.15); border-radius: var(--border-smaller); color: var(--lt-icon); font-family: var(--font-family-general); font-size: 0.68rem; padding: 0.4rem 0.7rem; cursor: pointer; transition: background-color 0.15s; }
 .tlf-clear:hover { background: rgba(0,0,0,0.08); }

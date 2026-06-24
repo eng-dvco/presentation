@@ -283,11 +283,12 @@ a.flex-logo-container {
     /* T2: o caminho encolhe ao conteúdo (sem width:100%) para que o conjunto
        crumbs+botão permaneça centralizado e o botão fique logo após o último crumb */
     margin: 0;
-    /* T1: gap simétrico entre cada elemento do caminho (crumb e separador). Como
-       o separador "›" é um ::after DENTRO do .crumb, o gap só separa os <li>; por
-       isso o separador também recebe margens horizontais simétricas (ver .crumb
-       ::after abaixo), resultando em espaçamento IGUAL dos dois lados do "›". */
-    gap: 8px;
+    /* T1/T9: o separador "›" é um ::after DENTRO do .crumb; o espaçamento ao redor
+       dele vem SÓ das margens horizontais do ::after (ver .crumb abaixo). O ol não
+       acrescenta gap entre os <li> — senão o lado direito do "›" (margem + gap)
+       ficaria maior que o esquerdo (só margem), gerando a assimetria observada.
+       gap:0 mantém [texto]—›—[texto] equidistante e mais compacto dos dois lados. */
+    gap: 0;
     /* T5: centraliza verticalmente os itens do caminho */
     align-items: center;
     list-style: none;
@@ -332,11 +333,10 @@ a.flex-logo-container {
     content: "›";
     display: inline-block;
     color: var(--lt-accent);
-    /* T1: margens horizontais SIMÉTRICAS para que a distância
-       [texto] — [›] — [texto] seja igual dos dois lados. O ol já aplica gap:8px
-       entre os <li>; o separador adiciona 8px de cada lado, ficando o "›"
-       equidistante do crumb anterior e do próximo. */
-    margin-inline: 8px;
+    /* T1/T9: margens horizontais SIMÉTRICAS e REDUZIDAS. Como o ol tem gap:0, esta
+       margem é a ÚNICA fonte de espaço dos dois lados do "›", deixando a distância
+       [texto]—[›]—[texto] igual e enxuta (reduzida de 8px → 6px). */
+    margin-inline: 6px;
     opacity: 0.75;
   }
 }
@@ -1539,23 +1539,12 @@ body:has(.has-sidebar) #back-to-top {
 }
 
 /* atalho "Seleção de conteúdo": o respiro até a lista de seções é dado pelo
-   .secnav-all-divider (margin 8px) logo abaixo; a antiga regra unificada zerava
-   esta margem com !important — consolidada aqui como 0 (resultado idêntico).
-
-   T4: a seta "‹" (à esquerda, ::after) NÃO deve sobrepor o texto ao pairar; em
-   vez disso EMPURRA o texto para a direita. Como a seta surge em ~left:8px, no
-   hover aumentamos o padding-left do item para abrir espaço à seta (com transição
-   suave). padding-left base = 12px (igual aos demais .secnav-all-link). */
+   .secnav-all-divider (margin 8px) logo abaixo (margin-bottom:0 evita respiro
+   duplicado). T9: SEM exceções de seta/posição — herda integralmente o
+   comportamento dos demais .secnav-item-link (seta "›" à DIREITA revelada no
+   hover, gradiente de fade à direita), ficando idêntico a eles. */
 .secnav-all-home {
   margin-bottom: 0;
-  transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.15s, background-color 0.15s, color 0.15s, transform 0.1s;
-}
-
-.secnav-all-home:hover,
-.secnav-all-home:focus-visible {
-  /* abre espaço à seta "‹" (que ocupa ~left:8px + largura do glifo) sem sobrepor o texto */
-  padding-left: 28px;
 }
 
 /* seção atual em destaque (mesma ênfase do hover/itens) */
@@ -1765,31 +1754,10 @@ body:has(.has-sidebar) #back-to-top {
 .secnav-item-link.active::after { content: none; }
 .secnav-item-link.active::before { content: none; }
 
-/* T8: "Seleção de conteúdo" é exceção — sua seta aponta para a ESQUERDA (‹) e
-   fica à esquerda, indicando retorno à tela principal de seleção. O gradiente
-   de fade também espelha (fade da esquerda) para acompanhar a direção. */
-.secnav-all-home::after {
-  content: "‹";
-  right: auto;
-  left: 8px;
-  transform: translate(-4px, calc(-50% - 0.15em));
-}
-
-.secnav-all-home:hover::after,
-.secnav-all-home:focus-visible::after {
-  transform: translate(0, calc(-50% - 0.15em));
-}
-
-.secnav-all-home::before {
-  right: auto;
-  left: 0;
-  background-image: linear-gradient(
-    to left,
-    transparent 0%,
-    rgba(245, 245, 245, 0.35) 55%,
-    #f5f5f5 100%
-  );
-}
+/* T9: "Seleção de conteúdo" foi padronizado para ficar IDÊNTICO aos demais itens
+   de seção (Subestação, Linhas do Tempo, Distribuição etc.). Sem nenhum override:
+   herda .secnav-item-link::after (seta "›" à DIREITA, revelada no hover) e
+   .secnav-item-link::before (gradiente de fade à direita). */
 
 /* nome do slide: no máximo 2 linhas de altura (recortado em overflow: hidden) */
 .secnav-items-list .secnav-item-link {
@@ -1863,8 +1831,13 @@ body:has(.has-sidebar) #back-to-top {
   position: absolute;
   z-index: 3; /* acima do botão (z 2) e dos itens (z 1) — consolidado da antiga unificada */
   top: 0;
-  /* T5/T7: afastado 4px da borda esquerda */
-  left: 4px;
+  /* T5/T7/T10: alinha o gap horizontal do traço com o do item de SEÇÃO ativo
+     (.secnav-all-link.active::before, que fica a 5px da borda do card). O marcador
+     é absoluto dentro de .secnav-items-list (padding:2px) e mede left a partir do
+     padding-box da lista, enquanto os itens ficam recuados 2px por esse padding;
+     soma-se +1px da borda do item (onde o ::before do topo se assenta):
+     2px (padding) + 4px + 1px = 7px → mesmo gap visual (5px) da borda do card. */
+  left: 7px;
   width: 4px;
   /* T5: altura FIXA do container (não mais = altura do item). O JS centraliza
      verticalmente em cada item via translateY; a barra visível (::before) preenche

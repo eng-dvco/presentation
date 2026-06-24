@@ -987,3 +987,50 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
     sortSection(section, current);
   });
 })();
+
+// ── placeholder "máquina de escrever": cicla os códigos REAIS de cada eixo no
+// campo de busca textual enquanto ele está INATIVO (vazio + sem foco). É apenas
+// visual — altera somente input.placeholder; o filtro continua lendo input.value.
+// Respeita prefers-reduced-motion (placeholder estático no 1º código). ──────────
+(function tlCodePlaceholder() {
+  const CODE_RE = /^\d+\/\d+(?:\s*[A-Za-z])?$/; // código da estrutura: 000/000 (até 000/000 A)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const TYPE = 95, ERASE = 45, HOLD = 1400, GAP = 480, POLL = 350; // ms
+
+  document.querySelectorAll('.tl-axis-section').forEach(sec => {
+    const input = sec.querySelector('.tl-axis-code');
+    if (!input) return;
+
+    // códigos reais desta seção (únicos, ordem do DOM), só os que casam o padrão
+    const codes = [...new Set(
+      [...sec.querySelectorAll('.tl-code')].map(el => el.textContent.trim()).filter(c => CODE_RE.test(c))
+    )];
+    if (!codes.length) return;
+
+    if (reduce) { input.placeholder = codes[0]; return; }
+
+    let ci = 0, pos = 0, typing = true;
+
+    function step() {
+      // anima só enquanto INATIVO; ativo (foco ou texto digitado) → pausa e reinicia limpo
+      if (input.value !== '' || document.activeElement === input) {
+        if (document.activeElement === input) input.placeholder = '';
+        typing = true; pos = 0;
+        setTimeout(step, POLL);
+        return;
+      }
+      const code = codes[ci];
+      if (typing) {
+        input.placeholder = code.slice(0, ++pos);
+        if (pos >= code.length) { typing = false; setTimeout(step, HOLD); }
+        else setTimeout(step, TYPE);
+      } else {
+        input.placeholder = code.slice(0, --pos);
+        if (pos <= 0) { typing = true; ci = (ci + 1) % codes.length; setTimeout(step, GAP); }
+        else setTimeout(step, ERASE);
+      }
+    }
+    setTimeout(step, 500);
+  });
+})();

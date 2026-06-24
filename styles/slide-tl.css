@@ -54,6 +54,9 @@ body { color: rgba(0,0,0,0.75); }
 .tlf-filter { display: flex; align-items: center; margin-right: auto; }
 .tlf-funnel { display: none; }
 .tlf-funnel-icon { flex-shrink: 0; }
+/* título "Status" do menu do funil: oculto quando os chips estão inline (telas
+   largas); exibido como rótulo no topo do dropdown no mobile (ver media query) */
+.tlf-chips-title { display: none; }
 
 /* dropdown customizado (Eixo/Trecho) */
 .tlf-native-hidden { display: none !important; }
@@ -116,10 +119,14 @@ body { color: rgba(0,0,0,0.75); }
      ordem do código e, com igual especificidade, recortaria o dropdown.
      z-index garante que o menu suspenso fique acima do conteúdo do eixo. */
   .tl-axis .tl-axis-controls { overflow: visible; flex-wrap: wrap; position: relative; z-index: 3; }
-  /* o eixo e a seção não podem recortar o dropdown do funil ao transbordar
-     para baixo; no mobile dispensamos o overflow:hidden (clipping do raio de
-     borda) em favor da visibilidade do menu suspenso */
-  .tl-axis { overflow: visible; }
+  /* o eixo e a seção não podem recortar o dropdown do funil ao transbordar para
+     baixo; no mobile dispensamos o overflow:hidden (clipping do raio de borda) em
+     favor da visibilidade do menu suspenso. O z-index ELEVA o cabeçalho do eixo (e
+     seu dropdown) acima do conteúdo dos trechos (.tl-trecho-name z-index:2 e
+     .tl-trecho::after z-index:3); sem isso o menu fica capado no z-index:2 do
+     .tl-axis base e some atrás dos títulos dos trechos. Especificidade .tl-grid
+     para vencer a regra-base .tl-axis { z-index: 2 } (que vem depois na ordem). */
+  .tl-grid .tl-axis { overflow: visible; z-index: 10; }
   .tl-grid .tl-axis-section { overflow: visible; }
 
   /* chips de status num menu acionado pelo funil (à extrema esquerda) */
@@ -142,6 +149,12 @@ body { color: rgba(0,0,0,0.75); }
   }
   .tlf-filter.is-open .tlf-chips--axis { display: flex; }
   .tlf-filter .tlf-chip { font-size: 0.62rem; }
+  /* rótulo "Status" no topo do dropdown do funil, agrupando os chips */
+  .tlf-chips--axis .tlf-chips-title {
+    display: block; padding: 0 0.25rem 0.35rem; font-family: var(--font-family-general);
+    font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(0,0,0,0.45);
+  }
 }
 
 /* ── orientação HORIZONTAL: faixas (trechos) empilhadas; o tempo flui na horizontal (mais recente à esquerda) ── */

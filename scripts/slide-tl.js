@@ -839,6 +839,13 @@ function addScrollFade(scroller) {
     // tratado por um listener global único, após o forEach.)
     const axisChips = axis.querySelector('.tlf-chips--axis');
     if (axisChips) {
+      // título "Status" no topo do menu do funil, agrupando os chips de status
+      // (visível só no dropdown, no mobile — vide .tlf-chips-title em slide-tl.css)
+      const chipsTitle = document.createElement('span');
+      chipsTitle.className = 'tlf-chips-title';
+      chipsTitle.setAttribute('aria-hidden', 'true');
+      chipsTitle.textContent = 'Status';
+      axisChips.insertBefore(chipsTitle, axisChips.firstChild);
       const funnelWrap = document.createElement('div');
       funnelWrap.className = 'tlf-filter';
       const funnelBtn = document.createElement('button');

@@ -761,7 +761,6 @@ footer {
 }
 
 .disabled {
-  /* width: 100%; */
   color: var(--lt-text-faint);
   background-color: var(--color-black-alpha-10);
   pointer-events: none;
@@ -903,11 +902,8 @@ footer {
   .img > img:focus,
   .redirect:hover,
   .item:active,
-  .opener-item:active,
   .item:not(.pending):hover,
-  .item:not(.pending):focus,
-  .opener-item:not(.pending):hover,
-  .opener-item:not(.pending):focus {
+  .item:not(.pending):focus {
     transform: none;
     translate: 0;
   }
@@ -1221,7 +1217,9 @@ footer {
   height: calc(var(--r, 60px) * 2);
   margin-left: calc(var(--r, 60px) * -1);
   margin-top: calc(var(--r, 60px) * -1);
-  background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 70%);
+  /* ripple escuro (sobre superfícies claras da navegação lateral) — consolidado
+     da antiga regra unificada, que sobrescrevia o gradiente branco original */
+  background: radial-gradient(circle, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0) 70%);
   animation: nav-ripple 0.65s ease-out forwards;
 }
 
@@ -1232,19 +1230,34 @@ footer {
 }
 
 .copy-url-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   margin-left: auto;
-  background: none;
-  border: 1px solid var(--color-white-alpha-25);
-  border-radius: var(--border-general);
-  color: var(--color-white-alpha-50);
+  background: var(--color-black-alpha-10);
+  border: 1px solid var(--lt-border-strong);
+  border-radius: 99px;
+  color: var(--lt-text-muted);
   font-family: var(--font-family-general);
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-  padding: 2px 8px;
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  padding: 3px 12px;
   cursor: pointer;
   white-space: nowrap;
-  transition: color 0.15s, border-color 0.15s;
+  backdrop-filter: blur(4px);
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 
-  &:hover { color: var(--color-white); border-color: var(--color-green); }
+  /* ícone de cópia (máscara SVG colorida pela cor do texto) */
+  &::before {
+    content: '';
+    flex: 0 0 auto;
+    width: 12px;
+    height: 12px;
+    background-color: currentColor;
+    -webkit-mask: url(../assets/icons/copy.svg) center / contain no-repeat;
+    mask: url(../assets/icons/copy.svg) center / contain no-repeat;
+  }
+
+  &:hover { background: var(--lt-hover); border-color: var(--lt-border-strong); color: var(--color-black); }
 }
 
 /* ---- sidebar de navegação por seção -------------------------------------- */
@@ -1438,11 +1451,16 @@ body:has(.has-sidebar) #back-to-top {
   .secnav-all.is-open & { grid-template-rows: 1fr; }
 }
 
-/* caixa que recorta o conteúdo durante a animação (sem padding próprio, para
-   colapsar a exatamente 0) */
+/* caixa que recorta o conteúdo durante a animação. O padrão "cartão" branco
+   conectado ao botão (fundo #fff, cantos inferiores arredondados, padding
+   lateral/inferior) vinha da antiga regra unificada; consolidado aqui. O
+   padding lateral/inferior é recortado pelo pai (grid 0fr) ao colapsar. */
 .secnav-all-list-inner {
   min-height: 0;
   overflow: hidden;
+  background: var(--lt-surface-strong); /* #fff */
+  border-radius: 0 0 8px 8px;
+  padding: 0 12px 12px;
 }
 
 .secnav-all-links {
@@ -1457,9 +1475,11 @@ body:has(.has-sidebar) #back-to-top {
   padding: 5px 12px;
 }
 
-/* atalho "Seleção de conteúdo": vão maior para separá-lo da lista de seções */
+/* atalho "Seleção de conteúdo": o respiro até a lista de seções é dado pelo
+   .secnav-all-divider (margin 8px) logo abaixo; a antiga regra unificada zerava
+   esta margem com !important — consolidada aqui como 0 (resultado idêntico). */
 .secnav-all-home {
-  margin-bottom: 11px;
+  margin-bottom: 0;
 }
 
 /* seção atual em destaque (mesma ênfase do hover/itens) */
@@ -1469,6 +1489,28 @@ body:has(.has-sidebar) #back-to-top {
   color: var(--lt-text);
   font-weight: var(--font-weight-boldest);
   cursor: default;
+}
+
+/* T6: traço lateral esquerdo no item de seção ativo, espelhando o
+   .secnav-marker (mesmas medidas: 4px de largura, pontas arredondadas e
+   recuo vertical = raio do item, para respeitar o canto arredondado). A
+   especificidade extra (.secnav-all-links …) garante prioridade sobre a regra
+   .secnav-item-link.active::before { content: none } (T7), pois o item de seção
+   também é um .secnav-item-link. */
+.secnav-all-links .secnav-all-link.active::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: var(--border-general);
+  bottom: var(--border-general);
+  right: auto;
+  width: 4px;
+  height: auto;
+  border-radius: 2px;
+  background: var(--lt-accent);
+  opacity: 1;
+  transform: none;
+  pointer-events: none;
 }
 
 /* navegação entre os itens da seção atual — mesma formatação dos botões */
@@ -1502,7 +1544,8 @@ body:has(.has-sidebar) #back-to-top {
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--lt-text-muted);
+  /* subtítulo 0.45 (não --lt-text-muted 0.55): literal consolidado da antiga unificada */
+  color: rgba(0, 0, 0, 0.45);
 
   /* total de slides da seção, alinhado à direita */
   & .secnav-items-count {
@@ -1522,19 +1565,25 @@ body:has(.has-sidebar) #back-to-top {
   gap: 8px;
   padding: 2px;
   scrollbar-width: thin;
-  scrollbar-color: var(--lt-border-strong) transparent;
+  /* polegar do scroll 0.18 (não --lt-border-strong 0.22): literal consolidado */
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
 }
 
 .secnav-item-link {
   position: relative;
+  z-index: 1;
   display: block;
   overflow: hidden;
   padding: 8px 12px;
   border-radius: var(--border-general);
-  border: 1px solid var(--lt-border);
-  background-color: var(--lt-surface-muted);
-  backdrop-filter: blur(4px);
-  color: var(--lt-text-muted);
+  border: 1px solid var(--lt-border); /* 0.12 */
+  /* item opaco #f5f5f5 (não --lt-surface-muted, que tem alpha 0.97): sem token de
+     valor idêntico, mantém-se o literal consolidado da antiga regra unificada */
+  background-color: #f5f5f5;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* texto suave #8c8c8c (sem token idêntico): literal consolidado */
+  color: #8c8c8c;
   text-decoration: none;
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   line-height: var(--font-line-ui);
@@ -1543,15 +1592,20 @@ body:has(.has-sidebar) #back-to-top {
 
 .secnav-item-link:hover,
 .secnav-item-link:focus-visible {
-  border-color: var(--lt-border-strong);
-  background: var(--lt-hover);
-  color: var(--color-black);
+  border-color: var(--lt-border-strong); /* 0.22 */
+  background: var(--lt-hover); /* #e4e4e4 */
+  /* hover usa 0.88 (não --color-black 32,32,32): literal consolidado */
+  color: rgba(0, 0, 0, 0.88);
 }
 
 .secnav-item-link:active { transform: scale(0.97); }
 
 .secnav-item-link.active {
-  color: var(--color-black);
+  /* ativo: #fff opaco + texto 0.88 + borda 0.18 (literais consolidados da antiga
+     regra unificada — sem tokens de valor idêntico para 0.88/0.18) */
+  border-color: rgba(0, 0, 0, 0.18);
+  background: var(--lt-surface-strong); /* #fff */
+  color: rgba(0, 0, 0, 0.88);
   font-weight: var(--font-weight-boldest);
   cursor: default;
 }
@@ -1559,24 +1613,51 @@ body:has(.has-sidebar) #back-to-top {
 /* item atual sob hover: mantém texto escuro legível sobre o fundo claro (#e4e4e4) */
 .secnav-item-link.active:hover,
 .secnav-item-link.active:focus-visible {
-  color: var(--color-black);
+  color: rgba(0, 0, 0, 0.88);
 }
 
-/* seta direcional (→): sinaliza que o item leva (redireciona) a outra página.
-   Fica oculta e ligeiramente deslocada à direita; ao pairar/focar desliza para
-   dentro e aparece. Posicionada em absoluto para não interferir no recorte do
-   nome (2 linhas + máscara). Não aparece no item atual (.active), que não navega. */
+/* T7: seta direcional (›) + gradiente de fade, espelhando os itens da tela de
+   seleção (.item::before/::after em slide-selection.css). Sinaliza que o item
+   leva (redireciona) a outra página. A seta fica oculta e ligeiramente deslocada
+   à direita; ao pairar/focar aparece (revelação suave de 0.6s). Posicionada em
+   absoluto para não interferir no recorte do nome (2 linhas + máscara). Não
+   aparece no item atual (.active), que não navega. */
 .secnav-item-link::after {
-  content: "→";
+  content: "›";
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 8px;
   line-height: 1;
-  color: currentColor;
+  font-size: calc(var(--font-size-icon) * var(--font-size-multiplier-md));
+  color: var(--color-black);
   opacity: 0;
   transform: translate(4px, -50%);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  /* revelação suave/mais lenta, igual à da tela de seleção */
+  transition: opacity 0.6s ease, transform 0.15s ease;
   pointer-events: none;
+  z-index: 1;
+}
+
+/* gradiente suave de borda (transparente → fundo do item) atrás da seta e acima
+   do título, igual a .item::after da tela de seleção. Cor adaptada ao fundo
+   claro dos itens da sidebar (#f5f5f5). */
+.secnav-item-link::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 14ch;
+  height: 100%;
+  transform: translateY(-50%);
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(245, 245, 245, 0.35) 55%,
+    #f5f5f5 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
 }
 
 .secnav-item-link:hover::after,
@@ -1585,8 +1666,40 @@ body:has(.has-sidebar) #back-to-top {
   transform: translate(0, -50%);
 }
 
-/* item atual não redireciona: sem seta */
+.secnav-item-link:hover::before,
+.secnav-item-link:focus-visible::before {
+  opacity: 1;
+}
+
+/* item atual não redireciona: sem seta nem gradiente */
 .secnav-item-link.active::after { content: none; }
+.secnav-item-link.active::before { content: none; }
+
+/* T8: "Seleção de conteúdo" é exceção — sua seta aponta para a ESQUERDA (‹) e
+   fica à esquerda, indicando retorno à tela principal de seleção. O gradiente
+   de fade também espelha (fade da esquerda) para acompanhar a direção. */
+.secnav-all-home::after {
+  content: "‹";
+  right: auto;
+  left: 8px;
+  transform: translate(-4px, -50%);
+}
+
+.secnav-all-home:hover::after,
+.secnav-all-home:focus-visible::after {
+  transform: translate(0, -50%);
+}
+
+.secnav-all-home::before {
+  right: auto;
+  left: 0;
+  background-image: linear-gradient(
+    to left,
+    transparent 0%,
+    rgba(245, 245, 245, 0.35) 55%,
+    #f5f5f5 100%
+  );
+}
 
 /* nome do slide: no máximo 2 linhas de altura (recortado em overflow: hidden) */
 .secnav-items-list .secnav-item-link {
@@ -1656,38 +1769,62 @@ body:has(.has-sidebar) #back-to-top {
    suave de um item para outro (sem salto direto). */
 .secnav-marker {
   position: absolute;
+  z-index: 3; /* acima do botão (z 2) e dos itens (z 1) — consolidado da antiga unificada */
   top: 0;
   left: 2px;
   width: 4px;
-  border-radius: 2px;
-  background: var(--lt-accent);
+  /* a altura (= altura do item) e a posição são definidas em JS; a barra visível
+     fica num ::before com inset vertical para respeitar o canto arredondado do
+     item ativo (mantendo a mesma geometria/altura do marcador). */
+  background: transparent;
   transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1),
               height 0.34s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 
+/* T6: barra visível com pontas arredondadas e um pequeno recuo vertical
+   (= raio do item, var(--border-general)) para não ultrapassar os cantos
+   arredondados do item ativo. */
+.secnav-marker::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--border-general);
+  bottom: var(--border-general);
+  width: 100%;
+  border-radius: 2px;
+  background: var(--lt-accent);
+}
+
 .secnav-btn {
   position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 3px;
   overflow: hidden;
   padding: 10px 14px;
   border-radius: var(--border-general);
-  border: 1px solid var(--lt-border);
-  background-color: var(--lt-surface-strong);
-  backdrop-filter: blur(4px);
+  /* borda 0.18 (entre --lt-border 0.12 e --lt-border-strong 0.22): sem token de
+     valor idêntico, mantém-se o literal consolidado da antiga regra unificada */
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background-color: var(--lt-surface-strong); /* #fff */
+  /* navegação lateral fica sobre superfície transparente: sem blur próprio */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow: var(--lt-shadow);
-  color: var(--lt-text);
+  /* texto 0.88 (sem token idêntico; --lt-text é 0.82): literal consolidado */
+  color: rgba(0, 0, 0, 0.88);
   text-decoration: none;
   transition: border-color 0.15s, background-color 0.15s, transform 0.1s;
 }
 
 .secnav-btn:hover,
 .secnav-btn:focus-visible {
-  border-color: var(--lt-border-strong);
-  background: var(--lt-hover);
-  color: var(--color-black);
+  border-color: var(--lt-border-strong); /* 0.22 */
+  background: var(--lt-hover); /* #e4e4e4 */
+  /* hover do botão usa 0.88 (não --color-black 32,32,32): literal consolidado */
+  color: rgba(0, 0, 0, 0.88);
 }
 
 /* no hover do botão principal, escurece também o kicker e o nome da seção
@@ -1699,7 +1836,8 @@ body:has(.has-sidebar) #back-to-top {
   color: var(--color-black);
 }
 
-.secnav-btn:active { transform: scale(0.97); }
+/* T2: o botão principal não redimensiona ao clicar (somente o ripple/propagação
+   sinaliza o toque). Os ITENS continuam com o leve scale em :active. */
 
 .secnav-dir {
   display: flex;
@@ -1709,45 +1847,47 @@ body:has(.has-sidebar) #back-to-top {
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--lt-text-muted);
+  /* kicker 0.4 (não --lt-text-muted 0.55): literal consolidado da antiga unificada */
+  color: rgba(0, 0, 0, 0.4);
 }
 
 /* nome da seção atual (exibido no toggle do menu de seções) */
 .secnav-section {
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   font-weight: var(--font-weight-boldest);
-  color: var(--lt-text);
+  /* nome da seção 0.75 (não --lt-text 0.82): literal consolidado da antiga unificada */
+  color: rgba(0, 0, 0, 0.75);
   line-height: var(--font-line-ui);
 }
 
-/* ── formatação unificada da navegação lateral entre seções (global) ─────────
-   Antes vivia só em slide-tl.css (páginas de cronograma); movida para cá para
-   valer em TODAS as páginas. Botão principal branco com sombra; itens em
-   #f5f5f5 com texto suave; hover #e4e4e4 (faixas do cronograma); painel
-   expandido como "cartão" branco conectado ao botão; divisor tracejado.
-   (As setas direcionais e o espaçador acima continuam definidos no bloco
-   secnav base; aqui ficam apenas superfícies/cores/sombras.) */
-.slide-sidebar { background-color: transparent !important; backdrop-filter: none !important; }
-.secnav-btn { background-color: #fff !important; border-color: rgba(0,0,0,0.18) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; color: rgba(0,0,0,0.88) !important; position: relative !important; z-index: 2 !important; box-shadow: var(--lt-shadow) !important; }
-.secnav-item-link { background-color: #f5f5f5 !important; border-color: rgba(0,0,0,0.12) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; color: #8c8c8c !important; position: relative !important; z-index: 1 !important; }
-.secnav-btn:hover, .secnav-btn:focus-visible { border-color: rgba(0,0,0,0.22) !important; background: #e4e4e4 !important; color: rgba(0,0,0,0.88) !important; }
-.secnav-item-link:hover, .secnav-item-link:focus-visible, .secnav-all-link:hover, .secnav-all-link:focus-visible { border-color: rgba(0,0,0,0.22) !important; background: #e4e4e4 !important; color: rgba(0,0,0,0.88) !important; }
-.secnav-item-link.active, .secnav-all-link.active { color: rgba(0,0,0,0.88) !important; border-color: rgba(0,0,0,0.18) !important; background: #fff !important; cursor: default; }
-.secnav-marker { z-index: 3 !important; }
-.secnav-all-list-inner { background: #fff; border-radius: 0 0 8px 8px; padding: 0 12px 12px; }
-.secnav-all.is-open .secnav-btn { border-radius: 8px 8px 0 0 !important; border-bottom-color: transparent !important; }
-.secnav-all-home { margin-bottom: 0 !important; }
+/* ── formatação da navegação lateral entre seções (global) ───────────────────
+   Botão principal branco com sombra; itens em #f5f5f5 com texto suave; hover
+   #e4e4e4; painel expandido como "cartão" branco conectado ao botão; divisor
+   tracejado. As superfícies/cores/sombras antes viviam num bloco "unificado"
+   redundante (re-declarava ~12 seletores já definidos acima, com hex cru +
+   !important): foram CONSOLIDADAS nas definições originais de cada seletor
+   (.slide-sidebar/.secnav-btn/.secnav-item-link/-hover/-active/.secnav-marker/
+   .secnav-all-list-inner/.secnav-all-home/.secnav-items-title/.secnav-items-list/
+   .secnav-dir/.secnav-section/.nav-hint-ripple). Restam aqui apenas as regras SEM
+   definição original acima para receber os valores. */
+
+/* botão colapsado/aberto: ao abrir, o toggle vira o topo de um "cartão" (cantos
+   inferiores retos e borda inferior some para fundir com o painel). Maior
+   especificidade que .secnav-btn e .secnav-btn:hover — dispensa !important. */
+.secnav-all.is-open .secnav-btn {
+  border-radius: 8px 8px 0 0;
+  border-bottom-color: transparent;
+}
+
 /* divisor tracejado abaixo do botão "Seleção de conteúdo": o respiro até os
    itens adjacentes deve igualar o do segundo espaçador (16px acima + 16px abaixo
    da linha). Como a lista (.secnav-all-links) tem gap 8px, a margem de 8px do
    divisor soma 8+8 = 16px de cada lado. */
-.secnav-all-divider { border: none; border-top: 1.5px dashed rgba(160,160,160,0.65); margin: 8px 0; }
-.secnav-all-list .secnav-item-link { box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
-.secnav-items-title { color: rgba(0,0,0,0.45); }
-.secnav-items-list { scrollbar-color: rgba(0,0,0,0.18) transparent; }
-.secnav-dir { color: rgba(0,0,0,0.4) !important; }
-.secnav-section { color: rgba(0,0,0,0.75) !important; }
-.nav-hint-ripple { background: radial-gradient(circle, rgba(0,0,0,0.14) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0) 70%); }
+.secnav-all-divider { border: none; border-top: 1.5px dashed rgba(160, 160, 160, 0.65); margin: 8px 0; }
+
+/* sombra própria nos itens do menu de seções (dentro do cartão branco). Único
+   seletor que aplica box-shadow a esses itens — dispensa !important. */
+.secnav-all-list .secnav-item-link { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 @media (max-width: 768px) {
   .content-container.has-sidebar { flex-direction: column; gap: 16px; }
@@ -1776,13 +1916,4 @@ body:has(.has-sidebar) #back-to-top {
     transition: none;
     transform: translate(0, -50%);
   }
-  /* sem o deslize, o nome completo precisa continuar legível: deixa quebrar em
-     várias linhas em vez de ficar permanentemente cortado dentro do botão */
-  .secnav-item.is-overflowing {
-    overflow: visible;
-    -webkit-mask-image: none;
-            mask-image: none;
-  }
-  .secnav-item.is-overflowing .secnav-item-track { display: block; }
-  .secnav-item.is-overflowing .secnav-item-text { white-space: normal; }
 }

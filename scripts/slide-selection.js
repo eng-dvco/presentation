@@ -309,26 +309,21 @@ function measureDocNameMarquee(wrap) {
       { transform: 'translateX(0)',           offset: 0 },
       { transform: `translateX(${-shift}px)`, offset: 1 },
     ],
-    { duration: totalMs, iterations: Infinity, easing: 'linear' }
+    // 1 ciclo só: ao terminar, fica parqueado no estado final (forwards), sem salto
+    { duration: totalMs, iterations: 1, fill: 'forwards', easing: 'linear' }
   );
   // pausada por padrão: só desliza no hover (mouse) ou ao tocar/clicar a linha
   wrap._nameAnim.pause();
 }
 
-// inicia (ou reinicia do começo) o deslizamento do nome de UMA linha
+// inicia (do começo) UM único ciclo do deslizamento do nome de UMA linha;
+// se já estiver tocando, ignora o gatilho para não interferir
 function playDocNameMarquee(wrap) {
   const anim = wrap && wrap._nameAnim;
   if (!anim) return;
+  if (anim.playState === 'running') return;
   anim.currentTime = 0;
   anim.play();
-}
-
-// pausa e recolhe o deslizamento do nome de UMA linha (ao sair com o cursor)
-function resetDocNameMarquee(wrap) {
-  const anim = wrap && wrap._nameAnim;
-  if (!anim) return;
-  anim.pause();
-  anim.currentTime = 0;
 }
 
 // ---- marquee da descrição dos documentos ------------------------------------
@@ -374,27 +369,22 @@ function measureDocDescMarquee(row) {
       { transform: 'translateX(0)',           offset: 0 },
       { transform: `translateX(${-shift}px)`, offset: 1 },
     ],
-    { duration: totalMs, iterations: Infinity, easing: 'linear' }
+    // 1 ciclo só: ao terminar, fica parqueado no estado final (forwards), sem salto
+    { duration: totalMs, iterations: 1, fill: 'forwards', easing: 'linear' }
   );
   // por-documento: a animação não toca sozinha — fica pausada até o cursor
   // passar sobre a linha (hover) ou, em toque/clique, até tocar a linha
   row._descAnim.pause();
 }
 
-// inicia (ou reinicia do começo) o deslizamento da descrição de UMA linha
+// inicia (do começo) UM único ciclo do deslizamento da descrição de UMA linha;
+// se já estiver tocando, ignora o gatilho para não interferir
 function playDocDescMarquee(row) {
   const anim = row && row._descAnim;
   if (!anim) return;
+  if (anim.playState === 'running') return;
   anim.currentTime = 0;
   anim.play();
-}
-
-// pausa e recolhe o deslizamento de UMA linha (ao sair com o cursor)
-function resetDocDescMarquee(row) {
-  const anim = row && row._descAnim;
-  if (!anim) return;
-  anim.pause();
-  anim.currentTime = 0;
 }
 
 function refreshDocMarquees() {
@@ -402,31 +392,26 @@ function refreshDocMarquees() {
   document.querySelectorAll('.doc-name-wrap').forEach(measureDocNameMarquee);
 }
 
-// gatilho por documento: cada <li> aciona a PRÓPRIA descrição E o próprio nome,
-// que deslizam juntos. hover (mouse) toca enquanto o cursor permanece; em
-// dispositivos sem hover, um clique/toque na linha também dispara o deslizamento.
+// gatilho INDIVIDUAL: cada elemento aciona SOMENTE o próprio marquee — o título
+// (.doc-name-wrap) anima só o título; a descrição (.doc-desc-row) anima só a
+// descrição. Cada gatilho roda 1 ciclo idêntico e ignora-se enquanto em
+// andamento. hover (mouse) e clique/toque (touch, pen ou mouse sem hover)
+// disparam da mesma forma.
 if (!reducedMotion) {
+  // anexa hover (mouse) + clique/toque a UM elemento, acionando seu marquee
+  const bindMarqueeTrigger = (el, play) => {
+    if (!el) return;
+    el.addEventListener('pointerenter', e => {
+      if (e.pointerType !== 'mouse') return;
+      play(el);
+    });
+    // toque/clique (touch, pen ou mouse sem hover): inicia 1 ciclo
+    el.addEventListener('click', () => play(el));
+  };
+
   document.querySelectorAll('.doc-items li').forEach(li => {
-    const row  = li.querySelector('.doc-desc-row');
-    const wrap = li.querySelector('.doc-name-wrap');
-    if (!row && !wrap) return;
-
-    li.addEventListener('pointerenter', e => {
-      if (e.pointerType !== 'mouse') return;
-      playDocDescMarquee(row);
-      playDocNameMarquee(wrap);
-    });
-    li.addEventListener('pointerleave', e => {
-      if (e.pointerType !== 'mouse') return;
-      resetDocDescMarquee(row);
-      resetDocNameMarquee(wrap);
-    });
-
-    // toque/clique (touch, pen ou mouse sem hover): reinicia do começo
-    li.addEventListener('click', () => {
-      playDocDescMarquee(row);
-      playDocNameMarquee(wrap);
-    });
+    bindMarqueeTrigger(li.querySelector('.doc-name-wrap'), playDocNameMarquee);
+    bindMarqueeTrigger(li.querySelector('.doc-desc-row'), playDocDescMarquee);
   });
 }
 

@@ -26,13 +26,25 @@ let prevUrl = null;
 let nextUrl = null;
 let lightboxOpen = false;
 let currentImgIdx = 0;
-let overlay, overlayStage, overlayImg, overlayCaption, overlayTitle, overlayCount, overlayClose, overlayPrev, overlayNext;
+let overlay, overlayStage, overlayImg, overlayCaption, overlayCount, overlayClose, overlayPrev, overlayNext;
 let imgGroupInfo = [];
 let autoTimer = null;
 let autoStart = null;
 let autoRemaining = 10000;
 let isHoveringMain = false;
 const AUTO_DURATION = 10000;
+
+// Estado dos gestos do lightbox (deslize/pan/pinça). O transform da imagem é a
+// composição translate(gestureTX,gestureTY) scale(gestureScale). paintGesture é
+// definido dentro de buildLightbox() e reaplica o transform; resetGestureTransform
+// zera tudo (chamado ao trocar de imagem e ao fechar).
+let gestureScale = 1, gestureTX = 0, gestureTY = 0;
+let paintGesture = null;
+function resetGestureTransform() {
+  gestureScale = 1; gestureTX = 0; gestureTY = 0;
+  if (paintGesture) paintGesture(false);
+  else if (overlayImg) { overlayImg.style.transition = 'none'; overlayImg.style.transform = ''; }
+}
 
 const mosaicImages = Array.from(document.querySelectorAll('.mosaic-container img'));
 
@@ -78,7 +90,11 @@ function cleanSectionName(raw, code) {
 function parseSections(doc) {
   const sections = [];
   for (const sec of doc.querySelectorAll('.selection-grid > section[data-section]')) {
-    const title = cleanSectionName(sec.querySelector('.title-h2')?.textContent ?? '', sec.dataset.section);
+    const title = cleanSectionName(
+      sec.querySelector('.title-h2 .st-name-full')?.textContent
+        ?? sec.querySelector('.title-h2')?.textContent ?? '',
+      sec.dataset.section
+    );
     const items = Array.from(sec.querySelectorAll('a.item[href]'))
       .filter(a => !a.classList.contains('pending'))
       .map(a => ({ slug: a.getAttribute('href').split('/').pop(), label: a.textContent.trim() }))
@@ -622,9 +638,6 @@ function buildLightbox() {
     thumbsBar.appendChild(wrap);
   });
 
-  overlayTitle = document.createElement('p');
-  overlayTitle.className = 'lightbox-title';
-
   overlayCount = document.createElement('p');
   overlayCount.className = 'lightbox-title-count';
 
@@ -632,7 +645,6 @@ function buildLightbox() {
   overlayCaption.className = 'lightbox-caption';
 
   overlay.appendChild(overlayClose);
-  overlay.appendChild(overlayTitle);
   overlay.appendChild(overlayCount);
   overlay.appendChild(overlayStage);
   overlay.appendChild(overlayCaption);
@@ -645,30 +657,181 @@ function buildLightbox() {
   // Por requisito: APENAS a tecla ESC e o botão ✕ fecham o lightbox.
   // Clicar/tocar na imagem, no backdrop ou no palco NÃO fecha.
 
-  // Gestos de deslize na imagem (toque e mouse, via Pointer Events):
-  //   • deslizar para a esquerda/direita → alterna entre as imagens
-  // O pointerdown inicia no palco; pointerup/cancel escutam na janela para que
-  // a soltura conte mesmo fora do palco (ex.: deslize horizontal longo).
+  // Gestos na imagem (toque e mouse, via Pointer Events):
+  //   • 1 ponteiro + zoom == 1 → deslize horizontal: a imagem acompanha o dedo
+  //     (com atrito) e, ao soltar além do limiar, alterna de imagem; senão volta
+  //     ao centro (snap-back suave). [T4]
+  //   • 2 ponteiros → pinça: aplica scale entre 1 e ~3. Enquanto houver pinça,
+  //     NÃO navega. [T5]
+  //   • 1 ponteiro + zoom > 1 → pan: arrasta a imagem ampliada (não navega). [T5]
+  //   • duplo toque/clique → alterna entre ampliar (~2,2) e voltar a 1. [T5]
+  // O pointerdown inicia no palco; pointermove/up/cancel escutam na janela para
+  // que o gesto conte mesmo fora do palco (ex.: deslize horizontal longo).
+  // O estado do transform (gestureScale/gestureTX/gestureTY) é compartilhado e
+  // zerado ao trocar de imagem (resetGestureTransform) e ao fechar.
   overlayStage.style.touchAction = 'none';
   (() => {
-    let sx = 0, sy = 0, active = false;
-    const TH = 45; // distância mínima (px) para diferenciar deslize de toque
+    const SWIPE_TH = 45;   // distância mínima (px) p/ diferenciar deslize de toque
+    const FRICTION = 0.55; // atrito do deslize-navega: imagem acompanha ~55% do dedo
+    const MIN_SCALE = 1, MAX_SCALE = 3;
+    const ZOOM_LEVEL = 2.2;   // ampliação aplicada no duplo toque
+    const DOUBLE_TAP_MS = 300, DOUBLE_TAP_DIST = 30;
+
+    // mapa dos ponteiros ativos (id → posição atual)
+    const pointers = new Map();
+    // gesto de deslize/pan com 1 ponteiro
+    let dragId = null, sx = 0, sy = 0, baseTX = 0, baseTY = 0, dragging = false, swiping = false;
+    // gesto de pinça com 2 ponteiros
+    let pinching = false, pinchStartDist = 0, pinchStartScale = 1;
+    // detecção de duplo toque
+    let lastTapTime = 0, lastTapX = 0, lastTapY = 0;
+
+    const onNav = el => el && el.closest && el.closest('.lightbox-nav, .lightbox-close');
+
+    const dist = () => {
+      const [a, b] = [...pointers.values()];
+      return Math.hypot(a.x - b.x, a.y - b.y);
+    };
+
+    // aplica o transform atual (escala + deslocamento) sem transição
+    const paint = (transition = false) => {
+      overlayImg.style.transition = transition && !reducedMotion
+        ? 'transform 0.28s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
+      overlayImg.style.transform =
+        `translate(${gestureTX}px, ${gestureTY}px) scale(${gestureScale})`;
+    };
+    // expõe o pintor p/ resetGestureTransform (definido fora da IIFE)
+    paintGesture = paint;
+
+    // mantém o pan dentro de limites razoáveis quando ampliado
+    const clampPan = () => {
+      const rect = overlayImg.getBoundingClientRect();
+      // rect já reflete a escala atual; metade do excedente em cada eixo
+      const maxX = Math.max(0, (rect.width - overlayImg.clientWidth) / 2);
+      const maxY = Math.max(0, (rect.height - overlayImg.clientHeight) / 2);
+      gestureTX = Math.max(-maxX, Math.min(maxX, gestureTX));
+      gestureTY = Math.max(-maxY, Math.min(maxY, gestureTY));
+    };
+
     overlayStage.addEventListener('pointerdown', e => {
-      if (e.button > 0) return; // ignora botões secundários do mouse
-      if (e.target.closest && e.target.closest('.lightbox-nav, .lightbox-close')) return;
-      active = true; sx = e.clientX; sy = e.clientY;
+      if (e.button > 0) return;               // ignora botões secundários do mouse
+      if (onNav(e.target)) return;            // setas/✕ tratam o próprio clique
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      try { overlayStage.setPointerCapture(e.pointerId); } catch {}
+
+      if (pointers.size === 2) {
+        // entrou em modo pinça → cancela qualquer deslize/pan em andamento
+        pinching = true; dragging = false; swiping = false; dragId = null;
+        pinchStartDist = dist() || 1;
+        pinchStartScale = gestureScale;
+        paint(false);
+        return;
+      }
+      if (pointers.size !== 1) return;
+
+      // duplo toque (mesmo ponto, em curto intervalo) → alterna o zoom
+      const now = Date.now();
+      if (now - lastTapTime < DOUBLE_TAP_MS &&
+          Math.hypot(e.clientX - lastTapX, e.clientY - lastTapY) < DOUBLE_TAP_DIST) {
+        lastTapTime = 0;
+        gestureScale = gestureScale > 1 ? 1 : ZOOM_LEVEL;
+        if (gestureScale === 1) { gestureTX = 0; gestureTY = 0; }
+        else clampPan();
+        paint(true);
+        dragId = null;
+        return;
+      }
+      lastTapTime = now; lastTapX = e.clientX; lastTapY = e.clientY;
+
+      // inicia deslize (zoom == 1) ou pan (zoom > 1) com 1 ponteiro
+      dragId = e.pointerId;
+      sx = e.clientX; sy = e.clientY;
+      baseTX = gestureTX; baseTY = gestureTY;
+      dragging = true; swiping = gestureScale === 1;
+      overlayImg.style.transition = 'none';
     });
-    window.addEventListener('pointerup', e => {
-      if (!active) return;
-      active = false;
+
+    window.addEventListener('pointermove', e => {
+      if (!lightboxOpen) return;
+      if (!pointers.has(e.pointerId)) return;
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+      if (pinching && pointers.size >= 2) {
+        const ratio = dist() / pinchStartDist;
+        gestureScale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, pinchStartScale * ratio));
+        if (gestureScale === 1) { gestureTX = 0; gestureTY = 0; }
+        else clampPan();
+        paint(false);
+        return;
+      }
+
+      if (!dragging || e.pointerId !== dragId) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+
+      if (gestureScale > 1) {
+        // pan da imagem ampliada (sem navegar)
+        gestureTX = baseTX + dx;
+        gestureTY = baseTY + dy;
+        clampPan();
+        paint(false);
+      } else if (swiping) {
+        // deslize-navega: a imagem acompanha o dedo com atrito (resistência)
+        gestureTX = dx * FRICTION;
+        gestureTY = 0;
+        paint(false);
+      }
+    });
+
+    const endPointer = e => {
+      pointers.delete(e.pointerId);
+      try { overlayStage.releasePointerCapture(e.pointerId); } catch {}
+
+      if (pinching) {
+        // ao sair da pinça (menos de 2 ponteiros): mantém o zoom resultante.
+        if (pointers.size < 2) {
+          pinching = false;
+          if (gestureScale <= 1.02) {
+            // praticamente sem zoom → normaliza p/ 1 e recentraliza
+            gestureScale = 1; gestureTX = 0; gestureTY = 0; paint(true);
+          }
+          // se ainda há 1 ponteiro, prepara-o para pan a partir da posição atual
+          if (pointers.size === 1) {
+            const [id, p] = [...pointers.entries()][0];
+            dragId = id; sx = p.x; sy = p.y; baseTX = gestureTX; baseTY = gestureTY;
+            dragging = true; swiping = false;
+          }
+        }
+        return;
+      }
+
+      if (!dragging || e.pointerId !== dragId) return;
+      dragging = false; dragId = null;
       if (!lightboxOpen) return;
       const dx = e.clientX - sx, dy = e.clientY - sy;
       const adx = Math.abs(dx), ady = Math.abs(dy);
-      if (Math.max(adx, ady) < TH) return; // foi um toque/clique, não um deslize
-      // Apenas deslize horizontal navega; deslize vertical NÃO fecha (só ESC/✕ fecham).
-      if (adx > ady) showImage(currentImgIdx + (dx < 0 ? 1 : -1)); // ← próxima / → anterior
+
+      if (gestureScale > 1) { swiping = false; return; } // estava em pan; nada a navegar
+
+      if (swiping && adx > ady && adx >= SWIPE_TH) {
+        // passou do limiar → navega (o transform é zerado em showImage)
+        showImage(currentImgIdx + (dx < 0 ? 1 : -1)); // ← próxima / → anterior
+      } else {
+        // toque parado ou deslize curto → volta suavemente ao centro
+        gestureTX = 0; gestureTY = 0; paint(true);
+      }
+      swiping = false;
+    };
+
+    window.addEventListener('pointerup', endPointer);
+    window.addEventListener('pointercancel', e => {
+      pointers.delete(e.pointerId);
+      try { overlayStage.releasePointerCapture(e.pointerId); } catch {}
+      if (pointers.size < 2) pinching = false;
+      if (e.pointerId === dragId) {
+        dragging = false; dragId = null;
+        if (gestureScale === 1) { gestureTX = 0; gestureTY = 0; paint(true); }
+      }
     });
-    window.addEventListener('pointercancel', () => { active = false; });
   })();
 
   overlayStage.addEventListener('mouseenter', () => {
@@ -704,12 +867,9 @@ function showImage(idx) {
   const img = mosaicImages[currentImgIdx];
   overlayImg.src = img.src;
   overlayImg.alt = img.alt;
+  resetGestureTransform(); // zera deslize/pan/zoom ao trocar de imagem
   overlayPrev.disabled = mosaicImages.length <= 1;
   overlayNext.disabled = mosaicImages.length <= 1;
-
-  const titleText = getGroupTitle(img);
-  overlayTitle.textContent = titleText || 'subgrupo não identificado';
-  overlayTitle.classList.toggle('lightbox-title--empty', !titleText);
 
   const { posInGroup, groupTotal } = imgGroupInfo[currentImgIdx] ?? { posInGroup: 1, groupTotal: 1 };
   overlayCount.textContent = `exibindo ${posInGroup} de ${groupTotal} de um total de ${mosaicImages.length} (${currentImgIdx + 1}/${mosaicImages.length})`;
@@ -747,6 +907,7 @@ function closeLightbox() {
   clearAutoTimer();
   isHoveringMain = false;
   autoRemaining = AUTO_DURATION;
+  resetGestureTransform(); // zera deslize/pan/zoom ao fechar
   if (!reducedMotion) overlay.classList.remove('lightbox-visible');
   overlay.setAttribute('hidden', '');
   overlay.style.opacity = '';

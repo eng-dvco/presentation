@@ -1,9 +1,0 @@
-insulator-1, insulator-2: Aferição da resistência de isolamento dos cabos de alimentação do cubículo 6,9 kV.
-
-insulator-3, insulator-4: Aferição da resistência de isolamento dos motores dos ventiladores do transformador de potência 6TR1 da Subestação SE-E1.
-
-insulator-5, insulator-6: Aferição da resistência de isolamento dos motores dos ventiladores do transformador de potência 6TR1 da Subestação SE-E3.
-
-resistance-1, resistance-2, resistance-3: Aferição da resistência de contato das seccionadoras, utilizando micro-ohmímetro.
-
-resistance-4, resistance-5: Realização da aferição do isolamento AC (Fator de Potência) com tensão de 10 kV/60 Hz n do transformador de corrente TC.

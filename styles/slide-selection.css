@@ -173,8 +173,7 @@
   }
 }
 
-.item,
-.opener-item {
+.item {
   border: 1px solid var(--lt-border);
   border-radius: var(--border-item);
   padding: var(--padding-general-normal);
@@ -240,7 +239,7 @@
         to right,
         transparent 0%,
         rgba(255, 255, 255, 0.35) 55%,
-        var(--color-white) 100%
+        var(--lt-surface-strong) 100%
       );
 
     opacity: 0;
@@ -367,24 +366,6 @@
   }
 }
 
-.section-worksheets {
-  grid-area: auto / span 4 / auto / auto;
-  background-image: url("../assets/img/banner/documents.jpg");
-  background-position: 0% 25%;
-}
-
-.section-documentation {
-  grid-area: auto / span 4 / auto / auto;
-  background-image: url("../assets/img/banner/documents.jpg");
-  background-position: 0% 50%;
-}
-
-.section-media {
-  grid-area: auto / span 4 / auto / auto;
-  background-image: url("../assets/img/banner/documents.jpg");
-  background-position: 0% 75%;
-}
-
 .section-obstacles {
   min-width: max-content;
   grid-area: 4 / 1 / 5 / -1;
@@ -396,17 +377,8 @@
   }
 }
 
-.section-playable {
-  grid-area: auto / span 2 / auto / auto;
-  background-image: url("../assets/img/banner/ld-view-2.jpg");
-}
-
 .section-expanded {
   grid-area: auto / span 4 / auto / auto !important;
-}
-
-.section-miscellaneous {
-  background-image: url("../assets/img/banner/panel-1.jpg");
 }
 
 .additional-group {
@@ -1039,8 +1011,7 @@
     }
   }
 
-  .item,
-  .opener-item {
+  .item {
     font-size: calc(var(--font-size-content)*var(--font-size-multiplier-xs));
   }
 }
@@ -1063,8 +1034,7 @@
     }
   }
 
-  .item,
-  .opener-item {
+  .item {
     font-size: calc(var(--font-size-content)*var(--font-size-multiplier-xxs));
   }
 }
@@ -1248,8 +1218,7 @@
     flex-direction: column;
   }
 
-  .item,
-  .opener-item {
+  .item {
     font-size: calc(var(--font-size-content)*var(--font-size-multiplier-xxs));
   }
 

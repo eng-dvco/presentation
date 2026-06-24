@@ -58,6 +58,7 @@
     }
   }
 
+  /* utilitário de mosaico reservado (sem instância atual) */
   &.transient {
     cursor: grab;
 
@@ -79,6 +80,7 @@
     grid-column: span 2;
   }
 
+  /* utilitários de mosaico reservados (sem instância atual) */
   &.img-tri-column {
     grid-column: span 3;
   }
@@ -96,6 +98,7 @@
     grid-column: 1 / -1;
   }
 
+  /* utilitários de mosaico reservados (sem instância atual) */
   &.img-mid-top > img {
     object-fit: cover;
     object-position: center 0%;
@@ -121,6 +124,7 @@
     object-position: center 50%;
   }
 
+  /* utilitário de mosaico reservado (sem instância atual) */
   &.img-fill > img {
     object-fit: fill;
     object-position: center 50%;

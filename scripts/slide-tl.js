@@ -53,7 +53,7 @@ document.querySelectorAll('.tl-entries-scroll').forEach(scroll => {
 // containers de chips de status (filtros por eixo): arrastáveis como as faixas
 document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(chips));
 
-// ── Filtros do cronograma: código, status, eixo, trecho, data inicial e
+// ── Filtros do cronograma: código, status, eixo, data inicial e
 // data de conclusão. Uma estrutura aparece se satisfizer TODOS os filtros.
 (function tlFilters() {
   const root = document.querySelector('.tl-filters');
@@ -70,7 +70,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   const fimDe = root.querySelector('#tlf-fim-de'), fimAte = root.querySelector('#tlf-fim-ate');
   const clearBtn = root.querySelector('#tlf-clear');
 
-  const dmy = s => { const m = s && s.match(/(\d{2})\/(\d{2})\/(\d{2})/); return m ? (2000 + +m[3]) * 10000 + (+m[2]) * 100 + (+m[1]) : null; };
+  const dmy = s => { const m = s && s.match(/(\d{2})[\/-](\d{2})[\/-](\d{2})/); return m ? (2000 + +m[3]) * 10000 + (+m[2]) * 100 + (+m[1]) : null; };
   const iso = s => { const m = s && s.match(/(\d{4})-(\d{2})-(\d{2})/); return m ? (+m[1]) * 10000 + (+m[2]) * 100 + (+m[3]) : null; };
 
   const entries = Array.from(document.querySelectorAll('.tl-entry')).map(el => {
@@ -79,72 +79,11 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       el,
       code: foldAccents(el.querySelector('.tl-code').textContent.trim()),
       status: el.classList.contains('tl-entry--done') ? 'done' : el.classList.contains('tl-entry--running') ? 'running' : 'pending',
-      ini: dmy((txt.match(/ini\s*(\d{2}\/\d{2}\/\d{2})/) || [])[1]),
-      fim: dmy((txt.match(/fim\s*(\d{2}\/\d{2}\/\d{2})/) || [])[1]),
-      trecho: el.closest('.tl-trecho').querySelector('.tl-trecho-name').textContent.trim(),
+      ini: dmy((txt.match(/ini\s*(\d{2}[\/-]\d{2}[\/-]\d{2})/) || [])[1]),
+      fim: dmy((txt.match(/fim\s*(\d{2}[\/-]\d{2}[\/-]\d{2})/) || [])[1]),
       eixo: el.closest('.tl-axis-section') && el.closest('.tl-axis-section').classList.contains('tl-axis-section--norte') ? 'Eixo Norte' : 'Eixo Leste',
     };
   });
-
-  function enhanceSelect(select, labelId) {
-    const field = select.closest('.tlf-field');
-    const dd = document.createElement('div'); dd.className = 'tlf-dd';
-    const trigger = document.createElement('button');
-    trigger.type = 'button'; trigger.className = 'tlf-dd-trigger';
-    trigger.setAttribute('aria-haspopup', 'listbox');
-    trigger.setAttribute('aria-expanded', 'false');
-    if (labelId) trigger.setAttribute('aria-labelledby', labelId);
-    const valSpan = document.createElement('span'); valSpan.className = 'tlf-dd-value';
-    const arrow = document.createElement('span'); arrow.className = 'tlf-dd-arrow'; arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '▾';
-    trigger.append(valSpan, arrow);
-    const menu = document.createElement('ul'); menu.className = 'tlf-dd-menu'; menu.setAttribute('role', 'listbox'); menu.hidden = true;
-    dd.append(trigger, menu);
-
-    function sync() {
-      const opt = [...select.options].find(o => o.value === select.value) || select.options[0];
-      valSpan.textContent = opt ? opt.textContent : '';
-      for (const li of menu.children) {
-        const on = li.dataset.value === select.value;
-        li.classList.toggle('is-selected', on);
-        li.setAttribute('aria-selected', on ? 'true' : 'false');
-      }
-    }
-    function rebuild() {
-      menu.innerHTML = '';
-      for (const opt of select.options) {
-        const li = document.createElement('li');
-        li.className = 'tlf-dd-opt'; li.setAttribute('role', 'option'); li.tabIndex = -1;
-        li.dataset.value = opt.value; li.textContent = opt.textContent;
-        li.addEventListener('click', () => choose(opt.value));
-        menu.appendChild(li);
-      }
-      sync();
-    }
-    function open() {
-      document.querySelectorAll('.tlf-dd-menu, .tlf-cal-menu').forEach(m => { if (m !== menu) { m.hidden = true; const tg = m.previousElementSibling; if (tg) tg.setAttribute('aria-expanded', 'false'); } });
-      menu.hidden = false; trigger.setAttribute('aria-expanded', 'true');
-      const cur = menu.querySelector('.is-selected') || menu.firstElementChild; if (cur) cur.focus();
-    }
-    function close(focusTrigger) { menu.hidden = true; trigger.setAttribute('aria-expanded', 'false'); if (focusTrigger) trigger.focus(); }
-    function choose(v) { select.value = v; select.dispatchEvent(new Event('change', { bubbles: true })); close(true); }
-
-    trigger.addEventListener('click', () => { menu.hidden ? open() : close(false); });
-    trigger.addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
-    menu.addEventListener('keydown', e => {
-      const opts = [...menu.children]; const i = opts.indexOf(document.activeElement);
-      if (e.key === 'ArrowDown') { e.preventDefault(); (opts[i + 1] || opts[0]).focus(); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); (opts[i - 1] || opts[opts.length - 1]).focus(); }
-      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (opts[i]) choose(opts[i].dataset.value); }
-      else if (e.key === 'Escape') { e.preventDefault(); close(true); }
-      else if (e.key === 'Tab') { close(false); }
-    });
-    document.addEventListener('click', e => { if (!dd.contains(e.target)) close(false); });
-    select.addEventListener('change', sync);
-
-    select.classList.add('tlf-native-hidden');
-    field.appendChild(dd);
-    rebuild();
-  }
 
   // ── calendário customizado p/ os seletores de data: mesmo menu flutuante
   // escuro semitransparente, dia selecionado em verde (texto preto), demais
@@ -472,20 +411,20 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 
 // ── segmentos SVG da spine: sólido (done/running) ou tracejado (pending), sem sobreposição ──
 (function tlSpineSegments() {
-  var DOT_R  = 6;
-  var SPINE_Y = 16 + DOT_R; // PAD_TOP(1rem=16px) + DOT_R = 22px
-  var ns = 'http://www.w3.org/2000/svg';
+  const DOT_R  = 6;
+  const SPINE_Y = 16 + DOT_R; // PAD_TOP(1rem=16px) + DOT_R = 22px
+  const ns = 'http://www.w3.org/2000/svg';
 
   function dotX(e)   { return e.offsetLeft + DOT_R; }
   function panelX(e) {
-    var p = e.querySelector('.tl-entry-panel');
+    const p = e.querySelector('.tl-entry-panel');
     return e.offsetLeft + (p ? p.offsetLeft : DOT_R * 2 + 14);
   }
   function isPend(e) { return e.classList.contains('tl-entry--pending'); }
 
   function seg(x1, x2, solid) {
     if (x2 <= x1) return null;
-    var el = document.createElementNS(ns, 'line');
+    const el = document.createElementNS(ns, 'line');
     el.setAttribute('x1', x1); el.setAttribute('y1', SPINE_Y);
     el.setAttribute('x2', x2); el.setAttribute('y2', SPINE_Y);
     if (solid) {
@@ -503,10 +442,10 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   function push(svg, el) { if (el) svg.appendChild(el); }
 
   function drawSpine(entriesEl) {
-    var old = entriesEl._tlSpineSvg;
+    const old = entriesEl._tlSpineSvg;
     if (old) { old.remove(); entriesEl._tlSpineSvg = null; }
 
-    var visible = [].slice.call(entriesEl.children).filter(function(el) {
+    const visible = [].slice.call(entriesEl.children).filter(function(el) {
       return el.classList.contains('tl-entry') && el.style.display !== 'none';
     });
 
@@ -516,24 +455,24 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 
     if (!visible.length) return;
 
-    var svg = document.createElementNS(ns, 'svg');
+    const svg = document.createElementNS(ns, 'svg');
     svg.setAttribute('aria-hidden', 'true');
     // z-index implícito pela posição no DOM: inserido antes dos flex-children → fica atrás deles
     svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;';
 
-    var f = visible[0];
-    var fPend = isPend(f);
+    const f = visible[0];
+    const fPend = isPend(f);
 
     // === Segmento da área da curva até a primeira entrada ===
     // Cobre 0→dot (pending) ou 0→panel (não-pending); partindo de x=0 (borda esq. do .tl-entries)
     push(svg, seg(0, fPend ? dotX(f) : panelX(f), !fPend));
 
     // === Segmentos entre pares de entradas consecutivas visíveis ===
-    for (var i = 0; i < visible.length - 1; i++) {
-      var a = visible[i], b = visible[i + 1];
-      var aP = isPend(a), bP = isPend(b);
-      var ax = dotX(a), ap = panelX(a);
-      var bx = dotX(b), bp = panelX(b);
+    for (let i = 0; i < visible.length - 1; i++) {
+      const a = visible[i], b = visible[i + 1];
+      const aP = isPend(a), bP = isPend(b);
+      const ax = dotX(a), ap = panelX(a);
+      const bx = dotX(b), bp = panelX(b);
 
       if (!aP && !bP) {
         // Ambos sólidos: único segmento sólido de a.dot a b.panel
@@ -547,7 +486,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
         push(svg, seg(ap, bx, false));
       } else {
         // Pendente→sólido: tracejado até o meio do gap, sólido até b.panel
-        var mid = Math.round((ax + bx) / 2);
+        const mid = Math.round((ax + bx) / 2);
         push(svg, seg(ax, mid, false));
         push(svg, seg(mid, bp, true));
       }
@@ -563,7 +502,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   }
 
   // Encapsula _tlUpdateSpineRange: mantém cálculo de minWidth e adiciona os segmentos SVG
-  var _orig = window._tlUpdateSpineRange;
+  const _orig = window._tlUpdateSpineRange;
   window._tlUpdateSpineRange = function() {
     if (_orig) _orig();
     refreshAll();
@@ -664,7 +603,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       ? `<th class="tlt-th-base">A</th><th class="tlt-th-base">B</th><th class="tlt-th-base">C</th><th class="tlt-th-base">D</th>`
       : '';
     thead.innerHTML = `<tr>
-      <th>Trecho</th><th>Código</th><th>Status</th>
+      <th class="tlt-th-status">Status</th><th>Trecho</th><th>Código</th>
       <th>Início</th><th>Conclusão</th>${baseHead}
     </tr>`;
     table.appendChild(thead);
@@ -680,8 +619,8 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
                    : entry.classList.contains('tl-entry--running') ? 'running' : 'pending';
 
       const txt = entry.querySelector('.tl-dates')?.textContent || '';
-      const iniVal = (txt.match(/ini\s*([\d\/]+)/) || [])[1] || null;
-      const fimVal = (txt.match(/fim\s*([\d\/]+)/) || [])[1] || null;
+      const iniVal = (txt.match(/ini\s*([\d\/-]+)/) || [])[1] || null;
+      const fimVal = (txt.match(/fim\s*([\d\/-]+)/) || [])[1] || null;
 
       const basesMap = {};
       entry.querySelectorAll('.tl-base').forEach(base => {
@@ -703,6 +642,12 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 
       const tr = document.createElement('tr');
 
+      // Status (somente o ícone circular, na primeira coluna)
+      const tdS = document.createElement('td');
+      tdS.className = 'tlt-status-cell';
+      tdS.innerHTML = `<span class="tlt-status tlt-status--${status}" title="${STATUS_LABEL[status]}" aria-label="${STATUS_LABEL[status]}"><span class="tlt-status-dot"></span></span>`;
+      tr.appendChild(tdS);
+
       // Trecho
       const tdT = document.createElement('td');
       tdT.className = 'tlt-trecho'; tdT.textContent = trechoName; tr.appendChild(tdT);
@@ -710,11 +655,6 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       // Código
       const tdC = document.createElement('td');
       tdC.className = 'tlt-code'; tdC.textContent = code; tr.appendChild(tdC);
-
-      // Status
-      const tdS = document.createElement('td');
-      tdS.innerHTML = `<span class="tlt-status tlt-status--${status}"><span class="tlt-status-dot"></span><span class="tlt-status-text">${STATUS_LABEL[status]}</span></span>`;
-      tr.appendChild(tdS);
 
       // Início
       const tdI = document.createElement('td');
@@ -822,9 +762,31 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
     }
     controls.appendChild(viewGroup);
 
-    // Move chips de status do eixo para a barra de controles
+    // Move chips de status do eixo para a barra de controles. Em telas estreitas,
+    // eles colapsam num menu acionado por um botão de funil à extrema esquerda
+    // (CSS @media); em telas largas o wrapper é um flex item com margin-right:auto,
+    // mantendo os chips inline e empurrando os demais controles à direita.
+    // Reutiliza os mesmos chips e seus handlers. (Fechar ao clicar fora / Esc é
+    // tratado por um listener global único, após o forEach.)
     const axisChips = axis.querySelector('.tlf-chips--axis');
-    if (axisChips) controls.prepend(axisChips);
+    if (axisChips) {
+      const funnelWrap = document.createElement('div');
+      funnelWrap.className = 'tlf-filter';
+      const funnelBtn = document.createElement('button');
+      funnelBtn.type = 'button';
+      funnelBtn.className = 'tlf-funnel';
+      funnelBtn.title = 'Filtrar por status';
+      funnelBtn.setAttribute('aria-label', 'Filtrar por status');
+      funnelBtn.setAttribute('aria-expanded', 'false');
+      funnelBtn.innerHTML = '<svg class="tlf-funnel-icon" viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 2.5 L11 2.5 L7 7 L7 10.5 L5 10.5 L5 7 Z"/></svg>';
+      controls.prepend(funnelWrap);
+      funnelWrap.append(funnelBtn, axisChips);
+      funnelBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const open = funnelWrap.classList.toggle('is-open');
+        funnelBtn.setAttribute('aria-expanded', String(open));
+      });
+    }
 
     function setView(mode) {
       const isTable = mode === 'tabela';
@@ -842,6 +804,18 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
     cronBtn.addEventListener('click', () => setView('cronograma'));
     tabBtn.addEventListener('click', () => setView('tabela'));
   });
+
+  // Fecha qualquer menu de funil de status aberto ao clicar fora ou pressionar Esc.
+  // Listener único (fora do forEach) — evita handlers globais duplicados por eixo.
+  function closeAllStatusFunnels() {
+    document.querySelectorAll('.tlf-filter.is-open').forEach(w => {
+      w.classList.remove('is-open');
+      const b = w.querySelector('.tlf-funnel');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+  document.addEventListener('click', e => { if (!e.target.closest('.tlf-filter')) closeAllStatusFunnels(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllStatusFunnels(); });
 })();
 
 // ── zebra dinâmica: alterna a cor sempre seguindo a ordem VISÍVEL ─────────────
@@ -875,8 +849,6 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
     });
   }
 
-  window._tlUpdateStriping = update;
-
   // Encapsula _tlUpdateTableView: ele já é chamado após cada filtro (apply),
   // ordenação (sortSection) e troca de visão (setView) — restripamos junto.
   const _orig = window._tlUpdateTableView;
@@ -897,7 +869,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 
   function parseDate(str) {
     if (!str) return null;
-    const m = str.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/);
+    const m = str.trim().match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{2,4})$/);
     if (!m) return null;
     let y = parseInt(m[3], 10);
     if (y < 100) y += 2000;
@@ -912,7 +884,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   function getIniDate(entry) {
     const el = entry.querySelector('.tl-dates--hdr');
     const txt = el ? el.textContent : '';
-    const m = txt.match(/ini\s*([\d\/]+)/);
+    const m = txt.match(/ini\s*([\d\/-]+)/);
     return m ? parseDate(m[1]) : null;
   }
 
@@ -944,7 +916,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 
   // Cada botão alterna entre 2 modos ao clicar: inativo → ativa (modo lembrado);
   // ativo → inverte para o outro modo do mesmo botão.
-  var BTN_DEFS = [
+  const BTN_DEFS = [
     {
       id: 'code',
       modes:  ['code-asc',  'code-desc'],
@@ -960,41 +932,41 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   ];
 
   document.querySelectorAll('.tl-axis-section').forEach(function(section) {
-    var controls = section.querySelector('.tl-axis-controls');
+    const controls = section.querySelector('.tl-axis-controls');
     if (!controls) return;
 
-    var current = 'code-asc';
-    var btnMem = { code: 'code-asc', date: 'date-desc' };
-    var btnEls = {};
+    let current = 'code-asc';
+    const btnMem = { code: 'code-asc', date: 'date-desc' };
+    const btnEls = {};
 
     function updateUI() {
       BTN_DEFS.forEach(function(def) {
-        var btn = btnEls[def.id];
-        var active = def.modes.indexOf(current) !== -1;
+        const btn = btnEls[def.id];
+        const active = def.modes.indexOf(current) !== -1;
         btn.classList.toggle('is-active', active);
         btn.setAttribute('aria-pressed', String(active));
-        var modeShown = active ? current : btnMem[def.id];
-        var idx = def.modes.indexOf(modeShown);
+        const modeShown = active ? current : btnMem[def.id];
+        let idx = def.modes.indexOf(modeShown);
         if (idx < 0) idx = 0;
         btn.textContent = def.labels[idx];
         btn.title = def.titles[idx];
       });
     }
 
-    var group = document.createElement('div');
+    const group = document.createElement('div');
     group.className = 'tl-sort-toggle';
     group.setAttribute('role', 'group');
     group.setAttribute('aria-label', 'Ordenação');
 
     BTN_DEFS.forEach(function(def) {
-      var btn = document.createElement('button');
+      const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'tl-sort-btn';
       btn.setAttribute('aria-pressed', 'false');
 
       btn.addEventListener('click', function() {
         if (def.modes.indexOf(current) !== -1) {
-          var nextIdx = (def.modes.indexOf(current) + 1) % def.modes.length;
+          const nextIdx = (def.modes.indexOf(current) + 1) % def.modes.length;
           current = def.modes[nextIdx];
         } else {
           current = btnMem[def.id];
@@ -1008,7 +980,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       group.appendChild(btn);
     });
 
-    var viewToggle = controls.querySelector('.tl-view-toggle');
+    const viewToggle = controls.querySelector('.tl-view-toggle');
     controls.insertBefore(group, viewToggle || null);
 
     updateUI();

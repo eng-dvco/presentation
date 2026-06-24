@@ -43,8 +43,7 @@
   --color-green-alpha-50: rgba(0, 255, 150, 0.5);
   --color-green-alpha-25: rgba(0, 255, 150, 0.25);
   --color-green-alpha-10: rgba(0, 255, 150, 0.1);
-  --color-dark-yellow-alpha-10: rgba(255, 230, 80, 0.1);
-  --color-dark-green: rgba(5, 80, 50);
+  --color-dark-green: rgba(5, 80, 50, 1);
   --color-dark-green-alpha-75: rgba(5, 80, 50, 0.75);
   --color-dark-green-alpha-50: rgba(5, 80, 50, 0.5);
   --color-dark-green-alpha-25: rgba(5, 80, 50, 0.25);

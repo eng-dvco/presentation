@@ -1,11 +1,10 @@
+/* a página comparte o hero CLARO pintado em slide-style.css (body::before
+   imagem + body::after wash claro, ambos z-index:-1). O antigo tratamento
+   ESCURO próprio desta landing (imagem + multiply sobre preto) lavava com o
+   wash claro e brigava com o tema das demais páginas; removido para herdar o
+   mesmo hero claro + texto escuro legível das outras telas. */
 body {
-  background-image: url(../assets/img/hero/hero-clean_no-blur.jpg);
-  background-attachment: fixed;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: var(--color-black-alpha-50);
-  background-blend-mode: multiply;
+  color: var(--color-black);
 }
 
 h1 {
@@ -13,6 +12,8 @@ h1 {
     "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   min-width: max-content;
+  /* título ESCURO sobre o hero claro (garante o contraste mesmo se a herança mudar) */
+  color: var(--color-black);
 }
 
 .main-container {
@@ -48,15 +49,20 @@ h1 {
     font-family: "Quicksand", sans-serif;
     font-style: italic;
     text-align: justify;
-    color: var(--color-grey);
+    /* texto ESCURO legível sobre o hero claro (antes --color-grey claro, que
+       lavava no fundo claro) */
+    color: var(--lt-text);
   }
 }
 
+/* botão escuro sólido sobre o hero claro: alto contraste (botão escuro em fundo
+   claro é um padrão válido). Antes era preto translúcido (--background-black-alpha-50),
+   que sobre o wash claro perdia contraste; usa-se preto sólido (--color-black). */
 .redirect {
   height: min-content;
   padding: var(--padding-button);
   border-radius: var(--border-big);
-  background-color: var(--background-black-alpha-50);
+  background-color: var(--color-black);
 
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
   font-weight: var(--font-weight-bolder);
@@ -88,7 +94,9 @@ h1 {
     & > a.redirect {
       width: max-content;
       margin-top: 48px;
-      background-color: var(--background-white-alpha-25);
+      /* mantém o botão escuro (antes branco translúcido + texto branco = invisível
+         sobre o hero claro) */
+      background-color: var(--color-black);
       order: 1;
     }
   }
@@ -114,7 +122,8 @@ h1 {
 @media (max-width: 576px) {
   .redirect {
     &:hover {
-      background-color: var(--background-white-alpha-50);
+      /* hover permanece escuro (antes branco translúcido + texto branco = invisível) */
+      background-color: var(--background-black-alpha-75);
     }
   }
 

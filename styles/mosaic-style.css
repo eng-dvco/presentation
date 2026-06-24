@@ -130,23 +130,67 @@
     object-position: center 50%;
   }
 
-  /* a11y: position indicator (top-left of each mosaic image) */
+  /* a11y: position indicator (top-left corner of each mosaic image).
+     Label diagonal recortada no canto: o RETÂNGULO inclinado fica no ::before
+     (content:'') e o NÚMERO (upright) num ::after separado. Ambos os
+     pseudo-elementos da mesma .img enxergam o contador já incrementado pelo
+     ::before, então o número exibido é o valor correto. Apenas o trecho
+     sobreposto à imagem fica visível (recorte por overflow:hidden +
+     border-radius da .img). Cores mantidas: fundo verde-escuro, borda/texto
+     verde. */
+  /* ::before = RETÂNGULO diagonal (sem número). Incrementa o contador para o
+     ::after exibir o valor. Ancorado no canto superior-esquerdo, girado -45°
+     com origem no canto: a faixa cruza diagonalmente cobrindo a quina. Só o
+     trecho sobreposto à imagem fica visível (recorte por overflow:hidden +
+     border-radius da .img). A borda tracejada verde aparece SOMENTE na aresta
+     interna (border-bottom, voltada para baixo-direita / dentro da imagem). */
   &::before {
     counter-increment: img-position;
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* origem no canto da imagem; translate empurra a faixa para cobrir a quina
+       superior-esquerda sem deixar vão entre a label e o canto */
+    transform-origin: top left;
+    transform: translate(-36px, 36px) rotate(-45deg);
+
+    box-sizing: border-box;
+    width: 160px;
+    height: 36px;
+
+    background-color: var(--color-dark-green-alpha-50);
+    /* borda tracejada só na aresta interna (voltada para dentro da imagem) */
+    border-bottom: 1.5px dashed var(--color-green);
+
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ::after = NÚMERO na vertical (upright, NÃO rotacionado), centralizado na
+     parte VISÍVEL da faixa diagonal (próxima ao canto superior-esquerdo).
+     Lê o mesmo contador já incrementado pelo ::before. */
+  &::after {
     content: counter(img-position);
 
     position: absolute;
-    top: 8px;
-    left: 8px;
-    width:24px;
-    height:24px;
+    top: 0;
+    left: 0;
+
+    box-sizing: border-box;
+    /* a faixa visível é um triângulo retângulo com a quina em (0,0) e a
+       hipotenusa (aresta tracejada) cruzando ~(51,0)→(0,51). A caixa 34×34
+       ancorada no canto já centraria o número perto do centroide (~17,17),
+       mas isso o joga contra a aresta tracejada; o translate ligeiramente
+       NEGATIVO puxa o número em direção à quina superior-esquerda,
+       afastando-o da borda tracejada e equilibrando-o no trecho visível */
+    width: 34px;
+    height: 34px;
+    transform: translate(-3px, -2px);
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background-color: var(--color-dark-green-alpha-50);
-    border: 1.5px dashed var(--color-green);
-    border-radius: var(--border-general);
 
     color: var(--color-green);
     font-weight: var(--font-weight-boldest);
@@ -154,7 +198,7 @@
     line-height: var(--font-line-ui);
 
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
   }
 }
 

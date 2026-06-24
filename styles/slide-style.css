@@ -108,8 +108,22 @@ hr {
 
   background-color: var(--lt-surface);
   backdrop-filter: blur(4px);
-  border-bottom: 1px solid var(--lt-border);
   box-shadow: var(--lt-shadow);
+
+  /* T4: faixa ZEBRADA de 2px (mesma das bordas das imagens do mosaico) entre o
+     título principal e o breadcrumb, no lugar da antiga linha cinza
+     (border-bottom: 1px solid var(--lt-border)). Ancorada na base do header,
+     largura total. */
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: repeating-linear-gradient(45deg, #f5f5f5 0 6px, #ececec 6px 12px);
+    pointer-events: none;
+  }
 }
 
 .title-header-h1 {
@@ -191,6 +205,14 @@ hr {
   }
 }
 
+/* T6: nos cabeçalhos dos SLIDES, o ícone à esquerda do título usa a MESMA cor do
+   texto do título (que herda var(--color-black)), em vez do --lt-icon (mais
+   claro) padrão. Escopo restrito a .title-header-h1 para NÃO afetar os ícones da
+   página de seleção (que já têm sua própria regra escopada em slide-selection.css). */
+.title-header-h1 .section-icon {
+  background-color: var(--color-black);
+}
+
 .title-header-h2 {
   width: 100%;
   min-height: 64px;
@@ -245,7 +267,10 @@ a.flex-logo-container {
   position: sticky;
   top: 0;
   height: fit-content;
-  justify-content: center;
+  /* T5: centraliza verticalmente o caminho (ol/.crumb) e o ícone copiar-link */
+  align-items: center;
+  /* T2: caminho alinhado à ESQUERDA (antes centralizado) */
+  justify-content: flex-start;
   padding: 4px 24px;
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   background-color: var(--lt-surface);
@@ -255,8 +280,16 @@ a.flex-logo-container {
 
   & ol {
     display: flex;
-    width: 100%;
+    /* T2: o caminho encolhe ao conteúdo (sem width:100%) para que o conjunto
+       crumbs+botão permaneça centralizado e o botão fique logo após o último crumb */
     margin: 0;
+    /* T1: gap simétrico entre cada elemento do caminho (crumb e separador). Como
+       o separador "›" é um ::after DENTRO do .crumb, o gap só separa os <li>; por
+       isso o separador também recebe margens horizontais simétricas (ver .crumb
+       ::after abaixo), resultando em espaçamento IGUAL dos dois lados do "›". */
+    gap: 8px;
+    /* T5: centraliza verticalmente os itens do caminho */
+    align-items: center;
     list-style: none;
   }
 }
@@ -299,7 +332,11 @@ a.flex-logo-container {
     content: "›";
     display: inline-block;
     color: var(--lt-accent);
-    margin-right: 8px;
+    /* T1: margens horizontais SIMÉTRICAS para que a distância
+       [texto] — [›] — [texto] seja igual dos dois lados. O ol já aplica gap:8px
+       entre os <li>; o separador adiciona 8px de cada lado, ficando o "›"
+       equidistante do crumb anterior e do próximo. */
+    margin-inline: 8px;
     opacity: 0.75;
   }
 }
@@ -1229,35 +1266,54 @@ footer {
   100% { transform: scale(1.2); opacity: 0;   filter: blur(5px); }
 }
 
+/* T2: botão copiar-link — APENAS ícone (SVG inline injetado pelo slide-nav.js,
+   trocado por um check ao copiar — classe .is-copied). Posicionado IMEDIATAMENTE
+   APÓS o último crumb (sem margin-left:auto; o conjunto crumbs+botão é centralizado
+   pelo .breadcrumb). O VISUAL espelha os botões de tabela/cronograma
+   (.tl-view-toggle/.tl-view-btn em slide-tl.css): borda 1px solid rgba(0,0,0,0.18),
+   raio 3px, fundo claro #e2e2e2, padding pequeno (~0.22rem 0.5rem); hover #d8d8d8
+   com glifo mais escuro. font-size dimensiona o 1em do SVG (stroke=currentColor). */
 .copy-url-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  margin-left: auto;
-  background: var(--color-black-alpha-10);
-  border: 1px solid var(--lt-border-strong);
-  border-radius: 99px;
-  color: var(--lt-text-muted);
-  font-family: var(--font-family-general);
+  justify-content: center;
+  flex: 0 0 auto;
+  /* T1/T2: respiro entre o último crumb e o botão (coerente com o gap do caminho) */
+  margin-left: 8px;
+  /* T2: container REDUZIDO e PROPORCIONAL ao texto pequeno dos crumbs — padding
+     compacto, na escala da altura do texto do caminho (sem o tamanho dos botões
+     de tabela ~24px). Mantém o visual de botão de tabela (borda/raio/fundo). */
+  padding: 1px 4px;
+  /* visual dos botões de tabela (.tl-view-toggle = container; .tl-view-btn = botão) */
+  background: #e2e2e2;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 3px;
+  color: rgba(0, 0, 0, 0.38);
+  /* T2: ícone SVG (width/height:1em) dimensionado pela MESMA escala dos crumbs
+     (calc(--font-size-content * --font-size-multiplier-xxs)) — proporcional ao
+     texto pequeno do breadcrumb, em vez dos 14px anteriores. */
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
-  padding: 3px 12px;
+  line-height: 0;
   cursor: pointer;
-  white-space: nowrap;
-  backdrop-filter: blur(4px);
-  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 
-  /* ícone de cópia (máscara SVG colorida pela cor do texto) */
-  &::before {
-    content: '';
-    flex: 0 0 auto;
-    width: 12px;
-    height: 12px;
-    background-color: currentColor;
-    -webkit-mask: url(../assets/icons/copy.svg) center / contain no-repeat;
-    mask: url(../assets/icons/copy.svg) center / contain no-repeat;
+  & > svg {
+    display: block;
+    width: 1em;
+    height: 1em;
   }
 
-  &:hover { background: var(--lt-hover); border-color: var(--lt-border-strong); color: var(--color-black); }
+  &:hover,
+  &:focus-visible {
+    background: #d8d8d8;
+    color: rgba(0, 0, 0, 0.75);
+  }
+
+  /* feedback de cópia: o ícone vira check (slide-nav.js); destaca em verde escuro */
+  &.is-copied {
+    background: #fff;
+    color: var(--lt-accent);
+  }
 }
 
 /* ---- sidebar de navegação por seção -------------------------------------- */
@@ -1407,6 +1463,13 @@ body:has(.has-sidebar) #back-to-top {
   backdrop-filter: none;
   /* herda max-height/overflow:hidden de .slide-sidebar: a lista de itens rola
      internamente quando a seção tem muitos slides */
+
+  /* T5: ALTURA FIXA comum aos DOIS marcadores laterais — (a) o marcador deslizante
+     dos itens da seção (.secnav-marker::before) e (b) o indicador da seção ativa na
+     lista superior (.secnav-all-link.active::before). Dimensionada pelos itens de
+     1 linha (≈28px de altura: padding 8+8 + texto ~12px), a barra fica menor que o
+     item e CENTRALIZADA verticalmente nele, com tamanho IDÊNTICO nos dois lugares. */
+  --secnav-marker-h: 16px;
 }
 
 /* sidebar colapsível com todas as seções — mesma formatação dos demais botões */
@@ -1477,9 +1540,22 @@ body:has(.has-sidebar) #back-to-top {
 
 /* atalho "Seleção de conteúdo": o respiro até a lista de seções é dado pelo
    .secnav-all-divider (margin 8px) logo abaixo; a antiga regra unificada zerava
-   esta margem com !important — consolidada aqui como 0 (resultado idêntico). */
+   esta margem com !important — consolidada aqui como 0 (resultado idêntico).
+
+   T4: a seta "‹" (à esquerda, ::after) NÃO deve sobrepor o texto ao pairar; em
+   vez disso EMPURRA o texto para a direita. Como a seta surge em ~left:8px, no
+   hover aumentamos o padding-left do item para abrir espaço à seta (com transição
+   suave). padding-left base = 12px (igual aos demais .secnav-all-link). */
 .secnav-all-home {
   margin-bottom: 0;
+  transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.15s, background-color 0.15s, color 0.15s, transform 0.1s;
+}
+
+.secnav-all-home:hover,
+.secnav-all-home:focus-visible {
+  /* abre espaço à seta "‹" (que ocupa ~left:8px + largura do glifo) sem sobrepor o texto */
+  padding-left: 28px;
 }
 
 /* seção atual em destaque (mesma ênfase do hover/itens) */
@@ -1500,17 +1576,39 @@ body:has(.has-sidebar) #back-to-top {
 .secnav-all-links .secnav-all-link.active::before {
   content: "";
   position: absolute;
-  left: 2px;
-  top: var(--border-general);
-  bottom: var(--border-general);
+  /* T5/T7: espelha EXATAMENTE o .secnav-marker — afastado 4px da borda esquerda,
+     ALTURA FIXA --secnav-marker-h (mesma do marcador dos itens) e CENTRALIZADO
+     verticalmente (top:50% + translateY(-50%)), em vez de escalar com a altura do
+     item (que deixava esta barra maior que a dos itens). */
+  left: 4px;
+  top: 50%;
+  bottom: auto;
   right: auto;
   width: 4px;
-  height: auto;
+  height: var(--secnav-marker-h);
   border-radius: 2px;
   background: var(--lt-accent);
   opacity: 1;
-  transform: none;
+  transform: translateY(-50%);
   pointer-events: none;
+}
+
+/* T3: Container 2 — CONTEÚDO da seção ativa como uma CAIXA/cartão DISTINTO e
+   independente do Container 1 (navegação entre seções). Superfície/borda/raio/
+   sombra coerentes com o tema (mesmo "cartão" branco do .secnav-btn); o gap entre
+   os dois containers vem do .slide-secnav (gap:12px). Esta caixa recorta e deixa
+   a lista de itens (.secnav-items-list) rolar internamente. */
+.secnav-section-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 12px;
+  border-radius: var(--border-general);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background-color: var(--lt-surface-strong); /* #fff — mesmo cartão do botão */
+  box-shadow: var(--lt-shadow);
 }
 
 /* navegação entre os itens da seção atual — mesma formatação dos botões */
@@ -1520,17 +1618,6 @@ body:has(.has-sidebar) #back-to-top {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
-
-/* espaçador entre a lista de seções (acima) e o subtítulo "slides desta seção":
-   afasta o subtítulo/itens dos links de seção para a navegação não ficar
-   apinhada. Escala proporcional ao respiro dos botões (~1.3× o padding-top da
-   lista de seções) + divisor tracejado sutil; em px, mantém-se clara também
-   nas telas menores, onde a sidebar flui no documento. */
-.secnav-all-links + .secnav-items {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px dashed var(--lt-border);
 }
 
 .secnav-items-title {
@@ -1631,7 +1718,10 @@ body:has(.has-sidebar) #back-to-top {
   font-size: calc(var(--font-size-icon) * var(--font-size-multiplier-md));
   color: var(--color-black);
   opacity: 0;
-  transform: translate(4px, -50%);
+  /* centralização vertical idêntica à da tela de seleção (.item::before):
+     translateY(calc(-50% - 0.15em)); o +4px horizontal é o leve deslocamento
+     que escorrega para 0 ao revelar no hover */
+  transform: translate(4px, calc(-50% - 0.15em));
   /* revelação suave/mais lenta, igual à da tela de seleção */
   transition: opacity 0.6s ease, transform 0.15s ease;
   pointer-events: none;
@@ -1663,7 +1753,7 @@ body:has(.has-sidebar) #back-to-top {
 .secnav-item-link:hover::after,
 .secnav-item-link:focus-visible::after {
   opacity: 0.75;
-  transform: translate(0, -50%);
+  transform: translate(0, calc(-50% - 0.15em));
 }
 
 .secnav-item-link:hover::before,
@@ -1682,12 +1772,12 @@ body:has(.has-sidebar) #back-to-top {
   content: "‹";
   right: auto;
   left: 8px;
-  transform: translate(-4px, -50%);
+  transform: translate(-4px, calc(-50% - 0.15em));
 }
 
 .secnav-all-home:hover::after,
 .secnav-all-home:focus-visible::after {
-  transform: translate(0, -50%);
+  transform: translate(0, calc(-50% - 0.15em));
 }
 
 .secnav-all-home::before {
@@ -1765,32 +1855,34 @@ body:has(.has-sidebar) #back-to-top {
 }
 
 /* marcador do item ativo: barra vertical de 4px à esquerda. A posição
-   (translateY) e a altura são definidas em slide-nav.js e fazem a transição
-   suave de um item para outro (sem salto direto). */
+   (translateY) é definida em slide-nav.js e faz a transição suave de um item
+   para outro (sem salto direto). A ALTURA do container é FIXA (--secnav-marker-h)
+   e o JS centraliza a barra no item; assim o tracinho tem o MESMO tamanho em todos
+   os itens E é idêntico ao indicador da seção ativa (.secnav-all-link.active). */
 .secnav-marker {
   position: absolute;
   z-index: 3; /* acima do botão (z 2) e dos itens (z 1) — consolidado da antiga unificada */
   top: 0;
-  left: 2px;
+  /* T5/T7: afastado 4px da borda esquerda */
+  left: 4px;
   width: 4px;
-  /* a altura (= altura do item) e a posição são definidas em JS; a barra visível
-     fica num ::before com inset vertical para respeitar o canto arredondado do
-     item ativo (mantendo a mesma geometria/altura do marcador). */
+  /* T5: altura FIXA do container (não mais = altura do item). O JS centraliza
+     verticalmente em cada item via translateY; a barra visível (::before) preenche
+     100% deste container, ficando com tamanho idêntico ao marcador da seção ativa. */
+  height: var(--secnav-marker-h);
   background: transparent;
-  transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1),
-              height 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 
-/* T6: barra visível com pontas arredondadas e um pequeno recuo vertical
-   (= raio do item, var(--border-general)) para não ultrapassar os cantos
-   arredondados do item ativo. */
+/* T5: barra visível com pontas arredondadas, preenchendo a ALTURA FIXA do
+   container (--secnav-marker-h), centralizada no item pelo JS. */
 .secnav-marker::before {
   content: "";
   position: absolute;
   left: 0;
-  top: var(--border-general);
-  bottom: var(--border-general);
+  top: 0;
+  bottom: 0;
   width: 100%;
   border-radius: 2px;
   background: var(--lt-accent);
@@ -1883,7 +1975,7 @@ body:has(.has-sidebar) #back-to-top {
    itens adjacentes deve igualar o do segundo espaçador (16px acima + 16px abaixo
    da linha). Como a lista (.secnav-all-links) tem gap 8px, a margem de 8px do
    divisor soma 8+8 = 16px de cada lado. */
-.secnav-all-divider { border: none; border-top: 1.5px dashed rgba(160, 160, 160, 0.65); margin: 8px 0; }
+.secnav-all-divider { border: none; border-top: 1px dashed var(--lt-border); margin: 8px 0; }
 
 /* sombra própria nos itens do menu de seções (dentro do cartão branco). Único
    seletor que aplica box-shadow a esses itens — dispensa !important. */
@@ -1914,6 +2006,6 @@ body:has(.has-sidebar) #back-to-top {
   /* a seta direcional surge sem deslizar (apenas aparece) */
   .secnav-item-link::after {
     transition: none;
-    transform: translate(0, -50%);
+    transform: translate(0, calc(-50% - 0.15em));
   }
 }

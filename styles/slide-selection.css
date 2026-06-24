@@ -392,7 +392,11 @@
   background-image: url("../assets/img/banner/se-view-2.jpg");
   background-position: center center;
   background-blend-mode: lighten;
-  background-color: var(--lt-surface-muted);
+  /* coerente com .section: camada branca com alfa um pouco menor (0.88) que o
+     --lt-surface-muted (0.97), deixando a foto de fundo aparecer mais e dando
+     ao painel do histórico uma separação visível em vez de lavar tudo de
+     branco — o conteúdo (chips dos links) ganha contraste contra o painel. */
+  background-color: rgba(245, 245, 245, 0.88);
   background-size: cover;
   border: 1px solid var(--lt-border);
   box-shadow: var(--lt-shadow);
@@ -455,17 +459,25 @@
     font-size: calc(var(--font-size-content)*var(--font-size-multiplier-xxs));
     line-height: var(--font-line-general);
     transition:
-      opacity 300ms ease;
+      background-color 300ms ease,
+      border-color 300ms ease;
 
+    /* página de histórico: o chip do link era branco (rgba 250) sobre o
+       container também branco (--lt-surface), e o opacity .75 lavava o texto
+       escuro para cinza — tudo "muito branco". Agora o chip ganha um leve
+       tinte cinza + borda hairline para separar do fundo, e o texto fica em
+       cheio (opacity 1) para máxima legibilidade no tema claro. */
     &:not(.disabled) {
-      background-color: var(--background-white);
+      background-color: var(--lt-surface-muted);
+      border: 1px solid var(--lt-border);
       font-weight: var(--font-weight-bolder);
       color: var(--color-black);
-      opacity: .75;
+      opacity: 1;
     }
 
     &:not(.disabled):hover {
-      opacity: 1;
+      background-color: var(--lt-hover);
+      border-color: var(--lt-border-strong);
     }
   }
 }
@@ -475,6 +487,17 @@
 .reunion span {
   color: inherit;
   font: inherit;
+}
+
+/* histórico: as datas indisponíveis (.reunion.disabled) caíam no .disabled
+   global (--lt-text-faint = rgba(0,0,0,.35)) — quase ilegível no fundo claro.
+   Aqui, escopo só ao histórico, o texto sobe para um cinza escuro legível e o
+   chip ganha um tinte + borda hairline para se destacar do container branco,
+   mantendo-se visualmente abaixo dos links ativos (mais escuros). */
+.reunion.disabled {
+  background-color: var(--color-black-alpha-10);
+  border: 1px solid var(--lt-border);
+  color: var(--lt-text-muted);
 }
 
 .reunion-collection {

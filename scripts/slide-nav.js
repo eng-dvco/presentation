@@ -26,7 +26,7 @@ let prevUrl = null;
 let nextUrl = null;
 let lightboxOpen = false;
 let currentImgIdx = 0;
-let overlay, overlayStage, overlayImg, overlayCaption, overlayCount, overlayClose, overlayPrev, overlayNext;
+let overlay, overlayStage, overlayImg, overlayCaption, overlayTitle, overlayCount, overlayClose, overlayPrev, overlayNext;
 let imgGroupInfo = [];
 let autoTimer = null;
 let autoStart = null;
@@ -215,12 +215,33 @@ function buildItemNav(section, currentSlug) {
   return { group, activeLink, list, marker };
 }
 
-// Posiciona o marcador (translateY + altura) na linha de um item.
+// T5: Altura FIXA do marcador (em px), lida da custom property --secnav-marker-h
+// definida no CSS (.slide-secnav). É a MESMA altura usada pelo indicador da seção
+// ativa (.secnav-all-link.active::before), garantindo tracinhos idênticos nos dois
+// lugares. Centraliza-se verticalmente em cada item (vide moveMarkerTo). Cai num
+// fallback coerente com a barra de um item de 1 linha se a leitura falhar.
+const MARKER_HEIGHT_FALLBACK = 16;
+function markerFixedHeight(marker) {
+  const raw = getComputedStyle(marker).getPropertyValue('--secnav-marker-h').trim();
+  const px = parseFloat(raw);
+  return Number.isFinite(px) && px > 0 ? px : MARKER_HEIGHT_FALLBACK;
+}
+
+// Posiciona o marcador (translateY) na linha de um item, com ALTURA FIXA
+// (--secnav-marker-h) e CENTRALIZADO verticalmente dentro do item.
 function moveMarkerTo(marker, el, animate) {
+  // lê uma vez a altura fixa do CSS e memoiza no próprio marcador
+  if (marker._fixedHeight == null) {
+    marker._fixedHeight = markerFixedHeight(marker);
+  }
+  const h = marker._fixedHeight;
+  const y = el.offsetTop + (el.offsetHeight - h) / 2; // centraliza no item
   if (!animate) marker.style.transition = 'none';
-  marker.style.left = `${el.offsetLeft}px`;
-  marker.style.height = `${el.offsetHeight}px`;
-  marker.style.transform = `translateY(${el.offsetTop}px)`;
+  // T5: o afastamento horizontal (4px da borda esquerda) vem do CSS (.secnav-marker
+  // { left: 4px }) — NÃO sobrescrever com el.offsetLeft (que seria 2px por causa do
+  // padding da lista), para casar exatamente com o indicador da seção ativa.
+  marker.style.height = `${h}px`;
+  marker.style.transform = `translateY(${y}px)`;
   if (!animate) {
     void marker.offsetWidth;      // aplica a posição sem transição…
     marker.style.transition = ''; // …e reabilita a transição definida no CSS
@@ -357,18 +378,23 @@ function buildSectionNav(sections, currentIndex, currentSlug) {
   nav.className = 'slide-sidebar slide-secnav';
   nav.setAttribute('aria-label', 'Navegação dos slides');
 
-  // sidebar colapsível com todas as seções
+  // T3: DOIS containers DISTINTOS/independentes (duas caixas separadas):
+  //   Container 1 = navegação ENTRE SEÇÕES (.secnav-all: toggle colapsável + lista).
+  //   Container 2 = CONTEÚDO da seção ativa (.secnav-items: subtítulo + contador +
+  //   itens com o marcador deslizante). Antes o Container 2 ficava ANINHADO dentro
+  //   do painel colapsável do Container 1; agora cada um é uma caixa irmã/própria.
   const allNav = buildAllSectionsNav(sections, currentIndex);
-  // navegação entre os itens da seção atual — incluída dentro do container colapsível
+  // navegação entre os itens da seção atual — agora em seu PRÓPRIO container (irmão)
   const itemNav = buildItemNav(sections[currentIndex], currentSlug);
-  if (allNav) {
-    if (itemNav) {
-      const listInner = allNav.querySelector('.secnav-all-list-inner');
-      if (listInner) listInner.appendChild(itemNav.group);
-    }
-    nav.appendChild(allNav);
-  } else if (itemNav) {
-    nav.appendChild(itemNav.group);
+  if (allNav) nav.appendChild(allNav);
+  if (itemNav) {
+    // envolve o bloco de itens em uma caixa própria (Container 2), separada do
+    // Container 1 (navegação entre seções). O conteúdo interno (.secnav-items e
+    // seus filhos) é PRESERVADO — herda o look/feel atual (marcador, etc.).
+    const itemsBox = document.createElement('div');
+    itemsBox.className = 'secnav-section-content';
+    itemsBox.appendChild(itemNav.group);
+    nav.appendChild(itemsBox);
   }
 
   const container = document.querySelector('.content-container');
@@ -638,6 +664,9 @@ function buildLightbox() {
     thumbsBar.appendChild(wrap);
   });
 
+  overlayTitle = document.createElement('p');
+  overlayTitle.className = 'lightbox-title';
+
   overlayCount = document.createElement('p');
   overlayCount.className = 'lightbox-title-count';
 
@@ -645,6 +674,7 @@ function buildLightbox() {
   overlayCaption.className = 'lightbox-caption';
 
   overlay.appendChild(overlayClose);
+  overlay.appendChild(overlayTitle);
   overlay.appendChild(overlayCount);
   overlay.appendChild(overlayStage);
   overlay.appendChild(overlayCaption);
@@ -872,6 +902,17 @@ function showImage(idx) {
   overlayNext.disabled = mosaicImages.length <= 1;
 
   const { posInGroup, groupTotal } = imgGroupInfo[currentImgIdx] ?? { posInGroup: 1, groupTotal: 1 };
+  // título da subseção (h2 do grupo de mosaico ao qual a imagem pertence), acima da
+  // contagem; se o grupo não tiver subtítulo, recai no título principal do slide (h1).
+  const groupEl = img.closest('.mosaic-container');
+  let titleEl = groupEl ? groupEl.previousElementSibling : null;
+  while (titleEl && !titleEl.classList.contains('title-header-h2')) titleEl = titleEl.previousElementSibling;
+  const titleText = (titleEl
+    ? (titleEl.querySelector('.title-h2')?.textContent || titleEl.textContent)
+    : (document.querySelector('.title-h1')?.textContent || '')
+  ).trim();
+  overlayTitle.textContent = titleText || 'subgrupo não identificado';
+  overlayTitle.classList.toggle('lightbox-title--empty', !titleText);
   overlayCount.textContent = `exibindo ${posInGroup} de ${groupTotal} de um total de ${mosaicImages.length} (${currentImgIdx + 1}/${mosaicImages.length})`;
 
   const obsEl = img.closest('.img')?.querySelector('.obs');
@@ -932,16 +973,26 @@ if (mosaicImages.length) {
 
 const breadcrumb = document.querySelector('.breadcrumb');
 if (breadcrumb && navigator.clipboard) {
+  // ícone de prancheta (copiar) e ícone de check (sucesso) — apenas ícones, sem texto
+  const ICON_COPY = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>';
+  const ICON_CHECK = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+
   const copyBtn = document.createElement('button');
   copyBtn.className = 'copy-url-btn';
   copyBtn.setAttribute('aria-label', 'Copiar link desta página');
-  copyBtn.textContent = 'copiar link';
+  copyBtn.innerHTML = ICON_COPY;
   breadcrumb.appendChild(copyBtn);
 
+  let copyResetTimer = null;
   copyBtn.addEventListener('click', () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
-      copyBtn.textContent = '✓ copiado!';
-      setTimeout(() => { copyBtn.textContent = 'copiar link'; }, 2000);
+      copyBtn.classList.add('is-copied');
+      copyBtn.innerHTML = ICON_CHECK;
+      clearTimeout(copyResetTimer);
+      copyResetTimer = setTimeout(() => {
+        copyBtn.classList.remove('is-copied');
+        copyBtn.innerHTML = ICON_COPY;
+      }, 2000);
     });
   });
 }

@@ -1,0 +1,73 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   components.css — primitivas de UI reutilizáveis (tabelas, cronogramas,
+   controles). AGNÓSTICAS de página: podem ser linkadas em qualquer slide sem
+   trazer overrides de layout. Use estas classes em NOVOS elementos para herdar
+   automaticamente a aparência/comportamento padrão. Comportamento JS associado:
+   scripts/ui-utils.js (window.UI). Cores/sombras vêm de tokens (variables.css).
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── fade de rolagem horizontal (UI.addScrollFade emite estas classes) ── */
+.scrollfade { position: relative; }
+.scrollfade-edge { position: absolute; top: 0; bottom: 0; width: 2.5rem; pointer-events: none; z-index: 4; opacity: 0; transition: opacity 0.25s ease; }
+.scrollfade-left { left: 0; background: linear-gradient(to right, var(--lt-surface), transparent); }
+.scrollfade-right { right: 0; background: linear-gradient(to right, transparent, var(--lt-surface)); }
+.scrollfade.has-left .scrollfade-left { opacity: 1; }
+.scrollfade.has-right .scrollfade-right { opacity: 1; }
+
+/* ── balão de tooltip (UI.attachTip porta o elemento para o <body>) ── */
+.tip-bubble {
+  position: fixed; display: none; z-index: 9999;
+  padding: 0.2rem 0.45rem; background: var(--tooltip-bg); color: #fff;
+  font-family: var(--font-family-general); font-size: 0.56rem; font-weight: var(--font-weight-normal);
+  letter-spacing: 0.06em; white-space: nowrap; border-radius: var(--border-smaller);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); pointer-events: none;
+}
+
+/* ── ponto de status (cor + anel translúcido) — modificadores semânticos ── */
+.status-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.status-dot--done    { background: var(--color-green);          box-shadow: 0 0 0 2.5px var(--color-green-alpha-25); }
+.status-dot--running { background: var(--color-purple);         box-shadow: 0 0 0 2.5px var(--color-purple-alpha-25); }
+.status-dot--pending { background: var(--color-orange);         box-shadow: 0 0 0 2.5px var(--color-orange-alpha-25); }
+.status-dot--total   { background: var(--color-grey-alpha-50);  box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.07); }
+.status-dot--extra   { background: var(--color-blue);           box-shadow: 0 0 0 2.5px var(--color-blue-alpha-25); }
+/* desligamento programado (laranja) · forçado (vermelho) · SE energizada / sem desligamento (verde) */
+.status-dot--programado { background: var(--color-orange); box-shadow: 0 0 0 2.5px var(--color-orange-alpha-25); }
+.status-dot--forcado    { background: var(--color-red);    box-shadow: 0 0 0 2.5px var(--color-red-alpha-25); }
+.status-dot--energizado { background: var(--color-green);  box-shadow: 0 0 0 2.5px var(--color-green-alpha-25); }
+
+/* ── controle segmentado (botões alternantes) ── */
+.seg { display: flex; border: 1px solid rgba(0, 0, 0, 0.18); border-radius: 3px; overflow: hidden; }
+.seg-btn {
+  background: #e2e2e2; border: none; border-left: 1px solid rgba(0, 0, 0, 0.14);
+  color: rgba(0, 0, 0, 0.38); cursor: pointer; padding: 0.28rem 0.55rem;
+  display: inline-flex; align-items: center; gap: 0.32rem;
+  font-family: var(--font-family-general); font-size: 0.55rem;
+  letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+.seg-btn:first-child { border-left: none; }
+.seg-btn:hover { background: #d8d8d8; color: rgba(0, 0, 0, 0.75); }
+.seg-btn.is-active { background: #fff; color: rgba(0, 0, 0, 0.75); font-weight: var(--font-weight-bold); }
+.seg-btn svg { flex-shrink: 0; color: inherit; }
+/* indicador de direção de ordenação dentro do botão segmentado */
+.seg-dir { font-size: 0.8em; opacity: 0; transition: opacity 0.15s; }
+.seg-btn.is-active .seg-dir { opacity: 0.75; }
+
+/* ── campo de busca (pílula com ícone) ── */
+.search-pill { display: flex; align-items: center; gap: 0.35rem; background: rgba(0, 0, 0, 0.04); border: 1px solid var(--lt-border); border-radius: 99px; padding: 0.18rem 0.55rem; }
+.search-pill svg { color: rgba(0, 0, 0, 0.35); flex-shrink: 0; }
+.search-pill input { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.62rem; color: rgba(0, 0, 0, 0.75); }
+.search-pill input::placeholder { color: rgba(0, 0, 0, 0.3); }
+.search-pill input::-webkit-search-decoration,
+.search-pill input::-webkit-search-cancel-button { display: none; }
+
+/* ── legenda (barra inferior; mesmo padrão do conjunto de containers .tlp-group:
+   título + separador tracejado + itens com ponto de status) ── */
+.legend { display: flex; align-items: center; flex-wrap: wrap; gap: 0; padding: 0.5rem 1rem; background: var(--lt-surface); box-shadow: var(--lt-shadow); }
+.legend-title { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0, 0, 0, 0.75); white-space: nowrap; flex-shrink: 0; }
+.legend-sep { flex: 1; height: 0; border-top: 1px dashed var(--lt-border); margin: 0 1rem; }
+.legend-items { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+.legend-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-family-general); font-size: 0.68rem; color: var(--lt-icon); }
+@media (max-width: 640px) {
+  .legend-items { flex-direction: column; align-items: flex-start; gap: 0.4rem; flex-basis: 100%; padding-top: 0.3rem; }
+}

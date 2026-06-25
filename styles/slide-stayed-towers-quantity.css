@@ -1,0 +1,55 @@
+/* ───────── Quantitativos das torres estaiadas ─────────
+   Estilos de slide-stayed-towers-quantity.html: duas tabelas lado a lado
+   (Contratado | Torres), reaproveitando a linguagem visual de .tl-data-table
+   (slide-tl.css). Cada linha recebe um ponto de status no mesmo padrão dos
+   cronogramas; as duas tabelas são paralelas linha a linha (total ·
+   executada/utilizada · pendente/disponível · aditivo), por isso a cor é
+   definida pela POSIÇÃO da linha. */
+.qte-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: stretch;
+  width: 100%;
+}
+.qte-card {
+  flex: 1 1 300px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--lt-surface);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-general);
+  box-shadow: var(--lt-shadow);
+  overflow: hidden;
+
+  & .qte-cap {
+    padding: 0.55rem 0.9rem;
+    font-family: var(--font-family-general);
+    font-size: 0.64rem;
+    font-weight: var(--font-weight-boldest);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.72);
+    background: var(--lt-surface-muted);
+    border-bottom: 1px dashed var(--lt-border);
+  }
+  & .tl-data-table { width: 100%; }
+  /* primeira coluna: ponto de status, estreita e centralizada */
+  & .tl-data-table thead th:first-child,
+  & .tl-data-table tbody td:first-child { text-align: center; width: 1px; padding-left: 0.5rem; padding-right: 0.5rem; }
+  /* coluna 'Quantidade': números alinhados à direita, tabulares */
+  & .tl-data-table thead th:last-child { text-align: right; }
+  & .qte-qtd { text-align: right; font-variant-numeric: tabular-nums; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); }
+  & .qte-status { font-weight: var(--font-weight-bold); letter-spacing: 0.02em; color: rgba(0, 0, 0, 0.72); }
+}
+
+/* pontos de status (mesma família visual dos cronogramas: cor + anel translúcido) */
+.qte-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
+.qte-dot--total   { background: var(--color-grey-alpha-50); box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.07); }
+.qte-dot--done    { background: var(--color-green);  box-shadow: 0 0 0 2.5px var(--color-green-alpha-25); }
+.qte-dot--pending { background: var(--color-orange); box-shadow: 0 0 0 2.5px var(--color-orange-alpha-25); }
+.qte-dot--extra   { background: var(--color-purple); box-shadow: 0 0 0 2.5px var(--color-purple-alpha-25); }
+
+/* legenda (reusa a estrutura .tl-legend de slide-tl.css) */
+.qte-legend { margin-top: 0.25rem; }

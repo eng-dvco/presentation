@@ -1,6 +1,6 @@
 /* ── light theme overrides (timeline page only) ────────────────────────── */
 body { color: rgba(0,0,0,0.75); }
-.flex-header-container { background-color: var(--lt-surface); backdrop-filter: none; border-bottom: 2px solid transparent; border-image: repeating-linear-gradient(45deg, #f5f5f5 0 6px, #ececec 6px 12px) 2; box-shadow: var(--lt-shadow); }
+.flex-header-container { background-color: var(--lt-surface); backdrop-filter: none; border-bottom: 2px solid transparent; border-image: var(--zebra-stripe) 2; box-shadow: var(--lt-shadow); }
 .section-icon { background-color: var(--color-black); }
 .breadcrumb { background-color: var(--lt-surface); backdrop-filter: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
 .crumb a, .crumb [aria-current="page"] { color: rgba(0,0,0,0.5); opacity: 1; }
@@ -65,7 +65,7 @@ body { color: rgba(0,0,0,0.75); }
 .tlf-dd-trigger:focus-visible, .tlf-dd-trigger[aria-expanded="true"] { border-color: var(--color-green); }
 .tlf-dd-arrow { color: rgba(0,0,0,0.38); font-size: 0.7em; transition: transform 0.15s ease; }
 .tlf-dd-trigger[aria-expanded="true"] .tlf-dd-arrow { transform: rotate(180deg); }
-.tlf-dd-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; min-width: 100%; max-height: 240px; overflow-y: auto; margin: 0; padding: 4px; list-style: none; background: rgba(255,255,255,0.98); border: 1px solid var(--lt-border); border-radius: var(--border-smaller); box-shadow: 0 8px 24px rgba(0,0,0,0.14); scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.15) transparent; }
+.tlf-dd-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; min-width: 100%; max-height: 240px; overflow-y: auto; margin: 0; padding: 4px; list-style: none; background: rgba(255,255,255,0.98); border: 1px solid var(--lt-border); border-radius: var(--border-smaller); box-shadow: var(--shadow-popover); scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.15) transparent; }
 .tlf-dd-menu[hidden] { display: none; }
 .tlf-dd-opt { padding: 0.34rem 0.6rem; border-radius: var(--border-smaller); color: rgba(0,0,0,0.65); font-family: var(--font-family-general); font-size: 0.72rem; line-height: 1.2; cursor: pointer; white-space: nowrap; outline: none; }
 .tlf-dd-opt:hover, .tlf-dd-opt:focus-visible { background: var(--color-green-alpha-25); color: rgba(0,0,0,0.75); }
@@ -76,7 +76,7 @@ body { color: rgba(0,0,0,0.75); }
 .tlf-date .tlf-dd-trigger.tlf-dd-filled .tlf-dd-arrow { color: var(--lt-text-muted); }
 
 /* calendário customizado (datas) */
-.tlf-cal-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; width: max-content; padding: 8px; background: rgba(255,255,255,0.98); border: 1px solid var(--lt-border); border-radius: var(--border-smaller); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+.tlf-cal-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; width: max-content; padding: 8px; background: rgba(255,255,255,0.98); border: 1px solid var(--lt-border); border-radius: var(--border-smaller); box-shadow: var(--shadow-popover); }
 .tlf-cal-menu[hidden] { display: none; }
 .tlf-cal-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 6px; }
 .tlf-cal-title { font-family: var(--font-family-general); font-size: 0.7rem; font-weight: var(--font-weight-bold); color: rgba(0,0,0,0.75); text-transform: capitalize; white-space: nowrap; }
@@ -144,7 +144,7 @@ body { color: rgba(0,0,0,0.75); }
     display: none; flex-direction: column; align-items: stretch; gap: 0.35rem;
     margin: 0; padding: 0.5rem; width: max-content;
     background: rgba(255,255,255,0.98); border: 1px solid var(--lt-border);
-    border-radius: var(--border-smaller); box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    border-radius: var(--border-smaller); box-shadow: var(--shadow-popover);
     overflow: visible; cursor: default;
   }
   .tlf-filter.is-open .tlf-chips--axis { display: flex; }
@@ -254,7 +254,7 @@ body { color: rgba(0,0,0,0.75); }
 /* painel: grid com 1fr → coluna única se expande até o item mais largo;
    todos os filhos preenchem o mesmo 1fr = mesma largura;
    -6px sobe o panel para que o bottom do code-pill coincida com a espinha */
-.tl-entry-panel { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: calc(-1 * var(--tl-dot-r)); position: relative; z-index: 1; box-shadow: 0 4px 12px var(--lt-border); }
+.tl-entry-panel { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: calc(-1 * var(--tl-dot-r)); position: relative; z-index: 1; box-shadow: var(--shadow-card); }
 
 /* pill do código: altura = diâmetro do dot → bottom exatamente na espinha */
 .tl-entry-code-pill { height: calc(var(--tl-dot-r) * 2); display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 3px 3px 0 0; }
@@ -284,13 +284,13 @@ body { color: rgba(0,0,0,0.75); }
 
 /* done=verde / running=azul / pending=laranja */
 .tl-base--done    { color: var(--color-green); }
-.tl-base--running { color: #3b82f6; }
+.tl-base--running { color: var(--color-blue); }
 .tl-base--pending { color: var(--color-orange); }
 
 /* fill/stroke explícitos nas shapes SVG (atributos de apresentação não herdam
    color de CSS ancestor; regras CSS author > atributos de apresentação) */
 .tl-base--done    .tl-base-icon circle   { fill: var(--color-green); }
-.tl-base--running .tl-base-icon circle { stroke: #3b82f6; fill: none; }
+.tl-base--running .tl-base-icon circle { stroke: var(--color-blue); fill: none; }
 .tl-base--pending .tl-base-icon circle   { stroke: var(--color-orange); fill: none; }
 
 @keyframes tl-base-spin { to { transform: rotate(360deg); } }
@@ -517,7 +517,7 @@ body { color: rgba(0,0,0,0.75); }
 .tlt-base-wrap { display: inline-flex; align-items: center; justify-content: center; }
 .tlt-base-icon { width: 0.9rem; height: 0.9rem; display: block; }
 .tlt-base--done    .tlt-base-icon circle { fill: var(--color-green); }
-.tlt-base--running .tlt-base-icon circle { stroke: #3b82f6; fill: none; }
+.tlt-base--running .tlt-base-icon circle { stroke: var(--color-blue); fill: none; }
 .tlt-base--pending .tlt-base-icon circle { stroke: var(--color-orange); fill: none; }
 
 /* ── spine tracejada para entradas pending ──

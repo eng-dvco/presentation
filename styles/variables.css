@@ -58,6 +58,12 @@
   --color-orange-alpha-50: rgba(255, 185, 80, 0.5);
   --color-orange-alpha-25: rgba(255, 185, 80, 0.25);
   --color-orange-alpha-10: rgba(255, 185, 80, 0.1);
+  --color-blue: rgba(59, 130, 246, 1);
+  --color-blue-alpha-25: rgba(59, 130, 246, 0.25);
+  --color-blue-alpha-75: rgba(59, 130, 246, 0.75);
+  --color-blue-alpha-50: rgba(59, 130, 246, 0.5);
+  --color-blue-alpha-10: rgba(59, 130, 246, 0.1);
+  --color-dark-blue: rgba(30, 58, 138, 1);
 
   /* fonts */
   --font-family-general: "Roboto Mono", monospace;
@@ -139,6 +145,18 @@
   --lt-text-faint: rgba(0, 0, 0, 0.35);                 /* faint dark text (placeholders, counts) */
   --lt-icon: rgba(0, 0, 0, 0.6);                         /* monochrome mask icons on light (= slide-tl.css) */
   --lt-accent: var(--color-dark-green);                  /* link/active/icon accent that reads on light */
+
+  /* shared UI component tokens (tabelas, cronogramas, controles) — fonte de
+     verdade para padrões antes repetidos como literais entre os stylesheets */
+  --zebra-odd: #f5f5f5;                                   /* linha/card ímpar (faixa clara) */
+  --zebra-even: #ececec;                                  /* linha/card par */
+  --zebra-hover: #e4e4e4;                                 /* hover de linha/card (= --lt-hover) */
+  --zebra-stripe: repeating-linear-gradient(45deg, #f5f5f5 0 6px, #ececec 6px 12px); /* faixa diagonal (border-image do cabeçalho) */
+  --lt-col-divider: rgba(160, 160, 160, 0.55);           /* divisória tracejada entre colunas de tabela */
+  --tooltip-bg: rgba(0, 0, 0, 0.85);                     /* fundo do balão de tooltip */
+  --scrollbar-thumb: rgba(0, 0, 0, 0.2);                 /* polegar de scrollbar fina */
+  --shadow-card: 0 4px 12px var(--lt-border);            /* elevação de cartão/painel */
+  --shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.14);      /* menus flutuantes (dropdown/calendário/funil) */
 
   /* masks */
   --mask-fade: linear-gradient(90deg, #0000, #000 75%);

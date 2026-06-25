@@ -480,3 +480,24 @@ if (backToTop) {
     window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
   });
 }
+
+/* Vínculo bidirecional documento↔slide: ao chegar em index.html#doc-…, abre o
+   grupo <details> do documento, rola até ele e o destaca brevemente. */
+(function docDeepLink() {
+  function focus() {
+    var h = location.hash;
+    if (!h || h.length < 2) return;
+    var li = null;
+    try { li = document.getElementById(decodeURIComponent(h.slice(1))); } catch (e) { li = null; }
+    if (!li) return;
+    var det = li.closest('details');
+    if (det) det.open = true;
+    li.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    li.classList.remove('doc-flash');
+    void li.offsetWidth;
+    li.classList.add('doc-flash');
+  }
+  window.addEventListener('hashchange', focus);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', focus);
+  else focus();
+})();

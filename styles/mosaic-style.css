@@ -16,7 +16,7 @@
        transparente de 2px com a zebra. */
     background:
       linear-gradient(var(--background-white), var(--background-white)) padding-box,
-      repeating-linear-gradient(45deg, #f5f5f5 0 6px, #ececec 6px 12px) border-box;
+      var(--zebra-stripe) border-box;
   }
 
   &.uni-column {

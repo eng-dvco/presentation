@@ -831,7 +831,9 @@
     grid-column: 1;
     grid-row: 1 / span 2;
     align-self: center;
+    justify-self: start;
     margin-right: 0;
+    transition: opacity 0.15s;
   }
 }
 
@@ -1077,8 +1079,10 @@
     row-gap: 4px;
   }
 
-  /* badge à esquerda, alinhado ao título (linha 1) e não mais esticado */
-  .doc-items li > .ext-tag {
+  /* badge à esquerda, alinhado ao título (linha 1) e não mais esticado; o botão
+     "ir ↗" mesclado compartilha a mesma célula para a troca no hover/foco */
+  .doc-items li > .ext-tag,
+  .doc-items li > .doc-goto {
     grid-column: 1;
     grid-row: 1;
     align-self: center;
@@ -1327,34 +1331,69 @@
 
 /* (estilos internos de cada slide de timeline ficam no CSS do slide respectivo) */
 
-/* botão "slide" sob o item de documento recebido — herda a cor da extensão do
-   arquivo (PDF → vermelho, igual à label .ext-tag; demais tipos via :has); a
-   seta fica à direita. --doc-color = cor da extensão. */
+/* botão "ir ↗" MESCLADO ao badge de extensão do documento recebido: por padrão o
+   item mostra a extensão (ex.: "pdf"); ao pairar/focar o item (RDC vinculado a um
+   slide) o badge "pdf" dá lugar ao botão "ir ↗" ocupando a MESMA célula do grid —
+   cross-fade no lugar, sem deslocar o conteúdo (a largura da coluna 1 já é
+   reservada pelo botão, mesmo invisível). Herda a cor da extensão via --doc-color
+   (PDF → vermelho, igual à label .ext-tag; demais tipos via :has). */
 .doc-goto {
-  --doc-color: var(--color-red);
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+  justify-self: stretch;          /* preenche a coluna do badge: mesma "pegada" do "pdf" */
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  padding: 5px 12px;
+  justify-content: center;        /* ícone centralizado na caixa */
+  gap: 0;
+  margin: 0;
+  padding: var(--padding-general-small);
   font-family: var(--font-family-general);
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  font-size: 0;                   /* oculta o texto "ir" (mantido no DOM p/ a11y) */
   font-weight: var(--font-weight-bold);
   color: var(--doc-color);
   background-color: color-mix(in srgb, var(--doc-color) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--doc-color) 45%, transparent);
-  border-radius: 99px;
+  border: 1px solid transparent;
+  border-radius: var(--border-smaller);
   text-decoration: none;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.15s, border-color 0.15s;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, background-color 0.15s, border-color 0.15s;
 }
-.doc-items li:has(.ext-tag.slides) .doc-goto { --doc-color: var(--color-dark-yellow); }
-.doc-items li:has(.ext-tag.kmz)    .doc-goto { --doc-color: var(--color-purple); }
-.doc-items li:has(.ext-tag.img)    .doc-goto { --doc-color: var(--lt-text-muted); }
-.doc-goto::after { content: "\2197"; font-weight: var(--font-weight-boldest); }
+/* cor da extensão por tipo: --doc-color (texto/borda do botão "ir ↗") e --flash-bg
+   (realce translúcido do flash de destaque). Definidas no próprio <li> e herdadas;
+   --flash-bg é um token alpha direto (var simples) porque color-mix() dentro de
+   @keyframes não resolve. Padrão = verde do xlsx. */
+.doc-items li                        { --doc-color: var(--lt-accent);        --flash-bg: var(--color-green-alpha-25); }
+.doc-items li:has(.ext-tag.doc-text) { --doc-color: var(--color-red);        --flash-bg: var(--color-red-alpha-25); }
+.doc-items li:has(.ext-tag.slides)   { --doc-color: var(--color-dark-yellow); --flash-bg: var(--color-yellow-alpha-25); }
+.doc-items li:has(.ext-tag.kmz)      { --doc-color: var(--color-purple);     --flash-bg: var(--color-purple-alpha-25); }
+.doc-items li:has(.ext-tag.img)      { --doc-color: var(--lt-text-muted);    --flash-bg: var(--color-black-alpha-25); }
+/* ao pairar/focar, o badge "pdf" some e aparece SOMENTE o ícone de seta (↗) */
+.doc-goto::after {
+  content: "\2197";
+  font-size: calc(var(--font-size-default) * var(--font-size-multiplier-sm));
+  font-weight: var(--font-weight-boldest);
+  line-height: 1;
+}
+
+/* troca badge ↔ botão ao pairar/focar o item vinculado */
+.doc-items li:has(.doc-goto):hover > .ext-tag,
+.doc-items li:has(.doc-goto):focus-within > .ext-tag {
+  opacity: 0;
+  pointer-events: none;
+}
+.doc-items li:has(.doc-goto):hover > .doc-goto,
+.doc-items li:has(.doc-goto):focus-within > .doc-goto {
+  opacity: 1;
+  pointer-events: auto;
+}
 .doc-goto:hover { background-color: color-mix(in srgb, var(--doc-color) 22%, transparent); border-color: var(--doc-color); }
 .doc-goto:focus-visible { outline: 2px solid var(--doc-color); outline-offset: 2px; }
 
-/* destaque temporário do documento alvo ao chegar via link do slide */
+/* destaque temporário do documento alvo ao chegar via link do slide: a cor do
+   realce corresponde à extensão do documento (--doc-color; ex.: vermelho do PDF) */
 .doc-flash { animation: doc-flash 2s ease-out; }
-@keyframes doc-flash { 0%, 30% { background-color: var(--color-blue-alpha-25); } 100% { background-color: transparent; } }
+@keyframes doc-flash { 0%, 30% { background-color: var(--flash-bg); } 100% { background-color: transparent; } }

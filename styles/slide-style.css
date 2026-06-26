@@ -657,16 +657,32 @@ a.flex-logo-container {
   max-width: none;
   margin: 0;
   box-sizing: border-box;
-  /* O preenchimento (azul translúcido) e a borda TRACEJADA CHANFRADA são
-     desenhados por um SVG em pixels exatos (scripts/slide-nav.js): o chanfro
-     fica a 45° em qualquer largura e o tracejado segue TODAS as bordas,
-     inclusive as duas chanfradas (superior-esquerda e inferior-direita). A
+  /* O preenchimento e a borda TRACEJADA CHANFRADA são desenhados em DUAS camadas
+     SVG em pixels exatos (scripts/slide-banner.js): post-link-fill (preenchimento,
+     ATRÁS) e post-link-edge (traço, NA FRENTE). O chanfro fica a 45° em qualquer
+     largura e o tracejado segue TODAS as bordas, inclusive as chanfradas. A
      borda/fundo/sombra/blur da base ficam zerados aqui. */
   background-color: transparent;
   border: none;
   border-radius: 0;
   box-shadow: none;
   backdrop-filter: none;
+  /* SEM padding/gap: o título vai de borda a borda (laterais + topo, inclusive o
+     chanfro), sem espaços vazios entre os elementos. */
+  display: flex;
+  flex-direction: column;
+
+  & > svg.post-link-fill {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;                                  /* preenchimento ATRÁS do título */
+
+    & path { fill: var(--color-blue-alpha-25); stroke: none; }
+  }
+  &:hover > svg.post-link-fill path { fill: var(--color-blue-alpha-50); }
 
   & > svg.post-link-edge {
     position: absolute;
@@ -674,22 +690,62 @@ a.flex-logo-container {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: 2;                       /* traço NA FRENTE do título → sempre visível */
 
     & path {
-      fill: var(--color-blue-alpha-25);
+      fill: none;
       stroke: var(--color-blue);
       stroke-width: 1.5;
       stroke-dasharray: 6 4;
     }
   }
-  &:hover > svg.post-link-edge path { fill: var(--color-blue-alpha-50); stroke: var(--color-dark-blue); }
+  &:hover > svg.post-link-edge path { stroke: var(--color-dark-blue); }
 
+  /* título do banner = nome do documento (código do RDC): faixa superior que se
+     estende de BORDA A BORDA (inclusive preenchendo o chanfro superior-esquerdo,
+     recortado por clip-path), com preenchimento na cor do texto (azul escuro) e
+     texto na cor do preenchimento do banner (azul claro translúcido), centralizado. */
+  & > .post-link-title {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4px 12px;
+    background-color: var(--color-dark-blue);
+    /* texto na cor do PREENCHIMENTO do banner (azul claro translúcido): como o
+       fill é --color-blue a 25% sobre o fundo claro do slide, reproduzimos essa
+       MESMA aparência (azul 25% + branco) para o texto ficar legível sobre a faixa
+       azul-escura — alpha-25 literal sobre o escuro ficaria invisível. */
+    color: color-mix(in srgb, var(--color-blue) 25%, white);
+    font-family: var(--font-family-general);
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.04em;
+    overflow-wrap: anywhere;
+    /* chanfra o canto SUPERIOR-ESQUERDO do título p/ acompanhar o chanfro do banner
+       (10px = CHAMFER em scripts/slide-banner.js) */
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+
+    /* ícone de seta PERMANENTE (sempre visível) — mesmo glifo dos RDCs em
+       'documentos recebidos' (.doc-goto::after), sinalizando que o banner leva ao
+       documento. */
+    &::after {
+      content: "\2197";
+      margin-left: 0.4em;
+      font-weight: var(--font-weight-boldest);
+    }
+  }
+
+  /* corpo = descrição do RDC: fonte reduzida (igual ao kicker da navegação
+     lateral) e SEM negrito. Recuo próprio (o container não tem padding) p/ o texto
+     não encostar nas bordas nem no chanfro inferior-direito. */
   & p {
     position: relative;
     z-index: 1;
-    padding: 0.5rem 1rem;
+    margin: 0;
+    padding: 6px 14px 10px;
     color: var(--color-dark-blue);
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+    font-weight: var(--font-weight-normal);
 
     &::before {
       content: none;

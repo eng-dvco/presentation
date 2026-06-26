@@ -312,7 +312,7 @@ function measureDocNameMarquee(wrap) {
     // 1 ciclo só: ao terminar, fica parqueado no estado final (forwards), sem salto
     { duration: totalMs, iterations: 1, fill: 'forwards', easing: 'linear' }
   );
-  // pausada por padrão: só desliza no hover (mouse) ou ao tocar/clicar a linha
+  // pausada por padrão: só desliza ao clicar/tocar o container do documento
   wrap._nameAnim.pause();
 }
 
@@ -361,8 +361,8 @@ function measureDocDescMarquee(row) {
   track.appendChild(clone);
 
   const shift   = clone.getBoundingClientRect().left - text.getBoundingClientRect().left;
-  // velocidade levemente maior (55 px/s) e SEM espera inicial: ao tocar/clicar
-  // (ou passar o cursor), o deslizamento começa imediatamente do offset 0
+  // velocidade levemente maior (55 px/s) e SEM espera inicial: ao clicar/tocar
+  // o container, o deslizamento começa imediatamente do offset 0
   const totalMs = (shift / 55) * 1000;
   row._descAnim = track.animate(
     [
@@ -372,8 +372,8 @@ function measureDocDescMarquee(row) {
     // 1 ciclo só: ao terminar, fica parqueado no estado final (forwards), sem salto
     { duration: totalMs, iterations: 1, fill: 'forwards', easing: 'linear' }
   );
-  // por-documento: a animação não toca sozinha — fica pausada até o cursor
-  // passar sobre a linha (hover) ou, em toque/clique, até tocar a linha
+  // por-documento: a animação não toca sozinha — fica pausada até clicar/tocar
+  // o container do documento
   row._descAnim.pause();
 }
 
@@ -392,26 +392,21 @@ function refreshDocMarquees() {
   document.querySelectorAll('.doc-name-wrap').forEach(measureDocNameMarquee);
 }
 
-// gatilho INDIVIDUAL: cada elemento aciona SOMENTE o próprio marquee — o título
-// (.doc-name-wrap) anima só o título; a descrição (.doc-desc-row) anima só a
-// descrição. Cada gatilho roda 1 ciclo idêntico e ignora-se enquanto em
-// andamento. hover (mouse) e clique/toque (touch, pen ou mouse sem hover)
-// disparam da mesma forma.
+// gatilho por CLIQUE no CONTAINER: clicar o item (<li>) executa 1 ciclo do
+// marquee da DESCRIÇÃO. POR ENQUANTO o título permanece fixo (sem deslize) — a
+// chamada playDocNameMarquee está desativada; basta reativá-la p/ animar o título
+// de novo. NÃO há gatilho por hover — em QUALQUER viewport (inclusive nas maiores,
+// onde antes rodava ao pairar o mouse) o deslize só roda ao clicar/tocar o
+// container. playDocDescMarquee é no-op quando a descrição não está truncada, e
+// ignora-se enquanto um ciclo já está em andamento.
 if (!reducedMotion) {
-  // anexa hover (mouse) + clique/toque a UM elemento, acionando seu marquee
-  const bindMarqueeTrigger = (el, play) => {
-    if (!el) return;
-    el.addEventListener('pointerenter', e => {
-      if (e.pointerType !== 'mouse') return;
-      play(el);
-    });
-    // toque/clique (touch, pen ou mouse sem hover): inicia 1 ciclo
-    el.addEventListener('click', () => play(el));
-  };
-
   document.querySelectorAll('.doc-items li').forEach(li => {
-    bindMarqueeTrigger(li.querySelector('.doc-name-wrap'), playDocNameMarquee);
-    bindMarqueeTrigger(li.querySelector('.doc-desc-row'), playDocDescMarquee);
+    const descRow = li.querySelector('.doc-desc-row');
+    li.addEventListener('click', e => {
+      // o clique no link "ir ↗" navega p/ o slide — não dispara o marquee
+      if (e.target.closest('.doc-goto')) return;
+      playDocDescMarquee(descRow); // título fixo por enquanto (ver comentário acima)
+    });
   });
 }
 

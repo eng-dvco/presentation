@@ -19,7 +19,13 @@ body {
 body::before {
   content: '';
   position: fixed;
-  inset: 0;
+  /* cobre SEMPRE a maior altura possível da viewport (100lvh): em celulares, a
+     barra de endereço colapsável muda a viewport ao rolar e, com inset:0, surgia
+     uma faixa branca embaixo. Ancorado no topo + 100lvh → fundo fixo e imutável. */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100lvh;
   z-index: -1;
   background: url(../assets/img/hero/hero-clean_blur.jpg) center center / cover no-repeat;
 }
@@ -29,7 +35,10 @@ body::before {
 body::after {
   content: '';
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100lvh;
   z-index: -1;
   background: linear-gradient(to bottom, var(--lt-hero-overlay-top) 0%, transparent 100%) top center / 100% 60% no-repeat;
   background-color: var(--lt-hero-overlay);
@@ -571,6 +580,7 @@ a.flex-logo-container {
 
 /* postscriptum */
 .postscriptum-container {
+  position: relative;
   display: flex;
   height: fit-content;
   flex-direction: column;
@@ -746,16 +756,49 @@ a.flex-logo-container {
     color: var(--color-dark-blue);
     font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
     font-weight: var(--font-weight-normal);
+    /* colapsado: no máximo 3 linhas (mesmo limite em qualquer viewport); o botão
+       .post-link-toggle (exibir mais/menos) expande removendo o clamp */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 
     &::before {
       content: none;
     }
+  }
+
+  &.is-expanded p {
+    -webkit-line-clamp: unset;
+    overflow: visible;
   }
 }
 
 /* postscriptum usado como link (banner de menção bidirecional documento↔slide) */
 a.postscriptum-wrapper { cursor: pointer; text-decoration: none; transition: background-color 0.15s, border-color 0.15s, transform 0.15s; }
 a.postscriptum-wrapper:hover { transform: translateY(-1px); }
+
+/* botão "exibir mais / exibir menos" do banner (injetado por slide-banner.js só
+   quando a descrição passa de 3 linhas): pílula no canto inferior direito, na cor
+   da faixa do título, acima do traço SVG. */
+.post-link-toggle {
+  position: absolute;
+  bottom: 6px;
+  right: 16px;
+  z-index: 3;
+  padding: 0 9px;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-bold);
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--color-blue) 25%, white);
+  background-color: var(--color-dark-blue);
+  border: none;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.post-link-toggle:hover { background-color: var(--color-blue); }
 
 /* facultative section for notes */
 .foot-notes {
@@ -1455,7 +1498,7 @@ footer {
   width: 200px;
   position: sticky;
   top: 56px;
-  max-height: calc(100vh - 68px);
+  max-height: calc(100dvh - 68px);
   display: flex;
   flex-direction: column;
   background-color: var(--lt-surface);
@@ -1483,8 +1526,9 @@ footer {
   .copy-url-btn { transition: none; }
 }
 
-/* ---- botão retornar ao topo ---------------------------------------------- */
-#back-to-top {
+/* ---- botões flutuantes: retornar ao topo / ir para o fim ------------------ */
+#back-to-top,
+#go-to-bottom {
   position: fixed;
   bottom: 24px;
   right: max(16px, calc(25vw - 286px));
@@ -1504,7 +1548,7 @@ footer {
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease,
+  transition: opacity 0.25s ease, transform 0.25s ease, bottom 0.25s ease,
               background-color 0.15s, border-color 0.15s;
 
   &.is-visible {
@@ -1514,7 +1558,6 @@ footer {
   }
 
   &::before {
-    content: 'retornar ao topo da página';
     position: absolute;
     right: calc(100% + 10px);
     top: 50%;
@@ -1551,7 +1594,13 @@ footer {
   }
 }
 
-body:has(.has-sidebar) #back-to-top {
+#back-to-top::before { content: 'retornar ao topo da página'; }
+#go-to-bottom::before { content: 'ir para o fim da página'; }
+
+/* empilhamento: com o "topo" visível, o "fim" sobe para ficar logo acima dele */
+#go-to-bottom.is-raised { bottom: calc(24px + 32px + 12px); }
+
+body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   right: 16px;
 }
 
@@ -1570,8 +1619,12 @@ body:has(.has-sidebar) #back-to-top {
   mask-size: contain;
 }
 
+/* ícone do "ir para o fim": a mesma seta, girada 180° (aponta para baixo) */
+.back-top-icon--down { transform: rotate(180deg); }
+
 @media (prefers-reduced-motion: reduce) {
-  #back-to-top { transition: none; }
+  #back-to-top,
+  #go-to-bottom { transition: none; }
 }
 
 /* ---- navegação entre seções (barra lateral) ------------------------------ */

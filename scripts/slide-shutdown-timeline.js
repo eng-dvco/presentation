@@ -19,7 +19,7 @@
   var HORARIO = '07h–17h';
   var WD = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
   var EIXOS = [{ key: 'leste', label: 'Eixo Leste' }, { key: 'norte', label: 'Eixo Norte' }];
-  var STATUS_LABEL = { programado: 'Programado', forcado: 'Forçado', energizado: 'Energizado' };
+  var STATUS_LABEL = { programado: 'Desligamento programado', forcado: 'Desligamento forçado', energizado: 'Energizado' };
 
   // subestação → dias de desligamento (DD-MM-AA); lista vazia = sem desligamento.
   // s.forcado: true → desligamento forçado (vermelho); senão programado (laranja).
@@ -188,9 +188,70 @@
 
       wrap.appendChild(g); sec.appendChild(wrap);
       body.appendChild(sec);
-      UI.addScrollFade(wrap);
+      addGanttScroll(wrap);
     });
     if (!any) body.appendChild(el('div', 'sdt-empty', 'Nenhum registro encontrado para a busca.'));
+  }
+
+  // mobile: iguala a largura das colunas do Gantt entre os eixos. Define
+  // --colw = (região visível de dados)/3 para que TODO eixo mostre exatamente 3
+  // colunas com a MESMA largura — o eixo leste (mais dias) passa a rolar mostrando
+  // 3 por vez; o norte (3 dias) preenche a região. Recalculado no resize. No
+  // desktop a propriedade é removida (volta ao minmax(3rem,1fr) que preenche). */
+  function sizeGanttCols() {
+    var mobile = window.matchMedia('(max-width: 640px)').matches;
+    Array.prototype.forEach.call(body.querySelectorAll('.sdt-gantt'), function (g) {
+      if (!mobile) { g.style.removeProperty('--colw'); return; }
+      var wrap = g.closest('.sdt-gantt-wrap');
+      if (!wrap) return;
+      var cs = window.getComputedStyle(wrap);
+      var padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+      var label = g.querySelector('.sdt-gantt-se, .sdt-gantt-corner');
+      var labelW = label ? label.getBoundingClientRect().width : 0;
+      var region = wrap.clientWidth - padX - labelW;
+      // floor para evitar que arredondamento faça o norte transbordar (rolar)
+      if (region > 0) g.style.setProperty('--colw', (Math.floor(region / 3 * 100) / 100) + 'px');
+    });
+  }
+
+  // rolagem do Gantt: painéis congelados (sticky via CSS) + gradiente de
+  // continuidade SÓ na área de dados (horários), nos 4 lados. Envolve o scroller
+  // num wrapper que recebe os offsets --data-* (paddings do wrap + largura do
+  // rótulo + altura do cabeçalho) e as 4 bordas-gradiente; alterna
+  // has-left/right/top/bottom conforme a rolagem horizontal e vertical.
+  function addGanttScroll(scroller) {
+    if (!scroller) return;
+    var wrap = el('div', 'sdt-gantt-scroll');
+    scroller.parentNode.insertBefore(wrap, scroller);
+    wrap.appendChild(scroller);
+    ['left', 'right', 'top', 'bottom'].forEach(function (side) {
+      var d = el('div', 'sdt-gantt-fade sdt-gantt-fade-' + side);
+      d.setAttribute('aria-hidden', 'true');
+      wrap.appendChild(d);
+    });
+    function measure() {
+      var cs = window.getComputedStyle(scroller);
+      var g = scroller.querySelector('.sdt-gantt');
+      var label = g && g.querySelector('.sdt-gantt-se, .sdt-gantt-corner');
+      var head = g && g.querySelector('.sdt-gantt-head');
+      var labelW = label ? label.getBoundingClientRect().width : 0;
+      var headH = head ? head.getBoundingClientRect().height : 0;
+      wrap.style.setProperty('--data-left', (parseFloat(cs.paddingLeft) + labelW) + 'px');
+      wrap.style.setProperty('--data-right', cs.paddingRight);
+      wrap.style.setProperty('--data-top', (parseFloat(cs.paddingTop) + headH) + 'px');
+      wrap.style.setProperty('--data-bottom', cs.paddingBottom);
+    }
+    function upd() {
+      var maxX = scroller.scrollWidth - scroller.clientWidth;
+      var maxY = scroller.scrollHeight - scroller.clientHeight;
+      wrap.classList.toggle('has-left', scroller.scrollLeft > 1);
+      wrap.classList.toggle('has-right', scroller.scrollLeft < maxX - 1);
+      wrap.classList.toggle('has-top', scroller.scrollTop > 1);
+      wrap.classList.toggle('has-bottom', scroller.scrollTop < maxY - 1);
+    }
+    scroller.addEventListener('scroll', upd, { passive: true });
+    scroller._gRefresh = function () { measure(); upd(); };
+    scroller._gRefresh();
   }
 
   // ── render principal ──
@@ -201,6 +262,9 @@
     body.innerHTML = '';
     if (state.view === 'gantt') {
       renderGantt(q);
+      sizeGanttCols();
+      // larguras de coluna mudaram → recalcula offsets/estados das bordas-gradiente
+      Array.prototype.forEach.call(body.querySelectorAll('.sdt-gantt-wrap'), function (w) { if (w._gRefresh) w._gRefresh(); });
       var nSE = SE_DESL.filter(function (s) { return !q || UI.foldAccents([s.se, s.eixo, (s.dias[0] || ''), (s.dias[s.dias.length - 1] || '')].join(' ')).indexOf(q) !== -1; }).length;
       if (countEl) countEl.textContent = (nSE === SE_DESL.length ? SE_DESL.length : nSE + ' de ' + SE_DESL.length) + (nSE === 1 ? ' subestação' : ' subestações');
       return;
@@ -225,16 +289,12 @@
   function setActive(sel, btn) {
     root.querySelectorAll(sel).forEach(function (x) { var a = x === btn; x.classList.toggle('is-active', a); x.setAttribute('aria-pressed', String(a)); });
   }
-  // ordenação e detalhamento valem só para a tabela → ocultos no Gantt
-  function syncControls() {
-    var gantt = state.view === 'gantt';
-    ['.sdt-sort', '.sdt-detail'].forEach(function (sel) {
-      var grp = root.querySelector(sel); var cg = grp && grp.closest('.sdt-cgroup');
-      if (cg) cg.style.visibility = gantt ? 'hidden' : '';
-    });
-  }
+  // ordenação e detalhamento valem só para a tabela; o container .sdt-filters é
+  // ocultado no Gantt via CSS ([data-view="gantt"] .sdt-filters{display:none}) —
+  // collapsa de fato (sem espaço vazio) e o grupo "Exibição" fica ancorado à
+  // direita, então não se move ao trocar de exibição.
   root.querySelectorAll('.sdt-views button').forEach(function (b) {
-    b.addEventListener('click', function () { state.view = b.dataset.view; root.dataset.view = state.view; setActive('.sdt-views button', b); syncControls(); render(); });
+    b.addEventListener('click', function () { state.view = b.dataset.view; root.dataset.view = state.view; setActive('.sdt-views button', b); render(); });
   });
   root.querySelectorAll('.sdt-detail button').forEach(function (b) {
     b.addEventListener('click', function () { state.detail = b.dataset.detail; root.dataset.detail = state.detail; setActive('.sdt-detail button', b); render(); });
@@ -260,8 +320,18 @@
     });
   }
 
+  // recalcula a largura das colunas do Gantt ao redimensionar (mobile ↔ desktop)
+  var sdtResizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(sdtResizeTimer);
+    sdtResizeTimer = setTimeout(function () {
+      if (state.view !== 'gantt') return;
+      sizeGanttCols();
+      Array.prototype.forEach.call(body.querySelectorAll('.sdt-gantt-wrap'), function (w) { if (w._gRefresh) w._gRefresh(); });
+    }, 150);
+  });
+
   root.dataset.detail = state.detail;
   root.dataset.view = state.view;
-  syncControls();
   render();
 })();

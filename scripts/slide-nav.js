@@ -267,9 +267,10 @@ function initMarker(itemNav) {
 
 // Sidebar colapsível com TODAS as seções navegáveis (acima de anterior/próximo).
 // O cabeçalho mostra a seção atual; ao expandir, lista todas as seções e permite
-// saltar direto ao 1º item de qualquer uma. O estado (aberto/fechado) é
-// memorizado em sessionStorage, persistindo entre os slides.
-function buildAllSectionsNav(sections, currentIndex) {
+// saltar direto ao 1º item de qualquer uma. A cada carga o estado inicial segue
+// a regra do item 5 (colapsada se existe "slides desta seção"; senão expandida),
+// ignorando qualquer estado anterior do usuário.
+function buildAllSectionsNav(sections, currentIndex, hasItemNav) {
   if (sections.length < 2) return null;
   const current = sections[currentIndex] || null;
 
@@ -314,6 +315,11 @@ function buildAllSectionsNav(sections, currentIndex) {
   home.href = 'index.html';
   home.className = 'secnav-item-link secnav-all-link secnav-all-home';
   home.textContent = 'Seleção de conteúdo';
+  // voltar à seleção pela navegação lateral também restaura o ponto de onde o
+  // usuário saiu (mesma intenção do "conteúdo" do breadcrumb) — ver slide-selection.js
+  home.addEventListener('click', () => {
+    try { sessionStorage.setItem('indexRestoreScroll', '1'); } catch {}
+  });
   if (!reducedMotion) {
     home.addEventListener('mousedown', spawnRipple);
     home.addEventListener('touchstart', spawnRipple, { passive: true });
@@ -342,9 +348,10 @@ function buildAllSectionsNav(sections, currentIndex) {
   listWrap.appendChild(listInner);
   wrap.appendChild(listWrap);
 
-  // estado aberto/fechado memorizado (fechado por padrão)
-  let open = false;
-  try { open = sessionStorage.getItem('secnav-all-open') === '1'; } catch {}
+  // a 1ª caixa (entre seções) ignora estado memorizado e, a cada carga, inicia
+  // COLAPSADA quando existe a caixa "slides desta seção"; quando ela não existe,
+  // esta passa a ser a única navegação e abre EXPANDIDA.
+  let open = !hasItemNav;
   const apply = () => {
     wrap.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -352,7 +359,6 @@ function buildAllSectionsNav(sections, currentIndex) {
   apply();
   toggle.addEventListener('click', () => {
     open = !open;
-    try { sessionStorage.setItem('secnav-all-open', open ? '1' : '0'); } catch {}
     apply();
   });
 
@@ -383,9 +389,10 @@ function buildSectionNav(sections, currentIndex, currentSlug) {
   //   Container 2 = CONTEÚDO da seção ativa (.secnav-items: subtítulo + contador +
   //   itens com o marcador deslizante). Antes o Container 2 ficava ANINHADO dentro
   //   do painel colapsável do Container 1; agora cada um é uma caixa irmã/própria.
-  const allNav = buildAllSectionsNav(sections, currentIndex);
   // navegação entre os itens da seção atual — agora em seu PRÓPRIO container (irmão)
   const itemNav = buildItemNav(sections[currentIndex], currentSlug);
+  // a 1ª caixa sabe se há "slides desta seção" p/ decidir o estado inicial (item 5)
+  const allNav = buildAllSectionsNav(sections, currentIndex, !!itemNav);
   if (allNav) nav.appendChild(allNav);
   if (itemNav) {
     // envolve o bloco de itens em uma caixa própria (Container 2), separada do
@@ -1016,22 +1023,43 @@ if (breadcrumb && navigator.clipboard) {
 // prevUrl/nextUrl são null até initNav() resolver; o handler já está ativo
 // mas as teclas de navegação não disparam enquanto ambos são null.
 
-// ---- botão retornar ao topo ------------------------------------------------
+// ---- botões flutuantes: retornar ao topo / ir para o fim -------------------
 
 const backToTop = document.getElementById('back-to-top');
 if (backToTop) {
   const SCROLL_THRESHOLD = 400;
+
+  // botão gêmeo (inverso): ir para o fim da página — injetado aqui para não
+  // duplicar markup em todos os slides; empilhado verticalmente com o do topo.
+  const goToBottom = document.createElement('button');
+  goToBottom.id = 'go-to-bottom';
+  goToBottom.setAttribute('aria-label', 'Ir para o fim da página');
+  goToBottom.innerHTML = '<span class="back-top-icon back-top-icon--down" aria-hidden="true"></span>';
+  backToTop.insertAdjacentElement('afterend', goToBottom);
+
   let scrollTicking = false;
+  function syncScrollFabs() {
+    const doc = document.documentElement;
+    const showTop = window.scrollY >= SCROLL_THRESHOLD;
+    const bottomGap = doc.scrollHeight - window.scrollY - window.innerHeight;
+    backToTop.classList.toggle('is-visible', showTop);
+    goToBottom.classList.toggle('is-visible', bottomGap > SCROLL_THRESHOLD);
+    // quando o "topo" aparece, o "fim" sobe para ficar acima dele
+    goToBottom.classList.toggle('is-raised', showTop);
+  }
   window.addEventListener('scroll', () => {
     if (scrollTicking) return;
     scrollTicking = true;
-    requestAnimationFrame(() => {
-      backToTop.classList.toggle('is-visible', window.scrollY >= SCROLL_THRESHOLD);
-      scrollTicking = false;
-    });
+    requestAnimationFrame(() => { syncScrollFabs(); scrollTicking = false; });
   }, { passive: true });
+  window.addEventListener('resize', syncScrollFabs, { passive: true });
+  syncScrollFabs();
+
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+  });
+  goToBottom.addEventListener('click', () => {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: reducedMotion ? 'auto' : 'smooth' });
   });
 }
 

@@ -496,7 +496,7 @@
    mantendo-se visualmente abaixo dos links ativos (mais escuros). */
 .reunion.disabled {
   background-color: var(--color-black-alpha-10);
-  border: 1px solid var(--lt-border);
+  border: none;
   color: var(--lt-text-muted);
 }
 

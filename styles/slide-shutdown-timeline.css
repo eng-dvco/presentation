@@ -27,8 +27,17 @@
   }
   & .sdt-cgroup { display: flex; align-items: center; gap: 0.5rem; }
   & .sdt-clabel { font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0, 0, 0, 0.45); }
-  & .sdt-count { margin-left: auto; font-size: 0.66rem; color: rgba(0, 0, 0, 0.45); white-space: nowrap; }
+  /* filtros só-tabela (ordenar + detalhamento) num container próprio que COLAPSA
+     no Gantt (display:none) — sem deixar espaço vazio na barra. */
+  & .sdt-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 0.55rem 1rem; }
+  /* "Exibição" ancorada à direita: permanece no mesmo lugar quando os filtros
+     colapsam (não se move ao trocar de exibição). */
+  & .sdt-cgroup--view { margin-left: auto; }
+  & .sdt-count { font-size: 0.66rem; color: rgba(0, 0, 0, 0.45); white-space: nowrap; }
   & .search-pill input { width: 17ch; }
+
+  /* Gantt: os filtros só-tabela somem DE FATO (collapse, não apenas invisíveis) */
+  &[data-view="gantt"] .sdt-filters { display: none; }
 
   /* ── corpo (preenchido por JS conforme o modo) ── */
   & .sdt-body {
@@ -52,16 +61,21 @@
 
   /* ── modo TABELA ── */
   & .sdt-table-wrap { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) transparent; }
-  & table.sdt-table { width: 100%; border-collapse: collapse; font-size: 0.72rem; }
+  & table.sdt-table { width: 100%; min-width: 32rem; table-layout: fixed; border-collapse: collapse; font-size: 0.72rem; }
   & .sdt-table thead th {
     background: var(--lt-surface); padding: 0.42rem 0.7rem; text-align: left;
     font-size: 0.56rem; font-weight: var(--font-weight-bold); letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--lt-text-muted);
     border-bottom: 1px solid var(--lt-border); white-space: nowrap;
   }
-  & .sdt-table thead th.sdt-th-status { text-align: center; width: 1px; padding-left: 0.5rem; padding-right: 0.5rem; }
+  & .sdt-table thead th.sdt-th-status { text-align: center; width: 2.6rem; padding-left: 0.5rem; padding-right: 0.5rem; }
   & .sdt-table thead th.sdt-th-c { text-align: center; }
-  & .sdt-table tbody td { padding: 0.36rem 0.7rem; border-bottom: 1px dashed var(--lt-border); color: rgba(0, 0, 0, 0.75); white-space: nowrap; vertical-align: middle; }
+  /* larguras fixas das colunas estáveis (Eixo, Subestação): com table-layout
+     fixed acima, evitam o deslocamento horizontal ao filtrar/ordenar/trocar de
+     modo, em qualquer viewport */
+  & .sdt-table thead th:nth-child(2) { width: 5.5rem; }
+  & .sdt-table thead th:nth-child(3) { width: 8rem; }
+  & .sdt-table tbody td { padding: 0.36rem 0.7rem; border-bottom: 1px dashed var(--lt-border); color: rgba(0, 0, 0, 0.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; }
   & .sdt-table tbody td:not(:last-child) { border-right: 1px dashed var(--lt-col-divider); }
   & .sdt-table tbody tr.is-odd { background: var(--zebra-odd); }
   & .sdt-table tbody tr.is-even { background: var(--zebra-even); }
@@ -79,7 +93,14 @@
 
   /* ── modo GANTT (SEs × dias; barras coloridas por status; títulos das SEs e
      a linha do horário ficam em preto/cinza para preservar a legibilidade) ── */
-  & .sdt-gantt-wrap { overflow-x: auto; padding: 0.7rem 1rem 0.95rem; scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) transparent; }
+  & .sdt-gantt-wrap {
+    overflow: auto;                 /* rolagem horizontal E vertical (painéis congelados) */
+    max-height: min(34rem, 75vh);   /* ativa o scroll vertical só com dados suficientes */
+    /* SEM padding interno: os painéis fixos (sticky) encostam na borda do scroller,
+       sem deixar os dados "vazarem" no padding ao rolar. O respiro vem da margem do
+       wrapper externo .sdt-gantt-scroll. */
+    scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
   & .sdt-gantt { display: flex; flex-direction: column; width: max-content; min-width: 100%; }
   & .sdt-gantt-row { display: grid; grid-template-columns: 4.6rem repeat(var(--cols), minmax(3rem, 1fr)); align-items: stretch; }
   & .sdt-gantt-row:not(:last-child) { border-bottom: 1px dashed var(--lt-border); }
@@ -88,17 +109,48 @@
   & .sdt-gantt-wd { font-size: 0.5rem; font-weight: var(--font-weight-normal); color: rgba(0, 0, 0, 0.4); text-transform: uppercase; letter-spacing: 0.03em; }
   & .sdt-gantt-se { display: flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.5rem; font-size: 0.62rem; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); white-space: nowrap; letter-spacing: 0.03em; }
   & .sdt-gantt-c { min-height: 1.6rem; display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--lt-col-divider); }
-  & .sdt-gantt-c.is-on { border-left: none; color: rgba(0, 0, 0, 0.7); font-size: 0.5rem; font-weight: var(--font-weight-bold); letter-spacing: 0.02em; }
-  & .sdt-gantt-c.is-on.is-programado { background: var(--color-orange-alpha-50); }
-  & .sdt-gantt-c.is-on.is-forcado { background: var(--color-red-alpha-50); }
-  & .sdt-gantt-c.is-on.is-first { border-radius: 4px 0 0 4px; margin-left: 2px; }
-  & .sdt-gantt-c.is-on.is-last { border-radius: 0 4px 4px 0; margin-right: 2px; }
-  & .sdt-gantt-c.is-on.is-first.is-last { border-radius: 4px; }
-  & .sdt-gantt-h { overflow: hidden; white-space: nowrap; padding: 0 2px; font-weight: var(--font-weight-boldest); }
-  & .sdt-gantt-energ { display: flex; align-items: center; justify-content: center; min-height: 1.6rem; font-size: 0.56rem; font-style: italic; color: rgba(0, 0, 0, 0.42); background: var(--color-green-alpha-10); border-left: 1px dashed var(--lt-col-divider); }
+  /* todo bloco preenchido usa o MESMO padding (todas as extremidades), cantos
+     arredondados e margem uniforme → cada bloco vira uma "ilha" idêntica */
+  & .sdt-gantt-c.is-on { border-left: none; margin: 2px; padding: 0.18rem; border-radius: 4px; color: rgba(0, 0, 0, 0.72); font-size: 0.5rem; font-weight: var(--font-weight-bold); letter-spacing: 0.02em; }
+  /* desenergizado → HACHURA zebrada com dois tons do próprio status (claro + escuro) */
+  & .sdt-gantt-c.is-on.is-programado { background: repeating-linear-gradient(45deg, var(--color-orange-alpha-25) 0 5px, var(--color-orange-alpha-75) 5px 10px); }
+  & .sdt-gantt-c.is-on.is-forcado { background: repeating-linear-gradient(45deg, var(--color-red-alpha-25) 0 5px, var(--color-red-alpha-75) 5px 10px); }
+  & .sdt-gantt-h { overflow: hidden; white-space: nowrap; font-weight: var(--font-weight-boldest); }
+  /* energizado → preenchimento SÓLIDO, com os mesmos padding/cantos/margem */
+  & .sdt-gantt-energ { display: flex; align-items: center; justify-content: center; min-height: 1.6rem; margin: 2px; padding: 0.18rem; border-radius: 4px; font-size: 0.56rem; font-style: italic; color: rgba(0, 0, 0, 0.42); background: var(--color-green-alpha-25); }
+
+  /* ── painéis congelados (estilo Excel) ── a coluna das SEs fica fixa na rolagem
+     horizontal; a linha dos dias, fixa na vertical; o canto, fixo nos dois eixos.
+     As células fixas recebem fundo opaco p/ ocultar os dados que passam por baixo. */
+  & .sdt-gantt-se { position: sticky; left: 0; z-index: 2; background: var(--lt-surface); }
+  /* a LINHA do cabeçalho inteira fica sticky no topo — sticky por CÉLULA não
+     funcionaria (cada célula é limitada pela altura da própria linha, curta) */
+  & .sdt-gantt-head { position: sticky; top: 0; z-index: 3; }
+  & .sdt-gantt-head .sdt-gantt-dh { background: var(--lt-surface); }
+  & .sdt-gantt-corner { position: sticky; left: 0; z-index: 4; background: var(--lt-surface); }
+
+  /* ── gradiente de continuidade SOMENTE na região de dados (horários) ── nunca
+     sobre os títulos laterais (SEs) nem superiores (dias). Os offsets --data-* são
+     medidos pelo JS (paddings do wrap + largura do rótulo + altura do cabeçalho);
+     cada borda aparece conforme a rolagem (4 direções: ←/→ horizontal, ↑/↓ vertical). */
+  & .sdt-gantt-scroll { position: relative; margin: 0.6rem 1rem 0.85rem; }
+  & .sdt-gantt-fade { position: absolute; pointer-events: none; opacity: 0; transition: opacity 0.25s ease; z-index: 5; }
+  & .sdt-gantt-fade-left   { left: var(--data-left); top: var(--data-top); bottom: var(--data-bottom); width: 2rem; background: linear-gradient(to right, var(--lt-surface), transparent); }
+  & .sdt-gantt-fade-right  { right: var(--data-right); top: var(--data-top); bottom: var(--data-bottom); width: 2rem; background: linear-gradient(to left, var(--lt-surface), transparent); }
+  & .sdt-gantt-fade-top    { left: var(--data-left); right: var(--data-right); top: var(--data-top); height: 1.1rem; background: linear-gradient(to bottom, var(--lt-surface), transparent); }
+  & .sdt-gantt-fade-bottom { left: var(--data-left); right: var(--data-right); bottom: var(--data-bottom); height: 1.1rem; background: linear-gradient(to top, var(--lt-surface), transparent); }
+  & .sdt-gantt-scroll.has-left   .sdt-gantt-fade-left   { opacity: 1; }
+  & .sdt-gantt-scroll.has-right  .sdt-gantt-fade-right  { opacity: 1; }
+  & .sdt-gantt-scroll.has-top    .sdt-gantt-fade-top    { opacity: 1; }
+  & .sdt-gantt-scroll.has-bottom .sdt-gantt-fade-bottom { opacity: 1; }
 }
 
 @media (max-width: 640px) {
-  .sdt .sdt-count { margin-left: 0; }
+  /* a barra já wrap-a de forma compacta; a "Exibição" volta ao fluxo natural */
+  .sdt .sdt-cgroup--view { margin-left: 0; }
   .sdt .sdt-controls { gap: 0.5rem 0.8rem; }
+
+  /* colunas do Gantt com largura igual entre eixos: --colw (= região/3, definido
+     em slide-shutdown-timeline.js) faz cada eixo exibir exatamente 3 colunas */
+  .sdt .sdt-gantt-row { grid-template-columns: 4.6rem repeat(var(--cols), var(--colw, minmax(3rem, 1fr))); }
 }

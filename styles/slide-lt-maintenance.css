@@ -15,13 +15,41 @@
 ul.nav-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
   margin: 0;
 }
 
-.nav-list {
+.nav-group {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--padding-general-normal);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-general);
+
+  & .nav-group-label {
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    color: var(--lt-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  & .nav-group-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.nav-group-list {
   & li {
-    margin: 8px;
     background-color: var(--lt-surface-muted);
     padding: var(--padding-general-normal);
     border-radius: var(--border-general);

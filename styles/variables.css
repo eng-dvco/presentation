@@ -131,8 +131,8 @@
      existing color/background tokens above are untouched (other pages depend on them).
      Mirrors the already-light timeline page (slide-tl.css): light surfaces
      ~#fff / #f5f5f5 over a near-white page, dark text, darker-green accents. */
-  --lt-hero-overlay: rgba(245, 245, 245, 0.74);         /* light wash placed over the hero image (more transparent so the photo shows through) */
-  --lt-hero-overlay-top: rgba(255, 255, 255, 0.47);     /* slightly brighter top fade (mirrors old dark top gradient), lowered proportionally */
+  --lt-hero-overlay: rgba(245, 245, 245, 0.64);         /* light wash placed over the hero image (more transparent so the photo shows through) */
+  --lt-hero-overlay-top: rgba(255, 255, 255, 0.37);     /* slightly brighter top fade (mirrors old dark top gradient), lowered proportionally */
   --lt-surface: rgba(255, 255, 255, 0.97);              /* primary card/header surface (= slide-tl.css) */
   --lt-surface-strong: rgba(255, 255, 255, 1);          /* opaque surface */
   --lt-surface-muted: rgba(245, 245, 245, 0.97);        /* secondary/sunken surface (#f5f5f5) */

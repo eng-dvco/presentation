@@ -1,0 +1,102 @@
+/* ───────── Medição de resistência de aterramento ─────────
+   Três tabelas lado a lado (resistência por base, por torre), reaproveitando a
+   linguagem visual das tabelas de slide-stayed-towers-quantity.html (cartão +
+   .tl-data-table de slide-tl.css), porém SEM os pontos de status circulares.
+   Estilos replicados aqui (autocontidos, prefixo grt-) p/ não puxar os overrides
+   de página do slide-tl.css nesta página de mosaico. */
+.grt-tables {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.grt-card {
+  flex: 1 1 200px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--lt-surface);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-general);
+  box-shadow: var(--lt-shadow);
+  overflow: hidden;
+
+  & .grt-cap {
+    padding: 0.55rem 0.9rem;
+    font-family: var(--font-family-general);
+    font-size: 0.64rem;
+    font-weight: var(--font-weight-boldest);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.72);
+    background: var(--lt-surface-muted);
+    border-bottom: 1px dashed var(--lt-border);
+  }
+}
+
+/* tabela: mesma aparência de .tl-data-table (slide-tl.css) */
+.grt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-family-general);
+  font-size: 0.72rem;
+
+  & thead th {
+    background: var(--lt-surface);
+    padding: 0.42rem 0.7rem;
+    text-align: left;
+    font-size: 0.58rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--lt-text-muted);
+    border-bottom: 1px solid var(--lt-border);
+    white-space: nowrap;
+  }
+  & thead th:last-child { text-align: right; }
+
+  & tbody tr { transition: background 0.12s; }
+  & tbody tr.is-row-odd { background: #f5f5f5; }
+  & tbody tr.is-row-even { background: #ececec; }
+  & tbody tr:hover { background: #e4e4e4; }
+
+  & tbody td {
+    padding: 0.35rem 0.7rem;
+    border-bottom: 1px dashed var(--lt-border);
+    color: rgba(0, 0, 0, 0.75);
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  & tbody td:not(:last-child) { border-right: 1px dashed rgba(160, 160, 160, 0.55); }
+
+  & .grt-base { font-weight: var(--font-weight-bold); letter-spacing: 0.02em; color: rgba(0, 0, 0, 0.72); }
+  & .grt-val { text-align: right; font-variant-numeric: tabular-nums; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); }
+}
+
+/* legenda (mesma estrutura visual da .tl-legend) */
+.grt-legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  /* largura total do container (igual ao subtítulo do mosaico, que é width:100%);
+     sem isso o justify-items:center do .content-wrapper a deixaria do tamanho do
+     conteúdo */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  margin-bottom: 24px;
+  background: var(--lt-surface);
+  border-radius: var(--border-general);
+  box-shadow: var(--lt-shadow);
+}
+.grt-legend-title { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0, 0, 0, 0.75); white-space: nowrap; flex-shrink: 0; }
+.grt-legend-sep { flex: 1; height: 0; border-top: 1px dashed var(--lt-border); margin: 0 1rem; }
+.grt-legend-items { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; min-width: 0; }
+.grt-legend-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-family-general); font-size: 0.68rem; color: var(--lt-icon); }
+
+@media (max-width: 640px) {
+  .grt-legend-items { flex-direction: column; align-items: flex-start; gap: 0.4rem; flex-basis: 100%; padding-top: 0.3rem; }
+}

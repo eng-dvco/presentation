@@ -57,15 +57,44 @@
     edgeSvg.setAttribute('viewBox', vb); edgeSvg.firstChild.setAttribute('d', edgeD);
   }
 
+  /* exibir mais/menos: quando a descrição passa de 3 linhas (clamp do CSS), um
+     botão no canto inferior direito expande/colapsa o texto. O botão fica FORA do
+     <a> (não pode haver <button> dentro de link) — é irmão, no .postscriptum-container. */
+  function clampToggle(a) {
+    var p = a.querySelector('p');
+    var container = a.parentNode;
+    if (!p || !container) return;
+    var btn = container.querySelector(':scope > .post-link-toggle');
+    if (a.classList.contains('is-expanded')) return; // expandido: mantém o botão
+    if (p.scrollHeight - p.clientHeight <= 1) { if (btn) btn.remove(); return; }
+    if (btn) return;
+    btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'post-link-toggle';
+    btn.textContent = 'exibir mais';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var expanded = a.classList.toggle('is-expanded');
+      btn.textContent = expanded ? 'exibir menos' : 'exibir mais';
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      draw(a); // a altura mudou → redesenha as bordas SVG
+    });
+    container.appendChild(btn);
+  }
+
+  function refresh(a) { draw(a); clampToggle(a); }
+
   var banners = document.querySelectorAll('.post-link');
   if (!banners.length) return;
   banners.forEach(function (a) {
-    draw(a);
+    refresh(a);
     if ('ResizeObserver' in window) {
-      new ResizeObserver(function () { draw(a); }).observe(a);
+      new ResizeObserver(function () { refresh(a); }).observe(a);
     }
   });
-  window.addEventListener('resize', function () { banners.forEach(draw); });
+  window.addEventListener('resize', function () { banners.forEach(refresh); });
 
   /* Título + descrição:
      - TÍTULO (.post-link-title) = nome do documento (código do RDC), derivado do
@@ -82,7 +111,7 @@
     var code = id.replace(/^doc-/, '');
     if (titleEl && code && titleEl.textContent.trim() !== code) {
       titleEl.textContent = code;
-      draw(a);
+      refresh(a);
     }
     if (!url || !id || !p) return;
     fetch(url).then(function (r) { return r.text(); }).then(function (html) {
@@ -92,7 +121,7 @@
       var next = src.textContent.trim();
       if (p.textContent !== next) {
         p.textContent = next;
-        draw(a);
+        refresh(a);
       }
     }).catch(function () {});
   });

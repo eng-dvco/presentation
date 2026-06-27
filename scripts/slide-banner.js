@@ -58,8 +58,9 @@
   }
 
   /* exibir mais/menos: quando a descrição passa de 3 linhas (clamp do CSS), um
-     botão no canto inferior direito expande/colapsa o texto. O botão fica FORA do
-     <a> (não pode haver <button> dentro de link) — é irmão, no .postscriptum-container. */
+     botão no canto inferior direito expande/colapsa o texto. O botão é IRMÃO do
+     banner (.post-link), no .postscriptum-container, p/ se sobrepor à quina
+     inferior-direita ancorado na caixa do container (e não no fluxo do texto). */
   function clampToggle(a) {
     var p = a.querySelector('p');
     var container = a.parentNode;
@@ -98,17 +99,21 @@
   window.addEventListener('resize', function () { banners.forEach(refresh); });
 
   /* Título + descrição:
-     - TÍTULO (.post-link-title) = nome do documento (código do RDC), derivado do
-       próprio href (#doc-…) — disponível mesmo offline (file://).
+     - TÍTULO (.post-link-title) = nome do documento (código do RDC). É o ÚNICO
+       elemento clicável do banner (um <a> que leva ao documento na página inicial);
+       o restante do banner (.post-link) é uma <div> NÃO clicável. O código é
+       derivado do próprio href (#doc-…) do título — disponível mesmo offline (file://).
      - CORPO (<p>) = descrição viva do documento em 'documentos recebidos'
        (a .doc-desc-row de index.html, fonte de verdade), SEM o prefixo
        "Documento relacionado: …". Sincronizado via fetch quando servido por
        http(s); em file:// o fetch é bloqueado e mantém-se o texto local (fallback). */
   banners.forEach(function (a) {
-    var url = (a.getAttribute('href') || '').split('#')[0];
-    var id = decodeURIComponent((a.hash || '').replace(/^#/, ''));
-    var p = a.querySelector('p');
+    // o href/hash agora vivem no <a> do título (não mais no container .post-link)
     var titleEl = a.querySelector('.post-link-title');
+    var href = titleEl ? (titleEl.getAttribute('href') || '') : '';
+    var url = href.split('#')[0];
+    var id = decodeURIComponent((href.split('#')[1] || ''));
+    var p = a.querySelector('p');
     var code = id.replace(/^doc-/, '');
     if (titleEl && code && titleEl.textContent.trim() !== code) {
       titleEl.textContent = code;

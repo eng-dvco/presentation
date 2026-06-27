@@ -682,6 +682,9 @@ a.flex-logo-container {
      chanfro), sem espaços vazios entre os elementos. */
   display: flex;
   flex-direction: column;
+  /* transição da leve elevação ao pairar o título (antes vinha de a.postscriptum-wrapper,
+     que deixou de existir quando o banner passou de <a> p/ <div>) */
+  transition: transform 0.15s;
 
   & > svg.post-link-fill {
     position: absolute;
@@ -717,6 +720,12 @@ a.flex-logo-container {
   & > .post-link-title {
     position: relative;
     z-index: 1;
+    /* ÚNICO elemento clicável do banner: é um <a> que leva ao documento na página
+       inicial. Afford de link: cursor + sublinhado só no hover (sem sublinhado por
+       padrão p/ manter a faixa limpa). */
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
     text-align: center;
     padding: 4px 12px;
     background-color: var(--color-dark-blue);
@@ -733,6 +742,8 @@ a.flex-logo-container {
     /* chanfra o canto SUPERIOR-ESQUERDO do título p/ acompanhar o chanfro do banner
        (10px = CHAMFER em scripts/slide-banner.js) */
     clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+
+    &:hover { text-decoration: underline; }
 
     /* ícone de seta PERMANENTE (sempre visível) — mesmo glifo dos RDCs em
        'documentos recebidos' (.doc-goto::after), sinalizando que o banner leva ao
@@ -785,16 +796,16 @@ a.flex-logo-container {
   }
 }
 
-/* postscriptum usado como link (banner de menção bidirecional documento↔slide) */
-a.postscriptum-wrapper { cursor: pointer; text-decoration: none; transition: background-color 0.15s, border-color 0.15s, transform 0.15s; }
-/* HOVER do banner-link: o banner eleva levemente e o botão "exibir" (que é IRMÃO
-   do <a>, pois <button> não vai dentro de link) ACOMPANHA o movimento. Acionado no
-   CONTAINER (= caixa do banner) p/ pairar em qualquer um dos dois elevar AMBOS
-   juntos, sem flicker (o botão sobreposto não tira o hover do banner). */
-.postscriptum-container:hover > .post-link,
-.postscriptum-container:hover > .post-link-toggle { transform: translateY(-1px); }
-.postscriptum-container:hover > .post-link > svg.post-link-fill path { fill: var(--color-blue-alpha-50); }
-.postscriptum-container:hover > .post-link > svg.post-link-edge path { stroke: var(--color-dark-blue); }
+/* banner de menção bidirecional documento↔slide: APENAS o título (.post-link-title)
+   é clicável; o banner em si é uma <div> não clicável (antes o banner inteiro era um
+   <a>). HOVER: ao pairar o TÍTULO, o banner eleva levemente e o botão "exibir" (que é
+   IRMÃO do banner) ACOMPANHA o movimento. Acionado via :has(.post-link-title:hover) no
+   container p/ ELEVAR AMBOS (.post-link e .post-link-toggle) juntos — e só quando o
+   alvo clicável (o título) é apontado, não em qualquer ponto do banner. */
+.postscriptum-container:has(.post-link-title:hover) > .post-link,
+.postscriptum-container:has(.post-link-title:hover) > .post-link-toggle { transform: translateY(-1px); }
+.postscriptum-container:has(.post-link-title:hover) > .post-link > svg.post-link-fill path { fill: var(--color-blue-alpha-50); }
+.postscriptum-container:has(.post-link-title:hover) > .post-link > svg.post-link-edge path { stroke: var(--color-dark-blue); }
 
 /* botão "exibir mais / exibir menos" do banner (injetado por slide-banner.js só
    quando a descrição passa de 3 linhas): pílula no canto inferior direito, na cor
@@ -1539,7 +1550,12 @@ footer {
   width: 200px;
   position: sticky;
   top: 56px;
-  max-height: calc(100dvh - 68px);
+  /* margem inferior SIMÉTRICA à superior: o card gruda a 56px do topo (top: 56px,
+     que limpa o .breadcrumb sticky de ~25px e deixa ~31px de respiro até o card).
+     A altura máxima desconta esse mesmo respiro embaixo (56 do topo + 31 de margem
+     inferior = 87px) p/ que o card NÃO encoste no limite inferior da viewport e
+     fique com folga igual em cima e embaixo (centralizado entre o header e a base). */
+  max-height: calc(100dvh - 87px);
   display: flex;
   flex-direction: column;
   background-color: var(--lt-surface);

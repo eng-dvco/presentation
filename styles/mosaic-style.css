@@ -224,10 +224,15 @@
     width: 100%;
   }
 
+  /* O mosaico aqui é single-column: cada container de imagem AJUSTA a altura à
+     altura real da imagem (height:auto + img height:auto), exibindo o conteúdo
+     por INTEIRO, sem corte e sem faixas vazias. Resolve as imagens largas
+     (tabelas) que ficavam diminutas e com grande faixa vazia no 360px fixo. */
+  .img,
+  .img.img-stretch,
   .img.img-duo-column,
   .img.img-tri-column,
   .img.img-quad-column,
-  .img.img-largest {
-    height: 360px;
-  }
+  .img.img-largest { height: auto; }
+  .img > img { height: auto; }
 }

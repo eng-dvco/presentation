@@ -102,7 +102,11 @@
     scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) transparent;
   }
   & .sdt-gantt { display: flex; flex-direction: column; width: max-content; min-width: 100%; }
-  & .sdt-gantt-row { display: grid; grid-template-columns: 4.6rem repeat(var(--cols), minmax(3rem, 1fr)); align-items: stretch; }
+  /* colunas com largura IGUAL entre eixos. Mobile: --colw = região/3 (3 colunas,
+     definido em slide-shutdown-timeline.js). Desktop/tablet: sem --colw → largura
+     FIXA compacta de 4.5rem → o leste mostra ~todas as colunas e o norte fica com
+     sobra à direita (mesma largura nos dois eixos). */
+  & .sdt-gantt-row { display: grid; grid-template-columns: 4.6rem repeat(var(--cols), var(--colw, 4.5rem)); align-items: stretch; }
   & .sdt-gantt-row:not(:last-child) { border-bottom: 1px dashed var(--lt-border); }
   & .sdt-gantt-head { border-bottom: 1px solid var(--lt-border); }
   & .sdt-gantt-dh { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.22rem 0; font-size: 0.56rem; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.6); border-left: 1px dashed var(--lt-col-divider); }
@@ -149,8 +153,4 @@
   /* a barra já wrap-a de forma compacta; a "Exibição" volta ao fluxo natural */
   .sdt .sdt-cgroup--view { margin-left: 0; }
   .sdt .sdt-controls { gap: 0.5rem 0.8rem; }
-
-  /* colunas do Gantt com largura igual entre eixos: --colw (= região/3, definido
-     em slide-shutdown-timeline.js) faz cada eixo exibir exatamente 3 colunas */
-  .sdt .sdt-gantt-row { grid-template-columns: 4.6rem repeat(var(--cols), var(--colw, minmax(3rem, 1fr))); }
 }

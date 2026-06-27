@@ -61,19 +61,24 @@
                 <input type="search" class="tl-axis-code" id="tlp-search" placeholder="buscar equipamento / referência" autocomplete="off" aria-label="Buscar por equipamento ou referência de fabricação" title="Buscar por equipamento ou referência de fabricação" />
               </div>
             </div>
-            <div class="tlp-controls-group">
-              <span class="tlp-group-label">Ordenar</span>
-              <div class="tl-sort-toggle" role="group" aria-label="Ordenar tabela">
-                <button type="button" class="tl-sort-btn is-active" data-sort="item" aria-pressed="true" title="Ordenar por item nº (clique novamente para inverter)">Item nº <span class="tlp-dir" aria-hidden="true">▲</span></button>
-                <button type="button" class="tl-sort-btn" data-sort="crit" aria-pressed="false" title="Ordenar por criticidade (clique novamente para inverter)">Criticidade <span class="tlp-dir" aria-hidden="true">▲</span></button>
-                <button type="button" class="tl-sort-btn" data-sort="valor" aria-pressed="false" title="Ordenar por valor total (clique novamente para inverter)">Valor total <span class="tlp-dir" aria-hidden="true">▲</span></button>
-              </div>
-            </div>
-            <div class="tlp-controls-group">
-              <span class="tlp-group-label">Detalhamento</span>
-              <div class="tl-view-toggle" role="group" aria-label="Nível de detalhamento das colunas">
-                <button type="button" class="tl-view-btn is-active" data-view="reduzido" aria-pressed="true" title="Visão reduzida — quantidades agregadas por eixo (Norte/Leste)">Reduzido</button>
-                <button type="button" class="tl-view-btn" data-view="expandido" aria-pressed="false" title="Visão expandida — quantidades detalhadas por subestação">Expandido</button>
+            <div class="tlp-filter">
+              <button type="button" class="tlf-funnel" aria-label="Classificação e filtragem" aria-expanded="false" aria-controls="tlp-filter-menu" title="Classificação e filtragem"><svg class="tlf-funnel-icon" viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 2.5 L11 2.5 L7 7 L7 10.5 L5 10.5 L5 7 Z"/></svg></button>
+              <div class="tlp-filter-menu" id="tlp-filter-menu">
+                <div class="tlp-controls-group">
+                  <span class="tlp-group-label">Ordenar</span>
+                  <div class="tl-sort-toggle" role="group" aria-label="Ordenar tabela">
+                    <button type="button" class="tl-sort-btn is-active" data-sort="item" aria-pressed="true" title="Ordenar por item nº (clique novamente para inverter)">Item nº <span class="tlp-dir" aria-hidden="true">▲</span></button>
+                    <button type="button" class="tl-sort-btn" data-sort="crit" aria-pressed="false" title="Ordenar por criticidade (clique novamente para inverter)">Criticidade <span class="tlp-dir" aria-hidden="true">▲</span></button>
+                    <button type="button" class="tl-sort-btn" data-sort="valor" aria-pressed="false" title="Ordenar por valor total (clique novamente para inverter)">Valor total <span class="tlp-dir" aria-hidden="true">▲</span></button>
+                  </div>
+                </div>
+                <div class="tlp-controls-group">
+                  <span class="tlp-group-label">Detalhamento</span>
+                  <div class="tl-view-toggle" role="group" aria-label="Nível de detalhamento das colunas">
+                    <button type="button" class="tl-view-btn is-active" data-view="reduzido" aria-pressed="true" title="Visão reduzida — quantidades agregadas por eixo (Norte/Leste)">Reduzido</button>
+                    <button type="button" class="tl-view-btn" data-view="expandido" aria-pressed="false" title="Visão expandida — quantidades detalhadas por subestação">Expandido</button>
+                  </div>
+                </div>
               </div>
             </div>
             <span class="tlp-count" id="tlp-count" aria-live="polite"></span>
@@ -595,6 +600,26 @@
             });
           });
         });
+
+        /* ── funil de classificação/filtragem (mobile): abre/fecha o dropdown que
+           agrupa "Ordenar" e "Detalhamento". Mesmo comportamento do funil de status
+           do tl-stay-recovery (toggle .is-open + fecha ao clicar fora). ── */
+        (function tlpFilterFunnel() {
+          var btn = document.querySelector('.tlp-controls .tlf-funnel');
+          var fwrap = btn && btn.closest('.tlp-filter');
+          if (!btn || !fwrap) return;
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var open = fwrap.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', String(open));
+          });
+          document.addEventListener('click', function (e) {
+            if (!e.target.closest('.tlp-filter')) {
+              fwrap.classList.remove('is-open');
+              btn.setAttribute('aria-expanded', 'false');
+            }
+          });
+        })();
 
         render();
 

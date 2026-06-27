@@ -193,11 +193,14 @@
     if (!any) body.appendChild(el('div', 'sdt-empty', 'Nenhum registro encontrado para a busca.'));
   }
 
-  // mobile: iguala a largura das colunas do Gantt entre os eixos. Define
-  // --colw = (região visível de dados)/3 para que TODO eixo mostre exatamente 3
-  // colunas com a MESMA largura — o eixo leste (mais dias) passa a rolar mostrando
-  // 3 por vez; o norte (3 dias) preenche a região. Recalculado no resize. No
-  // desktop a propriedade é removida (volta ao minmax(3rem,1fr) que preenche). */
+  // colunas do Gantt com a MESMA largura entre os eixos, com comportamento por
+  // viewport:
+  //   • MOBILE (<=640px): --colw = região/3 → cada eixo mostra 3 colunas iguais;
+  //     o leste (mais dias) rola mostrando 3 por vez.
+  //   • DESKTOP/TABLET (>640px): remove --colw → cai no fallback FIXO do CSS
+  //     (var(--colw, 4.5rem)) → colunas compactas e iguais; o leste mostra ~todas
+  //     as colunas (pouca/nenhuma rolagem) e o norte (3 dias) fica com sobra à
+  //     direita. Recalculado no resize.
   function sizeGanttCols() {
     var mobile = window.matchMedia('(max-width: 640px)').matches;
     Array.prototype.forEach.call(body.querySelectorAll('.sdt-gantt'), function (g) {

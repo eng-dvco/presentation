@@ -388,11 +388,12 @@ a.flex-logo-container {
 }
 
 .obs {
-  width: calc(100% - 48px);
+  /* margem idêntica nas três bordas onde a observação se posiciona (inferior +
+     laterais): o mesmo 8px do fundo replicado à esquerda e à direita */
   position: absolute;
-  left: 50%;
+  left: 8px;
+  right: 8px;
   bottom: 8px;
-  transform: translateX(-50%);
 
   padding: 8px 12px;
   border-radius: var(--border-general);
@@ -692,7 +693,6 @@ a.flex-logo-container {
 
     & path { fill: var(--color-blue-alpha-25); stroke: none; }
   }
-  &:hover > svg.post-link-fill path { fill: var(--color-blue-alpha-50); }
 
   & > svg.post-link-edge {
     position: absolute;
@@ -709,7 +709,6 @@ a.flex-logo-container {
       stroke-dasharray: 6 4;
     }
   }
-  &:hover > svg.post-link-edge path { stroke: var(--color-dark-blue); }
 
   /* título do banner = nome do documento (código do RDC): faixa superior que se
      estende de BORDA A BORDA (inclusive preenchendo o chanfro superior-esquerdo,
@@ -752,51 +751,93 @@ a.flex-logo-container {
     position: relative;
     z-index: 1;
     margin: 0;
-    padding: 6px 14px 10px;
+    padding: 6px 14px 12px;
     color: var(--color-dark-blue);
     font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
     font-weight: var(--font-weight-normal);
-    /* colapsado: no máximo 3 linhas (mesmo limite em qualquer viewport); o botão
-       .post-link-toggle (exibir mais/menos) expande removendo o clamp */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    line-height: 1.5;
+    /* COLAPSADO: ~3 linhas (max-height em vez de -webkit-line-clamp p/ recorte
+       limpo, sem reticências/vazamento); o botão expande removendo o limite */
+    max-height: calc(1.5em * 3 + 18px);
     overflow: hidden;
 
-    &::before {
-      content: none;
-    }
+    &::before { content: none; }
   }
+  /* EXPANDIDO: texto inteiro + uma LINHA RESERVADA no fim (padding-bottom) para o
+     botão "exibir menos" ficar abaixo do texto, sem cobri-lo. */
+  &.is-expanded p { max-height: none; padding-bottom: 2.4em; }
 
-  &.is-expanded p {
-    -webkit-line-clamp: unset;
-    overflow: visible;
+  /* gradiente de continuidade: esmaece o fim do texto COLAPSADO (indica que há mais
+     conteúdo), sob a borda e o botão. Só quando há overflow (.has-more, definido
+     pelo JS) e colapsado. */
+  &.has-more:not(.is-expanded)::after {
+    content: '';
+    position: absolute;
+    left: 1.5px; right: 1.5px; bottom: 1.5px;
+    height: 2.4em;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-blue) 25%, white));
+    /* chanfra a quina INFERIOR-DIREITA do gradiente p/ acompanhar o chanfro do
+       banner, sem extravasar na quina cortada (CHAMFER 10px − 1.5px de recuo em
+       cada lado = 7px). */
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
   }
 }
 
 /* postscriptum usado como link (banner de menção bidirecional documento↔slide) */
 a.postscriptum-wrapper { cursor: pointer; text-decoration: none; transition: background-color 0.15s, border-color 0.15s, transform 0.15s; }
-a.postscriptum-wrapper:hover { transform: translateY(-1px); }
+/* HOVER do banner-link: o banner eleva levemente e o botão "exibir" (que é IRMÃO
+   do <a>, pois <button> não vai dentro de link) ACOMPANHA o movimento. Acionado no
+   CONTAINER (= caixa do banner) p/ pairar em qualquer um dos dois elevar AMBOS
+   juntos, sem flicker (o botão sobreposto não tira o hover do banner). */
+.postscriptum-container:hover > .post-link,
+.postscriptum-container:hover > .post-link-toggle { transform: translateY(-1px); }
+.postscriptum-container:hover > .post-link > svg.post-link-fill path { fill: var(--color-blue-alpha-50); }
+.postscriptum-container:hover > .post-link > svg.post-link-edge path { stroke: var(--color-dark-blue); }
 
 /* botão "exibir mais / exibir menos" do banner (injetado por slide-banner.js só
    quando a descrição passa de 3 linhas): pílula no canto inferior direito, na cor
    da faixa do título, acima do traço SVG. */
+/* o container ancora o botão (que é IRMÃO do <a>, pois <button> não pode ficar
+   dentro de link): com a tab fora de fluxo, o container = caixa do banner. */
+.postscriptum-container { position: relative; }
+
+/* botão "exibir mais/menos" do banner: tab no canto INFERIOR-DIREITO, preenchimento
+   partindo dessa borda, na cor da faixa do título. Forma de PARALELOGRAMO com as
+   duas laterais a 45° (como os chanfros sup-esq / inf-dir do banner): o lado direito
+   acompanha a borda inferior-direita chanfrada e o esquerdo é paralelo (consistência).
+   Largura ≈ tamanho do texto. */
 .post-link-toggle {
   position: absolute;
-  bottom: 6px;
-  right: 16px;
+  /* RECUO = espessura da borda (1.5px) nas bordas inferior e direita: o botão
+     encosta no PREENCHIMENTO da quina (sem vão visível) mas NÃO sobrepõe a borda
+     chanfrada do banner. */
+  right: 1.5px;
+  bottom: 1.5px;
   z-index: 3;
-  padding: 0 9px;
+  height: 1.8em;
+  line-height: 1.8em;
+  /* padding maior à esquerda (lado a 45°) p/ o texto não encostar na diagonal */
+  padding: 0 12px 0 22px;
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   font-weight: var(--font-weight-bold);
-  line-height: 1.7;
   color: color-mix(in srgb, var(--color-blue) 25%, white);
   background-color: var(--color-dark-blue);
   border: none;
-  border-radius: 99px;
+  border-radius: 0;
+  /* lado ESQUERDO a 45° (= chanfros do banner); quina INFERIOR-DIREITA chanfrada
+     ACOMPANHANDO o chanfro do banner; lado direito vertical rente à borda.
+     RECUO PERPENDICULAR DA DIAGONAL = espessura da borda (1.5px), igual ao recuo
+     reto das bordas inferior/direita: como o clip-path não aceita "right/bottom"
+     na diagonal, ele é obtido AUMENTANDO o corte. Numa reta a 45° (x+y=k), recuar
+     d perpendicular muda k em d·√2; logo o corte = 7px (rente à quina) + 1.5px·√2
+     ≈ 9.1px. Assim o botão desencosta da diagonal exatamente pela espessura da
+     borda, sem sobrepô-la (a borda chanfrada do banner fica visível na diagonal). */
+  clip-path: polygon(1.8em 0, 100% 0, 100% calc(100% - 9.1px), calc(100% - 9.1px) 100%, 0 100%);
   cursor: pointer;
-  transition: background-color 0.15s;
+  transition: background-color 0.15s, transform 0.15s;
 }
 .post-link-toggle:hover { background-color: var(--color-blue); }
 

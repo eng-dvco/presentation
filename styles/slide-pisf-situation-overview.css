@@ -72,3 +72,13 @@
 
 /* O fade de rolagem (.tl-scrollfade*) vem de slide-tl.css, já linkado nesta
    página — não há cópia local (evita duplicação). */
+
+@media (max-width: 640px) {
+  /* funil na MESMA linha do campo de busca, à direita dele: a busca encolhe e
+     cresce p/ preencher a linha, dividindo-a com o botão de funil (que vem logo
+     após); a contagem desce p/ a linha seguinte. Fica mais harmônico. */
+  #tlp-search { width: auto; flex: 1 1 0; min-width: 0; }
+  .tlp-controls > .tlp-controls-group { flex: 1 1 auto; min-width: 0; }
+  .tlp-controls > .tlp-controls-group .tl-axis-search { flex: 1 1 auto; min-width: 0; }
+  .tlp-controls .tlp-count { margin-left: 0; flex-basis: 100%; text-align: right; }
+}

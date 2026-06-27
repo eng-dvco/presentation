@@ -66,7 +66,8 @@
     if (!p || !container) return;
     var btn = container.querySelector(':scope > .post-link-toggle');
     if (a.classList.contains('is-expanded')) return; // expandido: mantém o botão
-    if (p.scrollHeight - p.clientHeight <= 1) { if (btn) btn.remove(); return; }
+    if (p.scrollHeight - p.clientHeight <= 1) { if (btn) btn.remove(); a.classList.remove('has-more'); return; }
+    a.classList.add('has-more'); // ativa o gradiente de continuidade (só quando há overflow)
     if (btn) return;
     btn = document.createElement('button');
     btn.type = 'button';

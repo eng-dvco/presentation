@@ -63,11 +63,15 @@
 
 /* ── legenda (barra inferior; mesmo padrão do conjunto de containers .tlp-group:
    título + separador tracejado + itens com ponto de status) ── */
-.legend { display: flex; align-items: center; flex-wrap: wrap; gap: 0; padding: 0.5rem 1rem; background: var(--lt-surface); box-shadow: var(--lt-shadow); }
+/* gap entre TÍTULO e itens consistente em todas as viewports: row-gap 0.4rem vale
+   sempre que os itens quebram para baixo (mobile e larguras intermediárias); o
+   column-gap 0 mantém o layout inline do desktop (espaçamento horizontal vem do
+   separador tracejado .legend-sep). */
+.legend { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem 0; padding: 0.5rem 1rem; background: var(--lt-surface); box-shadow: var(--lt-shadow); }
 .legend-title { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0, 0, 0, 0.75); white-space: nowrap; flex-shrink: 0; }
 .legend-sep { flex: 1; height: 0; border-top: 1px dashed var(--lt-border); margin: 0 2rem; }
 .legend-items { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; flex-shrink: 1; min-width: 0; }
 .legend-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-family-general); font-size: 0.68rem; color: var(--lt-icon); }
 @media (max-width: 640px) {
-  .legend-items { flex-direction: column; align-items: flex-start; gap: 0.4rem; flex-basis: 100%; padding-top: 0.3rem; }
+  .legend-items { flex-direction: column; align-items: flex-start; gap: 0.4rem; flex-basis: 100%; }
 }

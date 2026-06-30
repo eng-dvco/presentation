@@ -1,0 +1,306 @@
+/* ───────── Carrossel inline (scripts/slide-carousel.js) ─────────
+   Imagem principal à esquerda + tira VERTICAL rolável de miniaturas à direita,
+   replicando a linguagem do lightbox (slide-style.css), porém no TEMA CLARO da
+   página: fundo branco zebrado (mesma faixa diagonal aplicada às bordas dos
+   containers de imagem do mosaico), tira de miniaturas levemente escurecida para
+   contraste, miniaturas com barra de progresso, ícones de pausa/play, legenda e
+   tooltip de observação no hover — tudo monocromático/minimalista. É construído a
+   partir de uma .mosaic-container.is-carousel cujos blocos .img permanecem no DOM
+   (ocultos) p/ alimentar o lightbox global (clicar na imagem principal abre o
+   lightbox em tela cheia). Ocupa a seção inteira do mosaico (largura total). */
+
+.mosaic-container.is-carousel {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: none;
+  height: clamp(300px, 48vw, 540px);
+  padding: 12px;
+  box-sizing: border-box;
+  /* fundo branco zebrado: a mesma faixa diagonal (#f5f5f5/#ececec) usada nas
+     bordas dos containers de imagem do mosaico — mantém a página clara e
+     monocromática; a hairline delimita o painel sobre o quase-branco da página */
+  background: var(--zebra-stripe);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-general);
+  box-shadow: var(--lt-shadow);
+  overflow: hidden;
+}
+
+/* os blocos .img originais ficam só para o lightbox (mosaicImages) — invisíveis */
+.is-carousel > .img { display: none; }
+
+/* palco: imagem principal (abre o lightbox ao clicar) + legenda */
+.carousel-stage {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.carousel-img {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  object-fit: contain;
+  /* mesma moldura zebrada dos containers de imagem do mosaico: anel de 2px com a
+     faixa diagonal (border-box) + miolo branco (padding-box) sob a foto contida;
+     cantos arredondados em --border-item, como os demais containers */
+  border: 2px solid transparent;
+  border-radius: var(--border-item);
+  background:
+    linear-gradient(var(--background-white), var(--background-white)) padding-box,
+    var(--zebra-stripe) border-box;
+  box-shadow: var(--lt-shadow);
+  cursor: zoom-in;
+}
+
+.carousel-caption {
+  flex-shrink: 0;
+  text-align: center;
+  /* texto escuro sobre o fundo claro zebrado (era branco, invisível agora) */
+  color: var(--lt-text-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
+  font-style: italic;
+
+  &.carousel-caption--empty { color: var(--lt-text-faint); }
+  &.carousel-caption--done { color: var(--color-dark-green); }
+  &.carousel-caption--pending { color: var(--color-dark-red); }
+}
+
+/* wrapper da tira: porta as bordas-gradiente de rolagem E sangra a região
+   escurecida até as bordas do painel (topo, fundo e direita), cancelando o
+   padding de 12px do .is-carousel; o overflow:hidden + border-radius do painel
+   recortam o excedente (cantos externos arredondados). Não é um cartão dividido,
+   apenas um rebaixo que sugere profundidade — um nível abaixo do palco. A
+   esquerda permanece encostada ao palco (gap de 12px preservado). */
+.carousel-thumbs-fade {
+  flex-shrink: 0;
+  align-self: stretch;
+  width: 108px;
+  margin: -12px -12px -12px 0;
+}
+
+/* tira VERTICAL de miniaturas (rolável) — preenche o wrapper sangrado, de borda
+   a borda. O escurecimento (véu cinza sobre a zebra) vai até as bordas; o padding
+   uniforme de 6px mantém a distância atual das miniaturas às bordas e as deixa
+   centralizadas na horizontal. justify-content centraliza na vertical quando cabem
+   (cai p/ o topo, rolável, quando excedem). A sombra interna à esquerda marca o
+   degrau de profundidade em relação ao palco. */
+.carousel-thumbs {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  gap: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px;
+  background: var(--color-grey-alpha-50);
+  box-shadow: inset 5px 0 6px -4px rgba(0, 0, 0, 0.22);
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+/* bordas-gradiente de rolagem (topo/fundo), no molde das tabelas/cronogramas
+   (.scrollfade): brancas → transparentes, surgem só quando há conteúdo a rolar
+   naquele sentido (has-top/has-bottom alternadas por slide-carousel.js). */
+.carousel-thumbs-edge {
+  position: absolute;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+/* faixas horizontais (rolagem vertical, desktop) e verticais (rolagem horizontal,
+   mobile). O gradiente converge para a cor EFETIVA da tira (cinza ~#d7d7d7 = véu
+   --color-grey-alpha-50 sobre a zebra do painel), não para branco puro, p/ desbotar
+   sem halo e sumir nos limites — como o .scrollfade some no fundo das tabelas. */
+.carousel-thumbs-top,
+.carousel-thumbs-bottom { left: 0; right: 0; height: 2.5rem; }
+.carousel-thumbs-left,
+.carousel-thumbs-right { top: 0; bottom: 0; width: 2.5rem; }
+.carousel-thumbs-top { top: 0; background: linear-gradient(to bottom, #d7d7d7, transparent); }
+.carousel-thumbs-bottom { bottom: 0; background: linear-gradient(to top, #d7d7d7, transparent); }
+.carousel-thumbs-left { left: 0; background: linear-gradient(to right, #d7d7d7, transparent); }
+.carousel-thumbs-right { right: 0; background: linear-gradient(to left, #d7d7d7, transparent); }
+.carousel-thumbs-fade.has-top .carousel-thumbs-top { opacity: 1; }
+.carousel-thumbs-fade.has-bottom .carousel-thumbs-bottom { opacity: 1; }
+.carousel-thumbs-fade.has-left .carousel-thumbs-left { opacity: 1; }
+.carousel-thumbs-fade.has-right .carousel-thumbs-right { opacity: 1; }
+
+.carousel-thumb-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-thumb {
+  width: 100%;
+  height: 64px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  /* inativa levemente esmaecida (funde-se ao véu da tray); ativa em 1 + moldura
+     escura — leitura clara num fundo claro/monocromático */
+  opacity: 0.55;
+  background: transparent;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: opacity 0.15s, border-color 0.15s;
+
+  /* indicador de posição (1, 2, 3…) no canto superior-esquerdo — ESTILIZAÇÃO
+     IDÊNTICA à dos containers de imagem do mosaico (.img::before/::after em
+     mosaic-style.css). ::before = faixa diagonal verde recortada no canto (também
+     incrementa o contador img-position, resetado no .mosaic-container.is-carousel);
+     ::after = número upright que lê o contador já incrementado. O overflow:hidden
+     + border-radius da própria miniatura recortam a faixa no triângulo do canto.
+     A vinheta inferior decorativa foi removida p/ liberar o ::after ao número. */
+  &::before {
+    counter-increment: img-position;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: top left;
+    /* mesma faixa diagonal do mosaico, porém ESCALADA (~0,6×) p/ ficar proporcional
+       à miniatura: todos os comprimentos (largura/altura/translate) reduzidos no
+       mesmo fator escalam a figura em torno da quina (0,0), preservando o desenho */
+    transform: translate(-22px, 22px) rotate(-45deg);
+    box-sizing: border-box;
+    width: 96px;
+    height: 22px;
+    background-color: var(--color-dark-green-alpha-50);
+    border-bottom: 1.5px dashed var(--color-green);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &::after {
+    content: counter(img-position);
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    transform: translate(-2px, -1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-green);
+    font-weight: var(--font-weight-boldest);
+    /* fonte do mosaico reduzida no mesmo fator (~0,6×) */
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs) * 0.6);
+    line-height: var(--font-line-ui);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  &:hover { opacity: 0.85; }
+
+  &.active {
+    border-color: var(--color-black-alpha-75);
+    opacity: 1;
+  }
+}
+
+.carousel-thumb-progress {
+  /* barra de progresso CONTIDA na miniatura: ancorada no fundo, DENTRO do botão —
+     o overflow:hidden + border-radius da miniatura a recortam, então respeita as
+     bordas arredondadas sem ultrapassar os limites internos. Cresce da esquerda
+     p/ a direita via width (animada pelo JS). z acima da imagem/scrim/ícones. */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 4;
+  height: 3px;
+  width: 0%;
+  background: var(--color-black-alpha-75);
+}
+
+/* ícones de pausa/play sobre a miniatura ativa (reusa o keyframe lightbox-play-flash).
+   Ficam sobre a FOTO da miniatura ativa, com scrim escuro próprio + glifo claro —
+   independem do tema claro do painel, então permanecem brancos. */
+.carousel-thumb-pause,
+.carousel-thumb-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+}
+.carousel-thumb-pause { z-index: 2; transition: opacity 0.15s; }
+.carousel-thumb-play { z-index: 3; }
+.carousel-thumb-play.is-playing { animation: lightbox-play-flash 1.4s ease forwards; }
+
+.carousel-thumbs:hover .carousel-thumb.active .carousel-thumb-pause,
+.carousel-stage:hover ~ .carousel-thumbs .carousel-thumb.active .carousel-thumb-pause { opacity: 1; }
+
+.carousel-thumb-pause::after,
+.carousel-thumb-play::after {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: rgba(255, 255, 255, 0.9);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+}
+.carousel-thumb-pause::after {
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Crect%20x%3D%226%22%20y%3D%224%22%20width%3D%224%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%224%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3C%2Fsvg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Crect%20x%3D%226%22%20y%3D%224%22%20width%3D%224%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3Crect%20x%3D%2214%22%20y%3D%224%22%20width%3D%224%22%20height%3D%2216%22%20rx%3D%221%22%2F%3E%3C%2Fsvg%3E");
+}
+.carousel-thumb-play::after {
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M8%205v14l11-7z%22%2F%3E%3C%2Fsvg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M8%205v14l11-7z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-thumb { transition: none; }
+  .carousel-thumb-play,
+  .carousel-thumb-pause { animation: none; transition: none; }
+}
+
+/* mobile: empilha (palco em cima; miniaturas em tira HORIZONTAL embaixo). O
+   rebaixo sangra esquerda/direita/baixo; o topo encosta no palco (gap preservado).
+   A sombra de profundidade passa p/ a borda superior (degrau em relação ao palco). */
+@media (max-width: 640px) {
+  .mosaic-container.is-carousel { flex-direction: column; height: auto; }
+  .carousel-stage { height: clamp(220px, 62vw, 360px); }
+  .carousel-thumbs-fade {
+    width: 100%;
+    align-self: stretch;
+    margin: 0 -12px -12px -12px;
+  }
+  .carousel-thumbs {
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    box-shadow: inset 0 5px 6px -4px rgba(0, 0, 0, 0.22);
+  }
+  .carousel-thumb-wrap { width: 88px; }
+  .carousel-thumb { height: 60px; }
+}

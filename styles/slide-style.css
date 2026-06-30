@@ -1346,11 +1346,17 @@ footer {
 }
 
 .lightbox-thumb-progress {
+  /* barra de progresso CONTIDA na miniatura: ancorada no fundo, DENTRO do botão —
+     o overflow:hidden + border-radius da miniatura a recortam, então respeita as
+     bordas arredondadas sem ultrapassar os limites internos. z acima da imagem,
+     do scrim e dos ícones. Cor branca mantida (overlay escuro do lightbox). */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 4;
   height: 3px;
   width: 0%;
   background: rgba(255, 255, 255, 0.85);
-  border-radius: 0 0 2px 2px;
-  flex-shrink: 0;
 }
 
 .thumb-pause-icon {

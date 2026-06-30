@@ -46,7 +46,7 @@ function resetGestureTransform() {
   else if (overlayImg) { overlayImg.style.transition = 'none'; overlayImg.style.transform = ''; }
 }
 
-const mosaicImages = Array.from(document.querySelectorAll('.mosaic-container img'));
+const mosaicImages = Array.from(document.querySelectorAll('.mosaic-container img:not(.carousel-img)'));
 
 // ---- 1. NAVEGAÇÃO ENTRE SEÇÕES --------------------------------------------
 // Os botões "anterior"/"próximo" da barra lateral saltam para a seção vizinha
@@ -666,8 +666,10 @@ function buildLightbox() {
       });
     }
 
+    // barra DENTRO do botão (não mais abaixo dele): o overflow:hidden +
+    // border-radius da miniatura a recortam, contendo-a nas bordas arredondadas.
+    btn.appendChild(bar);
     wrap.appendChild(btn);
-    wrap.appendChild(bar);
     thumbsBar.appendChild(wrap);
   });
 
@@ -980,6 +982,10 @@ function closeLightbox() {
 
 if (mosaicImages.length) {
   mosaicImages.forEach((img, idx) => {
+    // imagens-fonte do carrossel inline (.is-carousel) ficam ocultas e são geridas
+    // por slide-carousel.js — a imagem principal abre o lightbox via a ponte abaixo;
+    // por isso não recebem o clique-para-ampliar aqui.
+    if (img.closest('.is-carousel')) return;
     img.style.cursor = 'zoom-in';
     img.setAttribute('tabindex', '0');
     img.setAttribute('role', 'button');
@@ -990,6 +996,13 @@ if (mosaicImages.length) {
     });
   });
 }
+
+// ponte p/ o carrossel inline (slide-carousel.js): abre o lightbox global na
+// imagem informada — um dos blocos .img do carrossel, presentes em mosaicImages.
+window.__openImgLightbox = function (imgEl) {
+  const i = mosaicImages.indexOf(imgEl);
+  if (i >= 0) openLightbox(i);
+};
 
 // ---- 3. BOTÃO COPIAR URL --------------------------------------------------
 

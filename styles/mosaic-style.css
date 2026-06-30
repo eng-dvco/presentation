@@ -45,6 +45,10 @@
   overflow: hidden;
 
   & > img {
+    /* block: remove o vão da linha-base de imagem inline (faixa branca em cima/
+       embaixo, mostrando o padding-box branco do .img); com object-fit:cover +
+       100%/100% a imagem preenche todo o container, restando só a borda zebrada */
+    display: block;
     object-fit: cover;
     object-position: center;
     width: 100%;

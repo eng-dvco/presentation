@@ -682,9 +682,6 @@ a.flex-logo-container {
      chanfro), sem espaços vazios entre os elementos. */
   display: flex;
   flex-direction: column;
-  /* transição da leve elevação ao pairar o título (antes vinha de a.postscriptum-wrapper,
-     que deixou de existir quando o banner passou de <a> p/ <div>) */
-  transition: transform 0.15s;
 
   & > svg.post-link-fill {
     position: absolute;
@@ -750,6 +747,9 @@ a.flex-logo-container {
        documento. */
     &::after {
       content: "\2197";
+      /* inline-block torna a seta atômica: o sublinhado do título (no hover) NÃO se
+         estende sob ela — só o texto do RDC fica sublinhado */
+      display: inline-block;
       margin-left: 0.4em;
       font-weight: var(--font-weight-boldest);
     }
@@ -797,13 +797,10 @@ a.flex-logo-container {
 }
 
 /* banner de menção bidirecional documento↔slide: APENAS o título (.post-link-title)
-   é clicável; o banner em si é uma <div> não clicável (antes o banner inteiro era um
-   <a>). HOVER: ao pairar o TÍTULO, o banner eleva levemente e o botão "exibir" (que é
-   IRMÃO do banner) ACOMPANHA o movimento. Acionado via :has(.post-link-title:hover) no
-   container p/ ELEVAR AMBOS (.post-link e .post-link-toggle) juntos — e só quando o
-   alvo clicável (o título) é apontado, não em qualquer ponto do banner. */
-.postscriptum-container:has(.post-link-title:hover) > .post-link,
-.postscriptum-container:has(.post-link-title:hover) > .post-link-toggle { transform: translateY(-1px); }
+   é clicável; o banner em si é uma <div> não clicável. HOVER: ao pairar o TÍTULO, o
+   banner NÃO se move — apenas troca as cores (preenchimento + traço, via
+   :has(.post-link-title:hover)) e sublinha o TEXTO do título (.post-link-title:hover;
+   a seta, inline-block, fica de fora do sublinhado). */
 .postscriptum-container:has(.post-link-title:hover) > .post-link > svg.post-link-fill path { fill: var(--color-blue-alpha-50); }
 .postscriptum-container:has(.post-link-title:hover) > .post-link > svg.post-link-edge path { stroke: var(--color-dark-blue); }
 

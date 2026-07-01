@@ -1,5 +1,9 @@
 .content-wrapper {
-  gap: 12px;
+  /* menor espaçamento base deste slide: propaga p/ o row-gap do wrapper E p/ o
+     gap ENTRE imagens dos grupos (.mosaic-container) — ambos 12px, então
+     "imagem↔imagem" = "subtítulo↔1ª imagem". O respiro MAIOR entre grupos vem do
+     margin-top:24px dos .title-header-h3 (abaixo), que permanece inalterado. */
+  --content-gap: 12px;
 }
 
 .title-header-h2 {

@@ -248,6 +248,10 @@ body { color: rgba(0,0,0,0.75); }
 .tl-date { font-family: var(--font-family-general); font-size: 0.58rem; color: rgba(0,0,0,0.65); white-space: nowrap; display: flex; align-items: baseline; gap: 0.25em; }
 .tl-lbl  { font-size: 0.52rem; color: rgba(0,0,0,0.4); flex-shrink: 0; }
 .tl-date--empty { color: rgba(0,0,0,0.35); font-style: italic; justify-content: center; }
+/* valor de data ausente (ex.: conclusão em aberto) reserva a MESMA largura de uma
+   data completa — 8 caracteres monoespaçados (DD-MM-YY) = 8ch —, para o card do
+   entry ficar com largura idêntica aos de datas completas; o "—" fica centralizado. */
+.tl-date--empty .tl-date-val { min-width: 8ch; text-align: center; }
 
 /* legend */
 .tl-empty-state { background: #f5f5f5; border-top: 1px dashed var(--lt-border); padding: 2rem 1rem; font-family: var(--font-family-general); font-size: 0.72rem; color: rgba(0,0,0,0.4); font-style: italic; text-align: center; }

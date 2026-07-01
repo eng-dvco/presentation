@@ -377,7 +377,13 @@ a.flex-logo-container {
   width: 100%;
   max-width: 1080px;
   grid-template-rows: min-content 1fr;
-  row-gap: 24px;
+  /* espaçamento base entre os filhos do wrapper (ex.: subtítulo↔1ª imagem). O
+     .mosaic-container (mosaic-style.css) reusa este MESMO valor no gap ENTRE as
+     imagens de um grupo → "imagem↔imagem" = "subtítulo↔1ª imagem" em qualquer
+     slide. Slides com espaçamento próprio só redefinem --content-gap (ex.:
+     slide-lt-maintenance.css) e ambos os gaps acompanham. */
+  --content-gap: 24px;
+  row-gap: var(--content-gap);
   justify-items: center;
 
   & .title-header-h2,

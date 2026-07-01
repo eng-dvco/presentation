@@ -4,6 +4,15 @@
    .tl-data-table de slide-tl.css), porém SEM os pontos de status circulares.
    Estilos replicados aqui (autocontidos, prefixo grt-) p/ não puxar os overrides
    de página do slide-tl.css nesta página de mosaico. */
+/* espaçamento uniforme: a distância horizontal entre as tabelas (.grt-tables gap =
+   1.25rem) é replicada a TODOS os gaps verticais do wrapper (subtítulo↔tabelas↔
+   legenda↔imagens) e ao gap ENTRE imagens do mosaico. --content-gap governa o
+   row-gap do .content-wrapper E o gap do .mosaic-container (mosaic-style.css), então
+   basta igualá-lo ao gap das tabelas → mesma distância entre todos os itens, H e V. */
+.content-wrapper {
+  --content-gap: 1.25rem;
+}
+
 .grt-tables {
   display: flex;
   flex-wrap: wrap;
@@ -87,7 +96,6 @@
   width: 100%;
   box-sizing: border-box;
   padding: 0.5rem 1rem;
-  margin-bottom: 24px;
   background: var(--lt-surface);
   border-radius: var(--border-general);
   box-shadow: var(--lt-shadow);

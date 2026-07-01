@@ -6,7 +6,9 @@
   display: grid;
   width: 100%;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  /* gap ENTRE imagens do grupo = --content-gap do .content-wrapper ancestral
+     (mesma distância de subtítulo↔1ª imagem); fallback 24px sem wrapper. */
+  gap: var(--content-gap, 24px);
   counter-reset: img-position;
 
   & > div.img {

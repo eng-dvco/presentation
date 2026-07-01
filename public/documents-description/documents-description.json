@@ -55,9 +55,9 @@
     "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Painel de Controle das Torres Autoportantes.xlsx"
   },
   {
-    "nome": "RDC — Controle dos Relatórios de Campo do CPISF.xlsx",
+    "nome": "RDC — Controle dos Relatórios de Campo do CPISF v1.10.xlsx",
     "descrição": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDC — Controle dos Relatórios de Campo do CPISF.xlsx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDC — Controle dos Relatórios de Campo do CPISF v1.10.xlsx"
   },
   {
     "nome": "Recomendações eletromecânica — COP Elétrico.pdf",
@@ -145,6 +145,11 @@
     "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Instalação de placa de identificação.pdf"
   },
   {
+    "nome": "Ficha — Verificação de verticalidade.pdf",
+    "descrição": "Ficha de atividade: verificação de verticalidade de estrutura da linha de transmissão.",
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Verificação de verticalidade.pdf"
+  },
+  {
     "nome": "Eixo Leste Completo.kmz",
     "descrição": "Arquivo geográfico (Google Earth) com o traçado completo do eixo Leste da linha de transmissão.",
     "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\KMZ da linha de transmissão\\Eixo Leste Completo.kmz"
@@ -173,5 +178,10 @@
     "nome": "Pendências Gerais do PISF.png",
     "descrição": "Planilha de controle das pendências gerais de materiais e equipamentos do PISF: itens, criticidade, marca/modelo e quantidades por subestação (eixos Norte e Leste), com valores unitário e total.",
     "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Pendências Gerais do PISF\\Pendências Gerais do PISF.png"
+  },
+  {
+    "nome": "Controle de relatórios de campo v1.1.jpg",
+    "descrição": "Painel de controle dos relatórios de campo (RDC) por trecho e eixo (Norte e Leste), com totais por status: concluída, em execução e pendente.",
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Controle de relatórios de campo v1.1.jpg"
   }
 ]

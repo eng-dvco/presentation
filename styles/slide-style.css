@@ -27,7 +27,16 @@ body::before {
   width: 100%;
   height: 100lvh;
   z-index: -1;
+  /* fallback (navegadores sem image-set): JPEG */
   background: url(../assets/img/hero/hero-clean_blur.jpg) center center / cover no-repeat;
+  /* WebP leve (1280×720, qualidade 40): o fundo é borrado + coberto pelo wash
+     claro (body::after), então a baixa resolução/qualidade é imperceptível — mas
+     o arquivo cai de ~108 KB p/ ~16 KB. Carrega em TODAS as páginas, então acelera
+     o carregamento geral. Fallback p/ o JPEG em quem não suporta image-set. */
+  background: image-set(
+      url(../assets/img/hero/hero-clean_blur.webp) type("image/webp"),
+      url(../assets/img/hero/hero-clean_blur.jpg) type("image/jpeg")
+    ) center center / cover no-repeat;
 }
 
 /* light theme: a light wash over the hero image so text reads dark-on-light.

@@ -986,8 +986,30 @@ function showImage(idx) {
   }
 }
 
+// pré-carrega e pré-decodifica TODAS as imagens do lightbox (na resolução exibida
+// pela principal) para que trocar de miniatura seja INSTANTÂNEO — sem espera de rede
+// nem de decodificação. Roda uma vez. Mantém os Image vivos p/ preservar o cache.
+const lightboxPreloadKeep = [];
+let lightboxPreloaded = false;
+function preloadLightboxImages() {
+  if (lightboxPreloaded) return;
+  lightboxPreloaded = true;
+  mosaicImages.forEach((img) => {
+    const pre = new Image();
+    const source = img.closest('picture')?.querySelector('source[type="image/webp"]');
+    if (source && source.getAttribute('srcset')) {
+      pre.sizes = '100vw';
+      pre.srcset = source.getAttribute('srcset');
+    }
+    pre.src = img.src;
+    if (pre.decode) pre.decode().catch(() => {});
+    lightboxPreloadKeep.push(pre);
+  });
+}
+
 function openLightbox(idx) {
   if (!overlay) buildLightbox();
+  preloadLightboxImages();
   showImage(idx);
   overlay.removeAttribute('hidden');
   if (!reducedMotion) overlay.classList.add('lightbox-visible');

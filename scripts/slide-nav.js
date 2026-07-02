@@ -36,7 +36,7 @@ let upUrl = null;
 let downUrl = null;
 let lightboxOpen = false;
 let currentImgIdx = 0;
-let overlay, overlayStage, overlayImg, overlayCaption, overlayTitle, overlayCount, overlayClose, overlayPrev, overlayNext;
+let overlay, overlayStage, overlayImg, overlayCaption, overlayTitle, overlayCount, overlayClose, overlayLocate, overlayPrev, overlayNext;
 let imgGroupInfo = [];
 let autoTimer = null;
 let autoStart = null;
@@ -547,6 +547,13 @@ function buildLightbox() {
   overlayClose.setAttribute('aria-label', 'Fechar visualização');
   overlayClose.textContent = '✕';
 
+  // botão "localizar na página": fica à esquerda do ✕. Fecha o lightbox e rola o
+  // slide até a imagem atualmente exibida, destacando-a ("foco"). Ícone de mira SVG.
+  overlayLocate = document.createElement('button');
+  overlayLocate.className = 'lightbox-locate';
+  overlayLocate.setAttribute('aria-label', 'Localizar esta imagem na página');
+  overlayLocate.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg><span class="lightbox-locate-text">localizar</span>';
+
   overlayStage = document.createElement('div');
   overlayStage.className = 'lightbox-stage';
 
@@ -703,6 +710,7 @@ function buildLightbox() {
   overlayCaption.className = 'lightbox-caption';
 
   overlay.appendChild(overlayClose);
+  overlay.appendChild(overlayLocate);
   overlay.appendChild(overlayTitle);
   overlay.appendChild(overlayCount);
   overlay.appendChild(overlayStage);
@@ -711,6 +719,11 @@ function buildLightbox() {
   document.body.appendChild(overlay);
 
   overlayClose.addEventListener('click', closeLightbox);
+  overlayLocate.addEventListener('click', () => {
+    const target = mosaicImages[currentImgIdx];
+    closeLightbox();
+    locateOnPage(target);
+  });
   overlayPrev.addEventListener('click', () => showImage(currentImgIdx - 1));
   overlayNext.addEventListener('click', () => showImage(currentImgIdx + 1));
   // Por requisito: APENAS a tecla ESC e o botão ✕ fecham o lightbox.
@@ -939,18 +952,36 @@ function showImage(idx) {
   if (!mosaicImages.length) return;
   currentImgIdx = (idx + mosaicImages.length) % mosaicImages.length;
   const img = mosaicImages[currentImgIdx];
-  // exibe uma variante WebP dimensionada à viewport (srcset do <source> do
-  // <picture>) em vez do ORIGINAL cheio (que pode ter vários MB) — elimina o delay
-  // ao selecionar a miniatura. Recai no src original quando não há <picture>/WebP.
   const source = img.closest('picture')?.querySelector('source[type="image/webp"]');
+  // 1) INSTANTÂNEO: reusa a MESMA variante WebP que o slide já exibe (mesmo srcset +
+  //    o sizes do MOSAICO). Para as imagens já visíveis no slide, está em cache →
+  //    aparece na hora; para as demais, carrega essa variante PEQUENA (rápida), nunca
+  //    o original de vários MB — elimina o delay de 5s ao selecionar a miniatura.
   if (source && source.getAttribute('srcset')) {
-    overlayImg.srcset = source.getAttribute('srcset');
-    overlayImg.sizes = '100vw';
+    overlayImg.setAttribute('srcset', source.getAttribute('srcset'));
+    overlayImg.setAttribute('sizes', source.getAttribute('sizes') || '100vw');
   } else {
     overlayImg.removeAttribute('srcset');
   }
   overlayImg.src = img.src;
   overlayImg.alt = img.alt;
+  // 2) UPGRADE em segundo plano p/ a MAIOR variante WebP (nitidez em tela cheia), sem
+  //    bloquear a exibição: só troca quando terminar de baixar E se ainda for a atual.
+  if (source) {
+    const cand = source.getAttribute('srcset').split(',').map(s => s.trim().split(/\s+/)[0]);
+    const largest = cand[cand.length - 1];
+    if (largest) {
+      const up = new Image();
+      up.onload = () => {
+        if (mosaicImages[currentImgIdx] === img) {
+          overlayImg.removeAttribute('srcset');
+          overlayImg.removeAttribute('sizes');
+          overlayImg.src = largest;
+        }
+      };
+      up.src = largest;
+    }
+  }
   resetGestureTransform(); // zera deslize/pan/zoom ao trocar de imagem
   overlayPrev.disabled = mosaicImages.length <= 1;
   overlayNext.disabled = mosaicImages.length <= 1;
@@ -998,7 +1029,7 @@ function preloadLightboxImages() {
     const pre = new Image();
     const source = img.closest('picture')?.querySelector('source[type="image/webp"]');
     if (source && source.getAttribute('srcset')) {
-      pre.sizes = '100vw';
+      pre.sizes = source.getAttribute('sizes') || '100vw';
       pre.srcset = source.getAttribute('srcset');
     }
     pre.src = img.src;
@@ -1030,6 +1061,21 @@ function closeLightbox() {
   overlay.style.opacity = '';
   document.body.style.overflow = '';
   lightboxOpen = false;
+}
+
+// leva o usuário até a imagem atualmente exibida no lightbox: rola o slide até ela
+// (centralizada) e a destaca brevemente. Para imagens do carrossel, mira o container
+// visível do carrossel (a imagem-fonte fica oculta).
+function locateOnPage(img) {
+  if (!img) return;
+  const box = img.closest('.is-carousel') || img.closest('.img') || img;
+  requestAnimationFrame(() => {
+    box.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center', inline: 'center' });
+  });
+  box.classList.remove('img-located');
+  void box.offsetWidth; // força reflow p/ reiniciar a animação em cliques seguidos
+  box.classList.add('img-located');
+  setTimeout(() => box.classList.remove('img-located'), 2400);
 }
 
 if (mosaicImages.length) {

@@ -1212,6 +1212,7 @@ footer {
 }
 
 .lightbox-close,
+.lightbox-locate,
 .lightbox-nav {
   background: var(--background-black-alpha-75);
   border: 1px solid var(--color-white-alpha-25);
@@ -1232,6 +1233,51 @@ footer {
   height: 36px;
   font-size: 1rem;
   z-index: 1;
+}
+
+.lightbox-locate {
+  position: absolute;
+  top: 16px;
+  right: 60px;
+  height: 36px;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 18px;
+  white-space: nowrap;
+  z-index: 1;
+
+  & .lightbox-locate-text {
+    font-family: var(--font-family-general);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+}
+
+/* em telas estreitas, colapsa para só-ícone (círculo) p/ não competir com o título */
+@media (max-width: 576px) {
+  .lightbox-locate {
+    width: 36px;
+    padding: 0;
+    border-radius: 50%;
+
+    & .lightbox-locate-text { display: none; }
+  }
+}
+
+/* destaque temporário da imagem ao usar "localizar na página" (botão do lightbox) */
+.img-located { animation: img-locate-flash 2.4s ease-out; }
+
+@keyframes img-locate-flash {
+  0%, 12% { box-shadow: 0 0 0 3px var(--color-green), 0 0 16px 3px var(--color-green); }
+  100%    { box-shadow: 0 0 0 0 transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img-located { animation: none; box-shadow: 0 0 0 3px var(--color-green); }
 }
 
 .lightbox-nav {
@@ -1596,6 +1642,7 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .lightbox-overlay { transition: none; }
   .lightbox-close,
+  .lightbox-locate,
   .lightbox-nav,
   .lightbox-thumb,
   .copy-url-btn { transition: none; }

@@ -1,8 +1,8 @@
 /* ── light theme overrides (timeline page only) ────────────────────────── */
 body { color: rgba(0,0,0,0.75); }
-.flex-header-container { background-color: var(--lt-surface); backdrop-filter: none; border-bottom: 2px solid transparent; border-image: var(--zebra-stripe) 2; box-shadow: var(--lt-shadow); }
+.flex-header-container { background-color: var(--lt-surface); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 2px solid transparent; border-image: var(--zebra-stripe) 2; box-shadow: var(--lt-shadow); }
 .section-icon { background-color: var(--color-black); }
-.breadcrumb { background-color: var(--lt-surface); backdrop-filter: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
+.breadcrumb { background-color: var(--lt-surface); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
 .crumb a, .crumb [aria-current="page"] { color: rgba(0,0,0,0.5); opacity: 1; }
 .crumb a:hover, .crumb a:focus { color: var(--lt-text); }
 .crumb [aria-current="page"] { color: rgba(0,0,0,0.7); }
@@ -13,9 +13,9 @@ body { color: rgba(0,0,0,0.75); }
    movido para slide-style.css, valendo em TODAS as páginas (antes só aqui). */
 
 /* botão retornar ao topo — light theme */
-#back-to-top { background: var(--lt-surface); border-color: var(--lt-border); backdrop-filter: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+#back-to-top { background: var(--lt-surface); border-color: var(--lt-border); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 #back-to-top:hover { background: rgba(255,255,255,1); border-color: var(--lt-border-strong); }
-#back-to-top::before { background: var(--lt-surface); border-color: var(--lt-border); color: rgba(0,0,0,0.65); backdrop-filter: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+#back-to-top::before { background: var(--lt-surface); border-color: var(--lt-border); color: rgba(0,0,0,0.65); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .back-top-icon { background-color: var(--lt-icon); }
 
 /* Prevent the grid's implicit column from growing to max-content of timeline entries */
@@ -335,7 +335,7 @@ body { color: rgba(0,0,0,0.75); }
 .tlp-group .tl-axis-section { border-radius: 0; }
 
 /* ── per-trecho independent horizontal scroll ── */
-.tl-entries-scroll { flex: 1; min-width: 0; overflow-x: auto; overflow-y: clip; overscroll-behavior-x: contain; cursor: grab; user-select: none; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.2) transparent; }
+.tl-entries-scroll { flex: 1; min-width: 0; overflow-x: auto; overflow-y: clip; overscroll-behavior-x: contain; cursor: grab; -webkit-user-select: none; user-select: none; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.2) transparent; }
 .tl-entries-scroll.is-grabbing { cursor: grabbing; }
 
 /* ── bases card: collapsible ── */

@@ -125,7 +125,7 @@ hr {
   align-items: center;
 
   background-color: var(--lt-surface);
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   box-shadow: var(--lt-shadow);
 
   /* T4: faixa ZEBRADA de 2px (mesma das bordas das imagens do mosaico) entre o
@@ -294,7 +294,7 @@ a.flex-logo-container {
   padding: 4px 24px;
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   background-color: var(--lt-surface);
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   border-bottom: 1px solid var(--lt-border);
   z-index: 1000;
 
@@ -413,7 +413,7 @@ a.flex-logo-container {
   padding: 8px 12px;
   border-radius: var(--border-general);
   background: var(--lt-surface);
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   border: 1px solid var(--lt-border);
   box-shadow: var(--lt-shadow);
   pointer-events: none;
@@ -612,7 +612,7 @@ a.flex-logo-container {
   border: 1.5px dashed var(--lt-border-strong);
   border-radius: var(--border-big);
   background-color: var(--lt-surface);
-  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
   box-shadow: var(--lt-shadow);
   overflow: hidden;
   cursor: default;
@@ -692,7 +692,7 @@ a.flex-logo-container {
   border: none;
   border-radius: 0;
   box-shadow: none;
-  backdrop-filter: none;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
   /* SEM padding/gap: o título vai de borda a borda (laterais + topo, inclusive o
      chanfro), sem espaços vazios entre os elementos. */
   display: flex;
@@ -1315,7 +1315,7 @@ footer {
   padding: 6px 10px;
   max-width: min(400px, calc(100vw - 32px));
   background: var(--background-black-alpha-75);
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   border: 1px solid var(--color-white-alpha-25);
   border-radius: var(--border-smaller);
   pointer-events: none;
@@ -1579,7 +1579,7 @@ footer {
   background-color: var(--lt-surface);
   border: 1px solid var(--lt-border);
   border-radius: var(--border-general);
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   box-shadow: var(--lt-shadow);
   overflow: hidden;
 }
@@ -1612,7 +1612,7 @@ footer {
   border-radius: 50%;
   border: 1px solid var(--lt-border);
   background: var(--lt-surface);
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   box-shadow: var(--lt-shadow);
   cursor: pointer;
   display: flex;
@@ -1642,7 +1642,7 @@ footer {
     border-radius: var(--border-smaller);
     border: 1px solid var(--lt-border);
     background: var(--lt-surface);
-    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
     box-shadow: var(--lt-shadow);
     color: var(--color-black);
     font-family: var(--font-family-general);
@@ -1710,7 +1710,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   gap: 4px;
   padding: 0;
   background-color: transparent;
-  backdrop-filter: none;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
   /* T7: sem borda no container externo da navegação lateral (toda a nav). O
      elemento herda .slide-sidebar { border: 1px solid }; aqui é removida para que
      não haja contorno cinza ao redor das DUAS caixas. A borda de .slide-sidebar
@@ -1921,7 +1921,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   /* item opaco #f5f5f5 (não --lt-surface-muted, que tem alpha 0.97): sem token de
      valor idêntico, mantém-se o literal consolidado da antiga regra unificada */
   background-color: #f5f5f5;
-  backdrop-filter: none;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
   -webkit-backdrop-filter: none;
   /* texto suave #8c8c8c (sem token idêntico): literal consolidado */
   color: #8c8c8c;
@@ -2144,7 +2144,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   border: none;
   background-color: var(--lt-surface-strong); /* #fff */
   /* navegação lateral fica sobre superfície transparente: sem blur próprio */
-  backdrop-filter: none;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: var(--lt-shadow);
   /* texto 0.88 (sem token idêntico; --lt-text é 0.82): literal consolidado */

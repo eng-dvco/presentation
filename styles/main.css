@@ -27,7 +27,7 @@ h1 {
 .flex-header-container {
   background: none;
   justify-content: flex-end;
-  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0);
 }
 
 .central-content {

@@ -31,6 +31,9 @@ document.querySelectorAll('.breadcrumb a[href$="index.html"]').forEach((a) => {
 // state shared between keyboard handler and lightbox
 let prevUrl = null;
 let nextUrl = null;
+// ↑/↓ navegam entre slides da MESMA seção; ←/→ entre seções vizinhas
+let upUrl = null;
+let downUrl = null;
 let lightboxOpen = false;
 let currentImgIdx = 0;
 let overlay, overlayStage, overlayImg, overlayCaption, overlayTitle, overlayCount, overlayClose, overlayPrev, overlayNext;
@@ -452,6 +455,11 @@ async function initNav() {
     if (i === -1) return;
     prevUrl = i > 0 ? sections[i - 1].items[0].slug : null;
     nextUrl = i < sections.length - 1 ? sections[i + 1].items[0].slug : null;
+    // ↑/↓: slide anterior/seguinte DENTRO da seção atual (ordem do index.html)
+    const secItems = sections[i].items;
+    const pos = secItems.findIndex(it => it.slug === slug);
+    upUrl = pos > 0 ? secItems[pos - 1].slug : null;
+    downUrl = (pos !== -1 && pos < secItems.length - 1) ? secItems[pos + 1].slug : null;
     buildSectionNav(sections, i, slug);
   } catch {
     // fetch indisponível (offline / protocolo file://) — navegação não aparece
@@ -1098,6 +1106,10 @@ document.addEventListener('keydown', e => {
   const tag = document.activeElement?.tagName;
   if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
 
-  if (e.key === 'ArrowLeft'  && prevUrl) { e.preventDefault(); location.href = prevUrl; }
-  if (e.key === 'ArrowRight' && nextUrl) { e.preventDefault(); location.href = nextUrl; }
+  if (e.key === 'ArrowLeft'  && prevUrl)  { e.preventDefault(); location.href = prevUrl; }
+  if (e.key === 'ArrowRight' && nextUrl)  { e.preventDefault(); location.href = nextUrl; }
+  // ↑/↓: navega entre os slides da mesma seção (só intercepta quando há destino,
+  // então nos slides das pontas da seção a rolagem normal continua funcionando)
+  if (e.key === 'ArrowUp'    && upUrl)    { e.preventDefault(); location.href = upUrl; }
+  if (e.key === 'ArrowDown'  && downUrl)  { e.preventDefault(); location.href = downUrl; }
 });

@@ -25,7 +25,7 @@
 
 .title-header-h2,
 .title-header-h3 {
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
 }
 
 .title-header-h2 {
@@ -322,6 +322,7 @@
 .section-substation {
   grid-area: auto / span 4 / auto / auto;
   background-image: url("../assets/img/banner/se-view-1.jpg");
+  background-image: image-set(url("../assets/img/banner/se-view-1.webp") type("image/webp"), url("../assets/img/banner/se-view-1.jpg") type("image/jpeg"));
 
   & .column-1 {
     grid-template-columns: repeat(3, 1fr);
@@ -331,17 +332,20 @@
 .section-transmission {
   grid-area: span 1 / span 2 / auto / auto;
   background-image: url("../assets/img/banner/lt-view-1.jpg");
+  background-image: image-set(url("../assets/img/banner/lt-view-1.webp") type("image/webp"), url("../assets/img/banner/lt-view-1.jpg") type("image/jpeg"));
 }
 
 .section-distribution {
   grid-area: span 1 / span 2 / auto / auto;
   background-image: url("../assets/img/banner/ld-view-1.jpg");
+  background-image: image-set(url("../assets/img/banner/ld-view-1.webp") type("image/webp"), url("../assets/img/banner/ld-view-1.jpg") type("image/jpeg"));
 }
 
 /* needs to update background image */
 .section-events {
   grid-area: auto / span 4 / auto / auto;
   background-image: url("../assets/img/banner/documents.jpg");
+  background-image: image-set(url("../assets/img/banner/documents.webp") type("image/webp"), url("../assets/img/banner/documents.jpg") type("image/jpeg"));
   background-position: center 75%;
 }
 
@@ -349,6 +353,7 @@
 .section-safety {
   grid-area: 1 / 1 / 2 / -1;
   background-image: url("../assets/img/banner/documents.jpg");
+  background-image: image-set(url("../assets/img/banner/documents.webp") type("image/webp"), url("../assets/img/banner/documents.jpg") type("image/jpeg"));
   background-position: center 50%;
 
   & .column-6 {
@@ -359,6 +364,7 @@
 .section-administration {
   grid-area: auto / span 4 / auto / auto;
   background-image: url("../assets/img/banner/lt-view-2.jpg");
+  background-image: image-set(url("../assets/img/banner/lt-view-2.webp") type("image/webp"), url("../assets/img/banner/lt-view-2.jpg") type("image/jpeg"));
   background-position: center 75%;
 
   & .column-4 {
@@ -370,6 +376,7 @@
   min-width: max-content;
   grid-area: 4 / 1 / 5 / -1;
   background-image: url("../assets/img/banner/se-view-3.jpg");
+  background-image: image-set(url("../assets/img/banner/se-view-3.webp") type("image/webp"), url("../assets/img/banner/se-view-3.jpg") type("image/jpeg"));
   background-position: 0% center;
 
   & .column-6 {
@@ -390,6 +397,7 @@
   border-radius: var(--border-general);
 
   background-image: url("../assets/img/banner/se-view-2.jpg");
+  background-image: image-set(url("../assets/img/banner/se-view-2.webp") type("image/webp"), url("../assets/img/banner/se-view-2.jpg") type("image/jpeg"));
   background-position: center center;
   background-blend-mode: lighten;
   /* coerente com .section: camada branca com alfa um pouco menor (0.88) que o
@@ -586,7 +594,7 @@
 /* informações do projeto de integração (PISF) */
 .section-integration {
   grid-area: auto / span 4 / auto / auto;
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
 
   & .title-header-h2 {
     background-color: var(--lt-surface-muted);
@@ -600,7 +608,7 @@
 /* documents section */
 .section-documents {
   grid-area: auto / span 4 / auto / auto;
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
 
   & .title-header-h2 {
     background-color: var(--lt-surface-muted);
@@ -636,7 +644,7 @@
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
   outline: none;
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   transition: border-color 0.15s;
 
   &::placeholder { color: var(--lt-text-faint); }
@@ -747,7 +755,7 @@
   border-radius: var(--border-smaller);
   overflow: hidden;
   background: var(--lt-surface);
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
 
   &:not([open]) {
     cursor: pointer;
@@ -1164,7 +1172,7 @@
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
   outline: none;
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   transition: border-color 0.15s;
 
   &::placeholder { color: var(--lt-text-faint); }
@@ -1202,7 +1210,7 @@
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   cursor: pointer;
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 
   &:hover { border-color: var(--lt-border-strong); color: var(--color-black); }
@@ -1319,7 +1327,7 @@
 
 .section-timelines {
   grid-area: auto / span 4 / auto / auto;
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
 
   & .title-header-h2 {
     background-color: var(--lt-surface-muted);

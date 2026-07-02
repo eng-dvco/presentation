@@ -455,11 +455,14 @@ async function initNav() {
     if (i === -1) return;
     prevUrl = i > 0 ? sections[i - 1].items[0].slug : null;
     nextUrl = i < sections.length - 1 ? sections[i + 1].items[0].slug : null;
-    // ↑/↓: slide anterior/seguinte DENTRO da seção atual (ordem do index.html)
-    const secItems = sections[i].items;
-    const pos = secItems.findIndex(it => it.slug === slug);
-    upUrl = pos > 0 ? secItems[pos - 1].slug : null;
-    downUrl = (pos !== -1 && pos < secItems.length - 1) ? secItems[pos + 1].slug : null;
+    // ↑/↓: slide ANTERIOR/SEGUINTE na ordem sequencial (todas as seções achatadas
+    // na ordem do index.html). Dentro de uma seção, alterna entre os seus slides;
+    // nas BORDAS, segue para o slide adjacente da seção vizinha — então ↑/↓ sempre
+    // navegam (sobrepondo a rolagem), exceto no 1º/último slide de toda a lista.
+    const flat = sections.flatMap(s => s.items.map(it => it.slug));
+    const gpos = flat.indexOf(slug);
+    upUrl = gpos > 0 ? flat[gpos - 1] : null;
+    downUrl = (gpos !== -1 && gpos < flat.length - 1) ? flat[gpos + 1] : null;
     buildSectionNav(sections, i, slug);
   } catch {
     // fetch indisponível (offline / protocolo file://) — navegação não aparece

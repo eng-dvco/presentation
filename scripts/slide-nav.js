@@ -939,6 +939,16 @@ function showImage(idx) {
   if (!mosaicImages.length) return;
   currentImgIdx = (idx + mosaicImages.length) % mosaicImages.length;
   const img = mosaicImages[currentImgIdx];
+  // exibe uma variante WebP dimensionada à viewport (srcset do <source> do
+  // <picture>) em vez do ORIGINAL cheio (que pode ter vários MB) — elimina o delay
+  // ao selecionar a miniatura. Recai no src original quando não há <picture>/WebP.
+  const source = img.closest('picture')?.querySelector('source[type="image/webp"]');
+  if (source && source.getAttribute('srcset')) {
+    overlayImg.srcset = source.getAttribute('srcset');
+    overlayImg.sizes = '100vw';
+  } else {
+    overlayImg.removeAttribute('srcset');
+  }
   overlayImg.src = img.src;
   overlayImg.alt = img.alt;
   resetGestureTransform(); // zera deslize/pan/zoom ao trocar de imagem

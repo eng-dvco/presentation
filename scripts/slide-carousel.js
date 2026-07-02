@@ -57,11 +57,13 @@
 
     var items = blocks.map(function (b) {
       var im = b.querySelector('img');
+      var srcEl = b.querySelector('source[type="image/webp"]');
+      var srcset = srcEl ? srcEl.getAttribute('srcset') : '';
       var obsEl = b.querySelector('.obs');
       var obs = (obsEl && !obsEl.classList.contains('invisible')) ? obsEl.textContent.trim() : '';
       var obsStatus = obsEl && obsEl.classList.contains('obs-done') ? 'done'
                     : (obsEl && obsEl.classList.contains('obs-pending')) ? 'pending' : '';
-      return { img: im, obs: obs, obsStatus: obsStatus };
+      return { img: im, srcset: srcset, obs: obs, obsStatus: obsStatus };
     }).filter(function (it) { return it.img; });
     if (!items.length) return;
 
@@ -129,7 +131,18 @@
     function show(idx) {
       cur = (idx + items.length) % items.length;
       var it = items[cur];
-      main.src = it.img.getAttribute('src');
+      var full = it.img.getAttribute('src');
+      // imagem principal: escolhe uma variante WebP (srcset gerado por wire-picture)
+      // dimensionada ao palco — bem mais leve que o JPEG cheio; cai no original via
+      // onerror (WebP ausente ou navegador sem suporte).
+      main.onerror = function () { main.onerror = null; main.removeAttribute('srcset'); main.src = full; };
+      if (it.srcset) {
+        main.setAttribute('srcset', it.srcset);
+        main.setAttribute('sizes', '(max-width: 640px) 88vw, 55vw');
+      } else {
+        main.removeAttribute('srcset');
+      }
+      main.src = full;
       main.alt = it.img.getAttribute('alt') || '';
       caption.textContent = it.obs || 'nenhuma observação foi fornecida para esta imagem';
       caption.classList.toggle('carousel-caption--empty', !it.obs);

@@ -46,7 +46,13 @@
   box-shadow: var(--lt-shadow);
   overflow: hidden;
 
-  & > img {
+  /* suporte a <picture> (imagens responsivas WebP — tools/optimize-images.js): o
+     <picture> é transparente ao layout (display:contents), então o <img> se
+     posiciona como filho do .img. Os seletores de imagem usam DESCENDENTE
+     (.img img) p/ casar tanto o <img> direto (legado) quanto o <picture><img>. */
+  & picture { display: contents; }
+
+  & img {
     /* block: remove o vão da linha-base de imagem inline (faixa branca em cima/
        embaixo, mostrando o padding-box branco do .img); com object-fit:cover +
        100%/100% a imagem preenche todo o container, restando só a borda zebrada */
@@ -68,8 +74,8 @@
   &.transient {
     cursor: grab;
 
-    & > img:hover,
-    & > img:focus {
+    & img:hover,
+    & img:focus {
       transform: scale(1);
     }
 
@@ -105,33 +111,33 @@
   }
 
   /* utilitários de mosaico reservados (sem instância atual) */
-  &.img-mid-top > img {
+  &.img-mid-top img {
     object-fit: cover;
     object-position: center 0%;
   }
 
-  &.img-mid-mid > img {
+  &.img-mid-mid img {
     object-fit: cover;
     object-position: center 50%;
   }
 
-  &.img-mid-right > img {
+  &.img-mid-right img {
     object-fit: cover;
     object-position: 75% 50%;
   }
 
-  &.img-mid-bottom > img {
+  &.img-mid-bottom img {
     object-fit: cover;
     object-position: center 100%;
   }
 
-  &.img-contain > img {
+  &.img-contain img {
     object-fit: contain;
     object-position: center 50%;
   }
 
   /* utilitário de mosaico reservado (sem instância atual) */
-  &.img-fill > img {
+  &.img-fill img {
     object-fit: fill;
     object-position: center 50%;
   }
@@ -240,5 +246,5 @@
   .img.img-tri-column,
   .img.img-quad-column,
   .img.img-largest { height: auto; }
-  .img > img { height: auto; }
+  .img img { height: auto; }
 }

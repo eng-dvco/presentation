@@ -16,6 +16,12 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var DURATION = 10000;
 
+  // miniatura leve: variante WebP de 200px (tools/optimize-images.js) no lugar do
+  // original; cai no próprio original se a variante não existir (via onerror).
+  function webpThumbSrc(src) {
+    return src ? src.replace(/\.(jpe?g|png)(\?.*)?$/i, '-200.webp') : src;
+  }
+
   // tooltip compartilhada entre todas as miniaturas (mesmo visual do lightbox)
   var tip = null;
   function ensureTip() {
@@ -143,7 +149,9 @@
       btn.className = 'carousel-thumb';
       btn.setAttribute('aria-label', it.img.getAttribute('alt') || ('Imagem ' + (i + 1)));
       var timg = document.createElement('img');
-      timg.src = it.img.getAttribute('src');
+      var timgFull = it.img.getAttribute('src');
+      timg.src = webpThumbSrc(timgFull);
+      timg.addEventListener('error', function onErr() { timg.removeEventListener('error', onErr); timg.src = timgFull; });
       timg.alt = '';
       btn.appendChild(timg);
       var pauseIcon = document.createElement('span');

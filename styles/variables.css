@@ -127,6 +127,20 @@
   /* gaps */
   /* will be added here */
 
+  /* ── breakpoints canônicos (REFERÊNCIA) ────────────────────────────────────
+     Custom properties NÃO funcionam dentro de @media, então estes valores são a
+     CONVENÇÃO a ser usada nas media queries de TODOS os stylesheets. Mantenha o
+     conjunto padronizado — não introduza valores intermediários (ex.: 800):
+       xl   1200px  desktops grandes
+       lg    992px  desktops
+       md    768px  tablets
+       sm    640px  tablets pequenos / phones landscape — componentes densos
+                    (tabelas, cronograma, carrossel, mosaico denso)
+       xs    576px  phones (layout base: seleção, mosaico, vídeo, capa)
+       xxs   386px  phones estreitos (reduz --font-multiplier)
+     Pares min-width especiais do cronograma (slide-tl.css): 641px (contraparte do
+     sm, evita sobreposição com o bloco max-width:640) e 860px (controles do eixo). */
+
   /* light theme (slide-style.css base + slide-selection.css) — NEW tokens only;
      existing color/background tokens above are untouched (other pages depend on them).
      Mirrors the already-light timeline page (slide-tl.css): light surfaces

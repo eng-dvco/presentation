@@ -2,6 +2,13 @@
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// miniatura leve: variante WebP de 200px (tools/optimize-images.js) no lugar do
+// original pesado; cai no próprio original se a variante não existir (imagem
+// pequena sem -200, ou navegador sem WebP) via onerror.
+function webpThumbSrc(src) {
+  return src ? src.replace(/\.(jpe?g|png)(\?.*)?$/i, '-200.webp') : src;
+}
+
 // Navegações novas (clique em link da sidebar, setas, digitar a URL) devem
 // iniciar pelo topo; já voltar/avançar pelo navegador deve RESTAURAR a posição
 // onde o usuário estava (onde clicou). É exatamente o que o modo 'auto' faz:
@@ -585,7 +592,9 @@ function buildLightbox() {
     btn.className = 'lightbox-thumb';
     btn.setAttribute('aria-label', img.alt || `Imagem ${i + 1}`);
     const thumb = document.createElement('img');
-    thumb.src = img.src;
+    const thumbFull = img.getAttribute('src');
+    thumb.src = webpThumbSrc(thumbFull);
+    thumb.addEventListener('error', function onErr() { thumb.removeEventListener('error', onErr); thumb.src = thumbFull; });
     thumb.alt = '';
     btn.appendChild(thumb);
     const pauseIcon = document.createElement('span');

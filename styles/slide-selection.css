@@ -1064,12 +1064,13 @@
   }
 }
 
-/* Abaixo de ~800px o título, a descrição e o grupo de ícones não cabem na mesma
-   linha: o <li> passa a empilhá-los em 3 faixas — título (1), descrição (2) e
-   ícones (3). O .doc-main-row vira display:contents para que o nome e o grupo
-   de ícones se tornem itens diretos do grid do <li> e possam ser reordenados
-   individualmente; o ext-tag permanece como badge à esquerda do título. */
-@media (max-width: 800px) {
+/* Abaixo de 768px (breakpoint md canônico) o título, a descrição e o grupo de
+   ícones não cabem na mesma linha: o <li> passa a empilhá-los em 3 faixas —
+   título (1), descrição (2) e ícones (3). O .doc-main-row vira display:contents
+   para que o nome e o grupo de ícones se tornem itens diretos do grid do <li> e
+   possam ser reordenados individualmente; o ext-tag permanece como badge à
+   esquerda do título. (antes 800px — unificado ao md p/ padronizar as quebras) */
+@media (max-width: 768px) {
   .doc-items li {
     /* coluna 1: badge ext-tag (auto) | coluna 2: conteúdo (restante)
        linha 1: título · linha 2: descrição · linha 3: grupo de ícones */

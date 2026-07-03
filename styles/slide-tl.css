@@ -196,6 +196,34 @@ body { color: rgba(0,0,0,0.75); }
 
 /* faixas empilhadas verticalmente */
 .tl-trechos { display: flex; flex-direction: column; }
+
+/* eixo unificado: rótulo vertical (Leste/Norte) à esquerda das faixas do eixo,
+   marcando todo o grupo de trechos daquele eixo dentro do container "Manutenções" */
+.tl-axis-band {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  & > .tl-trechos { flex: 1 1 auto; min-width: 0; }
+
+  & > .tl-axis-vlabel {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 0.5rem 0.15rem;
+    font-family: var(--font-family-general);
+    font-size: 0.62rem;
+    font-weight: var(--font-weight-boldest);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.62);
+    background: var(--lt-surface);
+    border-right: 1px dashed var(--lt-border);
+  }
+}
 .tl-trecho { display: flex; flex-direction: row; align-items: stretch; position: relative; transition: background 0.15s; }
 .tl-trecho:not(:last-child) { border-bottom: 1px dashed var(--lt-border); }
 
@@ -255,7 +283,7 @@ body { color: rgba(0,0,0,0.75); }
 
 /* legend */
 .tl-empty-state { background: #f5f5f5; border-top: 1px dashed var(--lt-border); padding: 2rem 1rem; font-family: var(--font-family-general); font-size: 0.72rem; color: rgba(0,0,0,0.4); font-style: italic; text-align: center; }
-.tl-axis-count { padding: 0.4rem 1rem; font-family: var(--font-family-general); font-size: 0.6rem; color: rgba(0,0,0,0.35); text-align: right; background: var(--lt-surface); border-top: 1px solid rgba(0,0,0,0.06); }
+.tl-axis-count { padding: 0.4rem 1rem; font-family: var(--font-family-general); font-size: 0.6rem; color: rgba(0,0,0,0.35); text-align: right; background: var(--lt-surface); }
 .tl-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 0; padding: 0.5rem 1rem; margin-top: 0; background: var(--lt-surface); border-radius: var(--border-general); box-shadow: var(--lt-shadow); }
 .tl-legend-title { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0,0,0,0.75); white-space: nowrap; flex-shrink: 0; }
 .tl-legend-sep { flex: 1; height: 0; border-top: 1px dashed var(--lt-border); margin: 0 1rem; }
@@ -387,6 +415,18 @@ body { color: rgba(0,0,0,0.75); }
 
 /* ── divisão entre grupos do mesmo eixo ── */
 .tl-group + .tl-group { border-top: 1px dashed var(--lt-border); }
+
+/* neste cronograma (tlsr): sem sombreamento no topo dos containers dos eixos — remove
+   a sombra que o cabeçalho "Manutenções" projetava sobre o topo do Leste (o gradiente
+   que destacava o topo do Norte também foi removido, acima). Ficam só as bordas. */
+.tl-grid.tlsr .tl-axis { box-shadow: none; }
+
+/* fundo OPACO no rótulo do eixo e no contador: o --lt-surface é semitransparente
+   (0.97) e a borda inferior do rótulo, sobre a banda transparente, deixava vazar
+   1px do fundo (linha cinza tênue abaixo do "N"). Opaco elimina esse artefato. */
+.tl-grid.tlsr .tl-axis-section,
+.tl-grid.tlsr .tl-axis-vlabel,
+.tl-grid.tlsr .tl-axis-count { background: #fff; }
 
 
 /* ── controles do eixo: linha inferior scrollável, alinhada à direita ── */

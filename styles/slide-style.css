@@ -1601,6 +1601,12 @@ footer {
 
 .content-container.has-sidebar {
   gap: 24px;
+  /* Slides com sidebar: o vão inferior vira PADDING (dentro do container) em vez de
+     margem. Assim a sidebar sticky tem curso p/ acompanhar TODA a rolagem — mesmo em
+     slides curtos (poucas imagens), em que o conteúdo mal supera a altura da sidebar
+     e, com a margem, ela sairia da tela. Mantém o mesmo respiro inferior visual. */
+  margin-bottom: 48px;
+  padding-bottom: 148px;
 }
 
 .content-container.has-sidebar .content-wrapper {

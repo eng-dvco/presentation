@@ -412,8 +412,11 @@ a.flex-logo-container {
 
   padding: 8px 12px;
   border-radius: var(--border-general);
-  background: var(--lt-surface);
-  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  /* efeito "glassy": fundo mais translúcido + blur mais forte. O texto é preto
+     em negrito, então permanece legível. As variantes semânticas obs-done/
+     obs-pending sobrescrevem apenas o background (alpha-75), mantendo o blur. */
+  background: color-mix(in srgb, white 82%, transparent);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   border: 1px solid var(--lt-border);
   box-shadow: var(--lt-shadow);
   pointer-events: none;
@@ -1195,6 +1198,11 @@ footer {
 .lightbox-stage {
   flex: 1;
   min-height: 0;
+  /* altura CONSTANTE do palco (não `max-height`): com `flex:1` + `max-height` a
+     altura acompanhava o conteúdo, então imagens de proporções diferentes mudavam
+     o tamanho do box e deslocavam a tira de miniaturas ao trocar de imagem. Com
+     `height` fixo o box nunca muda; a imagem é ajustada dentro via object-fit. */
+  height: min(860px, calc(100vh - 190px));
   max-height: min(860px, calc(100vh - 190px));
   position: relative;
   display: flex;
@@ -1327,7 +1335,12 @@ footer {
   font-style: italic;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 
-  &.lightbox-caption--empty { color: rgba(255, 255, 255, 0.28); }
+  /* placeholder vazio: iguala o tamanho do texto de observação (.obs), que usa o
+     multiplicador xxs (menor que o xs padrão das legendas reais) */
+  &.lightbox-caption--empty {
+    color: rgba(255, 255, 255, 0.28);
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  }
   &.lightbox-caption--done    { color: var(--color-green); }
   &.lightbox-caption--pending { color: var(--color-red); }
 }
@@ -1359,7 +1372,12 @@ footer {
   flex-direction: column;
   gap: 3px;
   padding: 6px 10px;
-  max-width: min(400px, calc(100vw - 32px));
+  /* largura intrínseca definida (max-content) para que o elemento fixo NÃO
+     encolha até o espaço disponível entre `left` e a borda da viewport — sem
+     isto, perto de uma borda ele colapsava numa coluna vertical de ~1 caractere.
+     O cap max-width limita o box e permite que o obs quebre em várias linhas. */
+  width: max-content;
+  max-width: min(360px, calc(100vw - 16px));
   background: var(--background-black-alpha-75);
   -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   border: 1px solid var(--color-white-alpha-25);

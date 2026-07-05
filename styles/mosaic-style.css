@@ -245,6 +245,14 @@
   .img.img-duo-column,
   .img.img-tri-column,
   .img.img-quad-column,
-  .img.img-largest { height: auto; }
+  .img.img-largest,
+  /* vence a regra .mosaic-container.tri-column .img.img-stretch (especificidade
+     0,4,0) que, senão, mantinha o container baixo (~134px no celular) e CORTAVA a
+     imagem 4:3 — escondendo a legenda/GPS sobreposta (ex.: activity-22/23/24 no
+     slide-shutdown-timeline). Mesma especificidade + fonte posterior → prevalece o
+     height:auto, exibindo a imagem INTEIRA no mobile. Este é o único override de
+     altura escopado por container no arquivo, então cobre TODAS as imagens que
+     cortavam no mobile. */
+  .mosaic-container.tri-column .img.img-stretch { height: auto; }
   .img img { height: auto; }
 }

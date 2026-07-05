@@ -106,7 +106,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
     trigger.append(valSpan, arrow);
     const menu = document.createElement('div'); menu.className = 'tlf-cal-menu'; menu.hidden = true; menu.setAttribute('role', 'dialog');
     dd.append(trigger, menu);
-    let view;
+    let view, yearOpen = false;
 
     function syncTrigger() {
       const d = parse(input.value);
@@ -119,14 +119,44 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       menu.innerHTML = '';
       const head = document.createElement('div'); head.className = 'tlf-cal-head';
       const prev = document.createElement('button'); prev.type = 'button'; prev.className = 'tlf-cal-nav'; prev.textContent = '‹'; prev.setAttribute('aria-label', 'mês anterior');
+      // título + seta de seleção de ano, agrupados p/ manter o ano e o gatilho juntos
+      const titleWrap = document.createElement('div'); titleWrap.className = 'tlf-cal-titlewrap';
       const title = document.createElement('span'); title.className = 'tlf-cal-title'; title.textContent = MO[view.getMonth()] + ' ' + view.getFullYear();
+      const yearBtn = document.createElement('button'); yearBtn.type = 'button'; yearBtn.className = 'tlf-cal-year-toggle';
+      yearBtn.textContent = '▾'; yearBtn.setAttribute('aria-label', 'selecionar ano');
+      yearBtn.setAttribute('aria-haspopup', 'listbox'); yearBtn.setAttribute('aria-expanded', String(yearOpen));
+      titleWrap.append(title, yearBtn);
       const next = document.createElement('button'); next.type = 'button'; next.className = 'tlf-cal-nav'; next.textContent = '›'; next.setAttribute('aria-label', 'próximo mês');
       // stopPropagation: render() recria os botões, e sem isso o clique
       // chegaria ao listener de "clique fora" com um alvo já desanexado
       // (dd.contains == false), fechando o menu indevidamente.
-      prev.addEventListener('click', e => { e.stopPropagation(); view.setMonth(view.getMonth() - 1); render(); });
-      next.addEventListener('click', e => { e.stopPropagation(); view.setMonth(view.getMonth() + 1); render(); });
-      head.append(prev, title, next);
+      prev.addEventListener('click', e => { e.stopPropagation(); yearOpen = false; view.setMonth(view.getMonth() - 1); render(); });
+      next.addEventListener('click', e => { e.stopPropagation(); yearOpen = false; view.setMonth(view.getMonth() + 1); render(); });
+      yearBtn.addEventListener('click', e => { e.stopPropagation(); yearOpen = !yearOpen; render(); });
+      head.append(prev, titleWrap, next);
+
+      // ── menu de seleção de ano: grade rolável centrada no ano em exibição ──
+      // Substitui a grade de dias; ao escolher um ano re-renderiza a grade de dias
+      // no mesmo mês. Fecha ao reselecionar ou clicar fora (tratado por close()).
+      if (yearOpen) {
+        const yGrid = document.createElement('div'); yGrid.className = 'tlf-cal-years';
+        yGrid.setAttribute('role', 'listbox'); yGrid.setAttribute('aria-label', 'ano');
+        const curY = view.getFullYear();
+        for (let y = curY - 8; y <= curY + 8; y++) {
+          const yb = document.createElement('button'); yb.type = 'button'; yb.className = 'tlf-cal-year';
+          yb.textContent = y; yb.setAttribute('role', 'option');
+          if (y === curY) { yb.classList.add('is-current'); yb.setAttribute('aria-selected', 'true'); }
+          yb.addEventListener('click', e => { e.stopPropagation(); view.setFullYear(y); yearOpen = false; render(); });
+          yGrid.appendChild(yb);
+        }
+        const clrY = document.createElement('button'); clrY.type = 'button'; clrY.className = 'tlf-cal-clear'; clrY.textContent = 'limpar';
+        clrY.addEventListener('click', () => { input.value = ''; input.dispatchEvent(new Event('change', { bubbles: true })); close(true); });
+        menu.append(head, yGrid, clrY);
+        // centraliza o ano atual na lista rolável
+        requestAnimationFrame(() => { const cur = yGrid.querySelector('.is-current'); if (cur) cur.scrollIntoView({ block: 'center' }); });
+        return;
+      }
+
       const grid = document.createElement('div'); grid.className = 'tlf-cal-grid';
       for (const w of WD) { const c = document.createElement('div'); c.className = 'tlf-cal-wd'; c.textContent = w; grid.appendChild(c); }
       const startDow = new Date(view.getFullYear(), view.getMonth(), 1).getDay();
@@ -148,6 +178,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       document.querySelectorAll('.tlf-dd-menu, .tlf-cal-menu').forEach(m => { if (m !== menu) { m.hidden = true; const tg = m.previousElementSibling; if (tg) tg.setAttribute('aria-expanded', 'false'); } });
       const sel = parse(input.value), now = new Date();
       view = sel ? new Date(sel.getFullYear(), sel.getMonth(), 1) : new Date(now.getFullYear(), now.getMonth(), 1);
+      yearOpen = false;
       render(); menu.hidden = false; trigger.setAttribute('aria-expanded', 'true');
       menu.style.left = '0'; menu.style.right = 'auto';
       if (menu.getBoundingClientRect().right > window.innerWidth - 8) { menu.style.left = 'auto'; menu.style.right = '0'; }
@@ -211,16 +242,6 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
       if (emptyStates[key]) emptyStates[key].hidden = visible;
       if (axisCounts[key]) axisCounts[key].el.textContent = visByAxis[key] + ' de ' + axisCounts[key].total + ' estruturas';
     }
-    // oculta o conector curvado para trechos cuja primeira entrada está filtrada
-    document.querySelectorAll('.tl-trecho').forEach(tr => {
-      const svg = tr._tlCurveConnector;
-      if (!svg) return;
-      const firstEntry = tr.querySelector('.tl-entry');
-      const scrollEl = tr.querySelector('.tl-entries-scroll');
-      const scrolled = scrollEl ? scrollEl.scrollLeft > 0 : false;
-      const firstHidden = firstEntry && firstEntry.style.display === 'none';
-      svg.style.opacity = (firstHidden || scrolled) ? '0' : '';
-    });
     window._tlUpdateSpineRange && window._tlUpdateSpineRange();
     window._tlUpdateTableView && window._tlUpdateTableView();
   }
@@ -294,80 +315,11 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   });
 })();
 
-// ── conector curvado animado: label → spine, para todos os trechos ──
-(function tlConnectors() {
-  const DOT_R = 6;     // px — corresponde a --tl-dot-r
-  const PAD_TOP = 16;  // px — 1rem (padding-top de .tl-entries)
-  const PAD_LEFT = 24; // px — 1.5rem (padding-left de .tl-entries)
-  const NAME_W = 80;   // px — 5rem (width de .tl-trecho-name)
-  const ns = 'http://www.w3.org/2000/svg';
-
-  function buildConnector(trecho) {
-    const entriesEl = trecho.querySelector('.tl-entries');
-    if (!entriesEl) return;
-    const firstEntry = entriesEl.querySelector('.tl-entry');
-    if (!firstEntry) return;
-
-    const color = 'rgba(0,0,0,0.15)';
-    const trechoH = trecho.getBoundingClientRect().height;
-    if (!trechoH) return;
-
-    const spineY = PAD_TOP + DOT_R;
-    const startY = trechoH / 2;
-    const endX = NAME_W + PAD_LEFT;
-    const midX = NAME_W + PAD_LEFT / 2;
-    const d = `M ${NAME_W} ${startY} C ${midX} ${startY}, ${midX} ${spineY}, ${endX} ${spineY}`;
-
-    const svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('aria-hidden', 'true');
-    svg.style.cssText = `position:absolute;top:0;left:0;width:${endX}px;height:${trechoH}px;pointer-events:none;overflow:visible;z-index:1;transition:opacity 0.4s ease;`;
-
-    const path = document.createElementNS(ns, 'path');
-    path.setAttribute('d', d);
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', color);
-    path.setAttribute('stroke-width', '1.5');
-    path.setAttribute('stroke-linecap', 'butt');
-    path.setAttribute('opacity', '0');
-
-    svg.appendChild(path);
-    trecho.appendChild(svg);
-    trecho._tlCurveConnector = svg;
-
-    // oculta quando o trecho estiver rolado horizontalmente
-    const scrollEl = trecho.querySelector('.tl-entries-scroll');
-    if (scrollEl) {
-      scrollEl.addEventListener('scroll', () => {
-        svg.style.opacity = scrollEl.scrollLeft > 0 ? '0' : '';
-      }, { passive: true });
-    }
-
-    // Anima um traço curto viajando de P_start (label) a P_end (spine)
-    requestAnimationFrame(() => {
-      const len = path.getTotalLength ? path.getTotalLength() : 40;
-      const dot = len * 0.35;
-      const cycle = 2200; // ms por loop
-
-      // dasharray: [dot, gap_large] — garante que só um traço fica visível
-      path.setAttribute('stroke-dasharray', `${dot} ${len + dot}`);
-
-      // offset decrescente → traço viaja da esquerda (label) para a direita (spine)
-      let startTs = null;
-      (function tick(ts) {
-        if (!startTs) startTs = ts;
-        const progress = ((ts - startTs) % cycle) / cycle; // 0 → 1
-        const offset = dot - progress * (len + 2 * dot); // decrescente: dot → -(len+dot)
-        path.setAttribute('stroke-dashoffset', offset);
-        const fadeIn  = Math.min(1, -offset / dot);
-        const fadeOut = Math.min(1, (len + offset) / dot);
-        path.setAttribute('opacity', Math.max(0, Math.min(fadeIn, fadeOut)));
-        requestAnimationFrame(tick);
-      })();
-    });
-  }
-
-  document.querySelectorAll('.tl-trecho').forEach(buildConnector);
-})();
+// ── conector curvado: REMOVIDO ──
+// A "spline" que ligava o rótulo do trecho ao início da spine (antes animada,
+// depois estática) foi TOTALMENTE removida a pedido: sobrava um traço curvo
+// residual entre o rótulo e a spine. O rótulo do trecho e a spine horizontal
+// (tlSpineRange / tlSpineSegments / .tl-entries::before) permanecem inalterados.
 
 // ── spine dinâmica: extensão do primeiro ao último dot visível de cada trecho ──
 (function tlSpineRange() {

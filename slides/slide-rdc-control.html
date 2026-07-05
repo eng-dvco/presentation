@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../styles/variables.css" />
     <link rel="stylesheet" href="../styles/slide-style.css" />
     <link rel="stylesheet" href="../styles/mosaic-style.css" />
+    <link rel="stylesheet" href="../styles/slide-rdc-control.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,10 +61,16 @@
               <p class="obs obs-default invisible"></p>
             </div>
           </div>
+          <div class="title-header-h2">
+            <h2 class="title-h2" id="rdc-list-heading">RDCs relevantes</h2>
+          </div>
+          <ul class="rdc-list" aria-labelledby="rdc-list-heading"></ul>
         </div>
       </div>
     </main>
     <script src="../scripts/slide-nav.js" defer></script>
+    <script src="../scripts/slide-banner.js" defer></script>
+    <script src="../scripts/slide-rdc-control.js" defer></script>
     <button id="back-to-top" aria-label="Retornar ao topo da página">
       <span class="back-top-icon" aria-hidden="true"></span>
     </button>

@@ -79,9 +79,23 @@ body { color: rgba(0,0,0,0.75); }
 .tlf-cal-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; width: max-content; padding: 8px; background: rgba(255,255,255,0.98); border: 1px solid var(--lt-border); border-radius: var(--border-smaller); box-shadow: var(--shadow-popover); }
 .tlf-cal-menu[hidden] { display: none; }
 .tlf-cal-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 6px; }
+/* título + seta de seleção de ano agrupados e centrados entre as setas de mês */
+.tlf-cal-titlewrap { display: inline-flex; align-items: center; gap: 2px; }
 .tlf-cal-title { font-family: var(--font-family-general); font-size: 0.7rem; font-weight: var(--font-weight-bold); color: rgba(0,0,0,0.75); text-transform: capitalize; white-space: nowrap; }
-.tlf-cal-nav { background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.14); border-radius: var(--border-smaller); color: rgba(0,0,0,0.5); width: 22px; height: 22px; line-height: 1; cursor: pointer; }
-.tlf-cal-nav:hover { background: var(--color-green-alpha-25); color: rgba(0,0,0,0.75); }
+/* setas de mês: só o glifo em negrito, sem caixa/borda; hover = mudança de cor */
+.tlf-cal-nav { background: none; border: none; padding: 0 4px; color: rgba(0,0,0,0.5); font-size: 0.85rem; font-weight: var(--font-weight-bold); line-height: 1; cursor: pointer; outline: none; transition: color 0.15s; }
+.tlf-cal-nav:hover, .tlf-cal-nav:focus-visible { color: rgba(0,0,0,0.85); }
+
+/* seta que abre o menu de seleção de ano (à direita do "mês ano") */
+.tlf-cal-year-toggle { background: none; border: none; padding: 0 2px; color: rgba(0,0,0,0.4); font-size: 0.6rem; line-height: 1; cursor: pointer; outline: none; transition: color 0.15s, transform 0.15s ease; }
+.tlf-cal-year-toggle:hover, .tlf-cal-year-toggle:focus-visible { color: rgba(0,0,0,0.75); }
+.tlf-cal-year-toggle[aria-expanded="true"] { transform: rotate(180deg); color: var(--color-green); }
+
+/* menu de anos: grade compacta e rolável (reutiliza tokens do calendário) */
+.tlf-cal-years { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-height: 172px; overflow-y: auto; padding: 2px; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.15) transparent; }
+.tlf-cal-year { font-family: var(--font-family-general); font-size: 0.66rem; color: rgba(0,0,0,0.65); background: rgba(0,0,0,0.03); text-align: center; padding: 5px 0; border-radius: var(--border-smaller); border: 1px solid rgba(0,0,0,0.1); cursor: pointer; outline: none; }
+.tlf-cal-year:hover, .tlf-cal-year:focus-visible { background: var(--color-green-alpha-25); color: rgba(0,0,0,0.75); }
+.tlf-cal-year.is-current { background: var(--color-green); color: #000; font-weight: var(--font-weight-bold); }
 .tlf-cal-grid { display: grid; grid-template-columns: repeat(7, 26px); gap: 2px; }
 .tlf-cal-wd { font-family: var(--font-family-general); font-size: 0.54rem; text-transform: uppercase; letter-spacing: 0.03em; color: rgba(0,0,0,0.45); text-align: center; padding: 2px 0; }
 .tlf-cal-day { font-family: var(--font-family-general); font-size: 0.66rem; color: rgba(0,0,0,0.65); background: rgba(0,0,0,0.03); text-align: center; padding: 4px 0; border-radius: var(--border-smaller); border: 1px solid rgba(0,0,0,0.1); cursor: pointer; outline: none; }

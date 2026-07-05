@@ -116,17 +116,20 @@
 
   // ── GANTT (substitui vertical/horizontal): SEs × dias, barras coloridas por
   // status. Inclui TODAS as SEs do eixo (mesmo as energizadas, sem barra). Os
-  // títulos das SEs e a linha do horário ficam em preto/cinza (no CSS). ──
+  // títulos das SEs e a linha do horário ficam em preto/cinza (no CSS).
+  // Espelha o padrão do cronograma unificado (slide-tl-stay-recovery): UM único
+  // container (.sdt-gantt-section) com um cabeçalho superior ("CONDIÇÃO POR
+  // ESTRUTURA") e, para cada eixo, uma faixa .sdt-axis-band (flex-row) com o
+  // rótulo VERTICAL do eixo (.sdt-axis-vlabel) à esquerda das linhas. ──
   function renderGantt(q) {
     var DAY = 86400000;
-    var any = false;
+    var bands = [];
     EIXOS.forEach(function (ax) {
       var ses = SE_DESL.filter(function (s) { return s.eixo === ax.key; });
       var rows = ses.filter(function (s) {
         return !q || UI.foldAccents([s.se, s.eixo, (s.dias[0] || ''), (s.dias[s.dias.length - 1] || '')].join(' ')).indexOf(q) !== -1;
       });
       if (!rows.length) return;
-      any = true;
       // eixo de tempo: do 1º ao último dia de desligamento do eixo (todas as SEs)
       var times = [];
       ses.forEach(function (s) { s.dias.forEach(function (d) { times.push(parse(d).getTime()); }); });
@@ -134,11 +137,11 @@
       var max = times.length ? Math.max.apply(null, times) : 0;
       var ncols = times.length ? Math.round((max - min) / DAY) + 1 : 0;
 
-      var sec = el('div', 'sdt-axis');
-      var title = el('div', 'sdt-axis-title');
-      title.appendChild(el('span', null, ax.label));
-      title.appendChild(el('span', 'sdt-axis-count', rows.length + (rows.length === 1 ? ' subestação' : ' subestações')));
-      sec.appendChild(title);
+      // faixa do eixo: rótulo vertical (Leste/Norte) à esquerda + linhas à direita
+      var band = el('div', 'sdt-axis-band');
+      var vlabel = el('span', 'sdt-axis-vlabel', ax.label.replace(/^Eixo\s+/i, ''));
+      vlabel.setAttribute('aria-label', ax.label);
+      band.appendChild(vlabel);
 
       var wrap = el('div', 'sdt-gantt-wrap');
       var g = el('div', 'sdt-gantt');
@@ -186,11 +189,20 @@
         g.appendChild(row);
       });
 
-      wrap.appendChild(g); sec.appendChild(wrap);
-      body.appendChild(sec);
-      addGanttScroll(wrap);
+      wrap.appendChild(g); band.appendChild(wrap);
+      bands.push({ band: band, wrap: wrap });
     });
-    if (!any) body.appendChild(el('div', 'sdt-empty', 'Nenhum registro encontrado para a busca.'));
+    if (!bands.length) { body.appendChild(el('div', 'sdt-empty', 'Nenhum registro encontrado para a busca.')); return; }
+
+    // UM único container com o cabeçalho superior comum
+    var sec = el('div', 'sdt-gantt-section');
+    var header = el('div', 'sdt-gantt-header');
+    header.appendChild(el('span', null, 'CONDIÇÃO POR ESTRUTURA'));
+    sec.appendChild(header);
+    bands.forEach(function (b) { sec.appendChild(b.band); });
+    body.appendChild(sec);
+    // scroll horizontal por eixo (após inserir no DOM p/ medir corretamente)
+    bands.forEach(function (b) { addGanttScroll(b.wrap); });
   }
 
   // colunas do Gantt com a MESMA largura entre os eixos, com comportamento por

@@ -57,6 +57,13 @@
     edgeSvg.setAttribute('viewBox', vb); edgeSvg.firstChild.setAttribute('d', edgeD);
   }
 
+  /* Exposto p/ REUSO: outras telas (ex.: a lista de RDCs em slide-rdc-control.js)
+     desenham a MESMA moldura chanfrada tracejada + preenchimento em elementos
+     .post-link criados dinamicamente, sem a lógica de fetch/título/clampToggle
+     específica do banner. Fica antes do early-return abaixo (que sai quando a
+     página não tem banners próprios), garantindo a exposição em qualquer slide. */
+  window.__postLinkDraw = draw;
+
   /* exibir mais/menos: quando a descrição passa de 3 linhas (clamp do CSS), um
      botão no canto inferior direito expande/colapsa o texto. O botão é IRMÃO do
      banner (.post-link), no .postscriptum-container, p/ se sobrepor à quina
@@ -100,27 +107,29 @@
 
   /* Título + descrição:
      - TÍTULO (.post-link-title) = nome do documento (código do RDC). É o ÚNICO
-       elemento clicável do banner (um <a> que leva ao documento na página inicial);
-       o restante do banner (.post-link) é uma <div> NÃO clicável. O código é
-       derivado do próprio href (#doc-…) do título — disponível mesmo offline (file://).
+       elemento clicável do banner (um <a>); AO CLICAR leva ao CONTROLE GERAL de
+       RDCs (slide-rdc-control.html, no próprio href), NÃO mais ao index.html. O
+       restante do banner (.post-link) é uma <div> NÃO clicável.
+     - O id do documento (doc-…) vem do atributo data-doc do título (não mais do
+       href, que passou a ser a navegação p/ o controle geral); o código exibido é
+       derivado desse id — disponível mesmo offline (file://).
      - CORPO (<p>) = descrição viva do documento em 'documentos recebidos'
        (a .doc-desc-row de index.html, fonte de verdade), SEM o prefixo
-       "Documento relacionado: …". Sincronizado via fetch quando servido por
-       http(s); em file:// o fetch é bloqueado e mantém-se o texto local (fallback). */
+       "Documento relacionado: …". Sincronizado via fetch do index.html quando
+       servido por http(s); em file:// o fetch é bloqueado e mantém-se o texto
+       local (fallback). */
   banners.forEach(function (a) {
-    // o href/hash agora vivem no <a> do título (não mais no container .post-link)
     var titleEl = a.querySelector('.post-link-title');
-    var href = titleEl ? (titleEl.getAttribute('href') || '') : '';
-    var url = href.split('#')[0];
-    var id = decodeURIComponent((href.split('#')[1] || ''));
+    // o id do doc vive em data-doc; o href do título é a navegação (controle geral)
+    var id = titleEl ? decodeURIComponent(titleEl.getAttribute('data-doc') || '') : '';
     var p = a.querySelector('p');
     var code = id.replace(/^doc-/, '');
     if (titleEl && code && titleEl.textContent.trim() !== code) {
       titleEl.textContent = code;
       refresh(a);
     }
-    if (!url || !id || !p) return;
-    fetch(url).then(function (r) { return r.text(); }).then(function (html) {
+    if (!id || !p) return;
+    fetch('index.html').then(function (r) { return r.text(); }).then(function (html) {
       var li = new DOMParser().parseFromString(html, 'text/html').getElementById(id);
       var src = li && li.querySelector('.doc-desc-row');
       if (!src) return;

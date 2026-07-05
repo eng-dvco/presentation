@@ -48,16 +48,32 @@
   }
   & .sdt-empty { padding: 2rem 1rem; text-align: center; font-size: 0.72rem; font-style: italic; color: rgba(0, 0, 0, 0.4); background: var(--zebra-odd); }
 
-  /* ── cabeçalho de eixo (Gantt) ── */
-  & .sdt-axis-title {
+  /* ── GANTT unificado (espelha o cronograma de slide-tl-stay-recovery): UM
+     único container com um cabeçalho superior comum e, para cada eixo, uma faixa
+     .sdt-axis-band (flex-row) com o rótulo VERTICAL do eixo à esquerda. ── */
+  & .sdt-gantt-section { display: flex; flex-direction: column; }
+
+  /* cabeçalho superior comum do Gantt ("CONDIÇÃO POR ESTRUTURA") */
+  & .sdt-gantt-header {
     display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1rem;
     font-size: 0.62rem; font-weight: var(--font-weight-boldest);
     letter-spacing: 0.16em; text-transform: uppercase; color: rgba(0, 0, 0, 0.72);
-    background: var(--lt-surface-muted); border-top: 1px solid rgba(0, 0, 0, 0.06);
-    border-bottom: 1px dashed var(--lt-border);
+    background: var(--lt-surface-muted); border-bottom: 1px dashed var(--lt-border);
   }
-  & .sdt-axis:first-child .sdt-axis-title { border-top: none; }
-  & .sdt-axis-count { margin-left: auto; font-size: 0.55rem; font-weight: var(--font-weight-bold); letter-spacing: 0.06em; color: var(--lt-text-muted); text-transform: none; }
+
+  /* faixa do eixo: rótulo vertical (Leste/Norte) à esquerda das linhas do eixo */
+  & .sdt-axis-band { display: flex; flex-direction: row; align-items: stretch; }
+  & .sdt-axis-band + .sdt-axis-band { border-top: 1px dashed var(--lt-border); }
+  & .sdt-axis-band > .sdt-gantt-scroll { flex: 1 1 auto; min-width: 0; }
+  & .sdt-axis-vlabel {
+    flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    padding: 0.5rem 0.15rem;
+    font-size: 0.62rem; font-weight: var(--font-weight-boldest);
+    letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0, 0, 0, 0.62);
+    background: var(--lt-surface); border-right: 1px dashed var(--lt-border);
+  }
 
   /* ── modo TABELA ── */
   & .sdt-table-wrap { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) transparent; }

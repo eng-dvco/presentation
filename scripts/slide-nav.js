@@ -748,7 +748,7 @@ function buildLightbox() {
     // resposta tátil (Vibration API) ao cruzar o limiar de navegação — só onde há
     // suporte (Android Chrome/Edge/Firefox; iOS Safari NÃO implementa navigator.vibrate)
     const canVibrate = typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function';
-    const MIN_SCALE = 1, MAX_SCALE = 3;
+    const MIN_SCALE = 1, MAX_SCALE = 5;
     const ZOOM_LEVEL = 2.2;   // ampliação aplicada no duplo toque
     const DOUBLE_TAP_MS = 300, DOUBLE_TAP_DIST = 30;
 

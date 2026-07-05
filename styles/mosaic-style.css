@@ -173,6 +173,11 @@
     height: 36px;
 
     background-color: var(--color-dark-green-alpha-50);
+    /* desfoca o CONTEÚDO da imagem atrás da faixa (backdrop-filter) p/ o número
+       (::after) ficar legível sobre qualquer fundo — inclusive imagens claras ou
+       muito detalhadas na quina superior-esquerda */
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
     /* borda tracejada só na aresta interna (voltada para dentro da imagem) */
     border-bottom: 1.5px dashed var(--color-green);
 

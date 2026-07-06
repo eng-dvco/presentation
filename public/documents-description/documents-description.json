@@ -1,10 +1,5 @@
 [
   {
-    "nome": "Controle Autoportante Leste.xlsx",
-    "descrição": "Controle de inspeção e reforço de bases (A/B/C/D) das torres autoportantes do eixo Leste, por torre, trecho e WBS, com aba de gráfico de status.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Controle Autoportante Leste.xlsx"
-  },
-  {
     "nome": "Cronograma de Manutenção das Torres Estaiadas.xlsx",
     "descrição": "Cronograma das atividades de manutenção das torres estaiadas da linha.",
     "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Cronograma de Manutenção das Torres Estaiadas.xlsx"
@@ -121,7 +116,7 @@
   },
   {
     "nome": "LT — Quantitativo de Estruturas da Linha de Transmissão v1.11 — Eixos Norte e Leste.jpg",
-    "descrição": "Imagem com o quantitativo de estruturas dos eixos Norte e Leste.",
+    "descrição": "Imagem com o quantitativo de estruturas da LT por tipo e trecho, nos eixos Norte e Leste.",
     "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fatos relevantes exibidos na apresentação\\LT — Quantitativo de Estruturas da Linha de Transmissão v1.11 — Eixos Norte e Leste.jpg"
   },
   {

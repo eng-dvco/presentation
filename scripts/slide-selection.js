@@ -87,6 +87,9 @@ filterBtns.forEach(btn => {
 // estado: mesmo filtro de seção, mesma busca e mesmo ponto de rolagem. Visitas
 // novas continuam no topo e sem filtro — só restaura quando o retorno foi
 // sinalizado pelo slide (sessionStorage), nunca em uma carga comum.
+// restoringFromSlide é compartilhado com a persistência da seção de documentos
+// (mais abaixo), que reabre os grupos colapsáveis nesse mesmo retorno sinalizado.
+let restoringFromSlide = false;
 (() => {
   const ss = {
     get: (k, d = '') => { try { const v = sessionStorage.getItem(k); return v === null ? d : v; } catch { return d; } },
@@ -103,6 +106,7 @@ filterBtns.forEach(btn => {
 
   if (ss.get('indexRestoreScroll') !== '1') return;   // retorno não sinalizado → topo
   ss.del('indexRestoreScroll');
+  restoringFromSlide = true;
 
   // 1) reaplica a busca e o filtro salvos antes de posicionar a rolagem
   const savedQuery = ss.get('indexQuery');
@@ -261,6 +265,74 @@ if (!reducedMotion) {
     });
   });
 }
+
+
+// ---- persistência do estado da seção de documentos -------------------------
+// No retorno sinalizado a partir de um slide (mesma condição da persistência da
+// seleção acima), reabre a seção "Documentos Recebidos" no mesmo estado: grupos
+// colapsáveis abertos, filtro de tipo, busca e realce do documento aberto.
+// Visitas novas continuam no padrão (grupos recolhidos).
+(() => {
+  if (!docGroups.length) return;
+  const ss = {
+    get: (k, d = '') => { try { const v = sessionStorage.getItem(k); return v === null ? d : v; } catch { return d; } },
+    set: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} },
+    del: (k) => { try { sessionStorage.removeItem(k); } catch {} },
+  };
+
+  // salva o estado ao sair (clique em "ir", item, breadcrumb, logo…)
+  window.addEventListener('pagehide', () => {
+    ss.set('indexDocGroupsOpen', Array.from(docGroups).map(g => g.open ? '1' : '0').join(''));
+    ss.set('indexDocType', activeDocType);
+    ss.set('indexDocQuery', docSearch ? docSearch.value : '');
+  });
+
+  // registra qual documento foi aberto ao clicar no "ir" (para realçá-lo na volta)
+  document.querySelectorAll('.doc-items li .doc-goto').forEach(goto => {
+    goto.addEventListener('click', () => {
+      const name = goto.closest('li').querySelector('.doc-name-text');
+      ss.set('indexDocFocus', name ? name.textContent.trim() : '');
+    });
+  });
+
+  if (!restoringFromSlide) return;   // visita nova → grupos no padrão (recolhidos)
+
+  // 1) restaura o filtro de tipo e a busca, depois reaplica os filtros
+  const savedType  = ss.get('indexDocType', 'all');
+  const savedQuery = ss.get('indexDocQuery', '');
+  if (docSearch && savedQuery) docSearch.value = savedQuery;
+  const typeBtn = Array.from(docTypeBtns).find(b => b.dataset.docType === savedType);
+  if (typeBtn && savedType !== 'all') {
+    activeDocType = savedType;
+    docTypeBtns.forEach(b => b.classList.toggle('active', b === typeBtn));
+  }
+  if (savedQuery || activeDocType !== 'all') applyDocFilters();
+
+  // 2) reabre exatamente os grupos que estavam abertos ao sair
+  const savedGroups = ss.get('indexDocGroupsOpen', '');
+  if (savedGroups.length === docGroups.length) {
+    docGroups.forEach((g, i) => { g.open = savedGroups[i] === '1'; });
+    syncToggleBtn();
+  }
+
+  // 3) realça o último documento aberto (a rolagem já é restaurada acima); some
+  //    após o uso para não repetir o realce em retornos seguintes
+  const focusName = ss.get('indexDocFocus', '');
+  ss.del('indexDocFocus');
+  if (focusName) {
+    const target = Array.from(document.querySelectorAll('.doc-items li')).find(li => {
+      const n = li.querySelector('.doc-name-text');
+      return n && n.textContent.trim() === focusName;
+    });
+    if (target) {
+      const det = target.closest('details');
+      if (det) det.open = true;
+      target.classList.remove('doc-flash');
+      void target.offsetWidth;
+      target.classList.add('doc-flash');
+    }
+  }
+})();
 
 
 // ---- tooltip e truncamento dos títulos de documentos ------------------------

@@ -46,7 +46,12 @@
     var ro = ('ResizeObserver' in global) ? new ResizeObserver(upd) : null;
     if (ro) ro.observe(scroller);
     w._uiCleanup = function () { global.removeEventListener('resize', upd); if (ro) ro.disconnect(); };
+    // upd() lê scrollWidth/clientWidth — que ainda não estão assentados no instante em que o
+    // wrapper acabou de ser inserido. Chamado só aqui, ele às vezes concluía que não há
+    // transbordo e o degradê da borda NÃO aparecia até um resize (bug real, reproduzido no
+    // Gantt de desligamentos). Medir também no próximo frame, com o layout pronto, resolve.
     upd();
+    (global.requestAnimationFrame || setTimeout)(upd);
     return w;
   }
 

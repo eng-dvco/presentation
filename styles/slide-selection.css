@@ -1,4 +1,9 @@
 .content-wrapper {
+  /* o índice e a tela de seleção são mais largos que os slides (960px). Antes isso não
+     estava escrito em lugar nenhum: as duas páginas simplesmente HERDAVAM o 1080px que a
+     base declarava, e as outras 55 o sobrescreviam para 960. Invertida a base (960, o valor
+     real da maioria), a exceção passa a ser DECLARADA aqui, em vez de implícita. */
+  --content-max: 1080px;
   display: flex;
   flex-direction: column;
   align-items: center;

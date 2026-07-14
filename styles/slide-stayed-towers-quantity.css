@@ -38,7 +38,7 @@
     font-weight: var(--font-weight-boldest);
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.72);
+    color: var(--ink-2);
     background: var(--lt-surface-muted);
     border-bottom: 1px dashed var(--lt-border);
   }
@@ -48,8 +48,8 @@
   & .tl-data-table tbody td:first-child { text-align: center; width: 1px; padding-left: 0.5rem; padding-right: 0.5rem; }
   /* coluna 'Quantidade': números alinhados à direita, tabulares */
   & .tl-data-table thead th:last-child { text-align: right; }
-  & .qte-qtd { text-align: right; font-variant-numeric: tabular-nums; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); }
-  & .qte-status { font-weight: var(--font-weight-bold); letter-spacing: 0.02em; color: rgba(0, 0, 0, 0.72); }
+  & .qte-qtd { text-align: right; font-variant-numeric: tabular-nums; font-weight: var(--font-weight-bold); color: var(--ink-2); }
+  & .qte-status { font-weight: var(--font-weight-bold); letter-spacing: 0.02em; color: var(--ink-2); }
 }
 
 /* pontos de status (mesma família visual dos cronogramas: cor + anel translúcido) */

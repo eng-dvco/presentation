@@ -39,7 +39,7 @@
     font-weight: var(--font-weight-boldest);
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.72);
+    color: var(--ink-2);
     background: var(--lt-surface-muted);
     border-bottom: 1px dashed var(--lt-border);
   }
@@ -74,14 +74,14 @@
   & tbody td {
     padding: 0.35rem 0.7rem;
     border-bottom: 1px dashed var(--lt-border);
-    color: rgba(0, 0, 0, 0.75);
+    color: var(--ink-2);
     vertical-align: middle;
     white-space: nowrap;
   }
   & tbody td:not(:last-child) { border-right: 1px dashed rgba(160, 160, 160, 0.55); }
 
-  & .grt-base { font-weight: var(--font-weight-bold); letter-spacing: 0.02em; color: rgba(0, 0, 0, 0.72); }
-  & .grt-val { text-align: right; font-variant-numeric: tabular-nums; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); }
+  & .grt-base { font-weight: var(--font-weight-bold); letter-spacing: 0.02em; color: var(--ink-2); }
+  & .grt-val { text-align: right; font-variant-numeric: tabular-nums; font-weight: var(--font-weight-bold); color: var(--ink-2); }
 }
 
 /* legenda: consolidada no componente canônico .legend* de components.css (esta

@@ -23,13 +23,13 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); pointer-events: none;
 }
 
-/* ── ponto de status (cor + anel translúcido) — modificadores semânticos ── */
+/* ── ponto de status (cor + anel translúcido) — modificadores semânticos ──
+   Os únicos sufixos existentes são os três abaixo. A classe é montada por concatenação em
+   slide-shutdown-timeline.js ('status-dot status-dot--' + r.status) e o dicionário de status
+   é FECHADO: {programado, forçado, energizado}. As variantes --done/--running/--pending/
+   --total/--extra estavam aqui mas são INALCANÇÁVEIS — nenhum caminho do JS ou do HTML as
+   gera. (Os pontos de status da timeline usam outra família: .tl-dot / .qte-dot.) */
 .status-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-.status-dot--done    { background: var(--color-green);          box-shadow: 0 0 0 2.5px var(--color-green-alpha-25); }
-.status-dot--running { background: var(--color-purple);         box-shadow: 0 0 0 2.5px var(--color-purple-alpha-25); }
-.status-dot--pending { background: var(--color-orange);         box-shadow: 0 0 0 2.5px var(--color-orange-alpha-25); }
-.status-dot--total   { background: var(--color-grey-alpha-50);  box-shadow: 0 0 0 2.5px rgba(0, 0, 0, 0.07); }
-.status-dot--extra   { background: var(--color-blue);           box-shadow: 0 0 0 2.5px var(--color-blue-alpha-25); }
 /* desligamento programado (laranja) · forçado (vermelho) · SE energizada / sem desligamento (verde) */
 .status-dot--programado { background: var(--color-orange); box-shadow: 0 0 0 2.5px var(--color-orange-alpha-25); }
 .status-dot--forcado    { background: var(--color-red);    box-shadow: 0 0 0 2.5px var(--color-red-alpha-25); }
@@ -54,15 +54,15 @@
 .seg { display: flex; border: 1px solid rgba(0, 0, 0, 0.18); border-radius: 3px; overflow: hidden; }
 .seg-btn {
   background: #e2e2e2; border: none; border-left: 1px solid rgba(0, 0, 0, 0.14);
-  color: rgba(0, 0, 0, 0.38); cursor: pointer; padding: 0.28rem 0.55rem;
+  color: var(--ink-4); cursor: pointer; padding: 0.28rem 0.55rem;
   display: inline-flex; align-items: center; gap: 0.32rem;
   font-family: var(--font-family-general); font-size: 0.55rem;
   letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; white-space: nowrap;
   transition: background 0.15s, color 0.15s;
 }
 .seg-btn:first-child { border-left: none; }
-.seg-btn:hover { background: #d8d8d8; color: rgba(0, 0, 0, 0.75); }
-.seg-btn.is-active { background: #fff; color: rgba(0, 0, 0, 0.75); font-weight: var(--font-weight-bold); }
+.seg-btn:hover { background: #d8d8d8; color: var(--ink-2); }
+.seg-btn.is-active { background: #fff; color: var(--ink-2); font-weight: var(--font-weight-bold); }
 .seg-btn svg { flex-shrink: 0; color: inherit; }
 /* indicador de direção de ordenação dentro do botão segmentado */
 .seg-dir { font-size: 0.8em; opacity: 0; transition: opacity 0.15s; }
@@ -70,9 +70,9 @@
 
 /* ── campo de busca (pílula com ícone) ── */
 .search-pill { display: flex; align-items: center; gap: var(--gap-inline); background: rgba(0, 0, 0, 0.04); border: 1px solid var(--lt-border); border-radius: 99px; padding: 0.18rem 0.55rem; }
-.search-pill svg { color: rgba(0, 0, 0, 0.35); flex-shrink: 0; }
-.search-pill input { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.62rem; color: rgba(0, 0, 0, 0.75); }
-.search-pill input::placeholder { color: rgba(0, 0, 0, 0.3); }
+.search-pill svg { color: var(--ink-4); flex-shrink: 0; }
+.search-pill input { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.62rem; color: var(--ink-2); }
+.search-pill input::placeholder { color: var(--ink-5); }
 .search-pill input::-webkit-search-decoration,
 .search-pill input::-webkit-search-cancel-button { display: none; }
 
@@ -87,10 +87,10 @@
    desktop (o espaçamento horizontal vem do separador tracejado .legend-sep).
    width:100% p/ preencher containers centralizados (ex.: .content-wrapper do mosaico). */
 .legend { display: flex; align-items: center; flex-wrap: wrap; gap: var(--gap-inline) 0; width: 100%; box-sizing: border-box; padding: 0.5rem 1rem; background: var(--lt-surface); border-radius: var(--border-general); box-shadow: var(--lt-shadow); }
-.legend-title { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0, 0, 0, 0.75); white-space: nowrap; flex-shrink: 0; }
+.legend-title { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; flex-shrink: 0; }
 .legend-sep { flex: 1; height: 0; border-top: 1px dashed var(--lt-border); margin: 0 1rem; }
 .legend-items { display: flex; align-items: center; flex-wrap: wrap; gap: var(--gap-24); flex-shrink: 1; min-width: 0; }
-.legend-item { display: flex; align-items: center; gap: var(--gap-inline); font-family: var(--font-family-general); font-size: 0.68rem; color: var(--lt-icon); }
+.legend-item { display: flex; align-items: center; gap: var(--gap-inline); font-family: var(--font-family-general); font-size: 0.68rem; color: var(--ink-3); }
 @media (max-width: 640px) {
   .legend-items { flex-direction: column; align-items: flex-start; gap: var(--gap-inline); flex-basis: 100%; padding-top: 0.3rem; }
 }

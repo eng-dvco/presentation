@@ -1,5 +1,10 @@
-/* ── light theme overrides (timeline page only) ────────────────────────── */
-body { color: rgba(0,0,0,0.75); }
+/* ── light theme overrides (timeline page only) ──────────────────────────
+   O `body { color: rgba(0,0,0,0.75) }` que existia aqui SAIU. Ele era um seletor GLOBAL
+   numa folha carregada por 4 páginas, e fazia o MESMO componente (.title-h1, o corpo do
+   texto) renderizar cinza-escuro nessas 4 e preto nas outras 57 — divergência que nunca
+   foi decidida, só herdada. O padrão agora é PRETO (--color-black, na base), valendo em
+   todas. O mesmo para o breadcrumb: os overrides cinzas daqui viraram a REGRA em
+   slide-style.css (--crumb-ink), e o verde saiu. */
 .flex-header-container { background-color: var(--lt-surface); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 2px solid transparent; border-image: var(--zebra-stripe) 2; box-shadow: var(--lt-shadow); }
 /* NÃO reintroduzir aqui um `.section-icon { background-color: … }` sem escopo: a classe
    .section-icon não é só a do cabeçalho — os ícones da navegação lateral entre seções também
@@ -10,10 +15,9 @@ body { color: rgba(0,0,0,0.75); }
    O ícone do cabeçalho já é escurecido pelo .title-header-h1 .section-icon (slide-style.css),
    que é mais específico e vale em todos os slides. */
 .breadcrumb { background-color: var(--lt-surface); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
-.crumb a, .crumb [aria-current="page"] { color: rgba(0,0,0,0.5); opacity: 1; }
-.crumb a:hover, .crumb a:focus { color: var(--lt-text); }
-.crumb [aria-current="page"] { color: rgba(0,0,0,0.7); }
-.crumb:not(:last-child)::after { color: rgba(0,0,0,0.25); opacity: 1; }
+/* os 4 overrides do .crumb saíram: eram seletores globais que definiam o breadcrumb cinza
+   só nestas páginas. O cinza agora é o PADRÃO (slide-style.css, tokens --crumb-*), então
+   repeti-los aqui seria redundância — e outra mina de cascata. */
 .cmt { border: 1px solid rgba(0,0,0,0.15); }
 
 /* navegação lateral entre seções (e o ripple dos botões): estilo unificado
@@ -22,21 +26,28 @@ body { color: rgba(0,0,0,0.75); }
 /* botão retornar ao topo — light theme */
 #back-to-top { background: var(--lt-surface); border-color: var(--lt-border); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 #back-to-top:hover { background: rgba(255,255,255,1); border-color: var(--lt-border-strong); }
-#back-to-top::before { background: var(--lt-surface); border-color: var(--lt-border); color: rgba(0,0,0,0.65); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+#back-to-top::before { background: var(--lt-surface); border-color: var(--lt-border); color: var(--ink-2); -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .back-top-icon { background-color: var(--lt-icon); }
 
 /* Prevent the grid's implicit column from growing to max-content of timeline entries */
 .main-container { grid-template-columns: minmax(0, 1fr); }
 .content-container.has-sidebar { gap: var(--gap-48); }
-.content-wrapper { width: 100%; max-width: none; min-width: 0; justify-items: stretch; grid-template-columns: minmax(0, 1fr); row-gap: var(--gap-12); }
+/* LARGURA TOTAL nas páginas de cronograma — agora pelo token, não sobrescrevendo a
+   propriedade. O cronograma é um componente largo (a tabela e a faixa de estruturas rolam
+   na horizontal); estreitá-lo a 960px só aumenta a rolagem. Isto sempre foi a INTENÇÃO
+   desta folha — mas em 2 das 4 páginas o mosaico, carregado depois, derrubava o `none` de
+   volta para 960px com um seletor nu, e a largura acabava decidida pela ordem de um <link>:
+   960 / 960 / 1096 / 1344px entre irmãs. Agora as quatro são iguais.
+   Para alinhá-las aos slides, basta trocar `none` por `960px` aqui. */
+.content-wrapper { --content-max: none; width: 100%; min-width: 0; justify-items: stretch; grid-template-columns: minmax(0, 1fr); row-gap: var(--gap-12); }
 
 .tl-scroll { overflow-x: clip; overflow-y: visible; padding-bottom: 0; cursor: default; }
 
 /* ── filtros do cronograma ── */
 .tl-filters { position: relative; z-index: 100; display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--gap-inline) var(--gap-16); width: 100%; padding: 0.75rem 1rem; margin-bottom: 0; box-sizing: border-box; background: var(--lt-surface); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--border-general); box-shadow: var(--lt-shadow); }
 .tlf-field { display: flex; flex-direction: column; gap: var(--gap-inline); }
-.tlf-label { font-family: var(--font-family-general); font-size: 0.58rem; font-weight: var(--font-weight-bold); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.5); }
-.tl-filters input[type="search"], .tl-filters input[type="date"], .tl-filters select { background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.15); border-radius: var(--border-smaller); color: rgba(0,0,0,0.75); font-family: var(--font-family-general); font-size: 0.72rem; padding: 0.32rem 0.5rem; outline: none; }
+.tlf-label { font-family: var(--font-family-general); font-size: 0.58rem; font-weight: var(--font-weight-bold); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.tl-filters input[type="search"], .tl-filters input[type="date"], .tl-filters select { background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.15); border-radius: var(--border-smaller); color: var(--ink-2); font-family: var(--font-family-general); font-size: 0.72rem; padding: 0.32rem 0.5rem; outline: none; }
 .tl-filters input[type="date"] { color-scheme: light; width: 8.4rem; }
 .tl-filters input[type="search"] { min-width: 8rem; }
 .tl-filters input:focus, .tl-filters select:focus { border-color: var(--color-green); }
@@ -52,10 +63,10 @@ body { color: rgba(0,0,0,0.75); }
 .tlf-chip[data-status="done"].active    { background: var(--color-green-alpha-10);  border: 1px solid var(--color-dark-green);  color: var(--color-dark-green); }
 .tlf-chip[data-status="running"].active { background: var(--color-purple-alpha-10); border: 1px solid var(--color-purple);      color: var(--color-purple); }
 .tlf-chip[data-status="pending"].active { background: var(--color-orange-alpha-25); border: 1px solid rgb(150, 95, 0);          color: rgb(150, 95, 0); }
-.tlf-range { display: flex; align-items: center; gap: var(--gap-inline); color: rgba(0,0,0,0.5); font-size: 0.7rem; }
-.tlf-clear { margin-left: auto; align-self: flex-end; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.15); border-radius: var(--border-smaller); color: var(--lt-icon); font-family: var(--font-family-general); font-size: 0.68rem; padding: 0.4rem 0.7rem; cursor: pointer; transition: background-color 0.15s; }
+.tlf-range { display: flex; align-items: center; gap: var(--gap-inline); color: var(--ink-3); font-size: 0.7rem; }
+.tlf-clear { margin-left: auto; align-self: flex-end; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.15); border-radius: var(--border-smaller); color: var(--ink-3); font-family: var(--font-family-general); font-size: 0.68rem; padding: 0.4rem 0.7rem; cursor: pointer; transition: background-color 0.15s; }
 .tlf-clear:hover { background: rgba(0,0,0,0.08); }
-.tlf-count { align-self: flex-end; margin-left: auto; font-family: var(--font-family-general); font-size: 0.66rem; color: rgba(0,0,0,0.45); white-space: nowrap; }
+.tlf-count { align-self: flex-end; margin-left: auto; font-family: var(--font-family-general); font-size: 0.66rem; color: var(--ink-4); white-space: nowrap; }
 
 /* ── filtro de status: inline (telas largas) ↔ menu de funil (telas estreitas) ── */
 .tlf-filter { display: flex; align-items: center; margin-right: auto; }
@@ -66,18 +77,18 @@ body { color: rgba(0,0,0,0.75); }
 .tlf-chips-title { display: none; }
 
 /* dropdown customizado (Eixo/Trecho) */
-.tlf-native-hidden { display: none !important; }
+.tlf-native-hidden { display: none; }
 .tlf-dd { position: relative; }
-.tlf-dd-trigger { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--gap-8); min-width: 6rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.15); border-radius: var(--border-smaller); color: rgba(0,0,0,0.75); font-family: var(--font-family-general); font-size: 0.72rem; padding: 0.32rem 0.5rem; cursor: pointer; outline: none; }
+.tlf-dd-trigger { display: inline-flex; align-items: center; justify-content: space-between; gap: var(--gap-8); min-width: 6rem; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.15); border-radius: var(--border-smaller); color: var(--ink-2); font-family: var(--font-family-general); font-size: 0.72rem; padding: 0.32rem 0.5rem; cursor: pointer; outline: none; }
 .tlf-dd-trigger:focus-visible, .tlf-dd-trigger[aria-expanded="true"] { border-color: var(--color-green); }
-.tlf-dd-arrow { color: rgba(0,0,0,0.38); font-size: 0.7em; transition: transform 0.15s ease; }
+.tlf-dd-arrow { color: var(--ink-4); font-size: 0.7em; transition: transform 0.15s ease; }
 .tlf-dd-trigger[aria-expanded="true"] .tlf-dd-arrow { transform: rotate(180deg); }
 .tlf-dd-menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 200; min-width: 100%; max-height: 240px; overflow-y: auto; margin: 0; padding: 4px; list-style: none; background: rgba(255,255,255,0.98); border: 1px solid var(--lt-border); border-radius: var(--border-smaller); box-shadow: var(--shadow-popover); scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.15) transparent; }
 .tlf-dd-menu[hidden] { display: none; }
-.tlf-dd-opt { padding: 0.34rem 0.6rem; border-radius: var(--border-smaller); color: rgba(0,0,0,0.65); font-family: var(--font-family-general); font-size: 0.72rem; line-height: 1.2; cursor: pointer; white-space: nowrap; outline: none; }
-.tlf-dd-opt:hover, .tlf-dd-opt:focus-visible { background: var(--color-green-alpha-25); color: rgba(0,0,0,0.75); }
+.tlf-dd-opt { padding: 0.34rem 0.6rem; border-radius: var(--border-smaller); color: var(--ink-2); font-family: var(--font-family-general); font-size: 0.72rem; line-height: 1.2; cursor: pointer; white-space: nowrap; outline: none; }
+.tlf-dd-opt:hover, .tlf-dd-opt:focus-visible { background: var(--color-green-alpha-25); color: var(--ink-2); }
 .tlf-dd-opt.is-selected { background: var(--color-green); color: #000; font-weight: var(--font-weight-bold); }
-.tlf-dd-placeholder { color: rgba(0,0,0,0.28); }
+.tlf-dd-placeholder { color: var(--ink-5); }
 .tlf-date .tlf-dd-trigger.tlf-dd-filled { background: var(--color-green); border-color: var(--color-green); color: #000; }
 .tlf-date .tlf-dd-trigger.tlf-dd-filled .tlf-dd-value { color: #000; }
 .tlf-date .tlf-dd-trigger.tlf-dd-filled .tlf-dd-arrow { color: var(--lt-text-muted); }
@@ -88,29 +99,29 @@ body { color: rgba(0,0,0,0.75); }
 .tlf-cal-head { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-6); margin-bottom: 6px; }
 /* título + seta de seleção de ano agrupados e centrados entre as setas de mês */
 .tlf-cal-titlewrap { display: inline-flex; align-items: center; gap: var(--gap-2); }
-.tlf-cal-title { font-family: var(--font-family-general); font-size: 0.7rem; font-weight: var(--font-weight-bold); color: rgba(0,0,0,0.75); text-transform: capitalize; white-space: nowrap; }
+.tlf-cal-title { font-family: var(--font-family-general); font-size: 0.7rem; font-weight: var(--font-weight-bold); color: var(--ink-2); text-transform: capitalize; white-space: nowrap; }
 /* setas de mês: só o glifo em negrito, sem caixa/borda; hover = mudança de cor */
-.tlf-cal-nav { background: none; border: none; padding: 0 4px; color: rgba(0,0,0,0.5); font-size: 0.85rem; font-weight: var(--font-weight-bold); line-height: 1; cursor: pointer; outline: none; transition: color 0.15s; }
-.tlf-cal-nav:hover, .tlf-cal-nav:focus-visible { color: rgba(0,0,0,0.85); }
+.tlf-cal-nav { background: none; border: none; padding: 0 4px; color: var(--ink-3); font-size: 0.85rem; font-weight: var(--font-weight-bold); line-height: 1; cursor: pointer; outline: none; transition: color 0.15s; }
+.tlf-cal-nav:hover, .tlf-cal-nav:focus-visible { color: var(--ink-1); }
 
 /* seta que abre o menu de seleção de ano (à direita do "mês ano") */
-.tlf-cal-year-toggle { background: none; border: none; padding: 0 2px; color: rgba(0,0,0,0.4); font-size: 0.6rem; line-height: 1; cursor: pointer; outline: none; transition: color 0.15s, transform 0.15s ease; }
-.tlf-cal-year-toggle:hover, .tlf-cal-year-toggle:focus-visible { color: rgba(0,0,0,0.75); }
+.tlf-cal-year-toggle { background: none; border: none; padding: 0 2px; color: var(--ink-4); font-size: 0.6rem; line-height: 1; cursor: pointer; outline: none; transition: color 0.15s, transform 0.15s ease; }
+.tlf-cal-year-toggle:hover, .tlf-cal-year-toggle:focus-visible { color: var(--ink-2); }
 .tlf-cal-year-toggle[aria-expanded="true"] { transform: rotate(180deg); color: var(--color-green); }
 
 /* menu de anos: grade compacta e rolável (reutiliza tokens do calendário) */
 .tlf-cal-years { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap-2); max-height: 172px; overflow-y: auto; padding: 2px; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.15) transparent; }
-.tlf-cal-year { font-family: var(--font-family-general); font-size: 0.66rem; color: rgba(0,0,0,0.65); background: rgba(0,0,0,0.03); text-align: center; padding: 5px 0; border-radius: var(--border-smaller); border: 1px solid rgba(0,0,0,0.1); cursor: pointer; outline: none; }
-.tlf-cal-year:hover, .tlf-cal-year:focus-visible { background: var(--color-green-alpha-25); color: rgba(0,0,0,0.75); }
+.tlf-cal-year { font-family: var(--font-family-general); font-size: 0.66rem; color: var(--ink-2); background: rgba(0,0,0,0.03); text-align: center; padding: 5px 0; border-radius: var(--border-smaller); border: 1px solid rgba(0,0,0,0.1); cursor: pointer; outline: none; }
+.tlf-cal-year:hover, .tlf-cal-year:focus-visible { background: var(--color-green-alpha-25); color: var(--ink-2); }
 .tlf-cal-year.is-current { background: var(--color-green); color: #000; font-weight: var(--font-weight-bold); }
 .tlf-cal-grid { display: grid; grid-template-columns: repeat(7, 26px); gap: var(--gap-2); }
-.tlf-cal-wd { font-family: var(--font-family-general); font-size: 0.54rem; text-transform: uppercase; letter-spacing: 0.03em; color: rgba(0,0,0,0.45); text-align: center; padding: 2px 0; }
-.tlf-cal-day { font-family: var(--font-family-general); font-size: 0.66rem; color: rgba(0,0,0,0.65); background: rgba(0,0,0,0.03); text-align: center; padding: 4px 0; border-radius: var(--border-smaller); border: 1px solid rgba(0,0,0,0.1); cursor: pointer; outline: none; }
-.tlf-cal-day:hover, .tlf-cal-day:focus-visible { background: var(--color-green-alpha-25); color: rgba(0,0,0,0.75); }
+.tlf-cal-wd { font-family: var(--font-family-general); font-size: 0.54rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink-4); text-align: center; padding: 2px 0; }
+.tlf-cal-day { font-family: var(--font-family-general); font-size: 0.66rem; color: var(--ink-2); background: rgba(0,0,0,0.03); text-align: center; padding: 4px 0; border-radius: var(--border-smaller); border: 1px solid rgba(0,0,0,0.1); cursor: pointer; outline: none; }
+.tlf-cal-day:hover, .tlf-cal-day:focus-visible { background: var(--color-green-alpha-25); color: var(--ink-2); }
 .tlf-cal-day.is-today { border-color: var(--color-green); }
 .tlf-cal-day.is-selected { background: var(--color-green); color: #000; font-weight: var(--font-weight-bold); }
 .tlf-cal-day.is-empty { visibility: hidden; cursor: default; }
-.tlf-cal-clear { margin-top: 6px; width: 100%; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.14); border-radius: var(--border-smaller); color: var(--lt-icon); font-family: var(--font-family-general); font-size: 0.62rem; padding: 0.3rem; cursor: pointer; }
+.tlf-cal-clear { margin-top: 6px; width: 100%; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.14); border-radius: var(--border-smaller); color: var(--ink-3); font-family: var(--font-family-general); font-size: 0.62rem; padding: 0.3rem; cursor: pointer; }
 .tlf-cal-clear:hover { background: rgba(0,0,0,0.08); }
 
 /* ── barras de filtro no mobile (<=640px) ──
@@ -175,7 +186,7 @@ body { color: rgba(0,0,0,0.75); }
     display: inline-flex; align-items: center; justify-content: center;
     width: 1.6rem; height: 1.6rem;
     background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.18);
-    border-radius: 3px; color: var(--lt-icon); cursor: pointer;
+    border-radius: 3px; color: var(--ink-3); cursor: pointer;
     transition: background 0.15s, color 0.15s, border-color 0.15s;
   }
   .tlf-funnel:hover { background: rgba(0,0,0,0.08); color: var(--lt-text); border-color: rgba(0,0,0,0.3); }
@@ -193,7 +204,7 @@ body { color: rgba(0,0,0,0.75); }
   .tlf-chips--axis .tlf-chips-title {
     display: block; padding: 0 0.25rem 0.35rem; font-family: var(--font-family-general);
     font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em;
-    text-transform: uppercase; color: rgba(0,0,0,0.45);
+    text-transform: uppercase; color: var(--ink-4);
   }
 }
 
@@ -204,11 +215,11 @@ body { color: rgba(0,0,0,0.75); }
 .tl-axis { display: flex; flex-direction: column; align-items: stretch; background: var(--lt-surface); border-top: 1px solid rgba(0,0,0,0.08); border-bottom: 1px dashed var(--lt-border); position: relative; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.10); }
 .tl-axis-title-row { display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 1rem; gap: var(--gap-12); }
 /* nomes dos eixos (Eixo Norte / Eixo Leste) em negrito */
-.tl-axis-title { display: block; padding: 0; font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-boldest); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0,0,0,0.75); }
+.tl-axis-title { display: block; padding: 0; font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-boldest); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-2); }
 .tl-axis-search { display: flex; align-items: center; gap: var(--gap-inline); background: rgba(0,0,0,0.04); border: 1px solid var(--lt-border); border-radius: 99px; padding: 0.15rem 0.5rem; flex-shrink: 0; }
-.tl-axis-search-icon { color: rgba(0,0,0,0.35); flex-shrink: 0; }
-.tl-axis-code { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.58rem; width: 10ch; color: rgba(0,0,0,0.75); }
-.tl-axis-code::placeholder { color: rgba(0,0,0,0.3); }
+.tl-axis-search-icon { color: var(--ink-4); flex-shrink: 0; }
+.tl-axis-code { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.58rem; width: 10ch; color: var(--ink-2); }
+.tl-axis-code::placeholder { color: var(--ink-5); }
 .tl-axis-code::-webkit-search-decoration, .tl-axis-code::-webkit-search-cancel-button { display: none; }
 
 /* grupo = conjunto de faixas (sem ramificação visual no modo horizontal) */
@@ -240,7 +251,7 @@ body { color: rgba(0,0,0,0.75); }
     font-weight: var(--font-weight-boldest);
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.62);
+    color: var(--ink-3);
     background: var(--lt-surface);
     border-right: 1px dashed var(--lt-border);
   }
@@ -249,7 +260,7 @@ body { color: rgba(0,0,0,0.75); }
 .tl-trecho:not(:last-child) { border-bottom: 1px dashed var(--lt-border); }
 
 /* label da faixa: fixa à esquerda (sticky) — sempre visível ao rolar pelo tempo */
-.tl-trecho-name { display: flex; align-items: center; justify-content: center; padding: 0 0.6rem; font-family: var(--font-family-general); font-size: 0.66rem; font-weight: var(--font-weight-bold); letter-spacing: 0.06em; color: rgba(0,0,0,0.72); border-right: 1px solid rgba(0,0,0,0.1); background: var(--lt-surface); width: 5rem; min-width: 5rem; flex-shrink: 0; position: relative; z-index: 2; box-shadow: 4px 0 10px rgba(0,0,0,0.10); clip-path: inset(0 -20px 0 0); }
+.tl-trecho-name { display: flex; align-items: center; justify-content: center; padding: 0 0.6rem; font-family: var(--font-family-general); font-size: 0.66rem; font-weight: var(--font-weight-bold); letter-spacing: 0.06em; color: var(--ink-2); border-right: 1px solid rgba(0,0,0,0.1); background: var(--lt-surface); width: 5rem; min-width: 5rem; flex-shrink: 0; position: relative; z-index: 2; box-shadow: 4px 0 10px rgba(0,0,0,0.10); clip-path: inset(0 -20px 0 0); }
 
 /* espinha HORIZONTAL: linha que conecta os pontos ao longo do tempo */
 .tl-entries { position: relative; display: flex; flex-direction: row; align-items: flex-start; gap: 2.5rem; padding: 1rem 0 1.25rem 1.5rem; }
@@ -287,24 +298,24 @@ body { color: rgba(0,0,0,0.75); }
 .tl-badge { background: var(--tl-badge-bg, var(--tl-color)); display: flex; align-items: center; justify-content: center; padding: 0 0.4rem; height: 1.05rem; border-radius: 3px 3px 0 0; }
 /* roxo é escuro: clareia só o fundo do badge "em execução" p/ o código escuro continuar legível (o ponto permanece roxo vivo) */
 .tl-entry--running { --tl-badge-bg: rgba(154, 141, 255, 1); }
-.tl-code  { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bold); color: rgba(0,0,0,0.75); letter-spacing: 0.03em; white-space: nowrap; }
+.tl-code  { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bold); color: var(--ink-2); letter-spacing: 0.03em; white-space: nowrap; }
 
 /* sem separador no card vertical (badge colorido encosta direto nas datas) */
 .tl-sep { display: none; }
 
 /* dates — fundo branco, texto escuro */
 .tl-dates { background: rgba(255,255,255,0.92); border-radius: 0 0 3px 3px; padding: 0.25rem 0.4rem; display: flex; flex-direction: column; gap: 0.1rem; min-height: 2rem; justify-content: center; }
-.tl-date { font-family: var(--font-family-general); font-size: 0.58rem; color: rgba(0,0,0,0.65); white-space: nowrap; display: flex; align-items: baseline; gap: 0.25em; }
-.tl-lbl  { font-size: 0.52rem; color: rgba(0,0,0,0.4); flex-shrink: 0; }
-.tl-date--empty { color: rgba(0,0,0,0.35); font-style: italic; justify-content: center; }
+.tl-date { font-family: var(--font-family-general); font-size: 0.58rem; color: var(--ink-2); white-space: nowrap; display: flex; align-items: baseline; gap: 0.25em; }
+.tl-lbl  { font-size: 0.52rem; color: var(--ink-4); flex-shrink: 0; }
+.tl-date--empty { color: var(--ink-4); font-style: italic; justify-content: center; }
 /* valor de data ausente (ex.: conclusão em aberto) reserva a MESMA largura de uma
    data completa — 8 caracteres monoespaçados (DD-MM-YY) = 8ch —, para o card do
    entry ficar com largura idêntica aos de datas completas; o "—" fica centralizado. */
 .tl-date--empty .tl-date-val { min-width: 8ch; text-align: center; }
 
 /* legend */
-.tl-empty-state { background: #f5f5f5; border-top: 1px dashed var(--lt-border); padding: 2rem 1rem; font-family: var(--font-family-general); font-size: 0.72rem; color: rgba(0,0,0,0.4); font-style: italic; text-align: center; }
-.tl-axis-count { padding: 0.4rem 1rem; font-family: var(--font-family-general); font-size: 0.6rem; color: rgba(0,0,0,0.35); text-align: right; background: var(--lt-surface); }
+.tl-empty-state { background: #f5f5f5; border-top: 1px dashed var(--lt-border); padding: 2rem 1rem; font-family: var(--font-family-general); font-size: 0.72rem; color: var(--ink-4); font-style: italic; text-align: center; }
+.tl-axis-count { padding: 0.4rem 1rem; font-family: var(--font-family-general); font-size: 0.6rem; color: var(--ink-4); text-align: right; background: var(--lt-surface); }
 /* NB: o SCAFFOLD da legenda (.tl-legend / -title / -sep / -items / -item) foi
    consolidado no componente canônico .legend* de components.css. Aqui permanecem
    apenas os PONTOS de status (.tl-legend-dot*), específicos deste contexto e
@@ -325,12 +336,12 @@ body { color: rgba(0,0,0,0.75); }
 
 /* pill do código: altura = diâmetro do dot → bottom exatamente na espinha */
 .tl-entry-code-pill { height: calc(var(--tl-dot-r) * 2); display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 3px 3px 0 0; }
-.tl-entry-code-pill .tl-code { display: block; text-align: center; color: rgba(0,0,0,0.75); font-family: var(--font-family-general); font-size: 0.6rem; font-weight: var(--font-weight-bold); letter-spacing: 0.03em; padding: 0 0.4rem; white-space: nowrap; line-height: 1; }
+.tl-entry-code-pill .tl-code { display: block; text-align: center; color: var(--ink-2); font-family: var(--font-family-general); font-size: 0.6rem; font-weight: var(--font-weight-bold); letter-spacing: 0.03em; padding: 0 0.4rem; white-space: nowrap; line-height: 1; }
 
 /* datas: começam na espinha (logo abaixo da pill, sem gap); mesmo width via stretch */
 .tl-dates--hdr { background: rgba(228,228,228,0.95); min-height: auto; border-radius: 0; padding: 0.1rem 0.4rem; flex-direction: row; gap: var(--gap-8); justify-content: center; }
-.tl-dates--hdr .tl-date { font-size: 0.54rem; color: var(--lt-icon); }
-.tl-dates--hdr .tl-lbl { font-size: 0.48rem; color: rgba(0,0,0,0.38); }
+.tl-dates--hdr .tl-date { font-size: 0.54rem; color: var(--ink-3); }
+.tl-dates--hdr .tl-lbl { font-size: 0.48rem; color: var(--ink-4); }
 
 /* mobile/tablet: empilha as datas (ini acima, fim abaixo) sob o código.
    A faixa fica mais alta — desejado — e o painel (grid auto) acomoda. */
@@ -347,7 +358,7 @@ body { color: rgba(0,0,0,0.75); }
 .tl-base { display: grid; grid-template-columns: 0.85rem 0.9rem 1fr auto; align-items: center; gap: var(--gap-4); }
 .tl-base-lbl { font-family: var(--font-family-general); font-size: 0.65rem; font-weight: var(--font-weight-bold); color: var(--lt-text); }
 .tl-base-icon { width: 0.82rem; height: 0.82rem; flex-shrink: 0; }
-.tl-base-dates { font-family: var(--font-family-general); font-size: 0.58rem; color: rgba(0,0,0,0.65); white-space: nowrap; grid-column: 4; min-width: 14ch; }
+.tl-base-dates { font-family: var(--font-family-general); font-size: 0.58rem; color: var(--ink-2); white-space: nowrap; grid-column: 4; min-width: 14ch; }
 
 /* done=verde / running=azul / pending=laranja */
 .tl-base--done    { color: var(--color-green); }
@@ -387,7 +398,7 @@ body { color: rgba(0,0,0,0.75); }
 
 /* toggle chevron icon */
 .tl-bases-toggle { display: flex; align-items: center; justify-content: flex-end; align-self: flex-end; color: var(--lt-border-strong); transition: color 0.15s; }
-.tl-card--bases:hover .tl-bases-toggle { color: rgba(0,0,0,0.45); }
+.tl-card--bases:hover .tl-bases-toggle { color: var(--ink-4); }
 .tl-toggle-icon { transition: transform 0.2s ease; }
 
 /* expanded: seta aponta para CIMA (colapsar) */
@@ -404,7 +415,7 @@ body { color: rgba(0,0,0,0.75); }
 .tl-card--bases:not(.is-collapsed) .tl-base:not(:last-of-type) { border-bottom: 1px dashed rgba(0,0,0,0.13); padding-bottom: 0.1rem; }
 
 /* ── axis toggle button ── */
-.tl-axis-toggle { margin-left: auto; background: none; border: 1px solid rgba(0,0,0,0.18); border-radius: 3px; color: rgba(0,0,0,0.75); cursor: pointer; padding: 0.22rem 0.5rem; display: flex; align-items: center; gap: var(--gap-inline); font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+.tl-axis-toggle { margin-left: auto; background: none; border: 1px solid rgba(0,0,0,0.18); border-radius: 3px; color: var(--ink-2); cursor: pointer; padding: 0.22rem 0.5rem; display: flex; align-items: center; gap: var(--gap-inline); font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.15s, color 0.15s, border-color 0.15s; }
 .tl-axis-toggle:hover { background: rgba(0,0,0,0.06); color: var(--lt-text); border-color: rgba(0,0,0,0.3); }
 .tl-axis-toggle-icon { flex-shrink: 0; transition: transform 0.2s ease; color: inherit; }
 /* botões contêm SVG + span — forçar inherit para vencer a regra * { color: --color-white } do slide-style.css */
@@ -451,22 +462,23 @@ body { color: rgba(0,0,0,0.75); }
 
 /* ── seletor de visualização: cronograma ↔ tabela ── */
 .tl-view-toggle { display: flex; border: 1px solid rgba(0,0,0,0.18); border-radius: 3px; overflow: hidden; }
-.tl-view-btn { background: #e2e2e2; border: none; border-left: 1px solid rgba(0,0,0,0.14); color: rgba(0,0,0,0.38); cursor: pointer; padding: 0.22rem 0.5rem; display: flex; align-items: center; gap: var(--gap-inline); font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-normal); letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.15s, color 0.15s; line-height: 1; white-space: nowrap; }
+.tl-view-btn { background: #e2e2e2; border: none; border-left: 1px solid rgba(0,0,0,0.14); color: var(--ink-4); cursor: pointer; padding: 0.22rem 0.5rem; display: flex; align-items: center; gap: var(--gap-inline); font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-normal); letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.15s, color 0.15s; line-height: 1; white-space: nowrap; }
 .tl-view-btn:first-child { border-left: none; }
-.tl-view-btn:hover { background: #d8d8d8; color: rgba(0,0,0,0.75); }
-.tl-view-btn.is-active { background: #fff; color: rgba(0,0,0,0.75); font-weight: var(--font-weight-bold); }
+.tl-view-btn:hover { background: #d8d8d8; color: var(--ink-2); }
+.tl-view-btn.is-active { background: #fff; color: var(--ink-2); font-weight: var(--font-weight-bold); }
 .tl-view-btn-icon { flex-shrink: 0; color: inherit; }
 
 /* ── seletor de ordenação ── */
 .tl-sort-toggle { display: flex; border: 1px solid rgba(0,0,0,0.18); border-radius: 3px; overflow: hidden; }
-.tl-sort-btn { background: #e2e2e2; border: none; border-left: 1px solid rgba(0,0,0,0.14); color: rgba(0,0,0,0.38); cursor: pointer; padding: 0.22rem 0.5rem; display: flex; align-items: center; font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-normal); letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.15s, color 0.15s; line-height: 1; white-space: nowrap; }
+.tl-sort-btn { background: #e2e2e2; border: none; border-left: 1px solid rgba(0,0,0,0.14); color: var(--ink-4); cursor: pointer; padding: 0.22rem 0.5rem; display: flex; align-items: center; font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-normal); letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.15s, color 0.15s; line-height: 1; white-space: nowrap; }
 .tl-sort-btn:first-child { border-left: none; }
-.tl-sort-btn:hover { background: #d8d8d8; color: rgba(0,0,0,0.75); }
-.tl-sort-btn.is-active { background: #fff; color: rgba(0,0,0,0.75); font-weight: var(--font-weight-bold); }
+.tl-sort-btn:hover { background: #d8d8d8; color: var(--ink-2); }
+.tl-sort-btn.is-active { background: #fff; color: var(--ink-2); font-weight: var(--font-weight-bold); }
 
 /* ── oculta grupos do cronograma e exibe tabela quando a seção está em modo tabela ── */
 .tl-axis-section.is-table-view .tl-group { display: none !important; }
-.tl-axis-section.is-table-view .tl-axis-table { display: block !important; }
+/* sem !important: a especificidade (0,3,0) já derrota o .tl-axis-table (0,1,0) sozinha */
+.tl-axis-section.is-table-view .tl-axis-table { display: block; }
 
 /* ── container da visualização tabular ── */
 .tl-axis-table { display: none; overflow-x: auto; scrollbar-width: thin; scrollbar-color: rgba(0,0,0,0.2) transparent; }
@@ -495,7 +507,7 @@ body { color: rgba(0,0,0,0.75); }
 .tl-data-table tbody tr:hover { background: #e4e4e4; }
 .tl-data-table tbody tr.tlt-sep-row { background: transparent !important; }
 .tl-data-table tbody tr.tlt-sep-row td { padding: 0; height: 1px; background: transparent !important; border-bottom: 1px dashed rgba(0,0,0,0.15); }
-.tl-data-table tbody td { padding: 0.35rem 0.7rem; border-bottom: 1px dashed var(--lt-border); color: rgba(0,0,0,0.75); vertical-align: middle; white-space: nowrap; }
+.tl-data-table tbody td { padding: 0.35rem 0.7rem; border-bottom: 1px dashed var(--lt-border); color: var(--ink-2); vertical-align: middle; white-space: nowrap; }
 
 /* ── divisor tracejado suave entre as colunas (mesmo estilo do .secnav-all-divider:
    dashed, cinza ~rgba(160,160,160)). border-right tracejada SOMENTE nas linhas de
@@ -516,7 +528,7 @@ body { color: rgba(0,0,0,0.75); }
    .tl-data-table tbody tr.is-row-odd / .is-row-even / :hover acima. */
 
 /* selo de criticidade em tons pastel (Alta = laranja, Média = roxo, Baixa = verde) */
-.crit { display: inline-flex; align-items: center; gap: var(--gap-inline); min-width: 62px; padding: 3px 9px; border-radius: 99px; font-weight: var(--font-weight-bold); white-space: nowrap; color: rgba(0,0,0,0.72); }
+.crit { display: inline-flex; align-items: center; gap: var(--gap-inline); min-width: 62px; padding: 3px 9px; border-radius: 99px; font-weight: var(--font-weight-bold); white-space: nowrap; color: var(--ink-2); }
 .crit .tlt-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .crit--alta  { background: var(--color-red-alpha-25); }
 .crit--media { background: var(--color-orange-alpha-25); }
@@ -552,7 +564,7 @@ body { color: rgba(0,0,0,0.75); }
 .tlp-table .tlt-se-col { display: none; }
 .tl-axis-table.is-detailed .tlp-table .tlt-se-col { display: table-cell; }
 .tl-axis-table.is-detailed .tlp-table .tlt-eixo-col { display: none; }
-.tlp-table thead th.tlt-se-col { font-size: 0.54rem; color: rgba(0,0,0,0.42); }
+.tlp-table thead th.tlt-se-col { font-size: 0.54rem; color: var(--ink-4); }
 
 /* barra de controles (busca + ordenação + visão) — mesmo visual do cronograma */
 /* container dos filtros (busca + ordenação + visão) — mesma "caixa" do
@@ -561,8 +573,8 @@ body { color: rgba(0,0,0,0.75); }
    .content-wrapper, igual ao espaçamento padrão entre subtítulo e conteúdo. */
 .tlp-controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--gap-inline) var(--gap-16); width: 100%; padding: 0.75rem 1rem; box-sizing: border-box; background: var(--lt-surface); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--border-general); box-shadow: var(--lt-shadow); }
 .tlp-controls .tlp-controls-group { display: flex; align-items: center; gap: var(--gap-8); }
-.tlp-controls .tlp-group-label { font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,0,0,0.45); }
-.tlp-controls .tlp-count { margin-left: auto; font-family: var(--font-family-general); font-size: 0.66rem; color: rgba(0,0,0,0.45); white-space: nowrap; }
+.tlp-controls .tlp-group-label { font-family: var(--font-family-general); font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); }
+.tlp-controls .tlp-count { margin-left: auto; font-family: var(--font-family-general); font-size: 0.66rem; color: var(--ink-4); white-space: nowrap; }
 .tlp-controls .tl-sort-btn { gap: var(--gap-inline); }
 .tlp-controls .tl-sort-btn .tlp-dir { font-size: 0.8em; opacity: 0; transition: opacity 0.15s; }
 .tlp-controls .tl-sort-btn.is-active .tlp-dir { opacity: 0.75; }
@@ -582,7 +594,7 @@ body { color: rgba(0,0,0,0.75); }
 @media (prefers-reduced-motion: reduce) {
   .tlp-controls .tl-sort-btn .tlp-dir { transition: none; }
 }
-.tlt-trecho { font-size: 0.65rem; font-weight: var(--font-weight-bold); color: rgba(0,0,0,0.72); letter-spacing: 0.04em; }
+.tlt-trecho { font-size: 0.65rem; font-weight: var(--font-weight-bold); color: var(--ink-2); letter-spacing: 0.04em; }
 .tlt-code { font-weight: var(--font-weight-bold); letter-spacing: 0.03em; }
 .tlt-status { display: inline-flex; align-items: center; gap: var(--gap-inline); white-space: nowrap; }
 .tlt-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
@@ -592,7 +604,7 @@ body { color: rgba(0,0,0,0.75); }
 .tl-data-table thead th.tlt-th-status { text-align: center; width: 1px; padding-left: 0.4rem; padding-right: 0.4rem; position: relative; }
 /* cabeçalho de Status: ícone com tooltip (hover E foco/toque) */
 .tlt-th-tip { display: inline-flex; align-items: center; justify-content: center; cursor: help; outline: none; }
-.tlt-th-tip-icon { color: rgba(0,0,0,0.55); display: block; }
+.tlt-th-tip-icon { color: var(--ink-3); display: block; }
 .tlt-th-tip-bubble { position: fixed; display: none; z-index: 9999; padding: 0.2rem 0.45rem; background: rgba(0,0,0,0.85); color: #fff; font-size: 0.56rem; font-weight: var(--font-weight-normal); letter-spacing: 0.06em; text-transform: none; white-space: nowrap; border-radius: var(--border-smaller); box-shadow: 0 4px 12px rgba(0,0,0,0.25); pointer-events: none; }
 .tl-data-table tbody td.tlt-status-cell { text-align: center; width: 1px; padding-left: 0.4rem; padding-right: 0.4rem; }
 .tlt-status-cell .tlt-status { display: inline-flex; justify-content: center; gap: 0; }
@@ -603,9 +615,12 @@ body { color: rgba(0,0,0,0.75); }
 .tlt-status--done    .tlt-status-text { color: var(--color-green); }
 .tlt-status--running .tlt-status-text { color: var(--color-purple); }
 .tlt-status--pending .tlt-status-text { color: var(--color-orange); }
-.tlt-date { font-size: 0.68rem; color: rgba(0,0,0,0.65); }
-.tlt-date--empty { font-size: 0.68rem; color: rgba(0,0,0,0.3); font-style: italic; }
-.tlt-base-cell { text-align: center; padding-left: 0.3rem !important; padding-right: 0.3rem !important; }
+.tlt-date { font-size: 0.68rem; color: var(--ink-2); }
+.tlt-date--empty { font-size: 0.68rem; color: var(--ink-5); font-style: italic; }
+/* o padding APERTADO das células de base é necessário (sem ele o computed volta de 4,8px
+   para 11,2px), mas não precisa de força bruta: a especificidade (0,1,3) já derrota o
+   `.tl-data-table tbody td` (0,1,2) que impunha o padding largo. */
+.tl-data-table tbody td.tlt-base-cell { text-align: center; padding-left: 0.3rem; padding-right: 0.3rem; }
 .tlt-base-wrap { display: inline-flex; align-items: center; justify-content: center; }
 .tlt-base-icon { width: 0.9rem; height: 0.9rem; display: block; }
 .tlt-base--done    .tlt-base-icon circle { fill: var(--color-green); }

@@ -1,6 +1,6 @@
-.content-wrapper {
-  max-width: 960px;
-}
+/* a antiga cópia de `.content-wrapper { max-width: 960px }` saiu daqui: 960px agora é o
+   valor da BASE (slide-style.css), via --content-max. Esta regra era um seletor nu que só
+   funcionava pela ordem do <link>. */
 
 .video-container {
   display: flex;

@@ -26,14 +26,14 @@
     box-shadow: var(--lt-shadow);
   }
   & .sdt-cgroup { display: flex; align-items: center; gap: var(--gap-8); }
-  & .sdt-clabel { font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0, 0, 0, 0.45); }
+  & .sdt-clabel { font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); }
   /* filtros só-tabela (ordenar + detalhamento) num container próprio que COLAPSA
      no Gantt (display:none) — sem deixar espaço vazio na barra. */
   & .sdt-filters { display: flex; align-items: center; flex-wrap: wrap; gap: var(--gap-inline) var(--gap-16); }
   /* "Exibição" ancorada à direita: permanece no mesmo lugar quando os filtros
      colapsam (não se move ao trocar de exibição). */
   & .sdt-cgroup--view { margin-left: auto; }
-  & .sdt-count { font-size: 0.66rem; color: rgba(0, 0, 0, 0.45); white-space: nowrap; }
+  & .sdt-count { font-size: 0.66rem; color: var(--ink-4); white-space: nowrap; }
   & .search-pill input { width: 17ch; }
 
   /* Gantt: os filtros só-tabela somem DE FATO (collapse, não apenas invisíveis) */
@@ -46,7 +46,7 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: var(--lt-shadow); overflow: hidden;
   }
-  & .sdt-empty { padding: 2rem 1rem; text-align: center; font-size: 0.72rem; font-style: italic; color: rgba(0, 0, 0, 0.4); background: var(--zebra-odd); }
+  & .sdt-empty { padding: 2rem 1rem; text-align: center; font-size: 0.72rem; font-style: italic; color: var(--ink-4); background: var(--zebra-odd); }
 
   /* ── GANTT unificado (espelha o cronograma de slide-tl-stay-recovery): UM
      único container com um cabeçalho superior comum e, para cada eixo, uma faixa
@@ -57,7 +57,7 @@
   & .sdt-gantt-header {
     display: flex; align-items: center; gap: var(--gap-inline); padding: 0.5rem 1rem;
     font-size: 0.62rem; font-weight: var(--font-weight-boldest);
-    letter-spacing: 0.16em; text-transform: uppercase; color: rgba(0, 0, 0, 0.72);
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2);
     background: var(--lt-surface-muted); border-bottom: 1px dashed var(--lt-border);
   }
 
@@ -71,7 +71,7 @@
     writing-mode: vertical-rl; transform: rotate(180deg);
     padding: 0.5rem 0.15rem;
     font-size: 0.62rem; font-weight: var(--font-weight-boldest);
-    letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0, 0, 0, 0.62);
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3);
     background: var(--lt-surface); border-right: 1px dashed var(--lt-border);
   }
 
@@ -91,7 +91,7 @@
      modo, em qualquer viewport */
   & .sdt-table thead th:nth-child(2) { width: 5.5rem; }
   & .sdt-table thead th:nth-child(3) { width: 8rem; }
-  & .sdt-table tbody td { padding: 0.36rem 0.7rem; border-bottom: 1px dashed var(--lt-border); color: rgba(0, 0, 0, 0.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; }
+  & .sdt-table tbody td { padding: 0.36rem 0.7rem; border-bottom: 1px dashed var(--lt-border); color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; }
   & .sdt-table tbody td:not(:last-child) { border-right: 1px dashed var(--lt-col-divider); }
   & .sdt-table tbody tr.is-odd { background: var(--zebra-odd); }
   & .sdt-table tbody tr.is-even { background: var(--zebra-even); }
@@ -99,12 +99,12 @@
   & .sdt-cell-c { text-align: center; }
   & .sdt-td-status { text-align: center; width: 1px; padding-left: 0.5rem; padding-right: 0.5rem; }
   & .sdt-se { font-weight: var(--font-weight-bold); letter-spacing: 0.03em; }
-  & .sdt-eixo { font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.7); text-transform: capitalize; }
-  & .sdt-wd { color: rgba(0, 0, 0, 0.45); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.66rem; }
-  & .sdt-none { color: rgba(0, 0, 0, 0.32); font-style: italic; }
+  & .sdt-eixo { font-weight: var(--font-weight-bold); color: var(--ink-2); text-transform: capitalize; }
+  & .sdt-wd { color: var(--ink-4); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.66rem; }
+  & .sdt-none { color: var(--ink-4); font-style: italic; }
 
   /* gatilho do tooltip de Status (balão .tip-bubble vem de components.css) */
-  & .sdt-th-tip { display: inline-flex; align-items: center; justify-content: center; cursor: help; outline: none; color: rgba(0, 0, 0, 0.55); }
+  & .sdt-th-tip { display: inline-flex; align-items: center; justify-content: center; cursor: help; outline: none; color: var(--ink-3); }
   & .sdt-th-tip svg { display: block; }
 
   /* ── modo GANTT (SEs × dias; barras coloridas por status; títulos das SEs e
@@ -125,19 +125,19 @@
   & .sdt-gantt-row { display: grid; grid-template-columns: 4.6rem repeat(var(--cols), var(--colw, 4.5rem)); align-items: stretch; }
   & .sdt-gantt-row:not(:last-child) { border-bottom: 1px dashed var(--lt-border); }
   & .sdt-gantt-head { border-bottom: 1px solid var(--lt-border); }
-  & .sdt-gantt-dh { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.22rem 0; font-size: 0.56rem; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.6); border-left: 1px dashed var(--lt-col-divider); }
-  & .sdt-gantt-wd { font-size: 0.5rem; font-weight: var(--font-weight-normal); color: rgba(0, 0, 0, 0.4); text-transform: uppercase; letter-spacing: 0.03em; }
-  & .sdt-gantt-se { display: flex; align-items: center; gap: var(--gap-inline); padding: 0.3rem 0.5rem; font-size: 0.62rem; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); white-space: nowrap; letter-spacing: 0.03em; }
+  & .sdt-gantt-dh { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.22rem 0; font-size: 0.56rem; font-weight: var(--font-weight-bold); color: var(--ink-3); border-left: 1px dashed var(--lt-col-divider); }
+  & .sdt-gantt-wd { font-size: 0.5rem; font-weight: var(--font-weight-normal); color: var(--ink-4); text-transform: uppercase; letter-spacing: 0.03em; }
+  & .sdt-gantt-se { display: flex; align-items: center; gap: var(--gap-inline); padding: 0.3rem 0.5rem; font-size: 0.62rem; font-weight: var(--font-weight-bold); color: var(--ink-2); white-space: nowrap; letter-spacing: 0.03em; }
   & .sdt-gantt-c { min-height: 1.6rem; display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--lt-col-divider); }
   /* todo bloco preenchido usa o MESMO padding (todas as extremidades), cantos
      arredondados e margem uniforme → cada bloco vira uma "ilha" idêntica */
-  & .sdt-gantt-c.is-on { border-left: none; margin: 2px; padding: 0.18rem; border-radius: 4px; color: rgba(0, 0, 0, 0.72); font-size: 0.5rem; font-weight: var(--font-weight-bold); letter-spacing: 0.02em; }
+  & .sdt-gantt-c.is-on { border-left: none; margin: 2px; padding: 0.18rem; border-radius: 4px; color: var(--ink-2); font-size: 0.5rem; font-weight: var(--font-weight-bold); letter-spacing: 0.02em; }
   /* desenergizado → HACHURA zebrada com dois tons do próprio status (claro + escuro) */
   & .sdt-gantt-c.is-on.is-programado { background: repeating-linear-gradient(45deg, var(--color-orange-alpha-25) 0 5px, var(--color-orange-alpha-75) 5px 10px); }
   & .sdt-gantt-c.is-on.is-forcado { background: repeating-linear-gradient(45deg, var(--color-red-alpha-25) 0 5px, var(--color-red-alpha-75) 5px 10px); }
   & .sdt-gantt-h { overflow: hidden; white-space: nowrap; font-weight: var(--font-weight-boldest); }
   /* energizado → preenchimento SÓLIDO, com os mesmos padding/cantos/margem */
-  & .sdt-gantt-energ { display: flex; align-items: center; justify-content: center; min-height: 1.6rem; margin: 2px; padding: 0.18rem; border-radius: 4px; font-size: 0.56rem; font-style: italic; color: rgba(0, 0, 0, 0.42); background: var(--color-green-alpha-25); }
+  & .sdt-gantt-energ { display: flex; align-items: center; justify-content: center; min-height: 1.6rem; margin: 2px; padding: 0.18rem; border-radius: 4px; font-size: 0.56rem; font-style: italic; color: var(--ink-4); background: var(--color-green-alpha-25); }
 
   /* ── painéis congelados (estilo Excel) ── a coluna das SEs fica fixa na rolagem
      horizontal; a linha dos dias, fixa na vertical; o canto, fixo nos dois eixos.

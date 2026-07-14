@@ -1,10 +1,15 @@
-.content-wrapper {
-  max-width: 960px;
-}
-
+/* A última cópia nua de `.content-wrapper { max-width: 960px }` SAIU daqui. Ela existia para
+   segurar a largura das imagens, mas fazia isso apertando o CONTAINER DA PÁGINA INTEIRA — e,
+   nas 2 páginas que carregam mosaico E cronograma, derrubava a largura total que a timeline
+   pede, decidindo o layout pela ordem de um <link>.
+   Agora as duas coisas estão separadas: a página tem a largura que a página quer, e o
+   MOSAICO tem a sua própria. Nas ~50 páginas de slide o wrapper já vale 960px, então o teto
+   abaixo não muda nada; nas 2 de cronograma, a página abre e só as imagens ficam contidas. */
 .mosaic-container {
   display: grid;
   width: 100%;
+  max-width: var(--mosaic-max, 960px);
+  margin-inline: auto;
   grid-template-columns: repeat(2, 1fr);
   /* gap ENTRE imagens do grupo = --content-gap do .content-wrapper ancestral
      (mesma distância de subtítulo↔1ª imagem); fallback 24px sem wrapper. */

@@ -185,11 +185,45 @@
   --lt-border: rgba(0, 0, 0, 0.12);                     /* hairline separation on light */
   --lt-border-strong: rgba(0, 0, 0, 0.22);              /* stronger border (hover/active) */
   --lt-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);           /* soft card lift */
-  --lt-text: rgba(0, 0, 0, 0.82);                        /* primary dark text */
-  --lt-text-muted: rgba(0, 0, 0, 0.55);                 /* muted dark text (was --color-white-alpha-*) */
-  --lt-text-faint: rgba(0, 0, 0, 0.35);                 /* faint dark text (placeholders, counts) */
+  /* os três tokens de texto passam a ser APELIDOS da rampa — não uma segunda escala paralela.
+     Eram 0.82 / 0.55 / 0.35; agora 0.88 / 0.55 / 0.38. O do meio não se move (é o degrau
+     exato); os outros dois deslocam 0.06 e 0.03. */
+  --lt-text: var(--ink-1);                               /* primary dark text */
+  --lt-text-muted: var(--ink-3);                        /* muted dark text */
+  --lt-text-faint: var(--ink-4);                        /* faint dark text (placeholders, counts) */
   --lt-icon: rgba(0, 0, 0, 0.6);                         /* monochrome mask icons on light (= slide-tl.css) */
   --lt-accent: var(--color-dark-green);                  /* link/active/icon accent that reads on light */
+
+  /* ── RAMPA DE TINTA (texto sobre fundo claro) ──────────────────────────────────
+     CINCO papéis, não vinte e um tons. O CSS tinha 19 alfas distintos de rgba(0,0,0,·)
+     escritos à mão só em `color:`, com 93 ocorrências — e a página de recuperação dos
+     estais chegava a ter 17 cores de texto DIFERENTES nela mesma.
+
+     A causa-raiz era de NOME, não de disciplina: o token do alfa mais usado (0.75) chamava-se
+     --background-black-alpha-75, e ninguém o aplicava a texto porque o nome dizia "background".
+     Daí nove comentários no CSS confessando "sem token idêntico" seguidos de um literal. Um
+     token de BORDA (--lt-border-strong) chegou a ser usado 12 vezes como cor de texto.
+
+     Os dois degraus mais usados (0.75 e 0.55) são EXATOS — não se mexeu neles. Os demais tons
+     foram absorvidos pelo degrau mais próximo, então algumas cores de texto mudam levemente:
+     é o preço de ter uma escala em vez de uma nuvem. */
+  --ink-1: rgba(0, 0, 0, 0.88);   /* ênfase — títulos de UI, item ativo */
+  --ink-2: rgba(0, 0, 0, 0.75);   /* padrão — texto de interface */
+  --ink-3: rgba(0, 0, 0, 0.55);   /* secundário — rótulos, apoio */
+  --ink-4: rgba(0, 0, 0, 0.38);   /* fraco — placeholders, contadores */
+  --ink-5: rgba(0, 0, 0, 0.25);   /* mínimo — separadores, desabilitado */
+
+  /* BREADCRUMB — preto e cinza, o padrão da apresentação.
+     Até aqui a trilha era VERDE (--lt-accent) em 54 páginas e CINZA nas 4 de cronograma —
+     e essa divergência nunca foi decidida: vinha de o slide-tl.css declarar `.crumb a`
+     como seletor GLOBAL numa folha que só aquelas 4 carregam. Quem "escolhia" a cor era a
+     ordem do <link>. Agora o cinza é a regra, escrita uma vez, e os tons ganham NOME —
+     antes eram literais soltos (0.5 / 0.7 / 0.25) sem token. */
+     Os três são DEGRAUS DA RAMPA, não tons próprios — senão o breadcrumb reintroduziria uma
+     escala paralela (0.5 / 0.7 / 0.25) ao lado da que acabamos de criar. */
+  --crumb-ink: var(--ink-3);                             /* item navegável */
+  --crumb-ink-current: var(--ink-2);                     /* página atual (mais firme) */
+  --crumb-sep: var(--ink-5);                             /* separador "›" (mais leve) */
 
   /* shared UI component tokens (tabelas, cronogramas, controles) — fonte de
      verdade para padrões antes repetidos como literais entre os stylesheets */

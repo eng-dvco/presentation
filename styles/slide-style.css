@@ -324,19 +324,22 @@ a.flex-logo-container {
     font-weight: var(--font-weight-bolder);
     font-style: italic;
 
-    color: var(--lt-accent);
-    opacity: 0.75;
+    /* PRETO E CINZA é o padrão. Estes valores vinham do slide-tl.css e valiam só nas 4
+       páginas de cronograma; agora são a regra, e o verde (--lt-accent) sai do breadcrumb. */
+    color: var(--crumb-ink);
+    opacity: 1;
 
-    transition: opacity 0.3s ease;
+    transition: color 0.3s ease;
 
     &:hover,
     &:focus {
-      opacity: 1;
+      color: var(--lt-text);
     }
   }
 
-  /* último item (página atual): mesma aparência dos demais, porém não clicável */
+  /* último item (página atual): mais firme que os navegáveis, e não clicável */
   & [aria-current="page"] {
+    color: var(--crumb-ink-current);
     cursor: default;
   }
 
@@ -352,7 +355,7 @@ a.flex-logo-container {
   &:not(:last-child)::after {
     content: "›";
     display: inline-block;
-    color: var(--lt-accent);
+    color: var(--crumb-sep);
     /* T1/T9: margens horizontais SIMÉTRICAS e REDUZIDAS. Como o ol tem gap:0, esta
        margem é a ÚNICA fonte de espaço dos dois lados do "›", deixando a distância
        [texto]—[›]—[texto] igual e enxuta (reduzida de 8px → 6px). */
@@ -384,7 +387,17 @@ a.flex-logo-container {
 .content-wrapper {
   display: grid;
   width: 100%;
-  max-width: 1080px;
+  /* LARGURA: uma fonte de verdade só. O valor real de 55 das 60 páginas é 960px — ele estava
+     escrito à mão em TRÊS folhas (mosaic/document/video), cada uma com um seletor NU que
+     vencia esta base apenas pela ordem do <link>. Agora a base entrega 960 e quem precisa de
+     outra largura sobrescreve o TOKEN, não a propriedade:
+       --content-max: 1080px  → slide-selection.css (índice e seleção)
+       --content-max: none    → slide-tl.css (páginas de cronograma)
+     mosaic-style.css ainda repete o 960 porque, nas 2 páginas que carregam mosaico E
+     cronograma, é ele que derrota o `none` da timeline — resolver isso é decisão de layout
+     (Onda 3), não faxina. */
+  --content-max: 960px;
+  max-width: var(--content-max);
   grid-template-rows: min-content 1fr;
   /* espaçamento base entre os filhos do wrapper (ex.: subtítulo↔1ª imagem). O
      .mosaic-container (mosaic-style.css) reusa este MESMO valor no gap ENTRE as
@@ -463,139 +476,6 @@ a.flex-logo-container {
   }
 }
 
-/* general carousel configuration */
-.carousel-container {
-  --peek: clamp(8px, 3vw, 12px);
-  --gap: clamp(6px, 1.2vw, 12px);
-  --h: clamp(320px, 56vh, 480px);
-
-  width: 100%;
-  max-height: var(--h);
-  padding-block: var(--padding-around-general);
-  background-color: var(--lt-surface-muted);
-  border: 1px solid var(--lt-border);
-  border-radius: var(--border-general);
-  overflow: hidden;
-}
-
-.carousel-wrapper {
-  height: 100%;
-}
-
-.slider {
-  display: flex;
-  height: 100%;
-  flex: 0 0 100%;
-  gap: var(--gap);
-
-  margin: 0;
-  padding-inline: var(--peek);
-
-  list-style: none;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--peek);
-  scroll-behavior: smooth;
-  scroll-snap-stop: always;
-  scrollbar-width: none;
-}
-
-.slide {
-  flex: 0 0 calc(100% - (2 * var(--peek)));
-  height: 100%;
-  scroll-snap-align: center;
-}
-
-.image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--border-item);
-  border: 4px solid var(--lt-border);
-  overflow: hidden;
-
-  & > img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-  }
-
-  /* buttons */
-  & > a {
-    display: flex;
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 50%;
-    translate: 0% -50%;
-    justify-content: center;
-    align-items: center;
-
-    margin: 0;
-    border: 0;
-    border-radius: var(--border-round);
-    background-color: var(--background-black-alpha-50);
-    /* buttons float over photographic slides, so they stay dark with a light
-       glyph for contrast against the image (not against the light page) */
-    color: var(--color-white);
-
-    font-size: calc(var(--font-size-icon) * var(--font-size-multiplier-xxs));
-    font-weight: var(--font-weight-boldest);
-
-    transition: background-color 300ms ease;
-
-    &::before {
-      position: absolute;
-      translate: 0% -10%;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: var(--background-black-alpha-75);
-    }
-  }
-
-  & > .button-left { left: 20px; }
-  & > .button-right { right: 20px; }
-
-  & > .button-left::before { content: "‹"; }
-  & > .button-right::before { content: "›"; }
-}
-
-/* marker group */
-.carousel-nav {
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  translate: -50%;
-  z-index: 1;
-}
-
-.marker-group {
-  display: flex;
-  gap: var(--gap-8);
-  padding: var(--padding-general-small);
-  border-radius: var(--border-general);
-  background-color: var(--background-black-alpha-75);
-
-  & > a {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: var(--border-round);
-    background-color: var(--background-white-alpha-75);
-
-    transition:
-      background-color 100ms ease,
-      opacity 300ms ease;
-
-    &:hover,
-    &:focus {
-      opacity: 1;
-      background-color: var(--color-green);
-    }
-  }
-}
 
 /* ── banner de LEMBRETE / observação (REUTILIZÁVEL) — mesma posição do banner de
    RDC (primeiro filho do .content-wrapper, acima das seções). CSS-only, sem JS.
@@ -871,112 +751,6 @@ a.flex-logo-container {
   }
 }
 
-/* facultative section for notes */
-.foot-notes {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  height: fit-content;
-  margin: 0px 48px 48px 48px;
-}
-
-.notes-container {
-  width: 100%;
-  max-width: 480px;
-  background-color: var(--lt-surface);
-  border: 1px solid var(--lt-border);
-  box-shadow: var(--lt-shadow);
-  padding: 12px 24px;
-  border-radius: var(--border-general);
-  pointer-events: none;
-}
-
-.notes-list {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  gap: var(--gap-8);
-
-  & p {
-    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
-  }
-}
-
-.note-item {
-  display: flex;
-  align-items: center;
-
-  & p {
-    pointer-events: none;
-  }
-
-  & > span {
-    color: var(--lt-text-muted);
-    white-space: pre;
-  }
-}
-
-.note-acronym {
-  min-width: max-content;
-  padding: var(--padding-general-small);
-  border-radius: var(--border-item);
-  background-color: var(--color-black-alpha-10);
-}
-
-.note-meaning {
-  color: var(--lt-text-muted);
-}
-
-/* additional information on hovering */
-.tip {
-  border-radius: var(--border-general);
-  padding: 0px 12px;
-  font-weight: var(--font-weight-bold);
-  font-style: italic;
-  color: var(--lt-accent);
-  background-color: var(--color-green-alpha-10);
-  cursor: help;
-
-  transition: background 500ms ease;
-
-  &:hover,
-  &:focus {
-    background: radial-gradient(var(--color-green-alpha-25));
-  }
-
-  &::before {
-    content: attr(data-tip);
-    width: clamp(220px, 90vw, 696px);
-    height: fit-content;
-    position: fixed;
-    left: 50%;
-    bottom: 1.5dvh;
-
-    border-radius: var(--border-general);
-    padding: 12px;
-    transform: translateX(-50%);
-    /* floating tooltip stays dark for contrast as a popover; force light text */
-    background-color: var(--color-black);
-    color: var(--color-white);
-
-    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
-    box-shadow: 0px 4px 12px 0.5px var(--color-black-alpha-50);
-    text-align: justify;
-    visibility: hidden;
-    pointer-events: none;
-    opacity: 0;
-    z-index: 100;
-
-    transition: opacity 500ms ease;
-  }
-
-  &:hover::before,
-  &:focus::before {
-    opacity: 1;
-    visibility: visible;
-  }
-}
 
 footer {
   display: block;
@@ -1584,7 +1358,7 @@ footer {
   background: #e2e2e2;
   border: 1px solid rgba(0, 0, 0, 0.18);
   border-radius: 3px;
-  color: rgba(0, 0, 0, 0.38);
+  color: var(--ink-4);
   /* T2: ícone SVG (width/height:1em) dimensionado pela MESMA escala dos crumbs
      (calc(--font-size-content * --font-size-multiplier-xxs)) — proporcional ao
      texto pequeno do breadcrumb, em vez dos 14px anteriores. */
@@ -1602,7 +1376,7 @@ footer {
   &:hover,
   &:focus-visible {
     background: #d8d8d8;
-    color: rgba(0, 0, 0, 0.75);
+    color: var(--ink-2);
   }
 
   /* feedback de cópia: o ícone vira check (slide-nav.js); destaca em verde escuro */
@@ -1657,7 +1431,6 @@ footer {
 
 @media (max-width: 768px) {
   .slide-sidebar { display: none; }
-  .content-container.has-sidebar { gap: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1880,8 +1653,16 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
 /* ícone da seção à ESQUERDA do título. Reusa as máscaras de .section-icon/.icon-*
    (a MESMA fonte de verdade dos ícones no index.html — nenhum mapa duplicado), porém
    menor e com a cor do PRÓPRIO link (currentColor): assim o ícone acende junto com o
-   texto no hover e no item ativo. */
-.secnav-all-icon {
+   texto no hover e no item ativo.
+
+   O ESCOPO .slide-secnav NÃO é decoração — é a proteção estrutural contra um bug que já
+   aconteceu. O elemento carrega as DUAS classes ("section-icon secnav-all-icon"), e
+   .secnav-all-icon nua tem especificidade (0,1,0) — a MESMA de um `.section-icon
+   { background-color: … }` global. Bastou o slide-tl.css declarar isso (uma folha carregada
+   DEPOIS) para todos os ícones da navegação virarem pretos, inclusive os inativos. Com
+   (0,2,0) o currentColor passa a vencer qualquer seletor nu, hoje e no futuro. O escopo é
+   sempre satisfeito: slide-nav.js só cria este ícone dentro da nav (.slide-secnav). */
+.slide-secnav .secnav-all-icon {
   flex: 0 0 16px;
   width: 16px;
   height: 16px;
@@ -2000,7 +1781,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   /* subtítulo 0.45 (não --lt-text-muted 0.55): literal consolidado da antiga unificada */
-  color: rgba(0, 0, 0, 0.45);
+  color: var(--ink-4);
 
   /* total de slides da seção, alinhado à direita */
   & .secnav-items-count {
@@ -2036,7 +1817,6 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
      valor idêntico, mantém-se o literal consolidado da antiga regra unificada */
   background-color: #f5f5f5;
   -webkit-backdrop-filter: none; backdrop-filter: none;
-  -webkit-backdrop-filter: none;
   /* texto suave #8c8c8c (sem token idêntico): literal consolidado */
   color: #8c8c8c;
   text-decoration: none;
@@ -2050,7 +1830,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   border-color: var(--lt-border-strong); /* 0.22 */
   background: var(--lt-hover); /* #e4e4e4 */
   /* hover usa 0.88 (não --color-black 32,32,32): literal consolidado */
-  color: rgba(0, 0, 0, 0.88);
+  color: var(--ink-1);
 }
 
 .secnav-item-link:active { transform: scale(0.97); }
@@ -2060,7 +1840,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
      regra unificada — sem tokens de valor idêntico para 0.88/0.18) */
   border-color: rgba(0, 0, 0, 0.18);
   background: var(--lt-surface-strong); /* #fff */
-  color: rgba(0, 0, 0, 0.88);
+  color: var(--ink-1);
   font-weight: var(--font-weight-boldest);
   cursor: default;
 }
@@ -2068,7 +1848,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
 /* item atual sob hover: mantém texto escuro legível sobre o fundo claro (#e4e4e4) */
 .secnav-item-link.active:hover,
 .secnav-item-link.active:focus-visible {
-  color: rgba(0, 0, 0, 0.88);
+  color: var(--ink-1);
 }
 
 /* T7: seta direcional (›) + gradiente de fade, espelhando os itens da tela de
@@ -2262,7 +2042,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   -webkit-backdrop-filter: none;
   box-shadow: var(--lt-shadow);
   /* texto 0.88 (sem token idêntico; --lt-text é 0.82): literal consolidado */
-  color: rgba(0, 0, 0, 0.88);
+  color: var(--ink-1);
   text-decoration: none;
   transition: border-color 0.15s, background-color 0.15s, transform 0.1s;
 }
@@ -2272,7 +2052,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   border-color: var(--lt-border-strong); /* 0.22 */
   background: var(--lt-hover); /* #e4e4e4 */
   /* hover do botão usa 0.88 (não --color-black 32,32,32): literal consolidado */
-  color: rgba(0, 0, 0, 0.88);
+  color: var(--ink-1);
 }
 
 /* no hover do botão principal, escurece também o kicker e o nome da seção
@@ -2296,7 +2076,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   /* kicker 0.4 (não --lt-text-muted 0.55): literal consolidado da antiga unificada */
-  color: rgba(0, 0, 0, 0.4);
+  color: var(--ink-4);
 }
 
 /* nome da seção atual (exibido no toggle do menu de seções) */
@@ -2304,7 +2084,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   font-weight: var(--font-weight-boldest);
   /* nome da seção 0.75 (não --lt-text 0.82): literal consolidado da antiga unificada */
-  color: rgba(0, 0, 0, 0.75);
+  color: var(--ink-2);
   line-height: var(--font-line-ui);
 }
 

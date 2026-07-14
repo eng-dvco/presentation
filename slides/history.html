@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Histórico de Modificações</title>
+    <meta name="description" content="Registro auditável de tudo que foi adicionado, modificado e removido da apresentação, consolidado por dia e por mês." />
+    <meta name="keywords" content="apresentação, histórico, modificações, auditoria, pisf" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="../assets/icons/favicon.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="../assets/icons/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+
+    <link rel="stylesheet" href="../styles/variables.css" />
+    <link rel="stylesheet" href="../styles/slide-style.css" />
+    <link rel="stylesheet" href="../styles/slide-history.css" />
+
+    <link rel="preload" href="../assets/fonts/roboto-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../styles/fonts.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <main class="main-container" id="main-content">
+      <header class="flex-header-container" aria-label="Cabeçalho">
+        <div class="title-header-h1">
+          <h1 class="title-h1">Histórico de Modificações</h1>
+        </div>
+        <a class="flex-logo-container" href="../slides/index.html" aria-label="Voltar para a seleção">
+          <img width="480" height="290" class="logo cmt" src="../assets/logos/cmt-hd.jpg" alt="Logo CMT" loading="eager" />
+          <img width="600" height="600" class="logo midr" src="../assets/logos/midr-hd.png" alt="Logo MIDR" loading="lazy" />
+        </a>
+      </header>
+      <nav class="breadcrumb" aria-label="Navegação estrutural">
+        <ol>
+          <li class="crumb crumb-1"><a href="../apresentação.html">início</a></li>
+          <li class="crumb crumb-2"><a href="../slides/index.html">conteúdo</a></li>
+          <li class="crumb crumb-3"><span aria-current="page">histórico</span></li>
+        </ol>
+      </nav>
+      <div class="content-container">
+        <div class="content-wrapper hist-root" data-fonte="../history/history-indefinida.json" data-base="../">
+          <p class="hist-source"></p>
+
+          <div class="hist-controls">
+            <div class="hist-tabs" role="tablist" aria-label="Tipo de alteração">
+              <button type="button" class="hist-tab active" data-aba="conteudo" role="tab" aria-selected="true">Conteúdo</button>
+              <button type="button" class="hist-tab" data-aba="funcoes" role="tab" aria-selected="false">Funções</button>
+            </div>
+            <div class="hist-groups" role="group" aria-label="Agrupamento">
+              <button type="button" class="hist-group-btn active" data-grupo="cronologico" aria-pressed="true">Cronológico</button>
+              <button type="button" class="hist-group-btn" data-grupo="acao" aria-pressed="false">Por ação</button>
+            </div>
+            <div class="hist-fold" role="group" aria-label="Expandir ou colapsar">
+              <button type="button" class="hist-fold-btn" id="hist-expand">Expandir tudo</button>
+              <button type="button" class="hist-fold-btn" id="hist-collapse">Colapsar tudo</button>
+            </div>
+          </div>
+
+          <div class="hist-filters">
+            <label class="hist-search-label">
+              <span class="search-icon" aria-hidden="true"></span>
+              <input id="hist-search" type="search" placeholder="Buscar por slide, seção, imagem, documento…" autocomplete="off" aria-label="Buscar alterações" />
+              <button type="button" id="hist-search-clear" hidden aria-label="Limpar busca">✕</button>
+            </label>
+            <div class="hist-filter-bar hist-filter-acao" role="group" aria-label="Filtrar por ação"></div>
+            <div class="hist-filter-bar hist-filter-tipo" role="group" aria-label="Filtrar por elemento"></div>
+          </div>
+
+          <p class="hist-summary"></p>
+          <p class="hist-empty" hidden></p>
+          <div class="hist-list"></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../scripts/ui-utils.js" defer></script>
+    <script src="../scripts/slide-nav.js" defer></script>
+    <script src="../scripts/slide-history.js" defer></script>
+
+    <button id="back-to-top" aria-label="Retornar ao topo da página">
+      <span class="back-top-icon" aria-hidden="true"></span>
+    </button>
+  </body>
+  <footer>
+    <div class="footer-wrapper">
+      <div class="personal-info">
+        <a href="https://www.instagram.com/eng.danielcarvalho/" target="_blank" rel="noreferrer noopener">
+          <img width="2560" height="1440" src="../assets/logos/dc-logo-white.png" alt="logo do eng. daniel carvalho composta pelas letras 'd' e 'c' estilizadas" loading="lazy" />
+        </a>
+        <p>© 2026 Eng. Daniel Carvalho</p>
+      </div>
+      <nav class="footer-nav invisible" aria-label="Links externos">
+        <ul class="more-info">
+          <li><a href="https://www.linkedin.com/in/dvco/" target="_blank" rel="noreferrer noopener">Contacts</a></li>
+          <li><a href="https://github.com/eng-dvco/presentation/commits?author=eng-dvco" target="_blank" rel="noreferrer noopener">Commits</a></li>
+          <li><a href="https://github.com/eng-dvco/presentation" target="_blank" rel="noreferrer noopener">Docs</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</html>

@@ -1,0 +1,508 @@
+/* ── Histórico de Modificações ────────────────────────────────────────────────
+   Registro auditável do que mudou na apresentação. A leitura é sempre vertical e do
+   mais recente para o mais antigo; o que muda entre os dois agrupamentos é o cabeçalho
+   que separa os blocos (mês, ou rótulo de ação).
+
+   Cores por ação: verde = entrou, âmbar = mudou, vermelho = saiu. As mesmas três famílias
+   servem à aba de funções (implementada / aperfeiçoada / descartada), porque a semântica é
+   a mesma — só o vocabulário muda. Todos os valores vêm de variables.css. */
+
+.hist-root {
+  /* mais largo que um slide (960px): o registro tem breadcrumb, texto antes→depois,
+     miniaturas e metadados na mesma linha, e ganha em legibilidade com o espaço extra.
+     DECLARADO, não herdado — antes esta página só ficava com 1080px porque era o valor da
+     base, e encolheu sozinha quando a base passou a valer 960. Se preferir alinhá-la aos
+     slides, troque para 960px. */
+  --content-max: 1080px;
+
+  --hist-add: var(--color-green);
+  --hist-mod: var(--color-yellow);
+  --hist-del: var(--color-red);
+}
+
+/* ── barra de controles: abas + agrupamento ── */
+.hist-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-12);
+  padding-bottom: var(--gap-16);
+}
+
+.hist-tabs,
+.hist-groups,
+.hist-fold {
+  display: flex;
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-general);
+  overflow: hidden;
+}
+
+.hist-tab,
+.hist-group-btn,
+.hist-fold-btn {
+  border: none;
+  border-left: 1px solid var(--lt-border);
+  background: var(--lt-surface-muted);
+  color: var(--lt-text-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--gap-8) var(--gap-16);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+
+  &:first-child { border-left: none; }
+  &:hover { background: var(--lt-hover); color: var(--lt-text); }
+  &.active {
+    background: var(--lt-surface-strong);
+    color: var(--lt-text);
+    font-weight: var(--font-weight-boldest);
+  }
+}
+
+.hist-groups { margin-left: auto; }
+
+/* colapsar/expandir não é um estado — é uma ação; não recebe .active */
+.hist-fold-btn:active { background: var(--lt-surface-strong); }
+
+.hist-summary,
+.hist-source {
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text-muted);
+}
+
+.hist-source { padding-bottom: var(--gap-8); }
+
+/* ── cabeçalho de mês / de ação ── */
+.hist-month {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  margin: var(--gap-32) 0 var(--gap-12);
+  padding-bottom: var(--gap-6);
+  border-bottom: 1px solid var(--lt-border);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-sm));
+  font-weight: var(--font-weight-boldest);
+  color: var(--lt-text);
+
+  /* sem text-transform: capitalize aqui — ele maiusculiza TODA palavra, e "julho de 2026"
+     virava "Julho De 2026". A capitalização certa (só o mês) é feita no JS. */
+  &:first-child { margin-top: 0; }
+}
+
+.hist-month-count {
+  margin-left: auto;
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  font-weight: var(--font-weight-normal);
+  color: var(--lt-text-muted);
+}
+
+/* ── um dia (colapsável) ── */
+.hist-day { padding-bottom: var(--gap-16); }
+
+.hist-day-head {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--gap-8);
+  padding: 0 0 var(--gap-8);
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text-muted);
+
+  &:hover .hist-day-date { color: var(--ink-1); }
+}
+
+.hist-day-caret {
+  display: inline-block;
+  color: var(--ink-4);
+  transition: transform 0.15s ease;
+}
+
+.hist-day-date {
+  font-weight: var(--font-weight-boldest);
+  color: var(--lt-text);
+  letter-spacing: 0.06em;
+}
+
+.hist-day-count { margin-left: auto; }
+
+.hist-day-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-8);
+}
+
+/* colapsado: some com os registros e gira a seta */
+.hist-day.is-collapsed {
+  & .hist-day-items { display: none; }
+  & .hist-day-caret { transform: rotate(-90deg); }
+}
+
+/* ── o registro: o corpo INTEIRO é clicável ── */
+.hist-card {
+  position: relative;
+  display: block;
+  padding: var(--gap-12) var(--gap-16);
+  padding-left: var(--gap-16);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-item);
+  background: var(--lt-surface-strong);
+  box-shadow: var(--lt-shadow);
+  color: var(--lt-text);
+  text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s, transform 0.1s;
+
+  /* faixa lateral com a cor da ação: dá para varrer a coluna e ver o que entrou/saiu */
+  &::before {
+    content: "";
+    position: absolute;
+    top: var(--gap-8);
+    bottom: var(--gap-8);
+    left: 0;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--lt-border-strong);
+  }
+
+  /* hover: só clareia o tom, sem escurecer a sombra (mesma linguagem dos demais
+     clicáveis da apresentação) */
+  &:hover,
+  &:focus-visible {
+    background: var(--lt-surface-muted);
+    border-color: var(--lt-border-strong);
+  }
+
+  &:active { transform: scale(0.995); }
+
+  &.hist-card--adicao::before,
+  &.hist-card--implementada::before { background: var(--hist-add); }
+
+  &.hist-card--modificacao::before,
+  &.hist-card--aperfeicoada::before { background: var(--hist-mod); }
+
+  &.hist-card--delecao::before,
+  &.hist-card--descartada::before { background: var(--hist-del); }
+}
+
+.hist-card-top {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  padding-bottom: var(--gap-6);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+}
+
+/* HORA, não data: a data já titula o grupo do dia, e repeti-la em cada registro seria
+   redundância. A hora vem do commit e distingue registros dentro do MESMO dia — há dias com
+   até 10 commits. */
+.hist-hora {
+  color: var(--lt-text-muted);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hist-type {
+  color: var(--lt-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── o rótulo da ação ── */
+.hist-badge {
+  padding: 2px var(--gap-8);
+  border-radius: 99px;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-black);
+  white-space: nowrap;
+
+  &.hist-badge--adicao,
+  &.hist-badge--implementada { background: var(--color-green-alpha-75); }
+
+  &.hist-badge--modificacao,
+  &.hist-badge--aperfeicoada { background: var(--color-yellow-alpha-75); }
+
+  &.hist-badge--delecao,
+  &.hist-badge--descartada { background: var(--color-red-alpha-75); }
+}
+
+.hist-card-title {
+  margin: 0;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
+  font-weight: var(--font-weight-bold);
+  color: var(--lt-text);
+}
+
+/* ── caminho até o conteúdo ── */
+.hist-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-4);
+  padding-top: var(--gap-4);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  color: var(--lt-text-muted);
+}
+
+.hist-crumb-sep { opacity: 0.5; }
+
+/* ── DE → PARA: dois subcontainers.
+   Lado a lado quando há largura, empilhados quando não há. O grid com auto-fit + minmax faz
+   isso sem media query: cada coluna quer no mínimo 240px; se não couberem duas, vira uma. */
+.hist-delta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--gap-8);
+  padding-top: var(--gap-8);
+}
+
+.hist-delta-box {
+  padding: var(--gap-6) var(--gap-8);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-smaller);
+  background: var(--lt-surface-muted);
+  border-left: 3px solid var(--lt-border-strong);
+
+  &.hist-delta-box--de { border-left-color: var(--hist-del); }
+  &.hist-delta-box--para { border-left-color: var(--hist-add); }
+}
+
+.hist-delta-label {
+  display: block;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+}
+
+.hist-delta-valor {
+  margin: 2px 0 0;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text);
+  overflow-wrap: anywhere;
+}
+
+.hist-delta-box--de .hist-delta-valor { color: var(--ink-3); }
+
+/* ── barra de filtros (ação e elemento) + busca ── */
+.hist-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-8);
+  padding-bottom: var(--gap-16);
+}
+
+.hist-search-label {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  padding: var(--gap-6) var(--gap-12);
+  border: 1px solid var(--lt-border);
+  border-radius: 99px;
+  background: var(--lt-surface-muted);
+
+  &:focus-within { border-color: var(--lt-border-strong); }
+
+  /* a lupa do índice mora em slide-selection.css, que esta página não carrega — a máscara é
+     redeclarada aqui (mesmo desenho) em vez de arrastar uma folha de 1.400 linhas junto */
+  & .search-icon {
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    background-color: var(--ink-4);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='black' stroke-width='1.1' stroke-linecap='round'%3E%3Ccircle cx='5' cy='5' r='3'/%3E%3Cline x1='7.5' y1='7.5' x2='11' y2='11'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='black' stroke-width='1.1' stroke-linecap='round'%3E%3Ccircle cx='5' cy='5' r='3'/%3E%3Cline x1='7.5' y1='7.5' x2='11' y2='11'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-position: center; mask-position: center;
+    -webkit-mask-size: contain; mask-size: contain;
+  }
+
+  & input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: none;
+    outline: none;
+    background: none;
+    font-family: var(--font-family-general);
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+    color: var(--lt-text);
+  }
+
+  & input::placeholder { color: var(--ink-5); }
+  & input::-webkit-search-decoration,
+  & input::-webkit-search-cancel-button { display: none; }
+
+  & button {
+    flex: 0 0 auto;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--ink-4);
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+
+    &:hover { color: var(--lt-text); }
+  }
+}
+
+.hist-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-6);
+}
+
+.hist-filter-btn {
+  border: 1px solid var(--lt-border);
+  border-radius: 99px;
+  background: var(--lt-surface-muted);
+  color: var(--ink-3);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-bold);
+  padding: var(--gap-4) var(--gap-12);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+
+  &:hover { background: var(--lt-hover); color: var(--lt-text); }
+
+  &.active {
+    background: var(--lt-surface-strong);
+    border-color: var(--lt-border-strong);
+    color: var(--lt-text);
+  }
+
+  /* o filtro ativo herda a cor da ação que representa — mesma linguagem dos rótulos */
+  &.active.hist-filter-btn--adicao,
+  &.active.hist-filter-btn--implementada { border-color: var(--hist-add); }
+
+  &.active.hist-filter-btn--modificacao,
+  &.active.hist-filter-btn--aperfeicoada { border-color: var(--hist-mod); }
+
+  &.active.hist-filter-btn--delecao,
+  &.active.hist-filter-btn--descartada { border-color: var(--hist-del); }
+
+  /* elemento que a busca/ação corrente zerou: continua clicável, mas anuncia o resultado */
+  &.is-empty:not(.active) { opacity: 0.45; }
+}
+
+.hist-resumo,
+.hist-nota {
+  margin: var(--gap-6) 0 0;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text-muted);
+}
+
+/* a nota de curadoria explica por que o registro não é o que o git diz cruamente */
+.hist-nota {
+  padding-left: var(--gap-8);
+  border-left: 2px solid var(--lt-border);
+  font-style: italic;
+}
+
+/* ── miniaturas: no máximo 3; a última carrega o indicador "+N" ── */
+.hist-thumbs {
+  display: flex;
+  gap: var(--gap-6);
+  padding-top: var(--gap-8);
+}
+
+.hist-thumb {
+  position: relative;
+  display: block;
+  width: 64px;
+  height: 48px;
+  border-radius: var(--border-smaller);
+  overflow: hidden;
+  border: 1px solid var(--lt-border);
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.hist-thumb-mais {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-black-alpha-75);
+  color: var(--color-white);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  font-weight: var(--font-weight-boldest);
+}
+
+/* ── metadados (peso, contagem, dados do documento) ── */
+.hist-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-6);
+  padding-top: var(--gap-8);
+}
+
+.hist-meta-item {
+  padding: 2px var(--gap-6);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-smaller);
+  background: var(--lt-surface-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  color: var(--lt-text-muted);
+  white-space: nowrap;
+}
+
+.hist-meta-ext {
+  font-weight: var(--font-weight-boldest);
+  color: var(--lt-text);
+  letter-spacing: 0.06em;
+}
+
+/* o commit fica discreto, no canto: é a prova de auditoria do registro */
+.hist-commit {
+  position: absolute;
+  top: var(--gap-12);
+  right: var(--gap-16);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  color: var(--lt-text-muted);
+  opacity: 0.6;
+}
+
+.hist-empty {
+  padding: var(--gap-32) 0;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
+  color: var(--lt-text-muted);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .hist-controls { gap: var(--gap-8); }
+  .hist-groups { margin-left: 0; }
+  .hist-commit { display: none; }
+  .hist-thumb { width: 52px; height: 39px; }
+}

@@ -1117,6 +1117,28 @@ window.__openImgLightbox = function (imgEl) {
   if (i >= 0) openLightbox(i);
 };
 
+// ---- 2b. RETORNO AO HISTÓRICO DE MODIFICAÇÕES ------------------------------
+// Quando o usuário chega a um slide CLICANDO num registro do histórico, o
+// slide-history.js grava de onde ele veio (sessionStorage). Aqui oferecemos o caminho de
+// volta — para o ponto EXATO da lista, não para o topo dela: o histórico restaura a rolagem
+// que guardou. É o mesmo contrato do "conteúdo" do breadcrumb, que reabre o índice na
+// posição de onde se saiu.
+(function botaoVoltarAoHistorico() {
+  const bc = document.querySelector('.breadcrumb');
+  if (!bc || document.querySelector('.hist-root')) return;   // não no próprio histórico
+  let veio = null;
+  try { veio = sessionStorage.getItem('hist-from'); } catch (e) { return; }
+  if (!veio) return;
+
+  const a = document.createElement('a');
+  a.className = 'hist-back-btn';
+  // href relativo ao slide atual (todos os slides vivem em slides/)
+  a.href = 'history.html';
+  a.innerHTML = '<span aria-hidden="true">‹</span> histórico';
+  a.setAttribute('aria-label', 'Voltar ao histórico de modificações');
+  bc.appendChild(a);
+})();
+
 // ---- 3. BOTÃO COPIAR URL --------------------------------------------------
 
 const breadcrumb = document.querySelector('.breadcrumb');
@@ -1179,6 +1201,14 @@ if (backToTop) {
     requestAnimationFrame(() => { syncScrollFabs(); scrollTicking = false; });
   }, { passive: true });
   window.addEventListener('resize', syncScrollFabs, { passive: true });
+
+  // A altura do documento também muda SEM scroll e SEM resize: o histórico monta os registros
+  // depois de buscar o JSON, e colapsar/expandir os dias encolhe ou estica a página inteira.
+  // Sem observar isso, o botão "ir para o fim" nasce escondido numa página longa (a página
+  // ainda era curta quando ele calculou) e não volta mais.
+  if (typeof ResizeObserver === 'function') {
+    new ResizeObserver(syncScrollFabs).observe(document.documentElement);
+  }
   syncScrollFabs();
 
   backToTop.addEventListener('click', () => {

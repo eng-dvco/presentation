@@ -1442,6 +1442,37 @@ footer {
   .copy-url-btn { transition: none; }
 }
 
+/* ── botão "‹ histórico" no breadcrumb ──
+   Só existe quando o usuário chegou ao slide CLICANDO num registro do Histórico de
+   Modificações (o slide-nav.js o injeta lendo o sessionStorage). Vai à EXTREMA DIREITA do
+   caminho — daí o margin-left:auto, que empurra o último item do flex — e devolve o usuário
+   ao ponto EXATO de onde saiu, porque o histórico restaura a rolagem que guardou. */
+.hist-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  order: 2;
+  margin-left: auto;
+  padding: 1px 6px;
+  background: #e2e2e2;
+  border: 1px solid var(--lt-border-strong);
+  border-radius: 3px;
+  color: var(--ink-3);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  font-style: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--lt-surface-strong);
+    color: var(--ink-1);
+  }
+}
+
 /* ---- botões flutuantes: retornar ao topo / ir para o fim ------------------ */
 #back-to-top,
 #go-to-bottom {

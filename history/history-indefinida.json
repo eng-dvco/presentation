@@ -1,7 +1,7 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "14-07-26",
- "commits": 111,
+ "commits": 112,
  "total": 599,
  "registros": [
   {
@@ -542,9 +542,21 @@
       "src": "assets/img/slides/se/silica-reservoir/silica-3.jpeg",
       "miniatura": "assets/img/slides/se/silica-reservoir/silica-3-200.webp",
       "peso": "205 KB"
+     },
+     {
+      "nome": "silica-4.jpeg",
+      "src": "assets/img/slides/se/silica-reservoir/silica-4.jpeg",
+      "miniatura": "assets/img/slides/se/silica-reservoir/silica-4-200.webp",
+      "peso": "51 KB"
+     },
+     {
+      "nome": "silica-5.jpeg",
+      "src": "assets/img/slides/se/silica-reservoir/silica-5.jpeg",
+      "miniatura": "assets/img/slides/se/silica-reservoir/silica-5-200.webp",
+      "peso": "53 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -968,9 +980,21 @@
       "src": "assets/img/slides/issues/parts-replacement/lamp-3.jpeg",
       "miniatura": "assets/img/slides/issues/parts-replacement/lamp-3-200.webp",
       "peso": "53 KB"
+     },
+     {
+      "nome": "lamp-4.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/lamp-4.jpeg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/lamp-4-200.webp",
+      "peso": "48 KB"
+     },
+     {
+      "nome": "lamp-5.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/lamp-5.jpeg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/lamp-5-200.webp",
+      "peso": "41 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -1011,9 +1035,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-19.jpeg",
       "miniatura": "history/thumbs/5be3e82-part-19.webp",
       "peso": "66 KB"
+     },
+     {
+      "nome": "part-20.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-20.jpeg",
+      "miniatura": "history/thumbs/5be3e82-part-20.webp",
+      "peso": "64 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -1053,9 +1083,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-9.jpeg",
       "miniatura": "history/thumbs/5be3e82-part-9.webp",
       "peso": "53 KB"
+     },
+     {
+      "nome": "part-10.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-10.jpeg",
+      "miniatura": "history/thumbs/5be3e82-part-10.webp",
+      "peso": "59 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -1364,9 +1400,15 @@
       "src": "assets/img/slides/se/gmg-maintenance/gmg-15.jpeg",
       "miniatura": "assets/img/slides/se/gmg-maintenance/gmg-15-200.webp",
       "peso": "66 KB"
+     },
+     {
+      "nome": "gmg-16.jpeg",
+      "src": "assets/img/slides/se/gmg-maintenance/gmg-16.jpeg",
+      "miniatura": "assets/img/slides/se/gmg-maintenance/gmg-16-200.webp",
+      "peso": "64 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -1407,9 +1449,15 @@
       "src": "assets/img/slides/se/gmg-maintenance/gmg-11.jpeg",
       "miniatura": "assets/img/slides/se/gmg-maintenance/gmg-11-200.webp",
       "peso": "53 KB"
+     },
+     {
+      "nome": "gmg-12.jpeg",
+      "src": "assets/img/slides/se/gmg-maintenance/gmg-12.jpeg",
+      "miniatura": "assets/img/slides/se/gmg-maintenance/gmg-12-200.webp",
+      "peso": "59 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -1516,9 +1564,15 @@
       "src": "assets/img/slides/se/ac-repair/ac-15.jpeg",
       "miniatura": "assets/img/slides/se/ac-repair/ac-15-200.webp",
       "peso": "40 KB"
+     },
+     {
+      "nome": "ac-16.jpeg",
+      "src": "assets/img/slides/se/ac-repair/ac-16.jpeg",
+      "miniatura": "assets/img/slides/se/ac-repair/ac-16-200.webp",
+      "peso": "31 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -1577,9 +1631,21 @@
       "src": "assets/img/slides/se/ac-repair/ac-9.jpeg",
       "miniatura": "assets/img/slides/se/ac-repair/ac-9-200.webp",
       "peso": "57 KB"
+     },
+     {
+      "nome": "ac-10.jpeg",
+      "src": "assets/img/slides/se/ac-repair/ac-10.jpeg",
+      "miniatura": "assets/img/slides/se/ac-repair/ac-10-200.webp",
+      "peso": "47 KB"
+     },
+     {
+      "nome": "ac-11.jpeg",
+      "src": "assets/img/slides/se/ac-repair/ac-11.jpeg",
+      "miniatura": "assets/img/slides/se/ac-repair/ac-11-200.webp",
+      "peso": "49 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -2003,9 +2069,15 @@
       "src": "assets/img/slides/se/rectifier-installation/rectifier-3.jpeg",
       "miniatura": "assets/img/slides/se/rectifier-installation/rectifier-3-200.webp",
       "peso": "155 KB"
+     },
+     {
+      "nome": "rectifier-4.jpeg",
+      "src": "assets/img/slides/se/rectifier-installation/rectifier-4.jpeg",
+      "miniatura": "assets/img/slides/se/rectifier-installation/rectifier-4-200.webp",
+      "peso": "207 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -2111,9 +2183,15 @@
       "src": "assets/img/slides/se/roof-repair/roof-3.jpeg",
       "miniatura": "assets/img/slides/se/roof-repair/roof-3-200.webp",
       "peso": "187 KB"
+     },
+     {
+      "nome": "roof-4.jpeg",
+      "src": "assets/img/slides/se/roof-repair/roof-4.jpeg",
+      "miniatura": "assets/img/slides/se/roof-repair/roof-4-200.webp",
+      "peso": "153 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -2154,9 +2232,15 @@
       "src": "assets/img/slides/ld/pole-repair/pole-13.jpeg",
       "miniatura": "assets/img/slides/ld/pole-repair/pole-13-200.webp",
       "peso": "594 KB"
+     },
+     {
+      "nome": "pole-14.jpeg",
+      "src": "assets/img/slides/ld/pole-repair/pole-14.jpeg",
+      "miniatura": "assets/img/slides/ld/pole-repair/pole-14-200.webp",
+      "peso": "571 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -2402,9 +2486,21 @@
       "src": "assets/img/slides/st/training/training-9.jpeg",
       "miniatura": "assets/img/slides/st/training/training-9-200.webp",
       "peso": "275 KB"
+     },
+     {
+      "nome": "training-10.jpeg",
+      "src": "assets/img/slides/st/training/training-10.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-10-200.webp",
+      "peso": "301 KB"
+     },
+     {
+      "nome": "training-11.jpeg",
+      "src": "assets/img/slides/st/training/training-11.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-11-200.webp",
+      "peso": "134 KB"
      }
     ],
-    "extras": 5
+    "extras": 3
    },
    "qtdImagens": 8
   },
@@ -2463,9 +2559,21 @@
       "src": "assets/img/slides/events/equipment-acquisition/equipment-12.jpeg",
       "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-12-200.webp",
       "peso": "67 KB"
+     },
+     {
+      "nome": "equipment-13.jpeg",
+      "src": "assets/img/slides/events/equipment-acquisition/equipment-13.jpeg",
+      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-13-200.webp",
+      "peso": "45 KB"
+     },
+     {
+      "nome": "equipment-14.jpeg",
+      "src": "assets/img/slides/events/equipment-acquisition/equipment-14.jpeg",
+      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-14-200.webp",
+      "peso": "43 KB"
      }
     ],
-    "extras": 6
+    "extras": 4
    },
    "qtdImagens": 9
   },
@@ -2590,9 +2698,21 @@
       "src": "assets/img/slides/se/substation-restoration/paint-3.jpeg",
       "miniatura": "assets/img/slides/se/substation-restoration/paint-3-200.webp",
       "peso": "63 KB"
+     },
+     {
+      "nome": "paint-4.jpeg",
+      "src": "assets/img/slides/se/substation-restoration/paint-4.jpeg",
+      "miniatura": "assets/img/slides/se/substation-restoration/paint-4-200.webp",
+      "peso": "70 KB"
+     },
+     {
+      "nome": "paint-5.jpeg",
+      "src": "assets/img/slides/se/substation-restoration/paint-5.jpeg",
+      "miniatura": "assets/img/slides/se/substation-restoration/paint-5-200.webp",
+      "peso": "63 KB"
      }
     ],
-    "extras": 13
+    "extras": 11
    },
    "qtdImagens": 16
   },
@@ -2798,9 +2918,21 @@
       "src": "assets/img/slides/ld/pole-repair/pole-7.jpeg",
       "miniatura": "assets/img/slides/ld/pole-repair/pole-7-200.webp",
       "peso": "85 KB"
+     },
+     {
+      "nome": "pole-8.jpeg",
+      "src": "assets/img/slides/ld/pole-repair/pole-8.jpeg",
+      "miniatura": "assets/img/slides/ld/pole-repair/pole-8-200.webp",
+      "peso": "67 KB"
+     },
+     {
+      "nome": "pole-9.jpeg",
+      "src": "assets/img/slides/ld/pole-repair/pole-9.jpeg",
+      "miniatura": "assets/img/slides/ld/pole-repair/pole-9-200.webp",
+      "peso": "83 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -2911,9 +3043,15 @@
       "src": "assets/img/slides/se/gmg-maintenance/gmg-7.jpeg",
       "miniatura": "assets/img/slides/se/gmg-maintenance/gmg-7-200.webp",
       "peso": "211 KB"
+     },
+     {
+      "nome": "gmg-8.jpeg",
+      "src": "assets/img/slides/se/gmg-maintenance/gmg-8.jpeg",
+      "miniatura": "assets/img/slides/se/gmg-maintenance/gmg-8-200.webp",
+      "peso": "178 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -3071,9 +3209,15 @@
       "src": "assets/img/slides/st/training/training-5.jpeg",
       "miniatura": "assets/img/slides/st/training/training-5-200.webp",
       "peso": "141 KB"
+     },
+     {
+      "nome": "training-6.png",
+      "src": "assets/img/slides/st/training/training-6.png",
+      "miniatura": "assets/img/slides/st/training/training-6-200.webp",
+      "peso": "573 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -3201,9 +3345,21 @@
       "src": "assets/img/slides/se/thermography-inspection/thermo-24.jpeg",
       "miniatura": "assets/img/slides/se/thermography-inspection/thermo-24-200.webp",
       "peso": "419 KB"
+     },
+     {
+      "nome": "thermo-25.jpeg",
+      "src": "assets/img/slides/se/thermography-inspection/thermo-25.jpeg",
+      "miniatura": "assets/img/slides/se/thermography-inspection/thermo-25-200.webp",
+      "peso": "225 KB"
+     },
+     {
+      "nome": "thermo-26.jpeg",
+      "src": "assets/img/slides/se/thermography-inspection/thermo-26.jpeg",
+      "miniatura": "assets/img/slides/se/thermography-inspection/thermo-26-200.webp",
+      "peso": "645 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -3544,9 +3700,15 @@
       "src": "assets/img/slides/events/shutdown-timeline/activity-20.jpeg",
       "miniatura": "assets/img/slides/events/shutdown-timeline/activity-20-200.webp",
       "peso": "51 KB"
+     },
+     {
+      "nome": "activity-21.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-21.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-21-200.webp",
+      "peso": "59 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -4000,9 +4162,21 @@
       "src": "assets/img/slides/st/psychosocial-risks/risks-3.jpeg",
       "miniatura": "assets/img/slides/st/psychosocial-risks/risks-3-200.webp",
       "peso": "233 KB"
+     },
+     {
+      "nome": "risks-4.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-4.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-4-200.webp",
+      "peso": "218 KB"
+     },
+     {
+      "nome": "risks-5.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-5.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-5-200.webp",
+      "peso": "223 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -4185,9 +4359,15 @@
       "src": "assets/img/slides/se/paint-restoration/slab-3.jpg",
       "miniatura": "history/thumbs/3442081-slab-3.webp",
       "peso": "113 KB"
+     },
+     {
+      "nome": "slab-4.jpg",
+      "src": "assets/img/slides/se/paint-restoration/slab-4.jpg",
+      "miniatura": "history/thumbs/3442081-slab-4.webp",
+      "peso": "105 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4,
    "removidas": 4
@@ -4315,9 +4495,15 @@
       "src": "assets/img/slides/lt/lt-maintenance/E2-E3/28-04-26/1.jpeg",
       "miniatura": "assets/img/slides/lt/lt-maintenance/E2-E3/28-04-26/1-200.webp",
       "peso": "221 KB"
+     },
+     {
+      "nome": "2.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/E2-E3/28-04-26/2.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/E2-E3/28-04-26/2-200.webp",
+      "peso": "201 KB"
      }
     ],
-    "extras": 3
+    "extras": 2
    },
    "qtdImagens": 6,
    "removidas": 6
@@ -4502,9 +4688,15 @@
       "src": "assets/img/slides/se/earthmoving-service/earth-3.jpeg",
       "miniatura": "assets/img/slides/se/earthmoving-service/earth-3-200.webp",
       "peso": "61 KB"
+     },
+     {
+      "nome": "earth-4.jpeg",
+      "src": "assets/img/slides/se/earthmoving-service/earth-4.jpeg",
+      "miniatura": "assets/img/slides/se/earthmoving-service/earth-4-200.webp",
+      "peso": "67 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -4563,9 +4755,15 @@
       "src": "assets/img/slides/se/earthmoving-service/earth-3.jpeg",
       "miniatura": "assets/img/slides/se/earthmoving-service/earth-3-200.webp",
       "peso": "61 KB"
+     },
+     {
+      "nome": "earth-4.jpeg",
+      "src": "assets/img/slides/se/earthmoving-service/earth-4.jpeg",
+      "miniatura": "assets/img/slides/se/earthmoving-service/earth-4-200.webp",
+      "peso": "67 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -4768,9 +4966,15 @@
       "src": "assets/img/slides/se/ac-repair/ac-3.jpeg",
       "miniatura": "assets/img/slides/se/ac-repair/ac-3-200.webp",
       "peso": "72 KB"
+     },
+     {
+      "nome": "ac-4.jpeg",
+      "src": "assets/img/slides/se/ac-repair/ac-4.jpeg",
+      "miniatura": "assets/img/slides/se/ac-repair/ac-4-200.webp",
+      "peso": "63 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -4811,9 +5015,15 @@
       "src": "assets/img/slides/se/ac-repair/ac-3.jpeg",
       "miniatura": "assets/img/slides/se/ac-repair/ac-3-200.webp",
       "peso": "72 KB"
+     },
+     {
+      "nome": "ac-4.jpeg",
+      "src": "assets/img/slides/se/ac-repair/ac-4.jpeg",
+      "miniatura": "assets/img/slides/se/ac-repair/ac-4-200.webp",
+      "peso": "63 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -5461,9 +5671,15 @@
       "src": "assets/img/slides/se/equipment-cleaning/secc-3.jpeg",
       "miniatura": "assets/img/slides/se/equipment-cleaning/secc-3-200.webp",
       "peso": "71 KB"
+     },
+     {
+      "nome": "secc-4.jpeg",
+      "src": "assets/img/slides/se/equipment-cleaning/secc-4.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-cleaning/secc-4-200.webp",
+      "peso": "60 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -5504,9 +5720,15 @@
       "src": "assets/img/slides/se/equipment-cleaning/rectifier-3.jpeg",
       "miniatura": "assets/img/slides/se/equipment-cleaning/rectifier-3-200.webp",
       "peso": "43 KB"
+     },
+     {
+      "nome": "rectifier-4.jpeg",
+      "src": "assets/img/slides/se/equipment-cleaning/rectifier-4.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-cleaning/rectifier-4-200.webp",
+      "peso": "41 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -5818,9 +6040,15 @@
       "src": "assets/img/slides/ld/segment-cleaning/cleaning-3.jpeg",
       "miniatura": "assets/img/slides/ld/segment-cleaning/cleaning-3-200.webp",
       "peso": "60 KB"
+     },
+     {
+      "nome": "cleaning-4.jpeg",
+      "src": "assets/img/slides/ld/segment-cleaning/cleaning-4.jpeg",
+      "miniatura": "assets/img/slides/ld/segment-cleaning/cleaning-4-200.webp",
+      "peso": "67 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -5897,9 +6125,15 @@
       "src": "assets/img/slides/se/resistance-measurement/insulator-5.jpeg",
       "miniatura": "history/thumbs/1827a19-insulator-5.webp",
       "peso": "51 KB"
+     },
+     {
+      "nome": "insulator-6.jpeg",
+      "src": "assets/img/slides/se/resistance-measurement/insulator-6.jpeg",
+      "miniatura": "history/thumbs/1827a19-insulator-6.webp",
+      "peso": "59 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -6090,9 +6324,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-19.jpeg",
       "miniatura": "history/thumbs/1827a19-part-19.webp",
       "peso": "66 KB"
+     },
+     {
+      "nome": "part-20.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-20.jpeg",
+      "miniatura": "history/thumbs/1827a19-part-20.webp",
+      "peso": "64 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -6151,9 +6391,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-9.jpeg",
       "miniatura": "history/thumbs/1827a19-part-9.webp",
       "peso": "53 KB"
+     },
+     {
+      "nome": "part-10.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-10.jpeg",
+      "miniatura": "history/thumbs/1827a19-part-10.webp",
+      "peso": "59 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -6212,9 +6458,21 @@
       "src": "assets/img/slides/issues/parts-replacement/part-14.jpeg",
       "miniatura": "assets/img/slides/issues/parts-replacement/part-14-200.webp",
       "peso": "83 KB"
+     },
+     {
+      "nome": "part-15.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-15.jpeg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-15-200.webp",
+      "peso": "53 KB"
+     },
+     {
+      "nome": "part-16.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-16.jpeg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-16-200.webp",
+      "peso": "43 KB"
      }
     ],
-    "extras": 2
+    "extras": 0
    },
    "qtdImagens": 5,
    "removidas": 3
@@ -6337,9 +6595,21 @@
       "src": "assets/img/slides/se/oil-analysis/oil-3.jpeg",
       "miniatura": "assets/img/slides/se/oil-analysis/oil-3-200.webp",
       "peso": "65 KB"
+     },
+     {
+      "nome": "oil-4.jpeg",
+      "src": "assets/img/slides/se/oil-analysis/oil-4.jpeg",
+      "miniatura": "assets/img/slides/se/oil-analysis/oil-4-200.webp",
+      "peso": "33 KB"
+     },
+     {
+      "nome": "oil-5.jpeg",
+      "src": "assets/img/slides/se/oil-analysis/oil-5.jpeg",
+      "miniatura": "assets/img/slides/se/oil-analysis/oil-5-200.webp",
+      "peso": "62 KB"
      }
     ],
-    "extras": 5
+    "extras": 3
    },
    "qtdImagens": 8
   },
@@ -6397,9 +6667,15 @@
       "src": "assets/img/slides/lt/grounding-resistance/test-3.jpeg",
       "miniatura": "assets/img/slides/lt/grounding-resistance/test-3-200.webp",
       "peso": "89 KB"
+     },
+     {
+      "nome": "test-4.jpeg",
+      "src": "assets/img/slides/lt/grounding-resistance/test-4.jpeg",
+      "miniatura": "assets/img/slides/lt/grounding-resistance/test-4-200.webp",
+      "peso": "71 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -6439,9 +6715,15 @@
       "src": "assets/img/slides/se/false-floor-cleaning/floor-3.jpeg",
       "miniatura": "assets/img/slides/se/false-floor-cleaning/floor-3-200.webp",
       "peso": "53 KB"
+     },
+     {
+      "nome": "floor-4.jpeg",
+      "src": "assets/img/slides/se/false-floor-cleaning/floor-4.jpeg",
+      "miniatura": "assets/img/slides/se/false-floor-cleaning/floor-4-200.webp",
+      "peso": "44 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -6500,9 +6782,15 @@
       "src": "assets/img/slides/se/equipment-backup/backup-7.jpeg",
       "miniatura": "assets/img/slides/se/equipment-backup/backup-7-200.webp",
       "peso": "53 KB"
+     },
+     {
+      "nome": "backup-8.jpeg",
+      "src": "assets/img/slides/se/equipment-backup/backup-8.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-backup/backup-8-200.webp",
+      "peso": "37 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -6560,9 +6848,15 @@
       "src": "assets/img/slides/se/earthmoving-service/earth-3.jpeg",
       "miniatura": "assets/img/slides/se/earthmoving-service/earth-3-200.webp",
       "peso": "61 KB"
+     },
+     {
+      "nome": "earth-4.jpeg",
+      "src": "assets/img/slides/se/earthmoving-service/earth-4.jpeg",
+      "miniatura": "assets/img/slides/se/earthmoving-service/earth-4-200.webp",
+      "peso": "67 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -6738,9 +7032,15 @@
       "src": "assets/img/slides/lt/concrete-base-repair/repair-7.jpeg",
       "miniatura": "assets/img/slides/lt/concrete-base-repair/repair-7-200.webp",
       "peso": "72 KB"
+     },
+     {
+      "nome": "repair-8.jpeg",
+      "src": "assets/img/slides/lt/concrete-base-repair/repair-8.jpeg",
+      "miniatura": "assets/img/slides/lt/concrete-base-repair/repair-8-200.webp",
+      "peso": "68 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -6780,9 +7080,21 @@
       "src": "assets/img/slides/se/computer-replacement/pc-3.jpeg",
       "miniatura": "assets/img/slides/se/computer-replacement/pc-3-200.webp",
       "peso": "55 KB"
+     },
+     {
+      "nome": "pc-4.jpeg",
+      "src": "assets/img/slides/se/computer-replacement/pc-4.jpeg",
+      "miniatura": "assets/img/slides/se/computer-replacement/pc-4-200.webp",
+      "peso": "53 KB"
+     },
+     {
+      "nome": "pc-5.jpeg",
+      "src": "assets/img/slides/se/computer-replacement/pc-5.jpeg",
+      "miniatura": "assets/img/slides/se/computer-replacement/pc-5-200.webp",
+      "peso": "57 KB"
      }
     ],
-    "extras": 10
+    "extras": 8
    },
    "qtdImagens": 13
   },
@@ -7984,9 +8296,15 @@
       "src": "assets/img/slides/events/training/training-3.png",
       "miniatura": "history/thumbs/ba09017-training-3.webp",
       "peso": "448 KB"
+     },
+     {
+      "nome": "training-4.png",
+      "src": "assets/img/slides/events/training/training-4.png",
+      "miniatura": "history/thumbs/ba09017-training-4.webp",
+      "peso": "1,1 MB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -8045,9 +8363,15 @@
       "src": "assets/img/slides/events/training/training-3.png",
       "miniatura": "history/thumbs/21fed56-training-3.webp",
       "peso": "448 KB"
+     },
+     {
+      "nome": "training-4.png",
+      "src": "assets/img/slides/events/training/training-4.png",
+      "miniatura": "history/thumbs/21fed56-training-4.webp",
+      "peso": "1,1 MB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -8222,9 +8546,21 @@
       "src": "assets/img/slides/se/thermography-inspection/thermo-3.jpeg",
       "miniatura": "assets/img/slides/se/thermography-inspection/thermo-3-200.webp",
       "peso": "31 KB"
+     },
+     {
+      "nome": "thermo-4.jpeg",
+      "src": "assets/img/slides/se/thermography-inspection/thermo-4.jpeg",
+      "miniatura": "assets/img/slides/se/thermography-inspection/thermo-4-200.webp",
+      "peso": "34 KB"
+     },
+     {
+      "nome": "thermo-12.jpeg",
+      "src": "assets/img/slides/se/thermography-inspection/thermo-12.jpeg",
+      "miniatura": "assets/img/slides/se/thermography-inspection/thermo-12-200.webp",
+      "peso": "36 KB"
      }
     ],
-    "extras": 2
+    "extras": 0
    },
    "qtdImagens": 5,
    "removidas": 1
@@ -8296,9 +8632,15 @@
       "src": "assets/img/slides/se/thermography-inspection/thermo-3.jpeg",
       "miniatura": "assets/img/slides/se/thermography-inspection/thermo-3-200.webp",
       "peso": "31 KB"
+     },
+     {
+      "nome": "thermo-4.jpeg",
+      "src": "assets/img/slides/se/thermography-inspection/thermo-4.jpeg",
+      "miniatura": "assets/img/slides/se/thermography-inspection/thermo-4-200.webp",
+      "peso": "34 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -8451,9 +8793,15 @@
       "src": "assets/img/slides/se/concrete-slab/slab-3.jpg",
       "miniatura": "history/thumbs/21fed56-slab-3.webp",
       "peso": "113 KB"
+     },
+     {
+      "nome": "slab-4.jpg",
+      "src": "assets/img/slides/se/concrete-slab/slab-4.jpg",
+      "miniatura": "history/thumbs/21fed56-slab-4.webp",
+      "peso": "105 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -8593,9 +8941,15 @@
       "src": "assets/img/slides/issues/stolen-varigrip/varigrip-3.jpg",
       "miniatura": "history/thumbs/ba09017-varigrip-3.webp",
       "peso": "110 KB"
+     },
+     {
+      "nome": "varigrip-4.jpg",
+      "src": "assets/img/slides/issues/stolen-varigrip/varigrip-4.jpg",
+      "miniatura": "history/thumbs/ba09017-varigrip-4.webp",
+      "peso": "135 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -8636,9 +8990,15 @@
       "src": "assets/img/slides/se/concrete-slab/slab-3.jpg",
       "miniatura": "history/thumbs/ba09017-slab-3.webp",
       "peso": "113 KB"
+     },
+     {
+      "nome": "slab-4.jpg",
+      "src": "assets/img/slides/se/concrete-slab/slab-4.jpg",
+      "miniatura": "history/thumbs/ba09017-slab-4.webp",
+      "peso": "105 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -9023,9 +9383,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-10.jpeg",
       "miniatura": "history/thumbs/21fed56-part-10.webp",
       "peso": "83 KB"
+     },
+     {
+      "nome": "part-11.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-11.jpeg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-11-200.webp",
+      "peso": "83 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -9066,9 +9432,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-6.jpeg",
       "miniatura": "assets/img/slides/issues/parts-replacement/part-6-200.webp",
       "peso": "62 KB"
+     },
+     {
+      "nome": "part-7.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-7.jpeg",
+      "miniatura": "history/thumbs/21fed56-part-7.webp",
+      "peso": "71 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -9109,9 +9481,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-10.jpeg",
       "miniatura": "history/thumbs/fe961ba-part-10.webp",
       "peso": "83 KB"
+     },
+     {
+      "nome": "part-11.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-11.jpeg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-11-200.webp",
+      "peso": "83 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -9151,9 +9529,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-6.jpeg",
       "miniatura": "assets/img/slides/issues/parts-replacement/part-6-200.webp",
       "peso": "62 KB"
+     },
+     {
+      "nome": "part-7.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-7.jpeg",
+      "miniatura": "history/thumbs/fe961ba-part-7.webp",
+      "peso": "71 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -9422,9 +9806,15 @@
       "src": "assets/img/slides/events/training/training-3.png",
       "miniatura": "history/thumbs/4cf0728-training-3.webp",
       "peso": "448 KB"
+     },
+     {
+      "nome": "training-4.png",
+      "src": "assets/img/slides/events/training/training-4.png",
+      "miniatura": "history/thumbs/4cf0728-training-4.webp",
+      "peso": "1,1 MB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -9534,9 +9924,15 @@
       "src": "assets/img/slides/events/shutdown-timeline/activity-14.png",
       "miniatura": "assets/img/slides/events/shutdown-timeline/activity-14-200.webp",
       "peso": "364 KB"
+     },
+     {
+      "nome": "activity-15.png",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-15.png",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-15-200.webp",
+      "peso": "370 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -9950,9 +10346,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-10.jpeg",
       "miniatura": "history/thumbs/4cf0728-part-10.webp",
       "peso": "83 KB"
+     },
+     {
+      "nome": "part-11.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-11.jpeg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-11-200.webp",
+      "peso": "83 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -9993,9 +10395,15 @@
       "src": "assets/img/slides/issues/parts-replacement/part-6.jpeg",
       "miniatura": "assets/img/slides/issues/parts-replacement/part-6-200.webp",
       "peso": "62 KB"
+     },
+     {
+      "nome": "part-7.jpeg",
+      "src": "assets/img/slides/issues/parts-replacement/part-7.jpeg",
+      "miniatura": "history/thumbs/4cf0728-part-7.webp",
+      "peso": "71 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -10097,9 +10505,21 @@
       "src": "assets/img/slides/issues/parts-replacement/part-3.png",
       "miniatura": "assets/img/slides/issues/parts-replacement/part-3-200.webp",
       "peso": "361 KB"
+     },
+     {
+      "nome": "part-4.png",
+      "src": "assets/img/slides/issues/parts-replacement/part-4.png",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-4-200.webp",
+      "peso": "2,9 MB"
+     },
+     {
+      "nome": "part-5.jpg",
+      "src": "assets/img/slides/issues/parts-replacement/part-5.jpg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-5-200.webp",
+      "peso": "104 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    }
   },
   {
@@ -11196,9 +11616,21 @@
       "src": "assets/img/slides/issues/parts-replacement/part-3.png",
       "miniatura": "assets/img/slides/issues/parts-replacement/part-3-200.webp",
       "peso": "361 KB"
+     },
+     {
+      "nome": "part-4.png",
+      "src": "assets/img/slides/issues/parts-replacement/part-4.png",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-4-200.webp",
+      "peso": "2,9 MB"
+     },
+     {
+      "nome": "part-5.jpg",
+      "src": "assets/img/slides/issues/parts-replacement/part-5.jpg",
+      "miniatura": "assets/img/slides/issues/parts-replacement/part-5-200.webp",
+      "peso": "104 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -11257,9 +11689,21 @@
       "src": "assets/img/slides/se/paint-restoration/paint-3.jpeg",
       "miniatura": "history/thumbs/76d3a99-paint-3.webp",
       "peso": "63 KB"
+     },
+     {
+      "nome": "paint-4.jpeg",
+      "src": "assets/img/slides/se/paint-restoration/paint-4.jpeg",
+      "miniatura": "history/thumbs/76d3a99-paint-4.webp",
+      "peso": "70 KB"
+     },
+     {
+      "nome": "paint-5.jpeg",
+      "src": "assets/img/slides/se/paint-restoration/paint-5.jpeg",
+      "miniatura": "history/thumbs/76d3a99-paint-5.webp",
+      "peso": "63 KB"
      }
     ],
-    "extras": 9
+    "extras": 7
    },
    "qtdImagens": 12,
    "removidas": 8
@@ -11446,9 +11890,21 @@
       "src": "assets/img/slides/se/equipment-cleaning/secc-3.jpeg",
       "miniatura": "assets/img/slides/se/equipment-cleaning/secc-3-200.webp",
       "peso": "71 KB"
+     },
+     {
+      "nome": "secc-4.jpeg",
+      "src": "assets/img/slides/se/equipment-cleaning/secc-4.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-cleaning/secc-4-200.webp",
+      "peso": "60 KB"
+     },
+     {
+      "nome": "secc-5.png",
+      "src": "assets/img/slides/se/equipment-cleaning/secc-5.png",
+      "miniatura": "history/thumbs/76d3a99-secc-5.webp",
+      "peso": "280 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6,
    "removidas": 4
@@ -11490,9 +11946,15 @@
       "src": "assets/img/slides/se/equipment-cleaning/rectifier-3.jpeg",
       "miniatura": "assets/img/slides/se/equipment-cleaning/rectifier-3-200.webp",
       "peso": "43 KB"
+     },
+     {
+      "nome": "rectifier-4.jpeg",
+      "src": "assets/img/slides/se/equipment-cleaning/rectifier-4.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-cleaning/rectifier-4-200.webp",
+      "peso": "41 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4,
    "removidas": 4
@@ -11533,9 +11995,21 @@
       "src": "assets/img/slides/events/equipment-acquisition/equipment-3.jpeg",
       "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-3-200.webp",
       "peso": "64 KB"
+     },
+     {
+      "nome": "equipment-4.jpg",
+      "src": "assets/img/slides/events/equipment-acquisition/equipment-4.jpg",
+      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-4-200.webp",
+      "peso": "50 KB"
+     },
+     {
+      "nome": "equipment-5.jpg",
+      "src": "assets/img/slides/events/equipment-acquisition/equipment-5.jpg",
+      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-5-200.webp",
+      "peso": "113 KB"
      }
     ],
-    "extras": 4
+    "extras": 2
    },
    "qtdImagens": 7
   },
@@ -12064,9 +12538,15 @@
       "src": "assets/img/slides/ld/atalho-connection/atalho-3.jpeg",
       "miniatura": "assets/img/slides/ld/atalho-connection/atalho-3-200.webp",
       "peso": "306 KB"
+     },
+     {
+      "nome": "atalho-4.jpeg",
+      "src": "assets/img/slides/ld/atalho-connection/atalho-4.jpeg",
+      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-4-200.webp",
+      "peso": "553 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -12247,9 +12727,21 @@
       "src": "assets/img/slides/se/thermography-inspection/thermo-3.jpeg",
       "miniatura": "assets/img/slides/se/thermography-inspection/thermo-3-200.webp",
       "peso": "31 KB"
+     },
+     {
+      "nome": "thermo-4.jpeg",
+      "src": "assets/img/slides/se/thermography-inspection/thermo-4.jpeg",
+      "miniatura": "assets/img/slides/se/thermography-inspection/thermo-4-200.webp",
+      "peso": "34 KB"
+     },
+     {
+      "nome": "thermo-5.jpeg",
+      "src": "assets/img/slides/se/thermography-inspection/thermo-5.jpeg",
+      "miniatura": "assets/img/slides/se/thermography-inspection/thermo-5-200.webp",
+      "peso": "44 KB"
      }
     ],
-    "extras": 13
+    "extras": 11
    },
    "qtdImagens": 16
   },
@@ -12415,9 +12907,21 @@
       "src": "assets/img/slides/st/paint-restoration/paint-3.jpeg",
       "miniatura": "history/thumbs/4ceac6f-paint-3.webp",
       "peso": "63 KB"
+     },
+     {
+      "nome": "paint-4.jpeg",
+      "src": "assets/img/slides/st/paint-restoration/paint-4.jpeg",
+      "miniatura": "history/thumbs/4ceac6f-paint-4.webp",
+      "peso": "70 KB"
+     },
+     {
+      "nome": "paint-5.jpeg",
+      "src": "assets/img/slides/st/paint-restoration/paint-5.jpeg",
+      "miniatura": "history/thumbs/4ceac6f-paint-5.webp",
+      "peso": "63 KB"
      }
     ],
-    "extras": 5
+    "extras": 3
    },
    "qtdImagens": 8
   },
@@ -12482,9 +12986,21 @@
       "src": "assets/img/slides/se/equipment-cleaning/cleaning-3.jpeg",
       "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-3-200.webp",
       "peso": "69 KB"
+     },
+     {
+      "nome": "cleaning-4.jpeg",
+      "src": "assets/img/slides/se/equipment-cleaning/cleaning-4.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-4-200.webp",
+      "peso": "55 KB"
+     },
+     {
+      "nome": "cleaning-5.jpeg",
+      "src": "assets/img/slides/se/equipment-cleaning/cleaning-5.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-5-200.webp",
+      "peso": "59 KB"
      }
     ],
-    "extras": 11
+    "extras": 9
    },
    "qtdImagens": 14
   },
@@ -12524,9 +13040,21 @@
       "src": "assets/img/slides/se/component-replacement/replacement-3.jpeg",
       "miniatura": "history/thumbs/4ceac6f-replacement-3.webp",
       "peso": "62 KB"
+     },
+     {
+      "nome": "replacement-4.jpeg",
+      "src": "assets/img/slides/se/component-replacement/replacement-4.jpeg",
+      "miniatura": "history/thumbs/4ceac6f-replacement-4.webp",
+      "peso": "71 KB"
+     },
+     {
+      "nome": "replacement-5.jpeg",
+      "src": "assets/img/slides/se/component-replacement/replacement-5.jpeg",
+      "miniatura": "history/thumbs/4ceac6f-replacement-5.webp",
+      "peso": "64 KB"
      }
     ],
-    "extras": 5
+    "extras": 3
    },
    "qtdImagens": 8
   },
@@ -12603,9 +13131,21 @@
       "src": "assets/img/slides/lt/uav-inspection/uav-3.jpeg",
       "miniatura": "assets/img/slides/lt/uav-inspection/uav-3-200.webp",
       "peso": "191 KB"
+     },
+     {
+      "nome": "uav-4.jpeg",
+      "src": "assets/img/slides/lt/uav-inspection/uav-4.jpeg",
+      "miniatura": "assets/img/slides/lt/uav-inspection/uav-4-200.webp",
+      "peso": "419 KB"
+     },
+     {
+      "nome": "uav-5.jpeg",
+      "src": "assets/img/slides/lt/uav-inspection/uav-5.jpeg",
+      "miniatura": "assets/img/slides/lt/uav-inspection/uav-5-200.webp",
+      "peso": "564 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -12921,9 +13461,15 @@
       "src": "assets/img/slides/se/equipment-backup/backup-3.jpeg",
       "miniatura": "assets/img/slides/se/equipment-backup/backup-3-200.webp",
       "peso": "46 KB"
+     },
+     {
+      "nome": "backup-4.jpeg",
+      "src": "assets/img/slides/se/equipment-backup/backup-4.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-backup/backup-4-200.webp",
+      "peso": "69 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -12964,9 +13510,15 @@
       "src": "assets/img/slides/se/equipment-backup/backup-3.jpeg",
       "miniatura": "assets/img/slides/se/equipment-backup/backup-3-200.webp",
       "peso": "46 KB"
+     },
+     {
+      "nome": "backup-4.jpeg",
+      "src": "assets/img/slides/se/equipment-backup/backup-4.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-backup/backup-4-200.webp",
+      "peso": "69 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -13087,9 +13639,15 @@
       "src": "assets/img/slides/se/secc-verification/secc-3.jpeg",
       "miniatura": "history/thumbs/12c272a-secc-3.webp",
       "peso": "71 KB"
+     },
+     {
+      "nome": "secc-4.jpeg",
+      "src": "assets/img/slides/se/secc-verification/secc-4.jpeg",
+      "miniatura": "history/thumbs/12c272a-secc-4.webp",
+      "peso": "60 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -13130,9 +13688,15 @@
       "src": "assets/img/slides/se/rectifier-cleaning/rectifier-3.jpeg",
       "miniatura": "history/thumbs/12c272a-rectifier-3.webp",
       "peso": "43 KB"
+     },
+     {
+      "nome": "rectifier-4.jpeg",
+      "src": "assets/img/slides/se/rectifier-cleaning/rectifier-4.jpeg",
+      "miniatura": "history/thumbs/12c272a-rectifier-4.webp",
+      "peso": "41 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -13355,9 +13919,15 @@
       "src": "assets/img/slides/se/concrete-slab/slab-3.jpg",
       "miniatura": "history/thumbs/12c272a-slab-3.webp",
       "peso": "113 KB"
+     },
+     {
+      "nome": "slab-4.jpg",
+      "src": "assets/img/slides/se/concrete-slab/slab-4.jpg",
+      "miniatura": "history/thumbs/12c272a-slab-4.webp",
+      "peso": "105 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -13637,9 +14207,15 @@
       "src": "assets/img/slides/se/secc-verification/secc-3.jpeg",
       "miniatura": "history/thumbs/1f12366-secc-3.webp",
       "peso": "71 KB"
+     },
+     {
+      "nome": "secc-4.jpeg",
+      "src": "assets/img/slides/se/secc-verification/secc-4.jpeg",
+      "miniatura": "history/thumbs/1f12366-secc-4.webp",
+      "peso": "60 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -13679,9 +14255,15 @@
       "src": "assets/img/slides/se/screw-tightening/screw-3.jpeg",
       "miniatura": "assets/img/slides/se/screw-tightening/screw-3-200.webp",
       "peso": "58 KB"
+     },
+     {
+      "nome": "screw-4.jpeg",
+      "src": "assets/img/slides/se/screw-tightening/screw-4.jpeg",
+      "miniatura": "assets/img/slides/se/screw-tightening/screw-4-200.webp",
+      "peso": "63 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -13721,9 +14303,21 @@
       "src": "assets/img/slides/se/resistance-measurement/resistance-1.jpeg",
       "miniatura": "history/thumbs/1f12366-resistance-1.webp",
       "peso": "63 KB"
+     },
+     {
+      "nome": "resistance-2.jpeg",
+      "src": "assets/img/slides/se/resistance-measurement/resistance-2.jpeg",
+      "miniatura": "history/thumbs/1f12366-resistance-2.webp",
+      "peso": "84 KB"
+     },
+     {
+      "nome": "resistance-3.jpeg",
+      "src": "assets/img/slides/se/resistance-measurement/resistance-3.jpeg",
+      "miniatura": "history/thumbs/1f12366-resistance-3.webp",
+      "peso": "49 KB"
      }
     ],
-    "extras": 2
+    "extras": 0
    },
    "qtdImagens": 5
   },
@@ -13819,9 +14413,15 @@
       "src": "assets/img/slides/issues/insulator-coating/insulator-5.jpeg",
       "miniatura": "assets/img/slides/issues/insulator-coating/insulator-5-200.webp",
       "peso": "79 KB"
+     },
+     {
+      "nome": "insulator-6.jpeg",
+      "src": "assets/img/slides/issues/insulator-coating/insulator-6.jpeg",
+      "miniatura": "assets/img/slides/issues/insulator-coating/insulator-6-200.webp",
+      "peso": "60 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -13960,9 +14560,15 @@
       "src": "assets/img/slides/ld/fuse-switch/fuse-3.jpeg",
       "miniatura": "history/thumbs/1f12366-fuse-3.webp",
       "peso": "72 KB"
+     },
+     {
+      "nome": "fuse-4.jpeg",
+      "src": "assets/img/slides/ld/fuse-switch/fuse-4.jpeg",
+      "miniatura": "history/thumbs/1f12366-fuse-4.webp",
+      "peso": "59 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -14071,9 +14677,21 @@
       "src": "assets/img/slides/lt/cable-retensioning/cable-1.jpg",
       "miniatura": "history/thumbs/1f12366-cable-1.webp",
       "peso": "124 KB"
+     },
+     {
+      "nome": "cable-2.jpg",
+      "src": "assets/img/slides/lt/cable-retensioning/cable-2.jpg",
+      "miniatura": "history/thumbs/1f12366-cable-2.webp",
+      "peso": "143 KB"
+     },
+     {
+      "nome": "cable-5.jpeg",
+      "src": "assets/img/slides/lt/cable-retensioning/cable-5.jpeg",
+      "miniatura": "history/thumbs/1f12366-cable-5.webp",
+      "peso": "67 KB"
      }
     ],
-    "extras": 3
+    "extras": 1
    },
    "qtdImagens": 6
   },
@@ -14114,9 +14732,15 @@
       "src": "assets/img/slides/lt/cable-retensioning/cable-1.jpg",
       "miniatura": "history/thumbs/585a814-cable-1.webp",
       "peso": "124 KB"
+     },
+     {
+      "nome": "cable-2.jpg",
+      "src": "assets/img/slides/lt/cable-retensioning/cable-2.jpg",
+      "miniatura": "history/thumbs/585a814-cable-2.webp",
+      "peso": "143 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    }
   },
   {
@@ -14187,9 +14811,15 @@
       "src": "assets/img/slides/lt/lt-maintenance/BNM-N3/21-05-26/lane-3.jpeg",
       "miniatura": "assets/img/slides/lt/lt-maintenance/BNM-N3/21-05-26/lane-3-200.webp",
       "peso": "303 KB"
+     },
+     {
+      "nome": "lane-4.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/BNM-N3/21-05-26/lane-4.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/BNM-N3/21-05-26/lane-4-200.webp",
+      "peso": "253 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -14973,9 +15603,21 @@
       "src": "assets/img/slides/lt/lt-maintenance/E0-E1/27-04-25/2.jpeg",
       "miniatura": "assets/img/slides/lt/lt-maintenance/E0-E1/27-04-25/2-200.webp",
       "peso": "903 KB"
+     },
+     {
+      "nome": "1.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/E0-E1/13-05-26/1.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/E0-E1/13-05-26/1-200.webp",
+      "peso": "189 KB"
+     },
+     {
+      "nome": "2.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/E0-E1/13-05-26/2.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/E0-E1/13-05-26/2-200.webp",
+      "peso": "216 KB"
      }
     ],
-    "extras": 20
+    "extras": 18
    },
    "qtdImagens": 23,
    "removidas": 23
@@ -15049,9 +15691,21 @@
       "src": "assets/img/slides/lt/lt-maintenance/E2-E3/Fotos/21-04-26/1.jpeg",
       "miniatura": "history/thumbs/5f19cc2-1.webp",
       "peso": "556 KB"
+     },
+     {
+      "nome": "1.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/E2-E3/Fotos/22-04-26/1.jpeg",
+      "miniatura": "history/thumbs/5f19cc2-1.webp",
+      "peso": "534 KB"
+     },
+     {
+      "nome": "1.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/E2-E3/Fotos/28-04-26/1.jpeg",
+      "miniatura": "history/thumbs/5f19cc2-1.webp",
+      "peso": "221 KB"
      }
     ],
-    "extras": 7
+    "extras": 5
    },
    "qtdImagens": 8,
    "removidas": 8
@@ -15137,9 +15791,21 @@
       "src": "assets/img/slides/lt/lt-maintenance/E0-E1/27-04-25/2.jpeg",
       "miniatura": "assets/img/slides/lt/lt-maintenance/E0-E1/27-04-25/2-200.webp",
       "peso": "903 KB"
+     },
+     {
+      "nome": "1.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/E0-E1/13-05-26/1.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/E0-E1/13-05-26/1-200.webp",
+      "peso": "189 KB"
+     },
+     {
+      "nome": "2.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/E0-E1/13-05-26/2.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/E0-E1/13-05-26/2-200.webp",
+      "peso": "216 KB"
      }
     ],
-    "extras": 4
+    "extras": 2
    },
    "qtdImagens": 7,
    "removidas": 7
@@ -15196,9 +15862,15 @@
       "src": "assets/img/slides/se/crushed-stone/stone-3.jpeg",
       "miniatura": "assets/img/slides/se/crushed-stone/stone-3-200.webp",
       "peso": "150 KB"
+     },
+     {
+      "nome": "stone-4.jpeg",
+      "src": "assets/img/slides/se/crushed-stone/stone-4.jpeg",
+      "miniatura": "assets/img/slides/se/crushed-stone/stone-4-200.webp",
+      "peso": "148 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -15316,9 +15988,15 @@
       "src": "assets/img/slides/se/ac-repair/ac-3.jpeg",
       "miniatura": "assets/img/slides/se/ac-repair/ac-3-200.webp",
       "peso": "72 KB"
+     },
+     {
+      "nome": "ac-4.jpeg",
+      "src": "assets/img/slides/se/ac-repair/ac-4.jpeg",
+      "miniatura": "assets/img/slides/se/ac-repair/ac-4-200.webp",
+      "peso": "63 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },
@@ -15358,9 +16036,21 @@
       "src": "assets/img/slides/events/lt-maintenance/E0-E1/27-04-25/2.jpeg",
       "miniatura": "history/thumbs/d3bcbac-2.webp",
       "peso": "903 KB"
+     },
+     {
+      "nome": "1.jpeg",
+      "src": "assets/img/slides/events/lt-maintenance/E0-E1/13-05-26/1.jpeg",
+      "miniatura": "history/thumbs/d3bcbac-1.webp",
+      "peso": "189 KB"
+     },
+     {
+      "nome": "2.jpeg",
+      "src": "assets/img/slides/events/lt-maintenance/E0-E1/13-05-26/2.jpeg",
+      "miniatura": "history/thumbs/d3bcbac-2.webp",
+      "peso": "216 KB"
      }
     ],
-    "extras": 20
+    "extras": 18
    },
    "qtdImagens": 23
   },
@@ -15430,9 +16120,21 @@
       "src": "assets/img/slides/events/lt-maintenance/E2-E3/Fotos/21-04-26/1.jpeg",
       "miniatura": "history/thumbs/d3bcbac-1.webp",
       "peso": "556 KB"
+     },
+     {
+      "nome": "1.jpeg",
+      "src": "assets/img/slides/events/lt-maintenance/E2-E3/Fotos/22-04-26/1.jpeg",
+      "miniatura": "history/thumbs/d3bcbac-1.webp",
+      "peso": "534 KB"
+     },
+     {
+      "nome": "1.jpeg",
+      "src": "assets/img/slides/events/lt-maintenance/E2-E3/Fotos/28-04-26/1.jpeg",
+      "miniatura": "history/thumbs/d3bcbac-1.webp",
+      "peso": "221 KB"
      }
     ],
-    "extras": 7
+    "extras": 5
    },
    "qtdImagens": 8
   },
@@ -15514,9 +16216,21 @@
       "src": "assets/img/slides/events/lt-maintenance/E0-E1/27-04-25/2.jpeg",
       "miniatura": "history/thumbs/d3bcbac-2.webp",
       "peso": "903 KB"
+     },
+     {
+      "nome": "1.jpeg",
+      "src": "assets/img/slides/events/lt-maintenance/E0-E1/13-05-26/1.jpeg",
+      "miniatura": "history/thumbs/d3bcbac-1.webp",
+      "peso": "189 KB"
+     },
+     {
+      "nome": "2.jpeg",
+      "src": "assets/img/slides/events/lt-maintenance/E0-E1/13-05-26/2.jpeg",
+      "miniatura": "history/thumbs/d3bcbac-2.webp",
+      "peso": "216 KB"
      }
     ],
-    "extras": 4
+    "extras": 2
    },
    "qtdImagens": 7
   },
@@ -15776,9 +16490,15 @@
       "src": "assets/img/slides/lt/waterproofing/vedapren-3.jpeg",
       "miniatura": "assets/img/slides/lt/waterproofing/vedapren-3-200.webp",
       "peso": "114 KB"
+     },
+     {
+      "nome": "vedapren-4.jpeg",
+      "src": "assets/img/slides/lt/waterproofing/vedapren-4.jpeg",
+      "miniatura": "assets/img/slides/lt/waterproofing/vedapren-4-200.webp",
+      "peso": "128 KB"
      }
     ],
-    "extras": 1
+    "extras": 0
    },
    "qtdImagens": 4
   },

@@ -422,6 +422,7 @@
 /* ── miniaturas: no máximo 3; a última carrega o indicador "+N" ── */
 .hist-thumbs {
   display: flex;
+  flex-wrap: wrap;   /* 5 miniaturas cabem no cartão; a quebra é a rede para o viewport estreito */
   gap: var(--gap-6);
   padding-top: var(--gap-8);
 }

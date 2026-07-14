@@ -124,8 +124,39 @@
   --padding-left-icon: 0.5rem 1rem 0.5rem 42px;
   --padding-right-icon: 0.5rem 42px 0.5rem 1rem;
 
-  /* gaps */
-  /* will be added here */
+  /* gaps — escala canônica de espaçamento entre elementos (flex/grid gap).
+     Fonte de verdade ÚNICA: alterar aqui propaga a todos os stylesheets.
+     px porque casa com os breakpoints e com os gaps de layout que já eram px;
+     como o root nunca muda de 16px (e --font-multiplier não afeta rem), cada
+     token equivale exatamente ao seu rem (ex.: --gap-8 = 0.5rem), então valores
+     antes escritos em rem foram unificados no MESMO token — sem mudança visual.
+     Degraus fora desta escala (0.35rem, 0.6rem, 1.25rem, 2.5rem…) são micro-ajustes
+     de componente e permanecem como literais (exceções documentadas). */
+  --gap-2: 2px;
+  --gap-3: 3px;
+  --gap-4: 4px;
+  --gap-6: 6px;
+  --gap-8: 8px;
+  --gap-10: 10px;
+  --gap-12: 12px;
+  --gap-16: 16px;
+  --gap-24: 24px;
+  --gap-32: 32px;
+  --gap-48: 48px;
+  --gap-64: 64px;
+
+  /* gap "inline" de componente — padronização (pedido do usuário) dos micro-gaps
+     repetidos e FORA da escala px (0.3/0.35/0.4/0.55/0.6/0.7rem) num único valor.
+     Usado no gap ícone↔rótulo das legendas e nos controles densos (chips, filtros,
+     campos, botões de ordenação). Fora da grade de 4px de propósito (=9.6px). */
+  --gap-inline: 0.6rem;
+
+  /* espaçamento canônico de GRUPOS DE TABELAS: distância entre tabelas lado a lado
+     (horizontal) e o ritmo vertical ao redor do grupo (subtítulo↔tabelas↔legenda).
+     Fonte de verdade ÚNICA p/ manter a consistência entre os slides de tabelas
+     (grounding-resistance, stayed-towers-quantity…). 20px, fora da escala px de
+     propósito (é o padrão herdado do slide-grounding-resistance). */
+  --gap-table-group: 1.25rem;
 
   /* ── breakpoints canônicos (REFERÊNCIA) ────────────────────────────────────
      Custom properties NÃO funcionam dentro de @media, então estes valores são a

@@ -2,29 +2,30 @@
 /* ── Lista dinâmica de RDCs (slide-rdc-control) ──────────────────────────────
    Abaixo do painel de controle, monta uma lista dos Relatórios Diários de Campo
    (RDCs) a partir da seção 'documentos recebidos' do index.html — a MESMA fonte
-   de verdade usada pelo banner (scripts/slide-banner.js) e pela navegação
+   de verdade usada pelos banners (scripts/slide-banner.js) e pela navegação
    (scripts/slide-nav.js). Segue o mesmo idioma: fetch('../slides/index.html')
    sobre http(s), DOMParser, e catch silencioso em caso de falha (ex.: file://,
    onde o fetch é bloqueado → a lista fica vazia, sem erro).
 
-   Cada cartão REUSA a FORMATAÇÃO do banner de RDC (.post-link): moldura chanfrada
-   tracejada + preenchimento translúcido (SVG desenhado por window.__postLinkDraw,
-   exposto por slide-banner.js) e faixa de título azul-escura (.post-link-title).
-   Diferença: aqui o CARTÃO INTEIRO é o link e leva ao SLIDE associado (não ao
-   documento), e o corpo mostra a descrição por inteiro (sem o clamp/exibir-mais).
+   Cada cartão usa o MESMO componente dos banners dos slides (.note-banner--rdc):
+   mosaico + código em duas linhas + descrição. Assim a estética é a mesma em toda
+   a apresentação — não há mais o formato antigo (.post-link, moldura chanfrada).
+   A DIFERENÇA de sentido: aqui o cartão leva ao SLIDE associado (e não ao controle
+   de RDCs), por isso ganha a chamada "ir para o slide" (.note-banner-goto).
 
    Para cada <li id^="doc-"> em index.html (os RDCs, com código+descrição+slide):
-     • .doc-name-text → código do RDC (faixa de título .post-link-title)
-     • .doc-desc-row  → descrição breve ("Assunto: …")  (corpo <p>)
+     • .doc-name-text → código do RDC (quebrado em duas linhas: …-RDC / restante)
+     • .doc-desc-row  → descrição breve (corpo) — fonte de verdade, ≤70 caracteres
      • .doc-goto (<a href="../slides/slide-XXX.html">) → slide associado */
 (function rdcControlList() {
   var container = document.querySelector('.rdc-list');
   if (!container) return;
 
-  var cards = [];
-  function drawAll() {
-    if (!window.__postLinkDraw) return;
-    cards.forEach(function (c) { window.__postLinkDraw(c); });
+  function span(cls, text) {
+    var s = document.createElement('span');
+    if (cls) s.className = cls;
+    if (text) s.textContent = text;
+    return s;
   }
 
   fetch('../slides/index.html')
@@ -50,54 +51,45 @@
         var cell = document.createElement('li');
         cell.className = 'rdc-item';
 
-        // o cartão INTEIRO é o link (leva ao slide); veste a formatação do banner
+        // o cartão INTEIRO é o link (leva ao slide) — clique/redirect NATIVOS
         var card = document.createElement('a');
-        card.className = 'rdc-card post-link';
+        card.className = 'note-banner note-banner--mosaic note-banner--rdc rdc-card';
         card.href = href;
         card.setAttribute('aria-label', 'Abrir slide do RDC ' + code);
 
-        var title = document.createElement('span');
-        title.className = 'post-link-title';
-        title.textContent = code;
-        card.appendChild(title);
+        // espaço reservado: ícone de documentos + código em DUAS linhas (…-RDC / resto)
+        var aside = document.createElement('div');
+        aside.className = 'note-banner-aside';
+        var tag = span('note-banner-tag');
+        var ico = span('note-banner-icon'); ico.setAttribute('aria-hidden', 'true');
+        var sep = span('note-banner-div'); sep.setAttribute('aria-hidden', 'true');
+        var codeWrap = span('note-banner-code');
+        var m = code.match(/^(.*?RDC)[-_]?(.*)$/i);
+        [m ? m[1] : code, m ? m[2] : ''].forEach(function (line) {
+          if (line) codeWrap.appendChild(span('', line));
+        });
+        tag.appendChild(ico); tag.appendChild(sep); tag.appendChild(codeWrap);
+        aside.appendChild(tag);
+        card.appendChild(aside);
 
-        if (desc) {
-          var p = document.createElement('p');
-          p.textContent = desc;
-          card.appendChild(p);
-        }
-
-        // indicação explícita de que o clique redireciona ao slide, com a MESMA
-        // formatação do botão "exibir mais/menos" do banner (.post-link-toggle):
-        // tab azul-escura chanfrada no canto inferior-direito, p/ consistência.
-        var go = document.createElement('span');
-        go.className = 'rdc-card-go post-link-toggle';
-        go.textContent = 'ir para o slide';
-        card.appendChild(go);
+        // corpo: descrição (fonte de verdade do index.html) + chamada de navegação
+        var body = document.createElement('div');
+        body.className = 'note-banner-body';
+        var p = document.createElement('p');
+        p.className = 'note-banner-text';
+        p.textContent = desc;
+        body.appendChild(p);
+        body.appendChild(span('note-banner-goto', 'ir para o slide'));
+        card.appendChild(body);
 
         cell.appendChild(card);
-        cards.push(card);
         frag.appendChild(cell);
       });
 
       container.appendChild(frag);
-
-      // desenha a moldura SVG chanfrada após o layout (dimensões prontas) e ao
-      // (re)carregar as fontes; redesenha quando cada cartão muda de tamanho.
-      requestAnimationFrame(drawAll);
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawAll);
-      if ('ResizeObserver' in window) {
-        cards.forEach(function (c) {
-          new ResizeObserver(function () {
-            if (window.__postLinkDraw) window.__postLinkDraw(c);
-          }).observe(c);
-        });
-      }
     })
     .catch(function () {
       // fetch indisponível (offline / protocolo file://) — lista fica vazia,
       // sem qualquer erro visível ao usuário.
     });
-
-  window.addEventListener('resize', drawAll);
 })();

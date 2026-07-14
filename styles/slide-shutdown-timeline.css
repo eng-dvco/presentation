@@ -19,17 +19,17 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.55rem 1rem;
+    gap: var(--gap-inline) var(--gap-16);
     padding: 0.6rem 1rem;
     background: var(--lt-surface);
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: var(--lt-shadow);
   }
-  & .sdt-cgroup { display: flex; align-items: center; gap: 0.5rem; }
+  & .sdt-cgroup { display: flex; align-items: center; gap: var(--gap-8); }
   & .sdt-clabel { font-size: 0.55rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0, 0, 0, 0.45); }
   /* filtros só-tabela (ordenar + detalhamento) num container próprio que COLAPSA
      no Gantt (display:none) — sem deixar espaço vazio na barra. */
-  & .sdt-filters { display: flex; align-items: center; flex-wrap: wrap; gap: 0.55rem 1rem; }
+  & .sdt-filters { display: flex; align-items: center; flex-wrap: wrap; gap: var(--gap-inline) var(--gap-16); }
   /* "Exibição" ancorada à direita: permanece no mesmo lugar quando os filtros
      colapsam (não se move ao trocar de exibição). */
   & .sdt-cgroup--view { margin-left: auto; }
@@ -55,7 +55,7 @@
 
   /* cabeçalho superior comum do Gantt ("CONDIÇÃO POR ESTRUTURA") */
   & .sdt-gantt-header {
-    display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1rem;
+    display: flex; align-items: center; gap: var(--gap-inline); padding: 0.5rem 1rem;
     font-size: 0.62rem; font-weight: var(--font-weight-boldest);
     letter-spacing: 0.16em; text-transform: uppercase; color: rgba(0, 0, 0, 0.72);
     background: var(--lt-surface-muted); border-bottom: 1px dashed var(--lt-border);
@@ -127,7 +127,7 @@
   & .sdt-gantt-head { border-bottom: 1px solid var(--lt-border); }
   & .sdt-gantt-dh { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.22rem 0; font-size: 0.56rem; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.6); border-left: 1px dashed var(--lt-col-divider); }
   & .sdt-gantt-wd { font-size: 0.5rem; font-weight: var(--font-weight-normal); color: rgba(0, 0, 0, 0.4); text-transform: uppercase; letter-spacing: 0.03em; }
-  & .sdt-gantt-se { display: flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.5rem; font-size: 0.62rem; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); white-space: nowrap; letter-spacing: 0.03em; }
+  & .sdt-gantt-se { display: flex; align-items: center; gap: var(--gap-inline); padding: 0.3rem 0.5rem; font-size: 0.62rem; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); white-space: nowrap; letter-spacing: 0.03em; }
   & .sdt-gantt-c { min-height: 1.6rem; display: flex; align-items: center; justify-content: center; border-left: 1px dashed var(--lt-col-divider); }
   /* todo bloco preenchido usa o MESMO padding (todas as extremidades), cantos
      arredondados e margem uniforme → cada bloco vira uma "ilha" idêntica */

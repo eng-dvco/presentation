@@ -36,7 +36,7 @@
     { eixo: 'norte', se: 'SE-N3', dias: [] }
   ];
 
-  var state = { view: 'tabela', detail: 'completo', sortKey: 'se', sortDir: 1, query: '' };
+  var state = { view: 'gantt', detail: 'completo', sortKey: 'se', sortDir: 1, query: '' };
 
   function parse(d) { var m = d && d.match(/(\d{2})-(\d{2})-(\d{2})/); return m ? new Date(2000 + +m[3], +m[2] - 1, +m[1]) : null; }
   function weekday(d) { var dt = parse(d); return dt ? WD[dt.getDay()] : ''; }

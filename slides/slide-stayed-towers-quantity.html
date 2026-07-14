@@ -3,22 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <title>Quantitativos das torres estaiadas</title>
-    <meta name="description" content="Quantitativos das torres estaiadas: estais contratados e execução das torres no PISF." />
+    <meta name="description" content="Quantitativos das torres estaiadas: estais adquiridos e execução das torres no PISF." />
     <meta name="keywords" content="apresentação, transmissão, manutenção, pisf, torres estaiadas, estais, quantitativos" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="../assets/icons/favicon.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="../assets/icons/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
 
     <link rel="stylesheet" href="../styles/variables.css" />
+    <link rel="stylesheet" href="../styles/components.css" />
     <link rel="stylesheet" href="../styles/slide-style.css" />
     <link rel="stylesheet" href="../styles/slide-tl.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&family=Fondamento:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="../assets/fonts/roboto-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../styles/fonts.css" />
 
     <link rel="stylesheet" href="../styles/slide-stayed-towers-quantity.css" />
   </head>
@@ -51,11 +48,11 @@
       <div class="content-container">
         <div class="content-wrapper">
           <div class="title-header-h2">
-            <h2 class="title-h2">Contratação e execução</h2>
+            <h2 class="title-h2">Aquisição e execução</h2>
           </div>
           <div class="qte-pair">
             <div class="qte-card">
-              <div class="qte-cap">Contratado</div>
+              <div class="qte-cap">Adquirido</div>
               <table class="tl-data-table">
                 <thead>
                   <tr>
@@ -73,12 +70,12 @@
                   <tr class="is-row-even">
                     <td><span class="qte-dot qte-dot--done" title="Utilizada" aria-hidden="true"></span></td>
                     <td class="qte-status">utilizada</td>
-                    <td class="qte-qtd">40</td>
+                    <td class="qte-qtd">48</td>
                   </tr>
                   <tr class="is-row-odd">
                     <td><span class="qte-dot qte-dot--pending" title="Disponível" aria-hidden="true"></span></td>
                     <td class="qte-status">disponível</td>
-                    <td class="qte-qtd">20</td>
+                    <td class="qte-qtd">12</td>
                   </tr>
                   <tr class="is-row-even">
                     <td><span class="qte-dot qte-dot--extra" title="Aditivo" aria-hidden="true"></span></td>
@@ -102,17 +99,17 @@
                   <tr class="is-row-odd">
                     <td><span class="qte-dot qte-dot--total" title="Total" aria-hidden="true"></span></td>
                     <td class="qte-status">total</td>
-                    <td class="qte-qtd">60</td>
+                    <td class="qte-qtd">17</td>
                   </tr>
                   <tr class="is-row-even">
                     <td><span class="qte-dot qte-dot--done" title="Executada" aria-hidden="true"></span></td>
                     <td class="qte-status">executada</td>
-                    <td class="qte-qtd">40</td>
+                    <td class="qte-qtd">12</td>
                   </tr>
                   <tr class="is-row-odd">
                     <td><span class="qte-dot qte-dot--pending" title="Pendente" aria-hidden="true"></span></td>
                     <td class="qte-status">pendente</td>
-                    <td class="qte-qtd">20</td>
+                    <td class="qte-qtd">3</td>
                   </tr>
                   <tr class="is-row-even">
                     <td><span class="qte-dot qte-dot--extra" title="Pendente (aditivo)" aria-hidden="true"></span></td>
@@ -123,14 +120,14 @@
               </table>
             </div>
           </div>
-          <div class="tl-legend qte-legend" aria-label="Legenda dos quantitativos">
-            <span class="tl-legend-title">Legenda</span>
-            <span class="tl-legend-sep" aria-hidden="true"></span>
-            <div class="tl-legend-items">
-              <span class="tl-legend-item"><span class="qte-dot qte-dot--total" aria-hidden="true"></span>Total</span>
-              <span class="tl-legend-item"><span class="qte-dot qte-dot--done" aria-hidden="true"></span>Utilizada / executada</span>
-              <span class="tl-legend-item"><span class="qte-dot qte-dot--pending" aria-hidden="true"></span>Disponível / pendente</span>
-              <span class="tl-legend-item"><span class="qte-dot qte-dot--extra" aria-hidden="true"></span>Aditivo</span>
+          <div class="legend qte-legend" aria-label="Legenda dos quantitativos">
+            <span class="legend-title">Legenda</span>
+            <span class="legend-sep" aria-hidden="true"></span>
+            <div class="legend-items">
+              <span class="legend-item"><span class="qte-dot qte-dot--total" aria-hidden="true"></span>Total</span>
+              <span class="legend-item"><span class="qte-dot qte-dot--done" aria-hidden="true"></span>Utilizada / executada</span>
+              <span class="legend-item"><span class="qte-dot qte-dot--pending" aria-hidden="true"></span>Disponível / pendente</span>
+              <span class="legend-item"><span class="qte-dot qte-dot--extra" aria-hidden="true"></span>Aditivo</span>
             </div>
           </div>
         </div>

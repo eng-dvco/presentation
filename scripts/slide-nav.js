@@ -105,11 +105,16 @@ function parseSections(doc) {
         ?? sec.querySelector('.title-h2')?.textContent ?? '',
       sec.dataset.section
     );
+    // ÍCONE da seção: reaproveita a MESMA classe .icon-* já usada no cabeçalho da
+    // seção no index.html (fonte de verdade única) — assim a nav lateral herda o
+    // ícone de qualquer seção NOVA sem precisar de um mapa duplicado aqui.
+    const iconEl = sec.querySelector('.title-header-h2 .section-icon');
+    const icon = iconEl ? (Array.from(iconEl.classList).find(c => c.startsWith('icon-')) || '') : '';
     const items = Array.from(sec.querySelectorAll('a.item[href]'))
       .filter(a => !a.classList.contains('pending'))
       .map(a => ({ slug: a.getAttribute('href').split('/').pop(), label: a.textContent.trim() }))
       .filter(it => /^slide-.+\.html$/.test(it.slug));
-    if (items.length) sections.push({ code: sec.dataset.section, title, items });
+    if (items.length) sections.push({ code: sec.dataset.section, title, icon, items });
   }
   return sections;
 }
@@ -346,7 +351,17 @@ function buildAllSectionsNav(sections, currentIndex, hasItemNav) {
     const link = document.createElement('a');
     link.href = sec.items[0].slug;
     link.className = 'secnav-item-link secnav-all-link' + (isCurrent ? ' active' : '');
-    link.textContent = sec.title;
+    // ícone da seção À ESQUERDA do título (máscara reusada de .section-icon/.icon-*)
+    if (sec.icon) {
+      const ico = document.createElement('span');
+      ico.className = 'section-icon secnav-all-icon ' + sec.icon;
+      ico.setAttribute('aria-hidden', 'true');
+      link.appendChild(ico);
+    }
+    const nm = document.createElement('span');
+    nm.className = 'secnav-all-name';
+    nm.textContent = sec.title;
+    link.appendChild(nm);
     if (isCurrent) {
       link.setAttribute('aria-current', 'true');
     } else if (!reducedMotion) {

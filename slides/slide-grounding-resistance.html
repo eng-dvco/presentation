@@ -10,16 +10,13 @@
     <link rel="icon" href="../assets/icons/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
 
     <link rel="stylesheet" href="../styles/variables.css" />
+    <link rel="stylesheet" href="../styles/components.css" />
     <link rel="stylesheet" href="../styles/slide-style.css" />
     <link rel="stylesheet" href="../styles/mosaic-style.css" />
     <link rel="stylesheet" href="../styles/slide-grounding-resistance.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&family=Fondamento:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="../assets/fonts/roboto-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../styles/fonts.css" />
   </head>
   <body data-prev="../slides/slide-uav-inspection.html" data-next="../slides/slide-flooded-pole.html">
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -105,11 +102,11 @@
               </table>
             </div>
           </div>
-          <div class="grt-legend" aria-label="Legenda">
-            <span class="grt-legend-title">Legenda</span>
-            <span class="grt-legend-sep" aria-hidden="true"></span>
-            <div class="grt-legend-items">
-              <span class="grt-legend-item">Ω — ohm (unidade de resistência elétrica)</span>
+          <div class="legend" aria-label="Legenda">
+            <span class="legend-title">Legenda</span>
+            <span class="legend-sep" aria-hidden="true"></span>
+            <div class="legend-items">
+              <span class="legend-item">Ω — ohm (unidade de resistência elétrica)</span>
             </div>
           </div>
           <div class="mosaic-container">

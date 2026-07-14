@@ -7,15 +7,16 @@
    definida pela POSIÇÃO da linha. */
 
 /* esta página usa slide-tl.css (pelas tabelas .tl-data-table), que reduz o
-   row-gap do .content-wrapper para 0.75rem; restauramos o gap padrão de 24px
-   (slide-style.css) p/ o espaçamento subtítulo→tabelas→legenda ficar igual ao
-   dos demais slides (e ao slide-grounding-resistance). */
-.content-wrapper { row-gap: 24px; }
+   row-gap do .content-wrapper para 0.75rem; sobrescrevemos DIRETAMENTE (o
+   slide-tl.css fixa row-gap, então --content-gap não bastaria aqui) com o
+   espaçamento canônico de grupos de tabelas, igual ao slide-grounding-resistance,
+   tanto vertical (subtítulo↔tabelas↔legenda) quanto horizontal (.qte-pair). */
+.content-wrapper { row-gap: var(--gap-table-group); }
 
 .qte-pair {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: var(--gap-table-group);
   align-items: stretch;
   width: 100%;
 }

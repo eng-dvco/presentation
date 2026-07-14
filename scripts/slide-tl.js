@@ -3,6 +3,18 @@
 // busca sem acentuação: normaliza removendo diacríticos (ã/á/à/â → a, ç → c, …) e caixa
 function foldAccents(s) { return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
 
+// Timelines serpenteantes (.tl-wrap) quebram as estruturas em VÁRIAS fileiras e têm
+// sua própria espinha em SVG (slide-tl-stay-recovery.js). As rotinas horizontais deste
+// arquivo — espinha reta em y fixo, min-width do scroller e a faísca do "em execução" —
+// pressupõem UMA única fileira: aplicadas ali, desenham retas atravessando as fileiras.
+// Ignoramos esses containers desde o início.
+//
+// Hoje o único slide que carrega este arquivo É serpenteante, então essas rotinas
+// horizontais não rodam em lugar nenhum — ficam de pé caso volte a existir um
+// cronograma de fileira única. O restante (filtros, ordenação, visão tabela, calendário,
+// zebra) é compartilhado e continua em uso.
+function isWrapTimeline(el) { return !!el.closest('.tl-wrap'); }
+
 // ── scroll drag horizontal: clicar-segurar-arrastar + swipe de touchpad ──
 // Lógica reutilizável aplicada às faixas de estruturas (.tl-entries-scroll) e
 // aos containers de chips de status (.tlf-chips--axis). Para os chips, que são
@@ -328,6 +340,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 
   function update() {
     document.querySelectorAll('.tl-entries').forEach(entries => {
+      if (isWrapTimeline(entries)) return;                  // serpenteante: espinha própria
       const visible = [...entries.children]
         .filter(el => el.classList.contains('tl-entry') && el.style.display !== 'none');
       if (!visible.length) return;
@@ -397,6 +410,7 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
   function push(svg, el) { if (el) svg.appendChild(el); }
 
   function drawSpine(entriesEl) {
+    if (isWrapTimeline(entriesEl)) return;                  // serpenteante: espinha própria
     // Não redesenha enquanto o .tl-entries está OCULTO (ex.: visão tabela, em que o
     // .tl-group fica display:none): os offsetLeft seriam 0 e a spine sairia vazia
     // (segmentos nulos), clobberando a existente. Preserva-a; será redesenhada ao
@@ -532,6 +546,9 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 
   document.fonts.ready.then(() => {
     document.querySelectorAll('.tl-entries').forEach(entriesEl => {
+      // no serpenteante a faísca é oculta pelo CSS — construí-la só deixaria um
+      // requestAnimationFrame eterno animando um SVG invisível
+      if (isWrapTimeline(entriesEl)) return;
       entriesEl
         .querySelectorAll('.tl-entry--running.tl-entry--expanded')
         .forEach(entry => buildRay(entry, entriesEl));

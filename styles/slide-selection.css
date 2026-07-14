@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 64px;
+  gap: var(--gap-64);
 
   & .title-header-h2,
   & .title-header-h3 {
@@ -20,7 +20,7 @@
   width: 100%;
   max-width: 1080px;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px 12px;
+  gap: var(--gap-24) var(--gap-12);
 }
 
 .title-header-h2,
@@ -37,7 +37,7 @@
 .title-header-h2:has(.section-icon) {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--gap-12);
   padding-left: 16px;
   /* mirrors the left-occupied space (padding + icon + gap) so the
      centered title stays optically centered within the whole header */
@@ -99,7 +99,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding-inline: var(--padding-around-general);
-  gap: 12px;
+  gap: var(--gap-12);
   list-style: none;
 
   & li {
@@ -311,7 +311,7 @@
 .column {
   display: grid;
   grid-template-columns: 100%;
-  gap: 12px;
+  gap: var(--gap-12);
   padding: var(--padding-around-general);
 }
 
@@ -422,7 +422,7 @@
 .group-wrapper {
   display: grid;
   grid-template: repeat(2, minmax(120px, 240px)) / 1fr 1.75fr;
-  gap: 12px;
+  gap: var(--gap-12);
   padding: var(--padding-around-general);
   overflow: hidden;
 
@@ -562,15 +562,6 @@
   grid-area: 2 / 2 / 3 / 3;
 }
 
-/* postscriptum */
-.postscriptum-container {
-  grid-area: auto / span 4 / auto / auto;
-}
-
-.postscriptum-wrapper {
-  margin: 0;
-}
-
 /* status (item cards) — tinted fills keep each status's identity; text stays
    dark so it reads on the light tint instead of pale-on-pale */
 .partial {
@@ -622,7 +613,7 @@
 .doc-controls {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8);
   padding: 12px var(--padding-around-general);
   background-color: var(--lt-surface-muted);
 }
@@ -669,7 +660,7 @@
 .doc-type-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: var(--gap-6);
 }
 
 .doc-no-results {
@@ -778,7 +769,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--gap-8);
   margin: 12px;
   list-style: none; /* remove o triângulo padrão do <summary> */
   cursor: pointer;
@@ -820,8 +811,8 @@
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: stretch;
-  column-gap: 8px;
-  row-gap: 2px;
+  column-gap: var(--gap-8);
+  row-gap: var(--gap-2);
   margin: 2px 6px;
   padding: 5px 8px;
   border-radius: var(--border-smaller);
@@ -848,7 +839,7 @@
 .doc-main-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--gap-8);
   min-width: 0;
 }
 
@@ -872,7 +863,7 @@
 .doc-name-track {
   display: inline-flex;
   flex-wrap: nowrap;
-  gap: 48px;
+  gap: var(--gap-48);
   will-change: transform;
 }
 
@@ -885,7 +876,7 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--gap-10);
 }
 
 /* cada par "estreito + largo" (versão+tamanho, páginas+data) é uma unidade que
@@ -895,14 +886,14 @@
 .doc-meta-pair {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--gap-10);
   flex-shrink: 0;
 }
 
 .doc-meta {
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: var(--gap-3);
   /* espaço reservado padrão (= o maior dos metadados longos: tamanho e data),
      mantendo os ícones alinhados entre todos os itens e grupos de documentos */
   min-width: 72px;
@@ -934,7 +925,7 @@
 .doc-desc-track {
   display: inline-flex;
   flex-wrap: nowrap;
-  gap: 48px;
+  gap: var(--gap-48);
   color: inherit;
 }
 
@@ -1085,7 +1076,7 @@
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto auto;
     align-items: center;
-    row-gap: 4px;
+    row-gap: var(--gap-4);
   }
 
   /* badge à esquerda, alinhado ao título (linha 1) e não mais esticado; o botão
@@ -1130,7 +1121,7 @@
 .index-controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--gap-10);
   width: 100%;
   max-width: 1080px;
 }
@@ -1197,7 +1188,7 @@
 .section-filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: var(--gap-6);
 }
 
 .filter-btn {

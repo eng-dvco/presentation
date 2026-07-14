@@ -1,46 +1,36 @@
 /* ── Lista de RDCs abaixo do painel (slide-rdc-control) ──────────────────────
    Lista dinâmica dos Relatórios Diários de Campo (RDCs) gerada por
    scripts/slide-rdc-control.js a partir de 'documentos recebidos' do index.html.
-   Cada cartão REUSA a FORMATAÇÃO do banner de RDC (.post-link, de slide-style.css):
-   a moldura chanfrada tracejada + preenchimento translúcido vêm do SVG desenhado
-   por window.__postLinkDraw (exposto por slide-banner.js), a faixa de título vem de
-   .post-link-title e a chamada "ir para o slide" reusa a tab .post-link-toggle
-   (mesma do botão "exibir mais/menos"). O CARTÃO INTEIRO é o link para o slide.
-   O SUBTÍTULO usa o padrão .title-header-h2/.title-h2 (idêntico aos demais slides).
-   Empilha em coluna única no mobile. */
 
-/* grade responsiva: até 3 colunas no desktop, 1 no mobile (auto-fill). É filha
-   direta de .content-wrapper → herda o row-gap padrão (24px) para o subtítulo. */
+   Cada cartão é o MESMO componente dos banners dos slides (.note-banner--rdc, em
+   slide-style.css): mosaico + código em duas linhas + descrição + "pregos". Com isso
+   a estética é ÚNICA em toda a apresentação — o formato antigo (.post-link, com a
+   moldura chanfrada tracejada desenhada em SVG) deixou de existir.
+
+   A lista EMPILHA em coluna única (não em grade) justamente para os cartões terem a
+   MESMA proporção dos banners dos slides: o espaço reservado do mosaico (200px)
+   ficaria desproporcional dentro de uma coluna estreita de grade.
+   O SUBTÍTULO usa o padrão .title-header-h2/.title-h2 (idêntico aos demais slides). */
+
 .rdc-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--padding-around-general);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
   width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* célula da grade (o <li>): apenas ancora o cartão, que a preenche por inteiro */
+/* o <li>: apenas ancora o cartão, que o preenche por inteiro */
 .rdc-item {
   display: flex;
 }
 
-/* cartão = banner .post-link, mas como LINK do cartão INTEIRO para o slide.
-   (.post-link já dá: position relative, flex column, fundo transparente, sem
-   borda — a moldura chanfrada tracejada e o preenchimento são o SVG desenhado
-   por __postLinkDraw. Aqui só acrescentamos o comportamento de link + elevação.) */
+/* o cartão INTEIRO é o link para o slide — clique/redirect NATIVOS do <a>
+   (o realce de hover vem do próprio .note-banner--rdc) */
 .rdc-card {
   flex: 1;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* ao pairar o cursor, o cartão NÃO se move (sem translate) — apenas realça as
-   cores (preenchimento/traço/tab), igual ao banner de RDC. */
-.rdc-card:hover,
-.rdc-card:focus-visible {
-  outline: none;
 }
 
 .rdc-card:focus-visible {
@@ -48,38 +38,25 @@
   outline-offset: 2px;
 }
 
-/* HOVER do cartão: realça o preenchimento/traço E a tab "ir para o slide", como o
-   banner faz ao pairar (o cartão inteiro é o link → a tab acompanha o hover). */
-.rdc-card:hover > svg.post-link-fill path,
-.rdc-card:focus-visible > svg.post-link-fill path { fill: var(--color-blue-alpha-50); }
-.rdc-card:hover > svg.post-link-edge path,
-.rdc-card:focus-visible > svg.post-link-edge path { stroke: var(--color-dark-blue); }
-.rdc-card:hover .rdc-card-go,
-.rdc-card:focus-visible .rdc-card-go { background-color: var(--color-blue); }
-
-/* título (código do RDC): fonte AUMENTADA um nível (xxs em vez do xxxs do banner),
-   acompanhando o aumento do corpo. */
-.rdc-card > .post-link-title {
+/* Chamada de navegação. Aqui o sentido é o INVERSO do banner de um slide: o cartão
+   leva ao SLIDE associado (o banner leva a este controle) — daí a indicação explícita.
+   Fica discreta e só ganha ênfase no hover, junto do realce do próprio cartão. */
+.note-banner-goto {
+  align-self: flex-start;
+  font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
-}
-/* a seta permanente (↗) do título do banner é suprimida aqui: quem indica a
-   navegação é a tab "ir para o slide" (evita seta redundante e não sugere que só
-   o título é clicável — o cartão inteiro é o link). */
-.rdc-card > .post-link-title::after { content: none; }
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--note-accent) 45%, transparent);
+  transition: color 0.15s;
 
-/* corpo: descrição INTEIRA (remove o clamp de 3 linhas do banner) com fonte
-   AUMENTADA um nível em relação ao banner (xxs em vez de xxxs). Reserva espaço
-   embaixo para a tab "ir para o slide", que se sobrepõe ao canto inferior-direito. */
-.rdc-card > p {
-  max-height: none;
-  overflow: visible;
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
-  padding-bottom: 2em;
-}
-
-/* mobile: cartões empilham em coluna única */
-@media (max-width: 576px) {
-  .rdc-list {
-    grid-template-columns: 1fr;
+  &::after {
+    content: " ›";
   }
+}
+
+.rdc-card:hover .note-banner-goto,
+.rdc-card:focus-visible .note-banner-goto {
+  color: var(--note-accent);
 }

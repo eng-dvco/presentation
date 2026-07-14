@@ -3,7 +3,7 @@
      gap ENTRE imagens dos grupos (.mosaic-container) — ambos 12px, então
      "imagem↔imagem" = "subtítulo↔1ª imagem". O respiro MAIOR entre grupos vem do
      margin-top:24px dos .title-header-h3 (abaixo), que permanece inalterado. */
-  --content-gap: 12px;
+  --content-gap: var(--gap-12);
 }
 
 .title-header-h2 {
@@ -20,7 +20,7 @@ ul.nav-list {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 16px;
+  gap: var(--gap-16);
   margin: 0;
 }
 
@@ -28,7 +28,7 @@ ul.nav-list {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8);
   padding: var(--padding-general-normal);
   border: 1px solid var(--lt-border);
   border-radius: var(--border-general);
@@ -45,7 +45,7 @@ ul.nav-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px;
+    gap: var(--gap-8);
     margin: 0;
     padding: 0;
     list-style: none;

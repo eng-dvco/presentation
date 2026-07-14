@@ -13,12 +13,8 @@
     <link rel="stylesheet" href="../styles/slide-style.css" />
     <link rel="stylesheet" href="../styles/mosaic-style.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&family=Fondamento:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="../assets/fonts/roboto-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../styles/fonts.css" />
   </head>
   <body data-prev="../slides/slide-anchor-block.html" data-next="../slides/slide-tower-identification.html">
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -48,12 +44,18 @@
       </nav>
       <div class="content-container">
         <div class="content-wrapper">
-          <div class="postscriptum-container">
-            <div class="postscriptum-wrapper post-link">
-              <a class="post-link-title" href="../slides/slide-rdc-control.html" data-doc="doc-2026-04-28_1379-RDC-2825-20-04-099">2026-04-28_1379-RDC-2825-20-04-099</a>
-              <p>Assunto: inspeção de manutenção civil na Torre 43/2 da LT 230 kV (WBS 2825). Acompanhamento de fissuras nos blocos de fundação; surgimento de novas fissuras superficiais, com hipótese de retração hidráulica por falha de cura.</p>
+          <a class="note-banner note-banner--mosaic note-banner--rdc" href="../slides/slide-rdc-control.html" data-doc="doc-2026-04-28_1379-RDC-2825-20-04-099" aria-label="Documento relacionado — abrir o controle de RDCs">
+            <div class="note-banner-aside">
+              <span class="note-banner-tag">
+                <span class="note-banner-icon" aria-hidden="true"></span>
+                <span class="note-banner-div" aria-hidden="true"></span>
+                <span class="note-banner-code"><span>2026-04-28_1379-RDC</span><span>2825-20-04-099</span></span>
+              </span>
             </div>
-          </div>
+            <div class="note-banner-body">
+              <p class="note-banner-text">Torre 43/2: novas fissuras na fundação; provável retração hidráulica.</p>
+            </div>
+          </a>
           <div class="title-header-h2">
             <h2 class="title-h2">Resumo executivo</h2>
           </div>

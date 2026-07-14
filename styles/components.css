@@ -35,6 +35,21 @@
 .status-dot--forcado    { background: var(--color-red);    box-shadow: 0 0 0 2.5px var(--color-red-alpha-25); }
 .status-dot--energizado { background: var(--color-green);  box-shadow: 0 0 0 2.5px var(--color-green-alpha-25); }
 
+/* ── ícones monocromáticos por máscara (recolorível via background-color) ──
+   arquivos SVG em assets/icons/. A FORMA vem da máscara; a COR vem do
+   background-color (default --lt-icon = rgba(0,0,0,0.6)). Reutilizável em qualquer
+   slide: <span class="icon-mask icon-tower-autoportante"></span>. Defina o TAMANHO
+   (width/height) no elemento — a máscara é agnóstica de tamanho (mask-size:contain). */
+.icon-mask {
+  display: inline-block;
+  background-color: var(--lt-icon);
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-size: contain; mask-size: contain;
+}
+.icon-tower-autoportante { -webkit-mask-image: url("../assets/icons/transmission-tower-black.svg"); mask-image: url("../assets/icons/transmission-tower-black.svg"); }
+.icon-tower-estaiada     { -webkit-mask-image: url("../assets/icons/cable-stayed-tower-black.svg"); mask-image: url("../assets/icons/cable-stayed-tower-black.svg"); }
+
 /* ── controle segmentado (botões alternantes) ── */
 .seg { display: flex; border: 1px solid rgba(0, 0, 0, 0.18); border-radius: 3px; overflow: hidden; }
 .seg-btn {
@@ -54,24 +69,28 @@
 .seg-btn.is-active .seg-dir { opacity: 0.75; }
 
 /* ── campo de busca (pílula com ícone) ── */
-.search-pill { display: flex; align-items: center; gap: 0.35rem; background: rgba(0, 0, 0, 0.04); border: 1px solid var(--lt-border); border-radius: 99px; padding: 0.18rem 0.55rem; }
+.search-pill { display: flex; align-items: center; gap: var(--gap-inline); background: rgba(0, 0, 0, 0.04); border: 1px solid var(--lt-border); border-radius: 99px; padding: 0.18rem 0.55rem; }
 .search-pill svg { color: rgba(0, 0, 0, 0.35); flex-shrink: 0; }
 .search-pill input { background: none; border: none; outline: none; font-family: var(--font-family-general); font-size: 0.62rem; color: rgba(0, 0, 0, 0.75); }
 .search-pill input::placeholder { color: rgba(0, 0, 0, 0.3); }
 .search-pill input::-webkit-search-decoration,
 .search-pill input::-webkit-search-cancel-button { display: none; }
 
-/* ── legenda (barra inferior; mesmo padrão do conjunto de containers .tlp-group:
-   título + separador tracejado + itens com ponto de status) ── */
-/* gap entre TÍTULO e itens consistente em todas as viewports: row-gap 0.4rem vale
-   sempre que os itens quebram para baixo (mobile e larguras intermediárias); o
-   column-gap 0 mantém o layout inline do desktop (espaçamento horizontal vem do
-   separador tracejado .legend-sep). */
-.legend { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem 0; padding: 0.5rem 1rem; background: var(--lt-surface); box-shadow: var(--lt-shadow); }
+/* ── legenda (barra inferior; título + separador tracejado + itens com ponto de
+   status) — COMPONENTE CANÔNICO ÚNICO. Consolida as antigas cópias .tl-legend*
+   (slide-tl.css) e .grt-legend* (grounding). Consumidores: shutdown-timeline,
+   tl-stay-recovery (+experiment), pisf (criticidade), stayed-towers (qte), grounding.
+   Os PONTOS continuam por-contexto: .status-dot (components), .tl-legend-dot (tl),
+   .qte-dot (stayed), .crit-legend-dot (pisf) — cores semânticas distintas. ── */
+/* gap TÍTULO↔itens consistente em todas as viewports: o row-gap (--gap-inline) vale
+   quando os itens quebram para baixo; o column-gap 0 mantém o layout inline no
+   desktop (o espaçamento horizontal vem do separador tracejado .legend-sep).
+   width:100% p/ preencher containers centralizados (ex.: .content-wrapper do mosaico). */
+.legend { display: flex; align-items: center; flex-wrap: wrap; gap: var(--gap-inline) 0; width: 100%; box-sizing: border-box; padding: 0.5rem 1rem; background: var(--lt-surface); border-radius: var(--border-general); box-shadow: var(--lt-shadow); }
 .legend-title { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0, 0, 0, 0.75); white-space: nowrap; flex-shrink: 0; }
-.legend-sep { flex: 1; height: 0; border-top: 1px dashed var(--lt-border); margin: 0 2rem; }
-.legend-items { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; flex-shrink: 1; min-width: 0; }
-.legend-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-family-general); font-size: 0.68rem; color: var(--lt-icon); }
+.legend-sep { flex: 1; height: 0; border-top: 1px dashed var(--lt-border); margin: 0 1rem; }
+.legend-items { display: flex; align-items: center; flex-wrap: wrap; gap: var(--gap-24); flex-shrink: 1; min-width: 0; }
+.legend-item { display: flex; align-items: center; gap: var(--gap-inline); font-family: var(--font-family-general); font-size: 0.68rem; color: var(--lt-icon); }
 @media (max-width: 640px) {
-  .legend-items { flex-direction: column; align-items: flex-start; gap: 0.4rem; flex-basis: 100%; }
+  .legend-items { flex-direction: column; align-items: flex-start; gap: var(--gap-inline); flex-basis: 100%; padding-top: 0.3rem; }
 }

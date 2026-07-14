@@ -10,13 +10,13 @@
    row-gap do .content-wrapper E o gap do .mosaic-container (mosaic-style.css), então
    basta igualá-lo ao gap das tabelas → mesma distância entre todos os itens, H e V. */
 .content-wrapper {
-  --content-gap: 1.25rem;
+  --content-gap: var(--gap-table-group);
 }
 
 .grt-tables {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: var(--gap-table-group);
   align-items: stretch;
   width: 100%;
 }
@@ -84,27 +84,6 @@
   & .grt-val { text-align: right; font-variant-numeric: tabular-nums; font-weight: var(--font-weight-bold); color: rgba(0, 0, 0, 0.78); }
 }
 
-/* legenda (mesma estrutura visual da .tl-legend) */
-.grt-legend {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0;
-  /* largura total do container (igual ao subtítulo do mosaico, que é width:100%);
-     sem isso o justify-items:center do .content-wrapper a deixaria do tamanho do
-     conteúdo */
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0.5rem 1rem;
-  background: var(--lt-surface);
-  border-radius: var(--border-general);
-  box-shadow: var(--lt-shadow);
-}
-.grt-legend-title { font-family: var(--font-family-general); font-size: 0.68rem; font-weight: var(--font-weight-bolder); letter-spacing: 0.18em; text-transform: uppercase; color: rgba(0, 0, 0, 0.75); white-space: nowrap; flex-shrink: 0; }
-.grt-legend-sep { flex: 1; height: 0; border-top: 1px dashed var(--lt-border); margin: 0 1rem; }
-.grt-legend-items { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; min-width: 0; }
-.grt-legend-item { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-family-general); font-size: 0.68rem; color: var(--lt-icon); }
-
-@media (max-width: 640px) {
-  .grt-legend-items { flex-direction: column; align-items: flex-start; gap: 0.4rem; flex-basis: 100%; padding-top: 0.3rem; }
-}
+/* legenda: consolidada no componente canônico .legend* de components.css (esta
+   página passou a linká-lo). Regras .grt-legend* removidas; o .legend já traz
+   width:100% p/ preencher o .content-wrapper centralizado. */

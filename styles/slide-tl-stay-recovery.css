@@ -1,0 +1,85 @@
+/* ── Timeline serpenteante (wrap) — escopo 100% em .tl-wrap ───────────────────
+   Carregado SOMENTE por slide-tl-stay-recovery.html. Substitui a rolagem horizontal
+   por-trecho por um fluxo que quebra em linhas dentro do limite da viewport; a
+   espinha serpenteante e os ícones de tipo (autoportante/estaiada) são desenhados
+   por scripts/slide-tl-stay-recovery.js. Cores de status e a pulsação do "em
+   execução" continuam vindo de slide-tl.css.
+
+   Nasceu como um teste A/B contra uma versão de rolagem horizontal; venceu e virou
+   a única. O escopo em .tl-wrap foi o que manteve os dois convivendo, e segue sendo
+   o que separa este layout do maquinário horizontal ainda presente em slide-tl.js. */
+
+/* os "U" de 180° da serpente podem transbordar levemente as faixas; como no modo
+   wrap não há rolagem horizontal, liberamos o clip do container p/ não cortá-los. */
+.tl-scroll { overflow: visible; }
+
+/* a faixa não rola mais: fluxo com quebra de linha, sem clip/scroll */
+.tl-wrap .tl-entries-scroll {
+  overflow: visible;
+  cursor: default;
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
+/* entries quebram em várias linhas; min-width neutralizado (o JS compartilhado o força
+   p/ acomodar a espinha horizontal — no wrap isso impediria a quebra) */
+.tl-wrap .tl-entries {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: var(--gap-32);
+  row-gap: 2.8rem;
+  /* CALHAS laterais: são elas que dão espaço para os "U" da serpente. O JS ancora a curva
+     em (turn + R) além do card mais adiantado — hoje 16 + ~18 = ~34px. Com a calha direita
+     antiga de 1.4rem (22.4px) faltavam ~12px, e quando uma fileira enchia até a borda o
+     bojo era amputado pelo .tl-axis-section (overflow:hidden) ou pintado fora do cartão.
+     2.6rem (41.6px) acomoda a curva inteira; a esquerda (3rem) já acomodava.
+     Cards não encolhem: reservar a calha só faz a fileira quebrar um pouco mais cedo. */
+  padding: 1.2rem 2.6rem 1.5rem 3rem;
+  min-width: 0 !important;
+  position: relative;
+}
+
+/* sem espinha CSS horizontal nem conectores ::before (o SVG serpenteante cobre) */
+.tl-wrap .tl-entries::before,
+.tl-wrap .tl-entry::before { display: none; }
+
+/* sem gradiente de "há mais conteúdo" — não há rolagem */
+.tl-wrap .tl-trecho::after { display: none; }
+
+/* remove a "faísca" (traço que corre da estrutura anterior até o dot da estrutura
+   "em execução"): o único <svg> filho DIRETO de .tl-entry é essa faísca do tlSpineRay
+   (a serpente vive em .tl-entries; o ícone de tipo é aninhado no code-pill). */
+.tl-wrap .tl-entry > svg { display: none; }
+
+/* SVG da espinha serpenteante fica ATRÁS dos nós */
+.tl-wrap .tl-entries > svg.tl-snake {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; overflow: visible;
+  z-index: 0;
+}
+
+/* ── ícone de tipo (autoportante / estaiada) no code-pill ──
+   o pill deixa de ter altura fixa (no wrap a espinha não passa pela sua base),
+   então acomoda o ícone + o código lado a lado */
+.tl-wrap .tl-entry-code-pill {
+  height: auto;
+  gap: 0.26rem;
+  padding: 0.16rem 0.42rem;
+}
+/* o ícone vem por MÁSCARA (classes reutilizáveis .icon-mask + .icon-tower-* de
+   components.css, aplicadas pelo JS conforme data-type). Aqui definimos só o TAMANHO
+   no contexto do pill; o tom neutro (--lt-icon) e a máscara vêm do .icon-mask. A
+   distinção autoportante×estaiada é pela FORMA (verde/roxo/laranja seguem reservados
+   ao status do ponto). */
+.tl-type-icon {
+  flex-shrink: 0;
+  width: 0.82rem; height: 0.82rem;
+}
+
+/* ── mesmos ajustes de espaçamento do slide original, agora TAMBÉM no experimento ──
+   mais respiro entre a legenda do cronograma e o subtítulo "Manutenções dos estais",
+   e as 3 imagens do resumo mais próximas entre si. Sem .tl-wrap porque a seção de
+   imagens fica ABAIXO da timeline. */
+.title-header-h2 { margin-top: 1.5rem; }
+.mosaic-container { gap: var(--gap-8); }

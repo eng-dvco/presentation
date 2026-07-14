@@ -14,12 +14,8 @@
     <link rel="stylesheet" href="../styles/mosaic-style.css" />
     <link rel="stylesheet" href="../styles/slide-lt-maintenance.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&family=Fondamento:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="../assets/fonts/roboto-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../styles/fonts.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -154,11 +150,17 @@
               <h4>12-05-26</h4>
             </div>
             <div class="img img-default">
-              <img width="1024" height="768" src="../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/1%20%283%29.jpeg" alt="Serviços no trecho E2-E3 — 12-05-26 (foto 1 de 2)" loading="eager" />
+              <picture>
+                <source type="image/webp" srcset="../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/1-200.webp 200w, ../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/1-640.webp 640w, ../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/1-1024.webp 1024w" sizes="(max-width: 576px) 92vw, (max-width: 992px) 46vw, 468px" />
+                <img width="1024" height="768" src="../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/1.jpeg" alt="Serviços no trecho E2-E3 — 12-05-26 (foto 1 de 2)" loading="lazy" />
+              </picture>
               <p class="obs obs-default invisible"></p>
             </div>
             <div class="img img-default">
-              <img width="1024" height="768" src="../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/1%20%288%29.jpeg" alt="Serviços no trecho E2-E3 — 12-05-26 (foto 2 de 2)" loading="eager" />
+              <picture>
+                <source type="image/webp" srcset="../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/2-200.webp 200w, ../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/2-640.webp 640w, ../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/2-1024.webp 1024w" sizes="(max-width: 576px) 92vw, (max-width: 992px) 46vw, 468px" />
+                <img width="1024" height="768" src="../assets/img/slides/lt/lt-maintenance/E2-E3/12-05-26/2.jpeg" alt="Serviços no trecho E2-E3 — 12-05-26 (foto 2 de 2)" loading="lazy" />
+              </picture>
               <p class="obs obs-default invisible"></p>
             </div>
           </div>

@@ -157,7 +157,7 @@ hr {
   &:has(.section-icon) {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: var(--gap-32);
   }
 }
 
@@ -263,7 +263,7 @@ a.flex-logo-container {
      align-self:center aqui garante o bloco de logos centrado mesmo se o
      cross-axis do pai mudar; margens verticais simétricas evitam deslocamento */
   align-self: center;
-  gap: 12px;
+  gap: var(--gap-12);
   margin: 12px;
 }
 
@@ -375,7 +375,7 @@ a.flex-logo-container {
    filtros+cronograma+legenda) lidos como UM grupo conectado: gap de 4px, cantos
    internos retos e apenas as extremidades (topo do 1º filho, base do último)
    arredondadas. A margem dos filhos é zerada — o respiro vem do gap do flex. */
-.tlp-group { display: flex; flex-direction: column; gap: 4px; }
+.tlp-group { display: flex; flex-direction: column; gap: var(--gap-4); }
 .tlp-group > * { margin: 0; border-radius: 0; }
 .tlp-group > :first-child { border-radius: var(--border-general) var(--border-general) 0 0; }
 .tlp-group > :last-child  { border-radius: 0 0 var(--border-general) var(--border-general); }
@@ -391,7 +391,7 @@ a.flex-logo-container {
      imagens de um grupo → "imagem↔imagem" = "subtítulo↔1ª imagem" em qualquer
      slide. Slides com espaçamento próprio só redefinem --content-gap (ex.:
      slide-lt-maintenance.css) e ambos os gaps acompanham. */
-  --content-gap: 24px;
+  --content-gap: var(--gap-24);
   row-gap: var(--content-gap);
   justify-items: center;
 
@@ -574,7 +574,7 @@ a.flex-logo-container {
 
 .marker-group {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--gap-8);
   padding: var(--padding-general-small);
   border-radius: var(--border-general);
   background-color: var(--background-black-alpha-75);
@@ -597,275 +597,279 @@ a.flex-logo-container {
   }
 }
 
-/* postscriptum */
-.postscriptum-container {
+/* ── banner de LEMBRETE / observação (REUTILIZÁVEL) — mesma posição do banner de
+   RDC (primeiro filho do .content-wrapper, acima das seções). CSS-only, sem JS.
+   Identidade fixa: acento navy com alerta "!" + etiqueta amarela "Lembrete"; a cor
+   de estado (texto/régua/status) vem de --note-accent (verde "operacional" por
+   padrão), fácil de re-tematizar por observação. Ícones por máscara recolorível. */
+.note-banner {
+  /* COR DE FRENTE ÚNICA do banner: o MESMO preto dos subtítulos dos mosaicos
+     (.title-h2 = --color-black = #202020). Governa etiqueta, ícone, divisor, texto
+     principal e os "pregos" — antes cada um trazia a cor na mão (navy), o que
+     fragmentava o elemento. */
+  --note-accent: var(--color-black);
+  /* HACHURA: a MESMA cor, porém muito clara/transparente (color-mix mantém o vínculo
+     com o token) — marca a textura sem atrapalhar a leitura do texto. */
+  --note-hatch: color-mix(in srgb, var(--color-black) 5%, transparent);
+  /* losango dos "PREGOS" dos cantos, na MESMA cor do texto principal (--note-accent =
+     --color-black = #202020). O data-URI não aceita var() DENTRO do SVG, então o hex é
+     fixo aqui e espelha o token; a URL inteira mora nesta custom property e é reusada
+     nas camadas de background abaixo. */
+  --note-nail: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8'><path d='M4 0 L8 4 L4 8 L0 4 Z' fill='%23202020'/></svg>");
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
-  height: fit-content;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-}
-
-.postscriptum-wrapper {
-  max-width: 720px;
-  margin: 24px;
-  margin-bottom: 48px;
-  border: 1.5px dashed var(--lt-border-strong);
-  border-radius: var(--border-big);
-  background-color: var(--lt-surface);
-  -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px);
+  align-items: stretch;
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-item);
   box-shadow: var(--lt-shadow);
   overflow: hidden;
-  cursor: default;
 
-  & p {
-    padding: var(--padding-left-icon);
-    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
-    font-weight: var(--font-weight-bold);
+  /* HACHURA sutil (cinza claro) no CARD inteiro: linhas diagonais cruzadas (45°/-45°)
+     por repeating-linear-gradient — sem asset, nítida em qualquer escala. As duas
+     últimas famílias usam períodos maiores e ÍMPARES entre si p/ variar o peso dos
+     traços e evitar a leitura de "quadriculado" regular. Ficando no card (e não no
+     corpo), a textura segue contínua também sob as células vazadas do mosaico. */
+  background-color: var(--lt-surface);
+  background-image:
+    repeating-linear-gradient(45deg, var(--note-hatch) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(-45deg, var(--note-hatch) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(45deg, var(--note-hatch) 0 1px, transparent 1px 23px),
+    repeating-linear-gradient(-45deg, var(--note-hatch) 0 1px, transparent 1px 19px);
 
-    &::before {
-      content: "⚫";
-      position: absolute;
-      left: clamp(2%, 10px, 4%);
-      top: 50%;
-      translate: 0% -50%;
-      font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
-    }
-  }
-}
-
-/* status callouts on light: soft tinted fills (alpha-25) keep each hue's
-   meaning, with text darkened to read on the light surface */
-.post-alert {
-  background-color: var(--color-yellow-alpha-25);
-  border: 1.5px dashed var(--color-yellow-alpha-75);
-
-  & p {
-    color: var(--color-dark-yellow);
-
-    &::before {
-      content: "🟡";
-    }
-  }
-}
-
-.post-details {
-  background-color: var(--color-green-alpha-25);
-  border: 1.5px dashed var(--color-green);
-
-  & p {
-    color: var(--color-dark-green);
-
-    &::before {
-      content: "🟢";
-    }
-  }
-}
-
-.post-critical {
-  background-color: var(--color-red-alpha-25);
-  border: 1.5px dashed var(--color-red);
-
-  & p {
-    color: var(--color-dark-red);
-
-    &::before {
-      content: "🔴";
-    }
-  }
-}
-
-.post-link {
-  position: relative;
-  /* largura total do container (igual ao título); margem 0 → o espaçamento até
-     o subtítulo vem só do row-gap (24px) do .content-wrapper, igual ao gap
-     subtítulo→imagem */
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  box-sizing: border-box;
-  /* O preenchimento e a borda TRACEJADA CHANFRADA são desenhados em DUAS camadas
-     SVG em pixels exatos (scripts/slide-banner.js): post-link-fill (preenchimento,
-     ATRÁS) e post-link-edge (traço, NA FRENTE). O chanfro fica a 45° em qualquer
-     largura e o tracejado segue TODAS as bordas, inclusive as chanfradas. A
-     borda/fundo/sombra/blur da base ficam zerados aqui. */
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  -webkit-backdrop-filter: none; backdrop-filter: none;
-  /* SEM padding/gap: o título vai de borda a borda (laterais + topo, inclusive o
-     chanfro), sem espaços vazios entre os elementos. */
-  display: flex;
-  flex-direction: column;
-
-  & > svg.post-link-fill {
+  /* "PREGOS": um losango nos cantos da DIREITA (superior e inferior), como se fixassem
+     o banner no lugar. Uma ÚNICA camada (::before) cobre o banner e repete o mesmo
+     losango nas duas posições. */
+  &::before {
+    content: "";
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    z-index: 2;
     pointer-events: none;
-    z-index: 0;                                  /* preenchimento ATRÁS do título */
-
-    & path { fill: var(--color-blue-alpha-25); stroke: none; }
+    background-image: var(--note-nail), var(--note-nail);
+    background-position:
+      right 11px top 11px,
+      right 11px bottom 11px;
+    background-repeat: no-repeat;
   }
 
-  & > svg.post-link-edge {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 2;                       /* traço NA FRENTE do título → sempre visível */
-
-    & path {
-      fill: none;
-      stroke: var(--color-blue);
-      stroke-width: 1.5;
-      stroke-dasharray: 6 4;
-    }
+  & .note-banner-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-8);
+    /* padding horizontal simétrico, com folga suficiente p/ o conteúdo não encostar nos
+       "pregos" dos cantos (losango de 8px recuado 11px → ocupa até ~19px da borda). */
+    padding: 0.95rem 1.4rem;
   }
-
-  /* título do banner = nome do documento (código do RDC): faixa superior que se
-     estende de BORDA A BORDA (inclusive preenchendo o chanfro superior-esquerdo,
-     recortado por clip-path), com preenchimento na cor do texto (azul escuro) e
-     texto na cor do preenchimento do banner (azul claro translúcido), centralizado. */
-  & > .post-link-title {
-    position: relative;
-    z-index: 1;
-    /* ÚNICO elemento clicável do banner: é um <a> que leva ao documento na página
-       inicial. Afford de link: cursor + sublinhado só no hover (sem sublinhado por
-       padrão p/ manter a faixa limpa). */
-    display: block;
-    text-decoration: none;
-    cursor: pointer;
-    text-align: center;
-    padding: 4px 12px;
-    background-color: var(--color-dark-blue);
-    /* texto na cor do PREENCHIMENTO do banner (azul claro translúcido): como o
-       fill é --color-blue a 25% sobre o fundo claro do slide, reproduzimos essa
-       MESMA aparência (azul 25% + branco) para o texto ficar legível sobre a faixa
-       azul-escura — alpha-25 literal sobre o escuro ficaria invisível. */
-    color: color-mix(in srgb, var(--color-blue) 25%, white);
+  & .note-banner-head {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-12);
+  }
+  /* etiqueta amarela "Lembrete" com sino (máscara) */
+  & .note-banner-tag {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.26rem 0.7rem;
+    background: var(--color-yellow);
+    color: var(--note-accent);
+    border-radius: var(--border-smaller);
     font-family: var(--font-family-general);
-    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.04em;
-    overflow-wrap: anywhere;
-    /* chanfra o canto SUPERIOR-ESQUERDO do título p/ acompanhar o chanfro do banner
-       (10px = CHAMFER em scripts/slide-banner.js) */
-    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
-
-    &:hover { text-decoration: underline; }
-
-    /* ícone de seta PERMANENTE (sempre visível) — mesmo glifo dos RDCs em
-       'documentos recebidos' (.doc-goto::after), sinalizando que o banner leva ao
-       documento. */
-    &::after {
-      content: "\2197";
-      /* inline-block torna a seta atômica: o sublinhado do título (no hover) NÃO se
-         estende sob ela — só o texto do RDC fica sublinhado */
-      display: inline-block;
-      margin-left: 0.4em;
-      font-weight: var(--font-weight-boldest);
-    }
+    font-weight: var(--font-weight-boldest);
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
-
-  /* corpo = descrição do RDC: fonte reduzida (igual ao kicker da navegação
-     lateral) e SEM negrito. Recuo próprio (o container não tem padding) p/ o texto
-     não encostar nas bordas nem no chanfro inferior-direito. */
-  & p {
-    position: relative;
-    z-index: 1;
+  /* ícone da etiqueta (máscara recolorível). Padrão: sino. Variantes trocam só a
+     mask-image — ex.: .note-banner--rdc usa o ícone de documentos/pastas. */
+  & .note-banner-icon {
+    flex-shrink: 0;
+    width: 0.95rem;
+    height: 0.95rem;
+    background: var(--note-accent);
+    -webkit-mask: url(../assets/icons/bell.svg) center / contain no-repeat;
+    mask: url(../assets/icons/bell.svg) center / contain no-repeat;
+  }
+  /* pequeno espaçador tracejado VERTICAL entre o sino e o texto da etiqueta */
+  & .note-banner-div {
+    flex-shrink: 0;
+    align-self: stretch;
+    width: 0;
+    margin: 0.15rem 0.05rem;
+    border-left: 1.5px dashed color-mix(in srgb, var(--note-accent) 55%, transparent);
+  }
+  & .note-banner-text {
     margin: 0;
-    padding: 6px 14px 12px;
-    color: var(--color-dark-blue);
-    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+    color: var(--note-accent);
+    font-family: var(--font-family-general);
+    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
     font-weight: var(--font-weight-normal);
-    line-height: 1.5;
-    /* COLAPSADO: ~3 linhas (max-height em vez de -webkit-line-clamp p/ recorte
-       limpo, sem reticências/vazamento); o botão expande removendo o limite */
-    max-height: calc(1.5em * 3 + 18px);
+    line-height: var(--font-line-content);
+
+    /* NO MÁXIMO 3 LINHAS: mantém a altura do banner consistente em toda a apresentação.
+       É um TETO de segurança — a descrição (fonte de verdade em 'documentos recebidos')
+       deve ser curta o bastante p/ caber inteira, sem depender do recorte. */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+            line-clamp: 3;
     overflow: hidden;
 
-    &::before { content: none; }
+    & strong { font-weight: var(--font-weight-boldest); }
   }
-  /* EXPANDIDO: texto inteiro + uma LINHA RESERVADA no fim (padding-bottom) para o
-     botão "exibir menos" ficar abaixo do texto, sem cobri-lo. */
-  &.is-expanded p { max-height: none; padding-bottom: 2.4em; }
+  /* ícone de estado à direita — SLOT OPCIONAL (não usado no banner do GMG, onde o
+     próprio círculo do acento já é o check). Recolorível pela máscara. */
+  & .note-banner-status {
+    flex: 0 0 auto;
+    align-self: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    margin: 0 1.1rem;
+    background: var(--note-accent);
+    -webkit-mask: url(../assets/icons/circle-check.svg) center / contain no-repeat;
+    mask: url(../assets/icons/circle-check.svg) center / contain no-repeat;
+  }
+}
 
-  /* gradiente de continuidade: esmaece o fim do texto COLAPSADO (indica que há mais
-     conteúdo), sob a borda e o botão. Só quando há overflow (.has-more, definido
-     pelo JS) e colapsado. */
-  &.has-more:not(.is-expanded)::after {
-    content: '';
-    position: absolute;
-    left: 1.5px; right: 1.5px; bottom: 1.5px;
-    height: 2.4em;
+/* ── variante MOSAICO (.note-banner--mosaic) ───────────────────────────────────
+   A etiqueta ganha um ESPAÇO RESERVADO à esquerda (com o sino), centralizada
+   VERTICALMENTE, sobre um preenchimento amarelo feito de QUADRADOS adjacentes em
+   tons diferentes (assets/img/note-mosaic.svg) que se dissolvem, pixel a pixel, na
+   área branca do texto. O tile (200x120) repete só na VERTICAL, então os quadrados
+   mantêm o tamanho em qualquer altura do banner. Como a hachura vive no card, ela
+   segue visível por baixo das células vazadas — a transição fica contínua. */
+.note-banner--mosaic {
+  /* COR do mosaico = a cor da SEÇÃO do slide no index.html. Amarelo é o padrão; cada
+     variante troca apenas esta variável (ver .note-banner--rdc). */
+  --note-mosaic: var(--color-yellow);
+
+  & .note-banner-aside {
+    position: relative;
+    flex: 0 0 auto;
+    width: 200px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    /* MARGEM ESQUERDA PADRONIZADA: alinhado à esquerda com padding-left FIXO.
+       Com justify-content:center (como era antes) a distância até a borda variava com
+       a LARGURA do conteúdo — a etiqueta larga do RDC (165px) ficava 18px mais perto da
+       borda que a do GMG (128px). O valor 2.3rem (36.8px) é exatamente onde a etiqueta
+       do GMG já estava, então o banner de referência não se move. */
+    justify-content: flex-start;
+    padding: 1rem 0.6rem 1rem 2.3rem;
+
+    /* O mosaico vive numa CAMADA PRÓPRIA (::before): se a máscara fosse aplicada ao
+       .note-banner-aside, ela recortaria também a ETIQUETA que está dentro dele.
+       O SVG é uma MÁSCARA ALPHA (cada quadrado guarda seu "tom" como opacidade) → a
+       cor vem de --note-mosaic, então o MESMO asset serve a qualquer seção.
+       `100% auto`: acompanha a LARGURA do espaço reservado e a altura sai proporcional
+       (o SVG tem aspecto 5:3) → os quadrados seguem QUADRADOS e a dissolução termina
+       exatamente na borda direita. Repete só na vertical. */
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-color: var(--note-mosaic);
+      -webkit-mask: url(../assets/img/note-mosaic.svg) left top / 100% auto repeat-y;
+      mask: url(../assets/img/note-mosaic.svg) left top / 100% auto repeat-y;
+    }
+  }
+  /* a cor do mosaico já é o FUNDO: a etiqueta dispensa a pílula e fica só o texto navy
+     + ícone sobre os quadrados — ACIMA da camada do mosaico */
+  & .note-banner-tag {
+    position: relative;
     z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--color-blue) 25%, white));
-    /* chanfra a quina INFERIOR-DIREITA do gradiente p/ acompanhar o chanfro do
-       banner, sem extravasar na quina cortada (CHAMFER 10px − 1.5px de recuo em
-       cada lado = 7px). */
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%);
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
+  /* o corpo passa a ter só o texto → centraliza-o verticalmente junto da etiqueta */
+  & .note-banner-body {
+    justify-content: center;
   }
 }
 
-/* banner de menção bidirecional documento↔slide: APENAS o título (.post-link-title)
-   é clicável; o banner em si é uma <div> não clicável. HOVER: ao pairar o TÍTULO, o
-   banner NÃO se move — apenas troca as cores (preenchimento + traço, via
-   :has(.post-link-title:hover)) e sublinha o TEXTO do título (.post-link-title:hover;
-   a seta, inline-block, fica de fora do sublinhado). */
-.postscriptum-container:has(.post-link-title:hover) > .post-link > svg.post-link-fill path { fill: var(--color-blue-alpha-50); }
-.postscriptum-container:has(.post-link-title:hover) > .post-link > svg.post-link-edge path { stroke: var(--color-dark-blue); }
+/* ── variante RDC (.note-banner--rdc) ─────────────────────────────────────────
+   O elemento É um <a>, então o CLIQUE e o REDIRECIONAMENTO ao controle de RDCs são
+   NATIVOS (sem depender de JS). A etiqueta exibe o CÓDIGO do documento em DUAS linhas
+   (…-RDC / restante), com o ícone de documentos/pastas no lugar do sino. O corpo recebe
+   a descrição viva de 'documentos recebidos' (sincronizada por scripts/slide-banner.js).
+   ESTÉTICA ÚNICA: a LISTA de RDCs (slide-rdc-control.js) usa este MESMO componente —
+   o formato antigo (.post-link, moldura chanfrada em SVG, .postscriptum-*) foi
+   removido por completo do projeto. */
+.note-banner--rdc {
+  /* mosaico na COR DA SEÇÃO dos RDCs no index.html: em 'documentos recebidos' os
+     documentos de texto/PDF (os RDCs) são VERMELHOS (--doc-color: var(--color-red)). */
+  --note-mosaic: var(--color-red);
+  text-decoration: none;
+  transition: background-color 0.15s, border-color 0.15s;
 
-/* botão "exibir mais / exibir menos" do banner (injetado por slide-banner.js só
-   quando a descrição passa de 3 linhas): pílula no canto inferior direito, na cor
-   da faixa do título, acima do traço SVG. */
-/* o container ancora o botão (que é IRMÃO do <a>, pois <button> não pode ficar
-   dentro de link): com a tab fora de fluxo, o container = caixa do banner. */
-.postscriptum-container { position: relative; }
+  & .note-banner-icon {
+    -webkit-mask-image: url(../assets/icons/documents.svg);
+    mask-image: url(../assets/icons/documents.svg);
+  }
+  /* o código é bem mais longo que "Informativo": fonte menor e sem o letter-spacing
+     largo da etiqueta, p/ caber no MESMO espaço reservado (200px) já respeitando a
+     margem esquerda padronizada — assim a largura do aside e o início do texto do
+     corpo ficam idênticos aos dos demais banners. */
+  & .note-banner-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+  }
+  & .note-banner-code {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.3;
+    text-align: left;
+  }
 
-/* botão "exibir mais/menos" do banner: tab no canto INFERIOR-DIREITO, preenchimento
-   partindo dessa borda, na cor da faixa do título. Forma de PARALELOGRAMO com as
-   duas laterais a 45° (como os chanfros sup-esq / inf-dir do banner): o lado direito
-   acompanha a borda inferior-direita chanfrada e o esquerdo é paralelo (consistência).
-   Largura ≈ tamanho do texto. */
-.post-link-toggle {
-  position: absolute;
-  /* RECUO = espessura da borda (1.5px) nas bordas inferior e direita: o botão
-     encosta no PREENCHIMENTO da quina (sem vão visível) mas NÃO sobrepõe a borda
-     chanfrada do banner. */
-  right: 1.5px;
-  bottom: 1.5px;
-  z-index: 3;
-  height: 1.8em;
-  line-height: 1.8em;
-  /* padding maior à esquerda (lado a 45°) p/ o texto não encostar na diagonal */
-  padding: 0 12px 0 22px;
-  font-family: var(--font-family-general);
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-  font-weight: var(--font-weight-bold);
-  color: color-mix(in srgb, var(--color-blue) 25%, white);
-  background-color: var(--color-dark-blue);
-  border: none;
-  border-radius: 0;
-  /* lado ESQUERDO a 45° (= chanfros do banner); quina INFERIOR-DIREITA chanfrada
-     ACOMPANHANDO o chanfro do banner; lado direito vertical rente à borda.
-     RECUO PERPENDICULAR DA DIAGONAL = espessura da borda (1.5px), igual ao recuo
-     reto das bordas inferior/direita: como o clip-path não aceita "right/bottom"
-     na diagonal, ele é obtido AUMENTANDO o corte. Numa reta a 45° (x+y=k), recuar
-     d perpendicular muda k em d·√2; logo o corte = 7px (rente à quina) + 1.5px·√2
-     ≈ 9.1px. Assim o botão desencosta da diagonal exatamente pela espessura da
-     borda, sem sobrepô-la (a borda chanfrada do banner fica visível na diagonal). */
-  clip-path: polygon(1.8em 0, 100% 0, 100% calc(100% - 9.1px), calc(100% - 9.1px) 100%, 0 100%);
-  cursor: pointer;
-  transition: background-color 0.15s, transform 0.15s;
+  /* afordância de clique igual à dos demais elementos clicáveis (ex.: itens da nav
+     lateral, que vão de #f5f5f5 → --lt-hover): apenas um passo de TOM no fundo, do
+     branco p/ um branco levemente mais escuro, + borda mais forte. A SOMBRA continua
+     a mesma — não escurece nem se intensifica no hover. */
+  &:hover {
+    background-color: var(--lt-surface-muted);
+    border-color: var(--lt-border-strong);
+
+    & .note-banner-code { text-decoration: underline; }
+  }
 }
-.post-link-toggle:hover { background-color: var(--color-blue); }
+
+@media (max-width: 640px) {
+  .note-banner {
+    /* o texto do banner NÃO encolhe sozinho no mobile (usa um multiplicador FIXO,
+       --font-size-multiplier-xs, e não o --font-multiplier responsivo do :root), por
+       isso ocupava altura demais na viewport. Reduzimos aqui — e a ETIQUETA encolhe
+       junto, mantendo a proporção entre os dois elementos. */
+    & .note-banner-text { font-size: 0.85rem; }
+    & .note-banner-tag { font-size: 0.6rem; letter-spacing: 0.1em; }
+    & .note-banner-icon { width: 0.8rem; height: 0.8rem; }
+    & .note-banner-body { padding: 0.9rem 1rem; }
+
+    & .note-banner-status { width: 2.2rem; height: 2.2rem; margin: 0 0.7rem; }
+    & .note-banner-head { flex-wrap: wrap; }
+  }
+  /* com a etiqueta menor, o espaço reservado pode estreitar → sobra mais largura p/ o
+     texto, reduzindo ainda mais a quebra de linhas (e a altura total). */
+  .note-banner--mosaic .note-banner-aside {
+    width: 120px;
+    padding: 0.8rem 0.4rem;
+  }
+  /* o código do RDC é mais largo que "Informativo" → o espaço reservado precisa de
+     um pouco mais de folga que o do banner comum */
+  .note-banner--rdc {
+    & .note-banner-aside { width: 148px; }
+    & .note-banner-tag { font-size: 0.55rem; }
+  }
+}
 
 /* facultative section for notes */
 .foot-notes {
@@ -892,7 +896,7 @@ a.flex-logo-container {
   display: flex;
   flex-direction: column;
   list-style: none;
-  gap: 8px;
+  gap: var(--gap-8);
 
   & p {
     font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
@@ -984,7 +988,7 @@ footer {
   padding: var(--padding-around-general);
   justify-content: flex-start;
   align-items: center;
-  gap: 12px;
+  gap: var(--gap-12);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
 
   & p,
@@ -1015,7 +1019,7 @@ footer {
 
 .more-info {
   display: flex;
-  gap: 12px;
+  gap: var(--gap-12);
 }
 
 .italic-text {
@@ -1112,7 +1116,7 @@ footer {
      caber na altura do cabeçalho (96px aqui) sem forçá-lo a crescer */
   a.flex-logo-container {
     flex-direction: column;
-    gap: 4px;
+    gap: var(--gap-4);
     margin: 8px 12px;
   }
 
@@ -1122,10 +1126,6 @@ footer {
 
   .midr {
     width: 2.6rem;
-  }
-
-  .postscriptum-container p {
-    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   }
 
   .main-container {
@@ -1151,9 +1151,6 @@ footer {
     }
   }
 
-  .postscriptum-container p {
-    font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
-  }
 }
 
 /* a11y: respect prefers-reduced-motion */
@@ -1252,7 +1249,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--gap-6);
   border-radius: 18px;
   white-space: nowrap;
   z-index: 1;
@@ -1349,7 +1346,7 @@ footer {
 .lightbox-thumbs {
   flex-shrink: 0;
   display: flex;
-  gap: 8px;
+  gap: var(--gap-8);
   padding: 8px 24px 20px;
   overflow-x: auto;
   justify-content: safe center;
@@ -1370,7 +1367,7 @@ footer {
   z-index: 10001;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: var(--gap-3);
   padding: 6px 10px;
   /* largura intrínseca definida (max-content) para que o elemento fixo NÃO
      encolha até o espaço disponível entre `left` e a borda da viewport — sem
@@ -1400,7 +1397,7 @@ footer {
 .tooltip-title-track {
   display: inline-flex;
   flex-wrap: nowrap;
-  gap: 48px;
+  gap: var(--gap-48);
 }
 
 .tooltip-title-text,
@@ -1618,7 +1615,7 @@ footer {
 /* ---- sidebar de navegação por seção -------------------------------------- */
 
 .content-container.has-sidebar {
-  gap: 24px;
+  gap: var(--gap-24);
   /* Slides com sidebar: o vão inferior vira PADDING (dentro do container) em vez de
      margem. Assim a sidebar sticky tem curso p/ acompanhar TODA a rolagem — mesmo em
      slides curtos (poucas imagens), em que o conteúdo mal supera a altura da sidebar
@@ -1778,7 +1775,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
    substitui o conteúdo por dois botões "anterior"/"próximo". */
 
 .slide-secnav {
-  gap: 4px;
+  gap: var(--gap-4);
   padding: 0;
   background-color: transparent;
   -webkit-backdrop-filter: none; backdrop-filter: none;
@@ -1860,13 +1857,56 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
 .secnav-all-links {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* mesmo respiro entre itens da lista de slides (.secnav-items-list) */
+  gap: var(--gap-8); /* mesmo respiro entre itens da lista de slides (.secnav-items-list) */
   padding-top: 12px; /* respiro até os botões — recortado pelo pai ao colapsar */
 }
 
-/* itens do menu de seções: mais compactos verticalmente que os demais links */
+/* itens do menu de seções: mais compactos verticalmente que os demais links.
+   Viram flex p/ acomodar o ÍCONE da seção à esquerda do título — seguro porque a
+   seta "›" e o gradiente de fade (::after/::before) são position:absolute e, portanto,
+   não entram no fluxo flex. */
 .secnav-all-link {
   padding: 5px 12px;
+}
+
+/* a especificidade extra (.secnav-all-links …) é NECESSÁRIA: .secnav-item-link define
+   display:block, tem a mesma especificidade e vem DEPOIS no arquivo — venceria o flex. */
+.secnav-all-links .secnav-all-link {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+}
+
+/* ícone da seção à ESQUERDA do título. Reusa as máscaras de .section-icon/.icon-*
+   (a MESMA fonte de verdade dos ícones no index.html — nenhum mapa duplicado), porém
+   menor e com a cor do PRÓPRIO link (currentColor): assim o ícone acende junto com o
+   texto no hover e no item ativo. */
+.secnav-all-icon {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+}
+
+/* O nome encolhe (min-width:0) e DEIXA o texto TRANSBORDAR — quem recorta é o próprio
+   link (overflow:hidden) e quem o dissolve é o gradiente de fade à direita
+   (.secnav-item-link::before), exatamente como nos itens do index.html.
+   NÃO usar overflow:hidden aqui: isso cortaria o texto a seco DENTRO do span, antes da
+   faixa do gradiente — o título terminaria em borda dura e competiria com a seta "›".
+   Ordem de pintura resultante: título (fluxo) < gradiente (::before) < seta (::after),
+   ambos posicionados → hierarquia clara, sem conflito. */
+.secnav-all-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Esmaece o PRÓPRIO texto à direita por MÁSCARA (em vez de só sobrepor uma camada
+     colorida) — a mesma estratégia que o arquivo já adota no fade vertical dos nomes
+     de slide. O título dissolve no fundo do botão e LIBERA a área da seta "›".
+     Resultado (de baixo p/ cima): título esmaecido < gradiente (::before) < seta
+     (::after) — hierarquia clara, sem o título competir com a seta. */
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.4rem), transparent 100%);
+          mask-image: linear-gradient(to right, #000 calc(100% - 2.4rem), transparent 100%);
 }
 
 /* atalho "Seleção de conteúdo": o respiro até a lista de seções é dado pelo
@@ -1876,6 +1916,9 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
    hover, gradiente de fade à direita), ficando idêntico a eles. */
 .secnav-all-home {
   margin-bottom: 0;
+  /* não é uma seção (logo, não tem ícone): recuo equivalente ao ícone + gap, p/ o
+     texto alinhar com o dos itens de seção logo abaixo */
+  padding-left: calc(12px + 16px + var(--gap-8));
 }
 
 /* seção atual em destaque (mesma ênfase do hover/itens) */
@@ -1950,7 +1993,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 6px;
+  gap: var(--gap-6);
   padding: 2px 4px 6px;
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
@@ -1974,7 +2017,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8);
   padding: 2px;
   scrollbar-width: thin;
   /* polegar do scroll 0.18 (não --lt-border-strong 0.22): literal consolidado */
@@ -2202,7 +2245,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: var(--gap-3);
   overflow: hidden;
   padding: 10px 14px;
   /* T3: topo arredondado, base reta — a base do container superior encara o
@@ -2247,7 +2290,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
 .secnav-dir {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--gap-6);
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   text-transform: uppercase;
@@ -2294,7 +2337,7 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
 .secnav-all-list .secnav-item-link { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
 
 @media (max-width: 768px) {
-  .content-container.has-sidebar { flex-direction: column; gap: 16px; }
+  .content-container.has-sidebar { flex-direction: column; gap: var(--gap-16); }
   .slide-secnav {
     display: flex;
     position: static;

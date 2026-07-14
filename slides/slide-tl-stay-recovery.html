@@ -9,12 +9,13 @@
     <link rel="icon" href="../assets/icons/favicon.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" href="../assets/icons/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
     <link rel="stylesheet" href="../styles/variables.css" />
+    <link rel="stylesheet" href="../styles/components.css" />
     <link rel="stylesheet" href="../styles/slide-style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400..700&family=Fondamento:ital@0;1&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+    <link rel="preload" href="../assets/fonts/roboto-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="../styles/fonts.css" />
     <link rel="stylesheet" href="../styles/slide-tl.css" />
     <link rel="stylesheet" href="../styles/mosaic-style.css" />
+    <link rel="stylesheet" href="../styles/slide-tl-stay-recovery.css" />
   </head>
   <body data-prev="../slides/index.html">
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
@@ -59,7 +60,7 @@
             <button type="button" class="tlf-clear" id="tlf-clear">Limpar</button>
           </div>
           <div class="tl-scroll" role="region" aria-label="Cronograma — role horizontalmente para ver todas as colunas">
-            <div class="tl-grid tlsr">
+            <div class="tl-grid tlsr tl-wrap">
 
               <div class="tl-axis-section">
                 <div class="tl-axis"><div class="tl-axis-title-row"><span class="tl-axis-title">Manutenções</span><div class="tl-axis-search"><svg class="tl-axis-search-icon" viewBox="0 0 10 10" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="4" cy="4" r="2.5"/><line x1="6.5" y1="6.5" x2="9" y2="9"/></svg><input type="search" class="tl-axis-code" placeholder="000/000" maxlength="9" autocomplete="off" /></div></div><div class="tlf-chips tlf-chips--axis"><button type="button" class="tlf-chip active" data-status="done">Executada</button><button type="button" class="tlf-chip active" data-status="running">Em execução</button><button type="button" class="tlf-chip active" data-status="pending">Pendente</button></div></div>
@@ -76,36 +77,36 @@
                         <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
                           <div class="tl-dot" aria-hidden="true"></div>
                           <div class="tl-entry-panel">
-                            <div class="tl-entry-code-pill"><span class="tl-code">042/002</span></div>
-                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>18-08-25</span><span class="tl-date"><span class="tl-lbl">fim</span>16-10-25</span></div>
+                            <div class="tl-entry-code-pill"><span class="tl-code">042/003</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>18-08-25</span><span class="tl-date"><span class="tl-lbl">fim</span>17-10-25</span></div>
                           </div>
                         </div>
                         <div class="tl-entry tl-entry--left tl-entry--done tl-entry--expanded">
                           <div class="tl-dot" aria-hidden="true"></div>
                           <div class="tl-entry-panel">
                             <div class="tl-entry-code-pill"><span class="tl-code">046/002</span></div>
-                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>03-12-25</span><span class="tl-date"><span class="tl-lbl">fim</span>14-12-25</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>03-12-25</span><span class="tl-date"><span class="tl-lbl">fim</span>22-12-25</span></div>
                           </div>
                         </div>
                         <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
                           <div class="tl-dot" aria-hidden="true"></div>
                           <div class="tl-entry-panel">
                             <div class="tl-entry-code-pill"><span class="tl-code">050/001</span></div>
-                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>06-01-26</span><span class="tl-date"><span class="tl-lbl">fim</span>16-01-26</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>06-01-26</span><span class="tl-date"><span class="tl-lbl">fim</span>21-01-26</span></div>
                           </div>
                         </div>
                         <div class="tl-entry tl-entry--left tl-entry--done tl-entry--expanded">
                           <div class="tl-dot" aria-hidden="true"></div>
                           <div class="tl-entry-panel">
                             <div class="tl-entry-code-pill"><span class="tl-code">051/002</span></div>
-                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>26-01-26</span><span class="tl-date"><span class="tl-lbl">fim</span>04-02-26</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>26-01-26</span><span class="tl-date"><span class="tl-lbl">fim</span>23-02-26</span></div>
                           </div>
                         </div>
                         <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
                           <div class="tl-dot" aria-hidden="true"></div>
                           <div class="tl-entry-panel">
                             <div class="tl-entry-code-pill"><span class="tl-code">053/002</span></div>
-                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>02-03-26</span><span class="tl-date"><span class="tl-lbl">fim</span>12-03-26</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>02-03-26</span><span class="tl-date"><span class="tl-lbl">fim</span>17-04-26</span></div>
                           </div>
                         </div>
                         <div class="tl-entry tl-entry--left tl-entry--running tl-entry--expanded">
@@ -113,6 +114,13 @@
                           <div class="tl-entry-panel">
                             <div class="tl-entry-code-pill"><span class="tl-code">045/003</span></div>
                             <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>22-06-26</span><span class="tl-date tl-date--empty"><span class="tl-lbl">fim</span><span class="tl-date-val">—</span></span></div>
+                          </div>
+                        </div>
+                        <div class="tl-entry tl-entry--right tl-entry--running tl-entry--expanded">
+                          <div class="tl-dot" aria-hidden="true"></div>
+                          <div class="tl-entry-panel">
+                            <div class="tl-entry-code-pill"><span class="tl-code">046/001</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>06-07-26</span><span class="tl-date tl-date--empty"><span class="tl-lbl">fim</span><span class="tl-date-val">—</span></span></div>
                           </div>
                         </div>
                       </div>
@@ -158,21 +166,21 @@
                           <div class="tl-dot" aria-hidden="true"></div>
                           <div class="tl-entry-panel">
                             <div class="tl-entry-code-pill"><span class="tl-code">009/001</span></div>
-                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>19-11-25</span><span class="tl-date"><span class="tl-lbl">fim</span>01-12-25</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>19-11-25</span><span class="tl-date"><span class="tl-lbl">fim</span>03-12-25</span></div>
                           </div>
                         </div>
                         <div class="tl-entry tl-entry--left tl-entry--done tl-entry--expanded">
                           <div class="tl-dot" aria-hidden="true"></div>
                           <div class="tl-entry-panel">
                             <div class="tl-entry-code-pill"><span class="tl-code">006/002</span></div>
-                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>28-01-26</span><span class="tl-date"><span class="tl-lbl">fim</span>09-02-26</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>28-01-26</span><span class="tl-date"><span class="tl-lbl">fim</span>01-04-26</span></div>
                           </div>
                         </div>
                         <div class="tl-entry tl-entry--right tl-entry--done tl-entry--expanded">
                           <div class="tl-dot" aria-hidden="true"></div>
                           <div class="tl-entry-panel">
                             <div class="tl-entry-code-pill"><span class="tl-code">007/001</span></div>
-                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>26-05-26</span><span class="tl-date"><span class="tl-lbl">fim</span>12-06-26</span></div>
+                            <div class="tl-dates tl-dates--hdr"><span class="tl-date"><span class="tl-lbl">ini</span>26-05-26</span><span class="tl-date"><span class="tl-lbl">fim</span>10-06-26</span></div>
                           </div>
                         </div>
                       </div>
@@ -186,13 +194,13 @@
 
             </div>
           </div>
-          <div class="tl-legend" aria-label="Legenda de status">
-            <span class="tl-legend-title" aria-hidden="true">Legenda</span>
-            <span class="tl-legend-sep" aria-hidden="true"></span>
-            <div class="tl-legend-items" role="list">
-              <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--done" aria-hidden="true"></span><span>Executada</span></div>
-              <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--running" aria-hidden="true"></span><span>Em execução</span></div>
-              <div class="tl-legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--pending" aria-hidden="true"></span><span>Pendente</span></div>
+          <div class="legend" aria-label="Legenda de status">
+            <span class="legend-title" aria-hidden="true">Legenda</span>
+            <span class="legend-sep" aria-hidden="true"></span>
+            <div class="legend-items" role="list">
+              <div class="legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--done" aria-hidden="true"></span><span>Executada</span></div>
+              <div class="legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--running" aria-hidden="true"></span><span>Em execução</span></div>
+              <div class="legend-item" role="listitem"><span class="tl-legend-dot tl-legend-dot--pending" aria-hidden="true"></span><span>Pendente</span></div>
             </div>
           </div>
           </div>
@@ -209,8 +217,8 @@
             </div>
             <div class="img img-largest">
               <picture>
-                <source type="image/webp" srcset="../assets/img/slides/tl/lt-stay-recovery/stayed-east-200.webp 200w, ../assets/img/slides/tl/lt-stay-recovery/stayed-east-640.webp 640w, ../assets/img/slides/tl/lt-stay-recovery/stayed-east-683.webp 683w" sizes="(max-width: 992px) 94vw, 960px" />
-                <img width="683" height="366" src="../assets/img/slides/tl/lt-stay-recovery/stayed-east.png" alt="Manutenções dos estais — eixo Leste" loading="eager" />
+                <source type="image/webp" srcset="../assets/img/slides/tl/lt-stay-recovery/stayed-east-200.webp 200w, ../assets/img/slides/tl/lt-stay-recovery/stayed-east-640.webp 640w, ../assets/img/slides/tl/lt-stay-recovery/stayed-east-1024.webp 1024w, ../assets/img/slides/tl/lt-stay-recovery/stayed-east-1600.webp 1600w" sizes="(max-width: 992px) 94vw, 960px" />
+                <img width="1600" height="843" src="../assets/img/slides/tl/lt-stay-recovery/stayed-east.jpeg" alt="Manutenções dos estais — eixo Leste" loading="eager" />
               </picture>
               <p class="obs obs-default invisible"></p>
             </div>
@@ -229,6 +237,7 @@
 
     <script src="../scripts/slide-nav.js" defer></script>
     <script src="../scripts/slide-tl.js" defer></script>
+    <script src="../scripts/slide-tl-stay-recovery.js" defer></script>
 
     <button id="back-to-top" aria-label="Retornar ao topo da página">
       <span class="back-top-icon" aria-hidden="true"></span>

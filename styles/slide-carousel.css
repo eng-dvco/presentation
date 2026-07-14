@@ -11,7 +11,7 @@
 
 .mosaic-container.is-carousel {
   display: flex;
-  gap: 12px;
+  gap: var(--gap-12);
   width: 100%;
   max-width: none;
   height: clamp(300px, 48vw, 540px);
@@ -36,7 +36,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8);
 }
 
 .carousel-img {
@@ -96,7 +96,7 @@
   display: flex;
   flex-direction: column;
   justify-content: safe center;
-  gap: 8px;
+  gap: var(--gap-8);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 6px;

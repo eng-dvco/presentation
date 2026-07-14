@@ -557,21 +557,19 @@ document.querySelectorAll('.tlf-chips--axis').forEach(chips => makeDragScroll(ch
 })();
 
 // ── fade de rolagem horizontal nas duas bordas de um scroller ────────────────
-// Envolve o scroller (.tl-axis-table) num .tl-scrollfade, insere as duas bordas
-// gradiente e alterna .has-left/.has-right conforme a posição de rolagem. O
-// ResizeObserver cobre o caso de a tabela ficar visível (clientWidth muda ao
-// trocar p/ a visão tabular) e os resizes. Idêntico ao usado na página de óbices.
+// Este arquivo REIMPLEMENTAVA a função inteira, criando as mesmas classes com outro
+// prefixo (.tl-scrollfade em vez de .scrollfade) — e era o JS que obrigava o CSS a existir
+// duas vezes. O comentário do slide-tl.css dizia literalmente "manter sincronizadas":
+// manutenção manual assumida. Agora usamos a versão de ui-utils.js (window.UI), que já é
+// parametrizada por prefixo desde sempre.
+//
+// O ganho não é só menos código: a versão daqui NUNCA removia os listeners, e o
+// _tlRebuildTable descarta a tabela a cada ordenação — cada clique deixava para trás um
+// 'resize' no window e um ResizeObserver segurando a tabela desanexada inteira. A versão
+// de ui-utils.js devolve o wrapper com um _uiCleanup(), que agora é chamado no rebuild.
 function addScrollFade(scroller) {
-  if (!scroller || scroller.dataset.fadeInit) return;
-  scroller.dataset.fadeInit = '1';
-  var wrap = document.createElement('div'); wrap.className = 'tl-scrollfade';
-  scroller.parentNode.insertBefore(wrap, scroller); wrap.appendChild(scroller);
-  ['left','right'].forEach(function(side){ var d=document.createElement('div'); d.className='tl-scrollfade-edge tl-scrollfade-'+side; d.setAttribute('aria-hidden','true'); wrap.appendChild(d); });
-  var update = function(){ var max = scroller.scrollWidth - scroller.clientWidth; wrap.classList.toggle('has-left', scroller.scrollLeft > 1); wrap.classList.toggle('has-right', scroller.scrollLeft < max - 1); };
-  scroller.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  if ('ResizeObserver' in window) new ResizeObserver(update).observe(scroller);
-  update();
+  if (!window.UI || !window.UI.addScrollFade) return null;   // ui-utils.js precisa vir antes
+  return window.UI.addScrollFade(scroller, 'tl-scrollfade');
 }
 
 // ── alternância de visualização: cronograma ↔ tabela ─────────────────────────
@@ -699,19 +697,13 @@ function addScrollFade(scroller) {
   // borda esquerda da tabela, recortado pelo overflow). Mesmo fix robusto da página
   // de óbices: move o balão para o <body> (escapa overflow/transform) e o posiciona
   // por JS, fixado dentro do viewport.
+  // Era uma reimplementação de UI.attachTip — e VAZAVA: registrava um listener global de
+  // 'scroll' a CADA chamada, e o _tlRebuildTable a chama de novo a cada ordenação. A versão
+  // de ui-utils.js registra UM ÚNICO listener global (guard interno) e esconde os balões por
+  // atributo, então reconstruir a tabela não acumula nada.
   function attachTip(trigger, tip) {
-    document.body.appendChild(tip);   // portal: escapes table overflow/transform
-    function place() {
-      tip.style.display = 'block';
-      var r = trigger.getBoundingClientRect(), tw = tip.offsetWidth, th = tip.offsetHeight, m = 8;
-      var left = Math.max(m, Math.min(r.left + r.width / 2 - tw / 2, innerWidth - tw - m));
-      var top = r.bottom + 6; if (top + th > innerHeight - m) top = r.top - th - 6;
-      tip.style.left = left + 'px'; tip.style.top = Math.max(m, top) + 'px';
-    }
-    function hide() { tip.style.display = 'none'; }
-    trigger.addEventListener('mouseenter', place); trigger.addEventListener('focus', place);
-    trigger.addEventListener('mouseleave', hide); trigger.addEventListener('blur', hide);
-    addEventListener('scroll', hide, true);
+    if (window.UI && window.UI.attachTip) return window.UI.attachTip(trigger, tip);
+    return null;
   }
 
   // Localiza o gatilho do tooltip de Status numa tabela e ativa o portal (uma vez).
@@ -750,6 +742,12 @@ function addScrollFade(scroller) {
     const old = section._tlTableContainer;
     // remove também o wrapper de fade (.tl-scrollfade) que envolve a tabela antiga
     const oldWrap = old && old.parentNode && old.parentNode.classList.contains('tl-scrollfade') ? old.parentNode : old;
+    // DESMONTA antes de descartar. Tirar o nó do DOM NÃO remove o listener de 'resize' no
+    // window nem desconecta o ResizeObserver — eles seguem segurando a tabela desanexada
+    // inteira. Cada clique de ordenação vazava ~174 nós e ~7 listeners; 100 cliques levavam
+    // o DOM de 1.256 para 18.658 nós, com uma única tabela viva. O _uiCleanup vem do
+    // UI.addScrollFade.
+    if (oldWrap && typeof oldWrap._uiCleanup === 'function') oldWrap._uiCleanup();
     if (oldWrap && oldWrap.parentNode) oldWrap.parentNode.removeChild(oldWrap);
     // remove o balão de tooltip portado para o <body> pela tabela antiga
     if (section._tlTipBubble && section._tlTipBubble.parentNode) section._tlTipBubble.parentNode.removeChild(section._tlTipBubble);

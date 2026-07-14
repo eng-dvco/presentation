@@ -35,7 +35,10 @@
      2.6rem (41.6px) acomoda a curva inteira; a esquerda (3rem) já acomodava.
      Cards não encolhem: reservar a calha só faz a fileira quebrar um pouco mais cedo. */
   padding: 1.2rem 2.6rem 1.5rem 3rem;
-  min-width: 0 !important;
+  /* sem !important: ele existia para derrotar o style inline que o slide-tl.js aplicava
+     (minWidth = scrollWidth + trail). Esse código agora IGNORA containers .tl-wrap
+     (isWrapTimeline), então não há mais nada para derrotar. */
+  min-width: 0;
   position: relative;
 }
 

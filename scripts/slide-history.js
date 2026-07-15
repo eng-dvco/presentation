@@ -390,7 +390,13 @@
       const cur = mes.querySelector('.hist-month-cur');
       if (!cur) return;
       const r = mes.getBoundingClientRect();
-      if (r.bottom <= 0 || r.top >= window.innerHeight) { cur.classList.remove('is-shown'); return; }
+      if (r.bottom <= 0 || r.top >= window.innerHeight) {
+        // fora da tela: some direto (invisível, sem fade), e cancela qualquer limpeza pendente
+        cur.classList.remove('is-shown');
+        if (cur._fadeT) { clearTimeout(cur._fadeT); cur._fadeT = 0; }
+        if (cur.textContent) cur.textContent = '';
+        return;
+      }
       // a área rolável é irmã do título dentro do cartão (a faixa zebrada fica entre os dois)
       const rol = mes.parentElement && mes.parentElement.querySelector('.hist-monthscroll');
       let atual = null;
@@ -403,8 +409,15 @@
         const d = atual.querySelector('.hist-day-date'), c = atual.querySelector('.hist-day-count');
         const txt = (d ? d.textContent : '') + (c ? '  ·  ' + c.textContent : '');
         if (cur.textContent !== txt) cur.textContent = txt;
+        if (cur._fadeT) { clearTimeout(cur._fadeT); cur._fadeT = 0; }   // cancela um fade-out em curso
         cur.classList.add('is-shown');   // ganha opacidade suavemente (fade-in via CSS)
-      } else if (cur.classList.contains('is-shown')) { cur.classList.remove('is-shown'); cur.textContent = ''; }
+      } else if (cur.classList.contains('is-shown')) {
+        // some por ESMAECIMENTO: perde a opacidade (transição) e só limpa o texto DEPOIS do fade,
+        // para a largura não colapsar antes de ele terminar de esmaecer
+        cur.classList.remove('is-shown');
+        if (cur._fadeT) clearTimeout(cur._fadeT);
+        cur._fadeT = setTimeout(() => { if (!cur.classList.contains('is-shown')) cur.textContent = ''; cur._fadeT = 0; }, 420);
+      }
     });
   }
 

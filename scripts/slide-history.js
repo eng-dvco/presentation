@@ -298,11 +298,44 @@
     cab.addEventListener('click', () => {
       const fechado = sec.classList.toggle('is-collapsed');
       cab.setAttribute('aria-expanded', String(!fechado));
-      requestAnimationFrame(atualizaMarcas);
+      requestAnimationFrame(() => { atualizaMarcas(); if (!fechado) centraTodos([sec]); });
     });
     sec.appendChild(cab);
     sec.appendChild(tl);
     return sec;
+  }
+
+  // posiciona o MARCADOR de cada dia no CENTRO vertical do 1º registro (metade da sua altura), em
+  // vez de no topo do rail — assim o registro em evidência aparece inteiro e o marcador começa a
+  // deslizar um pouco antes. Lê todas as alturas e só então escreve, para não fazer thrash de layout.
+  function centraTodos(dias) {
+    const leituras = [];
+    dias.forEach(day => {
+      const mark = day.querySelector('.hist-mark');
+      const card = day.querySelector('.hist-tl-body > .hist-card');
+      if (mark && card) leituras.push({ mark, ch: card.getBoundingClientRect().height, mh: mark.getBoundingClientRect().height });
+    });
+    leituras.forEach(({ mark, ch, mh }) => { mark.style.marginTop = Math.max(0, (ch - mh) / 2) + 'px'; });
+  }
+
+  function diasVisiveis() {
+    return [...document.querySelectorAll('.hist-day:not(.is-collapsed)')].filter(d => {
+      const r = d.getBoundingClientRect();
+      return r.bottom > 0 && r.top < innerHeight;
+    });
+  }
+
+  // cada dia é centrado quando o seu 1º registro entra em cena (aí ele já tem a altura real, mesmo
+  // com content-visibility) — de forma preguiçosa, sem forçar render de fora da tela nem recalcular
+  // a cada scroll (o que causaria deslocamento). Re-observa a cada render/resize.
+  let _obsCentro = null;
+  function atualizaCentragem() {
+    if (_obsCentro) _obsCentro.disconnect();
+    _obsCentro = new IntersectionObserver(entradas => {
+      centraTodos(entradas.filter(e => e.isIntersecting).map(e => e.target.closest('.hist-day')).filter(Boolean));
+    }, { rootMargin: '150px 0px' });
+    document.querySelectorAll('.hist-day:not(.is-collapsed) .hist-tl-body > .hist-card:first-child').forEach(c => _obsCentro.observe(c));
+    centraTodos(diasVisiveis());   // pass imediato p/ os dias já visíveis (sem "pulo" no load)
   }
 
   // percorre os dias visíveis e, em cada um, acha o registro sob a linha do marcador (busca
@@ -342,7 +375,8 @@
       if (!cur) return;
       const r = mes.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= window.innerHeight) { if (!cur.hidden) cur.hidden = true; return; }
-      const rol = mes.nextElementSibling;   // .hist-monthscroll (área rolável dos registros)
+      // a área rolável é irmã do título dentro do cartão (a faixa zebrada fica entre os dois)
+      const rol = mes.parentElement && mes.parentElement.querySelector('.hist-monthscroll');
       let atual = null;
       if (rol) rol.querySelectorAll('.hist-day-head').forEach(head => {
         // a data só migra para o título quando o subtítulo do dia SOME por completo sob o título
@@ -362,6 +396,9 @@
   function agendaMarcas() { if (_marcasRAF) return; _marcasRAF = requestAnimationFrame(() => { _marcasRAF = 0; atualizaMarcas(); atualizaMeses(); }); }
   window.addEventListener('scroll', agendaMarcas, { passive: true });
   window.addEventListener('resize', agendaMarcas, { passive: true });
+  // no resize as alturas dos registros mudam: recentra os marcadores (adiado, fora do caminho do scroll)
+  let _tCentra = 0;
+  window.addEventListener('resize', () => { clearTimeout(_tCentra); _tCentra = setTimeout(atualizaCentragem, 200); }, { passive: true });
 
   function agrupaPorDia(regs) {
     const mapa = new Map();
@@ -540,6 +577,7 @@
           mh.appendChild(el('span', 'hist-month-label', rotuloMes));
           mh.appendChild(el('span', 'hist-month-cur'));   // data + contagem do dia, absorvidas ao rolar
           caixa.appendChild(mh);
+          caixa.appendChild(el('div', 'hist-gap'));   // faixa zebrada suave logo abaixo do título do mês
           rolagem = el('div', 'hist-monthscroll');   // SÓ os registros rolam; a barra fica sob o título
           rolagem.addEventListener('scroll', agendaMarcas, { passive: true });
           caixa.appendChild(rolagem);
@@ -558,6 +596,7 @@
         h.appendChild(badgeAcao(acao));
         h.appendChild(el('span', 'hist-month-count', String(doGrupo.length)));
         caixa.appendChild(h);
+        caixa.appendChild(el('div', 'hist-gap'));   // faixa zebrada suave logo abaixo do título da ação
         const rolagem = el('div', 'hist-monthscroll');
         rolagem.addEventListener('scroll', agendaMarcas, { passive: true });
         agrupaPorDia(doGrupo).forEach(([dia, itens]) => rolagem.appendChild(bloco(dia, itens)));
@@ -565,8 +604,9 @@
         lista.appendChild(caixa);
       });
     }
-    // depois que o layout assenta, acerta os marcadores ao estado inicial da lista
-    requestAnimationFrame(atualizaMarcas);
+    // depois que o layout assenta, acerta os marcadores ao estado inicial da lista e centra cada
+    // marcador no 1º registro do seu dia
+    requestAnimationFrame(() => { atualizaCentragem(); atualizaMarcas(); });
   }
 
   // ── controles ──
@@ -620,7 +660,7 @@
       const h = s.querySelector('.hist-day-head');
       if (h) h.setAttribute('aria-expanded', String(!fechar));
     });
-    requestAnimationFrame(atualizaMarcas);
+    requestAnimationFrame(() => { atualizaCentragem(); atualizaMarcas(); });
   };
   const btnColapsar = document.querySelector('#hist-collapse');
   const btnExpandir = document.querySelector('#hist-expand');

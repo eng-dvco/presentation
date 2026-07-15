@@ -92,6 +92,19 @@
     (r.legendas || []).forEach(l => (l.imagens.amostra || []).forEach(a => nomes.push(a.src.split('/').pop())));
     return [...new Set(nomes)];
   };
+  // srcs SÓ das imagens de uma faixa/legenda (para localizar aquela alteração específica no slide)
+  const focoImgsGrupo = imagens => [...new Set((imagens && imagens.amostra || []).map(a => a.src.split('/').pop()))];
+
+  // guarda ONDE se saiu (retorno + realce) e O QUE localizar no slide destino (imagens + texto).
+  // Usada tanto pelo cartão inteiro quanto por cada faixa de imagens (clique individual).
+  function salvaFoco(r, imgs, texto) {
+    try {
+      sessionStorage.setItem('hist-scroll', String(window.scrollY));
+      sessionStorage.setItem('hist-from', location.pathname);
+      if (r.id) sessionStorage.setItem('hist-record', r.id);
+      sessionStorage.setItem('hist-focus', JSON.stringify({ imgs: imgs, texto: texto || null }));
+    } catch (e) { /* sessionStorage bloqueado: o link continua funcionando */ }
+  }
 
   // tira de miniaturas com o indicador "+N" (que CONTA a miniatura que cobre)
   function tiras(imagens, mini) {
@@ -169,18 +182,9 @@
     a.dataset.tipo = r.tipo;
     if (r.id) a.dataset.id = r.id;
 
-    // guarda de ONDE se saiu (retorno + realce do próprio registro) e O QUE realçar no slide
-    a.addEventListener('click', () => {
-      try {
-        sessionStorage.setItem('hist-scroll', String(window.scrollY));
-        sessionStorage.setItem('hist-from', location.pathname);
-        if (r.id) sessionStorage.setItem('hist-record', r.id);
-        sessionStorage.setItem('hist-focus', JSON.stringify({
-          imgs: focoImgs(r),
-          texto: (r.tipo === 'título' ? r.para : (r.breadcrumb || []).slice(-1)[0]) || null,
-        }));
-      } catch (e) { /* sessionStorage bloqueado: o link continua funcionando */ }
-    });
+    // clique no cartão INTEIRO: localiza todas as imagens do registro (foco geral)
+    const textoGeral = (r.tipo === 'título' ? r.para : (r.breadcrumb || []).slice(-1)[0]) || null;
+    a.addEventListener('click', () => salvaFoco(r, focoImgs(r), textoGeral));
 
     const topo = el('div', 'hist-card-top');
     topo.appendChild(badgeAcao(r.acao));
@@ -212,13 +216,25 @@
       const legendas = r.legendas || [];
       const umaImg = r.imagens && r.imagens.total === 1;
       if (legendas.length > 1) {
-        // legendas DIFERENTES por faixa de imagens: cada uma com as suas miniaturas (o vínculo)
+        // legendas DIFERENTES por faixa de imagens: cada uma com as suas miniaturas (o vínculo).
+        // Cada faixa é CLICÁVEL individualmente: leva o usuário exatamente àquela alteração no slide
+        // (localiza só as imagens daquela faixa), em vez de tratar o registro como um bloco único.
         const grupos = el('div', 'hist-info-groups');
         legendas.forEach(l => {
-          const g = el('div', 'hist-info-group');
+          const g = el('div', 'hist-info-group hist-info-group--link');
+          g.tabIndex = 0;
+          g.setAttribute('role', 'link');
+          g.title = 'Localizar esta alteração no slide';
           g.appendChild(el('p', 'hist-info-text', l.texto));
           const t = tiras(l.imagens, true);
           if (t) g.appendChild(t);
+          const irAoGrupo = e => {
+            e.preventDefault(); e.stopPropagation();   // sobrepõe o clique geral do cartão
+            salvaFoco(r, focoImgsGrupo(l.imagens), l.texto);
+            location.href = a.href;
+          };
+          g.addEventListener('click', irAoGrupo);
+          g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') irAoGrupo(e); });
           grupos.appendChild(g);
         });
         a.appendChild(infoBox(umaImg, [grupos]));

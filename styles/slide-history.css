@@ -805,6 +805,20 @@
   & + & { padding-top: var(--gap-8); border-top: 1px solid var(--lt-border); }
 }
 
+/* cada faixa é CLICÁVEL individualmente (localiza aquela alteração específica no slide): cursor de
+   mão e realce ao pairar/focar deixam claro que dá para selecionar uma faixa isolada */
+.hist-info-group--link {
+  margin: 0 calc(var(--gap-8) * -1);
+  padding: var(--gap-6) var(--gap-8);
+  border-radius: var(--border-smaller);
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover { background: var(--lt-surface-strong); }
+  &:focus-visible { background: var(--lt-surface-strong); outline: 2px solid var(--color-green); outline-offset: -2px; }
+  & + & { padding-top: var(--gap-6); border-top-color: transparent; }
+}
+
 /* ── miniaturas: até 5; a última carrega o indicador "+N" ── */
 .hist-thumbs {
   display: flex;

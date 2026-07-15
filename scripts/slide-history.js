@@ -224,25 +224,24 @@
     return a;
   }
 
-  // ── uma FAIXA HORÁRIA: todas as ações do mesmo horário sob um nó da linha do tempo ──
-  // O horário fica à esquerda; à sua direita, o ponto (cor = ação, ou "misto" quando há mais de
-  // uma); o traço vertical costura os pontos formando a linha do tempo; os registros à direita.
-  function slot(hora, registros) {
-    const acoes = [...new Set(registros.map(r => r.acao))];
-    const cor = acoes.length === 1 ? slug(acoes[0]) : 'misto';
-    const s = el('div', 'hist-slot');
-    s.dataset.acao = cor;
-    const rail = el('div', 'hist-slot-rail');
-    rail.appendChild(el('span', 'hist-hora', hora || '—'));
-    rail.appendChild(el('span', 'hist-dot hist-dot--' + cor));
-    s.appendChild(rail);
-    const cards = el('div', 'hist-slot-cards');
-    registros.forEach(r => cards.appendChild(cartao(r)));
-    s.appendChild(cards);
-    return s;
+  // hora "17:42" → "17h42" (formato pedido)
+  const horaBR = h => (h || '').replace(':', 'h');
+
+  // atualiza o MARCADOR sticky de um dia: horário (00h00) + cor do ponto pela ação corrente
+  function setMark(mark, hora, acao) {
+    const t = mark.querySelector('.hist-mark-time');
+    const d = mark.querySelector('.hist-dot');
+    const txt = horaBR(hora);
+    if (t.textContent !== txt) t.textContent = txt;
+    const cls = 'hist-dot hist-dot--' + slug(acao || 'misto');
+    if (d.className !== cls) d.className = cls;
   }
 
-  // ── um dia (colapsável): linha do tempo de faixas horárias ──
+  // ── um dia (colapsável): linha do tempo com MARCADOR STICKY ──
+  // Em vez de repetir horário+ponto em cada registro, um único marcador desliza pela linha do
+  // tempo (sticky) e, conforme o registro sob ele, atualiza o horário (00h00) e a COR do ponto
+  // pela ação — verde/amarelo/vermelho. O cabeçalho (a data) também gruda no topo. Como as datas
+  // e horários variam, cada dia tem a sua própria linha do tempo e o seu próprio marcador.
   function bloco(dia, registros) {
     const sec = el('section', 'hist-day');
     const cab = el('button', 'hist-day-head');
@@ -251,19 +250,52 @@
     cab.appendChild(el('span', 'hist-day-caret', '▾'));
     cab.appendChild(el('span', 'hist-day-date', dia));
     cab.appendChild(el('span', 'hist-day-count', plural(registros.length, 'alteração')));
+
     const tl = el('div', 'hist-day-items hist-tl');
-    // agrupa por horário (mais recente primeiro), preservando a ordem dos registros dentro dele
-    const porHora = new Map();
-    registros.forEach(r => { const h = r.hora || '—'; if (!porHora.has(h)) porHora.set(h, []); porHora.get(h).push(r); });
-    [...porHora.entries()].sort((a, b) => b[0].localeCompare(a[0])).forEach(([h, rs]) => tl.appendChild(slot(h, rs)));
+    const rail = el('div', 'hist-tl-rail');
+    const mark = el('div', 'hist-mark');
+    mark.appendChild(el('span', 'hist-mark-time'));
+    mark.appendChild(el('span', 'hist-dot'));
+    rail.appendChild(mark);
+    const corpo = el('div', 'hist-tl-body');
+    registros.forEach(r => { const c = cartao(r); c.dataset.hora = r.hora || ''; corpo.appendChild(c); });
+    tl.appendChild(rail);
+    tl.appendChild(corpo);
+    if (registros[0]) setMark(mark, registros[0].hora, registros[0].acao);
+
     cab.addEventListener('click', () => {
       const fechado = sec.classList.toggle('is-collapsed');
       cab.setAttribute('aria-expanded', String(!fechado));
+      agendaMarcas();
     });
     sec.appendChild(cab);
     sec.appendChild(tl);
     return sec;
   }
+
+  // percorre os dias visíveis e, em cada um, acha o registro sob a linha do marcador (busca
+  // binária — os cartões estão em ordem vertical) para atualizar horário e cor. rAF-throttled.
+  function atualizaMarcas() {
+    document.querySelectorAll('.hist-day:not(.is-collapsed)').forEach(day => {
+      const r = day.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= window.innerHeight) return;
+      const mark = day.querySelector('.hist-mark');
+      const cards = day.querySelectorAll('.hist-tl-body > .hist-card');
+      if (!mark || !cards.length) return;
+      const linha = mark.getBoundingClientRect().top + mark.offsetHeight / 2 + 1;
+      let lo = 0, hi = cards.length - 1, at = 0;
+      while (lo <= hi) {
+        const mid = (lo + hi) >> 1;
+        if (cards[mid].getBoundingClientRect().top <= linha) { at = mid; lo = mid + 1; }
+        else hi = mid - 1;
+      }
+      setMark(mark, cards[at].dataset.hora, cards[at].dataset.acao);
+    });
+  }
+  let _marcasRAF = 0;
+  function agendaMarcas() { if (_marcasRAF) return; _marcasRAF = requestAnimationFrame(() => { _marcasRAF = 0; atualizaMarcas(); }); }
+  window.addEventListener('scroll', agendaMarcas, { passive: true });
+  window.addEventListener('resize', agendaMarcas, { passive: true });
 
   function agrupaPorDia(regs) {
     const mapa = new Map();
@@ -370,6 +402,7 @@
         agrupaPorDia(doGrupo).forEach(([dia, itens]) => lista.appendChild(bloco(dia, itens)));
       });
     }
+    agendaMarcas();   // acerta os marcadores sticky ao estado inicial da lista recém-montada
   }
 
   // ── controles ──

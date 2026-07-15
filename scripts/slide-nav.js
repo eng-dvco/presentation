@@ -1139,6 +1139,40 @@ window.__openImgLightbox = function (imgEl) {
   bc.appendChild(a);
 })();
 
+// ---- 2b. REALCE AO CHEGAR DO HISTÓRICO ------------------------------------
+// Vindo de um registro do histórico, rola até o item que a alteração descreve (as imagens, ou o
+// título/atividade) e o pisca em verde — a mesma afordância do "localizar na página" do lightbox.
+(function realceVindoDoHistorico() {
+  if (document.querySelector('.hist-root')) return;
+  let foco = null;
+  try { foco = JSON.parse(sessionStorage.getItem('hist-focus') || 'null'); sessionStorage.removeItem('hist-focus'); } catch (e) { return; }
+  if (!foco) return;
+  const reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function realca() {
+    let alvos = [];
+    if (foco.imgs && foco.imgs.length) {
+      const querido = new Set(foco.imgs);
+      document.querySelectorAll('img').forEach(im => {
+        const nome = (im.getAttribute('src') || '').split('/').pop();
+        if (querido.has(nome)) { const bloco = im.closest('.img') || im; if (!alvos.includes(bloco)) alvos.push(bloco); }
+      });
+    }
+    if (!alvos.length && foco.texto) {
+      document.querySelectorAll('.title-h2, .title-h1').forEach(h => {
+        if (h.textContent.trim() === foco.texto) alvos.push(h.closest('.title-header-h2') || h.closest('.title-header-h1') || h);
+      });
+    }
+    if (!alvos.length) return;
+    alvos[0].scrollIntoView({ behavior: reduz ? 'auto' : 'smooth', block: 'center' });
+    alvos.forEach(t => { t.classList.remove('img-located'); void t.offsetWidth; t.classList.add('img-located'); });
+  }
+
+  // espera o layout/lazy assentar para medir a posição certa
+  if (document.readyState === 'complete') requestAnimationFrame(realca);
+  else window.addEventListener('load', () => requestAnimationFrame(realca), { once: true });
+})();
+
 // ---- 3. BOTÃO COPIAR URL --------------------------------------------------
 
 const breadcrumb = document.querySelector('.breadcrumb');

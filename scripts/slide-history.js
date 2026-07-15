@@ -77,8 +77,57 @@
     r.titulo, r.resumo, r.tipo, r.acao, r.de, r.para, r.curadoria, r.commit,
     (r.breadcrumb || []).join(' '),
     (r.imagens && r.imagens.amostra || []).map(a => a.nome).join(' '),
+    (r.legendas || []).map(l => l.texto).join(' '),
     r.documento && [r.documento.versao, r.documento.paginas, r.documento.tamanho].join(' '),
   ].filter(Boolean).join(' '));
+
+  // srcs das imagens que o registro toca (para o "localizar" no slide destino)
+  const focoImgs = r => {
+    const nomes = [];
+    (r.imagens && r.imagens.amostra || []).forEach(a => nomes.push(a.src.split('/').pop()));
+    (r.legendas || []).forEach(l => (l.imagens.amostra || []).forEach(a => nomes.push(a.src.split('/').pop())));
+    return [...new Set(nomes)];
+  };
+
+  // tira de miniaturas com o indicador "+N" (que CONTA a miniatura que cobre)
+  function tiras(imagens, mini) {
+    const total = imagens.total, amostra = imagens.amostra || [];
+    if (!amostra.length) return null;
+    const escondidas = total - (amostra.length - 1);
+    const mostraMais = total > amostra.length;
+    const wrap = el('div', 'hist-thumbs' + (mini ? ' hist-thumbs--mini' : ''));
+    amostra.forEach((im, i) => {
+      const cel = el('span', 'hist-thumb');
+      const img = document.createElement('img');
+      img.src = base + im.miniatura; img.alt = im.nome; img.loading = 'lazy';
+      img.width = mini ? 46 : 64; img.height = mini ? 35 : 48;
+      cel.appendChild(img);
+      if (i === amostra.length - 1 && mostraMais) cel.appendChild(el('span', 'hist-thumb-mais', '+' + escondidas));
+      wrap.appendChild(cel);
+    });
+    return wrap;
+  }
+
+  // de → para em dois subcontainers (lado a lado no desktop, empilhados no mobile)
+  function delta(de, para) {
+    const d = el('div', 'hist-delta');
+    [['de', de], ['para', para]].forEach(([papel, valor]) => {
+      const cx = el('div', 'hist-delta-box hist-delta-box--' + papel);
+      cx.appendChild(el('span', 'hist-delta-label', papel));
+      cx.appendChild(el('p', 'hist-delta-valor', valor));
+      d.appendChild(cx);
+    });
+    return d;
+  }
+
+  // container rotulado "informação da(s) imagem(ns)": deixa claro que o texto é a legenda das
+  // fotos, não uma nota solta. Recebe o miolo já montado (texto, de/para ou grupos legenda↔fotos).
+  function infoBox(umaImagem, miolo) {
+    const box = el('div', 'hist-info');
+    box.appendChild(el('span', 'hist-info-label', umaImagem ? 'informação da imagem' : 'informação das imagens'));
+    miolo.forEach(n => n && box.appendChild(n));
+    return box;
+  }
 
   // ── um registro ──
   function cartao(r) {
@@ -86,19 +135,22 @@
     a.href = base + (r.link || 'slides/index.html');
     a.dataset.acao = r.acao;
     a.dataset.tipo = r.tipo;
+    if (r.id) a.dataset.id = r.id;
 
-    // guarda de ONDE se saiu, p/ o slide oferecer o retorno e a rolagem ser restaurada
+    // guarda de ONDE se saiu (retorno + realce do próprio registro) e O QUE realçar no slide
     a.addEventListener('click', () => {
       try {
         sessionStorage.setItem('hist-scroll', String(window.scrollY));
         sessionStorage.setItem('hist-from', location.pathname);
+        if (r.id) sessionStorage.setItem('hist-record', r.id);
+        sessionStorage.setItem('hist-focus', JSON.stringify({
+          imgs: focoImgs(r),
+          texto: (r.tipo === 'título' ? r.para : (r.breadcrumb || []).slice(-1)[0]) || null,
+        }));
       } catch (e) { /* sessionStorage bloqueado: o link continua funcionando */ }
     });
 
     const topo = el('div', 'hist-card-top');
-    // HORA, não a data: a data já titula o grupo. Dentro de um mesmo dia há até 10 commits,
-    // então a hora é o que de fato distingue um registro do outro.
-    if (r.hora) topo.appendChild(el('span', 'hist-hora', r.hora));
     topo.appendChild(el('span', 'hist-badge hist-badge--' + slug(r.acao), r.acao));
     topo.appendChild(el('span', 'hist-type', r.tipo));
     a.appendChild(topo);
@@ -114,51 +166,46 @@
       a.appendChild(bc);
     }
 
-    // ── DE → PARA em dois subcontainers (lado a lado no desktop, empilhados no mobile) ──
-    if (r.de != null && r.para != null && r.de !== r.para) {
-      const delta = el('div', 'hist-delta');
-      [['de', r.de], ['para', r.para]].forEach(([papel, valor]) => {
-        const cx = el('div', 'hist-delta-box hist-delta-box--' + papel);
-        cx.appendChild(el('span', 'hist-delta-label', papel));
-        cx.appendChild(el('p', 'hist-delta-valor', valor));
-        delta.appendChild(cx);
-      });
-      a.appendChild(delta);
-    } else if (r.resumo) {
-      a.appendChild(el('p', 'hist-resumo', r.resumo));
-    }
+    const temDelta = r.de != null && r.para != null && r.de !== r.para;
 
-    // ── IMAGENS: miniaturas com o indicador "+N" ──
-    if (r.imagens && r.imagens.amostra && r.imagens.amostra.length) {
-      const total = r.imagens.total;
-      const amostra = r.imagens.amostra;
-      // O indicador COBRE a miniatura em que está — então ela também não é vista, e precisa
-      // ser contada. Com 6 imagens e 3 miniaturas, a 3ª exibe "+4" (as 3 escondidas + ela
-      // própria), não "+3". Só aparece quando há de fato imagem oculta.
-      const escondidas = total - (amostra.length - 1);
-      const mostraMais = total > amostra.length;
+    // ── OBSERVAÇÃO: a legenda, embrulhada, VINCULADA à(s) imagem(ns) que a receberam ──
+    if (r.tipo === 'observação') {
+      const umaImg = r.imagens && r.imagens.total === 1;
+      const miolo = [temDelta ? delta(r.de, r.para) : (r.resumo ? el('p', 'hist-info-text', r.resumo) : null)];
+      if (r.imagens) miolo.push(tiras(r.imagens, true));
+      a.appendChild(infoBox(umaImg, miolo));
 
-      const tiras = el('div', 'hist-thumbs');
-      amostra.forEach((im, i) => {
-        const cel = el('span', 'hist-thumb');
-        const img = document.createElement('img');
-        img.src = base + im.miniatura;
-        img.alt = im.nome;
-        img.loading = 'lazy';
-        img.width = 64; img.height = 48;
-        cel.appendChild(img);
-        if (i === amostra.length - 1 && mostraMais) {
-          cel.appendChild(el('span', 'hist-thumb-mais', '+' + escondidas));
-        }
-        tiras.appendChild(cel);
-      });
-      a.appendChild(tiras);
+    // ── IMAGENS: legendas por faixa (1-2: X · 3-4: Y) + tira de miniaturas + metadados ──
+    } else if (r.tipo === 'imagens') {
+      const legendas = r.legendas || [];
+      const umaImg = r.imagens && r.imagens.total === 1;
+      if (legendas.length > 1) {
+        // legendas DIFERENTES por faixa de imagens: cada uma com as suas miniaturas (o vínculo)
+        const grupos = el('div', 'hist-info-groups');
+        legendas.forEach(l => {
+          const g = el('div', 'hist-info-group');
+          g.appendChild(el('p', 'hist-info-text', l.texto));
+          const t = tiras(l.imagens, true);
+          if (t) g.appendChild(t);
+          grupos.appendChild(g);
+        });
+        a.appendChild(infoBox(umaImg, [grupos]));
+      } else {
+        if (legendas.length === 1) a.appendChild(infoBox(umaImg, [el('p', 'hist-info-text', legendas[0].texto)]));
+        if (r.imagens) { const t = tiras(r.imagens, false); if (t) a.appendChild(t); }
+      }
+      if (r.imagens) {
+        const met = el('div', 'hist-meta');
+        met.appendChild(el('span', 'hist-meta-item', plural(r.imagens.total, 'imagem')));
+        if (r.imagens.pesoTotal) met.appendChild(el('span', 'hist-meta-item', r.imagens.pesoTotal));
+        if (r.removidas) met.appendChild(el('span', 'hist-meta-item', r.removidas + ' substituída(s)'));
+        a.appendChild(met);
+      }
 
-      const met = el('div', 'hist-meta');
-      met.appendChild(el('span', 'hist-meta-item', total + (total === 1 ? ' imagem' : ' imagens')));
-      met.appendChild(el('span', 'hist-meta-item', r.imagens.pesoTotal));
-      if (r.removidas) met.appendChild(el('span', 'hist-meta-item', r.removidas + ' substituída(s)'));
-      a.appendChild(met);
+    // ── DEMAIS (título, subtítulo, nome/seção do slide, funções): de/para ou resumo ──
+    } else {
+      if (temDelta) a.appendChild(delta(r.de, r.para));
+      else if (r.resumo) a.appendChild(el('p', 'hist-resumo', r.resumo));
     }
 
     // ── DOCUMENTOS: extensão, versão, páginas, tamanho ──
@@ -177,7 +224,25 @@
     return a;
   }
 
-  // ── um dia (colapsável) ──
+  // ── uma FAIXA HORÁRIA: todas as ações do mesmo horário sob um nó da linha do tempo ──
+  // O horário fica à esquerda; à sua direita, o ponto (cor = ação, ou "misto" quando há mais de
+  // uma); o traço vertical costura os pontos formando a linha do tempo; os registros à direita.
+  function slot(hora, registros) {
+    const acoes = [...new Set(registros.map(r => r.acao))];
+    const cor = acoes.length === 1 ? slug(acoes[0]) : 'misto';
+    const s = el('div', 'hist-slot');
+    s.dataset.acao = cor;
+    const rail = el('div', 'hist-slot-rail');
+    rail.appendChild(el('span', 'hist-hora', hora || '—'));
+    rail.appendChild(el('span', 'hist-dot hist-dot--' + cor));
+    s.appendChild(rail);
+    const cards = el('div', 'hist-slot-cards');
+    registros.forEach(r => cards.appendChild(cartao(r)));
+    s.appendChild(cards);
+    return s;
+  }
+
+  // ── um dia (colapsável): linha do tempo de faixas horárias ──
   function bloco(dia, registros) {
     const sec = el('section', 'hist-day');
     const cab = el('button', 'hist-day-head');
@@ -186,22 +251,23 @@
     cab.appendChild(el('span', 'hist-day-caret', '▾'));
     cab.appendChild(el('span', 'hist-day-date', dia));
     cab.appendChild(el('span', 'hist-day-count', plural(registros.length, 'alteração')));
-    const cx = el('div', 'hist-day-items');
-    registros.forEach(r => cx.appendChild(cartao(r)));
+    const tl = el('div', 'hist-day-items hist-tl');
+    // agrupa por horário (mais recente primeiro), preservando a ordem dos registros dentro dele
+    const porHora = new Map();
+    registros.forEach(r => { const h = r.hora || '—'; if (!porHora.has(h)) porHora.set(h, []); porHora.get(h).push(r); });
+    [...porHora.entries()].sort((a, b) => b[0].localeCompare(a[0])).forEach(([h, rs]) => tl.appendChild(slot(h, rs)));
     cab.addEventListener('click', () => {
       const fechado = sec.classList.toggle('is-collapsed');
       cab.setAttribute('aria-expanded', String(!fechado));
     });
     sec.appendChild(cab);
-    sec.appendChild(cx);
+    sec.appendChild(tl);
     return sec;
   }
 
   function agrupaPorDia(regs) {
     const mapa = new Map();
     regs.forEach(r => { if (!mapa.has(r.data)) mapa.set(r.data, []); mapa.get(r.data).push(r); });
-    // dentro do dia, o mais recente primeiro (pela hora)
-    mapa.forEach(v => v.sort((a, b) => (b.hora || '').localeCompare(a.hora || '')));
     return [...mapa.entries()].sort((a, b) => (parse(b[0]) || { chave: 0 }).chave - (parse(a[0]) || { chave: 0 }).chave);
   }
 
@@ -261,6 +327,7 @@
 
     montaFiltroAcao();
     montaFiltroTipo(daAba, semTipo);
+    sincronizaFunil();
 
     if (!regs.length) {
       vazio.hidden = false;
@@ -337,6 +404,31 @@
     });
   }
 
+  // ── menu de filtros (funil) ──
+  // Recolhe as barras de ação e de elemento num dropdown ao lado da busca, poupando espaço
+  // vertical. Um ponto no botão avisa quando há filtro ativo mesmo com o menu fechado.
+  const filtroToggle = document.querySelector('#hist-filter-toggle');
+  const filtroPanel = document.querySelector('#hist-filter-panel');
+  const filtroDot = document.querySelector('.hist-filtermenu-dot');
+  const filtroClear = document.querySelector('#hist-filter-clear');
+  const abreFunil = abrir => { if (!filtroPanel) return; filtroPanel.hidden = !abrir; filtroToggle.setAttribute('aria-expanded', String(abrir)); };
+  if (filtroToggle) filtroToggle.addEventListener('click', e => { e.stopPropagation(); abreFunil(filtroPanel.hidden); });
+  if (filtroPanel) filtroPanel.addEventListener('click', e => e.stopPropagation());
+  document.addEventListener('click', () => abreFunil(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') abreFunil(false); });
+  if (filtroClear) filtroClear.addEventListener('click', () => {
+    filtroAcao = 'all'; filtroTipo = 'all'; termo = '';
+    if (busca) busca.value = '';
+    if (limpaBusca) limpaBusca.hidden = true;
+    agendarRender();
+  });
+  function sincronizaFunil() {
+    if (!filtroToggle) return;
+    const ativo = filtroAcao !== 'all' || filtroTipo !== 'all' || !!termo;
+    if (filtroDot) filtroDot.hidden = !ativo;
+    filtroToggle.classList.toggle('is-active', ativo);
+  }
+
   // colapsar / expandir tudo
   const todos = (fechar) => {
     document.querySelectorAll('.hist-day').forEach(s => {
@@ -358,12 +450,27 @@
   // retira o botão "‹ histórico" dos slides, já que o usuário voltou.
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   function restaurarRolagem() {
-    let y = null;
+    let y = null, rec = null;
     try {
       y = sessionStorage.getItem('hist-scroll');
+      rec = sessionStorage.getItem('hist-record');
       sessionStorage.removeItem('hist-scroll');
       sessionStorage.removeItem('hist-from');
+      sessionStorage.removeItem('hist-record');
+      sessionStorage.removeItem('hist-focus');
     } catch (e) { /* bloqueado */ }
+    // preferimos localizar o PRÓPRIO registro clicado: rola até ele e o pisca em verde (mesma
+    // afordância do "localizar" no slide). Só caímos no scroll bruto se o registro não existir.
+    if (rec) {
+      const alvo = lista.querySelector('.hist-card[data-id="' + (window.CSS && CSS.escape ? CSS.escape(rec) : rec) + '"]');
+      if (alvo) {
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          alvo.scrollIntoView({ block: 'center' });
+          alvo.classList.remove('hist-located'); void alvo.offsetWidth; alvo.classList.add('hist-located');
+        }));
+        return;
+      }
+    }
     if (y == null) return;
     requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, +y)));
   }

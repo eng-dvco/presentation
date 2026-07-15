@@ -60,8 +60,21 @@
               <input id="hist-search" type="search" placeholder="Buscar por slide, seção, imagem, documento…" autocomplete="off" aria-label="Buscar alterações" />
               <button type="button" id="hist-search-clear" hidden aria-label="Limpar busca">✕</button>
             </label>
-            <div class="hist-filter-bar hist-filter-acao" role="group" aria-label="Filtrar por ação"></div>
-            <div class="hist-filter-bar hist-filter-tipo" role="group" aria-label="Filtrar por elemento"></div>
+            <div class="hist-filtermenu">
+              <button type="button" class="hist-filtermenu-btn" id="hist-filter-toggle" aria-expanded="false" aria-controls="hist-filter-panel" aria-label="Filtros">
+                <svg class="hist-funnel-icon" viewBox="0 0 12 12" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 2.5 L11 2.5 L7 7 L7 10.5 L5 10.5 L5 7 Z"/></svg>
+                <span class="hist-filtermenu-txt">Filtros</span>
+                <span class="hist-filtermenu-dot" hidden aria-hidden="true"></span>
+              </button>
+              <div class="hist-filtermenu-panel" id="hist-filter-panel" hidden>
+                <div class="hist-filtermenu-head">
+                  <span class="hist-filtermenu-title">Filtrar por</span>
+                  <button type="button" class="hist-filter-clear" id="hist-filter-clear">Limpar</button>
+                </div>
+                <div class="hist-filter-bar hist-filter-acao" role="group" aria-label="Filtrar por ação"></div>
+                <div class="hist-filter-bar hist-filter-tipo" role="group" aria-label="Filtrar por elemento"></div>
+              </div>
+            </div>
           </div>
 
           <p class="hist-summary"></p>

@@ -135,11 +135,78 @@
 
 .hist-day-count { margin-left: auto; }
 
-.hist-day-items {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-8);
+/* ── LINHA DO TEMPO do dia ──
+   Cada FAIXA HORÁRIA (um horário de commit) é um nó: o horário à esquerda, o ponto colorido pela
+   ação à sua direita, um traço vertical costurando os pontos, e os registros daquele horário à
+   direita. Assim, ações do mesmo horário partilham um nó — mais compacto — e a coluna vira uma
+   linha do tempo, com o mesmo ponto usado nos cronogramas (variables/slide-tl). */
+.hist-day-items { display: flex; flex-direction: column; }
+
+.hist-tl { --hist-rail: 3.6rem; --hist-dot: 12px; }
+
+.hist-slot {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--hist-rail) 1fr;
+  column-gap: var(--gap-16);
+  padding-bottom: var(--gap-12);
+
+  /* o TRAÇO: linha vertical no eixo dos pontos. Percorre o slot inteiro, então slots contíguos
+     formam um traço contínuo; o ponto (z maior) cobre-o em cada nó. */
+  &::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--hist-rail) - var(--hist-dot) / 2);
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background: var(--lt-border-strong);
+    transform: translateX(-50%);
+  }
+  /* o último nó encerra o traço no ponto — sem sobra pendurada ao lado do último registro */
+  &:last-child::before { bottom: auto; height: calc(var(--gap-12) + var(--hist-dot)); }
 }
+
+.hist-slot-rail {
+  position: relative;
+  /* o horário alinha à direita e reserva a borda p/ o ponto; o padding-top põe ambos na altura
+     da 1ª linha do registro (a "distância diagonal" pedida: horário acima-à-esquerda do card) */
+}
+
+.hist-hora {
+  display: block;
+  padding-top: var(--gap-8);
+  padding-right: calc(var(--hist-dot) + var(--gap-6));
+  text-align: right;
+  color: var(--lt-text-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ponto do nó — mesmo desenho dos cronogramas: disco cheio + anel suave da cor da ação */
+.hist-dot {
+  position: absolute;
+  right: 0;
+  top: calc(var(--gap-8) + 0.15em);
+  z-index: 1;
+  width: var(--hist-dot);
+  height: var(--hist-dot);
+  border-radius: 50%;
+  background: var(--dot, var(--lt-border-strong));
+  box-shadow: 0 0 0 2.5px var(--dot-ring, transparent);
+
+  &.hist-dot--adicao,
+  &.hist-dot--implementada { --dot: var(--hist-add); --dot-ring: var(--color-green-alpha-25); }
+  &.hist-dot--modificacao,
+  &.hist-dot--aperfeicoada { --dot: var(--hist-mod); --dot-ring: var(--color-yellow-alpha-25); }
+  &.hist-dot--delecao,
+  &.hist-dot--descartada { --dot: var(--hist-del); --dot-ring: var(--color-red-alpha-25); }
+  &.hist-dot--misto { --dot: var(--lt-text-faint); --dot-ring: var(--lt-border); }
+}
+
+.hist-slot-cards { display: flex; flex-direction: column; gap: var(--gap-8); min-width: 0; }
 
 /* colapsado: some com os registros e gira a seta */
 .hist-day.is-collapsed {
@@ -151,6 +218,12 @@
 .hist-card {
   position: relative;
   display: block;
+  /* largura FIXA no container (não depende do conteúdo): a filtragem ou a contagem de registros
+     nunca deve mudar a largura de um cartão. É também o que impede o content-visibility abaixo de
+     encolher o cartão enquanto ele está fora da tela — a contenção de tamanho não colapsa uma
+     largura definida. */
+  width: 100%;
+  box-sizing: border-box;
   padding: var(--gap-12) var(--gap-16);
   padding-left: var(--gap-16);
   border: 1px solid var(--lt-border);
@@ -165,7 +238,8 @@
      content-visibility o navegador os pula até que rolem para perto da viewport, cortando esse
      custo sem tocar no JS. O `auto` do contain-intrinsic-size faz o navegador MEMORIZAR a altura
      real de cada cartão já renderizado — assim a barra de rolagem e a restauração do ponto de
-     leitura (que salta por pixel) continuam corretas; 200px é só o palpite inicial. */
+     leitura (que salta por pixel) continuam corretas; a largura vem do width:100% acima, então a
+     contenção só afeta a ALTURA (200px é o palpite inicial). */
   content-visibility: auto;
   contain-intrinsic-size: auto 200px;
 
@@ -199,6 +273,19 @@
 
   &.hist-card--delecao::before,
   &.hist-card--descartada::before { background: var(--hist-del); }
+}
+
+/* realce verde temporário ao chegar num registro (vindo do slide pelo botão "‹ histórico") —
+   mesma linguagem do "localizar na página" do lightbox. */
+.hist-located { animation: hist-locate-flash 2.4s ease-out; }
+
+@keyframes hist-locate-flash {
+  0%, 12% { box-shadow: 0 0 0 3px var(--color-green), 0 0 16px 3px var(--color-green); border-color: var(--color-green); }
+  100%    { box-shadow: var(--lt-shadow); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hist-located { animation: none; box-shadow: 0 0 0 3px var(--color-green); }
 }
 
 .hist-card-top {
@@ -310,12 +397,98 @@
 
 .hist-delta-box--de .hist-delta-valor { color: var(--ink-3); }
 
-/* ── barra de filtros (ação e elemento) + busca ── */
+/* ── busca + menu de filtros (funil) ──
+   As barras de ação e elemento vivem num dropdown recolhível ao lado da busca: economiza espaço
+   vertical e mantém a lista de registros mais alta na tela. */
 .hist-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  padding-bottom: var(--gap-16);
+}
+
+.hist-search-label { flex: 1 1 auto; }
+
+.hist-filtermenu { position: relative; flex: 0 0 auto; }
+
+.hist-filtermenu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-6);
+  padding: var(--gap-8) var(--gap-12);
+  border: 1px solid var(--lt-border);
+  border-radius: 99px;
+  background: var(--lt-surface-muted);
+  color: var(--lt-text-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+
+  &:hover,
+  &[aria-expanded="true"] { background: var(--lt-hover); color: var(--lt-text); border-color: var(--lt-border-strong); }
+  &.is-active { border-color: var(--color-green); color: var(--lt-text); }
+}
+
+.hist-funnel-icon { flex-shrink: 0; }
+
+/* ponto verde: há filtro ativo mesmo com o menu fechado */
+.hist-filtermenu-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-green);
+  box-shadow: 0 0 0 2px var(--color-green-alpha-25);
+}
+
+.hist-filtermenu-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 300;
+  width: max-content;
+  max-width: min(90vw, 420px);
+  padding: var(--gap-12);
   display: flex;
   flex-direction: column;
   gap: var(--gap-8);
-  padding-bottom: var(--gap-16);
+  background: var(--lt-surface-strong);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-general);
+  box-shadow: var(--shadow-popover);
+
+  &[hidden] { display: none; }
+}
+
+.hist-filtermenu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-12);
+}
+
+.hist-filtermenu-title {
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lt-text-faint);
+}
+
+.hist-filter-clear {
+  border: 1px solid var(--lt-border);
+  border-radius: 99px;
+  background: none;
+  color: var(--lt-text-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  padding: var(--gap-4) var(--gap-12);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+
+  &:hover { background: var(--lt-hover); color: var(--lt-text); }
 }
 
 .hist-search-label {
@@ -427,12 +600,57 @@
   font-style: italic;
 }
 
-/* ── miniaturas: no máximo 3; a última carrega o indicador "+N" ── */
+/* ── "informação da(s) imagem(ns)": embrulha a legenda das fotos num container rotulado, para
+   deixar claro que aquele texto é a legenda — não uma nota solta. ── */
+.hist-info {
+  margin-top: var(--gap-8);
+  padding: var(--gap-8) var(--gap-12);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-smaller);
+  background: var(--lt-surface-muted);
+}
+
+.hist-info-label {
+  display: block;
+  margin-bottom: var(--gap-4);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lt-text-faint);
+}
+
+.hist-info-text {
+  margin: 0;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text-muted);
+}
+
+/* legendas DIFERENTES por faixa de imagens (1-2: X · 3-4: Y): cada legenda com as suas fotos,
+   separadas por um filete — é o vínculo legenda↔imagem pedido */
+.hist-info-groups { display: flex; flex-direction: column; gap: var(--gap-8); }
+.hist-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+
+  & + & { padding-top: var(--gap-8); border-top: 1px solid var(--lt-border); }
+}
+
+/* ── miniaturas: até 5; a última carrega o indicador "+N" ── */
 .hist-thumbs {
   display: flex;
   flex-wrap: wrap;   /* 5 miniaturas cabem no cartão; a quebra é a rede para o viewport estreito */
   gap: var(--gap-6);
   padding-top: var(--gap-8);
+}
+
+/* miniaturas menores dentro das legendas por faixa e nas observações vinculadas */
+.hist-thumbs--mini {
+  padding-top: var(--gap-4);
+  & .hist-thumb { width: 46px; height: 35px; }
 }
 
 .hist-thumb {

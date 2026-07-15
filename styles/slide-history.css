@@ -77,32 +77,46 @@
 .hist-source { padding-bottom: var(--gap-8); }
 
 /* ── cabeçalho de mês / de ação ── */
-/* o título do MÊS é o TOPO do conjunto (cantos arredondados) e o ÚNICO elemento sticky: gruda no
-   topo e ABSORVE a data + contagem do dia atual (JS) conforme os cabeçalhos de dia deslizam por
-   baixo — mantendo a referência visível, junto do marcador de horário lateral. */
+/* cada MÊS é um CARTÃO: o título fica FIXO no topo e só os registros rolam (num elemento interno
+   com scroll próprio). Assim um mês inteiro pode ser pulado com o scroll da página, e o título —
+   fora da área rolável — nunca chega a encostar no breadcrumb. */
+.hist-monthbox {
+  position: relative;
+  margin-top: var(--gap-32);
+  border-radius: var(--border-item);
+  background: var(--lt-surface-strong);
+
+  &:first-child { margin-top: 0; }
+}
+
+/* SÓ os registros rolam aqui: a barra de rolagem fica sob o título, limitada a esta área. O
+   conteúdo excedente rola por dentro; a próxima subseção fica espreitando embaixo, deixando claro
+   que dá para pulá-la. */
+.hist-monthscroll {
+  max-height: min(64vh, 700px);
+  overflow-y: auto;
+  border-radius: 0 0 var(--border-item) var(--border-item);
+  scrollbar-width: thin;
+  scrollbar-color: var(--lt-border-strong) transparent;
+}
+
+/* o título do MÊS é o TOPO do cartão (cantos arredondados), fixo acima da área rolável, e ABSORVE a
+   data + contagem do dia atual (JS) somente quando o subtítulo do dia some sob ele — mantendo a
+   referência visível, junto do marcador de horário lateral. */
 .hist-month {
-  position: sticky;
-  /* o breadcrumb (sticky, ~25px, z:1000) fica ACIMA; o mês tuca-se 1px sob ele para não sobrar
-     nenhuma fresta por onde o conteúdo apareça ao rolar */
-  top: 1.5rem;
-  z-index: 4;
+  position: relative;
+  z-index: 2;   /* acima da área rolável, para a sombra cair sobre os registros */
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
   gap: var(--gap-2) var(--gap-8);
-  margin: var(--gap-32) 0 0;   /* sem margin inferior: encosta no 1º dia (mesmo conjunto) */
-  /* padding-top MAIOR e opaco: quando o mês prende sob o breadcrumb, esse espaço branco afasta o
-     título dele (margem harmoniosa) SEM deixar fresta por onde o conteúdo apareça ao rolar */
-  padding: var(--gap-24) var(--gap-16) var(--gap-8);
+  padding: var(--gap-16) var(--gap-16) var(--gap-8);
   border-radius: var(--border-item) var(--border-item) 0 0;
   background: var(--lt-surface-strong);
-  /* leve sombra ABAIXO do título: quando ele gruda, separa-o dos registros (todos brancos) que
-     passam por baixo. Como o mês tem z maior, a sombra cai sobre o marcador lateral e os registros. */
+  /* leve sombra ABAIXO do título: separa-o dos registros (todos brancos) que rolam por baixo */
   box-shadow: 0 6px 10px -6px rgba(0, 0, 0, 0.18);
   font-family: var(--font-family-general);
   color: var(--lt-text);
-
-  &:first-child { margin-top: 0; }
 }
 
 /* o mês (capitalização certa — só o nome — é feita no JS, não com text-transform) */
@@ -218,13 +232,13 @@
   }
 }
 
-/* MARCADOR: [horário] [ponto], preso por volta do CENTRO VERTICAL da viewport (não junto ao topo),
-   para que o registro em evidência — o que fica sob o marcador — apareça no meio da tela, fácil de
-   ver, em vez de colar na extremidade superior. O ponto encosta no traço; desliza pela linha do
-   tempo conforme se rola. */
+/* MARCADOR: [horário] [ponto]. Como só os registros rolam (área interna), o marcador gruda perto do
+   TOPO dessa área — logo abaixo do título fixo do mês: título + data + horário formam a "cabeça de
+   leitura"; os registros deslizam por baixo e o registro sob o marcador é o evidenciado. O ponto
+   encosta no traço e desliza pela linha do tempo conforme se rola. */
 .hist-mark {
   position: sticky;
-  top: 44vh;
+  top: 0.9rem;   /* perto do topo da área rolável dos registros (o título do mês fica acima, fixo) */
   z-index: 2;
   display: flex;
   align-items: center;
@@ -232,7 +246,7 @@
   gap: var(--gap-6);
   /* respiro no topo (afasta da data) e no fim (o marcador não cola no último registro: a margem
      inferior do elemento sticky recua o ponto onde ele para) */
-  margin-top: 2.1rem;
+  margin-top: 1rem;
   margin-bottom: 2.6rem;
   /* o ponto (à direita) fica centrado no traço, totalmente DENTRO da faixa; o horário respira
      à esquerda. Assim o marcador guarda distância das bordas e o círculo não transborda. */

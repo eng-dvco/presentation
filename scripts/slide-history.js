@@ -342,12 +342,13 @@
       if (!cur) return;
       const r = mes.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= window.innerHeight) { if (!cur.hidden) cur.hidden = true; return; }
+      const rol = mes.nextElementSibling;   // .hist-monthscroll (área rolável dos registros)
       let atual = null;
-      for (let s = mes.nextElementSibling; s && !s.classList.contains('hist-month'); s = s.nextElementSibling) {
-        if (!s.classList.contains('hist-day')) continue;
-        const head = s.querySelector('.hist-day-head');
-        if (head && head.getBoundingClientRect().top <= r.bottom + 1) atual = head;
-      }
+      if (rol) rol.querySelectorAll('.hist-day-head').forEach(head => {
+        // a data só migra para o título quando o subtítulo do dia SOME por completo sob o título
+        // (a base dele passa acima da base do título), não assim que começa a entrar
+        if (head.getBoundingClientRect().bottom <= r.bottom + 1) atual = head;
+      });
       if (atual) {
         const d = atual.querySelector('.hist-day-date'), c = atual.querySelector('.hist-day-count');
         const txt = (d ? d.textContent : '') + (c ? '  ·  ' + c.textContent : '');
@@ -523,29 +524,45 @@
       Object.entries(cont).map(([k, v]) => plural(v, k)).join(' · ');
 
     if (agrupamento === 'cronologico') {
-      let mesAtual = null;
+      // cada MÊS é um CONTAINER: o título fica FIXO no topo do cartão e só os REGISTROS rolam, num
+      // elemento interno com scroll próprio (a barra de rolagem fica sob o título, limitada aos
+      // registros). Assim um mês inteiro pode ser pulado pelo scroll da página, e o título nunca
+      // encosta no breadcrumb.
+      let mesAtual = null, rolagem = null;
       agrupaPorDia(regs).forEach(([dia, itens]) => {
         const p = parse(dia);
         const mes = p ? MESES[p.mes].charAt(0).toUpperCase() + MESES[p.mes].slice(1) : '—';
         const rotuloMes = p ? mes + ' de ' + p.ano : '—';
         if (rotuloMes !== mesAtual) {
           mesAtual = rotuloMes;
+          const caixa = el('div', 'hist-monthbox');
           const mh = el('h2', 'hist-month');
           mh.appendChild(el('span', 'hist-month-label', rotuloMes));
           mh.appendChild(el('span', 'hist-month-cur'));   // data + contagem do dia, absorvidas ao rolar
-          lista.appendChild(mh);
+          caixa.appendChild(mh);
+          rolagem = el('div', 'hist-monthscroll');   // SÓ os registros rolam; a barra fica sob o título
+          rolagem.addEventListener('scroll', agendaMarcas, { passive: true });
+          caixa.appendChild(rolagem);
+          lista.appendChild(caixa);
         }
-        lista.appendChild(bloco(dia, itens));
+        rolagem.appendChild(bloco(dia, itens));
       });
     } else {
+      // mesma estrutura de cartão do cronológico: cada AÇÃO é um container com título fixo e área de
+      // registros com scroll próprio, para poder pular um grupo inteiro pelo scroll da página.
       ACOES[aba].forEach(acao => {
         const doGrupo = regs.filter(r => r.acao === acao);
         if (!doGrupo.length) return;
+        const caixa = el('div', 'hist-monthbox');
         const h = el('h2', 'hist-month hist-month--acao');
         h.appendChild(badgeAcao(acao));
         h.appendChild(el('span', 'hist-month-count', String(doGrupo.length)));
-        lista.appendChild(h);
-        agrupaPorDia(doGrupo).forEach(([dia, itens]) => lista.appendChild(bloco(dia, itens)));
+        caixa.appendChild(h);
+        const rolagem = el('div', 'hist-monthscroll');
+        rolagem.addEventListener('scroll', agendaMarcas, { passive: true });
+        agrupaPorDia(doGrupo).forEach(([dia, itens]) => rolagem.appendChild(bloco(dia, itens)));
+        caixa.appendChild(rolagem);
+        lista.appendChild(caixa);
       });
     }
     // depois que o layout assenta, acerta os marcadores ao estado inicial da lista

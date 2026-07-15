@@ -389,10 +389,14 @@
     document.querySelectorAll('.hist-month:not(.hist-month--acao)').forEach(mes => {
       const cur = mes.querySelector('.hist-month-cur');
       if (!cur) return;
+      // a faixa zebrada ALTERNA para a versão gradiente (.is-merged) no MESMO instante da absorção
+      // da data — quando o subtítulo some sob o título; em repouso fica sólida no lugar de sempre
+      const band = mes.parentElement && mes.parentElement.querySelector('.hist-gap');
       const r = mes.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= window.innerHeight) {
         // fora da tela: some direto (invisível, sem fade), e cancela qualquer limpeza pendente
         cur.classList.remove('is-shown');
+        if (band) band.classList.remove('is-merged');
         if (cur._fadeT) { clearTimeout(cur._fadeT); cur._fadeT = 0; }
         if (cur.textContent) cur.textContent = '';
         return;
@@ -411,12 +415,16 @@
         if (cur.textContent !== txt) cur.textContent = txt;
         if (cur._fadeT) { clearTimeout(cur._fadeT); cur._fadeT = 0; }   // cancela um fade-out em curso
         cur.classList.add('is-shown');   // ganha opacidade suavemente (fade-in via CSS)
-      } else if (cur.classList.contains('is-shown')) {
-        // some por ESMAECIMENTO: perde a opacidade (transição) e só limpa o texto DEPOIS do fade,
-        // para a largura não colapsar antes de ele terminar de esmaecer
-        cur.classList.remove('is-shown');
-        if (cur._fadeT) clearTimeout(cur._fadeT);
-        cur._fadeT = setTimeout(() => { if (!cur.classList.contains('is-shown')) cur.textContent = ''; cur._fadeT = 0; }, 420);
+        if (band) band.classList.add('is-merged');   // faixa ALTERNA para o gradiente que revela a lista
+      } else {
+        if (band) band.classList.remove('is-merged');   // volta a ser a faixa sólida
+        if (cur.classList.contains('is-shown')) {
+          // some por ESMAECIMENTO: perde a opacidade (transição) e só limpa o texto DEPOIS do fade,
+          // para a largura não colapsar antes de ele terminar de esmaecer
+          cur.classList.remove('is-shown');
+          if (cur._fadeT) clearTimeout(cur._fadeT);
+          cur._fadeT = setTimeout(() => { if (!cur.classList.contains('is-shown')) cur.textContent = ''; cur._fadeT = 0; }, 420);
+        }
       }
     });
   }

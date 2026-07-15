@@ -95,6 +95,10 @@
 .hist-monthscroll {
   max-height: min(64vh, 700px);
   overflow-y: auto;
+  /* vão vazio no topo (30px) que a faixa zebrada cobre em repouso: assim, parada, ela fica sobre um
+     espaço em branco (aparência sólida) e não sobre o subtítulo; ao rolar, os registros sobem para
+     este vão sob a faixa e aparecem através da sua base transparente */
+  padding-top: 30px;
   border-radius: 0 0 var(--border-item) var(--border-item);
   scrollbar-width: thin;
   scrollbar-color: var(--lt-border-strong) transparent;
@@ -208,22 +212,33 @@
 /* faixa CINZA ZEBRADA HORIZONTAL logo abaixo do título do mês/ação, de extremidade a extremidade do
    container: mesma zebra diagonal dos cartões, porém SUAVE (quase transparente) e bem mais espessa
    (6×), separando o título principal dos registros que rolam abaixo. */
-/* A faixa fica POR CIMA do topo dos registros (não entre o título e eles): assim a sua base
-   TRANSPARENTE revela os registros que passam por baixo, unindo faixa e lista. Sobrepõe-se à área
-   rolável (margin-bottom negativa) e deixa os cliques passarem (pointer-events: none). */
+/* stop do esmaecimento, animável (@property) para ALTERNAR suavemente entre as duas versões da
+   faixa: sólida (repouso) e gradiente (ao fundir com os registros ao rolar) */
+@property --hist-gap-fade {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+/* A faixa fica POR CIMA do topo da área rolável (margin-bottom negativa) e deixa os cliques passarem
+   (pointer-events: none). Em REPOUSO cobre um vão vazio (padding-top da área rolável) e aparece
+   SÓLIDA e uniforme — no mesmo lugar de sempre, entre o título e o subtítulo. Ao ROLAR (subtítulo
+   absorvido, .is-merged) ela ALTERNA para a versão GRADIENTE: a base esmaece até transparente e
+   revela os registros que passam por baixo, fundindo faixa e lista. */
 .hist-gap {
   position: relative;
   z-index: 1;   /* acima dos registros; abaixo do título (z:2), que a encobre ao rolar */
   height: 30px;   /* 6× a espessura anterior (5px) */
-  margin-bottom: -30px;   /* sobrepõe os primeiros 30px de registros que seguem abaixo */
+  margin-bottom: -30px;   /* sobrepõe os primeiros 30px da área rolável */
   pointer-events: none;   /* cliques atravessam para os registros por baixo */
   /* zebra suave — a leveza vem do alpha embutido no tom (não do opacity do elemento) */
   background: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--lt-border) 45%, transparent) 0 2px, transparent 2px 7px);
-  /* zebra OPACA no topo (junto ao título) ESMAECENDO até TRANSPARENTE na base (máscara): os
-     registros que passam por baixo aparecem através dela — a transição fica visível e o conteúdo,
-     legível, fundindo a faixa à lista de forma harmônica */
-  -webkit-mask-image: linear-gradient(to top, transparent, #000 65%);
-  mask-image: linear-gradient(to top, transparent, #000 65%);
+  --hist-gap-fade: 0%;   /* 0% = faixa sólida/uniforme (visível, em repouso) */
+  transition: --hist-gap-fade 0.4s ease;
+  -webkit-mask-image: linear-gradient(to top, transparent, #000 var(--hist-gap-fade));
+  mask-image: linear-gradient(to top, transparent, #000 var(--hist-gap-fade));
+
+  &.is-merged { --hist-gap-fade: 65%; }   /* base transparente: revela os registros por baixo */
 }
 
 .hist-tl {

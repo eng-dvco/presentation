@@ -334,10 +334,18 @@
 .hist-card-top {
   display: flex;
   align-items: center;
-  gap: var(--gap-8);
+  gap: var(--gap-6);
   padding-bottom: var(--gap-6);
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+}
+
+/* ícone da ação, à esquerda do rótulo — preto como os títulos/subtítulos */
+.hist-acao-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--ink-1);
+  font-size: 0.95rem;
 }
 
 .hist-type {

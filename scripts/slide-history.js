@@ -138,7 +138,7 @@
   const ICONES_ACAO = {
     adicao: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
     modificacao: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
-    delecao: '<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+    delecao: '<line x1="5" y1="12" x2="19" y2="12"/>',
     implementada: '<polyline points="20 6 9 17 4 12"/>',
     aperfeicoada: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
     descartada: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
@@ -332,8 +332,33 @@
       }
     });
   }
+
+  // o título do MÊS (único sticky) ABSORVE a data + contagem do dia atual: conforme os cabeçalhos
+  // de dia deslizam para debaixo dele, a informação passa a ser exibida no próprio mês, mantendo a
+  // continuidade da referência. O "dia atual" é o último cujo cabeçalho já passou por baixo do mês.
+  function atualizaMeses() {
+    document.querySelectorAll('.hist-month:not(.hist-month--acao)').forEach(mes => {
+      const cur = mes.querySelector('.hist-month-cur');
+      if (!cur) return;
+      const r = mes.getBoundingClientRect();
+      if (r.bottom <= 0 || r.top >= window.innerHeight) { if (!cur.hidden) cur.hidden = true; return; }
+      let atual = null;
+      for (let s = mes.nextElementSibling; s && !s.classList.contains('hist-month'); s = s.nextElementSibling) {
+        if (!s.classList.contains('hist-day')) continue;
+        const head = s.querySelector('.hist-day-head');
+        if (head && head.getBoundingClientRect().top <= r.bottom + 1) atual = head;
+      }
+      if (atual) {
+        const d = atual.querySelector('.hist-day-date'), c = atual.querySelector('.hist-day-count');
+        const txt = (d ? d.textContent : '') + (c ? '  ·  ' + c.textContent : '');
+        if (cur.textContent !== txt) cur.textContent = txt;
+        if (cur.hidden) cur.hidden = false;
+      } else if (!cur.hidden) { cur.hidden = true; cur.textContent = ''; }
+    });
+  }
+
   let _marcasRAF = 0;
-  function agendaMarcas() { if (_marcasRAF) return; _marcasRAF = requestAnimationFrame(() => { _marcasRAF = 0; atualizaMarcas(); }); }
+  function agendaMarcas() { if (_marcasRAF) return; _marcasRAF = requestAnimationFrame(() => { _marcasRAF = 0; atualizaMarcas(); atualizaMeses(); }); }
   window.addEventListener('scroll', agendaMarcas, { passive: true });
   window.addEventListener('resize', agendaMarcas, { passive: true });
 
@@ -505,7 +530,10 @@
         const rotuloMes = p ? mes + ' de ' + p.ano : '—';
         if (rotuloMes !== mesAtual) {
           mesAtual = rotuloMes;
-          lista.appendChild(el('h2', 'hist-month', rotuloMes));
+          const mh = el('h2', 'hist-month');
+          mh.appendChild(el('span', 'hist-month-label', rotuloMes));
+          mh.appendChild(el('span', 'hist-month-cur'));   // data + contagem do dia, absorvidas ao rolar
+          lista.appendChild(mh);
         }
         lista.appendChild(bloco(dia, itens));
       });

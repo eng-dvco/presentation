@@ -77,21 +77,48 @@
 .hist-source { padding-bottom: var(--gap-8); }
 
 /* ── cabeçalho de mês / de ação ── */
+/* o título do MÊS é o TOPO do conjunto (cantos arredondados) e o ÚNICO elemento sticky: gruda no
+   topo e ABSORVE a data + contagem do dia atual (JS) conforme os cabeçalhos de dia deslizam por
+   baixo — mantendo a referência visível, junto do marcador de horário lateral. */
 .hist-month {
+  position: sticky;
+  /* o breadcrumb (sticky, ~25px, z:1000) fica ACIMA; o mês tuca-se 1px sob ele para não sobrar
+     nenhuma fresta por onde o conteúdo apareça ao rolar */
+  top: 1.5rem;
+  z-index: 4;
   display: flex;
-  align-items: center;
-  gap: var(--gap-8);
-  margin: var(--gap-32) 0 var(--gap-12);
-  padding-bottom: var(--gap-6);
-  border-bottom: 1px solid var(--lt-border);
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--gap-2) var(--gap-8);
+  margin: var(--gap-32) 0 0;   /* sem margin inferior: encosta no 1º dia (mesmo conjunto) */
+  /* padding-top MAIOR e opaco: quando o mês prende sob o breadcrumb, esse espaço branco afasta o
+     título dele (margem harmoniosa) SEM deixar fresta por onde o conteúdo apareça ao rolar */
+  padding: var(--gap-24) var(--gap-16) var(--gap-8);
+  border-radius: var(--border-item) var(--border-item) 0 0;
+  background: var(--lt-surface-strong);
+  /* leve sombra ABAIXO do título: quando ele gruda, separa-o dos registros (todos brancos) que
+     passam por baixo. Como o mês tem z maior, a sombra cai sobre o marcador lateral e os registros. */
+  box-shadow: 0 6px 10px -6px rgba(0, 0, 0, 0.18);
   font-family: var(--font-family-general);
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-sm));
-  font-weight: var(--font-weight-boldest);
   color: var(--lt-text);
 
-  /* sem text-transform: capitalize aqui — ele maiusculiza TODA palavra, e "julho de 2026"
-     virava "Julho De 2026". A capitalização certa (só o mês) é feita no JS. */
   &:first-child { margin-top: 0; }
+}
+
+/* o mês (capitalização certa — só o nome — é feita no JS, não com text-transform) */
+.hist-month-label {
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-sm));
+  font-weight: var(--font-weight-boldest);
+}
+
+/* a data + contagem do dia atual, absorvidas para o título do mês ao rolar */
+.hist-month-cur {
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text-muted);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+
+  &[hidden] { display: none; }
 }
 
 .hist-month-count {
@@ -108,10 +135,11 @@
    embaixo (continuidade com os registros, como os conjuntos do cronograma) e 4px de respiro até o
    1º registro. GRUDA no topo para manter a DATA visível ao rolar (ela varia entre dias); fundo
    fosco para ocultar os registros que passam sob ele. */
+/* NÃO é mais sticky nem o topo do conjunto: é um divisor interno (a data vai para o mês ao rolar).
+   Fica abaixo do mês na pilha (z menor) para o mês, opaco, o encobrir ao deslizar. */
 .hist-day-head {
-  position: sticky;
-  top: 0;
-  z-index: 3;
+  position: relative;
+  z-index: 1;
   display: flex;
   width: 100%;
   align-items: center;
@@ -119,7 +147,7 @@
   margin-bottom: var(--gap-4);
   padding: var(--gap-8) var(--gap-16);
   border: none;
-  border-radius: var(--border-item) var(--border-item) 0 0;
+  border-radius: 0;
   /* branco opaco, como o preenchimento dos registros */
   background: var(--lt-surface-strong);
   cursor: pointer;

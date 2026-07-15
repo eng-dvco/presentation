@@ -495,7 +495,29 @@
   }
 }
 
-/* símbolo (❮) do atalho "IR PARA O HISTÓRICO": herda a formatação do texto
+/* nav do índice: "selecionar apresentação" à esquerda e "histórico de modificações" à EXTREMA
+   direita (space-between). Empilham quando a largura não os comporta sem quebrar o texto, para
+   não criar quebras deselegantes. */
+.collection--nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--peek);
+
+  & > a {
+    width: auto;
+    flex: 0 1 auto;
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
+@media (max-width: 680px) {
+  .collection--nav { flex-direction: column; }
+  .collection--nav > a { width: 100%; }
+}
+
+/* símbolo (❮) do atalho "SELECIONAR APRESENTAÇÃO": herda a formatação do texto
    do link (sobrepõe o reset universal `*`, que o deixaria branco e normal) */
 .reunion span {
   color: inherit;
@@ -511,6 +533,19 @@
   background-color: var(--color-black-alpha-10);
   border: none;
   color: var(--lt-text-muted);
+}
+
+/* apresentação EM ANDAMENTO (indefinida): borda + tinte verdes para sinalizar que está em
+   produção, ainda não ocorreu. O elemento `a` casa a especificidade do chip base e, vindo
+   depois, vence. */
+a.reunion--andamento:not(.disabled) {
+  border-color: var(--color-green);
+  background-color: var(--color-green-alpha-10);
+}
+
+a.reunion--andamento:not(.disabled):hover {
+  border-color: var(--color-green);
+  background-color: var(--color-green-alpha-25);
 }
 
 .reunion-collection {

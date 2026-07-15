@@ -390,7 +390,7 @@
       const cur = mes.querySelector('.hist-month-cur');
       if (!cur) return;
       const r = mes.getBoundingClientRect();
-      if (r.bottom <= 0 || r.top >= window.innerHeight) { if (!cur.hidden) cur.hidden = true; return; }
+      if (r.bottom <= 0 || r.top >= window.innerHeight) { cur.classList.remove('is-shown'); return; }
       // a área rolável é irmã do título dentro do cartão (a faixa zebrada fica entre os dois)
       const rol = mes.parentElement && mes.parentElement.querySelector('.hist-monthscroll');
       let atual = null;
@@ -403,8 +403,8 @@
         const d = atual.querySelector('.hist-day-date'), c = atual.querySelector('.hist-day-count');
         const txt = (d ? d.textContent : '') + (c ? '  ·  ' + c.textContent : '');
         if (cur.textContent !== txt) cur.textContent = txt;
-        if (cur.hidden) cur.hidden = false;
-      } else if (!cur.hidden) { cur.hidden = true; cur.textContent = ''; }
+        cur.classList.add('is-shown');   // ganha opacidade suavemente (fade-in via CSS)
+      } else if (cur.classList.contains('is-shown')) { cur.classList.remove('is-shown'); cur.textContent = ''; }
     });
   }
 

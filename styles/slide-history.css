@@ -125,14 +125,17 @@
   font-weight: var(--font-weight-boldest);
 }
 
-/* a data + contagem do dia atual, absorvidas para o título do mês ao rolar */
+/* a data + contagem do dia atual, absorvidas para o título do mês ao rolar. Some/aparece por
+   ESMAECIMENTO (fade): ganha opacidade gradualmente ao surgir, em vez de aparecer de supetão. */
 .hist-month-cur {
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   color: var(--lt-text-muted);
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 
-  &[hidden] { display: none; }
+  &.is-shown { opacity: 1; }
 }
 
 .hist-month-count {

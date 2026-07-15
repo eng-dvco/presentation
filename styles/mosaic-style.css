@@ -39,6 +39,25 @@
   }
 }
 
+/* fotos em RETRATO sempre em PARES — 2 por linha, cada uma ocupando METADE da largura (grade de 2
+   colunas 1fr), preenchendo TODA a largura do mosaico e alinhadas às demais linhas. Exibidas em
+   altura natural (SEM corte); duas por linha já reduzem bastante a altura ante a largura cheia. */
+.mosaic-container.portrait-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+
+  & > .img {
+    width: 100%;
+    height: auto;
+  }
+  & > .img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
 .img {
   align-items: flex-end;
   width: 100%;

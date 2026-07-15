@@ -161,6 +161,14 @@
   text-decoration: none;
   transition: background-color 0.15s, border-color 0.15s, transform 0.1s;
 
+  /* ~¾ do custo de cada render é o layout/paint dos ~570 cartões que estão FORA da tela. Com
+     content-visibility o navegador os pula até que rolem para perto da viewport, cortando esse
+     custo sem tocar no JS. O `auto` do contain-intrinsic-size faz o navegador MEMORIZAR a altura
+     real de cada cartão já renderizado — assim a barra de rolagem e a restauração do ponto de
+     leitura (que salta por pixel) continuam corretas; 200px é só o palpite inicial. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+
   /* faixa lateral com a cor da ação: dá para varrer a coluna e ver o que entrou/saiu */
   &::before {
     content: "";

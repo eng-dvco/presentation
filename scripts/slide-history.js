@@ -54,6 +54,17 @@
   let filtroTipo = 'all';
   let termo = '';
 
+  // render() reconstrói a lista inteira (innerHTML = '' + 599 cartões + 659 imagens), e ~¾ do
+  // seu custo é o layout/paint do navegador, não o JS. Chamá-lo direto a cada tecla da busca
+  // enfileirava ~10 reconstruções síncronas: numa máquina modesta a thread principal congelava
+  // por segundos. Coalescemos as chamadas num único render do estado final.
+  //   • cliques (filtro, aba, agrupamento): espera 0 → ainda parece instantâneo, mas uma rajada
+  //     de cliques encadeados vira um render só;
+  //   • busca: espera ~160ms → uma palavra digitada dispara um render, não um por tecla.
+  // (render é function declaration, então já existe aqui; só é de fato chamada após o fetch.)
+  let _tRender = 0;
+  const agendarRender = espera => { clearTimeout(_tRender); _tRender = setTimeout(render, espera || 0); };
+
   const el = (tag, cls, texto) => {
     const e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -212,7 +223,7 @@
       b.dataset.valor = valor;
       b.textContent = rotulo + ' (' + n + ')';
       b.setAttribute('aria-pressed', String(filtroTipo === valor));
-      b.addEventListener('click', () => { filtroTipo = valor; render(); });
+      b.addEventListener('click', () => { if (filtroTipo === valor) return; filtroTipo = valor; agendarRender(); });
       barraTipo.appendChild(b);
     };
     criar('all', 'Tudo', visiveis.length);
@@ -228,7 +239,7 @@
       b.dataset.valor = valor;
       b.textContent = rotulo;
       b.setAttribute('aria-pressed', String(filtroAcao === valor));
-      b.addEventListener('click', () => { filtroAcao = valor; render(); });
+      b.addEventListener('click', () => { if (filtroAcao === valor) return; filtroAcao = valor; agendarRender(); });
       barraAcao.appendChild(b);
     };
     criar('all', 'Tudo');
@@ -300,23 +311,24 @@
     b.classList.add('active'); b.setAttribute('aria-selected', 'true');
     aba = b.dataset.aba;
     filtroAcao = 'all'; filtroTipo = 'all';   // os rótulos mudam entre abas
-    render();
+    agendarRender();
   }));
 
   // escopado a .hist-groups: os botões de colapsar/expandir são outra coisa
   const botoesGrupo = document.querySelectorAll('.hist-groups .hist-group-btn');
   botoesGrupo.forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.grupo === agrupamento) return;   // já é o agrupamento atual: nada a refazer
     botoesGrupo.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-pressed', 'false'); });
     b.classList.add('active'); b.setAttribute('aria-pressed', 'true');
     agrupamento = b.dataset.grupo;
-    render();
+    agendarRender();
   }));
 
   if (busca) {
     busca.addEventListener('input', () => {
-      termo = dobra(busca.value.trim());
+      termo = dobra(busca.value.trim());   // imediato: alimenta o botão limpar
       if (limpaBusca) limpaBusca.hidden = !busca.value;
-      render();
+      agendarRender(160);                  // adiado: só re-renderiza quando a digitação pausa
     });
   }
   if (limpaBusca) {

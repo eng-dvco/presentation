@@ -179,7 +179,7 @@ function applyDocFilters() {
     ? `${totalVisible} de ${docTotal} documentos`
     : `${docTotal} documentos`;
   syncToggleBtn();
-  requestAnimationFrame(() => { refreshDocNameTruncation(); refreshDocMarquees(); });
+  requestAnimationFrame(refreshDocMarquees);   // já cobre nome e descrição (truncamento + reset)
 }
 
 if (docSearch) {
@@ -389,11 +389,14 @@ function measureDocNameMarquee(wrap) {
 }
 
 // inicia (do começo) UM único ciclo do deslizamento do nome de UMA linha;
-// se já estiver tocando, ignora o gatilho para não interferir
+// se já estiver tocando, ignora o gatilho para não interferir.
+// Monta o marquee SOB DEMANDA (só a linha clicada): a montagem lê getBoundingClientRect e
+// forçaria um reflow — barato para 1 linha, caro se feito para todas de uma vez.
 function playDocNameMarquee(wrap) {
-  const anim = wrap && wrap._nameAnim;
-  if (!anim) return;
-  if (anim.playState === 'running') return;
+  if (!wrap) return;
+  if (!wrap._nameAnim) measureDocNameMarquee(wrap);
+  const anim = wrap._nameAnim;
+  if (!anim || anim.playState === 'running') return;
   anim.currentTime = 0;
   anim.play();
 }
@@ -450,18 +453,54 @@ function measureDocDescMarquee(row) {
 }
 
 // inicia (do começo) UM único ciclo do deslizamento da descrição de UMA linha;
-// se já estiver tocando, ignora o gatilho para não interferir
+// se já estiver tocando, ignora o gatilho para não interferir.
+// Monta o marquee SOB DEMANDA (ver playDocNameMarquee): a construção do clone + medição do
+// deslocamento roda só para a linha clicada, nunca para as ~32 de uma vez.
 function playDocDescMarquee(row) {
-  const anim = row && row._descAnim;
-  if (!anim) return;
-  if (anim.playState === 'running') return;
+  if (!row) return;
+  if (!row._descAnim) measureDocDescMarquee(row);
+  const anim = row._descAnim;
+  if (!anim || anim.playState === 'running') return;
   anim.currentTime = 0;
   anim.play();
 }
 
+// descarta o clone e a animação de uma linha (o próximo play remonta com a largura atual).
+// Só ESCRITA — não lê layout, então roda em lote sem forçar reflow por linha.
+function resetDocDescMarquee(row) {
+  if (row._descAnim) { row._descAnim.cancel(); row._descAnim = null; }
+  const track = row.querySelector('.doc-desc-track');
+  const clone = track && track.querySelector('.doc-desc-clone');
+  if (clone) clone.remove();
+}
+function resetDocNameMarquee(wrap) {
+  if (wrap._nameAnim) { wrap._nameAnim.cancel(); wrap._nameAnim = null; }
+  const track = wrap.querySelector('.doc-name-track');
+  const clone = track && track.querySelector('.doc-name-clone');
+  if (clone) clone.remove();
+}
+
+// DETECÇÃO de corte da descrição (controla só a máscara de fade .is-overflowing). Espelha
+// refreshDocNameTruncation. As escritas de init ficam numa passada e as leituras de largura
+// noutra — assim a medição não é intercalada com escrita, evitando o reflow-por-linha.
+function refreshDocDescTruncation() {
+  const rows = [...document.querySelectorAll('.doc-desc-row')];
+  rows.forEach(row => { if (!row._descInitDone) initDocDescMarquee(row); });
+  rows.forEach(row => {
+    const text = row.querySelector('.doc-desc-text');
+    if (text) row.classList.toggle('is-overflowing', text.scrollWidth - row.clientWidth > 1);
+  });
+}
+
+// Só reseta os marquees e re-detecta o corte (leituras baratas, sem montar clones). Antes, isto
+// montava o clone e media getBoundingClientRect para TODAS as ~32 descrições de uma vez — um
+// reflow forçado por linha, o "engasgo" de ~0,4s ao voltar ao índice com os grupos abertos. A
+// montagem do marquee agora é adiada ao 1º play de cada linha (playDocDescMarquee).
 function refreshDocMarquees() {
-  document.querySelectorAll('.doc-desc-row').forEach(measureDocDescMarquee);
-  document.querySelectorAll('.doc-name-wrap').forEach(measureDocNameMarquee);
+  document.querySelectorAll('.doc-desc-row').forEach(resetDocDescMarquee);
+  document.querySelectorAll('.doc-name-wrap').forEach(resetDocNameMarquee);
+  refreshDocDescTruncation();
+  refreshDocNameTruncation();
 }
 
 // gatilho por CLIQUE no CONTAINER: clicar o item (<li>) executa 1 ciclo do
@@ -485,7 +524,7 @@ if (!reducedMotion) {
 let docResizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(docResizeTimer);
-  docResizeTimer = setTimeout(() => { refreshDocNameTruncation(); refreshDocMarquees(); }, 150);
+  docResizeTimer = setTimeout(refreshDocMarquees, 150);
 });
 
 // ---- ripple nos itens -----------------------------------------------------

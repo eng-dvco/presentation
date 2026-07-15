@@ -1,9 +1,483 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "15-07-26",
- "commits": 130,
- "total": 567,
+ "commits": 136,
+ "total": 574,
  "registros": [
+  {
+   "id": "8ff80e1-1",
+   "data": "15-07-26",
+   "hora": "17:47",
+   "commit": "8ff80e1",
+   "aba": "conteudo",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Condição em que os estais foram encontrados",
+   "breadcrumb": [
+    "Linhas do Tempo",
+    "Recuperação estrutural dos estais",
+    "Condição em que os estais foram encontrados"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "1,7 MB",
+    "amostra": [
+     {
+      "nome": "stay-1.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-1.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-1-200.webp",
+      "peso": "398 KB"
+     },
+     {
+      "nome": "stay-2.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-2.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-2-200.webp",
+      "peso": "401 KB"
+     },
+     {
+      "nome": "stay-3.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-3.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-3-200.webp",
+      "peso": "475 KB"
+     },
+     {
+      "nome": "stay-4.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-4.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-4-200.webp",
+      "peso": "417 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4
+  },
+  {
+   "id": "8ff80e1-0",
+   "data": "15-07-26",
+   "hora": "17:47",
+   "commit": "8ff80e1",
+   "aba": "conteudo",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "acao": "adição",
+   "tipo": "subtítulo",
+   "titulo": "Condição em que os estais foram encontrados",
+   "breadcrumb": [
+    "Linhas do Tempo",
+    "Recuperação estrutural dos estais",
+    "Condição em que os estais foram encontrados"
+   ]
+  },
+  {
+   "id": "89f2ec5-0",
+   "data": "15-07-26",
+   "hora": "17:47",
+   "commit": "89f2ec5",
+   "aba": "conteudo",
+   "link": "slides/slide-psychosocial-risks.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Riscos psicossociais e saúde mental",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Riscos psicossociais e saúde mental"
+   ],
+   "legendas": [
+    {
+     "texto": "questionário de riscos psicossociais (Petrolândia-PE)",
+     "imagens": {
+      "total": 3,
+      "pesoTotal": "286 KB",
+      "amostra": [
+       {
+        "nome": "risks-7.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-7.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-7-200.webp",
+        "peso": "32 KB"
+       },
+       {
+        "nome": "risks-8.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-8.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-8-200.webp",
+        "peso": "111 KB"
+       },
+       {
+        "nome": "risks-9.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-9.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-9-200.webp",
+        "peso": "143 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "questionário de riscos psicossociais (Salgueiro-PE)",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "310 KB",
+      "amostra": [
+       {
+        "nome": "risks-10.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-10.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-10-200.webp",
+        "peso": "146 KB"
+       },
+       {
+        "nome": "risks-11.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-11.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-11-200.webp",
+        "peso": "165 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 5,
+    "pesoTotal": "596 KB",
+    "amostra": [
+     {
+      "nome": "risks-7.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-7.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-7-200.webp",
+      "peso": "32 KB"
+     },
+     {
+      "nome": "risks-8.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-8.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-8-200.webp",
+      "peso": "111 KB"
+     },
+     {
+      "nome": "risks-9.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-9.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-9-200.webp",
+      "peso": "143 KB"
+     },
+     {
+      "nome": "risks-10.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-10.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-10-200.webp",
+      "peso": "146 KB"
+     },
+     {
+      "nome": "risks-11.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-11.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-11-200.webp",
+      "peso": "165 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 5
+  },
+  {
+   "id": "3c6891a-2",
+   "data": "15-07-26",
+   "hora": "17:47",
+   "commit": "3c6891a",
+   "aba": "conteudo",
+   "link": "slides/slide-training.html",
+   "acao": "modificação",
+   "tipo": "observação",
+   "titulo": "Treinamentos internos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
+   ],
+   "de": "reciclagem SEP/NR-10",
+   "para": "reciclagem SEP/NR-10 (Eixo Norte)",
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "285 KB",
+    "amostra": [
+     {
+      "nome": "training-11.jpeg",
+      "src": "assets/img/slides/st/training/training-11.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-11-200.webp",
+      "peso": "134 KB"
+     },
+     {
+      "nome": "training-12.jpeg",
+      "src": "assets/img/slides/st/training/training-12.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-12-200.webp",
+      "peso": "151 KB"
+     }
+    ],
+    "extras": 0
+   }
+  },
+  {
+   "id": "3c6891a-1",
+   "data": "15-07-26",
+   "hora": "17:47",
+   "commit": "3c6891a",
+   "aba": "conteudo",
+   "link": "slides/slide-training.html",
+   "acao": "modificação",
+   "tipo": "observação",
+   "titulo": "Treinamentos internos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
+   ],
+   "de": "reciclagem da NR-6 (EPIs)",
+   "para": "reciclagem da NR-5 (CIPA)",
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "436 KB",
+    "amostra": [
+     {
+      "nome": "training-7.jpeg",
+      "src": "assets/img/slides/st/training/training-7.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-7-200.webp",
+      "peso": "233 KB"
+     },
+     {
+      "nome": "training-8.jpeg",
+      "src": "assets/img/slides/st/training/training-8.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-8-200.webp",
+      "peso": "203 KB"
+     }
+    ],
+    "extras": 0
+   }
+  },
+  {
+   "id": "3c6891a-0",
+   "data": "15-07-26",
+   "hora": "17:47",
+   "commit": "3c6891a",
+   "aba": "conteudo",
+   "link": "slides/slide-training.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Treinamentos internos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
+   ],
+   "legendas": [
+    {
+     "texto": "DDS, APR e checklist",
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "835 KB",
+      "amostra": [
+       {
+        "nome": "training-20.jpeg",
+        "src": "assets/img/slides/st/training/training-20.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-20-200.webp",
+        "peso": "212 KB"
+       },
+       {
+        "nome": "training-21.jpeg",
+        "src": "assets/img/slides/st/training/training-21.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-21-200.webp",
+        "peso": "307 KB"
+       },
+       {
+        "nome": "training-22.jpeg",
+        "src": "assets/img/slides/st/training/training-22.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-22-200.webp",
+        "peso": "258 KB"
+       },
+       {
+        "nome": "training-23.jpeg",
+        "src": "assets/img/slides/st/training/training-23.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-23-200.webp",
+        "peso": "58 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "reciclagem SEP/NR-10 (Eixo Leste)",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "147 KB",
+      "amostra": [
+       {
+        "nome": "training-15.jpeg",
+        "src": "assets/img/slides/st/training/training-15.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-15-200.webp",
+        "peso": "147 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "primeiros socorros (SAMU)",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "217 KB",
+      "amostra": [
+       {
+        "nome": "training-16.jpeg",
+        "src": "assets/img/slides/st/training/training-16.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-16-200.webp",
+        "peso": "140 KB"
+       },
+       {
+        "nome": "training-17.jpeg",
+        "src": "assets/img/slides/st/training/training-17.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-17-200.webp",
+        "peso": "76 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "acidentes com animais peçonhentos",
+     "imagens": {
+      "total": 3,
+      "pesoTotal": "350 KB",
+      "amostra": [
+       {
+        "nome": "animal-0.jpeg",
+        "src": "assets/img/slides/st/training/animal-0.jpeg",
+        "miniatura": "assets/img/slides/st/training/animal-0-200.webp",
+        "peso": "50 KB"
+       },
+       {
+        "nome": "animal-1.jpeg",
+        "src": "assets/img/slides/st/training/animal-1.jpeg",
+        "miniatura": "assets/img/slides/st/training/animal-1-200.webp",
+        "peso": "170 KB"
+       },
+       {
+        "nome": "animal-2.jpeg",
+        "src": "assets/img/slides/st/training/animal-2.jpeg",
+        "miniatura": "assets/img/slides/st/training/animal-2-200.webp",
+        "peso": "129 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "treinamento da NR-15 (insalubridade)",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "340 KB",
+      "amostra": [
+       {
+        "nome": "training-18.jpeg",
+        "src": "assets/img/slides/st/training/training-18.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-18-200.webp",
+        "peso": "195 KB"
+       },
+       {
+        "nome": "training-19.jpeg",
+        "src": "assets/img/slides/st/training/training-19.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-19-200.webp",
+        "peso": "144 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 12,
+    "pesoTotal": "1,8 MB",
+    "amostra": [
+     {
+      "nome": "training-20.jpeg",
+      "src": "assets/img/slides/st/training/training-20.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-20-200.webp",
+      "peso": "212 KB"
+     },
+     {
+      "nome": "training-21.jpeg",
+      "src": "assets/img/slides/st/training/training-21.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-21-200.webp",
+      "peso": "307 KB"
+     },
+     {
+      "nome": "training-22.jpeg",
+      "src": "assets/img/slides/st/training/training-22.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-22-200.webp",
+      "peso": "258 KB"
+     },
+     {
+      "nome": "training-23.jpeg",
+      "src": "assets/img/slides/st/training/training-23.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-23-200.webp",
+      "peso": "58 KB"
+     },
+     {
+      "nome": "training-15.jpeg",
+      "src": "assets/img/slides/st/training/training-15.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-15-200.webp",
+      "peso": "147 KB"
+     }
+    ],
+    "extras": 7
+   },
+   "qtdImagens": 12,
+   "removidas": 2
+  },
+  {
+   "id": "5349102-0",
+   "data": "15-07-26",
+   "hora": "17:47",
+   "commit": "5349102",
+   "aba": "conteudo",
+   "link": "slides/slide-fence-post-repair.html",
+   "acao": "adição",
+   "tipo": "slide",
+   "titulo": "Substituição de mourões",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Substituição de mourões"
+   ],
+   "resumo": null,
+   "imagens": {
+    "total": 6,
+    "pesoTotal": "2,7 MB",
+    "amostra": [
+     {
+      "nome": "fence-1.jpeg",
+      "src": "assets/img/slides/se/fence-post-repair/fence-1.jpeg",
+      "miniatura": "assets/img/slides/se/fence-post-repair/fence-1-200.webp",
+      "peso": "646 KB"
+     },
+     {
+      "nome": "fence-2.jpeg",
+      "src": "assets/img/slides/se/fence-post-repair/fence-2.jpeg",
+      "miniatura": "assets/img/slides/se/fence-post-repair/fence-2-200.webp",
+      "peso": "568 KB"
+     },
+     {
+      "nome": "fence-3.jpeg",
+      "src": "assets/img/slides/se/fence-post-repair/fence-3.jpeg",
+      "miniatura": "assets/img/slides/se/fence-post-repair/fence-3-200.webp",
+      "peso": "555 KB"
+     },
+     {
+      "nome": "fence-4.jpeg",
+      "src": "assets/img/slides/se/fence-post-repair/fence-4.jpeg",
+      "miniatura": "assets/img/slides/se/fence-post-repair/fence-4-200.webp",
+      "peso": "270 KB"
+     },
+     {
+      "nome": "fence-5.jpeg",
+      "src": "assets/img/slides/se/fence-post-repair/fence-5.jpeg",
+      "miniatura": "assets/img/slides/se/fence-post-repair/fence-5-200.webp",
+      "peso": "350 KB"
+     }
+    ],
+    "extras": 1
+   },
+   "qtdImagens": 6
+  },
   {
    "id": "d272791-6",
    "data": "14-07-26",

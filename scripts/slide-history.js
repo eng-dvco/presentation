@@ -25,6 +25,7 @@
   const limpaBusca = document.querySelector('#hist-search-clear');
   const barraAcao = document.querySelector('.hist-filter-acao');
   const barraTipo = document.querySelector('.hist-filter-tipo');
+  const barraAtiva = document.querySelector('.hist-active');
 
   const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   const ACOES = { conteudo: ['adição', 'modificação', 'deleção'], funcoes: ['implementada', 'aperfeiçoada', 'descartada'] };
@@ -50,8 +51,11 @@
   let dados = null;
   let aba = 'conteudo';
   let agrupamento = 'cronologico';
-  let filtroAcao = 'all';
-  let filtroTipo = 'all';
+  // filtros MULTI-SELEÇÃO: conjuntos de ações e de elementos (vazio = todos). Um registro passa
+  // se casar com QUALQUER ação marcada E QUALQUER elemento marcado (e a busca).
+  const filtrosAcao = new Set();
+  const filtrosTipo = new Set();
+  let gruposTab = null;   // aba para a qual os grupos do menu de filtro foram montados
   let termo = '';
 
   // render() reconstrói a lista inteira (innerHTML = '' + 599 cartões + 659 imagens), e ~¾ do
@@ -266,7 +270,7 @@
     cab.addEventListener('click', () => {
       const fechado = sec.classList.toggle('is-collapsed');
       cab.setAttribute('aria-expanded', String(!fechado));
-      agendaMarcas();
+      requestAnimationFrame(atualizaMarcas);
     });
     sec.appendChild(cab);
     sec.appendChild(tl);
@@ -290,12 +294,14 @@
         else hi = mid - 1;
       }
       setMark(mark, cards[at].dataset.hora, cards[at].dataset.acao);
-      // "acende" a faixa lateral dos registros que o marcador já alcançou (0..at) e apaga os que
-      // ficaram abaixo. Delta-only: mexe apenas nos que mudaram de estado — barato mesmo rolando.
-      const prev = day._evAt == null ? -1 : day._evAt;
-      if (at > prev) for (let i = prev + 1; i <= at; i++) cards[i].classList.add('is-evidenced');
-      else if (at < prev) for (let i = prev; i > at; i--) cards[i].classList.remove('is-evidenced');
-      day._evAt = at;
+      // SÓ o registro sob o marcador ganha a cor da ação; os demais voltam ao cinza. A cor
+      // "acompanha" o marcador conforme ele desce. Delta: apaga o anterior, acende o atual.
+      const prev = day._evAt;
+      if (prev !== at) {
+        if (prev != null && cards[prev]) cards[prev].classList.remove('is-evidenced');
+        cards[at].classList.add('is-evidenced');
+        day._evAt = at;
+      }
     });
   }
   let _marcasRAF = 0;
@@ -309,45 +315,120 @@
     return [...mapa.entries()].sort((a, b) => (parse(b[0]) || { chave: 0 }).chave - (parse(a[0]) || { chave: 0 }).chave);
   }
 
-  // ── barra de filtros por ELEMENTO ──
-  // A LISTA de botões sai de todos os registros da aba (é estável: a barra não dança a cada
-  // tecla digitada); os CONTADORES saem do que a ação e a busca já deixaram passar, para que o
-  // número diga quantos registros o clique vai de fato revelar.
-  function montaFiltroTipo(daAba, visiveis) {
-    if (!barraTipo) return;
-    const cont = {};
-    visiveis.forEach(r => (cont[r.tipo] = (cont[r.tipo] || 0) + 1));
-    const ordem = {};
-    daAba.forEach(r => (ordem[r.tipo] = (ordem[r.tipo] || 0) + 1));
-    const tipos = Object.keys(ordem).sort((a, b) => ordem[b] - ordem[a]);
-    barraTipo.innerHTML = '';
-    const criar = (valor, rotulo, n) => {
-      const b = el('button', 'hist-filter-btn' + (filtroTipo === valor ? ' active' : '') + (!n ? ' is-empty' : ''));
-      b.type = 'button';
-      b.dataset.valor = valor;
-      b.textContent = rotulo + ' (' + n + ')';
-      b.setAttribute('aria-pressed', String(filtroTipo === valor));
-      b.addEventListener('click', () => { if (filtroTipo === valor) return; filtroTipo = valor; agendarRender(); });
-      barraTipo.appendChild(b);
-    };
-    criar('all', 'Tudo', visiveis.length);
-    tipos.forEach(t => criar(t, t.charAt(0).toUpperCase() + t.slice(1), cont[t] || 0));
+  const cap = s => (s || '').charAt(0).toUpperCase() + s.slice(1);
+
+  // um GRUPO colapsável de checkboxes (multi-seleção). O cabeçalho é o subtítulo do conjunto;
+  // clicar nele recolhe/expande o grupo (mesma seta dos "documentos recebidos").
+  function montaGrupo(container, titulo, opcoes, selecionados, aoAlternar) {
+    if (!container) return;
+    const colapsado = container.classList.contains('is-collapsed');
+    container.innerHTML = '';
+    const head = el('button', 'hist-filtergroup-head');
+    head.type = 'button';
+    head.setAttribute('aria-expanded', String(!colapsado));
+    head.appendChild(el('span', 'hist-filtergroup-title', titulo));
+    head.appendChild(el('span', 'hist-filtergroup-caret', '▾'));
+    head.addEventListener('click', () => {
+      const c = container.classList.toggle('is-collapsed');
+      head.setAttribute('aria-expanded', String(!c));
+    });
+    const body = el('div', 'hist-filtergroup-body');
+    opcoes.forEach(o => {
+      const lab = el('label', 'hist-check' + (!o.n ? ' is-empty' : ''));
+      const inp = document.createElement('input');
+      inp.type = 'checkbox';
+      inp.value = o.valor;
+      inp.checked = selecionados.has(o.valor);
+      inp.addEventListener('change', () => aoAlternar(o.valor, inp.checked));
+      lab.appendChild(inp);
+      lab.appendChild(el('span', 'hist-check-lbl', o.rotulo));
+      lab.appendChild(el('span', 'hist-check-n', String(o.n)));
+      body.appendChild(lab);
+    });
+    container.appendChild(head);
+    container.appendChild(body);
   }
 
-  function montaFiltroAcao() {
-    if (!barraAcao) return;
-    barraAcao.innerHTML = '';
-    const criar = (valor, rotulo) => {
-      const b = el('button', 'hist-filter-btn' + (filtroAcao === valor ? ' active' : '') + (valor !== 'all' ? ' hist-filter-btn--' + slug(valor) : ''));
-      b.type = 'button';
-      b.dataset.valor = valor;
-      b.textContent = rotulo;
-      b.setAttribute('aria-pressed', String(filtroAcao === valor));
-      b.addEventListener('click', () => { if (filtroAcao === valor) return; filtroAcao = valor; agendarRender(); });
-      barraAcao.appendChild(b);
+  const alternaAcao = (v, on) => { on ? filtrosAcao.add(v) : filtrosAcao.delete(v); agendarRender(); };
+  const alternaTipo = (v, on) => { on ? filtrosTipo.add(v) : filtrosTipo.delete(v); agendarRender(); };
+
+  // monta os dois grupos do menu (Ação e Elemento) com as contagens totais da aba. Chamado só
+  // quando a ABA muda — contagens estáveis, o menu não "dança" a cada seleção e preserva o colapso.
+  function montaFiltros(daAba) {
+    const acaoOpts = ACOES[aba].map(a => ({ valor: a, rotulo: cap(a), n: daAba.filter(r => r.acao === a).length }));
+    montaGrupo(barraAcao, 'Ação', acaoOpts, filtrosAcao, alternaAcao);
+    const cont = {};
+    daAba.forEach(r => (cont[r.tipo] = (cont[r.tipo] || 0) + 1));
+    const tipoOpts = Object.keys(cont).sort((a, b) => cont[b] - cont[a]).map(t => ({ valor: t, rotulo: cap(t), n: cont[t] }));
+    montaGrupo(barraTipo, 'Elemento', tipoOpts, filtrosTipo, alternaTipo);
+  }
+
+  // contagens FACETADAS: cada opção mostra quantos registros restariam se ela fosse a única marcada
+  // na sua categoria, respeitando o filtro da OUTRA categoria e a busca. Opção sem resultado fica
+  // desabilitada (nada a exibir). Os filtros da MESMA categoria não influenciam as próprias
+  // contagens — só as da outra categoria (Ação↔Elemento).
+  function atualizaContagens(daAba) {
+    const casaBusca = r => !termo || textoDe(r).includes(termo);
+    const conta = (container, valorDe, outroOk) => {
+      if (!container) return;
+      container.querySelectorAll('.hist-check').forEach(lab => {
+        const inp = lab.querySelector('input');
+        const n = daAba.filter(r => valorDe(r) === inp.value && outroOk(r) && casaBusca(r)).length;
+        const nEl = lab.querySelector('.hist-check-n');
+        if (nEl) nEl.textContent = n;
+        lab.classList.toggle('is-empty', n === 0);
+        inp.disabled = n === 0 && !inp.checked;
+      });
     };
-    criar('all', 'Tudo');
-    ACOES[aba].forEach(a => criar(a, a.charAt(0).toUpperCase() + a.slice(1)));
+    conta(barraAcao, r => r.acao, r => filtrosTipo.size === 0 || filtrosTipo.has(r.tipo));
+    conta(barraTipo, r => r.tipo, r => filtrosAcao.size === 0 || filtrosAcao.has(r.acao));
+  }
+
+  // remove um filtro (via chip) e desmarca o checkbox correspondente, sem remontar o menu
+  function removeFiltro(conjunto, valor) {
+    conjunto.delete(valor);
+    const esc = window.CSS && CSS.escape ? CSS.escape(valor) : valor.replace(/"/g, '\\"');
+    const inp = document.querySelector('.hist-filtergroup input[value="' + esc + '"]');
+    if (inp) inp.checked = false;
+    agendarRender();
+  }
+
+  function limparFiltros() {
+    filtrosAcao.clear(); filtrosTipo.clear(); termo = '';
+    if (busca) busca.value = '';
+    if (limpaBusca) limpaBusca.hidden = true;
+    document.querySelectorAll('.hist-filtergroup input:checked').forEach(i => (i.checked = false));
+    agendarRender();
+  }
+
+  // ── filtros ATIVOS, logo abaixo da busca ──
+  // Um chip por elemento selecionado (mostra o "X" ao pairar, p/ remoção individual) + a busca
+  // ativa, e o botão "Limpar" ao final. Sem ponto/indicador no botão do funil (que mudava a
+  // largura e empurrava a busca): quem sinaliza o que está ativo é esta lista.
+  function renderAtivos() {
+    if (!barraAtiva) return;
+    barraAtiva.innerHTML = '';
+    const itens = [];
+    if (termo) itens.push({ rotulo: '“' + termo + '”', classe: 'busca', remove: () => { termo = ''; if (busca) busca.value = ''; if (limpaBusca) limpaBusca.hidden = true; agendarRender(); } });
+    filtrosAcao.forEach(v => itens.push({ rotulo: cap(v), classe: slug(v), remove: () => removeFiltro(filtrosAcao, v) }));
+    filtrosTipo.forEach(v => itens.push({ rotulo: cap(v), classe: 'tipo', remove: () => removeFiltro(filtrosTipo, v) }));
+    if (!itens.length) { barraAtiva.hidden = true; return; }
+    barraAtiva.hidden = false;
+    itens.forEach(it => {
+      const chip = el('span', 'hist-chip hist-chip--' + it.classe);
+      chip.appendChild(el('span', 'hist-chip-lbl', it.rotulo));
+      const x = el('button', 'hist-chip-x');
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Remover ' + it.rotulo);
+      x.textContent = '✕';
+      x.addEventListener('click', it.remove);
+      chip.appendChild(x);
+      barraAtiva.appendChild(chip);
+    });
+    const limpar = el('button', 'hist-filter-clear', 'Limpar');
+    limpar.type = 'button';
+    limpar.addEventListener('click', limparFiltros);
+    barraAtiva.appendChild(limpar);
   }
 
   function render() {
@@ -356,16 +437,19 @@
     const daAba = (dados.registros || []).filter(r => (r.aba || 'conteudo') === aba)
       .concat(aba === 'funcoes' ? (dados.funcoes || []) : []);
 
-    // os três filtros se combinam; o de ELEMENTO é aplicado por último para que seus
-    // contadores possam ser medidos no conjunto que a ação e a busca já filtraram
-    const semTipo = daAba.filter(r =>
-      (filtroAcao === 'all' || r.acao === filtroAcao) &&
-      (!termo || textoDe(r).includes(termo)));
-    const regs = semTipo.filter(r => filtroTipo === 'all' || r.tipo === filtroTipo);
+    // o menu de filtros é montado só quando a ABA muda (estrutura estável, colapso preservado);
+    // as contagens facetadas e o estado "desabilitado" das opções são atualizados a cada render
+    if (gruposTab !== aba) { montaFiltros(daAba); gruposTab = aba; }
+    atualizaContagens(daAba);
 
-    montaFiltroAcao();
-    montaFiltroTipo(daAba, semTipo);
-    sincronizaFunil();
+    // multi-seleção: vazio = todos; senão o registro precisa casar com ALGUMA ação marcada E
+    // ALGUM elemento marcado (e a busca). Os três conjuntos se combinam.
+    const regs = daAba.filter(r =>
+      (filtrosAcao.size === 0 || filtrosAcao.has(r.acao)) &&
+      (filtrosTipo.size === 0 || filtrosTipo.has(r.tipo)) &&
+      (!termo || textoDe(r).includes(termo)));
+
+    renderAtivos();
 
     if (!regs.length) {
       vazio.hidden = false;
@@ -408,7 +492,8 @@
         agrupaPorDia(doGrupo).forEach(([dia, itens]) => lista.appendChild(bloco(dia, itens)));
       });
     }
-    agendaMarcas();   // acerta os marcadores sticky ao estado inicial da lista recém-montada
+    // depois que o layout assenta, acerta os marcadores ao estado inicial da lista
+    requestAnimationFrame(atualizaMarcas);
   }
 
   // ── controles ──
@@ -416,7 +501,8 @@
     document.querySelectorAll('.hist-tab').forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); });
     b.classList.add('active'); b.setAttribute('aria-selected', 'true');
     aba = b.dataset.aba;
-    filtroAcao = 'all'; filtroTipo = 'all';   // os rótulos mudam entre abas
+    filtrosAcao.clear(); filtrosTipo.clear();   // os rótulos de ação mudam entre abas
+    gruposTab = null;                            // força remontar o menu para a nova aba
     agendarRender();
   }));
 
@@ -444,29 +530,15 @@
   }
 
   // ── menu de filtros (funil) ──
-  // Recolhe as barras de ação e de elemento num dropdown ao lado da busca, poupando espaço
-  // vertical. Um ponto no botão avisa quando há filtro ativo mesmo com o menu fechado.
+  // Abre/fecha o dropdown com os grupos colapsáveis de checkboxes. Sem indicador no botão (que
+  // mudava a largura e empurrava a busca): o que está ativo aparece nos chips abaixo da busca.
   const filtroToggle = document.querySelector('#hist-filter-toggle');
   const filtroPanel = document.querySelector('#hist-filter-panel');
-  const filtroDot = document.querySelector('.hist-filtermenu-dot');
-  const filtroClear = document.querySelector('#hist-filter-clear');
   const abreFunil = abrir => { if (!filtroPanel) return; filtroPanel.hidden = !abrir; filtroToggle.setAttribute('aria-expanded', String(abrir)); };
   if (filtroToggle) filtroToggle.addEventListener('click', e => { e.stopPropagation(); abreFunil(filtroPanel.hidden); });
   if (filtroPanel) filtroPanel.addEventListener('click', e => e.stopPropagation());
   document.addEventListener('click', () => abreFunil(false));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') abreFunil(false); });
-  if (filtroClear) filtroClear.addEventListener('click', () => {
-    filtroAcao = 'all'; filtroTipo = 'all'; termo = '';
-    if (busca) busca.value = '';
-    if (limpaBusca) limpaBusca.hidden = true;
-    agendarRender();
-  });
-  function sincronizaFunil() {
-    if (!filtroToggle) return;
-    const ativo = filtroAcao !== 'all' || filtroTipo !== 'all' || !!termo;
-    if (filtroDot) filtroDot.hidden = !ativo;
-    filtroToggle.classList.toggle('is-active', ativo);
-  }
 
   // colapsar / expandir tudo
   const todos = (fechar) => {
@@ -475,6 +547,7 @@
       const h = s.querySelector('.hist-day-head');
       if (h) h.setAttribute('aria-expanded', String(!fechar));
     });
+    requestAnimationFrame(atualizaMarcas);
   };
   const btnColapsar = document.querySelector('#hist-collapse');
   const btnExpandir = document.querySelector('#hist-expand');
@@ -519,12 +592,14 @@
     .then(j => {
       dados = j;
       const info = document.querySelector('.hist-source');
-      if (info) info.textContent = j.commits + ' commits analisados · ' + j.total + ' registros · última alteração em ' + j.geradoEm;
+      // sem a contagem de registros aqui: ela reaparece logo abaixo, em .hist-summary ("N
+      // alterações"), então repeti-la seria redundante.
+      if (info) info.textContent = j.commits + ' commits analisados · última alteração em ' + j.geradoEm;
       render();
       restaurarRolagem();
     })
     .catch(() => {
       vazio.hidden = false;
-      vazio.textContent = 'Não foi possível carregar o histórico. Sirva a página por http (o arquivo JSON é lido por fetch).';
+      vazio.textContent = 'Não foi possível carregar esta seção no momento. Tente novamente mais tarde.';
     });
 })();

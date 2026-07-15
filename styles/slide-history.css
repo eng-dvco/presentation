@@ -120,9 +120,8 @@
   padding: var(--gap-8) var(--gap-16);
   border: none;
   border-radius: var(--border-item) var(--border-item) 0 0;
-  background: var(--lt-surface-glass, rgba(247, 247, 247, 0.92));
-  -webkit-backdrop-filter: blur(6px);
-          backdrop-filter: blur(6px);
+  /* branco opaco, como o preenchimento dos registros */
+  background: var(--lt-surface-strong);
   cursor: pointer;
   text-align: left;
   font-family: var(--font-family-general);
@@ -162,40 +161,55 @@
 .hist-day-items { display: block; }
 
 .hist-tl {
-  --hist-rail: 3.9rem;
+  --hist-rail: 5rem;
   --hist-dot: 12px;
+  --spline-x: 1rem;   /* distância do traço (e do centro do ponto) à borda direita da faixa */
   display: grid;
   grid-template-columns: var(--hist-rail) 1fr;
-  column-gap: var(--gap-16);
+  column-gap: var(--gap-4);   /* mesma distância de 4px do resto do conjunto */
 }
 
+/* faixa do MARCADOR (esquerda): preenchimento branco como os registros, formando o mesmo
+   conjunto. Cantos retos — pois divide aresta com o cabeçalho (acima) e os registros (direita) —
+   exceto o inferior esquerdo, que é a única quina externa do conjunto sem vizinho. */
 .hist-tl-rail {
   position: relative;
-  /* o TRAÇO: linha vertical no eixo do ponto, percorrendo o dia inteiro */
+  background: var(--lt-surface-strong);
+  border-radius: 0 0 0 var(--border-item);
+
+  /* o TRAÇO: linha vertical no eixo do ponto, afastada da borda direita, percorrendo o rail */
   &::before {
     content: "";
     position: absolute;
-    left: calc(100% - var(--hist-dot) / 2);
+    right: var(--spline-x);
     top: 0;
     bottom: 0;
     width: 1.5px;
     background: var(--lt-border-strong);
-    transform: translateX(-50%);
+    transform: translateX(50%);
   }
 }
 
-/* MARCADOR: [horário] [ponto], grudado abaixo do cabeçalho do dia; o ponto encosta no traço.
-   Começa por volta do MEIO do 1º registro (margin-top) para se afastar da data e ficar mais fácil
-   de ver; ao rolar, prende-se em `top`. */
+/* MARCADOR: [horário] [ponto], preso por volta do CENTRO VERTICAL da viewport (não junto ao topo),
+   para que o registro em evidência — o que fica sob o marcador — apareça no meio da tela, fácil de
+   ver, em vez de colar na extremidade superior. O ponto encosta no traço; desliza pela linha do
+   tempo conforme se rola. */
 .hist-mark {
   position: sticky;
-  top: 4.6rem;
+  top: 44vh;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: var(--gap-6);
+  /* respiro no topo (afasta da data) e no fim (o marcador não cola no último registro: a margem
+     inferior do elemento sticky recua o ponto onde ele para) */
   margin-top: 2.1rem;
+  margin-bottom: 2.6rem;
+  /* o ponto (à direita) fica centrado no traço, totalmente DENTRO da faixa; o horário respira
+     à esquerda. Assim o marcador guarda distância das bordas e o círculo não transborda. */
+  padding-right: calc(var(--spline-x) - var(--hist-dot) / 2);
+  padding-left: var(--gap-6);
 }
 
 .hist-mark-time {
@@ -226,7 +240,12 @@
   &.hist-dot--misto { --dot: var(--lt-text-faint); --dot-ring: var(--lt-border); }
 }
 
-.hist-tl-body { display: flex; flex-direction: column; gap: var(--gap-8); min-width: 0; }
+/* 4px entre registros — a mesma distância do cabeçalho de data ao 1º registro */
+.hist-tl-body { display: flex; flex-direction: column; gap: var(--gap-4); min-width: 0; }
+
+/* o ÚLTIMO registro arredonda o canto inferior-direito: é a quina externa do conjunto, sem
+   vizinho com quem dividir aresta (a inferior-esquerda é a do rail) */
+.hist-tl-body > .hist-card:last-child { border-radius: 0 0 var(--border-item) 0; }
 
 /* colapsado: some com a linha do tempo e a seta aponta para baixo (como os documentos fechados) */
 .hist-day.is-collapsed {
@@ -246,8 +265,9 @@
   box-sizing: border-box;
   padding: var(--gap-12) var(--gap-16);
   padding-left: var(--gap-16);
-  border: 1px solid var(--lt-border);
-  border-radius: var(--border-item);
+  border: none;
+  /* TODOS os cantos retos: o registro divide aresta com os vizinhos e com o container do conjunto */
+  border-radius: 0;
   background: var(--lt-surface-strong);
   box-shadow: var(--lt-shadow);
   color: var(--lt-text);
@@ -266,16 +286,17 @@
   /* faixa lateral: CINZA por padrão; só assume a cor da ação quando o registro entra em evidência
      — quando o marcador de horário desce a linha do tempo e o alcança (classe .is-evidenced,
      posta pelo JS ao rolar). Assim a cor "acende" à medida que o marcador passa por cada registro. */
+  /* faixa lateral ZEBRADA (diagonal): cinza por padrão; assume a cor da ação — sempre em zebra —
+     só no registro sob o marcador (.is-evidenced). */
   &::before {
     content: "";
     position: absolute;
     top: var(--gap-8);
     bottom: var(--gap-8);
-    left: 0;
-    width: 3px;
-    border-radius: 0 3px 3px 0;
-    background: var(--lt-border-strong);
-    transition: background-color 0.25s ease;
+    left: var(--gap-4);   /* 4px de respiro entre a faixa e a borda do registro */
+    width: 2.5px;
+    border-radius: 99px;
+    background: repeating-linear-gradient(-45deg, var(--faixa, var(--lt-border-strong)) 0 2px, var(--faixa-2, var(--lt-surface-muted)) 2px 4px);
   }
 
   /* hover: só clareia o tom, sem escurecer a sombra (mesma linguagem dos demais
@@ -283,19 +304,18 @@
   &:hover,
   &:focus-visible {
     background: var(--lt-surface-muted);
-    border-color: var(--lt-border-strong);
   }
 
   &:active { transform: scale(0.995); }
 
-  &.is-evidenced.hist-card--adicao::before,
-  &.is-evidenced.hist-card--implementada::before { background: var(--hist-add); }
+  &.is-evidenced.hist-card--adicao,
+  &.is-evidenced.hist-card--implementada { --faixa: var(--hist-add); --faixa-2: var(--color-green-alpha-25); }
 
-  &.is-evidenced.hist-card--modificacao::before,
-  &.is-evidenced.hist-card--aperfeicoada::before { background: var(--hist-mod); }
+  &.is-evidenced.hist-card--modificacao,
+  &.is-evidenced.hist-card--aperfeicoada { --faixa: var(--hist-mod); --faixa-2: var(--color-yellow-alpha-25); }
 
-  &.is-evidenced.hist-card--delecao::before,
-  &.is-evidenced.hist-card--descartada::before { background: var(--hist-del); }
+  &.is-evidenced.hist-card--delecao,
+  &.is-evidenced.hist-card--descartada { --faixa: var(--hist-del); --faixa-2: var(--color-red-alpha-25); }
 }
 
 /* realce verde temporário ao chegar num registro (vindo do slide pelo botão "‹ histórico") —
@@ -421,9 +441,16 @@
 
 .hist-filters {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--gap-8);
   padding-bottom: var(--gap-16);
+}
+
+/* linha da busca + funil */
+.hist-filters-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
 }
 
 .hist-search-label { flex: 1 1 auto; min-width: 0; }
@@ -447,27 +474,18 @@
 
   &:hover,
   &[aria-expanded="true"] { background: var(--lt-hover); color: var(--lt-text); border-color: var(--lt-border-strong); }
-  &.is-active { border-color: var(--color-green); color: var(--lt-text); }
 }
 
 .hist-funnel-icon { flex-shrink: 0; }
-
-/* ponto verde: há filtro ativo mesmo com o menu fechado */
-.hist-filtermenu-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--color-green);
-  box-shadow: 0 0 0 2px var(--color-green-alpha-25);
-}
 
 .hist-filtermenu-panel {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
   z-index: 300;
-  width: max-content;
-  max-width: min(90vw, 420px);
+  /* largura FIXA: colapsar/expandir os grupos (ou mudar as contagens) não muda a dimensão do
+     menu enquanto ele está aberto */
+  width: min(90vw, 18rem);
   padding: var(--gap-12);
   display: flex;
   flex-direction: column;
@@ -480,20 +498,79 @@
   &[hidden] { display: none; }
 }
 
-.hist-filtermenu-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gap-12);
+/* ── grupo colapsável de filtros (subtítulo + checkboxes) ── */
+.hist-filtergroup {
+  border-top: 1px solid var(--lt-border);
+
+  &:first-child { border-top: none; }
 }
 
-.hist-filtermenu-title {
+.hist-filtergroup-head {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-8);
+  padding: var(--gap-8) 0;
+  border: none;
+  background: none;
+  cursor: pointer;
   font-family: var(--font-family-general);
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  font-weight: var(--font-weight-boldest);
+  color: var(--lt-text);
+}
+
+/* seta idêntica à dos "documentos recebidos" */
+.hist-filtergroup-caret {
+  flex-shrink: 0;
+  font-size: var(--collapsible-icon-size);
+  line-height: 1;
   color: var(--lt-text-faint);
+  transform: rotate(180deg);
+  transition: transform 0.38s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hist-filtergroup.is-collapsed {
+  & .hist-filtergroup-caret { transform: rotate(0deg); }
+  & .hist-filtergroup-body { display: none; }
+}
+
+.hist-filtergroup-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2);
+  padding-bottom: var(--gap-8);
+}
+
+/* opção = checkbox (multi-seleção por padrão) + rótulo + contagem */
+.hist-check {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  padding: var(--gap-4) var(--gap-6);
+  border-radius: var(--border-smaller);
+  cursor: pointer;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+
+  &:hover { background: var(--lt-hover); }
+
+  /* opção sem resultado no filtro atual: aparência de desabilitada (nada a exibir) */
+  &.is-empty { opacity: 0.4; }
+  &:has(input:disabled) { cursor: not-allowed; &:hover { background: none; } }
+
+  & input {
+    flex: 0 0 auto;
+    width: 15px;
+    height: 15px;
+    accent-color: var(--color-green);
+    cursor: pointer;
+
+    &:disabled { cursor: not-allowed; }
+  }
+  & .hist-check-lbl { flex: 1 1 auto; color: var(--lt-text); }
+  & .hist-check-n { flex: 0 0 auto; color: var(--lt-text-faint); font-variant-numeric: tabular-nums; }
 }
 
 .hist-filter-clear {
@@ -563,45 +640,54 @@
   }
 }
 
-.hist-filter-bar {
+/* ── filtros ATIVOS (chips abaixo da busca) ── */
+.hist-active {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--gap-6);
+
+  &[hidden] { display: none; }
 }
 
-.hist-filter-btn {
+.hist-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+  padding: var(--gap-4) var(--gap-8);
   border: 1px solid var(--lt-border);
   border-radius: 99px;
   background: var(--lt-surface-muted);
-  color: var(--ink-3);
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-  font-weight: var(--font-weight-bold);
-  padding: var(--gap-4) var(--gap-12);
+  color: var(--lt-text);
+
+  /* a borda herda a cor da ação que o chip representa */
+  &.hist-chip--adicao,
+  &.hist-chip--implementada { border-color: var(--hist-add); }
+  &.hist-chip--modificacao,
+  &.hist-chip--aperfeicoada { border-color: var(--hist-mod); }
+  &.hist-chip--delecao,
+  &.hist-chip--descartada { border-color: var(--hist-del); }
+}
+
+/* "X" de remoção individual: aparece ao pairar (em telas com hover); em toque, fica sempre visível */
+.hist-chip-x {
+  display: inline-flex;
+  border: none;
+  background: none;
+  padding: 0;
   cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  color: var(--lt-text-muted);
+  font-size: 0.85em;
+  line-height: 1;
 
-  &:hover { background: var(--lt-hover); color: var(--lt-text); }
+  &:hover { color: var(--hist-del); }
+}
 
-  &.active {
-    background: var(--lt-surface-strong);
-    border-color: var(--lt-border-strong);
-    color: var(--lt-text);
-  }
-
-  /* o filtro ativo herda a cor da ação que representa — mesma linguagem dos rótulos */
-  &.active.hist-filter-btn--adicao,
-  &.active.hist-filter-btn--implementada { border-color: var(--hist-add); }
-
-  &.active.hist-filter-btn--modificacao,
-  &.active.hist-filter-btn--aperfeicoada { border-color: var(--hist-mod); }
-
-  &.active.hist-filter-btn--delecao,
-  &.active.hist-filter-btn--descartada { border-color: var(--hist-del); }
-
-  /* elemento que a busca/ação corrente zerou: continua clicável, mas anuncia o resultado */
-  &.is-empty:not(.active) { opacity: 0.45; }
+@media (hover: hover) {
+  .hist-chip-x { display: none; }
+  .hist-chip:hover .hist-chip-x { display: inline-flex; }
 }
 
 .hist-resumo,

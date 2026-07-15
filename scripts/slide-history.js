@@ -152,6 +152,15 @@
     return s;
   }
 
+  // o rótulo da ação: ícone DENTRO do badge, à esquerda do texto
+  function badgeAcao(acao) {
+    const b = el('span', 'hist-badge hist-badge--' + slug(acao));
+    const ico = iconeAcao(acao);
+    if (ico) b.appendChild(ico);
+    b.appendChild(document.createTextNode(acao));
+    return b;
+  }
+
   // ── um registro ──
   function cartao(r) {
     const a = el('a', 'hist-card hist-card--' + slug(r.acao));
@@ -174,9 +183,7 @@
     });
 
     const topo = el('div', 'hist-card-top');
-    const ico = iconeAcao(r.acao);
-    if (ico) topo.appendChild(ico);
-    topo.appendChild(el('span', 'hist-badge hist-badge--' + slug(r.acao), r.acao));
+    topo.appendChild(badgeAcao(r.acao));
     topo.appendChild(el('span', 'hist-type', r.tipo));
     a.appendChild(topo);
 
@@ -507,9 +514,7 @@
         const doGrupo = regs.filter(r => r.acao === acao);
         if (!doGrupo.length) return;
         const h = el('h2', 'hist-month hist-month--acao');
-        const ig = iconeAcao(acao);
-        if (ig) h.appendChild(ig);
-        h.appendChild(el('span', 'hist-badge hist-badge--' + slug(acao), acao));
+        h.appendChild(badgeAcao(acao));
         h.appendChild(el('span', 'hist-month-count', String(doGrupo.length)));
         lista.appendChild(h);
         agrupaPorDia(doGrupo).forEach(([dia, itens]) => lista.appendChild(bloco(dia, itens)));

@@ -340,12 +340,12 @@
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
 }
 
-/* ícone da ação, à esquerda do rótulo — preto como os títulos/subtítulos */
+/* ícone da ação, DENTRO do badge à esquerda do texto — herda o preto do rótulo */
 .hist-acao-icon {
   display: inline-flex;
   flex-shrink: 0;
-  color: var(--ink-1);
-  font-size: 0.95rem;
+  color: inherit;
+  font-size: 1.25em;
 }
 
 .hist-type {
@@ -354,8 +354,11 @@
   letter-spacing: 0.08em;
 }
 
-/* ── o rótulo da ação ── */
+/* ── o rótulo da ação (com o ícone dentro) ── */
 .hist-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
   padding: 2px var(--gap-8);
   border-radius: 99px;
   font-family: var(--font-family-general);

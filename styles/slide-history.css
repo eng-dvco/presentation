@@ -104,8 +104,10 @@
 /* ── um dia (colapsável) ── */
 .hist-day { padding-bottom: var(--gap-16); }
 
-/* cabeçalho do dia GRUDA no topo enquanto se rola dentro do dia — assim a DATA da ação fica
-   sempre visível (ela varia entre dias). Fundo fosco para ocultar os registros que passam sob ele. */
+/* cabeçalho do dia: barra que CAPEIA a linha do tempo — cantos arredondados em cima, retos
+   embaixo (continuidade com os registros, como os conjuntos do cronograma) e 4px de respiro até o
+   1º registro. GRUDA no topo para manter a DATA visível ao rolar (ela varia entre dias); fundo
+   fosco para ocultar os registros que passam sob ele. */
 .hist-day-head {
   position: sticky;
   top: 0;
@@ -114,9 +116,11 @@
   width: 100%;
   align-items: center;
   gap: var(--gap-8);
-  padding: var(--gap-8) 0;
+  margin-bottom: var(--gap-4);
+  padding: var(--gap-8) var(--gap-16);
   border: none;
-  background: var(--lt-surface-glass, rgba(247, 247, 247, 0.9));
+  border-radius: var(--border-item) var(--border-item) 0 0;
+  background: var(--lt-surface-glass, rgba(247, 247, 247, 0.92));
   -webkit-backdrop-filter: blur(6px);
           backdrop-filter: blur(6px);
   cursor: pointer;
@@ -128,19 +132,28 @@
   &:hover .hist-day-date { color: var(--ink-1); }
 }
 
+/* seta de colapso IDÊNTICA à de "documentos recebidos" (mesmos tokens, mesma rotação de 180°):
+   expandido = seta p/ cima; colapsado = seta p/ baixo. */
 .hist-day-caret {
-  display: inline-block;
-  color: var(--ink-4);
-  transition: transform 0.15s ease;
+  flex-shrink: 0;
+  font-size: var(--collapsible-icon-size);
+  line-height: 1;
+  color: var(--lt-text-faint);
+  transform: rotate(180deg);
+  transition: transform 0.38s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .hist-day-date {
+  margin-left: var(--gap-8);
   font-weight: var(--font-weight-boldest);
   color: var(--lt-text);
   letter-spacing: 0.06em;
 }
 
-.hist-day-count { margin-left: auto; }
+.hist-day-count {
+  margin-left: auto;
+  margin-right: var(--gap-8);
+}
 
 /* ── LINHA DO TEMPO do dia ──
    Um único MARCADOR sticky desliza pela linha do tempo: mostra o horário (00h00) e o ponto com a
@@ -171,16 +184,18 @@
   }
 }
 
-/* MARCADOR: [horário] [ponto], grudado logo abaixo do cabeçalho do dia; o ponto encosta no traço */
+/* MARCADOR: [horário] [ponto], grudado abaixo do cabeçalho do dia; o ponto encosta no traço.
+   Começa por volta do MEIO do 1º registro (margin-top) para se afastar da data e ficar mais fácil
+   de ver; ao rolar, prende-se em `top`. */
 .hist-mark {
   position: sticky;
-  top: 2.9rem;
+  top: 4.6rem;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: var(--gap-6);
-  padding-top: var(--gap-8);
+  margin-top: 2.1rem;
 }
 
 .hist-mark-time {
@@ -213,10 +228,10 @@
 
 .hist-tl-body { display: flex; flex-direction: column; gap: var(--gap-8); min-width: 0; }
 
-/* colapsado: some com a linha do tempo e gira a seta */
+/* colapsado: some com a linha do tempo e a seta aponta para baixo (como os documentos fechados) */
 .hist-day.is-collapsed {
   & .hist-day-items { display: none; }
-  & .hist-day-caret { transform: rotate(-90deg); }
+  & .hist-day-caret { transform: rotate(0deg); }
 }
 
 /* ── o registro: o corpo INTEIRO é clicável ── */
@@ -248,7 +263,9 @@
   content-visibility: auto;
   contain-intrinsic-size: auto 200px;
 
-  /* faixa lateral com a cor da ação: dá para varrer a coluna e ver o que entrou/saiu */
+  /* faixa lateral: CINZA por padrão; só assume a cor da ação quando o registro entra em evidência
+     — quando o marcador de horário desce a linha do tempo e o alcança (classe .is-evidenced,
+     posta pelo JS ao rolar). Assim a cor "acende" à medida que o marcador passa por cada registro. */
   &::before {
     content: "";
     position: absolute;
@@ -258,6 +275,7 @@
     width: 3px;
     border-radius: 0 3px 3px 0;
     background: var(--lt-border-strong);
+    transition: background-color 0.25s ease;
   }
 
   /* hover: só clareia o tom, sem escurecer a sombra (mesma linguagem dos demais
@@ -270,14 +288,14 @@
 
   &:active { transform: scale(0.995); }
 
-  &.hist-card--adicao::before,
-  &.hist-card--implementada::before { background: var(--hist-add); }
+  &.is-evidenced.hist-card--adicao::before,
+  &.is-evidenced.hist-card--implementada::before { background: var(--hist-add); }
 
-  &.hist-card--modificacao::before,
-  &.hist-card--aperfeicoada::before { background: var(--hist-mod); }
+  &.is-evidenced.hist-card--modificacao::before,
+  &.is-evidenced.hist-card--aperfeicoada::before { background: var(--hist-mod); }
 
-  &.hist-card--delecao::before,
-  &.hist-card--descartada::before { background: var(--hist-del); }
+  &.is-evidenced.hist-card--delecao::before,
+  &.is-evidenced.hist-card--descartada::before { background: var(--hist-del); }
 }
 
 /* realce verde temporário ao chegar num registro (vindo do slide pelo botão "‹ histórico") —

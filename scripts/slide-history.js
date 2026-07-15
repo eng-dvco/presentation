@@ -290,6 +290,12 @@
         else hi = mid - 1;
       }
       setMark(mark, cards[at].dataset.hora, cards[at].dataset.acao);
+      // "acende" a faixa lateral dos registros que o marcador já alcançou (0..at) e apaga os que
+      // ficaram abaixo. Delta-only: mexe apenas nos que mudaram de estado — barato mesmo rolando.
+      const prev = day._evAt == null ? -1 : day._evAt;
+      if (at > prev) for (let i = prev + 1; i <= at; i++) cards[i].classList.add('is-evidenced');
+      else if (at < prev) for (let i = prev; i > at; i--) cards[i].classList.remove('is-evidenced');
+      day._evAt = at;
     });
   }
   let _marcasRAF = 0;

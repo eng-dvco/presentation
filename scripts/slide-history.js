@@ -397,7 +397,7 @@
         if (cur.textContent) cur.textContent = '';
         return;
       }
-      // a área rolável é irmã do título dentro do cartão (a faixa zebrada fica entre os dois)
+      // a área rolável é irmã do título dentro do cartão
       const rol = mes.parentElement && mes.parentElement.querySelector('.hist-monthscroll');
       let atual = null;
       if (rol) rol.querySelectorAll('.hist-day-head').forEach(head => {

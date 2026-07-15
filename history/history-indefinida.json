@@ -1,9 +1,45 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "15-07-26",
- "commits": 136,
- "total": 574,
+ "commits": 138,
+ "total": 575,
  "registros": [
+  {
+   "id": "88032a8-0",
+   "data": "15-07-26",
+   "hora": "18:50",
+   "commit": "88032a8",
+   "aba": "conteudo",
+   "link": "slides/slide-training.html",
+   "acao": "modificação",
+   "tipo": "observação",
+   "titulo": "Treinamentos internos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
+   ],
+   "de": "reciclagem da NR-5 (CIPA)",
+   "para": "reciclagem da NR-6 (EPIs)",
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "436 KB",
+    "amostra": [
+     {
+      "nome": "training-7.jpeg",
+      "src": "assets/img/slides/st/training/training-7.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-7-200.webp",
+      "peso": "233 KB"
+     },
+     {
+      "nome": "training-8.jpeg",
+      "src": "assets/img/slides/st/training/training-8.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-8-200.webp",
+      "peso": "203 KB"
+     }
+    ],
+    "extras": 0
+   }
+  },
   {
    "id": "8ff80e1-1",
    "data": "15-07-26",

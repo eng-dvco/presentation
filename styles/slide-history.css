@@ -246,7 +246,9 @@
    em evidência sob ele. O ponto encosta no traço e desliza pela linha do tempo conforme se rola. */
 .hist-mark {
   position: sticky;
-  top: 5rem;   /* afastado do topo da área rolável: o registro evidenciado respira abaixo do título */
+  /* mais afastado do topo da área rolável: quanto mais baixo, mais cedo o marcador "pega" o próximo
+     registro ao rolar (responde antes) e mais perto do centro fica o registro em evidência */
+  top: 7rem;
   z-index: 2;
   display: flex;
   align-items: center;

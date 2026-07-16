@@ -1,9 +1,106 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "16-07-26",
- "commits": 141,
- "total": 466,
+ "commits": 149,
+ "total": 468,
  "registros": [
+  {
+   "id": "8df3697-1",
+   "data": "16-07-26",
+   "hora": "11:40",
+   "commit": "8df3697",
+   "aba": "conteudo",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Condição em que os estais foram encontrados",
+   "breadcrumb": [
+    "Linhas do Tempo",
+    "Recuperação estrutural dos estais",
+    "Condição em que os estais foram encontrados"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "3,0 MB",
+    "amostra": [
+     {
+      "nome": "damaged-stay-1.png",
+      "src": "assets/img/slides/tl/lt-stay-recovery/damaged-stay-1.png",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/damaged-stay-1-200.webp",
+      "peso": "854 KB"
+     },
+     {
+      "nome": "damaged-stay-2.png",
+      "src": "assets/img/slides/tl/lt-stay-recovery/damaged-stay-2.png",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/damaged-stay-2-200.webp",
+      "peso": "1,1 MB"
+     },
+     {
+      "nome": "stay-5.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-5.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-5-200.webp",
+      "peso": "537 KB"
+     },
+     {
+      "nome": "stay-6.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-6.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-6-200.webp",
+      "peso": "563 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4
+  },
+  {
+   "id": "8df3697-0",
+   "data": "16-07-26",
+   "hora": "11:40",
+   "commit": "8df3697",
+   "aba": "conteudo",
+   "link": "slides/slide-concrete-base-repair.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Etapas do reparo",
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Reparo estrutural nas fundações",
+    "Etapas do reparo"
+   ],
+   "legendas": [
+    {
+     "texto": "diferentes etapas do processo de recuperação",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "1,9 MB",
+      "amostra": [
+       {
+        "nome": "repair-9.png",
+        "src": "assets/img/slides/lt/concrete-base-repair/repair-9.png",
+        "miniatura": "assets/img/slides/lt/concrete-base-repair/repair-9-200.webp",
+        "peso": "1,9 MB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "1,9 MB",
+    "amostra": [
+     {
+      "nome": "repair-9.png",
+      "src": "assets/img/slides/lt/concrete-base-repair/repair-9.png",
+      "miniatura": "assets/img/slides/lt/concrete-base-repair/repair-9-200.webp",
+      "peso": "1,9 MB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1
+  },
   {
    "id": "88032a8-0",
    "data": "15-07-26",

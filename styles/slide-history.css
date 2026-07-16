@@ -7,6 +7,10 @@
    servem à aba de funções (implementada / aperfeiçoada / descartada), porque a semântica é
    a mesma — só o vocabulário muda. Todos os valores vêm de variables.css. */
 
+/* espelha o --content-max de 1080px abaixo, no :root, para os botões flutuantes (position:fixed,
+   filhos de <body>) centralizarem-se na calha lateral desta página com margens simétricas */
+:root { --page-content-w: 1080px; }
+
 .hist-root {
   /* mais largo que um slide (960px): o registro tem breadcrumb, texto antes→depois,
      miniaturas e metadados na mesma linha, e ganha em legibilidade com o espaço extra.
@@ -26,9 +30,27 @@
 .hist-controls {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;   /* alinha os controles (base de cada conjunto), independentemente do título */
   gap: var(--gap-8);
   padding-bottom: var(--gap-16);
+}
+
+/* cada conjunto de controle ganha um TÍTULO em cima (Exibir / Ordenar / Detalhamento) */
+.hist-ctrlset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+}
+.hist-ctrlset--push { margin-left: auto; }   /* empurra "Ordenar" (e o que vem depois) para a direita */
+
+.hist-ctrlset-title {
+  text-align: center;   /* centralizado sobre o seu conjunto de botões */
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lt-text-faint);
 }
 
 .hist-tabs,
@@ -64,8 +86,6 @@
     font-weight: var(--font-weight-boldest);
   }
 }
-
-.hist-groups { margin-left: auto; }
 
 /* colapsar/expandir não é um estado — é uma ação; não recebe .active */
 .hist-fold-btn:active { background: var(--lt-surface-strong); }
@@ -192,17 +212,53 @@
   font-weight: var(--font-weight-boldest);
 }
 
-/* a data + contagem do dia atual, absorvidas para o título do mês ao rolar. Some/aparece por
-   ESMAECIMENTO (fade): ganha opacidade gradualmente ao surgir, em vez de aparecer de supetão. */
+/* a data + contagem do dia atual, absorvidas para o título do mês ao rolar. A ALTURA anima (grid
+   0fr↔1fr): cresce ANTES de receber a informação e recolhe ao devolvê-la, sem salto abrupto. Na
+   entrada, expande a altura e só então esmaece o conteúdo (leve atraso); na saída, o inverso. */
 .hist-month-cur {
+  flex-basis: 100%;   /* sempre na sua própria linha, logo abaixo do rótulo do mês */
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   color: var(--lt-text-muted);
   letter-spacing: 0.04em;
-  font-variant-numeric: tabular-nums;
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.22s ease, grid-template-rows 0.36s ease 0.1s;   /* SAÍDA: esmaece, depois recolhe */
 
-  &.is-shown { opacity: 1; }
+  &.is-shown {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition: grid-template-rows 0.36s ease, opacity 0.28s ease 0.14s;   /* ENTRADA: expande, depois esmaece */
+  }
+}
+
+/* wrapper recortado (o item do grid): é o que efetivamente cresce/encolhe e abriga as células */
+.hist-month-cur-in {
+  overflow: hidden;
+  min-height: 0;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.hist-cur-date, .hist-cur-num, .hist-cur-word { display: inline-block; }
+/* preserva o espaço à frente de "alterações" — um inline-block apararia o espaço inicial */
+.hist-cur-word { white-space: pre; }
+.hist-cur-sep { display: inline-block; margin: 0 0.34em; opacity: 0.7; }
+
+/* cada caractere é uma célula que "rola": o antigo desliza para fora e esmaece, o novo entra do
+   lado oposto — e SÓ quando aquele caractere muda de valor (ver rolaCelula em slide-history.js). */
+.hist-cur-ch {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+
+  & > .ch { display: inline-block; }
+  & > .ch-abs { position: absolute; left: 0; top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hist-month-cur, .hist-month-cur.is-shown { transition: opacity 0.2s ease; }
 }
 
 .hist-month-count {
@@ -470,6 +526,9 @@
   &.is-evidenced.hist-card--descartada { --faixa: var(--hist-del); --faixa-2: var(--color-red-alpha-25); }
 }
 
+/* registro DEFASADO (tem alteração já superada por outra mais recente): preenchimento ZEBRADO sutil
+   sobre o fundo do cartão, para diferenciá-lo dos vigentes à primeira vista — mesmo traço diagonal
+   da faixa do mês, bem discreto para não competir com o texto. */
 /* realce verde temporário ao chegar num registro (vindo do slide pelo botão "‹ histórico") —
    mesma linguagem do "localizar na página" do lightbox. */
 .hist-located { animation: hist-locate-flash 2.4s ease-out; }
@@ -529,6 +588,9 @@
 /* aviso, ao lado do commit, de que o slide-alvo não existe mais — VERMELHO no preenchimento e no
    texto (o clique abre o índice, não um 404) */
 .hist-ausente {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
   padding: 0 var(--gap-6);
   border-radius: 99px;
   background: var(--color-red-alpha-25);
@@ -540,6 +602,8 @@
   letter-spacing: 0.04em;
   white-space: nowrap;
 }
+
+.hist-ausente-icon { flex: 0 0 auto; }
 
 /* ── o rótulo da ação (com o ícone dentro) ── */
 .hist-badge {
@@ -580,15 +644,28 @@
 .hist-crumbs {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: var(--gap-4);
+  align-items: baseline;
+  /* linhas bem próximas na vertical, respiro só na horizontal: quando um segmento longo quebra,
+     não abre um vão grande entre as linhas do caminho */
+  gap: var(--gap-2) var(--gap-6);
   padding-top: var(--gap-4);
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  line-height: 1.4;
   color: var(--lt-text-muted);
 }
 
-.hist-crumb-sep { opacity: 0.5; }
+/* o separador (›) vive DENTRO do segmento seguinte (ver slide-history.js): assim nunca fica órfão
+   numa linha só. A quebra preferencial passa a ser ENTRE segmentos; dentro de um, só quando ele
+   sozinho excede a largura. */
+.hist-crumb-sep { opacity: 0.5; margin-right: var(--gap-4); }
+
+/* divisor tracejado abaixo do breadcrumb — mesmo traço que separa "de"/"para" na transferência.
+   Dá respiro entre o caminho (onde a alteração ocorreu) e o corpo do registro. */
+.hist-crumb-div {
+  margin-top: var(--gap-8);
+  border-top: 1px dashed var(--lt-border-strong);
+}
 
 /* pequena label do PAPEL de cada segmento do breadcrumb: [seção] › [slide] › [subtítulo] */
 .hist-crumb-tag {
@@ -967,6 +1044,20 @@
   font-style: italic;
 }
 
+/* faixa que ISOLA um elemento DEFASADO: todo o conteúdo da alteração superada (de→para, miniaturas,
+   aviso, histórico) vive aqui, e é a FAIXA INTEIRA que recebe o preenchimento ZEBRADO — não a label.
+   O traço diagonal marca a alteração como obsoleta de ponta a ponta. */
+.hist-obsoleto-band {
+  margin-top: var(--gap-8);
+  padding: var(--gap-8) var(--gap-12);
+  border-radius: var(--border-smaller);
+  background-color: var(--lt-surface-muted);
+  background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--lt-border) 45%, transparent) 0 1.5px, transparent 1.5px 8px);
+
+  /* dentro da faixa o respiro de topo já vem do seu padding: o 1º filho não repete a margem */
+  & > :first-child { margin-top: 0; padding-top: 0; }
+}
+
 /* aviso de registro DEFASADO: uma alteração posterior já substituiu esta. Clicável — leva ao registro
    vigente do mesmo elemento (realçando-o) e indica o commit atual. A borda tracejada = "provisório". */
 .hist-obsoleto {
@@ -977,7 +1068,7 @@
   padding: var(--gap-4) var(--gap-8);
   border: 1px dashed var(--lt-border-strong);
   border-radius: 99px;
-  background: var(--lt-surface-muted);
+  background: var(--lt-surface);   /* pílula clara, DESTACADA sobre a faixa zebrada que a envolve */
   cursor: pointer;
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
@@ -1086,6 +1177,23 @@
 
 .hist-hist-commit { color: var(--lt-text-faint); }
 .hist-hist-valor { overflow-wrap: anywhere; }
+.hist-hist-sep { color: var(--lt-text-faint); opacity: 0.7; }
+
+/* o registro VIGENTE encabeça a lista: tag "atual" + leve tinte verde, para distingui-lo dos superados */
+.hist-hist-atual {
+  margin-left: auto;
+  padding: 0 var(--gap-4);
+  border-radius: var(--border-smaller);
+  background: var(--color-green-alpha-10);
+  color: var(--lt-accent);
+  font-size: 0.85em;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.hist-hist-item.is-current { background: var(--color-green-alpha-10); }
+.hist-hist-item.is-current:hover,
+.hist-hist-item.is-current:focus-visible { background: var(--color-green-alpha-25); }
 
 /* ── legenda das fotos (SEM envelope): vai direto no cartão, sem a antiga caixa rotulada ── */
 .hist-info-text {
@@ -1214,6 +1322,21 @@
   letter-spacing: 0.06em;
 }
 
+/* imagens SUBSTITUÍDAS (trocadas por outras de mesmo nome): o sublinhado pontilhado + cursor de
+   ajuda sinalizam que o chip é explicável (tooltip nativo no title). Realça suavemente ao pairar. */
+.hist-meta-sub {
+  cursor: help;
+  text-decoration: underline dotted var(--lt-border-strong);
+  text-underline-offset: 2px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    border-color: var(--lt-border-strong);
+    background: var(--lt-surface);
+    color: var(--lt-text);
+  }
+}
+
 /* o commit fica discreto, no canto: é a prova de auditoria do registro */
 /* canto superior direito: aviso "slide não disponível" (se houver) + o código do commit, lado a lado */
 .hist-topinfo {
@@ -1242,7 +1365,7 @@
 
 @media (max-width: 640px) {
   .hist-controls { gap: var(--gap-8); }
-  .hist-groups { margin-left: 0; }
+  .hist-ctrlset--push { margin-left: 0; }
   .hist-commit { display: none; }
   /* o commit some no mobile; o aviso "slide indisponível" deixa de ser fixo à direita e FLUI abaixo do
      topo (alinhado à direita), evitando sobrepor o tipo em telas estreitas */
@@ -1251,6 +1374,9 @@
     justify-content: flex-end;
     margin-top: var(--gap-4);
   }
+  /* espaço limitado: o aviso "slide indisponível" fica só com o ícone de vínculo quebrado */
+  .hist-ausente-txt { display: none; }
+  .hist-ausente { padding: var(--gap-2) var(--gap-4); }
   .hist-thumb { width: 52px; height: 39px; }
   /* no máximo 3 miniaturas: esconde da 4ª em diante, troca o "+N" de desktop pelo de mobile (na 3ª) */
   .hist-thumbs .hist-thumb:nth-child(n+4) { display: none; }

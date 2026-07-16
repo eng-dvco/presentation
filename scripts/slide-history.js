@@ -84,11 +84,27 @@
   // os tipos de elemento do registro (vários, quando consolidado) — para o filtro por elemento
   const tiposDe = r => (r.tipos && r.tipos.length ? r.tipos : [r.tipo]);
 
-  // papel de cada segmento do breadcrumb — vira uma pequena label: [seção] › [slide] › [subtítulo]
-  // (o índice segue a estrutura seção › slide › atividade; nos documentos, o 2º item é o documento).
-  const papelCrumb = (r, i) => i === 0 ? 'seção'
+  // papel de cada segmento do breadcrumb — vira uma pequena label. A estrutura é seção › slide ›
+  // atividade e, nas SUB-PÁGINAS, seção › slide-mãe › sub-página › atividade. Ciente do tamanho `n`:
+  // o 1º é a seção, o 2º o slide (ou documento), o ÚLTIMO a atividade e os do meio, a sub-página.
+  const papelCrumb = (r, i, n) => i === 0 ? 'seção'
     : i === 1 ? (tiposDe(r).includes('documento') ? 'documento' : 'slide')
-      : 'subtítulo';
+      : i === n - 1 ? 'subtítulo'
+        : 'sub-página';
+
+  // resolve segmentos "crus" do breadcrumb para nomes legíveis. O histórico guarda o estado de CADA
+  // commit; num commit antigo o slide ainda não tinha seção nem nome próprio, então o diff caiu no
+  // nome do ARQUIVO (…​.html) e na seção "—". Aqui trocamos esses segmentos pelo valor mais recente e
+  // legível do MESMO link, deixando o caminho todo em nomes (seção › slide › atividade), não em paths.
+  function breadcrumbLegivel(r) {
+    const link = r.link || '';
+    return (r.breadcrumb || []).map((seg, i) => {
+      const s = (seg == null ? '' : String(seg)).trim();
+      if (i === 0 && /^[—–-]$/.test(s)) return secaoDoLink(link) || seg;
+      if (/^slide-|\.html$/.test(s)) return nomeDoLink(link) || prettify(link);
+      return seg;
+    });
+  }
 
   // ── índice de busca: tudo que o registro "diz" ──
   const textoDe = r => dobra([
@@ -223,6 +239,9 @@
   // ── corpo de UMA parte (tipo + conteúdo). `r` dá o contexto de clique/href do cartão inteiro. ──
   function corpoParte(a, r, p) {
     const temDelta = p.de != null && p.para != null && p.de !== p.para;
+    // um elemento DEFASADO é ISOLADO numa faixa própria (que recebe o zebrado); as demais
+    // partes seguem direto no cartão
+    const faixa = p.obsoleto ? el("div", "hist-obsoleto-band") : a;
     // a transferência usa um delta próprio (empilhado, com ícone de movimentação); os demais, o padrão
     const montarDelta = () => r.acao === 'transferência' ? deltaTransfer(p.de, p.para) : delta(p.de, p.para);
 
@@ -231,9 +250,9 @@
       // a legenda (resumo) de uma observação ADICIONADA ou REMOVIDA leva a label "observação" à esquerda
       // (como nas legendas das imagens). A MODIFICAÇÃO isolada (de→para) não leva — o próprio de/para já
       // a identifica e o topo do card diz OBSERVAÇÃO.
-      if (temDelta) a.appendChild(delta(p.de, p.para));
-      else if (p.resumo) a.appendChild(comRotulo('observação', el('span', 'hist-info-text', p.resumo)));
-      if (p.imagens) { const t = tiras(p.imagens, true); if (t) a.appendChild(t); }
+      if (temDelta) faixa.appendChild(delta(p.de, p.para));
+      else if (p.resumo) faixa.appendChild(comRotulo('observação', el('span', 'hist-info-text', p.resumo)));
+      if (p.imagens) { const t = tiras(p.imagens, true); if (t) faixa.appendChild(t); }
 
     // ── IMAGENS: legendas por faixa (1-2: X · 3-4: Y) + tira de miniaturas + metadados ──
     } else if (p.tipo === 'imagens') {
@@ -244,7 +263,7 @@
       const legendaEl = texto => (r.acao === 'adição' || uniaoImgObs)
         ? comRotulo('observação', el('span', 'hist-info-text', texto))
         : el('p', 'hist-info-text', texto);
-      if (temDelta) a.appendChild(montarDelta());   // transferência de imagens: origem → destino
+      if (temDelta) faixa.appendChild(montarDelta());   // transferência de imagens: origem → destino
       if (legendas.length > 1) {
         // legendas DIFERENTES por faixa de imagens: cada uma com as suas miniaturas (o vínculo).
         // Cada faixa é CLICÁVEL individualmente: leva o usuário exatamente àquela alteração no slide
@@ -267,23 +286,29 @@
           g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') irAoGrupo(e); });
           grupos.appendChild(g);
         });
-        a.appendChild(grupos);
+        faixa.appendChild(grupos);
       } else {
-        if (legendas.length === 1) a.appendChild(legendaEl(legendas[0].texto));
-        if (p.imagens) { const t = tiras(p.imagens, false); if (t) a.appendChild(t); }
+        if (legendas.length === 1) faixa.appendChild(legendaEl(legendas[0].texto));
+        if (p.imagens) { const t = tiras(p.imagens, false); if (t) faixa.appendChild(t); }
       }
       if (p.imagens) {
         const met = el('div', 'hist-meta');
         met.appendChild(el('span', 'hist-meta-item', plural(p.imagens.total, 'imagem')));
         if (p.imagens.pesoTotal) met.appendChild(el('span', 'hist-meta-item', p.imagens.pesoTotal));
-        if (p.removidas) met.appendChild(el('span', 'hist-meta-item', p.removidas + ' substituída(s)'));
-        a.appendChild(met);
+        if (p.removidas) {
+          // imagens TROCADAS por outras de mesmo nome (o diff as vê como "modificadas"). Singular/plural
+          // certo e um tooltip explicando por que uma substituição acontece.
+          const sub = el('span', 'hist-meta-item hist-meta-sub', p.removidas + (p.removidas === 1 ? ' substituída' : ' substituídas'));
+          sub.title = 'A substituição pode ocorrer para atualizar quantitativos, obter uma melhor qualidade ou simplesmente corrigir erros ortográficos.';
+          met.appendChild(sub);
+        }
+        faixa.appendChild(met);
       }
 
     // ── DEMAIS (título, subtítulo, nome/seção do slide, funções): de/para ou resumo ──
     } else {
-      if (temDelta) a.appendChild(montarDelta());
-      else if (p.resumo) a.appendChild(el('p', 'hist-resumo', p.resumo));
+      if (temDelta) faixa.appendChild(montarDelta());
+      else if (p.resumo) faixa.appendChild(el('p', 'hist-resumo', p.resumo));
     }
 
     // ── DOCUMENTOS: extensão, versão, páginas, tamanho ──
@@ -294,7 +319,7 @@
       if (d.versao) met.appendChild(el('span', 'hist-meta-item', 'versão ' + d.versao));
       if (d.paginas) met.appendChild(el('span', 'hist-meta-item', d.paginas + (d.paginas === '1' ? ' página' : ' páginas')));
       if (d.tamanho) met.appendChild(el('span', 'hist-meta-item', d.tamanho));
-      a.appendChild(met);
+      faixa.appendChild(met);
     }
 
     // ── DEFASADO: esta alteração já foi superada por outra mais recente do mesmo elemento. O aviso
@@ -309,7 +334,7 @@
       const ir = e => { e.preventDefault(); e.stopPropagation(); irParaRegistro(p.obsoleto.id); };
       av.addEventListener('click', ir);
       av.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') ir(e); });
-      a.appendChild(av);
+      faixa.appendChild(av);
     }
 
     // ── VIGENTE: esta versão lista, como um histórico, os registros que tornou obsoletos (com data,
@@ -324,19 +349,29 @@
       const lbl = el('span', 'hist-hist-label', 'expandir histórico');
       cab.appendChild(lbl);
       const lst = el('div', 'hist-hist-list');
-      p.substitui.forEach(s => {
-        const it = el('div', 'hist-hist-item');
+      // um item da lista: "DD-MM-AA às HHhMM · COMMIT · valor". O separador "·" fica entre a data(+hora),
+      // o commit e a informação alterada. `atual` marca o registro VIGENTE (topo da lista).
+      const itemHist = info => {
+        const it = el('div', 'hist-hist-item' + (info.atual ? ' is-current' : ''));
         it.tabIndex = 0;
         it.setAttribute('role', 'link');
-        it.title = 'Ir para este registro (' + s.commit + ')';
-        it.appendChild(el('span', 'hist-hist-data', s.data));
-        it.appendChild(el('span', 'hist-hist-commit', s.commit));
-        if (s.para != null) it.appendChild(el('span', 'hist-hist-valor', s.para));
-        const ir = e => { e.preventDefault(); e.stopPropagation(); irParaRegistro(s.id); };
+        it.title = info.atual ? 'Registro atual (' + info.commit + ')' : 'Ir para este registro (' + info.commit + ')';
+        it.appendChild(el('span', 'hist-hist-data', info.data + (info.hora ? ' às ' + horaBR(info.hora) : '')));
+        it.appendChild(el('span', 'hist-hist-sep', '·'));
+        it.appendChild(el('span', 'hist-hist-commit', info.commit));
+        if (info.valor != null) {
+          it.appendChild(el('span', 'hist-hist-sep', '·'));
+          it.appendChild(el('span', 'hist-hist-valor', info.valor));
+        }
+        if (info.atual) it.appendChild(el('span', 'hist-hist-atual', 'atual'));
+        const ir = e => { e.preventDefault(); e.stopPropagation(); irParaRegistro(info.id); };
         it.addEventListener('click', ir);
         it.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') ir(e); });
-        lst.appendChild(it);
-      });
+        return it;
+      };
+      // o registro VIGENTE encabeça a lista; abaixo dele, os que ele tornou obsoletos (mais recente → antigo)
+      lst.appendChild(itemHist({ data: r.data, hora: r.hora, commit: r.commit, valor: p.para, id: r.id, atual: true }));
+      p.substitui.forEach(s => lst.appendChild(itemHist({ data: s.data, hora: s.hora, commit: s.commit, valor: s.para, id: s.id })));
       const alterna = e => {
         e.preventDefault(); e.stopPropagation();
         const col = box.classList.toggle('is-collapsed');
@@ -347,8 +382,9 @@
       cab.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') alterna(e); });
       box.appendChild(cab);
       box.appendChild(lst);
-      a.appendChild(box);
+      faixa.appendChild(box);
     }
+    if (faixa !== a) a.appendChild(faixa);
   }
 
   // ── um registro (pode reunir várias alterações do mesmo elemento, feitas no mesmo commit) ──
@@ -374,8 +410,11 @@
     // o tipo em telas estreitas).
     const canto = el('div', 'hist-topinfo' + (r.alvoAusente ? ' hist-topinfo--ausente' : ''));
     if (r.alvoAusente) {
-      const av = el('span', 'hist-ausente', 'slide indisponível');
+      const av = el('span', 'hist-ausente');
       av.title = 'O slide original foi removido — o link abre o índice.';
+      // ícone de VÍNCULO QUEBRADO + rótulo; no mobile fica só o ícone (espaço limitado)
+      av.innerHTML = '<svg class="hist-ausente-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="2" y1="8" x2="5" y2="8"/><line x1="16" y1="19" x2="16" y2="22"/><line x1="19" y1="16" x2="22" y2="16"/></svg>';
+      av.appendChild(el('span', 'hist-ausente-txt', 'slide indisponível'));
       canto.appendChild(av);
     }
     canto.appendChild(el('span', 'hist-commit', r.commit));
@@ -383,12 +422,14 @@
 
     // sem título quando ele só repetiria o que já está à vista:
     //  • transferência (r.titulo já vem nulo);
-    //  • modificação de título (o próprio "para" do de→para já é o novo título) ou só de observação;
-    //  • adição de subtítulo e/ou imagens (o título repete a atividade/slide, já no breadcrumb).
+    //  • modificação de título ou de NOME DO SLIDE (o "para" do de→para já é o novo valor) ou só de observação;
+    //  • adição de subtítulo, imagens ou SLIDE inteiro (o título repete a atividade/slide, já no breadcrumb);
+    //  • deleção de subtítulo (o "de" do de→para já mostra o subtítulo removido).
     const t = tiposDe(r);
     const semTitulo =
-      (r.acao === 'modificação' && (t.includes('título') || (t.length === 1 && t[0] === 'observação'))) ||
-      (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens')));
+      (r.acao === 'modificação' && (t.includes('título') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação'))) ||
+      (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens') || t.includes('slide'))) ||
+      (r.acao === 'deleção' && t.includes('subtítulo'));
     if (r.titulo && !semTitulo) a.appendChild(el('h3', 'hist-card-title', r.titulo));
 
     // a transferência não mostra breadcrumb: origem e destino já vêm por extenso em "de" e "para".
@@ -397,14 +438,16 @@
     // — origem/destino já vêm por extenso, empilhados, em "de"/"para".
     if (r.breadcrumb && r.breadcrumb.length && r.acao !== 'transferência') {
       const bc = el('div', 'hist-crumbs');
-      r.breadcrumb.forEach((p, i) => {
-        if (i) bc.appendChild(el('span', 'hist-crumb-sep', '›'));
+      const crumbs = breadcrumbLegivel(r);
+      crumbs.forEach((p, i) => {
         const seg = el('span', 'hist-crumb');
-        seg.appendChild(el('span', 'hist-crumb-tag', papelCrumb(r, i)));   // pequena label do papel
+        if (i) seg.appendChild(el('span', 'hist-crumb-sep', '›'));   // separador DENTRO do segmento: nunca fica órfão numa linha
+        seg.appendChild(el('span', 'hist-crumb-tag', papelCrumb(r, i, crumbs.length)));   // pequena label do papel
         seg.appendChild(document.createTextNode(p));
         bc.appendChild(seg);
       });
       a.appendChild(bc);
+      a.appendChild(el('div', 'hist-crumb-div'));   // divisor tracejado: respiro entre o caminho e o corpo
     }
 
     // uma parte (registro simples) ou várias (consolidado). Quando o registro reúne DUAS OU MAIS
@@ -550,9 +593,99 @@
     });
   }
 
+  // ── microanimação do contador absorvido: cada caractere é um "rolo" ────────────────────────────
+  // Respeita quem pediu menos movimento (e é o modo do verificador): aí tudo é definido direto.
+  const reduzMov = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // rola UMA célula: o caractere antigo sai (desliza + esmaece) e o novo entra do lado oposto.
+  // 'down' = o valor AUMENTOU (novo desce do topo); 'up' = DIMINUIU (novo sobe de baixo). Seletivo:
+  // se o caractere não mudou, não anima nada.
+  function rolaCelula(cell, novo, dir) {
+    const antigo = cell.firstElementChild;
+    if (antigo && antigo.textContent === novo) return;   // inalterado: fica quieto
+    if (!antigo || reduzMov) { cell.textContent = ''; cell.appendChild(el('span', 'ch', novo)); return; }
+    const from = dir === 'up' ? 100 : -100;
+    const entra = el('span', 'ch ch-abs', novo);
+    cell.appendChild(entra);
+    const dur = 430, ease = 'cubic-bezier(.2,.7,.2,1)';
+    const aSai = antigo.animate([{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(' + (-from) + '%)', opacity: 0 }], { duration: dur, easing: ease, fill: 'forwards' });
+    const aEnt = entra.animate([{ transform: 'translateY(' + from + '%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: dur, easing: ease, fill: 'forwards' });
+    aEnt.onfinish = () => { aSai.cancel(); aEnt.cancel(); antigo.textContent = novo; antigo.removeAttribute('style'); entra.remove(); };
+  }
+
+  // a célula SAI: o caractere desliza para fora + esmaece e a largura colapsa, então a célula é
+  // removida. É o que anima o dígito que some quando o contador cai de dois para um dígito (14 → 5).
+  function rolaSaida(cell, dir) {
+    if (reduzMov) { cell.remove(); return; }
+    cell.classList.add('is-saindo');   // deixa de contar como célula "ativa" enquanto anima
+    const ch = cell.firstElementChild;
+    const to = dir === 'up' ? -100 : 100;
+    const w = cell.offsetWidth;
+    cell.style.width = w + 'px';
+    const dur = 430, ease = 'cubic-bezier(.2,.7,.2,1)';
+    if (ch) ch.animate([{ transform: 'translateY(0)', opacity: 1 }, { transform: 'translateY(' + to + '%)', opacity: 0 }], { duration: dur, easing: ease, fill: 'forwards' });
+    cell.animate([{ width: w + 'px' }, { width: '0px' }], { duration: dur, easing: ease, fill: 'forwards' }).onfinish = () => cell.remove();
+  }
+
+  // acerta uma ZONA (fila de células) ao texto alvo; anima só as que mudaram. anchor 'right' alinha
+  // pela direita (dígitos do contador: a unidade permanece no lugar quando surge a dezena). As células
+  // que saem animam (rolaSaida) e as que faltam são criadas na ponta certa antes do acerto.
+  function zonaCells(zona, alvo, dir, anchor, fresh) {
+    const chars = (alvo || '').split('');
+    const ativas = () => [...zona.children].filter(c => !c.classList.contains('is-saindo'));
+    // remove o excesso pelas pontas certas (anima a saída, mantendo a que fica no lugar)
+    let cur = ativas();
+    const excesso = cur.length - chars.length;
+    if (excesso > 0) {
+      (anchor === 'right' ? cur.slice(0, excesso) : cur.slice(cur.length - excesso))
+        .forEach(cell => (fresh || reduzMov) ? cell.remove() : rolaSaida(cell, dir));
+    }
+    // cria as que faltam, na ponta certa
+    for (let falta = chars.length - ativas().length; falta > 0; falta--) {
+      const cell = el('span', 'hist-cur-ch');
+      cell.appendChild(el('span', 'ch', ''));
+      if (anchor === 'right') zona.insertBefore(cell, zona.firstChild); else zona.appendChild(cell);
+    }
+    // acerta cada célula ativa ao caractere alvo (anima só as que mudaram)
+    ativas().forEach((cell, i) => {
+      if (fresh || reduzMov) { cell.textContent = ''; cell.appendChild(el('span', 'ch', chars[i])); }
+      else rolaCelula(cell, chars[i], dir);
+    });
+  }
+
+  // atualiza a linha absorvida: data (DD-MM-AA, células estáveis) + contador (dígitos rolam, alinhados
+  // à direita) + palavra. A direção vem do delta do contador; `fresh` (1ª exibição) define direto,
+  // sem rolo — o conteúdo entra junto com a expansão da altura.
+  function atualizaCur(cur, data, countTxt) {
+    const inner = cur.firstElementChild;
+    if (!inner) return;
+    const fresh = !cur.classList.contains('is-shown');
+    const mNum = /^(\d+)([\s\S]*)$/.exec(countTxt || '');
+    const num = mNum ? mNum[1] : '';
+    const palavra = mNum ? mNum[2] : (countTxt || '');
+    const nNovo = num ? +num : (cur._n || 0);
+    const dir = nNovo > (cur._n || 0) ? 'down' : nNovo < (cur._n || 0) ? 'up' : (cur._dir || 'down');
+    cur._dir = dir; cur._n = nNovo;
+    let zData = inner.querySelector('.hist-cur-date');
+    if (!zData) {
+      zData = el('span', 'hist-cur-date');
+      inner.appendChild(zData);
+      inner.appendChild(el('span', 'hist-cur-sep', '·'));
+      inner.appendChild(el('span', 'hist-cur-num'));
+      inner.appendChild(el('span', 'hist-cur-word'));
+    }
+    zonaCells(zData, data, dir, 'left', fresh);
+    zonaCells(inner.querySelector('.hist-cur-num'), num, dir, 'right', fresh);
+    // o espaço entre o número e "alterações" precisa ser um NBSP: um espaço comum, à frente de um
+    // inline-block, é aparado — e o valor saía colado ("10alterações")
+    inner.querySelector('.hist-cur-word').textContent = palavra;
+  }
+
   // o título do MÊS (único sticky) ABSORVE a data + contagem do dia atual: conforme os cabeçalhos
   // de dia deslizam para debaixo dele, a informação passa a ser exibida no próprio mês, mantendo a
   // continuidade da referência. O "dia atual" é o último cujo cabeçalho já passou por baixo do mês.
+  // A ALTURA do título anima (expande antes de receber a info, recolhe ao devolvê-la) e os números
+  // trocam de valor com um rolo por caractere.
   function atualizaMeses() {
     document.querySelectorAll('.hist-month:not(.hist-month--acao):not(.hist-month--secao)').forEach(mes => {
       const cur = mes.querySelector('.hist-month-cur');
@@ -562,11 +695,9 @@
       const band = mes.parentElement && mes.parentElement.querySelector('.hist-gap');
       const r = mes.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= window.innerHeight) {
-        // fora da tela: some direto (invisível, sem fade), e cancela qualquer limpeza pendente
+        // fora da tela: recolhe (altura) e esmaece via CSS; mantém as células para a próxima vez
         cur.classList.remove('is-shown');
         if (band) band.classList.remove('is-merged');
-        if (cur._fadeT) { clearTimeout(cur._fadeT); cur._fadeT = 0; }
-        if (cur.textContent) cur.textContent = '';
         return;
       }
       // a área rolável é irmã do título dentro do cartão
@@ -579,20 +710,15 @@
       });
       if (atual) {
         const d = atual.querySelector('.hist-day-date'), c = atual.querySelector('.hist-day-count');
-        const txt = (d ? d.textContent : '') + (c ? '  ·  ' + c.textContent : '');
-        if (cur.textContent !== txt) cur.textContent = txt;
-        if (cur._fadeT) { clearTimeout(cur._fadeT); cur._fadeT = 0; }   // cancela um fade-out em curso
-        cur.classList.add('is-shown');   // ganha opacidade suavemente (fade-in via CSS)
+        const dTxt = d ? d.textContent : '', cTxt = c ? c.textContent : '';
+        const chave = dTxt + '|' + cTxt;
+        // só mexe (e anima) quando o dia absorvido REALMENTE muda — não a cada quadro de scroll
+        if (cur._chave !== chave) { atualizaCur(cur, dTxt, cTxt); cur._chave = chave; }
+        cur.classList.add('is-shown');   // expande a altura e esmaece o conteúdo (via CSS)
         if (band) band.classList.add('is-merged');   // faixa ALTERNA para o gradiente que revela a lista
       } else {
+        cur.classList.remove('is-shown');   // recolhe por animação (via CSS) e devolve a info ao dia
         if (band) band.classList.remove('is-merged');   // volta a ser a faixa sólida
-        if (cur.classList.contains('is-shown')) {
-          // some por ESMAECIMENTO: perde a opacidade (transição) e só limpa o texto DEPOIS do fade,
-          // para a largura não colapsar antes de ele terminar de esmaecer
-          cur.classList.remove('is-shown');
-          if (cur._fadeT) clearTimeout(cur._fadeT);
-          cur._fadeT = setTimeout(() => { if (!cur.classList.contains('is-shown')) cur.textContent = ''; cur._fadeT = 0; }, 420);
-        }
       }
     });
   }
@@ -618,8 +744,11 @@
   // unifica as que só diferem em acento/caixa ("Documentos recebidos" vs "Documentos Recebidos").
   // Registros sem seção (breadcrumb "—") caem num grupo "Sem seção", sempre por último.
   function secaoDe(r) {
-    const bruto = ((r.breadcrumb && r.breadcrumb[0]) || '').replace(/\s+/g, ' ').trim();
-    if (!bruto || /^[—–-]$/.test(bruto)) return { chave: '__sem_secao__', rotulo: 'Sem seção' };
+    let bruto = ((r.breadcrumb && r.breadcrumb[0]) || '').replace(/\s+/g, ' ').trim();
+    // seção "—" num commit antigo: adota a seção mais recente do MESMO slide (mesma resolução do
+    // breadcrumb), para o grupo casar com o que o caminho passa a exibir
+    if (!bruto || /^[—–-]$/.test(bruto)) bruto = (secaoDoLink(r.link) || '').replace(/\s+/g, ' ').trim();
+    if (!bruto) return { chave: '__sem_secao__', rotulo: 'Sem seção' };
     const m = /^([A-Za-z]{2})\s*[—–-]/.exec(bruto);
     return m ? { chave: m[1].toUpperCase(), rotulo: bruto } : { chave: dobra(bruto), rotulo: bruto };
   }
@@ -656,6 +785,19 @@
       });
     }
     return _nomes.get(link) || null;
+  }
+  // mapa GLOBAL link → seção mais recente e legível: repõe a seção "—" dos commits antigos pela que
+  // o slide veio a ter. Mesma lógica de "o 1º visto (mais novo) é o atual".
+  let _secoes = null;
+  function secaoDoLink(link) {
+    if (!_secoes) {
+      _secoes = new Map();
+      (dados.registros || []).forEach(r => {
+        const sec = (r.breadcrumb || [])[0];
+        if (r.link && sec && !/^[—–-]$/.test((sec + '').trim()) && !_secoes.has(r.link)) _secoes.set(r.link, sec);
+      });
+    }
+    return _secoes.get(link) || null;
   }
   // "slides/slide-ac-repair.html" → "Ac repair" (só quando não há nome legível algum)
   const prettify = link => {
@@ -857,7 +999,9 @@
           const caixa = el('div', 'hist-monthbox');
           const mh = el('h2', 'hist-month');
           mh.appendChild(el('span', 'hist-month-label', rotuloMes));
-          mh.appendChild(el('span', 'hist-month-cur'));   // data + contagem do dia, absorvidas ao rolar
+          const cur = el('span', 'hist-month-cur');   // data + contagem do dia, absorvidas ao rolar
+          cur.appendChild(el('span', 'hist-month-cur-in'));   // wrapper recortado: anima a ALTURA (grid) e abriga as células que rolam
+          mh.appendChild(cur);
           caixa.appendChild(mh);
           caixa.appendChild(el('div', 'hist-gap'));   // faixa zebrada suave logo abaixo do título do mês
           rolagem = el('div', 'hist-monthscroll');   // SÓ os registros rolam; a barra fica sob o título

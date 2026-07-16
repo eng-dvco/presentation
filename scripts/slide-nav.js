@@ -1147,7 +1147,6 @@ window.__openImgLightbox = function (imgEl) {
   let foco = null;
   try { foco = JSON.parse(sessionStorage.getItem('hist-focus') || 'null'); sessionStorage.removeItem('hist-focus'); } catch (e) { return; }
   if (!foco) return;
-  const reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function realca() {
     let alvos = [];
@@ -1164,8 +1163,19 @@ window.__openImgLightbox = function (imgEl) {
       });
     }
     if (!alvos.length) return;
-    alvos[0].scrollIntoView({ behavior: reduz ? 'auto' : 'smooth', block: 'center' });
     alvos.forEach(t => { t.classList.remove('img-located'); void t.offsetWidth; t.classList.add('img-located'); });
+    // O layout ainda CRESCE após o load em slides pesados (a linha do tempo é montada por JS; imagens
+    // lazy acima do alvo carregam e empurram tudo para baixo), então uma rolagem única erra o alvo.
+    // Re-centra algumas vezes, em intervalos crescentes, até o usuário rolar por conta própria.
+    const alvo = alvos[0];
+    const foca = () => alvo.scrollIntoView({ block: 'center' });
+    foca();
+    let doUsuario = false;
+    const marca = () => { doUsuario = true; };
+    const eventos = ['wheel', 'touchmove', 'keydown'];
+    eventos.forEach(ev => window.addEventListener(ev, marca, { passive: true, once: true }));
+    [120, 320, 620, 1000].forEach(ms => setTimeout(() => { if (!doUsuario) foca(); }, ms));
+    setTimeout(() => eventos.forEach(ev => window.removeEventListener(ev, marca)), 1100);
   }
 
   // espera o layout/lazy assentar para medir a posição certa

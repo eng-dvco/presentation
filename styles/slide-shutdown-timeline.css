@@ -22,7 +22,8 @@
     gap: var(--gap-inline) var(--gap-16);
     padding: 0.6rem 1rem;
     background: var(--lt-surface);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* sem borda cinza externa: a linha de 1px criava um efeito óptico que "afastava" os containers;
+       a leve sombra (box-shadow) já dá a separação necessária */
     box-shadow: var(--lt-shadow);
   }
   & .sdt-cgroup { display: flex; align-items: center; gap: var(--gap-8); }
@@ -43,7 +44,7 @@
   & .sdt-body {
     position: relative;
     background: var(--lt-surface);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* idem: sem a borda cinza externa (só a sombra), para não confundir a distância entre os blocos */
     box-shadow: var(--lt-shadow); overflow: hidden;
   }
   & .sdt-empty { padding: 2rem 1rem; text-align: center; font-size: 0.72rem; font-style: italic; color: var(--ink-4); background: var(--zebra-odd); }

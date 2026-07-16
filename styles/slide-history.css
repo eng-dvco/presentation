@@ -537,10 +537,7 @@
   0%, 12% { box-shadow: 0 0 0 3px var(--color-green), 0 0 16px 3px var(--color-green); border-color: var(--color-green); }
   100%    { box-shadow: var(--lt-shadow); }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .hist-located { animation: none; box-shadow: 0 0 0 3px var(--color-green); }
-}
+/* o flash do realce (one-shot, 2.4s) vale também sob reduced-motion — ver a nota gêmea em slide-style.css */
 
 .hist-card-top {
   display: flex;

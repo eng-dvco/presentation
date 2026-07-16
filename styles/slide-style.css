@@ -927,27 +927,17 @@ footer {
 
 }
 
-/* a11y: respect prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .img > img:hover,
-  .img > img:focus,
-  .redirect:hover,
-  .item:active,
-  .item:not(.pending):hover,
-  .item:not(.pending):focus {
-    transform: none;
-    translate: 0;
-  }
-}
+/* a11y: prefers-reduced-motion — REDUZIR, não remover.
+   Havia aqui um reset global `*` que zerava TODA transição/animação (duration 0.01ms) e a rolagem
+   suave. Ele deixava a apresentação com aparência QUEBRADA em máquinas com as "animações do Windows"
+   desligadas — nesse caso o Firefox passa a reportar reduced-motion, e o usuário perdia todos os
+   microfeedbacks (zoom no hover, aura ao localizar no histórico, rolagem suave até o conteúdo),
+   ainda que não seja um usuário sensível a movimento. As MICROINTERAÇÕES sutis passam a valer para
+   todos; o movimento AMPLO ou em LAÇO (carrossel automático, máquina de escrever, pulso/desenho da
+   linha do tempo) continua desligado sob reduced-motion, por regras DIRECIONADAS em cada componente
+   (slide-carousel.css, slide-tl.css) e por checagens de matchMedia no JS.
+   O override `.img > img:hover { transform: none }` também saiu: além de indesejado (queremos o zoom),
+   nem casava — as imagens são `.img > picture > img`, não `.img > img`. */
 
 /* ---- slide-nav.js: lightbox, navegação por teclado, copiar link ----------- */
 
@@ -1054,10 +1044,8 @@ footer {
   0%, 12% { box-shadow: 0 0 0 3px var(--color-green), 0 0 16px 3px var(--color-green); }
   100%    { box-shadow: 0 0 0 0 transparent; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .img-located { animation: none; box-shadow: 0 0 0 3px var(--color-green); }
-}
+/* o flash da aura é um one-shot suave (2.4s, esmaece): vale também sob reduced-motion — a supressão
+   anterior o apagava por completo (e o verde estático de reserva era vencido pela sombra do .img). */
 
 .lightbox-nav {
   position: absolute;

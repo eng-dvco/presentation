@@ -236,12 +236,41 @@
     return b;
   }
 
+  // barra de TÍTULO do conteúdo DEFASADO, no topo do registro isolado: à esquerda o ícone de
+  // obsolescência + "conteúdo obsoleto" (zebrado vermelho, via CSS); à direita um botão que salta ao
+  // registro VIGENTE (realçando-o). Não é um <button>/<a> real — o cartão já é um <a> — mas role="button".
+  function cabecaObsoleto(obs) {
+    const head = el('div', 'hist-obsoleto-head');
+    const titulo = el('span', 'hist-obsoleto-head-title');
+    const ico = el('span', 'hist-obsoleto-icon');
+    ico.setAttribute('aria-hidden', 'true');
+    ico.innerHTML = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7.5 12 12 15.5 14"/></svg>';
+    titulo.appendChild(ico);
+    titulo.appendChild(el('span', 'hist-obsoleto-head-txt', 'conteúdo obsoleto'));
+    head.appendChild(titulo);
+
+    const irBtn = el('span', 'hist-obsoleto-goto');
+    irBtn.tabIndex = 0;
+    irBtn.setAttribute('role', 'button');
+    irBtn.title = 'Ir para a versão atual (' + obs.commit + ')';
+    irBtn.appendChild(el('span', 'hist-obsoleto-goto-txt', 'versão atual em ' + obs.commit));
+    const seta = el('span', 'hist-obsoleto-goto-icon');
+    seta.setAttribute('aria-hidden', 'true');
+    seta.innerHTML = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+    irBtn.appendChild(seta);
+    const ir = e => { e.preventDefault(); e.stopPropagation(); irParaRegistro(obs.id); };
+    irBtn.addEventListener('click', ir);
+    irBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') ir(e); });
+    head.appendChild(irBtn);
+    return head;
+  }
+
   // ── corpo de UMA parte (tipo + conteúdo). `r` dá o contexto de clique/href do cartão inteiro. ──
   function corpoParte(a, r, p) {
     const temDelta = p.de != null && p.para != null && p.de !== p.para;
     // um elemento DEFASADO é ISOLADO numa faixa própria (que recebe o zebrado); as demais
     // partes seguem direto no cartão
-    const faixa = p.obsoleto ? el("div", "hist-obsoleto-band") : a;
+    const faixa = p.obsoleto ? el("div", "hist-obsoleto-body") : a;
     // a transferência usa um delta próprio (empilhado, com ícone de movimentação); os demais, o padrão
     const montarDelta = () => r.acao === 'transferência' ? deltaTransfer(p.de, p.para) : delta(p.de, p.para);
 
@@ -323,19 +352,8 @@
     }
 
     // ── DEFASADO: esta alteração já foi superada por outra mais recente do mesmo elemento. O aviso
-    //    é clicável e leva ao registro vigente (realçando-o), cujo commit é indicado. ──
-    if (p.obsoleto) {
-      const av = el('div', 'hist-obsoleto');
-      av.tabIndex = 0;
-      av.setAttribute('role', 'link');
-      av.title = 'Ir para a versão atual (' + p.obsoleto.commit + ')';
-      av.appendChild(el('span', 'hist-obsoleto-tag', 'obsoleto'));
-      av.appendChild(el('span', 'hist-obsoleto-txt', 'versão atual em ' + p.obsoleto.commit));
-      const ir = e => { e.preventDefault(); e.stopPropagation(); irParaRegistro(p.obsoleto.id); };
-      av.addEventListener('click', ir);
-      av.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') ir(e); });
-      faixa.appendChild(av);
-    }
+    //    virou a BARRA DE TÍTULO "conteúdo obsoleto" no topo do registro isolado (cabecaObsoleto),
+    //    prependida à faixa logo abaixo — quando p.obsoleto. ──
 
     // ── VIGENTE: esta versão lista, como um histórico, os registros que tornou obsoletos (com data,
     //    commit e o valor de cada um). Cada item é clicável e leva ao registro correspondente. ──
@@ -384,7 +402,13 @@
       box.appendChild(lst);
       faixa.appendChild(box);
     }
-    if (faixa !== a) a.appendChild(faixa);
+    if (faixa !== a) {
+      // registro DEFASADO: barra de título vermelha no TOPO + o corpo cinza zebrado (faixa) abaixo
+      const band = el('div', 'hist-obsoleto-band');
+      band.appendChild(cabecaObsoleto(p.obsoleto));
+      band.appendChild(faixa);
+      a.appendChild(band);
+    }
   }
 
   // ── um registro (pode reunir várias alterações do mesmo elemento, feitas no mesmo commit) ──

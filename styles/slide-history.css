@@ -1041,51 +1041,70 @@
   font-style: italic;
 }
 
-/* faixa que ISOLA um elemento DEFASADO: todo o conteúdo da alteração superada (de→para, miniaturas,
-   aviso, histórico) vive aqui, e é a FAIXA INTEIRA que recebe o preenchimento ZEBRADO — não a label.
-   O traço diagonal marca a alteração como obsoleta de ponta a ponta. */
+/* registro DEFASADO isolado: uma BARRA DE TÍTULO vermelha zebrada no topo + o corpo cinza zebrado. */
 .hist-obsoleto-band {
   margin-top: var(--gap-8);
-  padding: var(--gap-8) var(--gap-12);
   border-radius: var(--border-smaller);
+  overflow: hidden;   /* recorta os dois zebrados aos cantos arredondados */
+}
+
+/* barra de título "CONTEÚDO OBSOLETO": largura total, zebrado VERMELHO (o tom de "slide indisponível"),
+   com o ícone de obsolescência + rótulo à esquerda e o botão para a versão vigente à direita. */
+.hist-obsoleto-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-4) var(--gap-8);
+  padding: var(--gap-4) var(--gap-8);
+  background-color: var(--color-red-alpha-25);
+  background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--color-red) 42%, transparent) 0 1.5px, transparent 1.5px 8px);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  color: var(--color-red);
+}
+
+.hist-obsoleto-head-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.hist-obsoleto-icon { flex: 0 0 auto; display: inline-flex; }
+
+/* botão → salta ao registro vigente (não é <button> real: o cartão já é um <a>) */
+.hist-obsoleto-goto {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+  padding: 1px var(--gap-6);
+  border: 1px solid color-mix(in srgb, var(--color-red) 45%, transparent);
+  border-radius: 99px;
+  background: var(--lt-surface);
+  color: var(--color-red);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s, border-color 0.15s;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--color-red-alpha-25);
+    border-color: var(--color-red);
+    outline: none;
+  }
+}
+.hist-obsoleto-goto-icon { flex: 0 0 auto; display: inline-flex; }
+
+/* corpo cinza zebrado: o conteúdo da alteração superada */
+.hist-obsoleto-body {
+  padding: var(--gap-8) var(--gap-12);
   background-color: var(--lt-surface-muted);
   background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--lt-border) 45%, transparent) 0 1.5px, transparent 1.5px 8px);
 
-  /* dentro da faixa o respiro de topo já vem do seu padding: o 1º filho não repete a margem */
+  /* dentro do corpo o respiro de topo já vem do padding: o 1º filho não repete a margem */
   & > :first-child { margin-top: 0; padding-top: 0; }
-}
-
-/* aviso de registro DEFASADO: uma alteração posterior já substituiu esta. Clicável — leva ao registro
-   vigente do mesmo elemento (realçando-o) e indica o commit atual. A borda tracejada = "provisório". */
-.hist-obsoleto {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--gap-6);
-  margin-top: var(--gap-16);
-  padding: var(--gap-4) var(--gap-8);
-  border: 1px dashed var(--lt-border-strong);
-  border-radius: 99px;
-  background: var(--lt-surface);   /* pílula clara, DESTACADA sobre a faixa zebrada que a envolve */
-  cursor: pointer;
-  font-family: var(--font-family-general);
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-  color: var(--lt-text-muted);
-  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
-}
-
-.hist-obsoleto:hover,
-.hist-obsoleto:focus-visible {
-  background: var(--lt-hover);
-  border-color: var(--lt-text-faint);
-  color: var(--lt-text);
-  outline: none;
-}
-
-.hist-obsoleto-tag {
-  font-weight: var(--font-weight-boldest);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-red);   /* vermelho: dá ênfase ao estado defasado */
 }
 
 /* HISTÓRICO do elemento na versão VIGENTE: lista dos registros que ela tornou obsoletos — cada um com

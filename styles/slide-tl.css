@@ -40,6 +40,9 @@
    960 / 960 / 1096 / 1344px entre irmãs. Agora as quatro são iguais.
    Para alinhá-las aos slides, basta trocar `none` por `960px` aqui. */
 .content-wrapper { --content-max: none; width: 100%; min-width: 0; justify-items: stretch; grid-template-columns: minmax(0, 1fr); row-gap: var(--gap-12); }
+/* conteúdo em largura plena: a calha lateral é só a margem do container, então os botões flutuantes
+   ficam junto à borda (mas ainda simétricos na calha). --content-max é `none` e não serve à conta. */
+:root { --page-content-w: 100vw; }
 
 .tl-scroll { overflow-x: clip; overflow-y: visible; padding-bottom: 0; cursor: default; }
 

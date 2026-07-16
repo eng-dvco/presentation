@@ -145,6 +145,14 @@
   --gap-48: 48px;
   --gap-64: 64px;
 
+  /* largura do conteúdo VISÍVEL a partir do :root (espelha --content-max de .content-wrapper), para
+     os botões flutuantes — position:fixed, filhos de <body> — poderem centralizar-se na calha lateral
+     com margens simétricas. Cada página que muda --content-max deve mudar isto também, no :root:
+       960px  → padrão (slides);  1080px → índice/seleção/histórico;  100vw → cronograma (largura plena). */
+  --page-content-w: 960px;
+  /* margem lateral do .content-container (a calha nunca é menor que isto) */
+  --content-margin: 48px;
+
   /* gap "inline" de componente — padronização (pedido do usuário) dos micro-gaps
      repetidos e FORA da escala px (0.3/0.35/0.4/0.55/0.6/0.7rem) num único valor.
      Usado no gap ícone↔rótulo das legendas e nos controles densos (chips, filtros,

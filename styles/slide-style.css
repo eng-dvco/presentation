@@ -1478,7 +1478,11 @@ footer {
 #go-to-bottom {
   position: fixed;
   bottom: 24px;
-  right: max(16px, calc(25vw - 286px));
+  /* CENTRALIZADO na calha à direita do conteúdo: a mesma margem dos dois lados (botão↔conteúdo =
+     botão↔viewport), acompanhando a largura do conteúdo e do viewport em QUALQUER dimensão. A calha
+     é (100vw − conteúdo)/2, nunca menor que a margem do container; o botão (32px) fica no meio dela.
+     Antes, a fórmula fixa "25vw − 286" só era simétrica acima de ~1208px e presumia 1080px de conteúdo. */
+  right: calc(max(var(--content-margin), (100vw - var(--page-content-w)) / 2) / 2 - 16px);
   width: 32px;
   height: 32px;
   border-radius: 50%;

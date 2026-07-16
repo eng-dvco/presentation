@@ -244,9 +244,9 @@
     const titulo = el('span', 'hist-obsoleto-head-title');
     const ico = el('span', 'hist-obsoleto-icon');
     ico.setAttribute('aria-hidden', 'true');
-    ico.innerHTML = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+    ico.innerHTML = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7.5 12 12 15.5 14"/></svg>';
     titulo.appendChild(ico);
-    titulo.appendChild(el('span', 'hist-obsoleto-head-txt', 'conteúdo obsoleto'));
+    titulo.appendChild(el('span', 'hist-obsoleto-head-txt', 'obsoleto'));
     head.appendChild(titulo);
 
     const irBtn = el('span', 'hist-obsoleto-goto');

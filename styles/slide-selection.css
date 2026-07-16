@@ -1,3 +1,7 @@
+/* espelha o --content-max de 1080px abaixo, no :root, para os botões flutuantes (position:fixed,
+   filhos de <body>) centralizarem-se na calha lateral com margens simétricas */
+:root { --page-content-w: 1080px; }
+
 .content-wrapper {
   /* o índice e a tela de seleção são mais largos que os slides (960px). Antes isso não
      estava escrito em lugar nenhum: as duas páginas simplesmente HERDAVAM o 1080px que a
@@ -513,8 +517,12 @@
 }
 
 @media (max-width: 680px) {
-  .collection--nav { flex-direction: column; }
-  .collection--nav > a { width: 100%; }
+  .collection--nav {
+    flex-direction: column;
+    gap: var(--gap-24);
+
+    & > a { width: 100%; }
+  }
 }
 
 /* símbolo (❮) do atalho "SELECIONAR APRESENTAÇÃO": herda a formatação do texto

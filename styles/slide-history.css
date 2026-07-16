@@ -1055,8 +1055,8 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gap-4) var(--gap-8);
-  padding: var(--gap-4) var(--gap-8);
+  gap: var(--gap-4) 0;
+  padding: 0;   /* sem padding: o título vermelho encosta no topo, na base e na borda esquerda da barra */
   background-color: var(--color-red-alpha-25);
   background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--color-red) 42%, transparent) 0 1.5px, transparent 1.5px 8px);
   font-family: var(--font-family-general);
@@ -1064,15 +1064,19 @@
   color: var(--color-red);
 }
 
-/* o rótulo + ícone ficam num CHIP sólido (como o botão): o zebrado vermelho atrás reduzia demais o
-   contraste do texto/ícone (também vermelhos). O chip claro os destaca; o zebrado segue ao redor. */
+/* o rótulo + ícone recebem o MESMO vermelho do hover do botão, mas como GRADIENTE: opaco atrás do
+   conteúdo e dissolvendo para transparente numa CAUDA à direita (além do texto+ícone, para os últimos
+   caracteres ficarem nítidos no vermelho sólido), mesclando-se ao zebrado da barra. Preenche a altura
+   toda (align-self:stretch) e vai até a borda esquerda (a barra não tem padding). Texto/ícone brancos.
+   (rgba(250,80,80,0) = --color-red com alfa 0: fade limpo, sem escurecer no meio.) */
 .hist-obsoleto-head-title {
+  align-self: stretch;
   display: inline-flex;
   align-items: center;
   gap: var(--gap-4);
-  padding: 1px var(--gap-6);
-  border-radius: 99px;
-  background: var(--lt-surface);
+  padding: var(--gap-4) var(--gap-32) var(--gap-4) var(--gap-8);
+  background: linear-gradient(to right, var(--color-red) calc(100% - var(--gap-32)), rgba(250, 80, 80, 0));
+  color: var(--lt-surface);
   font-weight: var(--font-weight-boldest);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1084,6 +1088,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--gap-4);
+  margin: var(--gap-4) var(--gap-8);   /* respiro próprio: a barra não tem mais padding (título vai às bordas) */
   padding: 1px var(--gap-6);
   border: 1px solid color-mix(in srgb, var(--color-red) 45%, transparent);
   border-radius: 99px;

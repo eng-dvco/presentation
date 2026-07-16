@@ -591,6 +591,7 @@ a.reunion--andamento:not(.disabled):hover {
       right: 0;
       top: calc(1em*var(--font-line-general) + 4px);
       background-color: var(--background-white);
+      -webkit-mask-image: var(--mask-fade);   /* par -webkit- (como as demais máscaras): iOS Safari ≤15.3 */
       mask-image: var(--mask-fade);
       font-weight: var(--font-weight-bolder);
       color: var(--color-black);

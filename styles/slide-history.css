@@ -18,14 +18,16 @@
   --hist-add: var(--color-green);
   --hist-mod: var(--color-yellow);
   --hist-del: var(--color-red);
+  --hist-mov: var(--color-blue);   /* transferência: conteúdo que mudou de lugar */
 }
 
 /* ── barra de controles: abas + agrupamento ── */
+/* barra de controles agora ABAIXO da busca (abas + agrupamento + expandir/colapsar) */
 .hist-controls {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--gap-12);
+  gap: var(--gap-8);
   padding-bottom: var(--gap-16);
 }
 
@@ -46,10 +48,11 @@
   background: var(--lt-surface-muted);
   color: var(--lt-text-muted);
   font-family: var(--font-family-general);
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  /* compactos: mesma altura/typo do botão "Limpar" (--gap-4/--gap-12, xxxs) já usado nesta página */
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: var(--gap-8) var(--gap-16);
+  padding: var(--gap-4) var(--gap-12);
   cursor: pointer;
   transition: background-color 0.15s, color 0.15s;
 
@@ -75,6 +78,66 @@
 }
 
 .hist-source { padding-bottom: var(--gap-8); }
+
+/* ── exibição "por seção" (experimental) ── */
+/* marcador compacto no botão, visível já em repouso (antes do clique) — sinaliza o recurso novo */
+.hist-exp-mark {
+  margin-left: 0.2em;
+  font-size: 0.72em;
+  font-weight: var(--font-weight-boldest);
+  letter-spacing: 0;
+  color: var(--lt-text-faint);
+  vertical-align: super;
+  text-transform: none;
+}
+
+.hist-group-btn.active .hist-exp-mark { color: var(--lt-text-muted); }
+
+/* aviso, logo acima da lista, de que o agrupamento por seção ainda está em desenvolvimento. A borda
+   tracejada é a linguagem visual de "provisório/em construção"; só aparece com a exibição ativa. */
+.hist-exp-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-8);
+  margin-bottom: var(--gap-16);
+  padding: var(--gap-8) var(--gap-12);
+  border: 1px dashed var(--lt-border-strong);
+  border-radius: var(--border-general);
+  background: var(--lt-surface-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text-muted);
+
+  &[hidden] { display: none; }
+}
+
+.hist-exp-badge {
+  flex: 0 0 auto;
+  padding: 2px var(--gap-8);
+  border: 1px solid var(--lt-border-strong);
+  border-radius: 99px;
+  background: var(--lt-surface-strong);
+  color: var(--lt-text);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.hist-exp-txt { flex: 1 1 12rem; min-width: 0; }
+
+/* cabeçalho de SLIDE (dentro do agrupamento por seção): o nome pode ser longo — encolhe e quebra,
+   preservando a contagem à direita; menos espaçamento entre letras que o cabeçalho de data. */
+.hist-day--slide .hist-day-date {
+  flex: 1 1 auto;
+  min-width: 0;
+  letter-spacing: 0.01em;
+  overflow-wrap: anywhere;
+}
+
+.hist-day--slide .hist-day-count { flex: 0 0 auto; }
 
 /* ── cabeçalho de mês / de ação ── */
 /* cada MÊS é um CARTÃO: o título fica FIXO no topo e só os registros rolam (num elemento interno
@@ -317,17 +380,22 @@
   &.hist-dot--implementada { --dot: var(--hist-add); --dot-ring: var(--color-green-alpha-25); }
   &.hist-dot--modificacao,
   &.hist-dot--aperfeicoada { --dot: var(--hist-mod); --dot-ring: var(--color-yellow-alpha-25); }
+  &.hist-dot--transferencia { --dot: var(--hist-mov); --dot-ring: var(--color-blue-alpha-25); }
   &.hist-dot--delecao,
   &.hist-dot--descartada { --dot: var(--hist-del); --dot-ring: var(--color-red-alpha-25); }
   &.hist-dot--misto { --dot: var(--lt-text-faint); --dot-ring: var(--lt-border); }
 }
 
-/* 4px entre registros — a mesma distância do cabeçalho de data ao 1º registro */
-.hist-tl-body { display: flex; flex-direction: column; gap: var(--gap-4); min-width: 0; }
-
-/* o ÚLTIMO registro arredonda o canto inferior-direito: é a quina externa do conjunto, sem
-   vizinho com quem dividir aresta (a inferior-esquerda é a do rail) */
-.hist-tl-body > .hist-card:last-child { border-radius: 0 0 var(--border-item) 0; }
+/* 4px entre registros — a mesma distância do cabeçalho de data ao 1º registro.
+   O padding-right afasta os cards da borda direita do container (eles não a encostam). Como o card
+   tem width:100%, o recuo vem do container (não de margem no card, que causaria transbordo). */
+.hist-tl-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+  min-width: 0;
+  padding-right: var(--gap-12);
+}
 
 /* colapsado: some com a linha do tempo e a seta aponta para baixo (como os documentos fechados) */
 .hist-day.is-collapsed {
@@ -348,8 +416,8 @@
   padding: var(--gap-12) var(--gap-16);
   padding-left: var(--gap-16);
   border: none;
-  /* TODOS os cantos retos: o registro divide aresta com os vizinhos e com o container do conjunto */
-  border-radius: 0;
+  /* card INDIVIDUAL: todos os cantos arredondados (não divide mais aresta com os vizinhos) */
+  border-radius: var(--border-item);
   background: var(--lt-surface-strong);
   box-shadow: var(--lt-shadow);
   color: var(--lt-text);
@@ -396,6 +464,8 @@
   &.is-evidenced.hist-card--modificacao,
   &.is-evidenced.hist-card--aperfeicoada { --faixa: var(--hist-mod); --faixa-2: var(--color-yellow-alpha-25); }
 
+  &.is-evidenced.hist-card--transferencia { --faixa: var(--hist-mov); --faixa-2: var(--color-blue-alpha-25); }
+
   &.is-evidenced.hist-card--delecao,
   &.is-evidenced.hist-card--descartada { --faixa: var(--hist-del); --faixa-2: var(--color-red-alpha-25); }
 }
@@ -415,12 +485,32 @@
 
 .hist-card-top {
   display: flex;
+  flex-wrap: wrap;   /* o tipo pode listar vários elementos ("subtítulo · imagens · observação") */
   align-items: center;
   gap: var(--gap-6);
   padding-bottom: var(--gap-6);
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
 }
+
+/* registro CONSOLIDADO: cada alteração conjunta num bloco ROTULADO com o seu elemento, separados
+   pela MESMA distância que há entre os subcontainers "de" e "para" (gap-8). Deixa claro o que cada
+   mudança representa — em vez de duas caixas de→para parecerem duplicadas. */
+.hist-parte { margin-top: var(--gap-8); }
+
+.hist-parte-tipo {
+  display: block;
+  margin-bottom: var(--gap-4);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lt-text-muted);
+}
+
+/* o 1º elemento de conteúdo (logo após o rótulo) não repete o respiro superior — já vem do rótulo */
+.hist-parte > .hist-parte-tipo + * { padding-top: 0; margin-top: 0; }
 
 /* ícone da ação, DENTRO do badge à esquerda do texto — herda o preto do rótulo */
 .hist-acao-icon {
@@ -434,6 +524,21 @@
   color: var(--lt-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+/* aviso, ao lado do commit, de que o slide-alvo não existe mais — VERMELHO no preenchimento e no
+   texto (o clique abre o índice, não um 404) */
+.hist-ausente {
+  padding: 0 var(--gap-6);
+  border-radius: 99px;
+  background: var(--color-red-alpha-25);
+  color: var(--color-red);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 /* ── o rótulo da ação (com o ícone dentro) ── */
@@ -456,6 +561,8 @@
 
   &.hist-badge--modificacao,
   &.hist-badge--aperfeicoada { background: var(--color-yellow-alpha-75); }
+
+  &.hist-badge--transferencia { background: var(--color-blue-alpha-75); }
 
   &.hist-badge--delecao,
   &.hist-badge--descartada { background: var(--color-red-alpha-75); }
@@ -483,12 +590,27 @@
 
 .hist-crumb-sep { opacity: 0.5; }
 
+/* pequena label do PAPEL de cada segmento do breadcrumb: [seção] › [slide] › [subtítulo] */
+.hist-crumb-tag {
+  display: inline-block;
+  margin-right: var(--gap-4);
+  padding: 0 var(--gap-4);
+  border: 1px solid var(--lt-border);
+  border-radius: var(--border-smaller);
+  background: var(--lt-surface-muted);
+  color: var(--lt-text-faint);
+  font-size: 0.85em;
+  letter-spacing: 0.02em;
+}
+
 /* ── DE → PARA: dois subcontainers.
    Lado a lado quando há largura, empilhados quando não há. O grid com auto-fit + minmax faz
    isso sem media query: cada coluna quer no mínimo 240px; se não couberem duas, vira uma. */
 .hist-delta {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  /* o min(240px, 100%) impede o transbordo no mobile: se o container for mais estreito que 240px
+     (a linha do tempo consome largura), a coluna encolhe até 100% em vez de forçar os 240px. */
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   gap: var(--gap-8);
   padding-top: var(--gap-8);
 }
@@ -523,6 +645,52 @@
 }
 
 .hist-delta-box--de .hist-delta-valor { color: var(--ink-3); }
+
+/* de → para da TRANSFERÊNCIA: UM ÚNICO container. "de"/"para" à esquerda, num espaço reservado de
+   largura IGUAL (centralizados na vertical e na horizontal), e a seta de movimentação (azul) entre
+   os dois textos. Mais simples que o delta de modificação (sem caixas fortes nem realce colorido). */
+.hist-move {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+  margin-top: var(--gap-8);
+  padding: var(--gap-8) var(--gap-12);
+  border-radius: var(--border-smaller);
+  background: var(--lt-surface-muted);
+}
+
+.hist-move-row {
+  display: flex;
+  align-items: center;   /* label centralizada verticalmente com o texto */
+  gap: var(--gap-8);
+}
+
+/* divisor tracejado entre os conteúdos "de" e "para" da transferência */
+.hist-move-row + .hist-move-row {
+  padding-top: var(--gap-4);
+  border-top: 1px dashed var(--lt-border-strong);
+}
+
+/* espaço reservado IGUAL para "de" e "para", com o rótulo centralizado nele */
+.hist-move-label {
+  flex: 0 0 2.75rem;
+  text-align: center;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lt-text-faint);
+}
+
+.hist-move-valor {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text);
+  overflow-wrap: anywhere;
+}
 
 /* ── busca + menu de filtros (funil) ──
    As barras de ação e elemento vivem num dropdown recolhível ao lado da busca: economiza espaço
@@ -760,6 +928,7 @@
   &.hist-chip--implementada { border-color: var(--hist-add); }
   &.hist-chip--modificacao,
   &.hist-chip--aperfeicoada { border-color: var(--hist-mod); }
+  &.hist-chip--transferencia { border-color: var(--hist-mov); }
   &.hist-chip--delecao,
   &.hist-chip--descartada { border-color: var(--hist-del); }
 }
@@ -798,37 +967,155 @@
   font-style: italic;
 }
 
-/* ── "informação da(s) imagem(ns)": embrulha a legenda das fotos num container rotulado, para
-   deixar claro que aquele texto é a legenda — não uma nota solta. ── */
-.hist-info {
-  margin-top: var(--gap-8);
-  padding: var(--gap-8) var(--gap-12);
-  border: 1px solid var(--lt-border);
-  border-radius: var(--border-smaller);
+/* aviso de registro DEFASADO: uma alteração posterior já substituiu esta. Clicável — leva ao registro
+   vigente do mesmo elemento (realçando-o) e indica o commit atual. A borda tracejada = "provisório". */
+.hist-obsoleto {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-6);
+  margin-top: var(--gap-16);
+  padding: var(--gap-4) var(--gap-8);
+  border: 1px dashed var(--lt-border-strong);
+  border-radius: 99px;
   background: var(--lt-surface-muted);
-}
-
-.hist-info-label {
-  display: block;
-  margin-bottom: var(--gap-4);
+  cursor: pointer;
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-  font-weight: var(--font-weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--lt-text-faint);
+  color: var(--lt-text-muted);
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
+.hist-obsoleto:hover,
+.hist-obsoleto:focus-visible {
+  background: var(--lt-hover);
+  border-color: var(--lt-text-faint);
+  color: var(--lt-text);
+  outline: none;
+}
+
+.hist-obsoleto-tag {
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-red);   /* vermelho: dá ênfase ao estado defasado */
+}
+
+/* HISTÓRICO do elemento na versão VIGENTE: lista dos registros que ela tornou obsoletos — cada um com
+   data, commit e valor, e clicável para saltar até ele. É COLAPSÁVEL (fechado por padrão) para
+   economizar espaço, com um botão "expandir/colapsar histórico". */
+.hist-hist {
+  margin-top: var(--gap-12);
+  padding-top: var(--gap-12);
+  border-top: 1px dashed var(--lt-border-strong);   /* DIVISOR tracejado, separando o histórico do conteúdo */
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+}
+
+.hist-hist-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-4);
+  cursor: pointer;
+  color: var(--lt-text-muted);
+  transition: color 0.15s;
+}
+
+.hist-hist-toggle:hover,
+.hist-hist-toggle:focus-visible { color: var(--lt-text); outline: none; }
+
+/* seta idêntica à dos demais colapsáveis: expandido p/ cima, colapsado p/ baixo. Caixa quadrada de
+   1em com o glifo centralizado e transform-origin no centro → o PIVOT de rotação fica no meio,
+   mantendo a seta alinhada/centralizada verticalmente com o título mesmo ao girar. */
+.hist-hist-caret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  font-size: var(--collapsible-icon-size);
+  line-height: 1;
+  color: var(--lt-text-faint);
+  transform: rotate(180deg);
+  transform-origin: center center;
+  transition: transform 0.38s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.hist-hist.is-collapsed .hist-hist-caret { transform: rotate(0deg); }
+
+.hist-hist-label {
+  font-weight: var(--font-weight-boldest);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hist-hist-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2);
+  margin-top: var(--gap-6);
+  padding-left: var(--gap-8);
+  border-left: 2px solid var(--lt-border-strong);
+}
+
+.hist-hist.is-collapsed .hist-hist-list { display: none; }
+
+.hist-hist-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--gap-6);
+  padding: var(--gap-2) var(--gap-4);
+  border-radius: var(--border-smaller);
+  cursor: pointer;
+  color: var(--lt-text-muted);
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.hist-hist-item:hover,
+.hist-hist-item:focus-visible {
+  background: var(--lt-hover);
+  color: var(--lt-text);
+  outline: none;
+}
+
+.hist-hist-data {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-bold);
+  color: var(--lt-text);
+}
+
+.hist-hist-commit { color: var(--lt-text-faint); }
+.hist-hist-valor { overflow-wrap: anywhere; }
+
+/* ── legenda das fotos (SEM envelope): vai direto no cartão, sem a antiga caixa rotulada ── */
 .hist-info-text {
-  margin: 0;
+  margin: var(--gap-8) 0 0;
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   color: var(--lt-text-muted);
 }
 
+/* dentro de uma faixa, o espaçamento vem do gap do grupo — não da margem do texto */
+.hist-info-group .hist-info-text { margin-top: 0; }
+
+/* conteúdo com a label do ELEMENTO à esquerda (ex.: observação), no mesmo estilo do breadcrumb.
+   O font-size xxxs faz a label (0.85em) ficar do MESMO tamanho das labels do breadcrumb; o texto da
+   legenda tem tamanho próprio (xxs), então não encolhe. */
+.hist-rot {
+  display: flex;
+  align-items: center;   /* label centralizada verticalmente com a observação */
+  gap: var(--gap-6);
+  padding-top: var(--gap-8);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+}
+.hist-rot > .hist-crumb-tag { flex: 0 0 auto; margin-right: 0; }
+.hist-rot > :not(.hist-crumb-tag) { flex: 1 1 auto; min-width: 0; margin-top: 0; padding-top: 0; }
+/* numa faixa/observação em grupo, o respiro vem do grupo — não da linha rotulada */
+.hist-info-group .hist-rot { padding-top: 0; }
+
 /* legendas DIFERENTES por faixa de imagens (1-2: X · 3-4: Y): cada legenda com as suas fotos,
    separadas por um filete — é o vínculo legenda↔imagem pedido */
-.hist-info-groups { display: flex; flex-direction: column; gap: var(--gap-8); }
+.hist-info-groups { display: flex; flex-direction: column; gap: var(--gap-8); padding-top: var(--gap-8); }
 .hist-info-group {
   display: flex;
   flex-direction: column;
@@ -859,11 +1146,15 @@
   padding-top: var(--gap-8);
 }
 
-/* miniaturas menores dentro das legendas por faixa e nas observações vinculadas */
+/* miniaturas nas legendas por faixa e nas observações: mesmo TAMANHO das demais (a maior versão),
+   só com o respiro superior um pouco menor */
 .hist-thumbs--mini {
   padding-top: var(--gap-4);
-  & .hist-thumb { width: 46px; height: 35px; }
 }
+
+/* miniatura logo abaixo de um delta de→para (ex.: modificação de observação): fica à MESMA distância
+   do delta que separa os subcontainers "de" e "para" (gap-8) — rítmica vertical uniforme. */
+.hist-delta + .hist-thumbs { padding-top: var(--gap-8); }
 
 .hist-thumb {
   position: relative;
@@ -895,6 +1186,9 @@
   font-weight: var(--font-weight-boldest);
 }
 
+/* o "+N" específico de mobile (na 3ª miniatura) só aparece nas viewports menores */
+.hist-thumb-mais--mob { display: none; }
+
 /* ── metadados (peso, contagem, dados do documento) ── */
 .hist-meta {
   display: flex;
@@ -921,10 +1215,17 @@
 }
 
 /* o commit fica discreto, no canto: é a prova de auditoria do registro */
-.hist-commit {
+/* canto superior direito: aviso "slide não disponível" (se houver) + o código do commit, lado a lado */
+.hist-topinfo {
   position: absolute;
   top: var(--gap-12);
   right: var(--gap-16);
+  display: flex;
+  align-items: center;
+  gap: var(--gap-6);
+}
+
+.hist-commit {
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   color: var(--lt-text-muted);
@@ -943,5 +1244,16 @@
   .hist-controls { gap: var(--gap-8); }
   .hist-groups { margin-left: 0; }
   .hist-commit { display: none; }
+  /* o commit some no mobile; o aviso "slide indisponível" deixa de ser fixo à direita e FLUI abaixo do
+     topo (alinhado à direita), evitando sobrepor o tipo em telas estreitas */
+  .hist-topinfo--ausente {
+    position: static;
+    justify-content: flex-end;
+    margin-top: var(--gap-4);
+  }
   .hist-thumb { width: 52px; height: 39px; }
+  /* no máximo 3 miniaturas: esconde da 4ª em diante, troca o "+N" de desktop pelo de mobile (na 3ª) */
+  .hist-thumbs .hist-thumb:nth-child(n+4) { display: none; }
+  .hist-thumb-mais:not(.hist-thumb-mais--mob) { display: none; }
+  .hist-thumb-mais--mob { display: flex; }
 }

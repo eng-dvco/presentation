@@ -21,6 +21,7 @@
   const lista = document.querySelector('.hist-list');
   const vazio = document.querySelector('.hist-empty');
   const resumoEl = document.querySelector('.hist-summary');
+  const expNote = document.querySelector('.hist-exp-note');
   const busca = document.querySelector('#hist-search');
   const limpaBusca = document.querySelector('#hist-search-clear');
   const barraAcao = document.querySelector('.hist-filter-acao');
@@ -28,7 +29,7 @@
   const barraAtiva = document.querySelector('.hist-active');
 
   const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
-  const ACOES = { conteudo: ['adição', 'modificação', 'deleção'], funcoes: ['implementada', 'aperfeiçoada', 'descartada'] };
+  const ACOES = { conteudo: ['adição', 'modificação', 'transferência', 'deleção'], funcoes: ['implementada', 'aperfeiçoada', 'descartada'] };
 
   // sem acentuação e sem caixa — mesma regra da busca do index.html
   const dobra = s => (window.UI && window.UI.foldAccents)
@@ -40,7 +41,9 @@
 
   // "1 adição" mas "349 adições"; "1 implementada" mas "3 implementadas"
   const plural = (n, rotulo) => n + ' ' + (n === 1 ? rotulo
-    : /ção$/.test(rotulo) ? rotulo.replace(/ção$/, 'ções') : rotulo + 's');
+    : /ção$/.test(rotulo) ? rotulo.replace(/ção$/, 'ções')
+    : /m$/.test(rotulo) ? rotulo.replace(/m$/, 'ns')   // imagem → imagens (não "imagems")
+    : rotulo + 's');
 
   const parse = d => {
     const m = /^(\d{2})-(\d{2})-(\d{2})$/.exec(d || '');
@@ -50,7 +53,7 @@
 
   let dados = null;
   let aba = 'conteudo';
-  let agrupamento = 'cronologico';
+  let agrupamento = 'tempo';
   // filtros MULTI-SELEÇÃO: conjuntos de ações e de elementos (vazio = todos). Um registro passa
   // se casar com QUALQUER ação marcada E QUALQUER elemento marcado (e a busca).
   const filtrosAcao = new Set();
@@ -76,24 +79,49 @@
     return e;
   };
 
+  // um registro consolidado guarda cada alteração em `partes`; um simples é a sua própria parte
+  const partesDe = r => (r.partes && r.partes.length ? r.partes : [r]);
+  // os tipos de elemento do registro (vários, quando consolidado) — para o filtro por elemento
+  const tiposDe = r => (r.tipos && r.tipos.length ? r.tipos : [r.tipo]);
+
+  // papel de cada segmento do breadcrumb — vira uma pequena label: [seção] › [slide] › [subtítulo]
+  // (o índice segue a estrutura seção › slide › atividade; nos documentos, o 2º item é o documento).
+  const papelCrumb = (r, i) => i === 0 ? 'seção'
+    : i === 1 ? (tiposDe(r).includes('documento') ? 'documento' : 'slide')
+      : 'subtítulo';
+
   // ── índice de busca: tudo que o registro "diz" ──
   const textoDe = r => dobra([
-    r.titulo, r.resumo, r.tipo, r.acao, r.de, r.para, r.curadoria, r.commit,
-    (r.breadcrumb || []).join(' '),
-    (r.imagens && r.imagens.amostra || []).map(a => a.nome).join(' '),
-    (r.legendas || []).map(l => l.texto).join(' '),
-    r.documento && [r.documento.versao, r.documento.paginas, r.documento.tamanho].join(' '),
+    r.titulo, r.tipo, r.acao, r.curadoria, r.commit, (r.breadcrumb || []).join(' '),
+    ...partesDe(r).flatMap(p => [
+      p.resumo, p.de, p.para,
+      (p.imagens && p.imagens.amostra || []).map(a => a.nome).join(' '),
+      (p.legendas || []).map(l => l.texto).join(' '),
+      p.documento && [p.documento.versao, p.documento.paginas, p.documento.tamanho].join(' '),
+    ]),
   ].filter(Boolean).join(' '));
 
   // srcs das imagens que o registro toca (para o "localizar" no slide destino)
   const focoImgs = r => {
     const nomes = [];
-    (r.imagens && r.imagens.amostra || []).forEach(a => nomes.push(a.src.split('/').pop()));
-    (r.legendas || []).forEach(l => (l.imagens.amostra || []).forEach(a => nomes.push(a.src.split('/').pop())));
+    partesDe(r).forEach(p => {
+      (p.imagens && p.imagens.amostra || []).forEach(a => nomes.push(a.src.split('/').pop()));
+      (p.legendas || []).forEach(l => (l.imagens.amostra || []).forEach(a => nomes.push(a.src.split('/').pop())));
+    });
     return [...new Set(nomes)];
   };
   // srcs SÓ das imagens de uma faixa/legenda (para localizar aquela alteração específica no slide)
   const focoImgsGrupo = imagens => [...new Set((imagens && imagens.amostra || []).map(a => a.src.split('/').pop()))];
+
+  // salta até o registro (card) de id informado, dentro da lista, e o realça — mesma affordância do
+  // "localizar". Usado pelo aviso de registro DEFASADO para levar à versão vigente do elemento.
+  function irParaRegistro(id) {
+    if (!id) return;
+    const alvo = lista.querySelector('.hist-card[data-id="' + (window.CSS && CSS.escape ? CSS.escape(id) : id) + '"]');
+    if (!alvo) return;   // pode estar filtrado/oculto no momento
+    alvo.scrollIntoView({ block: 'center' });
+    alvo.classList.remove('hist-located'); void alvo.offsetWidth; alvo.classList.add('hist-located');
+  }
 
   // guarda ONDE se saiu (retorno + realce) e O QUE localizar no slide destino (imagens + texto).
   // Usada tanto pelo cartão inteiro quanto por cada faixa de imagens (clique individual).
@@ -117,9 +145,11 @@
       const cel = el('span', 'hist-thumb');
       const img = document.createElement('img');
       img.src = base + im.miniatura; img.alt = im.nome; img.loading = 'lazy';
-      img.width = mini ? 46 : 64; img.height = mini ? 35 : 48;
+      img.width = 64; img.height = 48;   // tamanho único: sempre a miniatura maior
       cel.appendChild(img);
       if (i === amostra.length - 1 && mostraMais) cel.appendChild(el('span', 'hist-thumb-mais', '+' + escondidas));
+      // viewports menores mostram no MÁXIMO 3 miniaturas: a 3ª carrega o "+N" (revelado via CSS)
+      if (i === 2 && total > 3) cel.appendChild(el('span', 'hist-thumb-mais hist-thumb-mais--mob', '+' + (total - 2)));
       wrap.appendChild(cel);
     });
     return wrap;
@@ -137,13 +167,28 @@
     return d;
   }
 
-  // container rotulado "informação da(s) imagem(ns)": deixa claro que o texto é a legenda das
-  // fotos, não uma nota solta. Recebe o miolo já montado (texto, de/para ou grupos legenda↔fotos).
-  function infoBox(umaImagem, miolo) {
-    const box = el('div', 'hist-info');
-    box.appendChild(el('span', 'hist-info-label', umaImagem ? 'informação da imagem' : 'informação das imagens'));
-    miolo.forEach(n => n && box.appendChild(n));
-    return box;
+  // de → para da TRANSFERÊNCIA: mais simples que o delta de modificação (sem caixas fortes lado a
+  // lado). Origem EM CIMA, destino EMBAIXO, com um ícone de movimentação (seta) entre os dois.
+  function deltaTransfer(de, para) {
+    const d = el('div', 'hist-move');
+    const linha = (papel, valor) => {
+      const row = el('div', 'hist-move-row');
+      row.appendChild(el('span', 'hist-move-label', papel));
+      row.appendChild(el('span', 'hist-move-valor', valor));
+      return row;
+    };
+    d.appendChild(linha('de', de));
+    d.appendChild(linha('para', para));
+    return d;
+  }
+
+  // conteúdo precedido pela label do ELEMENTO (ex.: observação) à esquerda — mesmo estilo do breadcrumb,
+  // para deixar claro qual elemento aquilo representa.
+  function comRotulo(papel, conteudo) {
+    const linha = el('div', 'hist-rot');
+    linha.appendChild(el('span', 'hist-crumb-tag', papel));
+    linha.appendChild(conteudo);
+    return linha;
   }
 
   // ícone por ação (traço, cor = currentColor → preto como os títulos). Mesmo estilo Feather dos
@@ -151,6 +196,7 @@
   const ICONES_ACAO = {
     adicao: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
     modificacao: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+    transferencia: '<line x1="4" y1="12" x2="17" y2="12"/><polyline points="12 7 18 12 12 17"/>',
     delecao: '<line x1="5" y1="12" x2="19" y2="12"/>',
     implementada: '<polyline points="20 6 9 17 4 12"/>',
     aperfeicoada: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
@@ -174,47 +220,31 @@
     return b;
   }
 
-  // ── um registro ──
-  function cartao(r) {
-    const a = el('a', 'hist-card hist-card--' + slug(r.acao));
-    a.href = base + (r.link || 'slides/index.html');
-    a.dataset.acao = r.acao;
-    a.dataset.tipo = r.tipo;
-    if (r.id) a.dataset.id = r.id;
+  // ── corpo de UMA parte (tipo + conteúdo). `r` dá o contexto de clique/href do cartão inteiro. ──
+  function corpoParte(a, r, p) {
+    const temDelta = p.de != null && p.para != null && p.de !== p.para;
+    // a transferência usa um delta próprio (empilhado, com ícone de movimentação); os demais, o padrão
+    const montarDelta = () => r.acao === 'transferência' ? deltaTransfer(p.de, p.para) : delta(p.de, p.para);
 
-    // clique no cartão INTEIRO: localiza todas as imagens do registro (foco geral)
-    const textoGeral = (r.tipo === 'título' ? r.para : (r.breadcrumb || []).slice(-1)[0]) || null;
-    a.addEventListener('click', () => salvaFoco(r, focoImgs(r), textoGeral));
-
-    const topo = el('div', 'hist-card-top');
-    topo.appendChild(badgeAcao(r.acao));
-    topo.appendChild(el('span', 'hist-type', r.tipo));
-    a.appendChild(topo);
-
-    a.appendChild(el('h3', 'hist-card-title', r.titulo || '—'));
-
-    if (r.breadcrumb && r.breadcrumb.length) {
-      const bc = el('div', 'hist-crumbs');
-      r.breadcrumb.forEach((p, i) => {
-        if (i) bc.appendChild(el('span', 'hist-crumb-sep', '›'));
-        bc.appendChild(el('span', 'hist-crumb', p));
-      });
-      a.appendChild(bc);
-    }
-
-    const temDelta = r.de != null && r.para != null && r.de !== r.para;
-
-    // ── OBSERVAÇÃO: a legenda, embrulhada, VINCULADA à(s) imagem(ns) que a receberam ──
-    if (r.tipo === 'observação') {
-      const umaImg = r.imagens && r.imagens.total === 1;
-      const miolo = [temDelta ? delta(r.de, r.para) : (r.resumo ? el('p', 'hist-info-text', r.resumo) : null)];
-      if (r.imagens) miolo.push(tiras(r.imagens, true));
-      a.appendChild(infoBox(umaImg, miolo));
+    // ── OBSERVAÇÃO: a legenda VINCULADA à(s) imagem(ns) que a receberam (sem envelope) ──
+    if (p.tipo === 'observação') {
+      // a legenda (resumo) de uma observação ADICIONADA ou REMOVIDA leva a label "observação" à esquerda
+      // (como nas legendas das imagens). A MODIFICAÇÃO isolada (de→para) não leva — o próprio de/para já
+      // a identifica e o topo do card diz OBSERVAÇÃO.
+      if (temDelta) a.appendChild(delta(p.de, p.para));
+      else if (p.resumo) a.appendChild(comRotulo('observação', el('span', 'hist-info-text', p.resumo)));
+      if (p.imagens) { const t = tiras(p.imagens, true); if (t) a.appendChild(t); }
 
     // ── IMAGENS: legendas por faixa (1-2: X · 3-4: Y) + tira de miniaturas + metadados ──
-    } else if (r.tipo === 'imagens') {
-      const legendas = r.legendas || [];
-      const umaImg = r.imagens && r.imagens.total === 1;
+    } else if (p.tipo === 'imagens') {
+      const legendas = p.legendas || [];
+      // a legenda ganha a label "observação" quando imagem e observação vêm JUNTAS: na adição de
+      // imagens (imagem + legenda) ou num registro que UNE 'imagens' e 'observação' (ex.: 3c6891a).
+      const uniaoImgObs = tiposDe(r).includes('imagens') && tiposDe(r).includes('observação');
+      const legendaEl = texto => (r.acao === 'adição' || uniaoImgObs)
+        ? comRotulo('observação', el('span', 'hist-info-text', texto))
+        : el('p', 'hist-info-text', texto);
+      if (temDelta) a.appendChild(montarDelta());   // transferência de imagens: origem → destino
       if (legendas.length > 1) {
         // legendas DIFERENTES por faixa de imagens: cada uma com as suas miniaturas (o vínculo).
         // Cada faixa é CLICÁVEL individualmente: leva o usuário exatamente àquela alteração no slide
@@ -225,7 +255,7 @@
           g.tabIndex = 0;
           g.setAttribute('role', 'link');
           g.title = 'Localizar esta alteração no slide';
-          g.appendChild(el('p', 'hist-info-text', l.texto));
+          g.appendChild(legendaEl(l.texto));
           const t = tiras(l.imagens, true);
           if (t) g.appendChild(t);
           const irAoGrupo = e => {
@@ -237,28 +267,28 @@
           g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') irAoGrupo(e); });
           grupos.appendChild(g);
         });
-        a.appendChild(infoBox(umaImg, [grupos]));
+        a.appendChild(grupos);
       } else {
-        if (legendas.length === 1) a.appendChild(infoBox(umaImg, [el('p', 'hist-info-text', legendas[0].texto)]));
-        if (r.imagens) { const t = tiras(r.imagens, false); if (t) a.appendChild(t); }
+        if (legendas.length === 1) a.appendChild(legendaEl(legendas[0].texto));
+        if (p.imagens) { const t = tiras(p.imagens, false); if (t) a.appendChild(t); }
       }
-      if (r.imagens) {
+      if (p.imagens) {
         const met = el('div', 'hist-meta');
-        met.appendChild(el('span', 'hist-meta-item', plural(r.imagens.total, 'imagem')));
-        if (r.imagens.pesoTotal) met.appendChild(el('span', 'hist-meta-item', r.imagens.pesoTotal));
-        if (r.removidas) met.appendChild(el('span', 'hist-meta-item', r.removidas + ' substituída(s)'));
+        met.appendChild(el('span', 'hist-meta-item', plural(p.imagens.total, 'imagem')));
+        if (p.imagens.pesoTotal) met.appendChild(el('span', 'hist-meta-item', p.imagens.pesoTotal));
+        if (p.removidas) met.appendChild(el('span', 'hist-meta-item', p.removidas + ' substituída(s)'));
         a.appendChild(met);
       }
 
     // ── DEMAIS (título, subtítulo, nome/seção do slide, funções): de/para ou resumo ──
     } else {
-      if (temDelta) a.appendChild(delta(r.de, r.para));
-      else if (r.resumo) a.appendChild(el('p', 'hist-resumo', r.resumo));
+      if (temDelta) a.appendChild(montarDelta());
+      else if (p.resumo) a.appendChild(el('p', 'hist-resumo', p.resumo));
     }
 
     // ── DOCUMENTOS: extensão, versão, páginas, tamanho ──
-    if (r.documento) {
-      const d = r.documento;
+    if (p.documento) {
+      const d = p.documento;
       const met = el('div', 'hist-meta');
       met.appendChild(el('span', 'hist-meta-item hist-meta-ext', 'PDF'));
       if (d.versao) met.appendChild(el('span', 'hist-meta-item', 'versão ' + d.versao));
@@ -267,20 +297,155 @@
       a.appendChild(met);
     }
 
+    // ── DEFASADO: esta alteração já foi superada por outra mais recente do mesmo elemento. O aviso
+    //    é clicável e leva ao registro vigente (realçando-o), cujo commit é indicado. ──
+    if (p.obsoleto) {
+      const av = el('div', 'hist-obsoleto');
+      av.tabIndex = 0;
+      av.setAttribute('role', 'link');
+      av.title = 'Ir para a versão atual (' + p.obsoleto.commit + ')';
+      av.appendChild(el('span', 'hist-obsoleto-tag', 'obsoleto'));
+      av.appendChild(el('span', 'hist-obsoleto-txt', 'versão atual em ' + p.obsoleto.commit));
+      const ir = e => { e.preventDefault(); e.stopPropagation(); irParaRegistro(p.obsoleto.id); };
+      av.addEventListener('click', ir);
+      av.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') ir(e); });
+      a.appendChild(av);
+    }
+
+    // ── VIGENTE: esta versão lista, como um histórico, os registros que tornou obsoletos (com data,
+    //    commit e o valor de cada um). Cada item é clicável e leva ao registro correspondente. ──
+    if (p.substitui && p.substitui.length) {
+      const box = el('div', 'hist-hist is-collapsed');   // colapsado por padrão (economiza espaço)
+      const cab = el('div', 'hist-hist-toggle');
+      cab.tabIndex = 0;
+      cab.setAttribute('role', 'button');
+      cab.setAttribute('aria-expanded', 'false');
+      cab.appendChild(el('span', 'hist-hist-caret', '▾'));
+      const lbl = el('span', 'hist-hist-label', 'expandir histórico');
+      cab.appendChild(lbl);
+      const lst = el('div', 'hist-hist-list');
+      p.substitui.forEach(s => {
+        const it = el('div', 'hist-hist-item');
+        it.tabIndex = 0;
+        it.setAttribute('role', 'link');
+        it.title = 'Ir para este registro (' + s.commit + ')';
+        it.appendChild(el('span', 'hist-hist-data', s.data));
+        it.appendChild(el('span', 'hist-hist-commit', s.commit));
+        if (s.para != null) it.appendChild(el('span', 'hist-hist-valor', s.para));
+        const ir = e => { e.preventDefault(); e.stopPropagation(); irParaRegistro(s.id); };
+        it.addEventListener('click', ir);
+        it.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') ir(e); });
+        lst.appendChild(it);
+      });
+      const alterna = e => {
+        e.preventDefault(); e.stopPropagation();
+        const col = box.classList.toggle('is-collapsed');
+        cab.setAttribute('aria-expanded', String(!col));
+        lbl.textContent = col ? 'expandir histórico' : 'colapsar histórico';
+      };
+      cab.addEventListener('click', alterna);
+      cab.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') alterna(e); });
+      box.appendChild(cab);
+      box.appendChild(lst);
+      a.appendChild(box);
+    }
+  }
+
+  // ── um registro (pode reunir várias alterações do mesmo elemento, feitas no mesmo commit) ──
+  function cartao(r) {
+    const a = el('a', 'hist-card hist-card--' + slug(r.acao));
+    a.href = base + (r.link || 'slides/index.html');
+    a.dataset.acao = r.acao;
+    a.dataset.tipo = r.tipo;
+    if (r.id) a.dataset.id = r.id;
+
+    // clique no cartão INTEIRO: localiza todas as imagens do registro (foco geral). Se o slide-alvo
+    // não existe mais (alvoAusente), o link já aponta para o índice — não faz sentido tentar localizar.
+    const textoGeral = (r.tipo === 'título' ? (r.partes ? r.partes[0].para : r.para) : (r.breadcrumb || []).slice(-1)[0]) || null;
+    a.addEventListener('click', () => { if (!r.alvoAusente) salvaFoco(r, focoImgs(r), textoGeral); });
+
+    const topo = el('div', 'hist-card-top');
+    topo.appendChild(badgeAcao(r.acao));
+    topo.appendChild(el('span', 'hist-type', r.tipo));
+    a.appendChild(topo);
+
+    // canto superior direito: aviso "slide indisponível" (se o slide-alvo sumiu) + o código do commit.
+    // No desktop fica fixo à direita, ao lado do commit; no mobile FLUI abaixo do topo (evita sobrepor
+    // o tipo em telas estreitas).
+    const canto = el('div', 'hist-topinfo' + (r.alvoAusente ? ' hist-topinfo--ausente' : ''));
+    if (r.alvoAusente) {
+      const av = el('span', 'hist-ausente', 'slide indisponível');
+      av.title = 'O slide original foi removido — o link abre o índice.';
+      canto.appendChild(av);
+    }
+    canto.appendChild(el('span', 'hist-commit', r.commit));
+    a.appendChild(canto);
+
+    // sem título quando ele só repetiria o que já está à vista:
+    //  • transferência (r.titulo já vem nulo);
+    //  • modificação de título (o próprio "para" do de→para já é o novo título) ou só de observação;
+    //  • adição de subtítulo e/ou imagens (o título repete a atividade/slide, já no breadcrumb).
+    const t = tiposDe(r);
+    const semTitulo =
+      (r.acao === 'modificação' && (t.includes('título') || (t.length === 1 && t[0] === 'observação'))) ||
+      (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens')));
+    if (r.titulo && !semTitulo) a.appendChild(el('h3', 'hist-card-title', r.titulo));
+
+    // a transferência não mostra breadcrumb: origem e destino já vêm por extenso em "de" e "para".
+    // (o dado permanece no registro — é o que agrupa a transferência por seção/slide nas outras vistas.)
+    // breadcrumb horizontal (com a label do papel em cada segmento); a transferência não usa breadcrumb
+    // — origem/destino já vêm por extenso, empilhados, em "de"/"para".
+    if (r.breadcrumb && r.breadcrumb.length && r.acao !== 'transferência') {
+      const bc = el('div', 'hist-crumbs');
+      r.breadcrumb.forEach((p, i) => {
+        if (i) bc.appendChild(el('span', 'hist-crumb-sep', '›'));
+        const seg = el('span', 'hist-crumb');
+        seg.appendChild(el('span', 'hist-crumb-tag', papelCrumb(r, i)));   // pequena label do papel
+        seg.appendChild(document.createTextNode(p));
+        bc.appendChild(seg);
+      });
+      a.appendChild(bc);
+    }
+
+    // uma parte (registro simples) ou várias (consolidado). Quando o registro reúne DUAS OU MAIS
+    // alterações com corpo, cada uma vira um bloco ROTULADO com o seu elemento (ex.: distinguir
+    // "nome do slide" de "título", que de outra forma pareceriam duplicados) — à mesma distância
+    // que separa os subcontainers "de" e "para". Uma parte só, ou registro simples, vai sem rótulo.
+    const partes = partesDe(r);
+    if (partes.length > 1) {
+      const ehDelta = p => p.de != null && p.para != null && p.de !== p.para;
+      // rotula cada alteração com o seu elemento SÓ quando há 2+ TIPOS de delta distintos (ex.: "nome
+      // do slide" vs "título", que de outra forma pareceriam duplicados). Casos visualmente distintos
+      // (imagens + observação) seguem sem rótulo, só espaçados pela distância do vão entre "de"/"para".
+      const rotular = new Set(partes.filter(ehDelta).map(p => p.tipo)).size > 1;
+      partes.forEach(p => {
+        if (rotular && ehDelta(p)) {
+          const w = el('div', 'hist-parte');
+          corpoParte(w, r, p);
+          if (w.childElementCount) { w.insertBefore(el('span', 'hist-parte-tipo', p.tipo), w.firstChild); a.appendChild(w); }
+        } else {
+          corpoParte(a, r, p);
+        }
+      });
+    } else {
+      corpoParte(a, r, partes[0]);
+    }
+
     if (r.curadoria) a.appendChild(el('p', 'hist-nota', r.curadoria));
-    a.appendChild(el('span', 'hist-commit', r.commit));
     return a;
   }
 
   // hora "17:42" → "17h42" (formato pedido)
   const horaBR = h => (h || '').replace(':', 'h');
+  // "15-07-26" → "15/07": no agrupamento por slide os registros abrangem vários dias, então o
+  // marcador exibe a DATA (o que varia ali) em vez do horário (o que varia dentro de um mesmo dia)
+  const diaCurto = d => { const p = parse(d); return p ? String(p.dia).padStart(2, '0') + '/' + String(p.mes + 1).padStart(2, '0') : (d || ''); };
 
-  // atualiza o MARCADOR sticky de um dia: horário (00h00) + cor do ponto pela ação corrente
-  function setMark(mark, hora, acao) {
+  // atualiza o MARCADOR sticky: texto (horário ou data, já formatado) + cor do ponto pela ação corrente
+  function setMark(mark, texto, acao) {
     const t = mark.querySelector('.hist-mark-time');
     const d = mark.querySelector('.hist-dot');
-    const txt = horaBR(hora);
-    if (t.textContent !== txt) t.textContent = txt;
+    if (t.textContent !== texto) t.textContent = texto;
     const cls = 'hist-dot hist-dot--' + slug(acao || 'misto');
     if (d.className !== cls) d.className = cls;
   }
@@ -290,13 +455,16 @@
   // tempo (sticky) e, conforme o registro sob ele, atualiza o horário (00h00) e a COR do ponto
   // pela ação — verde/amarelo/vermelho. O cabeçalho (a data) também gruda no topo. Como as datas
   // e horários variam, cada dia tem a sua própria linha do tempo e o seu próprio marcador.
-  function bloco(dia, registros) {
-    const sec = el('section', 'hist-day');
+  // `titulo` é a data (por tempo/ação/seção→dia) ou o nome do slide (por seção→slide). Quando
+  // `porSlide`, o marcador da linha do tempo exibe a DATA de cada registro em vez do horário.
+  function bloco(titulo, registros, porSlide) {
+    const marcaDe = r => porSlide ? diaCurto(r.data) : horaBR(r.hora);
+    const sec = el('section', 'hist-day' + (porSlide ? ' hist-day--slide' : ''));
     const cab = el('button', 'hist-day-head');
     cab.type = 'button';
     cab.setAttribute('aria-expanded', 'true');
     cab.appendChild(el('span', 'hist-day-caret', '▾'));
-    cab.appendChild(el('span', 'hist-day-date', dia));
+    cab.appendChild(el('span', 'hist-day-date', titulo));
     cab.appendChild(el('span', 'hist-day-count', plural(registros.length, 'alteração')));
 
     const tl = el('div', 'hist-day-items hist-tl');
@@ -306,10 +474,10 @@
     mark.appendChild(el('span', 'hist-dot'));
     rail.appendChild(mark);
     const corpo = el('div', 'hist-tl-body');
-    registros.forEach(r => { const c = cartao(r); c.dataset.hora = r.hora || ''; corpo.appendChild(c); });
+    registros.forEach(r => { const c = cartao(r); c.dataset.hora = r.hora || ''; c.dataset.marca = marcaDe(r); corpo.appendChild(c); });
     tl.appendChild(rail);
     tl.appendChild(corpo);
-    if (registros[0]) setMark(mark, registros[0].hora, registros[0].acao);
+    if (registros[0]) setMark(mark, marcaDe(registros[0]), registros[0].acao);
 
     cab.addEventListener('click', () => {
       const fechado = sec.classList.toggle('is-collapsed');
@@ -370,7 +538,7 @@
         if (cards[mid].getBoundingClientRect().top <= linha) { at = mid; lo = mid + 1; }
         else hi = mid - 1;
       }
-      setMark(mark, cards[at].dataset.hora, cards[at].dataset.acao);
+      setMark(mark, cards[at].dataset.marca, cards[at].dataset.acao);
       // SÓ o registro sob o marcador ganha a cor da ação; os demais voltam ao cinza. A cor
       // "acompanha" o marcador conforme ele desce. Delta: apaga o anterior, acende o atual.
       const prev = day._evAt;
@@ -386,7 +554,7 @@
   // de dia deslizam para debaixo dele, a informação passa a ser exibida no próprio mês, mantendo a
   // continuidade da referência. O "dia atual" é o último cujo cabeçalho já passou por baixo do mês.
   function atualizaMeses() {
-    document.querySelectorAll('.hist-month:not(.hist-month--acao)').forEach(mes => {
+    document.querySelectorAll('.hist-month:not(.hist-month--acao):not(.hist-month--secao)').forEach(mes => {
       const cur = mes.querySelector('.hist-month-cur');
       if (!cur) return;
       // a faixa zebrada ALTERNA para a versão gradiente (.is-merged) no MESMO instante da absorção
@@ -443,6 +611,82 @@
     return [...mapa.entries()].sort((a, b) => (parse(b[0]) || { chave: 0 }).chave - (parse(a[0]) || { chave: 0 }).chave);
   }
 
+  // ── agrupamento POR SEÇÃO (experimental) ──
+  // Reúne as alterações pela seção a que pertencem, aproximando o que é estruturalmente semelhante.
+  // A seção vem do 1º item do breadcrumb; o CÓDIGO (ST/SE/LT/LD) unifica as variações do mesmo nome
+  // que surgiram ao longo dos commits ("Segurança do Trabalho" vs "Seg. do Trabalho"), e o dobra()
+  // unifica as que só diferem em acento/caixa ("Documentos recebidos" vs "Documentos Recebidos").
+  // Registros sem seção (breadcrumb "—") caem num grupo "Sem seção", sempre por último.
+  function secaoDe(r) {
+    const bruto = ((r.breadcrumb && r.breadcrumb[0]) || '').replace(/\s+/g, ' ').trim();
+    if (!bruto || /^[—–-]$/.test(bruto)) return { chave: '__sem_secao__', rotulo: 'Sem seção' };
+    const m = /^([A-Za-z]{2})\s*[—–-]/.exec(bruto);
+    return m ? { chave: m[1].toUpperCase(), rotulo: bruto } : { chave: dobra(bruto), rotulo: bruto };
+  }
+
+  function agrupaPorSecao(regs) {
+    const mapa = new Map();   // chave → { itens, rotulos: Map<rótulo, contagem> }
+    regs.forEach(r => {
+      const { chave, rotulo } = secaoDe(r);
+      if (!mapa.has(chave)) mapa.set(chave, { itens: [], rotulos: new Map() });
+      const g = mapa.get(chave);
+      g.itens.push(r);
+      g.rotulos.set(rotulo, (g.rotulos.get(rotulo) || 0) + 1);
+    });
+    // rótulo canônico = a variante mais usada (empate → a mais longa, que é a mais descritiva)
+    const grupos = [...mapa.entries()].map(([chave, g]) => ({
+      chave,
+      rotulo: [...g.rotulos.entries()].sort((a, b) => b[1] - a[1] || b[0].length - a[0].length)[0][0],
+      itens: g.itens,
+    }));
+    // "Sem seção" (sentinela) por último; as demais pela quantidade de alterações (desc)
+    return grupos.sort((a, b) => (a.chave === '__sem_secao__') - (b.chave === '__sem_secao__') || b.itens.length - a.itens.length);
+  }
+
+  // ── dentro de uma seção, agrupamento POR SLIDE (experimental) ──
+  // mapa GLOBAL link → nome mais recente e legível do slide: alimenta o rótulo dos slides que, num
+  // dado momento, ainda estavam sem seção (breadcrumb "—"/arquivo) mas já ganharam nome depois.
+  let _nomes = null;
+  function nomeDoLink(link) {
+    if (!_nomes) {
+      _nomes = new Map();   // registros já vêm do mais novo p/ o mais antigo → o 1º visto é o atual
+      (dados.registros || []).forEach(r => {
+        const nome = (r.breadcrumb || [])[1];
+        if (r.link && nome && !/^slide-|\.html$/.test(nome) && !_nomes.has(r.link)) _nomes.set(r.link, nome);
+      });
+    }
+    return _nomes.get(link) || null;
+  }
+  // "slides/slide-ac-repair.html" → "Ac repair" (só quando não há nome legível algum)
+  const prettify = link => {
+    const f = (link.split('/').pop() || '').replace(/\.html$/, '').replace(/^slide-/, '').replace(/-/g, ' ').trim();
+    return f ? f.charAt(0).toUpperCase() + f.slice(1) : link;
+  };
+
+  // a UNIDADE de um registro dentro da seção: o slide (pelo link, que mantém o histórico junto mesmo
+  // após renomeações) ou, no índice, cada DOCUMENTO (pelo nome). Registros de nível de seção (sem
+  // slide) caem num grupo "Mudanças de seção".
+  function slideDe(r) {
+    const link = r.link || '(sem link)';
+    const nome = (r.breadcrumb || [])[1];
+    const nomeLegivel = nome && !/^slide-|\.html$/.test(nome) ? nome : null;
+    if (/(^|\/)index\.html$/.test(link)) {
+      return nomeLegivel ? { chave: 'doc::' + dobra(nomeLegivel), rotulo: nomeLegivel } : { chave: 'sec::', rotulo: 'Mudanças de seção' };
+    }
+    return { chave: link, rotulo: nomeLegivel || nomeDoLink(link) || prettify(link) };
+  }
+
+  function agrupaPorSlide(regs) {
+    const mapa = new Map();   // chave → { chave, rotulo, itens }
+    regs.forEach(r => {
+      const { chave, rotulo } = slideDe(r);
+      if (!mapa.has(chave)) mapa.set(chave, { chave, rotulo, itens: [] });   // 1ª ocorrência (mais recente) fixa o rótulo
+      mapa.get(chave).itens.push(r);
+    });
+    // por quantidade de alterações (desc); "Mudanças de seção" sempre por último
+    return [...mapa.values()].sort((a, b) => (a.chave === 'sec::') - (b.chave === 'sec::') || b.itens.length - a.itens.length);
+  }
+
   const cap = s => (s || '').charAt(0).toUpperCase() + s.slice(1);
 
   // um GRUPO colapsável de checkboxes (multi-seleção). O cabeçalho é o subtítulo do conjunto;
@@ -486,7 +730,7 @@
     const acaoOpts = ACOES[aba].map(a => ({ valor: a, rotulo: cap(a), n: daAba.filter(r => r.acao === a).length }));
     montaGrupo(barraAcao, 'Ação', acaoOpts, filtrosAcao, alternaAcao);
     const cont = {};
-    daAba.forEach(r => (cont[r.tipo] = (cont[r.tipo] || 0) + 1));
+    daAba.forEach(r => tiposDe(r).forEach(t => (cont[t] = (cont[t] || 0) + 1)));
     const tipoOpts = Object.keys(cont).sort((a, b) => cont[b] - cont[a]).map(t => ({ valor: t, rotulo: cap(t), n: cont[t] }));
     montaGrupo(barraTipo, 'Elemento', tipoOpts, filtrosTipo, alternaTipo);
   }
@@ -497,19 +741,19 @@
   // contagens — só as da outra categoria (Ação↔Elemento).
   function atualizaContagens(daAba) {
     const casaBusca = r => !termo || textoDe(r).includes(termo);
-    const conta = (container, valorDe, outroOk) => {
+    const conta = (container, valoresDe, outroOk) => {
       if (!container) return;
       container.querySelectorAll('.hist-check').forEach(lab => {
         const inp = lab.querySelector('input');
-        const n = daAba.filter(r => valorDe(r) === inp.value && outroOk(r) && casaBusca(r)).length;
+        const n = daAba.filter(r => valoresDe(r).includes(inp.value) && outroOk(r) && casaBusca(r)).length;
         const nEl = lab.querySelector('.hist-check-n');
         if (nEl) nEl.textContent = n;
         lab.classList.toggle('is-empty', n === 0);
         inp.disabled = n === 0 && !inp.checked;
       });
     };
-    conta(barraAcao, r => r.acao, r => filtrosTipo.size === 0 || filtrosTipo.has(r.tipo));
-    conta(barraTipo, r => r.tipo, r => filtrosAcao.size === 0 || filtrosAcao.has(r.acao));
+    conta(barraAcao, r => [r.acao], r => filtrosTipo.size === 0 || tiposDe(r).some(t => filtrosTipo.has(t)));
+    conta(barraTipo, r => tiposDe(r), r => filtrosAcao.size === 0 || filtrosAcao.has(r.acao));
   }
 
   // remove um filtro (via chip) e desmarca o checkbox correspondente, sem remontar o menu
@@ -561,6 +805,7 @@
 
   function render() {
     lista.innerHTML = '';
+    if (expNote) expNote.hidden = agrupamento !== 'secao';   // o aviso só acompanha a exibição experimental
 
     const daAba = (dados.registros || []).filter(r => (r.aba || 'conteudo') === aba)
       .concat(aba === 'funcoes' ? (dados.funcoes || []) : []);
@@ -574,7 +819,7 @@
     // ALGUM elemento marcado (e a busca). Os três conjuntos se combinam.
     const regs = daAba.filter(r =>
       (filtrosAcao.size === 0 || filtrosAcao.has(r.acao)) &&
-      (filtrosTipo.size === 0 || filtrosTipo.has(r.tipo)) &&
+      (filtrosTipo.size === 0 || tiposDe(r).some(t => filtrosTipo.has(t))) &&
       (!termo || textoDe(r).includes(termo)));
 
     renderAtivos();
@@ -597,7 +842,7 @@
       (regs.length !== daAba.length ? ' (de ' + daAba.length + ')' : '') + ' · ' +
       Object.entries(cont).map(([k, v]) => plural(v, k)).join(' · ');
 
-    if (agrupamento === 'cronologico') {
+    if (agrupamento === 'tempo') {
       // cada MÊS é um CONTAINER: o título fica FIXO no topo do cartão e só os REGISTROS rolam, num
       // elemento interno com scroll próprio (a barra de rolagem fica sob o título, limitada aos
       // registros). Assim um mês inteiro pode ser pulado pelo scroll da página, e o título nunca
@@ -621,6 +866,23 @@
           lista.appendChild(caixa);
         }
         rolagem.appendChild(bloco(dia, itens));
+      });
+    } else if (agrupamento === 'secao') {
+      // mesma estrutura de container do modo "por tempo", mas o cabeçalho fixo é a SEÇÃO e, dentro
+      // dela, os registros são agrupados POR SLIDE (mais alterado primeiro); cada slide preserva a
+      // sua linha do tempo, agora marcada pela data — já que as alterações abrangem vários dias.
+      agrupaPorSecao(regs).forEach(({ rotulo, itens }) => {
+        const caixa = el('div', 'hist-monthbox');
+        const h = el('h2', 'hist-month hist-month--secao');
+        h.appendChild(el('span', 'hist-month-label', rotulo));
+        h.appendChild(el('span', 'hist-month-count', plural(itens.length, 'alteração')));
+        caixa.appendChild(h);
+        caixa.appendChild(el('div', 'hist-gap'));   // faixa zebrada suave logo abaixo do título da seção
+        const rolagem = el('div', 'hist-monthscroll');
+        rolagem.addEventListener('scroll', agendaMarcas, { passive: true });
+        agrupaPorSlide(itens).forEach(({ rotulo: nome, itens: ds }) => rolagem.appendChild(bloco(nome, ds, true)));
+        caixa.appendChild(rolagem);
+        lista.appendChild(caixa);
       });
     } else {
       // mesma estrutura de cartão do cronológico: cada AÇÃO é um container com título fixo e área de

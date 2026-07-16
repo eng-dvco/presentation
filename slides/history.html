@@ -39,21 +39,6 @@
         <div class="content-wrapper hist-root" data-fonte="../history/history-indefinida.json" data-base="../">
           <p class="hist-source"></p>
 
-          <div class="hist-controls">
-            <div class="hist-tabs" role="tablist" aria-label="Tipo de alteração">
-              <button type="button" class="hist-tab active" data-aba="conteudo" role="tab" aria-selected="true">Conteúdo</button>
-              <button type="button" class="hist-tab" data-aba="funcoes" role="tab" aria-selected="false">Funções</button>
-            </div>
-            <div class="hist-groups" role="group" aria-label="Agrupamento">
-              <button type="button" class="hist-group-btn active" data-grupo="cronologico" aria-pressed="true">Cronológico</button>
-              <button type="button" class="hist-group-btn" data-grupo="acao" aria-pressed="false">Por ação</button>
-            </div>
-            <div class="hist-fold" role="group" aria-label="Expandir ou colapsar">
-              <button type="button" class="hist-fold-btn" id="hist-expand">Expandir tudo</button>
-              <button type="button" class="hist-fold-btn" id="hist-collapse">Colapsar tudo</button>
-            </div>
-          </div>
-
           <div class="hist-filters">
             <div class="hist-filters-row">
               <label class="hist-search-label">
@@ -75,7 +60,27 @@
             <div class="hist-active" hidden></div>
           </div>
 
+          <div class="hist-controls">
+            <div class="hist-tabs" role="tablist" aria-label="Tipo de alteração">
+              <button type="button" class="hist-tab active" data-aba="conteudo" role="tab" aria-selected="true">Conteúdo</button>
+              <button type="button" class="hist-tab" data-aba="funcoes" role="tab" aria-selected="false">Funções</button>
+            </div>
+            <div class="hist-groups" role="group" aria-label="Agrupamento">
+              <button type="button" class="hist-group-btn active" data-grupo="tempo" aria-pressed="true">Por tempo</button>
+              <button type="button" class="hist-group-btn" data-grupo="acao" aria-pressed="false">Por ação</button>
+              <button type="button" class="hist-group-btn" data-grupo="secao" aria-pressed="false" title="Exibição experimental" aria-label="Exibição por seção — experimental">Por seção<sup class="hist-exp-mark" aria-hidden="true">β</sup></button>
+            </div>
+            <div class="hist-fold" role="group" aria-label="Expandir ou colapsar">
+              <button type="button" class="hist-fold-btn" id="hist-expand">Expandir tudo</button>
+              <button type="button" class="hist-fold-btn" id="hist-collapse">Colapsar tudo</button>
+            </div>
+          </div>
+
           <p class="hist-summary"></p>
+          <p class="hist-exp-note" hidden>
+            <span class="hist-exp-badge">experimental</span>
+            <span class="hist-exp-txt">Agrupa as alterações por seção da apresentação, reunindo o que é semelhante. Recurso em desenvolvimento.</span>
+          </p>
           <p class="hist-empty" hidden></p>
           <div class="hist-list"></div>
         </div>

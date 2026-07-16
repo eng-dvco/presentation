@@ -1064,10 +1064,15 @@
   color: var(--color-red);
 }
 
+/* o rótulo + ícone ficam num CHIP sólido (como o botão): o zebrado vermelho atrás reduzia demais o
+   contraste do texto/ícone (também vermelhos). O chip claro os destaca; o zebrado segue ao redor. */
 .hist-obsoleto-head-title {
   display: inline-flex;
   align-items: center;
   gap: var(--gap-4);
+  padding: 1px var(--gap-6);
+  border-radius: 99px;
+  background: var(--lt-surface);
   font-weight: var(--font-weight-boldest);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1088,10 +1093,13 @@
   white-space: nowrap;
   transition: background-color 0.15s, border-color 0.15s;
 
+  /* no hover ACENDE em vermelho sólido com texto claro (alto contraste): antes ficava vermelho-claro,
+     o mesmo tom da base do zebrado, e o botão sumia no fundo com o texto vermelho pouco legível. */
   &:hover,
   &:focus-visible {
-    background: var(--color-red-alpha-25);
+    background: var(--color-red);
     border-color: var(--color-red);
+    color: var(--lt-surface);
     outline: none;
   }
 }

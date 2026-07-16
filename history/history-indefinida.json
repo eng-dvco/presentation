@@ -1,7 +1,7 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "15-07-26",
- "commits": 139,
+ "geradoEm": "16-07-26",
+ "commits": 141,
  "total": 466,
  "registros": [
   {
@@ -44,6 +44,7 @@
      "commit": "3c6891a",
      "id": "3c6891a-0",
      "data": "15-07-26",
+     "hora": "17:47",
      "de": "reciclagem da NR-6 (EPIs)",
      "para": "reciclagem da NR-5 (CIPA)"
     },
@@ -51,6 +52,7 @@
      "commit": "e1b75a8",
      "id": "e1b75a8-26",
      "data": "14-07-26",
+     "hora": "07:41",
      "de": "reciclagem da NR-5 (CIPA)",
      "para": "reciclagem da NR-6 (EPIs)"
     }
@@ -715,6 +717,7 @@
      "commit": "ba09017",
      "id": "ba09017-26",
      "data": "19-06-26",
+     "hora": "14:06",
      "de": "descrição não fornecida",
      "para": "Assunto: inspeção de manutenção civil na Torre 43/2 da LT 230 kV (WBS 2825). Acompanhamento de fissuras nos blocos de fundação; surgimento de novas fissuras superficiais, com hipótese de retração hidráulica por falha de cura."
     }
@@ -936,7 +939,7 @@
    "acao": "adição",
    "breadcrumb": [
     "SE — Subestação",
-    "Revitalização da pintura e elementos",
+    "Revitalização geral",
     "Reposição da pia da guarita"
    ],
    "titulo": "Reposição da pia da guarita",
@@ -1008,7 +1011,7 @@
    "acao": "adição",
    "breadcrumb": [
     "SE — Subestação",
-    "Revitalização da pintura e elementos",
+    "Revitalização geral",
     "Restauração da pintura das calçadas"
    ],
    "titulo": "Restauração da pintura das calçadas",
@@ -1751,8 +1754,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e3-e4.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E3-E4",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -1789,8 +1793,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e2-e3.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E2-E3",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -1827,8 +1832,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e1.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E1",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -2306,6 +2312,7 @@
      "commit": "23e24fe",
      "id": "23e24fe-1",
      "data": "01-07-26",
+     "hora": "16:40",
      "de": "—",
      "para": "v1.10"
     }
@@ -2373,6 +2380,7 @@
      "commit": "ba09017",
      "id": "ba09017-40",
      "data": "19-06-26",
+     "hora": "14:06",
      "de": "descrição não fornecida",
      "para": "Planilha mestra: paleta, lista de estruturas, checklist, fichas-modelo (v1.91/v1.94), esquema de pendências e lista de serviços com frequência e criticidade."
     }
@@ -2715,7 +2723,7 @@
    "titulo": "Reparo em telhado metálico",
    "breadcrumb": [
     "SE — Subestação",
-    "Reparo em telhado metálico"
+    "Reparo em telhado de fibrocimento"
    ],
    "resumo": "Casa de comando",
    "imagens": {
@@ -2865,6 +2873,7 @@
        "commit": "3442081",
        "id": "3442081-58",
        "data": "24-06-26",
+       "hora": "06:54",
        "de": "Reparo nos ACs da sala de baterias da SE-E5",
        "para": "Reparo nos ACs da sala de baterias"
       }
@@ -2879,6 +2888,7 @@
        "commit": "b950280",
        "id": "b950280-0",
        "data": "27-05-26",
+       "hora": "15:51",
        "de": "Reparo nos ares-condicionados da sala de baterias",
        "para": "Reparo nos ACs da sala de baterias"
       }
@@ -3352,7 +3362,7 @@
    "titulo": "Revitalização das estruturas",
    "breadcrumb": [
     "SE — Subestação",
-    "Revitalização da pintura e elementos"
+    "Revitalização geral"
    ],
    "resumo": "Execução · Reposição de meio-fio e canaleta",
    "imagens": {
@@ -3753,7 +3763,7 @@
    "titulo": "Reparo nos ACs da sala de baterias",
    "breadcrumb": [
     "SE — Subestação",
-    "Reparo nos ACs da sala de baterias"
+    "Reparo em ares-condicionados"
    ],
    "de": "Reparo nos ACs da sala de baterias da SE-E5",
    "para": "Reparo nos ACs da sala de baterias",
@@ -3893,7 +3903,7 @@
    "titulo": null,
    "breadcrumb": [
     "SE — Subestação",
-    "Reparo nos ACs da sala de baterias",
+    "Reparo em ares-condicionados",
     "AC-BT-01 e AC-BT-02"
    ],
    "de": "SE — Subestação › Reparo nos ACs da sala de baterias da SE-E5 › AC-BT-01 e AC-BT-02 da SE-E5",
@@ -4155,6 +4165,7 @@
        "commit": "ba09017",
        "id": "ba09017-13",
        "data": "19-06-26",
+       "hora": "14:06",
        "de": "Treinamentos da SIPAT",
        "para": "SIPAT (Semana de Prevenção de Acidentes do Trabalho)"
       }
@@ -4169,6 +4180,7 @@
        "commit": "1827a19",
        "id": "1827a19-42",
        "data": "22-06-26",
+       "hora": "15:31",
        "de": "SIPAT e riscos psicossociais",
        "para": "Treinamentos da SIPAT"
       },
@@ -4176,6 +4188,7 @@
        "commit": "ba09017",
        "id": "ba09017-13",
        "data": "19-06-26",
+       "hora": "14:06",
        "de": "Treinamentos da SIPAT",
        "para": "SIPAT e riscos psicossociais"
       }
@@ -5655,8 +5668,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e3-e4.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E3-E4",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -5693,8 +5707,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e2-e3.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E2-E3",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -5743,8 +5758,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e2.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E2",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -5820,6 +5836,7 @@
        "commit": "b950280",
        "id": "b950280-4",
        "data": "27-05-26",
+       "hora": "15:51",
        "de": "Manutenção no GMG da E3",
        "para": "Manutenção no GMG da SE-E3"
       }
@@ -6207,7 +6224,7 @@
    "titulo": "AC-BT-01 e AC-BT-02 da SE-E5",
    "breadcrumb": [
     "SE — Subestação",
-    "Reparo nos ACs da sala de baterias",
+    "Reparo em ares-condicionados",
     "AC-BT-01 e AC-BT-02 da SE-E5"
    ]
   },
@@ -6223,7 +6240,7 @@
    "titulo": "AC-BT-01 e AC-BT-02",
    "breadcrumb": [
     "SE — Subestação",
-    "Reparo nos ACs da sala de baterias",
+    "Reparo em ares-condicionados",
     "AC-BT-01 e AC-BT-02"
    ]
   },
@@ -6238,8 +6255,8 @@
    "tipo": "slide",
    "titulo": "Regulagem de chave-faca",
    "breadcrumb": [
-    "—",
-    "slide-secc-knife.html"
+    "LD — Distribuição",
+    "Regulagem de chave-faca"
    ],
    "resumo": "Execução",
    "alvoAusente": true
@@ -6255,8 +6272,8 @@
    "tipo": "slide",
    "titulo": "Manutenção na ancoragem",
    "breadcrumb": [
-    "—",
-    "slide-pole-cable.html"
+    "LD — Distribuição",
+    "Manutenção na ancoragem"
    ],
    "resumo": "Execução",
    "alvoAusente": true
@@ -6272,8 +6289,8 @@
    "tipo": "slide",
    "titulo": "Remoção de resíduos de ninho",
    "breadcrumb": [
-    "—",
-    "slide-nest-removal.html"
+    "LD — Distribuição",
+    "Remoção de resíduos de ninho"
    ],
    "resumo": "Resíduos identificados",
    "alvoAusente": true
@@ -6289,8 +6306,8 @@
    "tipo": "slide",
    "titulo": "Recomposição da malha de aterramento",
    "breadcrumb": [
-    "—",
-    "slide-grounding-mesh-repair.html"
+    "LT — Transmissão",
+    "Recomposição da malha de aterramento"
    ],
    "resumo": "Execução",
    "alvoAusente": true
@@ -6306,8 +6323,8 @@
    "tipo": "slide",
    "titulo": "Substituição de chave fusível",
    "breadcrumb": [
-    "—",
-    "slide-fuse-switch.html"
+    "LD — Distribuição",
+    "Substituição de chave fusível"
    ],
    "resumo": "Execução",
    "alvoAusente": true
@@ -6323,8 +6340,8 @@
    "tipo": "slide",
    "titulo": "Retensionamento de estai",
    "breadcrumb": [
-    "—",
-    "slide-cable-retensioning.html"
+    "LT — Transmissão",
+    "Retensionamento de estai"
    ],
    "resumo": "Execução",
    "alvoAusente": true
@@ -6386,7 +6403,7 @@
    "tipo": "nome do slide",
    "titulo": "Contatos e orientações",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
+    "ST — Segurança do Trabalho",
     "Contatos e orientações"
    ],
    "de": "Contatos e orientações em banner",
@@ -6565,7 +6582,7 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
+    "ST — Segurança do Trabalho",
     "Contatos e orientações",
     "Informativos"
    ],
@@ -6651,8 +6668,8 @@
    "tipo": "imagens",
    "titulo": "Semana Interna de Prevenção de Acidentes do Trabalho",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "SIPAT (Semana de Prevenção de Acidentes do Trabalho)",
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos",
     "Semana Interna de Prevenção de Acidentes do Trabalho"
    ],
    "legendas": [
@@ -6722,8 +6739,8 @@
    "tipo": "título",
    "titulo": "Treinamentos da SIPAT",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "SIPAT (Semana de Prevenção de Acidentes do Trabalho)"
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
    ],
    "de": "SIPAT e riscos psicossociais",
    "para": "Treinamentos da SIPAT",
@@ -6888,6 +6905,7 @@
      "commit": "bb7fd65",
      "id": "bb7fd65-2",
      "data": "21-06-26",
+     "hora": "21:38",
      "de": "termográfica",
      "para": "convencional"
     }
@@ -7024,6 +7042,7 @@
      "commit": "bb7fd65",
      "id": "bb7fd65-1",
      "data": "21-06-26",
+     "hora": "21:38",
      "de": "termográfica",
      "para": "convencional"
     }
@@ -7783,7 +7802,7 @@
    "tipo": "observação",
    "titulo": "Equipamento de segurança",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
+    "ST — Segurança do Trabalho",
     "Equipamentos de segurança",
     "Equipamento de segurança"
    ],
@@ -7969,7 +7988,7 @@
    "tipo": "slide",
    "titulo": "Riscos psicossociais e saúde mental",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
+    "ST — Segurança do Trabalho",
     "Riscos psicossociais e saúde mental"
    ],
    "resumo": "Treinamento sobre riscos psicossociais",
@@ -8815,7 +8834,7 @@
    "tipo": "subtítulo",
    "titulo": "Banner informativo",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
+    "ST — Segurança do Trabalho",
     "Contatos e orientações",
     "Banner informativo"
    ]
@@ -8829,7 +8848,7 @@
    "link": "slides/slide-contact-label.html",
    "acao": "adição",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
+    "ST — Segurança do Trabalho",
     "Contatos e orientações",
     "Informativos"
    ],
@@ -10393,8 +10412,8 @@
    "tipo": "seção do slide",
    "titulo": null,
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "SIPAT (Semana de Prevenção de Acidentes do Trabalho)"
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
    ],
    "de": "Eventos › Treinamentos da SIPAT",
    "para": "ST — Seg. do Trabalho › SIPAT (Semana de Prevenção de Acidentes do Trabalho)"
@@ -10410,8 +10429,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "SIPAT (Semana de Prevenção de Acidentes do Trabalho)",
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos",
     "Semana Interna de Prevenção de Acidentes do Trabalho"
    ],
    "de": "Eventos › Treinamentos da SIPAT › Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT)",
@@ -10690,8 +10709,8 @@
    "tipo": "subtítulo",
    "titulo": "Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT)",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "SIPAT (Semana de Prevenção de Acidentes do Trabalho)",
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos",
     "Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT)"
    ]
   },
@@ -10706,8 +10725,8 @@
    "tipo": "subtítulo",
    "titulo": "Semana Interna de Prevenção de Acidentes do Trabalho",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "SIPAT (Semana de Prevenção de Acidentes do Trabalho)",
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos",
     "Semana Interna de Prevenção de Acidentes do Trabalho"
    ]
   },
@@ -10720,10 +10739,10 @@
    "link": "slides/slide-training.html",
    "acao": "modificação",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "SIPAT (Semana de Prevenção de Acidentes do Trabalho)"
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
    ],
-   "titulo": "SIPAT (Semana de Prevenção de Acidentes do Trabalho)",
+   "titulo": "Treinamentos internos",
    "tipo": "nome do slide · título",
    "tipos": [
     "nome do slide",
@@ -11039,6 +11058,7 @@
        "commit": "12c272a",
        "id": "12c272a-5",
        "data": "03-06-26",
+       "hora": "11:18",
        "de": "Reposição de etiquetas de identificação",
        "para": "Reposição de etiquetas e canaletas"
       }
@@ -11145,6 +11165,7 @@
        "commit": "76d3a99",
        "id": "76d3a99-15",
        "data": "15-06-26",
+       "hora": "16:00",
        "de": "Restauração de pintura",
        "para": "Revitalização da pintura"
       }
@@ -11804,8 +11825,8 @@
    "tipo": "slide",
    "titulo": "Treinamentos da SIPAT",
    "breadcrumb": [
-    "Eventos",
-    "Treinamentos da SIPAT"
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
    ],
    "resumo": "Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT)",
    "imagens": {
@@ -12298,7 +12319,7 @@
    "tipo": "slide",
    "titulo": "Vara de manobra",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
+    "ST — Segurança do Trabalho",
     "Equipamentos de segurança"
    ],
    "resumo": "Equipamento de segurança",
@@ -13351,8 +13372,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "Contatos e orientações em banner",
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
     "Contatos de emergência — Norte"
    ],
    "de": "ST — Seg. do Trabalho › Contatos e orientações em banner › Contatos de emergência",
@@ -14410,8 +14431,8 @@
    "tipo": "subtítulo",
    "titulo": "Contatos de emergência",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "Contatos e orientações em banner",
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
     "Contatos de emergência"
    ]
   },
@@ -14424,8 +14445,8 @@
    "link": "slides/slide-contact-label.html",
    "acao": "adição",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "Contatos e orientações em banner",
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
     "Banner informativo"
    ],
    "titulo": "Banner informativo",
@@ -14467,8 +14488,8 @@
    "link": "slides/slide-contact-label.html",
    "acao": "adição",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "Contatos e orientações em banner",
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
     "Contatos de emergência — Leste"
    ],
    "titulo": "Contatos de emergência — Leste",
@@ -14551,8 +14572,8 @@
    "tipo": "subtítulo",
    "titulo": "Contatos de emergência — Norte",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "Contatos e orientações em banner",
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
     "Contatos de emergência — Norte"
    ]
   },
@@ -14567,8 +14588,8 @@
    "tipo": "título",
    "titulo": "Contatos e orientações de segurança",
    "breadcrumb": [
-    "ST — Seg. do Trabalho",
-    "Contatos e orientações em banner"
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações"
    ],
    "de": "Crachá da segurança do trabalho",
    "para": "Contatos e orientações de segurança"
@@ -14632,8 +14653,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-lecture.html",
+    "Eventos",
+    "Palestra de conscientização sobre descarte de lixo na LT",
     "Apresentação para a comunidade"
    ],
    "de": "slide-lecture.html › Apresentação no bairro Santa Rita",
@@ -14670,8 +14691,8 @@
    "tipo": "subtítulo",
    "titulo": "Apresentação no bairro Santa Rita",
    "breadcrumb": [
-    "—",
-    "slide-lecture.html",
+    "Eventos",
+    "Palestra de conscientização sobre descarte de lixo na LT",
     "Apresentação no bairro Santa Rita"
    ]
   },
@@ -14686,8 +14707,8 @@
    "tipo": "subtítulo",
    "titulo": "Apresentação para a comunidade",
    "breadcrumb": [
-    "—",
-    "slide-lecture.html",
+    "Eventos",
+    "Palestra de conscientização sobre descarte de lixo na LT",
     "Apresentação para a comunidade"
    ]
   },
@@ -14700,8 +14721,8 @@
    "link": "slides/slide-anchor-block.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-anchor-block.html",
+    "LT — Transmissão",
+    "Fabricação de blocos de ancoragem",
     "Processo"
    ],
    "titulo": "Processo",
@@ -14757,8 +14778,8 @@
    "tipo": "observação",
    "titulo": "Processo",
    "breadcrumb": [
-    "—",
-    "slide-anchor-block.html",
+    "LT — Transmissão",
+    "Fabricação de blocos de ancoragem",
     "Processo"
    ],
    "de": "uso da betoneira",
@@ -14788,8 +14809,8 @@
    "tipo": "slide",
    "titulo": "Inspeção termográfica",
    "breadcrumb": [
-    "—",
-    "slide-thermography-inspection.html"
+    "SE — Subestação",
+    "Inspeção com VANT e câmera termográficos"
    ],
    "resumo": "Disjuntor DJ6-04 · Para-raios · Cubículos de 6,9 kV · Disjuntores",
    "imagens": {
@@ -14842,8 +14863,8 @@
    "tipo": "imagens",
    "titulo": "Cubículo de 6,9 kV (megômetro)",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html",
+    "SE — Subestação",
+    "Aferição de resistências",
     "Cubículo de 6,9 kV (megômetro)"
    ],
    "legendas": [
@@ -14902,8 +14923,8 @@
    "link": "slides/index.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html",
+    "SE — Subestação",
+    "Aferição de resistências",
     "TC (fator de potência)"
    ],
    "titulo": "TC (fator de potência)",
@@ -14977,8 +14998,8 @@
    "tipo": "título",
    "titulo": "Aferição de resistências",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html"
+    "SE — Subestação",
+    "Aferição de resistências"
    ],
    "de": "Medição de resistência de isolamento",
    "para": "Aferição de resistências",
@@ -14987,6 +15008,7 @@
      "commit": "ed56374",
      "id": "ed56374-2",
      "data": "03-06-26",
+     "hora": "11:58",
      "de": "Medição de resistência",
      "para": "Medição de resistência de isolamento"
     }
@@ -15004,8 +15026,8 @@
    "tipo": "slide",
    "titulo": "Restauração de pintura",
    "breadcrumb": [
-    "—",
-    "slide-paint-restoration.html"
+    "ST — Segurança do Trabalho",
+    "Restauração de pintura"
    ],
    "resumo": "Execução",
    "imagens": {
@@ -15059,8 +15081,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e1.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E1",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -15084,8 +15107,8 @@
    "tipo": "slide",
    "titulo": "Limpeza e verificação de equipamentos",
    "breadcrumb": [
-    "—",
-    "slide-equipment-cleaning.html"
+    "SE — Subestação",
+    "Limpeza e verificação de equipamentos"
    ],
    "resumo": "Buchas do transformador · TC e isoladores · Retificador · Chave-seccionadora",
    "imagens": {
@@ -15139,8 +15162,8 @@
    "tipo": "slide",
    "titulo": "Substituição de componentes",
    "breadcrumb": [
-    "—",
-    "slide-component-replacement.html"
+    "SE — Subestação",
+    "Substituição de componentes"
    ],
    "resumo": "Relé temporizado (DJ6-03 — SE-E4) · Refletor LED 200 W (VÃO AY — SE-E4)",
    "imagens": {
@@ -15194,8 +15217,8 @@
    "tipo": "imagens",
    "titulo": "Processo",
    "breadcrumb": [
-    "—",
-    "slide-anchor-block.html",
+    "LT — Transmissão",
+    "Fabricação de blocos de ancoragem",
     "Processo"
    ],
    "legendas": [],
@@ -15231,8 +15254,8 @@
    "tipo": "slide",
    "titulo": "Inspeção visual e termográfica com VANT",
    "breadcrumb": [
-    "—",
-    "slide-uav-inspection.html"
+    "LT — Transmissão",
+    "Inspeção visual e termográfica com VANT"
    ],
    "resumo": "Elementos inspecionados",
    "imagens": {
@@ -15285,8 +15308,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html",
+    "SE — Subestação",
+    "Medição de resistência de isolamento",
     "Seccionadoras (micro-ohmímetro)"
    ],
    "de": "slide-resistance-measurement.html › Seccionadoras",
@@ -15330,8 +15353,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html",
+    "SE — Subestação",
+    "Medição de resistência de isolamento",
     "Cubículo de 6,9 kV (megômetro)"
    ],
    "de": "slide-resistance-measurement.html › Cubículo de 6,9 kV",
@@ -15369,8 +15392,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-equipment-backup.html",
+    "SE — Subestação",
+    "Obtenção de backup de parâmetros",
     "Extração dos backups"
    ],
    "de": "slide-equipment-backup.html › Obtenção de backups",
@@ -15419,8 +15442,8 @@
    "tipo": "subtítulo",
    "titulo": "Seccionadoras",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html",
+    "SE — Subestação",
+    "Medição de resistência de isolamento",
     "Seccionadoras"
    ],
    "alvoAusente": true
@@ -15436,8 +15459,8 @@
    "tipo": "subtítulo",
    "titulo": "Cubículo de 6,9 kV",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html",
+    "SE — Subestação",
+    "Medição de resistência de isolamento",
     "Cubículo de 6,9 kV"
    ],
    "alvoAusente": true
@@ -15453,8 +15476,8 @@
    "tipo": "subtítulo",
    "titulo": "Seccionadoras (micro-ohmímetro)",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html",
+    "SE — Subestação",
+    "Medição de resistência de isolamento",
     "Seccionadoras (micro-ohmímetro)"
    ],
    "alvoAusente": true
@@ -15470,8 +15493,8 @@
    "tipo": "subtítulo",
    "titulo": "Cubículo de 6,9 kV (megômetro)",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html",
+    "SE — Subestação",
+    "Medição de resistência de isolamento",
     "Cubículo de 6,9 kV (megômetro)"
    ],
    "alvoAusente": true
@@ -15487,8 +15510,8 @@
    "tipo": "título",
    "titulo": "Medição de resistência de isolamento",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html"
+    "SE — Subestação",
+    "Medição de resistência de isolamento"
    ],
    "de": "Medição de resistência",
    "para": "Medição de resistência de isolamento",
@@ -15509,8 +15532,8 @@
    "tipo": "subtítulo",
    "titulo": "Obtenção de backups",
    "breadcrumb": [
-    "—",
-    "slide-equipment-backup.html",
+    "SE — Subestação",
+    "Obtenção de backup de parâmetros",
     "Obtenção de backups"
    ]
   },
@@ -15525,8 +15548,8 @@
    "tipo": "subtítulo",
    "titulo": "Extração dos backups",
    "breadcrumb": [
-    "—",
-    "slide-equipment-backup.html",
+    "SE — Subestação",
+    "Obtenção de backup de parâmetros",
     "Extração dos backups"
    ]
   },
@@ -15541,8 +15564,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-transformer-cleaning.html",
+    "SE — Subestação",
+    "Limpeza e verificação de equipamentos",
     "Buchas do transformador"
    ],
    "de": "slide-transformer-cleaning.html › Execução da limpeza",
@@ -15586,8 +15609,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-tag-replacement.html",
+    "SE — Subestação",
+    "Reposição de etiquetas dos equipamentos",
     "Etiquetas de identificação"
    ],
    "de": "slide-tag-replacement.html › Pátio energizado",
@@ -15624,8 +15647,8 @@
    "tipo": "subtítulo",
    "titulo": "Execução da limpeza",
    "breadcrumb": [
-    "—",
-    "slide-transformer-cleaning.html",
+    "SE — Subestação",
+    "Limpeza e verificação de equipamentos",
     "Execução da limpeza"
    ],
    "alvoAusente": true
@@ -15639,8 +15662,8 @@
    "link": "slides/index.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-transformer-cleaning.html",
+    "SE — Subestação",
+    "Limpeza e verificação de equipamentos",
     "Isoladores"
    ],
    "titulo": "Isoladores",
@@ -15683,8 +15706,8 @@
    "link": "slides/index.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-transformer-cleaning.html",
+    "SE — Subestação",
+    "Limpeza e verificação de equipamentos",
     "Chave-seccionadora"
    ],
    "titulo": "Chave-seccionadora",
@@ -15800,8 +15823,8 @@
    "link": "slides/index.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-transformer-cleaning.html",
+    "SE — Subestação",
+    "Limpeza e verificação de equipamentos",
     "Retificador"
    ],
    "titulo": "Retificador",
@@ -15864,8 +15887,8 @@
    "tipo": "subtítulo",
    "titulo": "Buchas do transformador",
    "breadcrumb": [
-    "—",
-    "slide-transformer-cleaning.html",
+    "SE — Subestação",
+    "Limpeza e verificação de equipamentos",
     "Buchas do transformador"
    ],
    "alvoAusente": true
@@ -15881,8 +15904,8 @@
    "tipo": "título",
    "titulo": "Limpeza e verificação de equipamentos",
    "breadcrumb": [
-    "—",
-    "slide-transformer-cleaning.html"
+    "SE — Subestação",
+    "Limpeza e verificação de equipamentos"
    ],
    "de": "Limpeza das buchas do transformador",
    "para": "Limpeza e verificação de equipamentos",
@@ -15899,8 +15922,8 @@
    "tipo": "subtítulo",
    "titulo": "Pátio energizado",
    "breadcrumb": [
-    "—",
-    "slide-tag-replacement.html",
+    "SE — Subestação",
+    "Reposição de etiquetas dos equipamentos",
     "Pátio energizado"
    ]
   },
@@ -15913,8 +15936,8 @@
    "link": "slides/slide-tag-replacement.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-tag-replacement.html",
+    "SE — Subestação",
+    "Reposição de etiquetas dos equipamentos",
     "Meio-fio e canaleta"
    ],
    "titulo": "Meio-fio e canaleta",
@@ -15976,8 +15999,8 @@
    "tipo": "subtítulo",
    "titulo": "Etiquetas de identificação",
    "breadcrumb": [
-    "—",
-    "slide-tag-replacement.html",
+    "SE — Subestação",
+    "Reposição de etiquetas dos equipamentos",
     "Etiquetas de identificação"
    ]
   },
@@ -15992,8 +16015,8 @@
    "tipo": "título",
    "titulo": "Reposição de etiquetas e canaletas",
    "breadcrumb": [
-    "—",
-    "slide-tag-replacement.html"
+    "SE — Subestação",
+    "Reposição de etiquetas dos equipamentos"
    ],
    "de": "Reposição de etiquetas de identificação",
    "para": "Reposição de etiquetas e canaletas",
@@ -16013,8 +16036,8 @@
    "tipo": "slide",
    "titulo": "Verificação e limpeza em chave-seccionadora",
    "breadcrumb": [
-    "—",
-    "slide-secc-verification.html"
+    "SE — Subestação",
+    "Verificação e limpeza em chave-seccionadora"
    ],
    "resumo": "Barramento desligado e aterrado",
    "alvoAusente": true
@@ -16030,8 +16053,8 @@
    "tipo": "slide",
    "titulo": "Limpeza em retificador",
    "breadcrumb": [
-    "—",
-    "slide-rectifier-cleaning.html"
+    "SE — Subestação",
+    "Limpeza em retificador"
    ],
    "resumo": "Etapas da limpeza",
    "alvoAusente": true
@@ -16047,8 +16070,8 @@
    "tipo": "slide",
    "titulo": "Limpeza de isoladores",
    "breadcrumb": [
-    "—",
-    "slide-insulator-cleaning.html"
+    "SE — Subestação",
+    "Limpeza de isoladores"
    ],
    "resumo": "Execução da limpeza",
    "alvoAusente": true
@@ -16064,8 +16087,8 @@
    "tipo": "imagens",
    "titulo": "Cabana no pátio energizado",
    "breadcrumb": [
-    "—",
-    "slide-fire-extinguisher-replacement.html",
+    "ST — Segurança do Trabalho",
+    "Reposição de extintor de incêndio",
     "Cabana no pátio energizado"
    ],
    "legendas": [],
@@ -16103,8 +16126,8 @@
    "tipo": "slide",
    "titulo": "Reposição de meio-fio e canaleta",
    "breadcrumb": [
-    "—",
-    "slide-concrete-slab.html"
+    "SE — Subestação",
+    "Reposição de meio-fio e canaleta"
    ],
    "resumo": "Processo fabricação e reposição",
    "alvoAusente": true
@@ -16120,8 +16143,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html",
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador",
     "SE-E4 — Polo A — SD6-01 (substituído)"
    ],
    "de": "slide-insulator-coating.html › SE-E4 — Polo A — SD6-01",
@@ -16158,8 +16181,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-fuse-switch.html",
+    "LD — Distribuição",
+    "Substituição de chave fusível",
     "Execução"
    ],
    "de": "slide-fuse-switch.html › Equipamento substituído",
@@ -16197,8 +16220,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-cable-retensioning.html",
+    "LT — Transmissão",
+    "Retensionamento de estai",
     "Execução"
    ],
    "de": "slide-cable-retensioning.html › Processo do retensionamento",
@@ -16248,8 +16271,8 @@
    "tipo": "slide",
    "titulo": "Verificação e limpeza em chave-seccionadora",
    "breadcrumb": [
-    "—",
-    "slide-secc-verification.html"
+    "SE — Subestação",
+    "Verificação e limpeza em chave-seccionadora"
    ],
    "resumo": "Barramento desligado e aterrado",
    "imagens": {
@@ -16297,8 +16320,8 @@
    "tipo": "slide",
    "titulo": "Reaperto de conectores e bornes",
    "breadcrumb": [
-    "—",
-    "slide-screw-tightening.html"
+    "SE — Subestação",
+    "Reaperto de conectores e bornes"
    ],
    "resumo": "Conectores do transformador de corrente · Terminais de borne dos quadros e painéis",
    "imagens": {
@@ -16346,8 +16369,8 @@
    "tipo": "slide",
    "titulo": "Medição de resistência",
    "breadcrumb": [
-    "—",
-    "slide-resistance-measurement.html"
+    "SE — Subestação",
+    "Medição de resistência"
    ],
    "resumo": "Cubículo de 6,9 kV · Seccionadoras",
    "imagens": {
@@ -16401,8 +16424,8 @@
    "tipo": "imagens",
    "titulo": "Resíduos identificados",
    "breadcrumb": [
-    "—",
-    "slide-nest-removal.html",
+    "LD — Distribuição",
+    "Remoção de resíduos de ninho",
     "Resíduos identificados"
    ],
    "legendas": [],
@@ -16439,8 +16462,8 @@
    "tipo": "subtítulo",
    "titulo": "SE-E4 — Polo A — SD6-01",
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html",
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador",
     "SE-E4 — Polo A — SD6-01"
    ]
   },
@@ -16453,8 +16476,8 @@
    "link": "slides/slide-insulator-coating.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html",
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador",
     "SE-E4 — Polo A — SD6-01 (substituído)"
    ],
    "titulo": "SE-E4 — Polo A — SD6-01 (substituído)",
@@ -16527,8 +16550,8 @@
    "tipo": "slide",
    "titulo": "Limpeza de isoladores",
    "breadcrumb": [
-    "—",
-    "slide-insulator-cleaning.html"
+    "SE — Subestação",
+    "Limpeza de isoladores"
    ],
    "resumo": "Execução da limpeza",
    "imagens": {
@@ -16558,8 +16581,8 @@
    "tipo": "subtítulo",
    "titulo": "Equipamento substituído",
    "breadcrumb": [
-    "—",
-    "slide-fuse-switch.html",
+    "LD — Distribuição",
+    "Substituição de chave fusível",
     "Equipamento substituído"
    ],
    "alvoAusente": true
@@ -16573,8 +16596,8 @@
    "link": "slides/index.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-fuse-switch.html",
+    "LD — Distribuição",
+    "Substituição de chave fusível",
     "Execução"
    ],
    "titulo": "Execução",
@@ -16625,8 +16648,8 @@
    "tipo": "subtítulo",
    "titulo": "Processo do retensionamento",
    "breadcrumb": [
-    "—",
-    "slide-cable-retensioning.html",
+    "LT — Transmissão",
+    "Retensionamento de estai",
     "Processo do retensionamento"
    ],
    "alvoAusente": true
@@ -16640,8 +16663,8 @@
    "link": "slides/index.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-cable-retensioning.html",
+    "LT — Transmissão",
+    "Retensionamento de estai",
     "Execução"
    ],
    "titulo": "Execução",
@@ -16692,8 +16715,9 @@
    "tipo": "slide",
    "titulo": "Manutenção dos acessos da LT",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-bnm-n3.html"
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "BNM-N3"
    ],
    "resumo": "Serviços realizados",
    "imagens": {
@@ -16740,8 +16764,8 @@
    "tipo": "slide",
    "titulo": "Crachá da segurança do trabalho",
    "breadcrumb": [
-    "—",
-    "slide-contact-label.html"
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações"
    ],
    "resumo": "Contatos de emergência",
    "imagens": {
@@ -16776,8 +16800,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-circuit-breaker-pins.html",
+    "Óbices",
+    "Pinos encontrados no disjuntor DJ6-02",
     "2 pinos dentro do disjuntor da SE-E2"
    ],
    "de": "slide-circuit-breaker-pins.html › Dois pinos encontrados dentro do disjuntor DJ6-02 da SE-E2",
@@ -16814,8 +16838,8 @@
    "tipo": "título",
    "titulo": "Manutenção no GMG da SE-E3",
    "breadcrumb": [
-    "—",
-    "slide-gmg-maintenance.html"
+    "SE — Subestação",
+    "Manutenção no GMG"
    ],
    "de": "Manutenção no GMG da E3",
    "para": "Manutenção no GMG da SE-E3",
@@ -16835,8 +16859,8 @@
    "tipo": "título",
    "titulo": "Manutenção nos postes 001/48 e 002/48",
    "breadcrumb": [
-    "—",
-    "slide-flooded-pole.html"
+    "LD — Distribuição",
+    "Manutenção nos postes inundados"
    ],
    "de": "Manutenção nos postes 001/48 e 002/48 (inundado)",
    "para": "Manutenção nos postes 001/48 e 002/48"
@@ -16852,8 +16876,8 @@
    "tipo": "subtítulo",
    "titulo": "Dois pinos encontrados dentro do disjuntor DJ6-02 da SE-E2",
    "breadcrumb": [
-    "—",
-    "slide-circuit-breaker-pins.html",
+    "Óbices",
+    "Pinos encontrados no disjuntor DJ6-02",
     "Dois pinos encontrados dentro do disjuntor DJ6-02 da SE-E2"
    ]
   },
@@ -16868,8 +16892,8 @@
    "tipo": "subtítulo",
    "titulo": "2 pinos dentro do disjuntor da SE-E2",
    "breadcrumb": [
-    "—",
-    "slide-circuit-breaker-pins.html",
+    "Óbices",
+    "Pinos encontrados no disjuntor DJ6-02",
     "2 pinos dentro do disjuntor da SE-E2"
    ]
   },
@@ -16884,8 +16908,8 @@
    "tipo": "título",
    "titulo": "Reparo nos ACs da sala de baterias",
    "breadcrumb": [
-    "—",
-    "slide-ac-repair.html"
+    "SE — Subestação",
+    "Reparo em ares-condicionados"
    ],
    "de": "Reparo nos ares-condicionados da sala de baterias",
    "para": "Reparo nos ACs da sala de baterias",
@@ -16905,8 +16929,8 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html",
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador",
     "SE-E4 — Polo A — SD6-01"
    ],
    "de": "slide-insulator-coating.html › Deterioração no polo A da SD6-01",
@@ -16943,8 +16967,8 @@
    "tipo": "subtítulo",
    "titulo": "Deterioração no polo A da SD6-01",
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html",
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador",
     "Deterioração no polo A da SD6-01"
    ]
   },
@@ -16957,8 +16981,8 @@
    "link": "slides/slide-insulator-coating.html",
    "acao": "adição",
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html",
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador",
     "SE-N1 — Vão AX — SD6-01"
    ],
    "titulo": "SE-N1 — Vão AX — SD6-01",
@@ -17008,8 +17032,8 @@
    "tipo": "subtítulo",
    "titulo": "SE-E4 — Polo A — SD6-01",
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html",
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador",
     "SE-E4 — Polo A — SD6-01"
    ]
   },
@@ -17024,8 +17048,8 @@
    "tipo": "título",
    "titulo": "Deterioração do esmalte do isolador",
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html"
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador"
    ],
    "de": "Deterioração do esmalte vitrificado do isolador",
    "para": "Deterioração do esmalte do isolador"
@@ -17041,8 +17065,9 @@
    "tipo": "slide",
    "titulo": "Manutenção dos acessos da LT",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-cpisf.html"
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "CPISF"
    ],
    "resumo": "Serviços realizados",
    "imagens": {
@@ -17077,8 +17102,8 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-general.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -17108,8 +17133,8 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-general.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
     "Serviços realizados"
    ],
    "legendas": [
@@ -17157,8 +17182,8 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-general.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
     "Serviços realizados"
    ],
    "legendas": [
@@ -17211,8 +17236,9 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e3-e4.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E3-E4",
     "Serviços realizados"
    ],
    "de": "slide-lt-maintenance-general.html › Serviços realizados",
@@ -17249,8 +17275,9 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e2-e3.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E2-E3",
     "Serviços realizados"
    ],
    "de": "slide-lt-maintenance-general.html › Serviços realizados",
@@ -17299,8 +17326,9 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e2.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E2",
     "Serviços realizados"
    ],
    "de": "slide-lt-maintenance-general.html › Serviços realizados",
@@ -17337,8 +17365,9 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e1.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E1",
     "Serviços realizados"
    ],
    "de": "slide-lt-maintenance-general.html › Serviços realizados",
@@ -17387,8 +17416,8 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-general.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -17425,8 +17454,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e3-e4.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E3-E4",
     "Serviços realizados"
    ],
    "qtdImagens": 1,
@@ -17455,8 +17485,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e2-e3.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E2-E3",
     "Serviços realizados"
    ],
    "qtdImagens": 2,
@@ -17478,8 +17509,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e2.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E2",
     "Serviços realizados"
    ],
    "qtdImagens": 1,
@@ -17508,8 +17540,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e1.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E1",
     "Serviços realizados"
    ],
    "qtdImagens": 1,
@@ -17538,8 +17571,8 @@
    "tipo": "título",
    "titulo": "Palestra em Salgueiro-PE",
    "breadcrumb": [
-    "—",
-    "slide-lecture.html"
+    "Eventos",
+    "Palestra de conscientização sobre descarte de lixo na LT"
    ],
    "de": "Palestra de conscientização em Salgueiro-PE",
    "para": "Palestra em Salgueiro-PE"
@@ -17555,8 +17588,8 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-general.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -17611,8 +17644,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e3-e4.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E3-E4",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -17655,8 +17689,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e2-e3.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E2-E3",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -17699,8 +17734,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e2.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E2",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -17743,8 +17779,9 @@
    "tipo": "imagens",
    "titulo": "Serviços realizados",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e1.html",
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E1",
     "Serviços realizados"
    ],
    "legendas": [],
@@ -17799,8 +17836,8 @@
    "tipo": "slide",
    "titulo": "Supressão mecânica de vegetação",
    "breadcrumb": [
-    "—",
-    "slide-lane-cleaning.html"
+    "LT — Transmissão",
+    "Supressão mecânica de vegetação"
    ],
    "resumo": "Faixas de servidão e praças",
    "alvoAusente": true
@@ -17816,8 +17853,8 @@
    "tipo": "slide",
    "titulo": "Recomposição de brita das subestações",
    "breadcrumb": [
-    "—",
-    "slide-crushed-stone.html"
+    "SE — Subestação",
+    "Recomposição de brita das subestações"
    ],
    "resumo": "Execução",
    "imagens": {
@@ -17864,8 +17901,8 @@
    "tipo": "slide",
    "titulo": "Restauração de pintura",
    "breadcrumb": [
-    "—",
-    "slide-paint-restauration.html"
+    "SE — Subestação",
+    "Restauração de pintura"
    ],
    "resumo": "Execução",
    "imagens": {
@@ -17901,8 +17938,8 @@
    "tipo": "slide",
    "titulo": "Recomposição da malha de aterramento",
    "breadcrumb": [
-    "—",
-    "slide-grounding-mesh-repair.html"
+    "LT — Transmissão",
+    "Recomposição da malha de aterramento"
    ],
    "resumo": "Execução",
    "imagens": {
@@ -17944,8 +17981,8 @@
    "tipo": "slide",
    "titulo": "Reparo nos ares-condicionados da sala de baterias",
    "breadcrumb": [
-    "—",
-    "slide-ac-repair.html"
+    "SE — Subestação",
+    "Reparo em ares-condicionados"
    ],
    "resumo": "AC-BT-01 e AC-BT-02 da SE-E5",
    "imagens": {
@@ -17992,8 +18029,8 @@
    "tipo": "slide",
    "titulo": "Manutenção dos acessos da LT",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-general.html"
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT"
    ],
    "resumo": "Serviços realizados",
    "imagens": {
@@ -18046,8 +18083,9 @@
    "tipo": "slide",
    "titulo": "Manutenção dos acessos da LT",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e3-e4.html"
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E3-E4"
    ],
    "resumo": "Serviços realizados",
    "imagens": {
@@ -18088,8 +18126,9 @@
    "tipo": "slide",
    "titulo": "Manutenção dos acessos da LT",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e2-e3.html"
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E2-E3"
    ],
    "resumo": "Serviços realizados",
    "imagens": {
@@ -18130,8 +18169,9 @@
    "tipo": "slide",
    "titulo": "Manutenção dos acessos da LT",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e2.html"
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E2"
    ],
    "resumo": "Serviços realizados",
    "imagens": {
@@ -18172,8 +18212,9 @@
    "tipo": "slide",
    "titulo": "Manutenção dos acessos da LT",
    "breadcrumb": [
-    "—",
-    "slide-lt-maintenance-e0-e1.html"
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "E0-E1"
    ],
    "resumo": "Serviços realizados",
    "imagens": {
@@ -18226,8 +18267,8 @@
    "tipo": "slide",
    "titulo": "Correção de oxidação",
    "breadcrumb": [
-    "—",
-    "slide-panel-oxidation.html"
+    "SE — Subestação",
+    "Correção de oxidação"
    ],
    "resumo": "TSA-01 — SE-E4",
    "imagens": {
@@ -18263,8 +18304,8 @@
    "tipo": "imagens",
    "titulo": "Apresentação no bairro Santa Rita",
    "breadcrumb": [
-    "—",
-    "slide-lecture.html",
+    "Eventos",
+    "Palestra de conscientização sobre descarte de lixo na LT",
     "Apresentação no bairro Santa Rita"
    ],
    "legendas": [],
@@ -18301,8 +18342,8 @@
    "tipo": "slide",
    "titulo": "Deterioração do esmalte vitrificado do isolador",
    "breadcrumb": [
-    "—",
-    "slide-insulator-coating.html"
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador"
    ],
    "resumo": "Deterioração no polo A da SD6-01",
    "imagens": {
@@ -18337,8 +18378,8 @@
    "tipo": "slide",
    "titulo": "Pinos encontrados no disjuntor DJ6-02",
    "breadcrumb": [
-    "—",
-    "slide-circuit-breaker-pins.html"
+    "Óbices",
+    "Pinos encontrados no disjuntor DJ6-02"
    ],
    "resumo": "Dois pinos encontrados dentro do disjuntor DJ6-02 da SE-E2",
    "imagens": {
@@ -18373,8 +18414,8 @@
    "tipo": "slide",
    "titulo": "Inspeção do disjuntor DJ6-02",
    "breadcrumb": [
-    "—",
-    "slide-circuit-breaker-inspection.html"
+    "SE — Subestação",
+    "Inspeção do disjuntor DJ6-02"
    ],
    "resumo": "Pinos encontrados no DJ6-02 da SE-E2",
    "imagens": {
@@ -18410,8 +18451,8 @@
    "tipo": "imagens",
    "titulo": "Atualizações no SPCS (MSO1-N3)",
    "breadcrumb": [
-    "—",
-    "slide-sage-normalization.html",
+    "SE — Subestação",
+    "Normalização de parâmetros do SAGE",
     "Atualizações no SPCS (MSO1-N3)"
    ],
    "legendas": [
@@ -18481,8 +18522,8 @@
    "tipo": "slide",
    "titulo": "Impermeabilização",
    "breadcrumb": [
-    "—",
-    "slide-waterproofing.html"
+    "LT — Transmissão",
+    "Impermeabilização das bases"
    ],
    "resumo": "Execução",
    "imagens": {
@@ -18529,8 +18570,8 @@
    "tipo": "imagens",
    "titulo": "Execução",
    "breadcrumb": [
-    "—",
-    "slide-pole-repair.html",
+    "LD — Distribuição",
+    "Reparo estrutural do fuste",
     "Execução"
    ],
    "legendas": [],
@@ -18566,8 +18607,8 @@
    "tipo": "slide",
    "titulo": "Palestra de conscientização em Salgueiro-PE",
    "breadcrumb": [
-    "—",
-    "slide-lecture.html"
+    "Eventos",
+    "Palestra de conscientização sobre descarte de lixo na LT"
    ],
    "resumo": "Apresentação no bairro Santa Rita",
    "imagens": {
@@ -18594,7 +18635,127 @@
  ],
  "funcoes": [
   {
-   "id": "fn-9",
+   "id": "fn-28",
+   "aba": "funcoes",
+   "data": "16-07-26",
+   "hora": "07:39",
+   "acao": "aperfeiçoada",
+   "tipo": "filtro",
+   "titulo": "Histórico: agrupamento por seção e ação de movimentação",
+   "resumo": "O histórico passou a agrupar os registros por seção da apresentação, a reconhecer uma nova ação de movimentação (quando um elemento é reordenado) além de adição/modificação/deleção, e a consolidar mudanças próximas num só registro.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Filtros"
+   ]
+  },
+  {
+   "id": "fn-27",
+   "aba": "funcoes",
+   "data": "15-07-26",
+   "hora": "14:59",
+   "acao": "aperfeiçoada",
+   "tipo": "usabilidade",
+   "titulo": "Legenda de cada imagem do histórico vira clicável",
+   "resumo": "Na linha do tempo do histórico, a faixa de legenda de cada imagem passou a ser individualmente clicável, ampliando a área de toque para abrir aquela imagem específica.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Imagens"
+   ]
+  },
+  {
+   "id": "fn-26",
+   "aba": "funcoes",
+   "data": "15-07-26",
+   "hora": "11:42",
+   "acao": "implementada",
+   "tipo": "aparência",
+   "titulo": "Ícone de ação em cada registro do histórico",
+   "resumo": "Cada registro passou a exibir, dentro do seu selo, um ícone que identifica a ação — adição, modificação ou deleção — tornando o tipo de mudança legível de relance.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Aparência"
+   ]
+  },
+  {
+   "id": "fn-25",
+   "aba": "funcoes",
+   "data": "15-07-26",
+   "hora": "09:48",
+   "acao": "aperfeiçoada",
+   "tipo": "navegação",
+   "titulo": "Apresentações agrupadas em uma seção no índice",
+   "resumo": "As apresentações foram reunidas numa única seção e a navegação do índice foi reorganizada em torno dela, encurtando o caminho até cada conjunto de slides.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Índice"
+   ]
+  },
+  {
+   "id": "fn-24",
+   "aba": "funcoes",
+   "data": "15-07-26",
+   "hora": "08:47",
+   "acao": "implementada",
+   "tipo": "navegação",
+   "titulo": "Destaque do elemento alterado ao abrir o slide",
+   "resumo": "Ao abrir um slide a partir de um registro do histórico, o próprio elemento que mudou (imagem, observação, subtítulo…) é realçado na página de destino, mostrando exatamente o que a alteração tocou.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Navegação"
+   ]
+  },
+  {
+   "id": "fn-23",
+   "aba": "funcoes",
+   "data": "15-07-26",
+   "hora": "08:47",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Histórico redesenhado como linha do tempo vertical",
+   "resumo": "O histórico passou a ser uma linha do tempo vertical por horário, com um marcador de tempo fixo que acompanha a rolagem, revelação dos registros conforme se rola e o título do mês grudado no topo, absorvendo o dia.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Aparência"
+   ]
+  },
+  {
+   "id": "fn-22",
+   "aba": "funcoes",
+   "data": "14-07-26",
+   "hora": "22:04",
+   "acao": "aperfeiçoada",
+   "tipo": "desempenho",
+   "titulo": "Rolagem dos títulos dos documentos montada sob demanda",
+   "resumo": "No índice, o efeito de rolagem (marquee) dos títulos longos dos documentos deixou de ser montado para todos de uma vez — que forçava recalcular o layout em cadeia — e passa a ser construído só ao interagir com cada documento.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Documentos"
+   ]
+  },
+  {
+   "id": "fn-21",
+   "aba": "funcoes",
+   "data": "14-07-26",
+   "hora": "21:50",
+   "acao": "aperfeiçoada",
+   "tipo": "desempenho",
+   "titulo": "Busca do histórico deixa de congelar a página",
+   "resumo": "A cada tecla digitada, a busca reconstruía toda a lista — de centenas de cartões — travando a página. Passou a agendar a reconstrução num único quadro por vez, e a digitação voltou a fluir.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Desempenho"
+   ]
+  },
+  {
+   "id": "fn-20",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18608,7 +18769,7 @@
    ]
   },
   {
-   "id": "fn-8",
+   "id": "fn-19",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18622,7 +18783,7 @@
    ]
   },
   {
-   "id": "fn-7",
+   "id": "fn-18",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18637,7 +18798,7 @@
    ]
   },
   {
-   "id": "fn-6",
+   "id": "fn-17",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18652,7 +18813,7 @@
    ]
   },
   {
-   "id": "fn-5",
+   "id": "fn-16",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18666,7 +18827,7 @@
    ]
   },
   {
-   "id": "fn-4",
+   "id": "fn-15",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18681,7 +18842,7 @@
    ]
   },
   {
-   "id": "fn-3",
+   "id": "fn-14",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18696,7 +18857,7 @@
    ]
   },
   {
-   "id": "fn-2",
+   "id": "fn-13",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18711,7 +18872,7 @@
    ]
   },
   {
-   "id": "fn-1",
+   "id": "fn-12",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18726,7 +18887,7 @@
    ]
   },
   {
-   "id": "fn-0",
+   "id": "fn-11",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -18737,6 +18898,167 @@
    "link": "slides/history.html",
    "breadcrumb": [
     "Histórico de Modificações"
+   ]
+  },
+  {
+   "id": "fn-10",
+   "aba": "funcoes",
+   "data": "14-07-26",
+   "hora": "07:41",
+   "acao": "implementada",
+   "tipo": "aparência",
+   "titulo": "Linha do tempo serpenteante das estruturas",
+   "resumo": "A linha do tempo dos estais passou a quebrar as estruturas em várias fileiras, com a espinha desenhada em SVG acompanhando a posição real de cada nó e um ícone indicando estrutura autoportante ou estaiada. Venceu um teste A/B contra a versão de rolagem horizontal e virou a única.",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "breadcrumb": [
+    "Linhas do Tempo",
+    "Recuperação estrutural dos estais"
+   ]
+  },
+  {
+   "id": "fn-9",
+   "aba": "funcoes",
+   "data": "05-07-26",
+   "hora": "08:44",
+   "acao": "implementada",
+   "tipo": "página",
+   "titulo": "Lista dinâmica de RDCs no controle",
+   "resumo": "Abaixo do painel de controle, uma lista dos Relatórios Diários de Campo é montada a partir da seção de documentos do índice — a mesma fonte de verdade dos banners. Cada cartão leva ao slide associado.",
+   "link": "slides/slide-rdc-control.html",
+   "breadcrumb": [
+    "Controle de RDCs"
+   ]
+  },
+  {
+   "id": "fn-8",
+   "aba": "funcoes",
+   "data": "30-06-26",
+   "hora": "14:54",
+   "acao": "implementada",
+   "tipo": "usabilidade",
+   "titulo": "Carrossel de imagens com avanço automático",
+   "resumo": "Uma imagem principal com tira vertical de miniaturas que avança sozinha a cada 10 s, com barra de progresso na miniatura ativa; pairar o cursor pausa e retomar mostra o ícone de play. Clicar na imagem abre o visualizador em tela cheia.",
+   "link": "slides/slide-equipment-acquisition.html",
+   "breadcrumb": [
+    "Eventos",
+    "Aquisição de equipamentos"
+   ]
+  },
+  {
+   "id": "fn-7",
+   "aba": "funcoes",
+   "data": "25-06-26",
+   "hora": "17:41",
+   "acao": "implementada",
+   "tipo": "navegação",
+   "titulo": "Banner de vínculo documento ↔ slide",
+   "resumo": "Cada documento recebido ganhou um banner clicável que leva ao slide correspondente, com o código e a descrição do documento. A descrição é puxada da seção de documentos do índice, mantendo os textos sincronizados.",
+   "link": "slides/slide-rdc-control.html",
+   "breadcrumb": [
+    "Documentos recebidos"
+   ]
+  },
+  {
+   "id": "fn-6",
+   "aba": "funcoes",
+   "data": "25-06-26",
+   "hora": "17:41",
+   "acao": "aperfeiçoada",
+   "tipo": "código",
+   "titulo": "Camada única de utilitários de interface",
+   "resumo": "Rotinas antes duplicadas entre os widgets — busca sem acento, degradê de rolagem, tooltip e efeito de máquina de escrever — foram reunidas num módulo compartilhado (window.UI), de onde cada slide passou a reusar a mesma lógica.",
+   "link": "slides/slide-shutdown-timeline.html",
+   "breadcrumb": [
+    "Apresentação"
+   ]
+  },
+  {
+   "id": "fn-5",
+   "aba": "funcoes",
+   "data": "25-06-26",
+   "hora": "17:41",
+   "acao": "implementada",
+   "tipo": "página",
+   "titulo": "Cronograma de desligamentos das SEs",
+   "resumo": "Widget do desligamento das subestações com busca textual, ordenação, nível de detalhe (um registro por dia ou agrupado por subestação) e duas exibições: tabela e gráfico de Gantt. As cores separam desligamento programado, forçado e SE energizada.",
+   "link": "slides/slide-shutdown-timeline.html",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs"
+   ]
+  },
+  {
+   "id": "fn-4",
+   "aba": "funcoes",
+   "data": "21-06-26",
+   "hora": "21:48",
+   "acao": "implementada",
+   "tipo": "página",
+   "titulo": "Linha do tempo interativa das estruturas",
+   "resumo": "As estruturas passaram a ser exibidas numa linha do tempo com filtros por situação e por tipo, ordenação, visão em tabela e em calendário, listras alternadas e arraste horizontal com o cursor.",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "breadcrumb": [
+    "Linhas do Tempo",
+    "Recuperação estrutural dos estais"
+   ]
+  },
+  {
+   "id": "fn-3",
+   "aba": "funcoes",
+   "data": "15-06-26",
+   "hora": "16:00",
+   "acao": "implementada",
+   "tipo": "navegação",
+   "titulo": "Navegação lateral e por setas entre os slides",
+   "resumo": "Uma barra lateral e setas de anterior/próximo, montadas a partir da ordem do índice, passam a percorrer os slides sem voltar ao índice a cada passo.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Navegação"
+   ]
+  },
+  {
+   "id": "fn-2",
+   "aba": "funcoes",
+   "data": "15-06-26",
+   "hora": "16:00",
+   "acao": "implementada",
+   "tipo": "usabilidade",
+   "titulo": "Visualizador de imagens em tela cheia",
+   "resumo": "Clicar numa miniatura do mosaico abre a imagem em tela cheia, com legenda e avanço entre as imagens do grupo. É a mesma peça que o carrossel e o histórico passaram a reusar depois.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Imagens"
+   ]
+  },
+  {
+   "id": "fn-1",
+   "aba": "funcoes",
+   "data": "15-06-26",
+   "hora": "16:00",
+   "acao": "implementada",
+   "tipo": "filtro",
+   "titulo": "Índice pesquisável com filtros de seção",
+   "resumo": "O índice ganhou busca textual que ignora acentuação (ã/á/â → a, ç → c) e botões que filtram os itens por seção. Foi essa mesma busca que o Histórico de Modificações reaproveitou depois.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Índice"
+   ]
+  },
+  {
+   "id": "fn-0",
+   "aba": "funcoes",
+   "data": "25-05-26",
+   "hora": "11:55",
+   "acao": "aperfeiçoada",
+   "tipo": "código",
+   "titulo": "Variáveis de estilo reunidas numa fonte única",
+   "resumo": "As cores, fontes, tamanhos, pesos, bordas e espaçamentos passaram a viver como tokens em um arquivo canônico (variables.css) que todos os slides carregam, em vez de valores repetidos slide a slide. Mudar um token altera a apresentação inteira de uma vez.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação"
    ]
   }
  ]

@@ -982,6 +982,7 @@ footer {
 
 .lightbox-close,
 .lightbox-locate,
+.lightbox-loupe,
 .lightbox-nav {
   background: var(--background-black-alpha-75);
   border: 1px solid var(--color-white-alpha-25);
@@ -989,7 +990,7 @@ footer {
   cursor: pointer;
   border-radius: 50%;
   line-height: 1;
-  transition: background-color 0.15s;
+  transition: background-color 0.15s, color 0.15s;
 
   &:hover { background: var(--color-green); color: var(--color-black); }
 }
@@ -1004,10 +1005,20 @@ footer {
   z-index: 1;
 }
 
-.lightbox-locate {
+/* ferramentas (lupa + localizar) agrupadas à esquerda do ✕ */
+.lightbox-tools {
   position: absolute;
   top: 16px;
   right: 60px;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  z-index: 1;
+}
+
+/* pílula compartilhada por "localizar" e "lupa" */
+.lightbox-locate,
+.lightbox-loupe {
   height: 36px;
   padding: 0 13px;
   display: flex;
@@ -1016,25 +1027,64 @@ footer {
   gap: var(--gap-6);
   border-radius: 18px;
   white-space: nowrap;
-  z-index: 1;
-
-  & .lightbox-locate-text {
-    font-family: var(--font-family-general);
-    font-size: 0.82rem;
-    letter-spacing: 0.02em;
-    line-height: 1;
-  }
 }
 
-/* em telas estreitas, colapsa para só-ícone (círculo) p/ não competir com o título */
+.lightbox-locate-text,
+.lightbox-loupe-text {
+  font-family: var(--font-family-general);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* lupa ATIVA: fica "acesa" (verde) enquanto a ferramenta está ligada */
+.lightbox-loupe.is-active {
+  background: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-black);
+}
+
+/* marca β de ferramenta EXPERIMENTAL */
+.lightbox-loupe-beta {
+  margin-left: -1px;
+  font-size: 0.62em;
+  font-weight: var(--font-weight-boldest);
+  opacity: 0.85;
+}
+
+/* a LENTE: disco que segue o cursor com a imagem ampliada (largura/altura e fundo montados por JS) */
+.lightbox-lens {
+  position: fixed;
+  z-index: 10000;
+  border-radius: 50%;
+  border: 3px solid var(--color-white);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+  background-color: var(--background-black-alpha-75);
+  background-repeat: no-repeat;
+  pointer-events: none;
+
+  &[hidden] { display: none; }
+}
+
+/* com a lupa ativa, o cursor vira mira sobre o palco (aponta a região a ampliar) */
+.lightbox-overlay.is-loupe .lightbox-stage { cursor: crosshair; }
+
+/* em telas estreitas, "localizar" e "lupa" colapsam para só-ícone (círculo) */
 @media (max-width: 576px) {
-  .lightbox-locate {
+  .lightbox-locate,
+  .lightbox-loupe {
     width: 36px;
     padding: 0;
     border-radius: 50%;
-
-    & .lightbox-locate-text { display: none; }
   }
+  .lightbox-locate-text,
+  .lightbox-loupe-text,
+  .lightbox-loupe-beta { display: none; }
+}
+
+/* a lupa é hover-based: sem apontador que paira (touch), não faz sentido — some */
+@media (hover: none) {
+  .lightbox-loupe { display: none; }
 }
 
 /* destaque temporário da imagem ao usar "localizar na página" (botão do lightbox) */

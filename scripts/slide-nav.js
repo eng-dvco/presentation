@@ -36,7 +36,8 @@ let upUrl = null;
 let downUrl = null;
 let lightboxOpen = false;
 let currentImgIdx = 0;
-let overlay, overlayStage, overlayImg, overlayCaption, overlayTitle, overlayCount, overlayClose, overlayLocate, overlayPrev, overlayNext;
+let overlay, overlayStage, overlayImg, overlayCaption, overlayTitle, overlayCount, overlayClose, overlayLocate, overlayLoupe, overlayLens, overlayPrev, overlayNext;
+let loupeActive = false;   // LUPA (experimental): amplia a região sob o cursor ao pairar
 let imgGroupInfo = [];
 let autoTimer = null;
 let autoStart = null;
@@ -571,6 +572,21 @@ function buildLightbox() {
   overlayLocate.setAttribute('aria-label', 'Localizar esta imagem na página');
   overlayLocate.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><line x1="12" y1="1.5" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22.5"/><line x1="1.5" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22.5" y2="12"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg><span class="lightbox-locate-text">localizar</span>';
 
+  // botão "lupa" (EXPERIMENTAL): à esquerda do "localizar". Enquanto ativa, pairar o cursor sobre a
+  // imagem mostra uma lente que amplia a região sob o cursor. Ícone de zoom-in (lupa com +) e marca β.
+  overlayLoupe = document.createElement('button');
+  overlayLoupe.className = 'lightbox-loupe';
+  overlayLoupe.setAttribute('aria-label', 'Lupa: ampliar detalhes ao pairar o cursor (experimental)');
+  overlayLoupe.setAttribute('aria-pressed', 'false');
+  overlayLoupe.title = 'Lupa — ferramenta experimental';
+  overlayLoupe.innerHTML = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg><span class="lightbox-loupe-text">lupa</span><sup class="lightbox-loupe-beta" aria-hidden="true">β</sup>';
+
+  // a LENTE: um disco que segue o cursor, com a imagem ampliada como fundo (montado em moveLupa)
+  overlayLens = document.createElement('div');
+  overlayLens.className = 'lightbox-lens';
+  overlayLens.setAttribute('aria-hidden', 'true');
+  overlayLens.hidden = true;
+
   overlayStage = document.createElement('div');
   overlayStage.className = 'lightbox-stage';
 
@@ -727,10 +743,16 @@ function buildLightbox() {
   overlayCaption.className = 'lightbox-caption';
 
   overlay.appendChild(overlayClose);
-  overlay.appendChild(overlayLocate);
+  // as ferramentas (lupa + localizar) ficam juntas num grupo, à esquerda do ✕
+  const overlayTools = document.createElement('div');
+  overlayTools.className = 'lightbox-tools';
+  overlayTools.appendChild(overlayLoupe);
+  overlayTools.appendChild(overlayLocate);
+  overlay.appendChild(overlayTools);
   overlay.appendChild(overlayTitle);
   overlay.appendChild(overlayCount);
   overlay.appendChild(overlayStage);
+  overlay.appendChild(overlayLens);   // a lente da lupa (sobre o palco; escondida por padrão)
   overlay.appendChild(overlayCaption);
   if (mosaicImages.length > 1) overlay.appendChild(thumbsBar);
   document.body.appendChild(overlay);
@@ -741,6 +763,17 @@ function buildLightbox() {
     closeLightbox();
     locateOnPage(target);
   });
+  // LUPA: alterna a ferramenta; ao pairar sobre a imagem, moveLupa monta a lente ampliada
+  overlayLoupe.addEventListener('click', () => {
+    loupeActive = !loupeActive;
+    overlayLoupe.classList.toggle('is-active', loupeActive);
+    overlayLoupe.setAttribute('aria-pressed', String(loupeActive));
+    overlay.classList.toggle('is-loupe', loupeActive);
+    if (loupeActive) resetGestureTransform();   // a lupa parte do zoom base (não combina com pan/pinça)
+    else hideLupa();
+  });
+  overlayStage.addEventListener('mousemove', moveLupa);
+  overlayStage.addEventListener('mouseleave', hideLupa);
   overlayPrev.addEventListener('click', () => showImage(currentImgIdx - 1));
   overlayNext.addEventListener('click', () => showImage(currentImgIdx + 1));
   // Por requisito: APENAS a tecla ESC e o botão ✕ fecham o lightbox.
@@ -809,6 +842,7 @@ function buildLightbox() {
     overlayStage.addEventListener('pointerdown', e => {
       if (e.button > 0) return;               // ignora botões secundários do mouse
       if (onNav(e.target)) return;            // setas/✕ tratam o próprio clique
+      if (loupeActive) return;                // lupa ativa: sem arraste/pan/pinça (só a lente ao pairar)
       pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
       try { overlayStage.setPointerCapture(e.pointerId); } catch {}
 
@@ -1000,6 +1034,7 @@ function showImage(idx) {
     }
   }
   resetGestureTransform(); // zera deslize/pan/zoom ao trocar de imagem
+  hideLupa();              // recolhe a lente; reaparece no próximo movimento sobre a nova imagem
   overlayPrev.disabled = mosaicImages.length <= 1;
   overlayNext.disabled = mosaicImages.length <= 1;
 
@@ -1073,12 +1108,37 @@ function closeLightbox() {
   isHoveringMain = false;
   autoRemaining = AUTO_DURATION;
   resetGestureTransform(); // zera deslize/pan/zoom ao fechar
+  // desliga a lupa e recolhe a lente ao fechar
+  loupeActive = false;
+  if (overlayLoupe) { overlayLoupe.classList.remove('is-active'); overlayLoupe.setAttribute('aria-pressed', 'false'); }
+  overlay.classList.remove('is-loupe');
+  hideLupa();
   if (!reducedMotion) overlay.classList.remove('lightbox-visible');
   overlay.setAttribute('hidden', '');
   overlay.style.opacity = '';
   document.body.style.overflow = '';
   lightboxOpen = false;
 }
+
+// ── LUPA (experimental): a lente segue o cursor e amplia a região da imagem sob ele. Fundo = a mesma
+// imagem, escalada por LOUPE_ZOOM, deslocada para que o ponto sob o cursor caia no centro da lente. ──
+const LOUPE_SIZE = 176;   // diâmetro da lente (px)
+const LOUPE_ZOOM = 2.6;   // fator de ampliação
+function moveLupa(e) {
+  if (!loupeActive || !overlayImg || !overlayLens) return;
+  const r = overlayImg.getBoundingClientRect();
+  const x = e.clientX - r.left, y = e.clientY - r.top;
+  if (r.width < 1 || x < 0 || y < 0 || x > r.width || y > r.height) { hideLupa(); return; }
+  const src = overlayImg.currentSrc || overlayImg.src;
+  overlayLens.style.width = overlayLens.style.height = LOUPE_SIZE + 'px';
+  overlayLens.style.backgroundImage = 'url("' + src + '")';
+  overlayLens.style.backgroundSize = (r.width * LOUPE_ZOOM) + 'px ' + (r.height * LOUPE_ZOOM) + 'px';
+  overlayLens.style.backgroundPosition = (LOUPE_SIZE / 2 - x * LOUPE_ZOOM) + 'px ' + (LOUPE_SIZE / 2 - y * LOUPE_ZOOM) + 'px';
+  overlayLens.style.left = (e.clientX - LOUPE_SIZE / 2) + 'px';
+  overlayLens.style.top = (e.clientY - LOUPE_SIZE / 2) + 'px';
+  overlayLens.hidden = false;
+}
+function hideLupa() { if (overlayLens) overlayLens.hidden = true; }
 
 // leva o usuário até a imagem atualmente exibida no lightbox: rola o slide até ela
 // (centralizada) e a destaca brevemente. Para imagens do carrossel, mira o container

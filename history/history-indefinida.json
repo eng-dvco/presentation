@@ -1,7 +1,7 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "17-07-26",
- "commits": 170,
+ "commits": 171,
  "total": 474,
  "registros": [
   {
@@ -19075,6 +19075,111 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-35",
+   "aba": "funcoes",
+   "data": "17-07-26",
+   "hora": "11:11",
+   "acao": "implementada",
+   "tipo": "usabilidade",
+   "titulo": "Prévia do slide ao pairar sobre o índice",
+   "resumo": "Em telas grandes com cursor, pairar sobre um item do índice passou a exibir uma prévia flutuante do slide — um iframe reduzido do conteúdo real que rola sozinho para dar a visão geral, com borda zebrada e reposicionado para nunca vazar da tela.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Índice"
+   ]
+  },
+  {
+   "id": "fn-34",
+   "aba": "funcoes",
+   "data": "17-07-26",
+   "hora": "10:09",
+   "acao": "aperfeiçoada",
+   "tipo": "correção",
+   "titulo": "Contador do histórico anima ao ganhar um dígito",
+   "resumo": "Na rolagem do histórico, quando a contagem de alterações do dia crescia de um para dois dígitos (por ex. 7 → 35), o dígito novo surgia de repente. Agora ele entra rolando, como os demais.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Aparência"
+   ]
+  },
+  {
+   "id": "fn-33",
+   "aba": "funcoes",
+   "data": "17-07-26",
+   "hora": "10:09",
+   "acao": "aperfeiçoada",
+   "tipo": "usabilidade",
+   "titulo": "Total de alterações por agrupamento e horário no cronograma por seção",
+   "resumo": "Cada container do histórico — por mês, por ação e por seção — passou a exibir no título o total de alterações ('X alterações no total'). No agrupamento por seção, o marcador da linha do tempo ganhou o horário numa segunda linha, sob a data.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Usabilidade"
+   ]
+  },
+  {
+   "id": "fn-32",
+   "aba": "funcoes",
+   "data": "17-07-26",
+   "hora": "10:09",
+   "acao": "implementada",
+   "tipo": "usabilidade",
+   "titulo": "Resumo inline dos dias colapsados no histórico",
+   "resumo": "Ao colapsar um dia no histórico, ele passou a exibir um resumo inline de cada alteração — a ação, o elemento (com a quantidade, quando imagens) e o local (o último item do breadcrumb) — dispensando expandir para saber o que mudou.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Usabilidade"
+   ]
+  },
+  {
+   "id": "fn-31",
+   "aba": "funcoes",
+   "data": "17-07-26",
+   "hora": "09:38",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Cronograma e títulos dos estais alinhados à largura do mosaico",
+   "resumo": "No slide da recuperação dos estais, o cronograma serpenteante e os subtítulos — que, por ser uma página de linha do tempo, se esticavam além da área das imagens — passaram a respeitar a mesma largura do mosaico, centralizados.",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "breadcrumb": [
+    "Linhas do Tempo",
+    "Recuperação estrutural dos estais"
+   ]
+  },
+  {
+   "id": "fn-30",
+   "aba": "funcoes",
+   "data": "17-07-26",
+   "hora": "08:49",
+   "acao": "implementada",
+   "tipo": "usabilidade",
+   "titulo": "Lupa de ampliação no visualizador em tela cheia",
+   "resumo": "O visualizador ganhou uma ferramenta de lupa (experimental): ativada, pairar o cursor sobre a imagem exibe uma lente circular ampliando a região sob ele, sincronizada com a área real da foto. Fica armada ao trocar de imagem — só um novo clique a desliga — e tem a borda zebrada.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Imagens"
+   ]
+  },
+  {
+   "id": "fn-29",
+   "aba": "funcoes",
+   "data": "16-07-26",
+   "hora": "15:18",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Registro obsoleto redesenhado como cabeçalho destacado",
+   "resumo": "Um registro já superado por outro mais recente passou a trazer, no topo, uma barra de título 'obsoleto' com ícone de relógio e preenchimento zebrado em vermelho, e um botão à direita que leva direto à versão vigente do elemento.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Aparência"
+   ]
+  },
   {
    "id": "fn-28",
    "aba": "funcoes",

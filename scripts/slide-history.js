@@ -446,12 +446,13 @@
 
     // sem título quando ele só repetiria o que já está à vista:
     //  • transferência (r.titulo já vem nulo);
-    //  • modificação de título ou de NOME DO SLIDE (o "para" do de→para já é o novo valor) ou só de observação;
+    //  • modificação de título ou de NOME DO SLIDE (o "para" do de→para já é o novo valor), só de
+    //    observação, ou de imagens + observação (a legenda vinculada às imagens já se identifica);
     //  • adição de subtítulo, imagens ou SLIDE inteiro (o título repete a atividade/slide, já no breadcrumb);
     //  • deleção de subtítulo (o "de" do de→para já mostra o subtítulo removido).
     const t = tiposDe(r);
     const semTitulo =
-      (r.acao === 'modificação' && (t.includes('título') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação'))) ||
+      (r.acao === 'modificação' && (t.includes('título') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação') || (t.includes('imagens') && t.includes('observação')))) ||
       (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens') || t.includes('slide'))) ||
       (r.acao === 'deleção' && t.includes('subtítulo'));
     if (r.titulo && !semTitulo) a.appendChild(el('h3', 'hist-card-title', r.titulo));
@@ -508,13 +509,38 @@
   // marcador exibe a DATA (o que varia ali) em vez do horário (o que varia dentro de um mesmo dia)
   const diaCurto = d => { const p = parse(d); return p ? String(p.dia).padStart(2, '0') + '/' + String(p.mes + 1).padStart(2, '0') : (d || ''); };
 
-  // atualiza o MARCADOR sticky: texto (horário ou data, já formatado) + cor do ponto pela ação corrente
-  function setMark(mark, texto, acao) {
+  // atualiza o MARCADOR sticky: texto (horário ou data, já formatado) + cor do ponto pela ação corrente.
+  // `sub` é a 2ª linha opcional (o horário, no agrupamento por seção, sob a data).
+  function setMark(mark, texto, acao, sub) {
     const t = mark.querySelector('.hist-mark-time');
     const d = mark.querySelector('.hist-dot');
     if (t.textContent !== texto) t.textContent = texto;
+    const s = mark.querySelector('.hist-mark-sub');
+    if (s) { const sv = sub || ''; if (s.textContent !== sv) s.textContent = sv; }
     const cls = 'hist-dot hist-dot--' + slug(acao || 'misto');
     if (d.className !== cls) d.className = cls;
+  }
+
+  // ── resumo inline de um dia COLAPSADO ──
+  // Só é exibido quando o dia está recolhido (via CSS); expandido, dá lugar à linha do tempo. Para cada
+  // alteração: a AÇÃO (adição, modificação…), o ELEMENTO que a recebeu (imagens — com a quantidade —,
+  // observação, título…) e ONDE foi feita (o último segmento do breadcrumb).
+  function montaResumoDia(registros) {
+    const wrap = el('div', 'hist-day-summary');
+    registros.forEach(r => {
+      const item = el('div', 'hist-day-sum');
+      item.appendChild(el('span', 'hist-day-sum-acao hist-day-sum-acao--' + slug(r.acao), r.acao));
+      const qtd = partesDe(r).reduce((s, p) => s + (p.imagens ? p.imagens.total : 0), 0);
+      const elem = tiposDe(r).map(t => (t === 'imagens' && qtd) ? 'imagens (' + qtd + ')' : t).join(', ');
+      if (elem) item.appendChild(el('span', 'hist-day-sum-elem', elem));
+      const local = (breadcrumbLegivel(r).slice(-1)[0] || '').toString().trim();
+      if (local) {
+        item.appendChild(el('span', 'hist-day-sum-em', 'em'));
+        item.appendChild(el('span', 'hist-day-sum-local', local));
+      }
+      wrap.appendChild(item);
+    });
+    return wrap;
   }
 
   // ── um dia (colapsável): linha do tempo com MARCADOR STICKY ──
@@ -526,6 +552,8 @@
   // `porSlide`, o marcador da linha do tempo exibe a DATA de cada registro em vez do horário.
   function bloco(titulo, registros, porSlide) {
     const marcaDe = r => porSlide ? diaCurto(r.data) : horaBR(r.hora);
+    // por seção o marcador exibe a DATA (1ª linha, DD/MM); o HORÁRIO (HHhMM) vai numa 2ª linha abaixo
+    const marcaSubDe = r => porSlide ? horaBR(r.hora) : '';
     const sec = el('section', 'hist-day' + (porSlide ? ' hist-day--slide' : ''));
     const cab = el('button', 'hist-day-head');
     cab.type = 'button';
@@ -537,14 +565,26 @@
     const tl = el('div', 'hist-day-items hist-tl');
     const rail = el('div', 'hist-tl-rail');
     const mark = el('div', 'hist-mark');
-    mark.appendChild(el('span', 'hist-mark-time'));
+    const markTxt = el('div', 'hist-mark-text');
+    markTxt.appendChild(el('span', 'hist-mark-time'));
+    if (porSlide) markTxt.appendChild(el('span', 'hist-mark-sub'));   // 2ª linha: horário (só por seção)
+    mark.appendChild(markTxt);
     mark.appendChild(el('span', 'hist-dot'));
     rail.appendChild(mark);
     const corpo = el('div', 'hist-tl-body');
-    registros.forEach(r => { const c = cartao(r); c.dataset.hora = r.hora || ''; c.dataset.marca = marcaDe(r); corpo.appendChild(c); });
+    registros.forEach(r => {
+      const c = cartao(r);
+      c.dataset.hora = r.hora || '';
+      c.dataset.marca = marcaDe(r);
+      if (porSlide) c.dataset.marcaSub = marcaSubDe(r);
+      corpo.appendChild(c);
+    });
     tl.appendChild(rail);
     tl.appendChild(corpo);
-    if (registros[0]) setMark(mark, marcaDe(registros[0]), registros[0].acao);
+    if (registros[0]) setMark(mark, marcaDe(registros[0]), registros[0].acao, marcaSubDe(registros[0]));
+
+    // resumo mostrado quando o dia é recolhido (ver montaResumoDia); no estado expandido fica oculto
+    const resumo = montaResumoDia(registros);
 
     cab.addEventListener('click', () => {
       const fechado = sec.classList.toggle('is-collapsed');
@@ -552,6 +592,7 @@
       requestAnimationFrame(() => { atualizaMarcas(); if (!fechado) centraTodos([sec]); });
     });
     sec.appendChild(cab);
+    sec.appendChild(resumo);
     sec.appendChild(tl);
     return sec;
   }
@@ -605,7 +646,7 @@
         if (cards[mid].getBoundingClientRect().top <= linha) { at = mid; lo = mid + 1; }
         else hi = mid - 1;
       }
-      setMark(mark, cards[at].dataset.marca, cards[at].dataset.acao);
+      setMark(mark, cards[at].dataset.marca, cards[at].dataset.acao, cards[at].dataset.marcaSub);
       // SÓ o registro sob o marcador ganha a cor da ação; os demais voltam ao cinza. A cor
       // "acompanha" o marcador conforme ele desce. Delta: apaga o anterior, acende o atual.
       const prev = day._evAt;
@@ -651,6 +692,22 @@
     cell.animate([{ width: w + 'px' }, { width: '0px' }], { duration: dur, easing: ease, fill: 'forwards' }).onfinish = () => cell.remove();
   }
 
+  // a célula ENTRA: espelho de rolaSaida. É o que anima o dígito que APARECE quando o contador sobe de
+  // um para dois (ou mais) caracteres (7 → 35). Sem isto, a célula nova nascia vazia (0px) e, com o
+  // overflow:hidden da célula, o dígito recém-chegado ficava recortado e só "surgia" ao final. Aqui o
+  // caractere já entra ESTÁTICO (dá largura à célula) e a largura cresce de 0 enquanto ele rola para
+  // dentro pelo lado oposto — mesma direção/tempo dos vizinhos que rolam.
+  function rolaEntrada(cell, novo, dir) {
+    const ch = cell.firstElementChild;
+    if (!ch) { cell.appendChild(el('span', 'ch', novo)); return; }
+    ch.textContent = novo;
+    const from = dir === 'up' ? 100 : -100;
+    const w = cell.offsetWidth;   // largura final, já com o dígito dentro
+    const dur = 430, ease = 'cubic-bezier(.2,.7,.2,1)';
+    cell.animate([{ width: '0px' }, { width: w + 'px' }], { duration: dur, easing: ease });
+    ch.animate([{ transform: 'translateY(' + from + '%)', opacity: 0 }, { transform: 'translateY(0)', opacity: 1 }], { duration: dur, easing: ease });
+  }
+
   // acerta uma ZONA (fila de células) ao texto alvo; anima só as que mudaram. anchor 'right' alinha
   // pela direita (dígitos do contador: a unidade permanece no lugar quando surge a dezena). As células
   // que saem animam (rolaSaida) e as que faltam são criadas na ponta certa antes do acerto.
@@ -664,15 +721,19 @@
       (anchor === 'right' ? cur.slice(0, excesso) : cur.slice(cur.length - excesso))
         .forEach(cell => (fresh || reduzMov) ? cell.remove() : rolaSaida(cell, dir));
     }
-    // cria as que faltam, na ponta certa
+    // cria as que faltam, na ponta certa — marcadas como NOVAS p/ animarem a ENTRADA (não a troca)
+    const novas = new Set();
     for (let falta = chars.length - ativas().length; falta > 0; falta--) {
       const cell = el('span', 'hist-cur-ch');
       cell.appendChild(el('span', 'ch', ''));
       if (anchor === 'right') zona.insertBefore(cell, zona.firstChild); else zona.appendChild(cell);
+      novas.add(cell);
     }
-    // acerta cada célula ativa ao caractere alvo (anima só as que mudaram)
+    // acerta cada célula ao caractere alvo: as recém-criadas ROLAM PARA DENTRO (rolaEntrada), as demais
+    // trocam de valor (rolaCelula) — ambas animam só quando de fato mudam.
     ativas().forEach((cell, i) => {
       if (fresh || reduzMov) { cell.textContent = ''; cell.appendChild(el('span', 'ch', chars[i])); }
+      else if (novas.has(cell)) rolaEntrada(cell, chars[i], dir);
       else rolaCelula(cell, chars[i], dir);
     });
   }
@@ -855,6 +916,12 @@
 
   const cap = s => (s || '').charAt(0).toUpperCase() + s.slice(1);
 
+  // "240 alterações no total" / "1 alteração no total": o total de alterações de um container, ao lado
+  // do seu título. Mesmo elemento (.hist-month-count) nos três agrupamentos — tempo, ação e seção.
+  function contadorTotal(n) {
+    return el('span', 'hist-month-count', n + (n === 1 ? ' alteração' : ' alterações') + ' no total');
+  }
+
   // um GRUPO colapsável de checkboxes (multi-seleção). O cabeçalho é o subtítulo do conjunto;
   // clicar nele recolhe/expande o grupo (mesma seta dos "documentos recebidos").
   function montaGrupo(container, titulo, opcoes, selecionados, aoAlternar) {
@@ -1014,7 +1081,15 @@
       // registros). Assim um mês inteiro pode ser pulado pelo scroll da página, e o título nunca
       // encosta no breadcrumb.
       let mesAtual = null, rolagem = null;
-      agrupaPorDia(regs).forEach(([dia, itens]) => {
+      const diasOrd = agrupaPorDia(regs);
+      // total de alterações por mês (somado dos seus dias) — vai no título do container, como nos demais
+      const totalMes = new Map();
+      diasOrd.forEach(([dia, itens]) => {
+        const p = parse(dia);
+        const rot = p ? (MESES[p.mes].charAt(0).toUpperCase() + MESES[p.mes].slice(1)) + ' de ' + p.ano : '—';
+        totalMes.set(rot, (totalMes.get(rot) || 0) + itens.length);
+      });
+      diasOrd.forEach(([dia, itens]) => {
         const p = parse(dia);
         const mes = p ? MESES[p.mes].charAt(0).toUpperCase() + MESES[p.mes].slice(1) : '—';
         const rotuloMes = p ? mes + ' de ' + p.ano : '—';
@@ -1023,6 +1098,7 @@
           const caixa = el('div', 'hist-monthbox');
           const mh = el('h2', 'hist-month');
           mh.appendChild(el('span', 'hist-month-label', rotuloMes));
+          mh.appendChild(contadorTotal(totalMes.get(rotuloMes)));   // total do mês, à direita do rótulo
           const cur = el('span', 'hist-month-cur');   // data + contagem do dia, absorvidas ao rolar
           cur.appendChild(el('span', 'hist-month-cur-in'));   // wrapper recortado: anima a ALTURA (grid) e abriga as células que rolam
           mh.appendChild(cur);
@@ -1043,7 +1119,7 @@
         const caixa = el('div', 'hist-monthbox');
         const h = el('h2', 'hist-month hist-month--secao');
         h.appendChild(el('span', 'hist-month-label', rotulo));
-        h.appendChild(el('span', 'hist-month-count', plural(itens.length, 'alteração')));
+        h.appendChild(contadorTotal(itens.length));
         caixa.appendChild(h);
         caixa.appendChild(el('div', 'hist-gap'));   // faixa zebrada suave logo abaixo do título da seção
         const rolagem = el('div', 'hist-monthscroll');
@@ -1061,7 +1137,7 @@
         const caixa = el('div', 'hist-monthbox');
         const h = el('h2', 'hist-month hist-month--acao');
         h.appendChild(badgeAcao(acao));
-        h.appendChild(el('span', 'hist-month-count', String(doGrupo.length)));
+        h.appendChild(contadorTotal(doGrupo.length));
         caixa.appendChild(h);
         caixa.appendChild(el('div', 'hist-gap'));   // faixa zebrada suave logo abaixo do título da ação
         const rolagem = el('div', 'hist-monthscroll');

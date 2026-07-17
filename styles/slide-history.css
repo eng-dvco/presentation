@@ -413,10 +413,29 @@
   padding-left: var(--gap-6);
 }
 
+/* coluna de texto do marcador (à esquerda do ponto): a data (1ª linha) e, no agrupamento por seção,
+   o horário (2ª linha), ambos alinhados à direita, junto do ponto. */
+.hist-mark-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.15;
+}
+
 .hist-mark-time {
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
   color: var(--lt-text-muted);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 2ª linha do marcador — só por seção: o horário (HHhMM), menor e mais fraco que a data acima */
+.hist-mark-sub {
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  color: var(--lt-text-faint);
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -457,7 +476,49 @@
 .hist-day.is-collapsed {
   & .hist-day-items { display: none; }
   & .hist-day-caret { transform: rotate(0deg); }
+  & .hist-day-summary { display: flex; }   /* no lugar da linha do tempo, o resumo inline do dia */
 }
+
+/* ── resumo do dia COLAPSADO ──
+   Oculto quando expandido (dá lugar à linha do tempo). Uma "pílula" por alteração, inline e com quebra:
+   AÇÃO (colorida pelo tipo) · ELEMENTO (imagens trazem a quantidade) · "em" LOCAL (último breadcrumb). */
+.hist-day-summary {
+  display: none;
+  flex-wrap: wrap;
+  gap: var(--gap-4) var(--gap-8);
+  padding: 0 var(--gap-16) var(--gap-8);
+}
+
+.hist-day-sum {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--gap-4);
+  max-width: 100%;
+  padding: var(--gap-2) var(--gap-8);
+  border-radius: var(--border-smaller);
+  background: var(--lt-surface-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text-muted);
+  line-height: 1.3;
+}
+
+/* a AÇÃO herda a cor do seu tipo — mesma paleta dos pontos do marcador e dos badges */
+.hist-day-sum-acao {
+  font-weight: var(--font-weight-boldest);
+
+  &.hist-day-sum-acao--adicao,
+  &.hist-day-sum-acao--implementada { color: var(--hist-add); }
+  &.hist-day-sum-acao--modificacao,
+  &.hist-day-sum-acao--aperfeicoada { color: var(--hist-mod); }
+  &.hist-day-sum-acao--transferencia { color: var(--hist-mov); }
+  &.hist-day-sum-acao--delecao,
+  &.hist-day-sum-acao--descartada { color: var(--hist-del); }
+}
+
+.hist-day-sum-elem { color: var(--lt-text); }
+.hist-day-sum-em { color: var(--lt-text-faint); }
+.hist-day-sum-local { color: var(--lt-text-muted); overflow-wrap: anywhere; }
 
 /* ── o registro: o corpo INTEIRO é clicável ── */
 .hist-card {

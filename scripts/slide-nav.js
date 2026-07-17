@@ -1126,13 +1126,22 @@ const LOUPE_SIZE = 176;   // diâmetro da lente (px)
 const LOUPE_ZOOM = 2.6;   // fator de ampliação
 function moveLupa(e) {
   if (!loupeActive || !overlayImg || !overlayLens) return;
-  const r = overlayImg.getBoundingClientRect();
-  const x = e.clientX - r.left, y = e.clientY - r.top;
-  if (r.width < 1 || x < 0 || y < 0 || x > r.width || y > r.height) { hideLupa(); return; }
+  const box = overlayImg.getBoundingClientRect();
+  const natW = overlayImg.naturalWidth, natH = overlayImg.naturalHeight;
+  if (!natW || !natH || box.width < 1) { hideLupa(); return; }
+  // A imagem usa object-fit: contain — ela é RENDERIZADA centralizada na caixa do <img>, com barras
+  // (letterbox) quando as proporções diferem. Cada imagem tem proporção própria, então a barra varia.
+  // A lupa tem de operar sobre a imagem REAL, não sobre a caixa: senão o conteúdo ampliado desalinha e
+  // a lente ainda amplia sobre as barras (fora da imagem).
+  const escala = Math.min(box.width / natW, box.height / natH);
+  const rendW = natW * escala, rendH = natH * escala;          // tamanho exibido da imagem
+  const offX = (box.width - rendW) / 2, offY = (box.height - rendH) / 2;   // letterbox (centralização)
+  const x = e.clientX - box.left - offX, y = e.clientY - box.top - offY;   // cursor RELATIVO à imagem
+  if (x < 0 || y < 0 || x > rendW || y > rendH) { hideLupa(); return; }    // sobre a barra/fora: recolhe
   const src = overlayImg.currentSrc || overlayImg.src;
   overlayLens.style.width = overlayLens.style.height = LOUPE_SIZE + 'px';
   overlayLens.style.backgroundImage = 'url("' + src + '")';
-  overlayLens.style.backgroundSize = (r.width * LOUPE_ZOOM) + 'px ' + (r.height * LOUPE_ZOOM) + 'px';
+  overlayLens.style.backgroundSize = (rendW * LOUPE_ZOOM) + 'px ' + (rendH * LOUPE_ZOOM) + 'px';
   overlayLens.style.backgroundPosition = (LOUPE_SIZE / 2 - x * LOUPE_ZOOM) + 'px ' + (LOUPE_SIZE / 2 - y * LOUPE_ZOOM) + 'px';
   overlayLens.style.left = (e.clientX - LOUPE_SIZE / 2) + 'px';
   overlayLens.style.top = (e.clientY - LOUPE_SIZE / 2) + 'px';

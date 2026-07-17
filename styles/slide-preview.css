@@ -80,6 +80,8 @@
     background-color: var(--lt-surface-strong);
     transform: scale(var(--pv-scale));
     transform-origin: top left;
+    /* o auto-scroll (JS) anima o transform deste iframe (translateY + scale) */
+    will-change: transform;
     /* preview-only: não interage, não rola, não rouba foco */
     pointer-events: none;
   }

@@ -19,9 +19,12 @@
     left: 0;
     z-index: 60;
     padding: var(--padding-around-condensed);
-    border: 1px solid var(--lt-border);
     border-radius: var(--border-item);
-    background-color: var(--lt-surface-strong);
+    /* borda ZEBRADA (branco+cinza diagonal, a MESMA do anel da lupa e dos registros do
+       histórico): a faixa de padding entre a miniatura e a borda recebe o zebrado. A miniatura
+       (.slide-preview__frame) tem fundo próprio e cobre o centro; só esse anel aparece. */
+    background-color: var(--lt-surface-muted);
+    background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--lt-border) 45%, transparent) 0 1.5px, var(--lt-surface) 1.5px 5px);
     box-shadow: var(--shadow-popover);
     /* nunca captura cursor/rolagem: é puramente decorativo e segue o ponteiro */
     pointer-events: none;

@@ -80,15 +80,17 @@
   width: 0.82rem; height: 0.82rem;
 }
 
-/* ── largura do cronograma alinhada ao mosaico ──
+/* ── largura dos blocos alinhada ao mosaico ──
    Esta é uma página de timeline (slide-tl.css → --content-max: none), logo o .content-wrapper
-   é full-width e o .tlp-group esticava (~1256px numa viewport de 1600px) muito além do mosaico
-   de imagens logo abaixo, que é limitado a --mosaic-max (960px). Igualamos o cronograma à MESMA
-   largura do mosaico, centralizado — mesmíssimo mecanismo do .mosaic-container: max-width +
+   é full-width e seus filhos diretos que NÃO se auto-limitam — o cronograma (.tlp-group) e os
+   subtítulos (.title-header-h2) — esticavam (~1256px numa viewport de 1600px) muito além do
+   mosaico de imagens, que fica em --mosaic-max (960px). Igualamos todos à MESMA largura do
+   mosaico, centralizados — mesmíssimo mecanismo do .mosaic-container: max-width +
    margin-inline:auto, cujas margens automáticas vencem o justify-items:stretch do grid do
    wrapper. O wrap serpenteante passa a quebrar dentro de 960px, e a espinha SVG (desenhada
    por slide-tl-stay-recovery.js sobre o layout já renderizado) acompanha o novo limite. */
-.tlp-group {
+.tlp-group,
+.title-header-h2 {
   width: 100%;
   max-width: var(--mosaic-max, 960px);
   margin-inline: auto;

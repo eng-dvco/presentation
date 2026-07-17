@@ -1099,6 +1099,15 @@ function openLightbox(idx) {
   else overlay.style.opacity = '1';
   document.body.style.overflow = 'hidden';
   lightboxOpen = true;
+  // lupa PERSISTENTE: se continuar armada de uma sessão anterior, reassegura o estado visual
+  // na imagem recém-aberta (mira/is-loupe no overlay e botão aceso) — a lente já funciona ao
+  // pairar, sem exigir novo clique. Os listeners de mousemove/mouseleave são montados uma vez
+  // em buildLightbox e nunca removidos, então seguem ativos na reabertura.
+  if (loupeActive && overlayLoupe) {
+    overlay.classList.add('is-loupe');
+    overlayLoupe.classList.add('is-active');
+    overlayLoupe.setAttribute('aria-pressed', 'true');
+  }
   overlayClose.focus();
 }
 
@@ -1108,10 +1117,9 @@ function closeLightbox() {
   isHoveringMain = false;
   autoRemaining = AUTO_DURATION;
   resetGestureTransform(); // zera deslize/pan/zoom ao fechar
-  // desliga a lupa e recolhe a lente ao fechar
-  loupeActive = false;
-  if (overlayLoupe) { overlayLoupe.classList.remove('is-active'); overlayLoupe.setAttribute('aria-pressed', 'false'); }
-  overlay.classList.remove('is-loupe');
+  // a lupa é PERSISTENTE: ao fechar apenas recolhe a lente. O estado ARMADO (loupeActive,
+  // is-loupe no overlay, botão aceso) sobrevive ao fechamento e à troca de imagem — só é
+  // desligado por um novo clique no próprio botão da lupa.
   hideLupa();
   if (!reducedMotion) overlay.classList.remove('lightbox-visible');
   overlay.setAttribute('hidden', '');
@@ -1140,9 +1148,11 @@ function moveLupa(e) {
   if (x < 0 || y < 0 || x > rendW || y > rendH) { hideLupa(); return; }    // sobre a barra/fora: recolhe
   const src = overlayImg.currentSrc || overlayImg.src;
   overlayLens.style.width = overlayLens.style.height = LOUPE_SIZE + 'px';
-  overlayLens.style.backgroundImage = 'url("' + src + '")';
-  overlayLens.style.backgroundSize = (rendW * LOUPE_ZOOM) + 'px ' + (rendH * LOUPE_ZOOM) + 'px';
-  overlayLens.style.backgroundPosition = (LOUPE_SIZE / 2 - x * LOUPE_ZOOM) + 'px ' + (LOUPE_SIZE / 2 - y * LOUPE_ZOOM) + 'px';
+  // a foto ampliada é pintada no ::before da lente via VARIÁVEIS CSS; a lente em si carrega
+  // a zebra do anel, então NÃO tocamos no background dela aqui (senão apagaríamos a zebra).
+  overlayLens.style.setProperty('--lupa-img', 'url("' + src + '")');
+  overlayLens.style.setProperty('--lupa-size', (rendW * LOUPE_ZOOM) + 'px ' + (rendH * LOUPE_ZOOM) + 'px');
+  overlayLens.style.setProperty('--lupa-pos', (LOUPE_SIZE / 2 - x * LOUPE_ZOOM) + 'px ' + (LOUPE_SIZE / 2 - y * LOUPE_ZOOM) + 'px');
   overlayLens.style.left = (e.clientX - LOUPE_SIZE / 2) + 'px';
   overlayLens.style.top = (e.clientY - LOUPE_SIZE / 2) + 'px';
   overlayLens.hidden = false;

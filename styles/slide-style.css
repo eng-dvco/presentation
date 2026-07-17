@@ -1052,16 +1052,31 @@ footer {
   opacity: 0.85;
 }
 
-/* a LENTE: disco que segue o cursor com a imagem ampliada (largura/altura e fundo montados por JS) */
+/* a LENTE: disco que segue o cursor com a imagem ampliada. O anel (borda) é uma ZEBRA
+   diagonal branco+cinza — a MESMA de slide-history.css (corpo "obsoleto"/fade de título):
+   -45deg, superfície muted por baixo e o pinstripe hairline por cima. A foto ampliada vive
+   no ::before (encravado pela espessura do anel), pintada via variáveis CSS que o JS define
+   em moveLupa — assim o JS nunca sobrescreve a zebra do anel. */
 .lightbox-lens {
   position: fixed;
   z-index: 10000;
+  border: 0;
   border-radius: 50%;
-  border: 3px solid var(--color-white);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(0, 0, 0, 0.25);
-  background-color: var(--background-black-alpha-75);
-  background-repeat: no-repeat;
+  background-color: var(--lt-surface-muted);
+  background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--lt-border) 45%, transparent) 0 1.5px, var(--lt-surface) 1.5px 5px);
   pointer-events: none;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: var(--gap-4);   /* espessura do anel da zebra */
+    border-radius: 50%;
+    background-image: var(--lupa-img);
+    background-repeat: no-repeat;
+    background-size: var(--lupa-size);
+    background-position: var(--lupa-pos);
+  }
 
   &[hidden] { display: none; }
 }

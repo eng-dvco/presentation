@@ -655,26 +655,6 @@
   letter-spacing: 0.08em;
 }
 
-/* aviso, ao lado do commit, de que o slide-alvo não existe mais — VERMELHO no preenchimento e no
-   texto (o clique abre o índice, não um 404) */
-.hist-ausente {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--gap-4);
-  padding: 0 var(--gap-6);
-  border-radius: 99px;
-  background: var(--color-red-alpha-25);
-  color: var(--color-red);
-  font-family: var(--font-family-general);
-  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-  font-weight: var(--font-weight-boldest);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-
-.hist-ausente-icon { flex: 0 0 auto; }
-
 /* ── o rótulo da ação (com o ícone dentro) ── */
 .hist-badge {
   display: inline-flex;
@@ -1115,40 +1095,48 @@
 }
 
 /* registro DEFASADO isolado: uma BARRA DE TÍTULO vermelha zebrada no topo + o corpo cinza zebrado. */
+/* BANDA de destaque (obsoleto / indisponível): barra de título zebrada no topo + corpo. A COR é
+   parametrizada por --band-accent: LARANJA para 'obsoleto' (padrão), VERMELHA para 'indisponível'. */
 .hist-obsoleto-band {
+  --band-accent: var(--color-orange);
+  --band-accent-soft: var(--color-orange-alpha-25);
   margin-top: var(--gap-8);
   border-radius: var(--border-smaller);
   overflow: hidden;   /* recorta os dois zebrados aos cantos arredondados */
 }
+/* variante 'slide indisponível': o slide-alvo do registro foi removido → mesma barra, em VERMELHO */
+.hist-obsoleto-band--ausente {
+  --band-accent: var(--color-red);
+  --band-accent-soft: var(--color-red-alpha-25);
+}
 
-/* barra de título "CONTEÚDO OBSOLETO": largura total, zebrado VERMELHO (o tom de "slide indisponível"),
-   com o ícone de obsolescência + rótulo à esquerda e o botão para a versão vigente à direita. */
+/* barra de título: largura total, zebrado na cor do acento, com o ícone + rótulo à esquerda e (no
+   obsoleto) o botão para a versão vigente à direita. */
 .hist-obsoleto-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--gap-4) 0;
-  padding: 0;   /* sem padding: o título vermelho encosta no topo, na base e na borda esquerda da barra */
-  background-color: var(--color-red-alpha-25);
-  background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--color-red) 42%, transparent) 0 1.5px, transparent 1.5px 8px);
+  padding: 0;   /* sem padding: o título encosta no topo, na base e na borda esquerda da barra */
+  background-color: var(--band-accent-soft);
+  background-image: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--band-accent) 42%, transparent) 0 1.5px, transparent 1.5px 8px);
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
-  color: var(--color-red);
+  color: var(--band-accent);
 }
 
-/* o rótulo + ícone recebem o MESMO vermelho do hover do botão, mas como GRADIENTE: opaco atrás do
-   conteúdo e dissolvendo para transparente numa CAUDA à direita (além do texto+ícone, para os últimos
-   caracteres ficarem nítidos no vermelho sólido), mesclando-se ao zebrado da barra. Preenche a altura
-   toda (align-self:stretch) e vai até a borda esquerda (a barra não tem padding). Texto/ícone brancos.
-   (rgba(250,80,80,0) = --color-red com alfa 0: fade limpo, sem escurecer no meio.) */
+/* o rótulo + ícone recebem a cor do acento como GRADIENTE: opaco atrás do conteúdo e dissolvendo para
+   transparente numa CAUDA à direita (para os últimos caracteres ficarem nítidos na cor sólida),
+   mesclando-se ao zebrado. Preenche a altura toda (align-self:stretch) e vai até a borda esquerda (a
+   barra não tem padding). Texto/ícone brancos. */
 .hist-obsoleto-head-title {
   align-self: stretch;
   display: inline-flex;
   align-items: center;
   gap: var(--gap-4);
   padding: var(--gap-4) var(--gap-32) var(--gap-4) var(--gap-8);
-  background: linear-gradient(to right, var(--color-red) calc(100% - var(--gap-32)), rgba(250, 80, 80, 0));
+  background: linear-gradient(to right, var(--band-accent) calc(100% - var(--gap-32)), transparent);
   color: var(--lt-surface);
   font-weight: var(--font-weight-boldest);
   text-transform: uppercase;
@@ -1163,20 +1151,19 @@
   gap: var(--gap-4);
   margin: var(--gap-4) var(--gap-8);   /* respiro próprio: a barra não tem mais padding (título vai às bordas) */
   padding: 1px var(--gap-6);
-  border: 1px solid color-mix(in srgb, var(--color-red) 45%, transparent);
+  border: 1px solid color-mix(in srgb, var(--band-accent) 45%, transparent);
   border-radius: 99px;
   background: var(--lt-surface);
-  color: var(--color-red);
+  color: var(--band-accent);
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 0.15s, border-color 0.15s;
 
-  /* no hover ACENDE em vermelho sólido com texto claro (alto contraste): antes ficava vermelho-claro,
-     o mesmo tom da base do zebrado, e o botão sumia no fundo com o texto vermelho pouco legível. */
+  /* no hover ACENDE na cor sólida com texto claro (alto contraste) */
   &:hover,
   &:focus-visible {
-    background: var(--color-red);
-    border-color: var(--color-red);
+    background: var(--band-accent);
+    border-color: var(--band-accent);
     color: var(--lt-surface);
     outline: none;
   }
@@ -1500,16 +1487,6 @@
   .hist-controls { gap: var(--gap-8); }
   .hist-ctrlset--push { margin-left: 0; }
   .hist-commit { display: none; }
-  /* o commit some no mobile; o aviso "slide indisponível" deixa de ser fixo à direita e FLUI abaixo do
-     topo (alinhado à direita), evitando sobrepor o tipo em telas estreitas */
-  .hist-topinfo--ausente {
-    position: static;
-    justify-content: flex-end;
-    margin-top: var(--gap-4);
-  }
-  /* espaço limitado: o aviso "slide indisponível" fica só com o ícone de vínculo quebrado */
-  .hist-ausente-txt { display: none; }
-  .hist-ausente { padding: var(--gap-2) var(--gap-4); }
   .hist-thumb { width: 52px; height: 39px; }
   /* no máximo 3 miniaturas: esconde da 4ª em diante, troca o "+N" de desktop pelo de mobile (na 3ª) */
   .hist-thumbs .hist-thumb:nth-child(n+4) { display: none; }

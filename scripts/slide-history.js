@@ -265,6 +265,22 @@
     return head;
   }
 
+  // barra de TÍTULO "slide indisponível", no topo do conteúdo do registro cujo slide-alvo foi removido —
+  // MESMO padrão do obsoleto (barra + corpo), porém VERMELHA. Não há botão à direita: não existe destino
+  // para onde ir (o slide não existe mais), então o registro é apenas informativo (inerte).
+  function cabecaIndisponivel() {
+    const head = el('div', 'hist-obsoleto-head');
+    head.title = 'O slide original foi removido — este registro é apenas informativo.';
+    const titulo = el('span', 'hist-obsoleto-head-title');
+    const ico = el('span', 'hist-obsoleto-icon');
+    ico.setAttribute('aria-hidden', 'true');
+    ico.innerHTML = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18.84 12.25 1.72-1.71a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="2" y1="8" x2="5" y2="8"/><line x1="16" y1="19" x2="16" y2="22"/><line x1="19" y1="16" x2="22" y2="16"/></svg>';
+    titulo.appendChild(ico);
+    titulo.appendChild(el('span', 'hist-obsoleto-head-txt', 'slide indisponível'));
+    head.appendChild(titulo);
+    return head;
+  }
+
   // ── corpo de UMA parte (tipo + conteúdo). `r` dá o contexto de clique/href do cartão inteiro. ──
   function corpoParte(a, r, p) {
     const temDelta = p.de != null && p.para != null && p.de !== p.para;
@@ -446,30 +462,21 @@
     topo.appendChild(el('span', 'hist-type', r.tipo));
     a.appendChild(topo);
 
-    // canto superior direito: aviso "slide indisponível" (se o slide-alvo sumiu) + o código do commit.
-    // No desktop fica fixo à direita, ao lado do commit; no mobile FLUI abaixo do topo (evita sobrepor
-    // o tipo em telas estreitas).
-    const canto = el('div', 'hist-topinfo' + (r.alvoAusente ? ' hist-topinfo--ausente' : ''));
-    if (r.alvoAusente) {
-      const av = el('span', 'hist-ausente');
-      av.title = 'O slide original foi removido — este registro é apenas informativo.';
-      // ícone de VÍNCULO QUEBRADO + rótulo; no mobile fica só o ícone (espaço limitado)
-      av.innerHTML = '<svg class="hist-ausente-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="2" y1="8" x2="5" y2="8"/><line x1="16" y1="19" x2="16" y2="22"/><line x1="19" y1="16" x2="22" y2="16"/></svg>';
-      av.appendChild(el('span', 'hist-ausente-txt', 'slide indisponível'));
-      canto.appendChild(av);
-    }
+    // canto superior direito: apenas o código do commit. O aviso "slide indisponível" deixou de ser um
+    // marcador de canto e virou a BARRA DE TÍTULO do conteúdo (ver cabecaIndisponivel + a banda abaixo).
+    const canto = el('div', 'hist-topinfo');
     canto.appendChild(el('span', 'hist-commit', r.commit));
     a.appendChild(canto);
 
     // sem título quando ele só repetiria o que já está à vista:
     //  • transferência (r.titulo já vem nulo);
-    //  • modificação de título ou de NOME DO SLIDE (o "para" do de→para já é o novo valor), só de
-    //    observação, ou de imagens + observação (a legenda vinculada às imagens já se identifica);
+    //  • modificação de título, subtítulo ou NOME DO SLIDE (o "para" do de→para já é o novo valor), só de
+    //    observação, ou de IMAGENS (a legenda das imagens já se identifica e o subtítulo já vem no breadcrumb);
     //  • adição de subtítulo, imagens ou SLIDE inteiro (o título repete a atividade/slide, já no breadcrumb);
     //  • deleção de subtítulo (o "de" do de→para já mostra o subtítulo removido).
     const t = tiposDe(r);
     const semTitulo =
-      (r.acao === 'modificação' && (t.includes('título') || t.includes('subtítulo') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação') || (t.includes('imagens') && t.includes('observação')))) ||
+      (r.acao === 'modificação' && (t.includes('título') || t.includes('subtítulo') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação') || t.includes('imagens'))) ||
       (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens') || t.includes('slide'))) ||
       (r.acao === 'deleção' && t.includes('subtítulo'));
     if (r.titulo && !semTitulo) a.appendChild(el('h3', 'hist-card-title', r.titulo));
@@ -496,6 +503,17 @@
     // alterações com corpo, cada uma vira um bloco ROTULADO com o seu elemento (ex.: distinguir
     // "nome do slide" de "título", que de outra forma pareceriam duplicados) — à mesma distância
     // que separa os subcontainers "de" e "para". Uma parte só, ou registro simples, vai sem rótulo.
+    // INDISPONÍVEL: o conteúdo (partes) entra numa BANDA — mesmo padrão do 'obsoleto' (barra de título
+    // + corpo), porém VERMELHA. Título e breadcrumb ficam FORA dela (a identidade do registro); a banda
+    // envolve só o corpo, com a barra "slide indisponível" no topo.
+    let alvo = a;
+    if (r.alvoAusente) {
+      const band = el('div', 'hist-obsoleto-band hist-obsoleto-band--ausente');
+      band.appendChild(cabecaIndisponivel());
+      alvo = el('div', 'hist-obsoleto-body');
+      band.appendChild(alvo);
+      a.appendChild(band);
+    }
     const partes = partesDe(r);
     if (partes.length > 1) {
       const ehDelta = p => p.de != null && p.para != null && p.de !== p.para;
@@ -507,16 +525,16 @@
         if (rotular && ehDelta(p)) {
           const w = el('div', 'hist-parte');
           corpoParte(w, r, p);
-          if (w.childElementCount) { w.insertBefore(el('span', 'hist-parte-tipo', p.tipo), w.firstChild); a.appendChild(w); }
+          if (w.childElementCount) { w.insertBefore(el('span', 'hist-parte-tipo', p.tipo), w.firstChild); alvo.appendChild(w); }
         } else {
-          corpoParte(a, r, p);
+          corpoParte(alvo, r, p);
         }
       });
     } else {
-      corpoParte(a, r, partes[0]);
+      corpoParte(alvo, r, partes[0]);
     }
 
-    if (r.curadoria) a.appendChild(el('p', 'hist-nota', r.curadoria));
+    if (r.curadoria) alvo.appendChild(el('p', 'hist-nota', r.curadoria));
     return a;
   }
 

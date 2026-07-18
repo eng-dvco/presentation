@@ -1,9 +1,79 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "17-07-26",
- "commits": 171,
- "total": 474,
+ "geradoEm": "18-07-26",
+ "commits": 173,
+ "total": 477,
  "registros": [
+  {
+   "id": "e9ce7cf-2",
+   "data": "18-07-26",
+   "hora": "12:25",
+   "commit": "e9ce7cf",
+   "aba": "conteudo",
+   "link": "slides/slide-measurements.html",
+   "acao": "transferência",
+   "tipo": "imagens",
+   "titulo": null,
+   "breadcrumb": [
+    "SE — Subestação",
+    "Aferições em baterias",
+    "Bateria do GMG"
+   ],
+   "de": "SE — Subestação › Aferições em baterias › Bateria do GMG (Grupo Motor-Gerador)",
+   "para": "SE — Subestação › Aferições em baterias › Bateria do GMG",
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "84 KB",
+    "amostra": [
+     {
+      "nome": "measurement-1.jpeg",
+      "src": "assets/img/slides/se/measurements/measurement-1.jpeg",
+      "miniatura": "assets/img/slides/se/measurements/measurement-1-200.webp",
+      "peso": "47 KB"
+     },
+     {
+      "nome": "measurement-2.jpeg",
+      "src": "assets/img/slides/se/measurements/measurement-2.jpeg",
+      "miniatura": "assets/img/slides/se/measurements/measurement-2-200.webp",
+      "peso": "37 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2
+  },
+  {
+   "id": "e9ce7cf-1",
+   "data": "18-07-26",
+   "hora": "12:25",
+   "commit": "e9ce7cf",
+   "aba": "conteudo",
+   "link": "slides/slide-measurements.html",
+   "acao": "deleção",
+   "tipo": "subtítulo",
+   "titulo": "Bateria do GMG (Grupo Motor-Gerador)",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Aferições em baterias",
+    "Bateria do GMG (Grupo Motor-Gerador)"
+   ]
+  },
+  {
+   "id": "e9ce7cf-0",
+   "data": "18-07-26",
+   "hora": "12:25",
+   "commit": "e9ce7cf",
+   "aba": "conteudo",
+   "link": "slides/slide-measurements.html",
+   "acao": "adição",
+   "tipo": "subtítulo",
+   "titulo": "Bateria do GMG",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Aferições em baterias",
+    "Bateria do GMG"
+   ]
+  },
   {
    "id": "cb39ca2-1",
    "data": "17-07-26",
@@ -1145,7 +1215,8 @@
     "tamanho": "4,8 MB",
     "paginas": "3",
     "inserido": "28-04-26",
-    "descricao": "Torre 43/2: novas fissuras na fundação; provável retração hidráulica."
+    "descricao": "Torre 43/2: novas fissuras na fundação; provável retração hidráulica.",
+    "slide": "slides/slide-concrete-base-repair.html"
    },
    "campos": [
     "descricao"
@@ -1184,7 +1255,8 @@
     "tamanho": "19,4 MB",
     "paginas": "7",
     "inserido": "23-03-26",
-    "descricao": "Inspeção FIP-010 na SE-E5: TRRD fora de operação e placas ilegíveis."
+    "descricao": "Inspeção FIP-010 na SE-E5: TRRD fora de operação e placas ilegíveis.",
+    "slide": "slides/slide-tag-replacement.html"
    },
    "campos": [
     "descricao"
@@ -1213,7 +1285,8 @@
     "tamanho": "21,3 MB",
     "paginas": "7",
     "inserido": "06-11-25",
-    "descricao": "Inspeção da LT 230 kV (SE-E4/SE-E6): placas faltantes em 47/2 e 49/1."
+    "descricao": "Inspeção da LT 230 kV (SE-E4/SE-E6): placas faltantes em 47/2 e 49/1.",
+    "slide": "slides/slide-tower-identification.html"
    },
    "campos": [
     "descricao"
@@ -2740,7 +2813,8 @@
     "tamanho": "57 KB",
     "paginas": "—",
     "inserido": "18-06-26",
-    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa."
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+    "slide": "slides/slide-rdc-control.html"
    },
    "campos": [
     "tamanho"
@@ -2779,7 +2853,8 @@
     "tamanho": "34 KB",
     "paginas": "—",
     "inserido": "15-06-26",
-    "descricao": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico."
+    "descricao": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico.",
+    "slide": "slides/slide-tower-identification.html"
    },
    "campos": [
     "tamanho"
@@ -2870,7 +2945,8 @@
     "tamanho": "782 KB",
     "paginas": "—",
     "inserido": "15-06-26",
-    "descricao": "Cronograma das atividades de manutenção das torres estaiadas da linha."
+    "descricao": "Cronograma das atividades de manutenção das torres estaiadas da linha.",
+    "slide": "slides/slide-tl-stay-recovery.html"
    }
   },
   {
@@ -2970,7 +3046,8 @@
     "tamanho": "202 KB",
     "paginas": "—",
     "inserido": "18-06-26",
-    "descricao": "Imagem com o quantitativo de estruturas da LT por tipo e trecho, nos eixos Norte e Leste."
+    "descricao": "Imagem com o quantitativo de estruturas da LT por tipo e trecho, nos eixos Norte e Leste.",
+    "slide": "slides/slide-structures-quantity.html"
    }
   },
   {
@@ -3357,7 +3434,8 @@
     "tamanho": "179 KB",
     "paginas": "—",
     "inserido": "01-07-26",
-    "descricao": "Painel de controle dos relatórios de campo (RDC) por trecho e eixo (Norte e Leste), com totais por status: concluída, em execução e pendente."
+    "descricao": "Painel de controle dos relatórios de campo (RDC) por trecho e eixo (Norte e Leste), com totais por status: concluída, em execução e pendente.",
+    "slide": "slides/slide-rdc-control.html"
    },
    "campos": [
     "versao"
@@ -3416,7 +3494,8 @@
     "tamanho": "179 KB",
     "paginas": "—",
     "inserido": "01-07-26",
-    "descricao": "Painel de controle dos relatórios de campo (RDC) por trecho e eixo (Norte e Leste), com totais por status: concluída, em execução e pendente."
+    "descricao": "Painel de controle dos relatórios de campo (RDC) por trecho e eixo (Norte e Leste), com totais por status: concluída, em execução e pendente.",
+    "slide": "slides/slide-rdc-control.html"
    }
   },
   {
@@ -3439,7 +3518,8 @@
     "tamanho": "56 KB",
     "paginas": "—",
     "inserido": "18-06-26",
-    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa."
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+    "slide": "slides/slide-rdc-control.html"
    },
    "campos": [
     "versao",
@@ -4981,7 +5061,7 @@
    "hora": "06:54",
    "commit": "3442081",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Furto de varigrip",
@@ -5615,7 +5695,7 @@
    "hora": "06:54",
    "commit": "3442081",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Aferição de resistências",
@@ -5932,7 +6012,7 @@
    "hora": "06:54",
    "commit": "3442081",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "imagens",
    "titulo": "Meio-fio e canaleta",
@@ -6233,7 +6313,7 @@
    "hora": "06:54",
    "commit": "3442081",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Correção de ponto quente",
@@ -6691,7 +6771,7 @@
    "hora": "09:13",
    "commit": "8aa9db2",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Regulagem de chave-faca",
@@ -6708,7 +6788,7 @@
    "hora": "09:13",
    "commit": "8aa9db2",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Manutenção na ancoragem",
@@ -6725,7 +6805,7 @@
    "hora": "09:13",
    "commit": "8aa9db2",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Remoção de resíduos de ninho",
@@ -6742,7 +6822,7 @@
    "hora": "09:13",
    "commit": "8aa9db2",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Recomposição da malha de aterramento",
@@ -6759,7 +6839,7 @@
    "hora": "09:13",
    "commit": "8aa9db2",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Substituição de chave fusível",
@@ -6776,7 +6856,7 @@
    "hora": "09:13",
    "commit": "8aa9db2",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Retensionamento de estai",
@@ -6830,7 +6910,8 @@
     "tamanho": "7,1 MB",
     "paginas": "—",
     "inserido": "18-06-26",
-    "descricao": "Planilha de controle das pendências gerais de materiais e equipamentos do PISF: itens, criticidade, marca/modelo e quantidades por subestação (eixos Norte e Leste), com valores unitário e total."
+    "descricao": "Planilha de controle das pendências gerais de materiais e equipamentos do PISF: itens, criticidade, marca/modelo e quantidades por subestação (eixos Norte e Leste), com valores unitário e total.",
+    "slide": "slides/slide-pisf-situation-overview.html"
    }
   },
   {
@@ -7513,7 +7594,7 @@
       "nome": "thermo-22.jpeg",
       "src": "assets/img/slides/se/thermography-inspection/thermo-22.jpeg",
       "miniatura": "assets/img/slides/se/thermography-inspection/thermo-22-200.webp",
-      "peso": "213 KB"
+      "peso": "202 KB"
      }
     ],
     "extras": 0
@@ -8274,7 +8355,7 @@
    "hora": "15:31",
    "commit": "1827a19",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "observação",
    "titulo": "Seccionadoras (microhmímetro)",
@@ -8317,7 +8398,7 @@
    "hora": "15:31",
    "commit": "1827a19",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "breadcrumb": [
     "SE — Subestação",
@@ -8892,7 +8973,7 @@
    "hora": "15:31",
    "commit": "1827a19",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "observação",
    "titulo": "Identificado com termografia",
@@ -9711,7 +9792,8 @@
     "tamanho": "19 KB",
     "paginas": "—",
     "inserido": "15-06-26",
-    "descricao": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico."
+    "descricao": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico.",
+    "slide": "slides/slide-tower-identification.html"
    }
   },
   {
@@ -9965,7 +10047,7 @@
         "nome": "thermo-22.jpeg",
         "src": "assets/img/slides/se/thermography-inspection/thermo-22.jpeg",
         "miniatura": "assets/img/slides/se/thermography-inspection/thermo-22-200.webp",
-        "peso": "213 KB"
+        "peso": "202 KB"
        }
       ],
       "extras": 0
@@ -9980,7 +10062,7 @@
       "nome": "thermo-22.jpeg",
       "src": "assets/img/slides/se/thermography-inspection/thermo-22.jpeg",
       "miniatura": "assets/img/slides/se/thermography-inspection/thermo-22-200.webp",
-      "peso": "213 KB"
+      "peso": "202 KB"
      }
     ],
     "extras": 0
@@ -10075,7 +10157,8 @@
     "tamanho": "997 KB",
     "paginas": "2",
     "inserido": "11/06/2026",
-    "descricao": "Relatório de saúde do transformador 6TR2 (SE-N3): expectativa de vida e diagnóstico de falha térmica T2 (ponto quente 300–700 °C)."
+    "descricao": "Relatório de saúde do transformador 6TR2 (SE-N3): expectativa de vida e diagnóstico de falha térmica T2 (ponto quente 300–700 °C).",
+    "slide": "slides/slide-oil-analysis.html"
    },
    "campos": [
     "descricao"
@@ -10104,7 +10187,8 @@
     "tamanho": "1,1 MB",
     "paginas": "2",
     "inserido": "11/06/2026",
-    "descricao": "Relatório de saúde do transformador 6TR1 (SE-N3): expectativa de vida, status e diagnóstico via análise de gases dissolvidos."
+    "descricao": "Relatório de saúde do transformador 6TR1 (SE-N3): expectativa de vida, status e diagnóstico via análise de gases dissolvidos.",
+    "slide": "slides/slide-oil-analysis.html"
    },
    "campos": [
     "descricao"
@@ -10133,7 +10217,8 @@
     "tamanho": "1,0 MB",
     "paginas": "2",
     "inserido": "11/06/2026",
-    "descricao": "Relatório de saúde do transformador 6TR1 (SE-N2): expectativa de vida, status e diagnóstico via análise de gases dissolvidos."
+    "descricao": "Relatório de saúde do transformador 6TR1 (SE-N2): expectativa de vida, status e diagnóstico via análise de gases dissolvidos.",
+    "slide": "slides/slide-oil-analysis.html"
    },
    "campos": [
     "descricao"
@@ -10162,7 +10247,8 @@
     "tamanho": "832 KB",
     "paginas": "2",
     "inserido": "11/06/2026",
-    "descricao": "Relatório de saúde do transformador 6TR1 (SE-N1): expectativa de vida, status de envelhecimento e diagnóstico de falha térmica."
+    "descricao": "Relatório de saúde do transformador 6TR1 (SE-N1): expectativa de vida, status de envelhecimento e diagnóstico de falha térmica.",
+    "slide": "slides/slide-oil-analysis.html"
    },
    "campos": [
     "descricao"
@@ -10191,7 +10277,8 @@
     "tamanho": "15,3 MB",
     "paginas": "14",
     "inserido": "11/06/2026",
-    "descricao": "Apresentação didática sobre DGA (análise de gases dissolvidos) e furfural no óleo isolante de transformadores: geração de gases por temperatura e falhas detectáveis."
+    "descricao": "Apresentação didática sobre DGA (análise de gases dissolvidos) e furfural no óleo isolante de transformadores: geração de gases por temperatura e falhas detectáveis.",
+    "slide": "slides/slide-oil-analysis.html"
    },
    "campos": [
     "descricao"
@@ -10220,7 +10307,8 @@
     "tamanho": "12 KB",
     "paginas": "—",
     "inserido": "02/06/2026",
-    "descricao": "Tabela com a quilometragem dos acessos manutenidos."
+    "descricao": "Tabela com a quilometragem dos acessos manutenidos.",
+    "slide": "slides/slide-lt-maintenance-general.html"
    },
    "campos": [
     "descricao"
@@ -10249,7 +10337,8 @@
     "tamanho": "1,8 MB",
     "paginas": "—",
     "inserido": "11/06/2026",
-    "descricao": "Controle do volume de brita recomposta nas subestações Norte (SE-N1, N2, N3), com registro de fotos antes e depois."
+    "descricao": "Controle do volume de brita recomposta nas subestações Norte (SE-N1, N2, N3), com registro de fotos antes e depois.",
+    "slide": "slides/slide-crushed-stone.html"
    },
    "campos": [
     "descricao"
@@ -10278,7 +10367,8 @@
     "tamanho": "39 KB",
     "paginas": "—",
     "inserido": "18/06/2026",
-    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa."
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+    "slide": "slides/slide-rdc-control.html"
    }
   },
   {
@@ -10330,7 +10420,8 @@
     "tamanho": "1,1 MB",
     "paginas": "—",
     "inserido": "15/06/2026",
-    "descricao": "Painel de controle do reforço estrutural das torres autoportantes dos eixos Leste e Norte, com dashboards e status das bases."
+    "descricao": "Painel de controle do reforço estrutural das torres autoportantes dos eixos Leste e Norte, com dashboards e status das bases.",
+    "slide": "slides/slide-concrete-base-repair.html"
    },
    "campos": [
     "descricao"
@@ -10508,7 +10599,8 @@
     "tamanho": "233 KB",
     "paginas": "2",
     "inserido": "01/06/2026",
-    "descricao": "Quantitativos de manutenções nas bases das torres estaiadas e autoportantes, por trecho e eixo."
+    "descricao": "Quantitativos de manutenções nas bases das torres estaiadas e autoportantes, por trecho e eixo.",
+    "slide": "slides/slide-concrete-base-repair.html"
    },
    "campos": [
     "descricao"
@@ -10537,7 +10629,8 @@
     "tamanho": "277 KB",
     "paginas": "3",
     "inserido": "02/06/2026",
-    "descricao": "Quantitativos de manutenções nas ancoragens das torres estaiadas, detalhados por trecho e eixo."
+    "descricao": "Quantitativos de manutenções nas ancoragens das torres estaiadas, detalhados por trecho e eixo.",
+    "slide": "slides/slide-tl-stay-recovery.html"
    },
    "campos": [
     "descricao"
@@ -10566,7 +10659,8 @@
     "tamanho": "223 KB",
     "paginas": "4",
     "inserido": "28/05/2026",
-    "descricao": "Listagem das estruturas por trecho e tensão (230 kV e 69 kV), com identificação e modelo."
+    "descricao": "Listagem das estruturas por trecho e tensão (230 kV e 69 kV), com identificação e modelo.",
+    "slide": "slides/slide-structures-list.html"
    },
    "campos": [
     "descricao"
@@ -10595,7 +10689,8 @@
     "tamanho": "829 KB",
     "paginas": "5",
     "inserido": "01/06/2026",
-    "descricao": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste."
+    "descricao": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste.",
+    "slide": "slides/slide-structures-diagram.html"
    },
    "campos": [
     "descricao"
@@ -10653,7 +10748,8 @@
     "tamanho": "11,2 MB",
     "paginas": "14",
     "inserido": "19/05/2026",
-    "descricao": "Ficha-modelo da atividade de instalação de placa de identificação."
+    "descricao": "Ficha-modelo da atividade de instalação de placa de identificação.",
+    "slide": "slides/slide-tower-identification.html"
    },
    "campos": [
     "descricao"
@@ -10682,7 +10778,8 @@
     "tamanho": "871 KB",
     "paginas": "1",
     "inserido": "19/05/2026",
-    "descricao": "Ficha de atividade: instalação de placa de identificação na torre 49-1."
+    "descricao": "Ficha de atividade: instalação de placa de identificação na torre 49-1.",
+    "slide": "slides/slide-tower-identification.html"
    },
    "campos": [
     "descricao"
@@ -10740,7 +10837,8 @@
     "tamanho": "2,6 MB",
     "paginas": "2",
     "inserido": "20/05/2026",
-    "descricao": "Ficha de atividade: aplicação de vedapren para vedação de bases com trinca."
+    "descricao": "Ficha de atividade: aplicação de vedapren para vedação de bases com trinca.",
+    "slide": "slides/slide-waterproofing.html"
    },
    "campos": [
     "descricao"
@@ -10769,7 +10867,8 @@
     "tamanho": "4,8 MB",
     "paginas": "3",
     "inserido": "28/04/2026",
-    "descricao": "Assunto: inspeção de manutenção civil na Torre 43/2 da LT 230 kV (WBS 2825). Acompanhamento de fissuras nos blocos de fundação; surgimento de novas fissuras superficiais, com hipótese de retração hidráulica por falha de cura."
+    "descricao": "Assunto: inspeção de manutenção civil na Torre 43/2 da LT 230 kV (WBS 2825). Acompanhamento de fissuras nos blocos de fundação; surgimento de novas fissuras superficiais, com hipótese de retração hidráulica por falha de cura.",
+    "slide": "slides/slide-concrete-base-repair.html"
    },
    "campos": [
     "descricao"
@@ -10802,7 +10901,8 @@
     "tamanho": "19,4 MB",
     "paginas": "7",
     "inserido": "23/03/2026",
-    "descricao": "Assunto: inspeção técnica da Subestação SE-E5 (WBS 2817) para a Ficha de Inspeção Periódica FIP-010. Painéis, pátio e transformador conformes; não conformidade no transformador TRRD fora de operação, ninhos de pássaro e placas ilegíveis."
+    "descricao": "Assunto: inspeção técnica da Subestação SE-E5 (WBS 2817) para a Ficha de Inspeção Periódica FIP-010. Painéis, pátio e transformador conformes; não conformidade no transformador TRRD fora de operação, ninhos de pássaro e placas ilegíveis.",
+    "slide": "slides/slide-tag-replacement.html"
    }
   },
   {
@@ -10825,7 +10925,8 @@
     "tamanho": "21,3 MB",
     "paginas": "7",
     "inserido": "06/11/2025",
-    "descricao": "Assunto: inspeção da LT 230 kV entre SE-E4 e SE-E6 (WBS 2825), estruturas 47 a 50. Sem anomalias estruturais; única não conformidade: ausência da placa de identificação superior nas torres 47/2 e 49/1."
+    "descricao": "Assunto: inspeção da LT 230 kV entre SE-E4 e SE-E6 (WBS 2825), estruturas 47 a 50. Sem anomalias estruturais; única não conformidade: ausência da placa de identificação superior nas torres 47/2 e 49/1.",
+    "slide": "slides/slide-tower-identification.html"
    }
   },
   {
@@ -11056,7 +11157,7 @@
    "hora": "14:06",
    "commit": "ba09017",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "transferência",
    "tipo": "imagens",
    "titulo": null,
@@ -11513,7 +11614,7 @@
    "hora": "14:06",
    "commit": "ba09017",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Furto de varigrip",
@@ -11562,7 +11663,7 @@
    "hora": "14:06",
    "commit": "ba09017",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "subtítulo",
    "titulo": "Meio-fio e canaleta",
@@ -11579,7 +11680,7 @@
    "hora": "14:06",
    "commit": "ba09017",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "breadcrumb": [
     "SE — Subestação",
@@ -13016,7 +13117,7 @@
    "hora": "16:31",
    "commit": "4cf0728",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "imagens",
    "titulo": "Chave-seccionadora",
@@ -13067,7 +13168,8 @@
     "tamanho": "997 KB",
     "paginas": "2",
     "inserido": "11/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-oil-analysis.html"
    }
   },
   {
@@ -13090,7 +13192,8 @@
     "tamanho": "1,1 MB",
     "paginas": "2",
     "inserido": "11/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-oil-analysis.html"
    }
   },
   {
@@ -13113,7 +13216,8 @@
     "tamanho": "1,0 MB",
     "paginas": "2",
     "inserido": "11/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-oil-analysis.html"
    }
   },
   {
@@ -13136,7 +13240,8 @@
     "tamanho": "832 KB",
     "paginas": "2",
     "inserido": "11/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-oil-analysis.html"
    }
   },
   {
@@ -13159,7 +13264,8 @@
     "tamanho": "15,3 MB",
     "paginas": "14",
     "inserido": "11/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-oil-analysis.html"
    }
   },
   {
@@ -13182,7 +13288,8 @@
     "tamanho": "12 KB",
     "paginas": "—",
     "inserido": "02/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-lt-maintenance-general.html"
    }
   },
   {
@@ -13205,7 +13312,8 @@
     "tamanho": "1,8 MB",
     "paginas": "—",
     "inserido": "11/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-crushed-stone.html"
    }
   },
   {
@@ -13320,7 +13428,8 @@
     "tamanho": "1,1 MB",
     "paginas": "—",
     "inserido": "15/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-concrete-base-repair.html"
    }
   },
   {
@@ -13435,7 +13544,8 @@
     "tamanho": "233 KB",
     "paginas": "2",
     "inserido": "01/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-concrete-base-repair.html"
    }
   },
   {
@@ -13458,7 +13568,8 @@
     "tamanho": "277 KB",
     "paginas": "3",
     "inserido": "02/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-tl-stay-recovery.html"
    }
   },
   {
@@ -13481,7 +13592,8 @@
     "tamanho": "223 KB",
     "paginas": "4",
     "inserido": "28/05/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-structures-list.html"
    }
   },
   {
@@ -13504,7 +13616,8 @@
     "tamanho": "829 KB",
     "paginas": "5",
     "inserido": "01/06/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-structures-diagram.html"
    }
   },
   {
@@ -13550,7 +13663,8 @@
     "tamanho": "11,2 MB",
     "paginas": "14",
     "inserido": "19/05/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-tower-identification.html"
    }
   },
   {
@@ -13573,7 +13687,8 @@
     "tamanho": "871 KB",
     "paginas": "1",
     "inserido": "19/05/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-tower-identification.html"
    }
   },
   {
@@ -13619,7 +13734,8 @@
     "tamanho": "2,6 MB",
     "paginas": "2",
     "inserido": "20/05/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-waterproofing.html"
    }
   },
   {
@@ -13642,7 +13758,8 @@
     "tamanho": "4,8 MB",
     "paginas": "3",
     "inserido": "28/04/2026",
-    "descricao": "descrição não fornecida"
+    "descricao": "descrição não fornecida",
+    "slide": "slides/slide-concrete-base-repair.html"
    }
   },
   {
@@ -13763,7 +13880,7 @@
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "transferência",
    "tipo": "imagens",
    "titulo": null,
@@ -13958,7 +14075,7 @@
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "subtítulo",
    "titulo": "Seccionadoras (micro-ohmímetro)",
@@ -13975,7 +14092,7 @@
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "subtítulo",
    "titulo": "Seccionadoras (microhmímetro)",
@@ -14076,7 +14193,7 @@
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "imagens",
    "titulo": "Execução",
@@ -14254,7 +14371,7 @@
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "título",
    "titulo": "Revitalização da pintura",
@@ -14361,7 +14478,7 @@
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Correção de ponto quente",
@@ -14404,7 +14521,7 @@
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "imagens",
    "titulo": "Chave-seccionadora",
@@ -14516,7 +14633,7 @@
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "imagens",
    "titulo": "Retificador",
@@ -15299,7 +15416,7 @@
    "hora": "15:35",
    "commit": "4ceac6f",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "imagens",
    "titulo": "Cubículo de 6,9 kV (megômetro)",
@@ -15361,7 +15478,7 @@
    "hora": "15:35",
    "commit": "4ceac6f",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "breadcrumb": [
     "SE — Subestação",
@@ -15434,7 +15551,7 @@
    "hora": "15:35",
    "commit": "4ceac6f",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "título",
    "titulo": "Aferição de resistências",
@@ -15462,7 +15579,7 @@
    "hora": "15:35",
    "commit": "4ceac6f",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Restauração de pintura",
@@ -15543,7 +15660,7 @@
    "hora": "15:35",
    "commit": "4ceac6f",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Limpeza e verificação de equipamentos",
@@ -15598,7 +15715,7 @@
    "hora": "15:35",
    "commit": "4ceac6f",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Substituição de componentes",
@@ -15744,7 +15861,7 @@
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "transferência",
    "tipo": "imagens",
    "titulo": null,
@@ -15789,7 +15906,7 @@
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "transferência",
    "tipo": "imagens",
    "titulo": null,
@@ -15878,7 +15995,7 @@
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "subtítulo",
    "titulo": "Seccionadoras",
@@ -15895,7 +16012,7 @@
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "subtítulo",
    "titulo": "Cubículo de 6,9 kV",
@@ -15912,7 +16029,7 @@
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "subtítulo",
    "titulo": "Seccionadoras (micro-ohmímetro)",
@@ -15929,7 +16046,7 @@
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "subtítulo",
    "titulo": "Cubículo de 6,9 kV (megômetro)",
@@ -15946,7 +16063,7 @@
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "título",
    "titulo": "Medição de resistência de isolamento",
@@ -16000,7 +16117,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "transferência",
    "tipo": "imagens",
    "titulo": null,
@@ -16083,7 +16200,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "subtítulo",
    "titulo": "Execução da limpeza",
@@ -16100,7 +16217,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "breadcrumb": [
     "SE — Subestação",
@@ -16144,7 +16261,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "breadcrumb": [
     "SE — Subestação",
@@ -16261,7 +16378,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "breadcrumb": [
     "SE — Subestação",
@@ -16323,7 +16440,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "subtítulo",
    "titulo": "Buchas do transformador",
@@ -16340,7 +16457,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "título",
    "titulo": "Limpeza e verificação de equipamentos",
@@ -16472,7 +16589,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Verificação e limpeza em chave-seccionadora",
@@ -16489,7 +16606,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Limpeza em retificador",
@@ -16506,7 +16623,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Limpeza de isoladores",
@@ -16523,7 +16640,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "modificação",
    "tipo": "imagens",
    "titulo": "Cabana no pátio energizado",
@@ -16562,7 +16679,7 @@
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Reposição de meio-fio e canaleta",
@@ -16617,7 +16734,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "transferência",
    "tipo": "imagens",
    "titulo": null,
@@ -16656,7 +16773,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "transferência",
    "tipo": "imagens",
    "titulo": null,
@@ -16707,7 +16824,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Verificação e limpeza em chave-seccionadora",
@@ -16756,7 +16873,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Reaperto de conectores e bornes",
@@ -16805,7 +16922,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Medição de resistência",
@@ -16860,7 +16977,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "imagens",
    "titulo": "Resíduos identificados",
@@ -16986,7 +17103,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Limpeza de isoladores",
@@ -17017,7 +17134,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "subtítulo",
    "titulo": "Equipamento substituído",
@@ -17034,7 +17151,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "breadcrumb": [
     "LD — Distribuição",
@@ -17084,7 +17201,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "subtítulo",
    "titulo": "Processo do retensionamento",
@@ -17101,7 +17218,7 @@
    "hora": "16:15",
    "commit": "1f12366",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "breadcrumb": [
     "LT — Transmissão",
@@ -17637,7 +17754,7 @@
        {
         "nome": "cpisf-erosion-request.png",
         "src": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request.png",
-        "miniatura": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request.png",
+        "miniatura": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request-200.webp",
         "peso": "62 KB"
        }
       ],
@@ -17652,7 +17769,7 @@
      {
       "nome": "cpisf-erosion-request.png",
       "src": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request.png",
-      "miniatura": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request.png",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request-200.webp",
       "peso": "62 KB"
      },
      {
@@ -18272,7 +18389,7 @@
    "hora": "09:19",
    "commit": "5f19cc2",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "deleção",
    "tipo": "slide",
    "titulo": "Supressão mecânica de vegetação",
@@ -18337,7 +18454,7 @@
    "hora": "08:36",
    "commit": "ecaac0d",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Restauração de pintura",
@@ -18374,7 +18491,7 @@
    "hora": "08:36",
    "commit": "ecaac0d",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Recomposição da malha de aterramento",
@@ -18703,7 +18820,7 @@
    "hora": "14:59",
    "commit": "f75b09c",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Correção de oxidação",
@@ -18850,7 +18967,7 @@
    "hora": "14:59",
    "commit": "f75b09c",
    "aba": "conteudo",
-   "link": "slides/index.html",
+   "link": null,
    "acao": "adição",
    "tipo": "slide",
    "titulo": "Inspeção do disjuntor DJ6-02",
@@ -19076,7 +19193,82 @@
  ],
  "funcoes": [
   {
-   "id": "fn-35",
+   "id": "fn-45",
+   "aba": "funcoes",
+   "data": "18-07-26",
+   "hora": "11:20",
+   "acao": "implementada",
+   "tipo": "aparência",
+   "titulo": "Post-scriptum de subseção nos mosaicos",
+   "resumo": "Uma observação que valha manter, mas que — repetida sob cada miniatura — poluiria o mosaico ou encobriria a base das imagens, passa a poder virar um post-scriptum: uma nota logo abaixo das imagens da subseção. Estreou na vedação polimérica das portas, na revitalização da subestação.",
+   "link": "slides/slide-substation-restoration.html",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Revitalização geral"
+   ]
+  },
+  {
+   "id": "fn-44",
+   "aba": "funcoes",
+   "data": "18-07-26",
+   "hora": "11:10",
+   "acao": "implementada",
+   "tipo": "usabilidade",
+   "titulo": "Banner informativo expansível",
+   "resumo": "O banner de informativo dos slides tem um teto de 3 linhas; ao estreitar a viewport, o texto podia ficar cortado. Quando (e só quando) isso acontece, o banner passa a ser clicável: um toque expande e revela todo o conteúdo, outro colapsa. Vale para qualquer slide que traga esse banner.",
+   "link": "slides/slide-gmg-maintenance.html",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Manutenção no GMG"
+   ]
+  },
+  {
+   "id": "fn-43",
+   "aba": "funcoes",
+   "data": "18-07-26",
+   "hora": "11:00",
+   "acao": "aperfeiçoada",
+   "tipo": "correção",
+   "titulo": "Registros de slides removidos tornam-se inertes",
+   "resumo": "Quando o slide de um registro antigo não existe mais — arquivo removido ou renomeado —, o registro deixa de ser clicável: não leva a lugar nenhum. Antes redirecionava ao índice, o que sugeria falsamente que a alteração tinha ocorrido no destino do link. Ele exibe, ao lado do código do commit, um marcador vermelho “slide indisponível”.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Navegação"
+   ]
+  },
+  {
+   "id": "fn-42",
+   "aba": "funcoes",
+   "data": "18-07-26",
+   "hora": "10:00",
+   "acao": "implementada",
+   "tipo": "navegação",
+   "titulo": "Atalho da badge de extensão ao slide, no histórico",
+   "resumo": "Nos registros de documentos, a badge que indica a extensão do arquivo (PDF) virou um atalho: ao pairar, troca por uma seta e leva ao slide relacionado — a mesma função da listagem de documentos do índice, agora reaproveitada no histórico. Cobre 47 documentos; o cartão em si continua abrindo a listagem.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Navegação"
+   ]
+  },
+  {
+   "id": "fn-41",
+   "aba": "funcoes",
+   "data": "18-07-26",
+   "hora": "09:50",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Miniaturas padronizadas e limitadas a 3 em telas pequenas",
+   "resumo": "As miniaturas dos registros foram uniformizadas no maior tamanho disponível e, nas viewports menores, passaram a exibir no máximo 3 por registro (antes 5), com o indicador “+N” absorvendo o excedente.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Imagens"
+   ]
+  },
+  {
+   "id": "fn-40",
    "aba": "funcoes",
    "data": "17-07-26",
    "hora": "11:11",
@@ -19091,7 +19283,7 @@
    ]
   },
   {
-   "id": "fn-34",
+   "id": "fn-39",
    "aba": "funcoes",
    "data": "17-07-26",
    "hora": "10:09",
@@ -19106,7 +19298,7 @@
    ]
   },
   {
-   "id": "fn-33",
+   "id": "fn-38",
    "aba": "funcoes",
    "data": "17-07-26",
    "hora": "10:09",
@@ -19121,7 +19313,7 @@
    ]
   },
   {
-   "id": "fn-32",
+   "id": "fn-37",
    "aba": "funcoes",
    "data": "17-07-26",
    "hora": "10:09",
@@ -19136,7 +19328,7 @@
    ]
   },
   {
-   "id": "fn-31",
+   "id": "fn-36",
    "aba": "funcoes",
    "data": "17-07-26",
    "hora": "09:38",
@@ -19151,7 +19343,7 @@
    ]
   },
   {
-   "id": "fn-30",
+   "id": "fn-35",
    "aba": "funcoes",
    "data": "17-07-26",
    "hora": "08:49",
@@ -19166,7 +19358,7 @@
    ]
   },
   {
-   "id": "fn-29",
+   "id": "fn-34",
    "aba": "funcoes",
    "data": "16-07-26",
    "hora": "15:18",
@@ -19181,7 +19373,52 @@
    ]
   },
   {
-   "id": "fn-28",
+   "id": "fn-33",
+   "aba": "funcoes",
+   "data": "16-07-26",
+   "hora": "11:10",
+   "acao": "aperfeiçoada",
+   "tipo": "usabilidade",
+   "titulo": "Histórico de obsolescência colapsável na versão vigente",
+   "resumo": "O registro vigente passou a listar, como um histórico recolhível que começa fechado, os registros que tornou obsoletos, com as respectivas datas — do mais recente ao mais antigo. Um divisor tracejado o separa do conteúdo, e o ícone de expandir gira sobre o próprio centro.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Usabilidade"
+   ]
+  },
+  {
+   "id": "fn-32",
+   "aba": "funcoes",
+   "data": "16-07-26",
+   "hora": "11:10",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Rótulos de papel no breadcrumb e nas observações",
+   "resumo": "Cada parte do breadcrumb passou a indicar entre colchetes o seu papel — [seção], [slide], [subtítulo] —, cada uma em sua linha e com o rótulo à esquerda do texto. As observações ganharam o mesmo rótulo, do tamanho dos do breadcrumb, para distinguir de relance o que é local do que é conteúdo.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Aparência"
+   ]
+  },
+  {
+   "id": "fn-31",
+   "aba": "funcoes",
+   "data": "16-07-26",
+   "hora": "07:39",
+   "acao": "descartada",
+   "tipo": "aparência",
+   "titulo": "Envelope “informação das imagens” removido do histórico",
+   "resumo": "A moldura que envolvia as imagens de cada registro — um contêiner rotulado “informação das imagens” — foi retirada. O conteúdo interno (miniaturas, legendas e contadores) permaneceu; sumiu apenas o envelope e o seu preenchimento.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Imagens"
+   ]
+  },
+  {
+   "id": "fn-30",
    "aba": "funcoes",
    "data": "16-07-26",
    "hora": "07:39",
@@ -19196,7 +19433,7 @@
    ]
   },
   {
-   "id": "fn-27",
+   "id": "fn-29",
    "aba": "funcoes",
    "data": "15-07-26",
    "hora": "14:59",
@@ -19211,7 +19448,7 @@
    ]
   },
   {
-   "id": "fn-26",
+   "id": "fn-28",
    "aba": "funcoes",
    "data": "15-07-26",
    "hora": "11:42",
@@ -19226,7 +19463,7 @@
    ]
   },
   {
-   "id": "fn-25",
+   "id": "fn-27",
    "aba": "funcoes",
    "data": "15-07-26",
    "hora": "09:48",
@@ -19241,7 +19478,7 @@
    ]
   },
   {
-   "id": "fn-24",
+   "id": "fn-26",
    "aba": "funcoes",
    "data": "15-07-26",
    "hora": "08:47",
@@ -19256,7 +19493,7 @@
    ]
   },
   {
-   "id": "fn-23",
+   "id": "fn-25",
    "aba": "funcoes",
    "data": "15-07-26",
    "hora": "08:47",
@@ -19271,7 +19508,7 @@
    ]
   },
   {
-   "id": "fn-22",
+   "id": "fn-24",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "22:04",
@@ -19286,7 +19523,7 @@
    ]
   },
   {
-   "id": "fn-21",
+   "id": "fn-23",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "21:50",
@@ -19301,7 +19538,7 @@
    ]
   },
   {
-   "id": "fn-20",
+   "id": "fn-22",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19315,7 +19552,7 @@
    ]
   },
   {
-   "id": "fn-19",
+   "id": "fn-21",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19329,7 +19566,7 @@
    ]
   },
   {
-   "id": "fn-18",
+   "id": "fn-20",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19344,7 +19581,7 @@
    ]
   },
   {
-   "id": "fn-17",
+   "id": "fn-19",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19359,7 +19596,7 @@
    ]
   },
   {
-   "id": "fn-16",
+   "id": "fn-18",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19373,7 +19610,7 @@
    ]
   },
   {
-   "id": "fn-15",
+   "id": "fn-17",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19388,7 +19625,7 @@
    ]
   },
   {
-   "id": "fn-14",
+   "id": "fn-16",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19403,7 +19640,7 @@
    ]
   },
   {
-   "id": "fn-13",
+   "id": "fn-15",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19418,7 +19655,7 @@
    ]
   },
   {
-   "id": "fn-12",
+   "id": "fn-14",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19433,7 +19670,7 @@
    ]
   },
   {
-   "id": "fn-11",
+   "id": "fn-13",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "18:45",
@@ -19447,7 +19684,22 @@
    ]
   },
   {
-   "id": "fn-10",
+   "id": "fn-12",
+   "aba": "funcoes",
+   "data": "14-07-26",
+   "hora": "07:41",
+   "acao": "descartada",
+   "tipo": "aparência",
+   "titulo": "Linha do tempo de rolagem horizontal aposentada",
+   "resumo": "A versão da linha do tempo dos estais que corria numa única fileira longa, rolada na horizontal, perdeu o teste A/B para a serpenteante e foi retirada deste slide. A espinha horizontal continua servindo às demais linhas do tempo; aqui, deu lugar ao layout em fileiras.",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "breadcrumb": [
+    "Linhas do Tempo",
+    "Recuperação estrutural dos estais"
+   ]
+  },
+  {
+   "id": "fn-11",
    "aba": "funcoes",
    "data": "14-07-26",
    "hora": "07:41",
@@ -19462,7 +19714,7 @@
    ]
   },
   {
-   "id": "fn-9",
+   "id": "fn-10",
    "aba": "funcoes",
    "data": "05-07-26",
    "hora": "08:44",
@@ -19476,7 +19728,7 @@
    ]
   },
   {
-   "id": "fn-8",
+   "id": "fn-9",
    "aba": "funcoes",
    "data": "30-06-26",
    "hora": "14:54",
@@ -19491,7 +19743,7 @@
    ]
   },
   {
-   "id": "fn-7",
+   "id": "fn-8",
    "aba": "funcoes",
    "data": "25-06-26",
    "hora": "17:41",
@@ -19505,7 +19757,7 @@
    ]
   },
   {
-   "id": "fn-6",
+   "id": "fn-7",
    "aba": "funcoes",
    "data": "25-06-26",
    "hora": "17:41",
@@ -19519,7 +19771,7 @@
    ]
   },
   {
-   "id": "fn-5",
+   "id": "fn-6",
    "aba": "funcoes",
    "data": "25-06-26",
    "hora": "17:41",
@@ -19534,7 +19786,7 @@
    ]
   },
   {
-   "id": "fn-4",
+   "id": "fn-5",
    "aba": "funcoes",
    "data": "21-06-26",
    "hora": "21:48",
@@ -19549,7 +19801,7 @@
    ]
   },
   {
-   "id": "fn-3",
+   "id": "fn-4",
    "aba": "funcoes",
    "data": "15-06-26",
    "hora": "16:00",
@@ -19564,7 +19816,7 @@
    ]
   },
   {
-   "id": "fn-2",
+   "id": "fn-3",
    "aba": "funcoes",
    "data": "15-06-26",
    "hora": "16:00",
@@ -19579,7 +19831,7 @@
    ]
   },
   {
-   "id": "fn-1",
+   "id": "fn-2",
    "aba": "funcoes",
    "data": "15-06-26",
    "hora": "16:00",
@@ -19591,6 +19843,20 @@
    "breadcrumb": [
     "Apresentação",
     "Índice"
+   ]
+  },
+  {
+   "id": "fn-1",
+   "aba": "funcoes",
+   "data": "02-06-26",
+   "hora": "16:15",
+   "acao": "descartada",
+   "tipo": "código",
+   "titulo": "Folhas de estilo por-slide abolidas",
+   "resumo": "As dezenas de folhas de estilo individuais — uma por slide — foram eliminadas de uma vez e seu conteúdo migrou para os tokens compartilhados. É o avesso da fonte única: em vez de repetir e manter estilo página a página, uma só regra passa a valer para todas.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação"
    ]
   },
   {

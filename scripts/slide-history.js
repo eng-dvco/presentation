@@ -344,7 +344,21 @@
     if (p.documento) {
       const d = p.documento;
       const met = el('div', 'hist-meta');
-      met.appendChild(el('span', 'hist-meta-item hist-meta-ext', 'PDF'));
+      // badge da extensão: com slide associado, vira o mesmo ATALHO da listagem de documentos (o "ir ↗"
+      // sobreposto ao badge) — em repouso mostra "PDF"; ao pairar/focar troca por "↗" e leva ao slide.
+      const ext = el('span', 'hist-meta-item hist-meta-ext' + (d.slide ? ' hist-meta-ext--goto' : ''));
+      if (d.slide) {
+        ext.tabIndex = 0;
+        ext.setAttribute('role', 'link');
+        ext.title = 'Ir para o slide relacionado';
+        ext.appendChild(el('span', 'hist-ext-label', 'PDF'));
+        const ir = e => { e.preventDefault(); e.stopPropagation(); location.href = base + d.slide; };
+        ext.addEventListener('click', ir);
+        ext.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') ir(e); });
+      } else {
+        ext.textContent = 'PDF';
+      }
+      met.appendChild(ext);
       if (d.versao) met.appendChild(el('span', 'hist-meta-item', 'versão ' + d.versao));
       if (d.paginas) met.appendChild(el('span', 'hist-meta-item', d.paginas + (d.paginas === '1' ? ' página' : ' páginas')));
       if (d.tamanho) met.appendChild(el('span', 'hist-meta-item', d.tamanho));
@@ -413,16 +427,19 @@
 
   // ── um registro (pode reunir várias alterações do mesmo elemento, feitas no mesmo commit) ──
   function cartao(r) {
-    const a = el('a', 'hist-card hist-card--' + slug(r.acao));
-    a.href = base + (r.link || 'slides/index.html');
+    const a = el('a', 'hist-card hist-card--' + slug(r.acao) + (r.alvoAusente ? ' hist-card--inerte' : ''));
     a.dataset.acao = r.acao;
     a.dataset.tipo = r.tipo;
     if (r.id) a.dataset.id = r.id;
 
-    // clique no cartão INTEIRO: localiza todas as imagens do registro (foco geral). Se o slide-alvo
-    // não existe mais (alvoAusente), o link já aponta para o índice — não faz sentido tentar localizar.
+    // clique no cartão INTEIRO: localiza todas as imagens do registro (foco geral). Se o slide-alvo não
+    // existe mais (alvoAusente), o registro fica INERTE — sem href e sem clique —, pois levar a qualquer
+    // destino sugeriria falsamente que a alteração ocorreu lá.
     const textoGeral = (r.tipo === 'título' ? (r.partes ? r.partes[0].para : r.para) : (r.breadcrumb || []).slice(-1)[0]) || null;
-    a.addEventListener('click', () => { if (!r.alvoAusente) salvaFoco(r, focoImgs(r), textoGeral); });
+    if (!r.alvoAusente) {
+      a.href = base + (r.link || 'slides/index.html');
+      a.addEventListener('click', () => salvaFoco(r, focoImgs(r), textoGeral));
+    }
 
     const topo = el('div', 'hist-card-top');
     topo.appendChild(badgeAcao(r.acao));
@@ -435,7 +452,7 @@
     const canto = el('div', 'hist-topinfo' + (r.alvoAusente ? ' hist-topinfo--ausente' : ''));
     if (r.alvoAusente) {
       const av = el('span', 'hist-ausente');
-      av.title = 'O slide original foi removido — o link abre o índice.';
+      av.title = 'O slide original foi removido — este registro é apenas informativo.';
       // ícone de VÍNCULO QUEBRADO + rótulo; no mobile fica só o ícone (espaço limitado)
       av.innerHTML = '<svg class="hist-ausente-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18.84 12.25 1.72-1.71a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="2" y1="8" x2="5" y2="8"/><line x1="16" y1="19" x2="16" y2="22"/><line x1="19" y1="16" x2="22" y2="16"/></svg>';
       av.appendChild(el('span', 'hist-ausente-txt', 'slide indisponível'));

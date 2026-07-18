@@ -477,6 +477,45 @@ a.flex-logo-container {
 }
 
 
+/* ── POST-SCRIPTUM de subseção — reaproveitado das snapshots (public/snapshots) ──────────────
+   "Detalhe" logo abaixo das imagens de uma subseção: uma observação que valha manter, mas que
+   repetida sob cada miniatura poluiria o mosaico (as observações idênticas são ocultadas por
+   ocultaObsRedundantes() em slide-nav.js). Caixa tracejada, com o mesmo arredondamento das imagens
+   do mosaico; cores herdadas das snapshots. A variante .post-details é a VERDE (vedação das portas). */
+.postscriptum-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-12);
+}
+.postscriptum-wrapper {
+  max-width: 720px;
+  /* sem margem própria: a distância até as imagens acima vem só do row-gap do .content-wrapper
+     (--content-gap), a MESMA aplicada entre o subtítulo e as imagens */
+  margin: 0 auto;
+  /* mesmo arredondamento das imagens do mosaico (.img usa --border-item) */
+  border-radius: var(--border-item);
+  overflow: hidden;
+  cursor: default;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+.postscriptum-wrapper p {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xs));
+  font-weight: var(--font-weight-bold);
+}
+/* variantes (fundos escuros translúcidos — mesmos tokens do rótulo de posição das imagens) */
+.post-alert    { background-color: var(--color-dark-yellow-alpha-50); border: 1.5px dashed var(--color-yellow); }
+.post-alert p    { color: var(--color-yellow); }
+
+.post-details  { background-color: var(--color-dark-green-alpha-50); border: 1.5px dashed var(--color-green); }
+.post-details p  { color: var(--color-green); }
+
+.post-critical { background-color: var(--color-dark-red-alpha-50); border: 1.5px dashed var(--color-red); }
+.post-critical p { color: var(--color-red); }
+
 /* ── banner de LEMBRETE / observação (REUTILIZÁVEL) — mesma posição do banner de
    RDC (primeiro filho do .content-wrapper, acima das seções). CSS-only, sem JS.
    Identidade fixa: acento navy com alerta "!" + etiqueta amarela "Lembrete"; a cor
@@ -721,6 +760,23 @@ a.flex-logo-container {
 
     & .note-banner-code { text-decoration: underline; }
   }
+}
+
+/* ── EXPANSÍVEL: o texto tem teto de 3 linhas (line-clamp). Quando esse teto TRUNCA o conteúdo —
+   sobretudo ao estreitar a viewport —, o JS (bannerExpansivel, slide-nav.js) marca .is-clampable e o
+   banner vira um botão: clicar (.is-expanded) solta o teto e revela todo o texto; clicar de novo
+   colapsa. Não vale para o .note-banner--rdc, que é um <a> e navega. */
+.note-banner.is-clampable {
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible { background-color: var(--lt-surface-muted); }
+}
+.note-banner.is-expanded .note-banner-text {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  display: block;
+  overflow: visible;
 }
 
 @media (max-width: 640px) {

@@ -1356,6 +1356,53 @@ if (backToTop) {
   });
 }
 
+// ---- observações REDUNDANTES ----------------------------------------------
+// Se TODAS as observações visíveis de uma mesma subseção (um .mosaic-container) forem idênticas, o
+// subtítulo já basta e a mesma frase repetida sob cada miniatura vira ruído — oculta-as. Só dispara
+// quando há 2+ observações e todas coincidem; observações que variam de imagem para imagem ficam.
+(function ocultaObsRedundantes() {
+  document.querySelectorAll('.mosaic-container').forEach(mos => {
+    const obs = [...mos.querySelectorAll('.obs')].filter(o => !o.classList.contains('invisible') && o.textContent.trim());
+    if (obs.length < 2) return;
+    const base = obs[0].textContent.trim();
+    if (obs.every(o => o.textContent.trim() === base)) obs.forEach(o => o.classList.add('invisible'));
+  });
+})();
+
+// ---- banner informativo EXPANSÍVEL ----------------------------------------
+// O texto do .note-banner tem teto de 3 linhas (-webkit-line-clamp); ao estreitar a viewport, ele pode
+// cortar parte do conteúdo. Quando (e só quando) o texto está de fato truncado, o banner vira um botão
+// que expande/colapsa para revelar tudo. Não afeta o banner-RDC, que É um <a> e navega nativamente.
+(function bannerExpansivel() {
+  document.querySelectorAll('.note-banner:not(a)').forEach(banner => {
+    const txt = banner.querySelector('.note-banner-text');
+    if (!txt) return;
+    // truncado? Se já está expandido, o clamp está desligado — mantemos o toggle p/ poder COLAPSAR.
+    const cortado = () => banner.classList.contains('is-expanded') || txt.scrollHeight - txt.clientHeight > 1;
+    function sincroniza() {
+      const arm = cortado();
+      banner.classList.toggle('is-clampable', arm);
+      if (arm) {
+        banner.setAttribute('role', 'button');
+        banner.tabIndex = 0;
+        banner.setAttribute('aria-expanded', banner.classList.contains('is-expanded') ? 'true' : 'false');
+      } else {
+        banner.removeAttribute('role');
+        banner.removeAttribute('tabindex');
+        banner.removeAttribute('aria-expanded');
+      }
+    }
+    function alterna() { banner.classList.toggle('is-expanded'); sincroniza(); }
+    banner.addEventListener('click', () => { if (banner.classList.contains('is-clampable')) alterna(); });
+    banner.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && banner.classList.contains('is-clampable')) { e.preventDefault(); alterna(); }
+    });
+    sincroniza();
+    window.addEventListener('resize', sincroniza, { passive: true });
+    window.addEventListener('load', sincroniza, { once: true });   // fontes/imagens podem reflowar após o defer
+  });
+})();
+
 document.addEventListener('keydown', e => {
   if (e.altKey || e.ctrlKey || e.metaKey) return;
 

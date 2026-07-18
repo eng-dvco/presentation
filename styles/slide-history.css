@@ -587,6 +587,18 @@
   &.is-evidenced.hist-card--descartada { --faixa: var(--hist-del); --faixa-2: var(--color-red-alpha-25); }
 }
 
+/* registro INERTE: o slide-alvo foi removido, então o cartão não leva a lugar nenhum (ver
+   corrigirLinks/alvoAusente no gerador). Sem afordância de clique — cursor padrão e nenhum realce no
+   hover — para não sugerir navegação nem que a alteração tenha ocorrido em outro destino. */
+.hist-card--inerte {
+  cursor: default;
+
+  &:hover,
+  &:focus-visible { background: var(--lt-surface-strong); }
+
+  &:active { transform: none; }
+}
+
 /* registro DEFASADO (tem alteração já superada por outra mais recente): preenchimento ZEBRADO sutil
    sobre o fundo do cartão, para diferenciá-lo dos vigentes à primeira vista — mesmo traço diagonal
    da faixa do mês, bem discreto para não competir com o texto. */
@@ -1410,6 +1422,37 @@
   font-weight: var(--font-weight-boldest);
   color: var(--lt-text);
   letter-spacing: 0.06em;
+}
+
+/* badge da extensão com ATALHO ao slide relacionado (mesmo mecanismo do "ir ↗" da listagem de
+   documentos): em repouso mostra "PDF"; ao pairar/focar, o "PDF" some e aparece "↗", em vermelho. */
+.hist-meta-ext--goto {
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--color-red-alpha-10);
+    border-color: var(--color-red);
+    color: var(--color-red);
+    outline: none;
+  }
+
+  &:hover .hist-ext-label,
+  &:focus-visible .hist-ext-label { visibility: hidden; }
+
+  &:hover::after,
+  &:focus-visible::after {
+    content: "\2197";   /* ↗ */
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-red);
+    font-weight: var(--font-weight-boldest);
+  }
 }
 
 /* imagens SUBSTITUÍDAS (trocadas por outras de mesmo nome): o sublinhado pontilhado + cursor de

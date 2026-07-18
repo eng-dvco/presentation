@@ -85,12 +85,12 @@
     thumbsBar.className = 'carousel-thumbs';
     thumbsBar.setAttribute('aria-label', 'Miniaturas');
 
-    var cur = 0, timer = null, startAt = 0, remaining = DURATION, hovering = false;
+    var cur = 0, timer = null, startAt = 0, remaining = DURATION, hovering = false, offscreen = false;
 
     function clearTimer() { if (timer !== null) { clearInterval(timer); timer = null; } }
 
     function startProgress() {
-      if (items.length <= 1 || hovering || reduced) return;
+      if (items.length <= 1 || hovering || offscreen || reduced) return;
       clearTimer();
       startAt = Date.now() - (DURATION - remaining);
       timer = setInterval(function () {
@@ -312,5 +312,21 @@
     }
     show(0);
     if (thumbsBar._updFade) thumbsBar._updFade();
+
+    // pausa o auto-avanço quando o carrossel SAI da tela: sem isto, o setInterval de 50ms (que anima a
+    // barra de progresso) seguiria rodando à toa fora da viewport. Retoma ao reaparecer (se não pausado
+    // por hover). Só faz sentido com 2+ imagens (com 1, não há auto-avanço).
+    if (items.length > 1 && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (ents) {
+        var vis = ents[ents.length - 1].isIntersecting;
+        if (!vis && !offscreen) {
+          offscreen = true;
+          if (timer !== null) { remaining = DURATION - (Date.now() - startAt); clearTimer(); }
+        } else if (vis && offscreen) {
+          offscreen = false;
+          startProgress();
+        }
+      }, { threshold: 0 }).observe(root);
+    }
   });
 })();

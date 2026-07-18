@@ -1,63 +1,9 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "18-07-26",
- "commits": 173,
- "total": 477,
+ "commits": 174,
+ "total": 432,
  "registros": [
-  {
-   "id": "e9ce7cf-2",
-   "data": "18-07-26",
-   "hora": "12:25",
-   "commit": "e9ce7cf",
-   "aba": "conteudo",
-   "link": "slides/slide-measurements.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Aferições em baterias",
-    "Bateria do GMG"
-   ],
-   "de": "SE — Subestação › Aferições em baterias › Bateria do GMG (Grupo Motor-Gerador)",
-   "para": "SE — Subestação › Aferições em baterias › Bateria do GMG",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "84 KB",
-    "amostra": [
-     {
-      "nome": "measurement-1.jpeg",
-      "src": "assets/img/slides/se/measurements/measurement-1.jpeg",
-      "miniatura": "assets/img/slides/se/measurements/measurement-1-200.webp",
-      "peso": "47 KB"
-     },
-     {
-      "nome": "measurement-2.jpeg",
-      "src": "assets/img/slides/se/measurements/measurement-2.jpeg",
-      "miniatura": "assets/img/slides/se/measurements/measurement-2-200.webp",
-      "peso": "37 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "e9ce7cf-1",
-   "data": "18-07-26",
-   "hora": "12:25",
-   "commit": "e9ce7cf",
-   "aba": "conteudo",
-   "link": "slides/slide-measurements.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Bateria do GMG (Grupo Motor-Gerador)",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Aferições em baterias",
-    "Bateria do GMG (Grupo Motor-Gerador)"
-   ]
-  },
   {
    "id": "e9ce7cf-0",
    "data": "18-07-26",
@@ -65,14 +11,16 @@
    "commit": "e9ce7cf",
    "aba": "conteudo",
    "link": "slides/slide-measurements.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Bateria do GMG",
    "breadcrumb": [
     "SE — Subestação",
     "Aferições em baterias",
     "Bateria do GMG"
-   ]
+   ],
+   "de": "Bateria do GMG (Grupo Motor-Gerador)",
+   "para": "Bateria do GMG"
   },
   {
    "id": "cb39ca2-1",
@@ -561,7 +509,7 @@
     },
     {
      "commit": "e1b75a8",
-     "id": "e1b75a8-26",
+     "id": "e1b75a8-25",
      "data": "14-07-26",
      "hora": "07:41",
      "de": "reciclagem da NR-5 (CIPA)",
@@ -1196,7 +1144,7 @@
    ]
   },
   {
-   "id": "e1b75a8-30",
+   "id": "e1b75a8-28",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1227,7 +1175,7 @@
    "substitui": [
     {
      "commit": "ba09017",
-     "id": "ba09017-26",
+     "id": "ba09017-22",
      "data": "19-06-26",
      "hora": "14:06",
      "de": "descrição não fornecida",
@@ -1236,7 +1184,7 @@
    ]
   },
   {
-   "id": "e1b75a8-29",
+   "id": "e1b75a8-27",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1266,7 +1214,7 @@
    "para": "Inspeção FIP-010 na SE-E5: TRRD fora de operação e placas ilegíveis."
   },
   {
-   "id": "e1b75a8-28",
+   "id": "e1b75a8-26",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1296,51 +1244,7 @@
    "para": "Inspeção da LT 230 kV (SE-E4/SE-E6): placas faltantes em 47/2 e 49/1."
   },
   {
-   "id": "e1b75a8-27",
-   "data": "14-07-26",
-   "hora": "07:41",
-   "commit": "e1b75a8",
-   "aba": "conteudo",
-   "link": "slides/slide-safety-equipment.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "ST — Segurança do Trabalho",
-    "Equipamentos de segurança",
-    "EPIs & EPCs"
-   ],
-   "de": "ST — Segurança do Trabalho › Equipamentos de segurança › Equipamento de segurança",
-   "para": "ST — Segurança do Trabalho › Equipamentos de segurança › EPIs & EPCs",
-   "imagens": {
-    "total": 3,
-    "pesoTotal": "1,2 MB",
-    "amostra": [
-     {
-      "nome": "epi-1.png",
-      "src": "assets/img/slides/st/safety-equipment/epi-1.png",
-      "miniatura": "assets/img/slides/st/safety-equipment/epi-1-200.webp",
-      "peso": "374 KB"
-     },
-     {
-      "nome": "epi-2.png",
-      "src": "assets/img/slides/st/safety-equipment/epi-2.png",
-      "miniatura": "assets/img/slides/st/safety-equipment/epi-2-200.webp",
-      "peso": "612 KB"
-     },
-     {
-      "nome": "epi-3.jpeg",
-      "src": "assets/img/slides/st/safety-equipment/epi-3.jpeg",
-      "miniatura": "assets/img/slides/st/safety-equipment/epi-3-200.webp",
-      "peso": "260 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 3
-  },
-  {
-   "id": "e1b75a8-26",
+   "id": "e1b75a8-25",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1412,7 +1316,7 @@
    ]
   },
   {
-   "id": "e1b75a8-25",
+   "id": "e1b75a8-24",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1444,7 +1348,7 @@
    "removidas": 1
   },
   {
-   "id": "e1b75a8-24",
+   "id": "e1b75a8-23",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1516,7 +1420,7 @@
    ]
   },
   {
-   "id": "e1b75a8-23",
+   "id": "e1b75a8-22",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1600,7 +1504,7 @@
    ]
   },
   {
-   "id": "e1b75a8-22",
+   "id": "e1b75a8-21",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1616,7 +1520,7 @@
    ]
   },
   {
-   "id": "e1b75a8-21",
+   "id": "e1b75a8-20",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1632,7 +1536,7 @@
    ]
   },
   {
-   "id": "e1b75a8-20",
+   "id": "e1b75a8-19",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1686,7 +1590,7 @@
    "qtdImagens": 6
   },
   {
-   "id": "e1b75a8-19",
+   "id": "e1b75a8-18",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1729,7 +1633,7 @@
    "qtdImagens": 3
   },
   {
-   "id": "e1b75a8-18",
+   "id": "e1b75a8-17",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
@@ -1760,36 +1664,22 @@
    "qtdImagens": 1
   },
   {
-   "id": "e1b75a8-17",
-   "data": "14-07-26",
-   "hora": "07:41",
-   "commit": "e1b75a8",
-   "aba": "conteudo",
-   "link": "slides/slide-safety-equipment.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Equipamento de segurança",
-   "breadcrumb": [
-    "ST — Segurança do Trabalho",
-    "Equipamentos de segurança",
-    "Equipamento de segurança"
-   ]
-  },
-  {
    "id": "e1b75a8-16",
    "data": "14-07-26",
    "hora": "07:41",
    "commit": "e1b75a8",
    "aba": "conteudo",
    "link": "slides/slide-safety-equipment.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "EPIs & EPCs",
    "breadcrumb": [
     "ST — Segurança do Trabalho",
     "Equipamentos de segurança",
     "EPIs & EPCs"
-   ]
+   ],
+   "de": "Equipamento de segurança",
+   "para": "EPIs & EPCs"
   },
   {
    "id": "e1b75a8-15",
@@ -2894,7 +2784,7 @@
    "substitui": [
     {
      "commit": "ba09017",
-     "id": "ba09017-40",
+     "id": "ba09017-36",
      "data": "19-06-26",
      "hora": "14:06",
      "de": "descrição não fornecida",
@@ -3389,7 +3279,7 @@
      "substitui": [
       {
        "commit": "3442081",
-       "id": "3442081-58",
+       "id": "3442081-54",
        "data": "24-06-26",
        "hora": "06:54",
        "de": "Reparo nos ACs da sala de baterias da SE-E5",
@@ -3805,45 +3695,7 @@
    ]
   },
   {
-   "id": "fbbd09b-8",
-   "data": "27-06-26",
-   "hora": "06:38",
-   "commit": "fbbd09b",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Limpeza em componentes metálicos"
-   ],
-   "de": "Eventos › Cronograma de desligamentos das SEs › Troca de componente metálico de seccionadoras",
-   "para": "Eventos › Cronograma de desligamentos das SEs › Limpeza em componentes metálicos",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "688 KB",
-    "amostra": [
-     {
-      "nome": "activity-6.png",
-      "src": "assets/img/slides/events/shutdown-timeline/activity-6.png",
-      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-6-200.webp",
-      "peso": "280 KB"
-     },
-     {
-      "nome": "activity-7.png",
-      "src": "assets/img/slides/events/shutdown-timeline/activity-7.png",
-      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-7-200.webp",
-      "peso": "409 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "fbbd09b-7",
+   "id": "fbbd09b-6",
    "data": "27-06-26",
    "hora": "06:38",
    "commit": "fbbd09b",
@@ -3872,7 +3724,7 @@
    }
   },
   {
-   "id": "fbbd09b-6",
+   "id": "fbbd09b-5",
    "data": "27-06-26",
    "hora": "06:38",
    "commit": "fbbd09b",
@@ -3926,7 +3778,7 @@
    "qtdImagens": 16
   },
   {
-   "id": "fbbd09b-5",
+   "id": "fbbd09b-4",
    "data": "27-06-26",
    "hora": "06:38",
    "commit": "fbbd09b",
@@ -3956,36 +3808,22 @@
    }
   },
   {
-   "id": "fbbd09b-4",
-   "data": "27-06-26",
-   "hora": "06:38",
-   "commit": "fbbd09b",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Troca de componente metálico de seccionadoras",
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Troca de componente metálico de seccionadoras"
-   ]
-  },
-  {
    "id": "fbbd09b-3",
    "data": "27-06-26",
    "hora": "06:38",
    "commit": "fbbd09b",
    "aba": "conteudo",
    "link": "slides/slide-shutdown-timeline.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Limpeza em componentes metálicos",
    "breadcrumb": [
     "Eventos",
     "Cronograma de desligamentos das SEs",
     "Limpeza em componentes metálicos"
-   ]
+   ],
+   "de": "Troca de componente metálico de seccionadoras",
+   "para": "Limpeza em componentes metálicos"
   },
   {
    "id": "fbbd09b-2",
@@ -4273,7 +4111,7 @@
    ]
   },
   {
-   "id": "3442081-58",
+   "id": "3442081-54",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4294,7 +4132,7 @@
    }
   },
   {
-   "id": "3442081-57",
+   "id": "3442081-53",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4325,145 +4163,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "3442081-56",
-   "data": "24-06-26",
-   "hora": "06:54",
-   "commit": "3442081",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Uso geral dos instrumentos"
-   ],
-   "de": "Eventos › Cronograma de desligamentos das SEs › Instrumentos de medição",
-   "para": "Eventos › Cronograma de desligamentos das SEs › Uso geral dos instrumentos",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "599 KB",
-    "amostra": [
-     {
-      "nome": "activity-1.png",
-      "src": "assets/img/slides/events/shutdown-timeline/activity-1.png",
-      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-1-200.webp",
-      "peso": "286 KB"
-     },
-     {
-      "nome": "activity-2.png",
-      "src": "assets/img/slides/events/shutdown-timeline/activity-2.png",
-      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-2-200.webp",
-      "peso": "313 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "3442081-55",
-   "data": "24-06-26",
-   "hora": "06:54",
-   "commit": "3442081",
-   "aba": "conteudo",
-   "link": "slides/slide-earthmoving-service.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Manutenção de drenagem externa da SE-E3",
-    "Terraplenagem"
-   ],
-   "de": "SE — Subestação › Manutenção de drenagem externa da SE-E3 › Terraplenagem e drenagem do talude",
-   "para": "SE — Subestação › Manutenção de drenagem externa da SE-E3 › Terraplenagem",
-   "imagens": {
-    "total": 4,
-    "pesoTotal": "294 KB",
-    "amostra": [
-     {
-      "nome": "earth-1.jpeg",
-      "src": "assets/img/slides/se/earthmoving-service/earth-1.jpeg",
-      "miniatura": "assets/img/slides/se/earthmoving-service/earth-1-200.webp",
-      "peso": "84 KB"
-     },
-     {
-      "nome": "earth-2.jpeg",
-      "src": "assets/img/slides/se/earthmoving-service/earth-2.jpeg",
-      "miniatura": "assets/img/slides/se/earthmoving-service/earth-2-200.webp",
-      "peso": "82 KB"
-     },
-     {
-      "nome": "earth-3.jpeg",
-      "src": "assets/img/slides/se/earthmoving-service/earth-3.jpeg",
-      "miniatura": "assets/img/slides/se/earthmoving-service/earth-3-200.webp",
-      "peso": "61 KB"
-     },
-     {
-      "nome": "earth-4.jpeg",
-      "src": "assets/img/slides/se/earthmoving-service/earth-4.jpeg",
-      "miniatura": "assets/img/slides/se/earthmoving-service/earth-4-200.webp",
-      "peso": "67 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 4
-  },
-  {
-   "id": "3442081-54",
-   "data": "24-06-26",
-   "hora": "06:54",
-   "commit": "3442081",
-   "aba": "conteudo",
-   "link": "slides/slide-ac-repair.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Reparo em ares-condicionados",
-    "AC-BT-01 e AC-BT-02"
-   ],
-   "de": "SE — Subestação › Reparo nos ACs da sala de baterias da SE-E5 › AC-BT-01 e AC-BT-02 da SE-E5",
-   "para": "SE — Subestação › Reparo nos ACs da sala de baterias › AC-BT-01 e AC-BT-02",
-   "imagens": {
-    "total": 4,
-    "pesoTotal": "258 KB",
-    "amostra": [
-     {
-      "nome": "ac-1.jpeg",
-      "src": "assets/img/slides/se/ac-repair/ac-1.jpeg",
-      "miniatura": "assets/img/slides/se/ac-repair/ac-1-200.webp",
-      "peso": "58 KB"
-     },
-     {
-      "nome": "ac-2.jpeg",
-      "src": "assets/img/slides/se/ac-repair/ac-2.jpeg",
-      "miniatura": "assets/img/slides/se/ac-repair/ac-2-200.webp",
-      "peso": "65 KB"
-     },
-     {
-      "nome": "ac-3.jpeg",
-      "src": "assets/img/slides/se/ac-repair/ac-3.jpeg",
-      "miniatura": "assets/img/slides/se/ac-repair/ac-3-200.webp",
-      "peso": "72 KB"
-     },
-     {
-      "nome": "ac-4.jpeg",
-      "src": "assets/img/slides/se/ac-repair/ac-4.jpeg",
-      "miniatura": "assets/img/slides/se/ac-repair/ac-4-200.webp",
-      "peso": "63 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 4
-  },
-  {
-   "id": "3442081-53",
+   "id": "3442081-52",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4542,7 +4242,7 @@
    ]
   },
   {
-   "id": "3442081-52",
+   "id": "3442081-51",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4617,7 +4317,7 @@
    "qtdImagens": 3
   },
   {
-   "id": "3442081-51",
+   "id": "3442081-50",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4659,7 +4359,7 @@
    ]
   },
   {
-   "id": "3442081-50",
+   "id": "3442081-49",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4684,7 +4384,7 @@
      "substitui": [
       {
        "commit": "ba09017",
-       "id": "ba09017-13",
+       "id": "ba09017-12",
        "data": "19-06-26",
        "hora": "14:06",
        "de": "Treinamentos da SIPAT",
@@ -4707,7 +4407,7 @@
       },
       {
        "commit": "ba09017",
-       "id": "ba09017-13",
+       "id": "ba09017-12",
        "data": "19-06-26",
        "hora": "14:06",
        "de": "Treinamentos da SIPAT",
@@ -4718,7 +4418,7 @@
    ]
   },
   {
-   "id": "3442081-49",
+   "id": "3442081-48",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4820,7 +4520,7 @@
    ]
   },
   {
-   "id": "3442081-48",
+   "id": "3442081-47",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4868,7 +4568,7 @@
    }
   },
   {
-   "id": "3442081-47",
+   "id": "3442081-46",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4910,7 +4610,7 @@
    }
   },
   {
-   "id": "3442081-46",
+   "id": "3442081-45",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -4977,7 +4677,7 @@
    ]
   },
   {
-   "id": "3442081-45",
+   "id": "3442081-44",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5008,7 +4708,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "3442081-44",
+   "id": "3442081-43",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5024,7 +4724,7 @@
    ]
   },
   {
-   "id": "3442081-43",
+   "id": "3442081-42",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5040,7 +4740,7 @@
    ]
   },
   {
-   "id": "3442081-42",
+   "id": "3442081-41",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5056,7 +4756,7 @@
    ]
   },
   {
-   "id": "3442081-41",
+   "id": "3442081-40",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5073,7 +4773,7 @@
    "alvoAusente": true
   },
   {
-   "id": "3442081-40",
+   "id": "3442081-39",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5109,7 +4809,7 @@
    }
   },
   {
-   "id": "3442081-39",
+   "id": "3442081-38",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5145,7 +4845,7 @@
    }
   },
   {
-   "id": "3442081-38",
+   "id": "3442081-37",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5181,7 +4881,7 @@
    }
   },
   {
-   "id": "3442081-37",
+   "id": "3442081-36",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5229,7 +4929,7 @@
    }
   },
   {
-   "id": "3442081-36",
+   "id": "3442081-35",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5265,7 +4965,7 @@
    }
   },
   {
-   "id": "3442081-35",
+   "id": "3442081-34",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5307,7 +5007,43 @@
    }
   },
   {
-   "id": "3442081-34",
+   "id": "3442081-33",
+   "data": "24-06-26",
+   "hora": "06:54",
+   "commit": "3442081",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "deleção",
+   "tipo": "observação",
+   "titulo": "Uso geral dos instrumentos",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Uso geral dos instrumentos"
+   ],
+   "resumo": "instrumentos de medição",
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "599 KB",
+    "amostra": [
+     {
+      "nome": "activity-1.png",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-1.png",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-1-200.webp",
+      "peso": "286 KB"
+     },
+     {
+      "nome": "activity-2.png",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-2.png",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-2-200.webp",
+      "peso": "313 KB"
+     }
+    ],
+    "extras": 0
+   }
+  },
+  {
+   "id": "3442081-32",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5337,39 +5073,25 @@
    }
   },
   {
-   "id": "3442081-33",
+   "id": "3442081-31",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
    "aba": "conteudo",
    "link": "slides/slide-shutdown-timeline.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Instrumentos de medição",
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Instrumentos de medição"
-   ]
-  },
-  {
-   "id": "3442081-32",
-   "data": "24-06-26",
-   "hora": "06:54",
-   "commit": "3442081",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Uso geral dos instrumentos",
    "breadcrumb": [
     "Eventos",
     "Cronograma de desligamentos das SEs",
     "Uso geral dos instrumentos"
-   ]
+   ],
+   "de": "Instrumentos de medição",
+   "para": "Uso geral dos instrumentos"
   },
   {
-   "id": "3442081-31",
+   "id": "3442081-30",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5441,7 +5163,7 @@
    ]
   },
   {
-   "id": "3442081-30",
+   "id": "3442081-29",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5496,7 +5218,7 @@
    ]
   },
   {
-   "id": "3442081-29",
+   "id": "3442081-28",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5557,7 +5279,7 @@
    ]
   },
   {
-   "id": "3442081-28",
+   "id": "3442081-27",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5623,7 +5345,7 @@
    ]
   },
   {
-   "id": "3442081-27",
+   "id": "3442081-26",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5659,7 +5381,7 @@
    }
   },
   {
-   "id": "3442081-26",
+   "id": "3442081-25",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5690,7 +5412,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "3442081-25",
+   "id": "3442081-24",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5707,7 +5429,7 @@
    "alvoAusente": true
   },
   {
-   "id": "3442081-24",
+   "id": "3442081-23",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5761,7 +5483,7 @@
    "qtdImagens": 6
   },
   {
-   "id": "3442081-23",
+   "id": "3442081-22",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5809,7 +5531,7 @@
    ]
   },
   {
-   "id": "3442081-22",
+   "id": "3442081-21",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5857,7 +5579,7 @@
    }
   },
   {
-   "id": "3442081-21",
+   "id": "3442081-20",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5911,7 +5633,7 @@
    }
   },
   {
-   "id": "3442081-20",
+   "id": "3442081-19",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -5959,7 +5681,7 @@
    }
   },
   {
-   "id": "3442081-19",
+   "id": "3442081-18",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6007,7 +5729,7 @@
    }
   },
   {
-   "id": "3442081-18",
+   "id": "3442081-17",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6058,7 +5780,7 @@
    "alvoAusente": true
   },
   {
-   "id": "3442081-17",
+   "id": "3442081-16",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6088,7 +5810,7 @@
    }
   },
   {
-   "id": "3442081-16",
+   "id": "3442081-15",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6179,7 +5901,7 @@
    ]
   },
   {
-   "id": "3442081-15",
+   "id": "3442081-14",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6218,7 +5940,7 @@
    "removidas": 4
   },
   {
-   "id": "3442081-14",
+   "id": "3442081-13",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6269,7 +5991,7 @@
    "removidas": 6
   },
   {
-   "id": "3442081-13",
+   "id": "3442081-12",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6308,7 +6030,7 @@
    "removidas": 2
   },
   {
-   "id": "3442081-12",
+   "id": "3442081-11",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6325,7 +6047,7 @@
    "alvoAusente": true
   },
   {
-   "id": "3442081-11",
+   "id": "3442081-10",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6355,7 +6077,7 @@
      "substitui": [
       {
        "commit": "b950280",
-       "id": "b950280-4",
+       "id": "b950280-3",
        "data": "27-05-26",
        "hora": "15:51",
        "de": "Manutenção no GMG da E3",
@@ -6366,7 +6088,7 @@
    ]
   },
   {
-   "id": "3442081-10",
+   "id": "3442081-9",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6479,7 +6201,7 @@
    ]
   },
   {
-   "id": "3442081-9",
+   "id": "3442081-8",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6515,7 +6237,7 @@
    "qtdImagens": 2
   },
   {
-   "id": "3442081-8",
+   "id": "3442081-7",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6557,39 +6279,92 @@
    }
   },
   {
-   "id": "3442081-7",
-   "data": "24-06-26",
-   "hora": "06:54",
-   "commit": "3442081",
-   "aba": "conteudo",
-   "link": "slides/slide-earthmoving-service.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Terraplenagem e drenagem do talude",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Manutenção de drenagem externa da SE-E3",
-    "Terraplenagem e drenagem do talude"
-   ]
-  },
-  {
    "id": "3442081-6",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
    "aba": "conteudo",
    "link": "slides/slide-earthmoving-service.html",
-   "acao": "adição",
+   "acao": "deleção",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Manutenção de drenagem externa da SE-E3",
+    "Terraplenagem"
+   ],
+   "titulo": "Terraplenagem",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "resumo": "vista superior",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "84 KB",
+      "amostra": [
+       {
+        "nome": "earth-1.jpeg",
+        "src": "assets/img/slides/se/earthmoving-service/earth-1.jpeg",
+        "miniatura": "assets/img/slides/se/earthmoving-service/earth-1-200.webp",
+        "peso": "84 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "resumo": "etapas da execução",
+     "imagens": {
+      "total": 3,
+      "pesoTotal": "210 KB",
+      "amostra": [
+       {
+        "nome": "earth-2.jpeg",
+        "src": "assets/img/slides/se/earthmoving-service/earth-2.jpeg",
+        "miniatura": "assets/img/slides/se/earthmoving-service/earth-2-200.webp",
+        "peso": "82 KB"
+       },
+       {
+        "nome": "earth-3.jpeg",
+        "src": "assets/img/slides/se/earthmoving-service/earth-3.jpeg",
+        "miniatura": "assets/img/slides/se/earthmoving-service/earth-3-200.webp",
+        "peso": "61 KB"
+       },
+       {
+        "nome": "earth-4.jpeg",
+        "src": "assets/img/slides/se/earthmoving-service/earth-4.jpeg",
+        "miniatura": "assets/img/slides/se/earthmoving-service/earth-4-200.webp",
+        "peso": "67 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "3442081-5",
+   "data": "24-06-26",
+   "hora": "06:54",
+   "commit": "3442081",
+   "aba": "conteudo",
+   "link": "slides/slide-earthmoving-service.html",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Terraplenagem",
    "breadcrumb": [
     "SE — Subestação",
     "Manutenção de drenagem externa da SE-E3",
     "Terraplenagem"
-   ]
+   ],
+   "de": "Terraplenagem e drenagem do talude",
+   "para": "Terraplenagem"
   },
   {
-   "id": "3442081-5",
+   "id": "3442081-4",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6619,7 +6394,7 @@
    }
   },
   {
-   "id": "3442081-4",
+   "id": "3442081-3",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6662,7 +6437,7 @@
    ]
   },
   {
-   "id": "3442081-3",
+   "id": "3442081-2",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6704,7 +6479,7 @@
    }
   },
   {
-   "id": "3442081-2",
+   "id": "3442081-1",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
@@ -6734,36 +6509,22 @@
    }
   },
   {
-   "id": "3442081-1",
-   "data": "24-06-26",
-   "hora": "06:54",
-   "commit": "3442081",
-   "aba": "conteudo",
-   "link": "slides/slide-ac-repair.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "AC-BT-01 e AC-BT-02 da SE-E5",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Reparo em ares-condicionados",
-    "AC-BT-01 e AC-BT-02 da SE-E5"
-   ]
-  },
-  {
    "id": "3442081-0",
    "data": "24-06-26",
    "hora": "06:54",
    "commit": "3442081",
    "aba": "conteudo",
    "link": "slides/slide-ac-repair.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "AC-BT-01 e AC-BT-02",
    "breadcrumb": [
     "SE — Subestação",
     "Reparo em ares-condicionados",
     "AC-BT-01 e AC-BT-02"
-   ]
+   ],
+   "de": "AC-BT-01 e AC-BT-02 da SE-E5",
+   "para": "AC-BT-01 e AC-BT-02"
   },
   {
    "id": "8aa9db2-5",
@@ -6891,7 +6652,7 @@
    "qtdImagens": 0
   },
   {
-   "id": "1827a19-50",
+   "id": "1827a19-49",
    "data": "22-06-26",
    "hora": "15:31",
    "commit": "1827a19",
@@ -6915,7 +6676,7 @@
    }
   },
   {
-   "id": "1827a19-49",
+   "id": "1827a19-48",
    "data": "22-06-26",
    "hora": "15:31",
    "commit": "1827a19",
@@ -6932,7 +6693,7 @@
    "para": "Contatos e orientações"
   },
   {
-   "id": "1827a19-48",
+   "id": "1827a19-47",
    "data": "22-06-26",
    "hora": "15:31",
    "commit": "1827a19",
@@ -6991,7 +6752,7 @@
    ]
   },
   {
-   "id": "1827a19-47",
+   "id": "1827a19-46",
    "data": "22-06-26",
    "hora": "15:31",
    "commit": "1827a19",
@@ -7023,7 +6784,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "1827a19-46",
+   "id": "1827a19-45",
    "data": "22-06-26",
    "hora": "15:31",
    "commit": "1827a19",
@@ -7092,38 +6853,6 @@
      "qtdImagens": 3
     }
    ]
-  },
-  {
-   "id": "1827a19-45",
-   "data": "22-06-26",
-   "hora": "15:31",
-   "commit": "1827a19",
-   "aba": "conteudo",
-   "link": "slides/slide-contact-label.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "ST — Segurança do Trabalho",
-    "Contatos e orientações",
-    "Informativos"
-   ],
-   "de": "ST — Seg. do Trabalho › Contatos e orientações em banner › Banner informativo",
-   "para": "ST — Seg. do Trabalho › Contatos e orientações › Informativos",
-   "imagens": {
-    "total": 1,
-    "pesoTotal": "591 KB",
-    "amostra": [
-     {
-      "nome": "label-3.png",
-      "src": "assets/img/slides/st/contact-label/label-3.png",
-      "miniatura": "assets/img/slides/st/contact-label/label-3-200.webp",
-      "peso": "591 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 1
   },
   {
    "id": "1827a19-44",
@@ -7268,7 +6997,7 @@
    "para": "Treinamentos da SIPAT",
    "obsoleto": {
     "commit": "3442081",
-    "id": "3442081-50"
+    "id": "3442081-49"
    }
   },
   {
@@ -9352,58 +9081,17 @@
    "commit": "1827a19",
    "aba": "conteudo",
    "link": "slides/slide-contact-label.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Banner informativo",
-   "breadcrumb": [
-    "ST — Segurança do Trabalho",
-    "Contatos e orientações",
-    "Banner informativo"
-   ]
-  },
-  {
-   "id": "1827a19-4",
-   "data": "22-06-26",
-   "hora": "15:31",
-   "commit": "1827a19",
-   "aba": "conteudo",
-   "link": "slides/slide-contact-label.html",
    "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Informativos",
    "breadcrumb": [
     "ST — Segurança do Trabalho",
     "Contatos e orientações",
     "Informativos"
    ],
-   "titulo": "Informativos",
-   "tipo": "subtítulo · imagens",
-   "tipos": [
-    "subtítulo",
-    "imagens"
-   ],
-   "partes": [
+   "legendas": [
     {
-     "tipo": "subtítulo"
-    },
-    {
-     "tipo": "imagens",
-     "legendas": [
-      {
-       "texto": "orientações sobre procedimentos de segurança",
-       "imagens": {
-        "total": 1,
-        "pesoTotal": "573 KB",
-        "amostra": [
-         {
-          "nome": "label-6.png",
-          "src": "assets/img/slides/st/contact-label/label-6.png",
-          "miniatura": "history/thumbs/1827a19-label-6.webp",
-          "peso": "573 KB"
-         }
-        ],
-        "extras": 0
-       }
-      }
-     ],
+     "texto": "orientações sobre procedimentos de segurança",
      "imagens": {
       "total": 1,
       "pesoTotal": "573 KB",
@@ -9416,10 +9104,41 @@
        }
       ],
       "extras": 0
-     },
-     "qtdImagens": 1
+     }
     }
-   ]
+   ],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "573 KB",
+    "amostra": [
+     {
+      "nome": "label-6.png",
+      "src": "assets/img/slides/st/contact-label/label-6.png",
+      "miniatura": "history/thumbs/1827a19-label-6.webp",
+      "peso": "573 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1
+  },
+  {
+   "id": "1827a19-4",
+   "data": "22-06-26",
+   "hora": "15:31",
+   "commit": "1827a19",
+   "aba": "conteudo",
+   "link": "slides/slide-contact-label.html",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Informativos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
+    "Informativos"
+   ],
+   "de": "Banner informativo",
+   "para": "Informativos"
   },
   {
    "id": "1827a19-3",
@@ -10070,7 +9789,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "ba09017-53",
+   "id": "ba09017-49",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10092,7 +9811,7 @@
    }
   },
   {
-   "id": "ba09017-52",
+   "id": "ba09017-48",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10115,7 +9834,7 @@
    }
   },
   {
-   "id": "ba09017-51",
+   "id": "ba09017-47",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10138,7 +9857,7 @@
    }
   },
   {
-   "id": "ba09017-50",
+   "id": "ba09017-46",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10168,7 +9887,7 @@
    "para": "Relatório de saúde do transformador 6TR2 (SE-N3): expectativa de vida e diagnóstico de falha térmica T2 (ponto quente 300–700 °C)."
   },
   {
-   "id": "ba09017-49",
+   "id": "ba09017-45",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10198,7 +9917,7 @@
    "para": "Relatório de saúde do transformador 6TR1 (SE-N3): expectativa de vida, status e diagnóstico via análise de gases dissolvidos."
   },
   {
-   "id": "ba09017-48",
+   "id": "ba09017-44",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10228,7 +9947,7 @@
    "para": "Relatório de saúde do transformador 6TR1 (SE-N2): expectativa de vida, status e diagnóstico via análise de gases dissolvidos."
   },
   {
-   "id": "ba09017-47",
+   "id": "ba09017-43",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10258,7 +9977,7 @@
    "para": "Relatório de saúde do transformador 6TR1 (SE-N1): expectativa de vida, status de envelhecimento e diagnóstico de falha térmica."
   },
   {
-   "id": "ba09017-46",
+   "id": "ba09017-42",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10288,7 +10007,7 @@
    "para": "Apresentação didática sobre DGA (análise de gases dissolvidos) e furfural no óleo isolante de transformadores: geração de gases por temperatura e falhas detectáveis."
   },
   {
-   "id": "ba09017-45",
+   "id": "ba09017-41",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10318,7 +10037,7 @@
    "para": "Tabela com a quilometragem dos acessos manutenidos."
   },
   {
-   "id": "ba09017-44",
+   "id": "ba09017-40",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10348,7 +10067,7 @@
    "para": "Controle do volume de brita recomposta nas subestações Norte (SE-N1, N2, N3), com registro de fotos antes e depois."
   },
   {
-   "id": "ba09017-43",
+   "id": "ba09017-39",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10372,7 +10091,7 @@
    }
   },
   {
-   "id": "ba09017-42",
+   "id": "ba09017-38",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10401,7 +10120,7 @@
    "para": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico."
   },
   {
-   "id": "ba09017-41",
+   "id": "ba09017-37",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10431,7 +10150,7 @@
    "para": "Painel de controle do reforço estrutural das torres autoportantes dos eixos Leste e Norte, com dashboards e status das bases."
   },
   {
-   "id": "ba09017-40",
+   "id": "ba09017-36",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10464,7 +10183,7 @@
    }
   },
   {
-   "id": "ba09017-39",
+   "id": "ba09017-35",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10493,7 +10212,7 @@
    "para": "Controle de bases recuperadas dos postes 13,8 kV: resumo por WBS, conferência plano × fonte, controle de postes e fotos das estruturas."
   },
   {
-   "id": "ba09017-38",
+   "id": "ba09017-34",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10522,7 +10241,7 @@
    "para": "Cronograma das atividades de manutenção das torres estaiadas da linha."
   },
   {
-   "id": "ba09017-37",
+   "id": "ba09017-33",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10551,7 +10270,7 @@
    "para": "Controle de inspeção e reforço de bases (A/B/C/D) das torres autoportantes do eixo Leste, por torre, trecho e WBS, com aba de gráfico de status."
   },
   {
-   "id": "ba09017-36",
+   "id": "ba09017-32",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10580,7 +10299,7 @@
    "para": "Recomendações de execução imediata (eletromecânica), como contenção de processo erosivo na faixa de servidão da LT 230 kV."
   },
   {
-   "id": "ba09017-35",
+   "id": "ba09017-31",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10610,7 +10329,7 @@
    "para": "Quantitativos de manutenções nas bases das torres estaiadas e autoportantes, por trecho e eixo."
   },
   {
-   "id": "ba09017-34",
+   "id": "ba09017-30",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10640,7 +10359,7 @@
    "para": "Quantitativos de manutenções nas ancoragens das torres estaiadas, detalhados por trecho e eixo."
   },
   {
-   "id": "ba09017-33",
+   "id": "ba09017-29",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10670,7 +10389,7 @@
    "para": "Listagem das estruturas por trecho e tensão (230 kV e 69 kV), com identificação e modelo."
   },
   {
-   "id": "ba09017-32",
+   "id": "ba09017-28",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10700,7 +10419,7 @@
    "para": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste."
   },
   {
-   "id": "ba09017-31",
+   "id": "ba09017-27",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10729,7 +10448,7 @@
    "para": "Checklist de execução de atividades por estrutura, com indicação de criticidade."
   },
   {
-   "id": "ba09017-30",
+   "id": "ba09017-26",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10759,7 +10478,7 @@
    "para": "Ficha-modelo da atividade de instalação de placa de identificação."
   },
   {
-   "id": "ba09017-29",
+   "id": "ba09017-25",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10789,7 +10508,7 @@
    "para": "Ficha de atividade: instalação de placa de identificação na torre 49-1."
   },
   {
-   "id": "ba09017-28",
+   "id": "ba09017-24",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10818,7 +10537,7 @@
    "para": "Ficha de atividade: emenda da malha de aterramento da torre 59-3."
   },
   {
-   "id": "ba09017-27",
+   "id": "ba09017-23",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10848,7 +10567,7 @@
    "para": "Ficha de atividade: aplicação de vedapren para vedação de bases com trinca."
   },
   {
-   "id": "ba09017-26",
+   "id": "ba09017-22",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10878,11 +10597,11 @@
    "para": "Assunto: inspeção de manutenção civil na Torre 43/2 da LT 230 kV (WBS 2825). Acompanhamento de fissuras nos blocos de fundação; surgimento de novas fissuras superficiais, com hipótese de retração hidráulica por falha de cura.",
    "obsoleto": {
     "commit": "e1b75a8",
-    "id": "e1b75a8-30"
+    "id": "e1b75a8-28"
    }
   },
   {
-   "id": "ba09017-25",
+   "id": "ba09017-21",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10906,7 +10625,7 @@
    }
   },
   {
-   "id": "ba09017-24",
+   "id": "ba09017-20",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10930,7 +10649,7 @@
    }
   },
   {
-   "id": "ba09017-23",
+   "id": "ba09017-19",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10944,7 +10663,7 @@
    ]
   },
   {
-   "id": "ba09017-22",
+   "id": "ba09017-18",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -10961,57 +10680,7 @@
    "para": "ST — Seg. do Trabalho › SIPAT (Semana de Prevenção de Acidentes do Trabalho)"
   },
   {
-   "id": "ba09017-21",
-   "data": "19-06-26",
-   "hora": "14:06",
-   "commit": "ba09017",
-   "aba": "conteudo",
-   "link": "slides/slide-training.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "ST — Segurança do Trabalho",
-    "Treinamentos internos",
-    "Semana Interna de Prevenção de Acidentes do Trabalho"
-   ],
-   "de": "Eventos › Treinamentos da SIPAT › Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT)",
-   "para": "ST — Seg. do Trabalho › SIPAT (Semana de Prevenção de Acidentes do Trabalho) › Semana Interna de Prevenção de Acidentes do Trabalho",
-   "imagens": {
-    "total": 4,
-    "pesoTotal": "2,3 MB",
-    "amostra": [
-     {
-      "nome": "training-1.png",
-      "src": "assets/img/slides/events/training/training-1.png",
-      "miniatura": "history/thumbs/ba09017-training-1.webp",
-      "peso": "428 KB"
-     },
-     {
-      "nome": "training-2.png",
-      "src": "assets/img/slides/events/training/training-2.png",
-      "miniatura": "history/thumbs/ba09017-training-2.webp",
-      "peso": "398 KB"
-     },
-     {
-      "nome": "training-3.png",
-      "src": "assets/img/slides/events/training/training-3.png",
-      "miniatura": "history/thumbs/ba09017-training-3.webp",
-      "peso": "448 KB"
-     },
-     {
-      "nome": "training-4.png",
-      "src": "assets/img/slides/events/training/training-4.png",
-      "miniatura": "history/thumbs/ba09017-training-4.webp",
-      "peso": "1,1 MB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 4
-  },
-  {
-   "id": "ba09017-20",
+   "id": "ba09017-17",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11043,7 +10712,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "ba09017-19",
+   "id": "ba09017-16",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11120,7 +10789,7 @@
    ]
   },
   {
-   "id": "ba09017-18",
+   "id": "ba09017-15",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11152,7 +10821,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "ba09017-17",
+   "id": "ba09017-14",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11203,77 +10872,25 @@
    "alvoAusente": true
   },
   {
-   "id": "ba09017-16",
-   "data": "19-06-26",
-   "hora": "14:06",
-   "commit": "ba09017",
-   "aba": "conteudo",
-   "link": "slides/slide-tag-replacement.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Reposição de etiquetas dos equipamentos",
-    "Aplicação das etiquetas"
-   ],
-   "de": "SE — Subestação › Reposição de etiquetas, canaletas e meios-fios › Etiquetas de identificação",
-   "para": "SE — Subestação › Reposição de etiquetas dos equipamentos › Aplicação das etiquetas",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "170 KB",
-    "amostra": [
-     {
-      "nome": "tag-1.jpeg",
-      "src": "assets/img/slides/se/tag-replacement/tag-1.jpeg",
-      "miniatura": "assets/img/slides/se/tag-replacement/tag-1-200.webp",
-      "peso": "91 KB"
-     },
-     {
-      "nome": "tag-2.jpeg",
-      "src": "assets/img/slides/se/tag-replacement/tag-2.jpeg",
-      "miniatura": "assets/img/slides/se/tag-replacement/tag-2-200.webp",
-      "peso": "80 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "ba09017-15",
+   "id": "ba09017-13",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
    "aba": "conteudo",
    "link": "slides/slide-training.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT)",
-   "breadcrumb": [
-    "ST — Segurança do Trabalho",
-    "Treinamentos internos",
-    "Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT)"
-   ]
-  },
-  {
-   "id": "ba09017-14",
-   "data": "19-06-26",
-   "hora": "14:06",
-   "commit": "ba09017",
-   "aba": "conteudo",
-   "link": "slides/slide-training.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Semana Interna de Prevenção de Acidentes do Trabalho",
    "breadcrumb": [
     "ST — Segurança do Trabalho",
     "Treinamentos internos",
     "Semana Interna de Prevenção de Acidentes do Trabalho"
-   ]
+   ],
+   "de": "Semana Interna de Prevenção de Acidentes do Trabalho (SIPAT)",
+   "para": "Semana Interna de Prevenção de Acidentes do Trabalho"
   },
   {
-   "id": "ba09017-13",
+   "id": "ba09017-12",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11297,7 +10914,7 @@
      "para": "SIPAT (Semana de Prevenção de Acidentes do Trabalho)",
      "obsoleto": {
       "commit": "3442081",
-      "id": "3442081-50"
+      "id": "3442081-49"
      }
     },
     {
@@ -11306,13 +10923,13 @@
      "para": "SIPAT e riscos psicossociais",
      "obsoleto": {
       "commit": "3442081",
-      "id": "3442081-50"
+      "id": "3442081-49"
      }
     }
    ]
   },
   {
-   "id": "ba09017-12",
+   "id": "ba09017-11",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11343,7 +10960,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "ba09017-11",
+   "id": "ba09017-10",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11374,7 +10991,7 @@
    }
   },
   {
-   "id": "ba09017-10",
+   "id": "ba09017-9",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11444,7 +11061,7 @@
    "qtdImagens": 2
   },
   {
-   "id": "ba09017-9",
+   "id": "ba09017-8",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11460,7 +11077,7 @@
    ]
   },
   {
-   "id": "ba09017-8",
+   "id": "ba09017-7",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11520,7 +11137,25 @@
    ]
   },
   {
-   "id": "ba09017-7",
+   "id": "ba09017-6",
+   "data": "19-06-26",
+   "hora": "14:06",
+   "commit": "ba09017",
+   "aba": "conteudo",
+   "link": "slides/slide-tag-replacement.html",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Aplicação das etiquetas",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Reposição de etiquetas dos equipamentos",
+    "Aplicação das etiquetas"
+   ],
+   "de": "Etiquetas de identificação",
+   "para": "Aplicação das etiquetas"
+  },
+  {
+   "id": "ba09017-5",
    "data": "19-06-26",
    "hora": "14:06",
    "commit": "ba09017",
@@ -11533,38 +11168,6 @@
     "SE — Subestação",
     "Reposição de etiquetas dos equipamentos",
     "Meio-fio e canaleta"
-   ]
-  },
-  {
-   "id": "ba09017-6",
-   "data": "19-06-26",
-   "hora": "14:06",
-   "commit": "ba09017",
-   "aba": "conteudo",
-   "link": "slides/slide-tag-replacement.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Etiquetas de identificação",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Reposição de etiquetas dos equipamentos",
-    "Etiquetas de identificação"
-   ]
-  },
-  {
-   "id": "ba09017-5",
-   "data": "19-06-26",
-   "hora": "14:06",
-   "commit": "ba09017",
-   "aba": "conteudo",
-   "link": "slides/slide-tag-replacement.html",
-   "acao": "adição",
-   "tipo": "subtítulo",
-   "titulo": "Aplicação das etiquetas",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Reposição de etiquetas dos equipamentos",
-    "Aplicação das etiquetas"
    ]
   },
   {
@@ -11705,7 +11308,7 @@
      "substitui": [
       {
        "commit": "76d3a99",
-       "id": "76d3a99-15",
+       "id": "76d3a99-14",
        "data": "15-06-26",
        "hora": "16:00",
        "de": "Restauração de pintura",
@@ -11760,230 +11363,6 @@
    ]
   },
   {
-   "id": "21fed56-13",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Correção de oxidação (cubículo)"
-   ],
-   "de": "Eventos › Cronograma de desligamentos das SEs › Correção de oxidação — cubículo de média tensão",
-   "para": "Eventos › Cronograma de desligamentos das SEs › Correção de oxidação (cubículo)",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "654 KB",
-    "amostra": [
-     {
-      "nome": "activity-10.png",
-      "src": "assets/img/slides/events/shutdown-timeline/activity-10.png",
-      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-10-200.webp",
-      "peso": "375 KB"
-     },
-     {
-      "nome": "activity-11.png",
-      "src": "assets/img/slides/events/shutdown-timeline/activity-11.png",
-      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-11-200.webp",
-      "peso": "279 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "21fed56-12",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Correção de oxidação (TSA-01)"
-   ],
-   "de": "Eventos › Cronograma de desligamentos das SEs › Correção de oxidação — caixa de alta tensão do TSA-01 (SE-E4)",
-   "para": "Eventos › Cronograma de desligamentos das SEs › Correção de oxidação (TSA-01)",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "283 KB",
-    "amostra": [
-     {
-      "nome": "activity-8.jpeg",
-      "src": "assets/img/slides/events/shutdown-timeline/activity-8.jpeg",
-      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-8-200.webp",
-      "peso": "151 KB"
-     },
-     {
-      "nome": "activity-9.jpeg",
-      "src": "assets/img/slides/events/shutdown-timeline/activity-9.jpeg",
-      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-9-200.webp",
-      "peso": "131 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "21fed56-11",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-parts-replacement.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Óbices",
-    "Substituição de peças avariadas",
-    "Refletor LED 200 W"
-   ],
-   "de": "Óbices › Substituição de peças avariadas › Refletor LED 200 W (vão AY — SE-E4)",
-   "para": "Óbices › Substituição de peças avariadas › Refletor LED 200 W",
-   "imagens": {
-    "total": 4,
-    "pesoTotal": "284 KB",
-    "amostra": [
-     {
-      "nome": "part-8.jpeg",
-      "src": "assets/img/slides/issues/parts-replacement/part-8.jpeg",
-      "miniatura": "history/thumbs/21fed56-part-8.webp",
-      "peso": "64 KB"
-     },
-     {
-      "nome": "part-9.jpeg",
-      "src": "assets/img/slides/issues/parts-replacement/part-9.jpeg",
-      "miniatura": "history/thumbs/21fed56-part-9.webp",
-      "peso": "54 KB"
-     },
-     {
-      "nome": "part-10.jpeg",
-      "src": "assets/img/slides/issues/parts-replacement/part-10.jpeg",
-      "miniatura": "history/thumbs/21fed56-part-10.webp",
-      "peso": "83 KB"
-     },
-     {
-      "nome": "part-11.jpeg",
-      "src": "assets/img/slides/issues/parts-replacement/part-11.jpeg",
-      "miniatura": "assets/img/slides/issues/parts-replacement/part-11-200.webp",
-      "peso": "83 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 4
-  },
-  {
-   "id": "21fed56-10",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-parts-replacement.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Óbices",
-    "Substituição de peças avariadas",
-    "Relé temporizado"
-   ],
-   "de": "Óbices › Substituição de peças avariadas › Relé temporizado (DJ6-03 — SE-E4)",
-   "para": "Óbices › Substituição de peças avariadas › Relé temporizado",
-   "imagens": {
-    "total": 4,
-    "pesoTotal": "227 KB",
-    "amostra": [
-     {
-      "nome": "part-4.jpeg",
-      "src": "assets/img/slides/issues/parts-replacement/part-4.jpeg",
-      "miniatura": "assets/img/slides/issues/parts-replacement/part-4-200.webp",
-      "peso": "43 KB"
-     },
-     {
-      "nome": "part-5.jpeg",
-      "src": "assets/img/slides/issues/parts-replacement/part-5.jpeg",
-      "miniatura": "assets/img/slides/issues/parts-replacement/part-5-200.webp",
-      "peso": "50 KB"
-     },
-     {
-      "nome": "part-6.jpeg",
-      "src": "assets/img/slides/issues/parts-replacement/part-6.jpeg",
-      "miniatura": "assets/img/slides/issues/parts-replacement/part-6-200.webp",
-      "peso": "62 KB"
-     },
-     {
-      "nome": "part-7.jpeg",
-      "src": "assets/img/slides/issues/parts-replacement/part-7.jpeg",
-      "miniatura": "history/thumbs/21fed56-part-7.webp",
-      "peso": "71 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 4
-  },
-  {
-   "id": "21fed56-9",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Correção de oxidação — cubículo de média tensão",
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Correção de oxidação — cubículo de média tensão"
-   ]
-  },
-  {
-   "id": "21fed56-8",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Correção de oxidação — caixa de alta tensão do TSA-01 (SE-E4)",
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Correção de oxidação — caixa de alta tensão do TSA-01 (SE-E4)"
-   ]
-  },
-  {
-   "id": "21fed56-7",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-shutdown-timeline.html",
-   "acao": "adição",
-   "tipo": "subtítulo",
-   "titulo": "Correção de oxidação (cubículo)",
-   "breadcrumb": [
-    "Eventos",
-    "Cronograma de desligamentos das SEs",
-    "Correção de oxidação (cubículo)"
-   ]
-  },
-  {
    "id": "21fed56-6",
    "data": "17-06-26",
    "hora": "04:35",
@@ -11991,16 +11370,91 @@
    "aba": "conteudo",
    "link": "slides/slide-shutdown-timeline.html",
    "acao": "adição",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Correção de oxidação (TSA-01)"
+   ],
+   "titulo": "Correção de oxidação (TSA-01)",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "resumo": "antes",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "151 KB",
+      "amostra": [
+       {
+        "nome": "activity-8.jpeg",
+        "src": "assets/img/slides/events/shutdown-timeline/activity-8.jpeg",
+        "miniatura": "assets/img/slides/events/shutdown-timeline/activity-8-200.webp",
+        "peso": "151 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "resumo": "depois",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "131 KB",
+      "amostra": [
+       {
+        "nome": "activity-9.jpeg",
+        "src": "assets/img/slides/events/shutdown-timeline/activity-9.jpeg",
+        "miniatura": "assets/img/slides/events/shutdown-timeline/activity-9-200.webp",
+        "peso": "131 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "21fed56-5",
+   "data": "17-06-26",
+   "hora": "04:35",
+   "commit": "21fed56",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Correção de oxidação (cubículo)",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Correção de oxidação (cubículo)"
+   ],
+   "de": "Correção de oxidação — cubículo de média tensão",
+   "para": "Correção de oxidação (cubículo)"
+  },
+  {
+   "id": "21fed56-4",
+   "data": "17-06-26",
+   "hora": "04:35",
+   "commit": "21fed56",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Correção de oxidação (TSA-01)",
    "breadcrumb": [
     "Eventos",
     "Cronograma de desligamentos das SEs",
     "Correção de oxidação (TSA-01)"
-   ]
+   ],
+   "de": "Correção de oxidação — caixa de alta tensão do TSA-01 (SE-E4)",
+   "para": "Correção de oxidação (TSA-01)"
   },
   {
-   "id": "21fed56-5",
+   "id": "21fed56-3",
    "data": "17-06-26",
    "hora": "04:35",
    "commit": "21fed56",
@@ -12030,7 +11484,7 @@
    }
   },
   {
-   "id": "21fed56-4",
+   "id": "21fed56-2",
    "data": "17-06-26",
    "hora": "04:35",
    "commit": "21fed56",
@@ -12079,52 +11533,22 @@
    "removidas": 2
   },
   {
-   "id": "21fed56-3",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-parts-replacement.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Refletor LED 200 W (vão AY — SE-E4)",
-   "breadcrumb": [
-    "Óbices",
-    "Substituição de peças avariadas",
-    "Refletor LED 200 W (vão AY — SE-E4)"
-   ]
-  },
-  {
-   "id": "21fed56-2",
-   "data": "17-06-26",
-   "hora": "04:35",
-   "commit": "21fed56",
-   "aba": "conteudo",
-   "link": "slides/slide-parts-replacement.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Relé temporizado (DJ6-03 — SE-E4)",
-   "breadcrumb": [
-    "Óbices",
-    "Substituição de peças avariadas",
-    "Relé temporizado (DJ6-03 — SE-E4)"
-   ]
-  },
-  {
    "id": "21fed56-1",
    "data": "17-06-26",
    "hora": "04:35",
    "commit": "21fed56",
    "aba": "conteudo",
    "link": "slides/slide-parts-replacement.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Refletor LED 200 W",
    "breadcrumb": [
     "Óbices",
     "Substituição de peças avariadas",
     "Refletor LED 200 W"
-   ]
+   ],
+   "de": "Refletor LED 200 W (vão AY — SE-E4)",
+   "para": "Refletor LED 200 W"
   },
   {
    "id": "21fed56-0",
@@ -12133,14 +11557,16 @@
    "commit": "21fed56",
    "aba": "conteudo",
    "link": "slides/slide-parts-replacement.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Relé temporizado",
    "breadcrumb": [
     "Óbices",
     "Substituição de peças avariadas",
     "Relé temporizado"
-   ]
+   ],
+   "de": "Relé temporizado (DJ6-03 — SE-E4)",
+   "para": "Relé temporizado"
   },
   {
    "id": "fe961ba-0",
@@ -13777,7 +13203,7 @@
    ]
   },
   {
-   "id": "76d3a99-31",
+   "id": "76d3a99-27",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -13791,7 +13217,7 @@
    ]
   },
   {
-   "id": "76d3a99-30",
+   "id": "76d3a99-26",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -13805,7 +13231,7 @@
    ]
   },
   {
-   "id": "76d3a99-29",
+   "id": "76d3a99-25",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -13819,7 +13245,7 @@
    ]
   },
   {
-   "id": "76d3a99-28",
+   "id": "76d3a99-24",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -13833,7 +13259,7 @@
    ]
   },
   {
-   "id": "76d3a99-27",
+   "id": "76d3a99-23",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -13847,7 +13273,7 @@
    ]
   },
   {
-   "id": "76d3a99-26",
+   "id": "76d3a99-22",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -13861,7 +13287,7 @@
    ]
   },
   {
-   "id": "76d3a99-25",
+   "id": "76d3a99-21",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -13875,90 +13301,7 @@
    ]
   },
   {
-   "id": "76d3a99-24",
-   "data": "15-06-26",
-   "hora": "16:00",
-   "commit": "76d3a99",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Uso do megômetro e micro-ohmímetro; tangente delta (Δ)",
-    "Seccionadoras (microhmímetro)"
-   ],
-   "de": "SE — Subestação › Uso do megômetro e micro-ohmímetro; tangente delta (Δ) › Seccionadoras (micro-ohmímetro)",
-   "para": "SE — Subestação › Uso do megômetro e micro-ohmímetro; tangente delta (Δ) › Seccionadoras (microhmímetro)",
-   "imagens": {
-    "total": 3,
-    "pesoTotal": "196 KB",
-    "amostra": [
-     {
-      "nome": "resistance-1.jpeg",
-      "src": "assets/img/slides/se/resistance-measurement/resistance-1.jpeg",
-      "miniatura": "history/thumbs/76d3a99-resistance-1.webp",
-      "peso": "63 KB"
-     },
-     {
-      "nome": "resistance-2.jpeg",
-      "src": "assets/img/slides/se/resistance-measurement/resistance-2.jpeg",
-      "miniatura": "history/thumbs/76d3a99-resistance-2.webp",
-      "peso": "84 KB"
-     },
-     {
-      "nome": "resistance-3.jpeg",
-      "src": "assets/img/slides/se/resistance-measurement/resistance-3.jpeg",
-      "miniatura": "history/thumbs/76d3a99-resistance-3.webp",
-      "peso": "49 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 3,
-   "alvoAusente": true
-  },
-  {
-   "id": "76d3a99-23",
-   "data": "15-06-26",
-   "hora": "16:00",
-   "commit": "76d3a99",
-   "aba": "conteudo",
-   "link": "slides/slide-contact-label.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "ST — Segurança do Trabalho",
-    "Contatos e orientações",
-    "Contatos de emergência — Norte"
-   ],
-   "de": "ST — Seg. do Trabalho › Contatos e orientações em banner › Contatos de emergência",
-   "para": "ST — Seg. do Trabalho › Contatos e orientações em banner › Contatos de emergência — Norte",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "161 KB",
-    "amostra": [
-     {
-      "nome": "label-1.jpeg",
-      "src": "assets/img/slides/st/contact-label/label-1.jpeg",
-      "miniatura": "assets/img/slides/st/contact-label/label-1-200.webp",
-      "peso": "78 KB"
-     },
-     {
-      "nome": "label-2.jpeg",
-      "src": "assets/img/slides/st/contact-label/label-2.jpeg",
-      "miniatura": "assets/img/slides/st/contact-label/label-2-200.webp",
-      "peso": "83 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "76d3a99-22",
+   "id": "76d3a99-20",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14040,7 +13383,7 @@
    ]
   },
   {
-   "id": "76d3a99-21",
+   "id": "76d3a99-19",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14070,30 +13413,13 @@
    "qtdImagens": 1
   },
   {
-   "id": "76d3a99-20",
+   "id": "76d3a99-18",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
    "link": null,
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Seccionadoras (micro-ohmímetro)",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Uso do megômetro e micro-ohmímetro; tangente delta (Δ)",
-    "Seccionadoras (micro-ohmímetro)"
-   ],
-   "alvoAusente": true
-  },
-  {
-   "id": "76d3a99-19",
-   "data": "15-06-26",
-   "hora": "16:00",
-   "commit": "76d3a99",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Seccionadoras (microhmímetro)",
    "breadcrumb": [
@@ -14101,10 +13427,12 @@
     "Uso do megômetro e micro-ohmímetro; tangente delta (Δ)",
     "Seccionadoras (microhmímetro)"
    ],
+   "de": "Seccionadoras (micro-ohmímetro)",
+   "para": "Seccionadoras (microhmímetro)",
    "alvoAusente": true
   },
   {
-   "id": "76d3a99-18",
+   "id": "76d3a99-17",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14134,7 +13462,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "76d3a99-17",
+   "id": "76d3a99-16",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14188,7 +13516,7 @@
    "qtdImagens": 6
   },
   {
-   "id": "76d3a99-16",
+   "id": "76d3a99-15",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14366,7 +13694,7 @@
    "alvoAusente": true
   },
   {
-   "id": "76d3a99-15",
+   "id": "76d3a99-14",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14388,7 +13716,7 @@
    "alvoAusente": true
   },
   {
-   "id": "76d3a99-14",
+   "id": "76d3a99-13",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14425,7 +13753,7 @@
    "qtdImagens": 2
   },
   {
-   "id": "76d3a99-13",
+   "id": "76d3a99-12",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14473,7 +13801,7 @@
    "qtdImagens": 1
   },
   {
-   "id": "76d3a99-12",
+   "id": "76d3a99-11",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14516,7 +13844,7 @@
    "alvoAusente": true
   },
   {
-   "id": "76d3a99-11",
+   "id": "76d3a99-10",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14628,7 +13956,7 @@
    "alvoAusente": true
   },
   {
-   "id": "76d3a99-10",
+   "id": "76d3a99-9",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14679,7 +14007,7 @@
    "alvoAusente": true
   },
   {
-   "id": "76d3a99-9",
+   "id": "76d3a99-8",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14733,7 +14061,7 @@
    "qtdImagens": 7
   },
   {
-   "id": "76d3a99-8",
+   "id": "76d3a99-7",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14815,7 +14143,7 @@
    ]
   },
   {
-   "id": "76d3a99-7",
+   "id": "76d3a99-6",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14897,7 +14225,7 @@
    ]
   },
   {
-   "id": "76d3a99-6",
+   "id": "76d3a99-5",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -14979,23 +14307,70 @@
    ]
   },
   {
-   "id": "76d3a99-5",
+   "id": "76d3a99-4",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
    "aba": "conteudo",
    "link": "slides/slide-contact-label.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Contatos de emergência",
+   "acao": "modificação",
    "breadcrumb": [
     "ST — Segurança do Trabalho",
     "Contatos e orientações",
-    "Contatos de emergência"
+    "Contatos de emergência — Norte"
+   ],
+   "titulo": "Contatos de emergência — Norte",
+   "tipo": "subtítulo · observação",
+   "tipos": [
+    "subtítulo",
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo",
+     "de": "Contatos de emergência",
+     "para": "Contatos de emergência — Norte"
+    },
+    {
+     "tipo": "observação",
+     "de": "frente",
+     "para": "relevantes",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "78 KB",
+      "amostra": [
+       {
+        "nome": "label-1.jpeg",
+        "src": "assets/img/slides/st/contact-label/label-1.jpeg",
+        "miniatura": "assets/img/slides/st/contact-label/label-1-200.webp",
+        "peso": "78 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "verso",
+     "para": "hospitalares",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "83 KB",
+      "amostra": [
+       {
+        "nome": "label-2.jpeg",
+        "src": "assets/img/slides/st/contact-label/label-2.jpeg",
+        "miniatura": "assets/img/slides/st/contact-label/label-2-200.webp",
+        "peso": "83 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
    ]
   },
   {
-   "id": "76d3a99-4",
+   "id": "76d3a99-3",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -15038,7 +14413,7 @@
    ]
   },
   {
-   "id": "76d3a99-3",
+   "id": "76d3a99-2",
    "data": "15-06-26",
    "hora": "16:00",
    "commit": "76d3a99",
@@ -15120,22 +14495,6 @@
    ]
   },
   {
-   "id": "76d3a99-2",
-   "data": "15-06-26",
-   "hora": "16:00",
-   "commit": "76d3a99",
-   "aba": "conteudo",
-   "link": "slides/slide-contact-label.html",
-   "acao": "adição",
-   "tipo": "subtítulo",
-   "titulo": "Contatos de emergência — Norte",
-   "breadcrumb": [
-    "ST — Segurança do Trabalho",
-    "Contatos e orientações",
-    "Contatos de emergência — Norte"
-   ]
-  },
-  {
    "id": "76d3a99-1",
    "data": "15-06-26",
    "hora": "16:00",
@@ -15201,74 +14560,22 @@
    "qtdImagens": 4
   },
   {
-   "id": "ffcdf66-4",
-   "data": "10-06-26",
-   "hora": "14:32",
-   "commit": "ffcdf66",
-   "aba": "conteudo",
-   "link": "slides/slide-lecture.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Eventos",
-    "Palestra de conscientização sobre descarte de lixo na LT",
-    "Apresentação para a comunidade"
-   ],
-   "de": "slide-lecture.html › Apresentação no bairro Santa Rita",
-   "para": "slide-lecture.html › Apresentação para a comunidade",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "1,0 MB",
-    "amostra": [
-     {
-      "nome": "lecture-1.jpeg",
-      "src": "assets/img/slides/events/environmental-lecture/lecture-1.jpeg",
-      "miniatura": "assets/img/slides/events/environmental-lecture/lecture-1-200.webp",
-      "peso": "549 KB"
-     },
-     {
-      "nome": "lecture-2.jpeg",
-      "src": "assets/img/slides/events/environmental-lecture/lecture-2.jpeg",
-      "miniatura": "assets/img/slides/events/environmental-lecture/lecture-2-200.webp",
-      "peso": "506 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "ffcdf66-3",
-   "data": "10-06-26",
-   "hora": "14:32",
-   "commit": "ffcdf66",
-   "aba": "conteudo",
-   "link": "slides/slide-lecture.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Apresentação no bairro Santa Rita",
-   "breadcrumb": [
-    "Eventos",
-    "Palestra de conscientização sobre descarte de lixo na LT",
-    "Apresentação no bairro Santa Rita"
-   ]
-  },
-  {
    "id": "ffcdf66-2",
    "data": "10-06-26",
    "hora": "14:32",
    "commit": "ffcdf66",
    "aba": "conteudo",
    "link": "slides/slide-lecture.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Apresentação para a comunidade",
    "breadcrumb": [
     "Eventos",
     "Palestra de conscientização sobre descarte de lixo na LT",
     "Apresentação para a comunidade"
-   ]
+   ],
+   "de": "Apresentação no bairro Santa Rita",
+   "para": "Apresentação para a comunidade"
   },
   {
    "id": "ffcdf66-1",
@@ -15564,7 +14871,7 @@
    "substitui": [
     {
      "commit": "ed56374",
-     "id": "ed56374-2",
+     "id": "ed56374-1",
      "data": "03-06-26",
      "hora": "11:58",
      "de": "Medição de resistência",
@@ -15856,181 +15163,13 @@
    "qtdImagens": 6
   },
   {
-   "id": "ed56374-9",
+   "id": "ed56374-3",
    "data": "03-06-26",
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
    "link": null,
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Medição de resistência de isolamento",
-    "Seccionadoras (micro-ohmímetro)"
-   ],
-   "de": "slide-resistance-measurement.html › Seccionadoras",
-   "para": "slide-resistance-measurement.html › Seccionadoras (micro-ohmímetro)",
-   "imagens": {
-    "total": 3,
-    "pesoTotal": "196 KB",
-    "amostra": [
-     {
-      "nome": "resistance-1.jpeg",
-      "src": "assets/img/slides/se/resistance-measurement/resistance-1.jpeg",
-      "miniatura": "history/thumbs/ed56374-resistance-1.webp",
-      "peso": "63 KB"
-     },
-     {
-      "nome": "resistance-2.jpeg",
-      "src": "assets/img/slides/se/resistance-measurement/resistance-2.jpeg",
-      "miniatura": "history/thumbs/ed56374-resistance-2.webp",
-      "peso": "84 KB"
-     },
-     {
-      "nome": "resistance-3.jpeg",
-      "src": "assets/img/slides/se/resistance-measurement/resistance-3.jpeg",
-      "miniatura": "history/thumbs/ed56374-resistance-3.webp",
-      "peso": "49 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 3,
-   "alvoAusente": true
-  },
-  {
-   "id": "ed56374-8",
-   "data": "03-06-26",
-   "hora": "11:58",
-   "commit": "ed56374",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Medição de resistência de isolamento",
-    "Cubículo de 6,9 kV (megômetro)"
-   ],
-   "de": "slide-resistance-measurement.html › Cubículo de 6,9 kV",
-   "para": "slide-resistance-measurement.html › Cubículo de 6,9 kV (megômetro)",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "128 KB",
-    "amostra": [
-     {
-      "nome": "insulator-1.jpeg",
-      "src": "assets/img/slides/se/insulator-resistance/insulator-1.jpeg",
-      "miniatura": "history/thumbs/ed56374-insulator-1.webp",
-      "peso": "64 KB"
-     },
-     {
-      "nome": "insulator-2.jpeg",
-      "src": "assets/img/slides/se/insulator-resistance/insulator-2.jpeg",
-      "miniatura": "history/thumbs/ed56374-insulator-2.webp",
-      "peso": "64 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2,
-   "alvoAusente": true
-  },
-  {
-   "id": "ed56374-7",
-   "data": "03-06-26",
-   "hora": "11:58",
-   "commit": "ed56374",
-   "aba": "conteudo",
-   "link": "slides/slide-equipment-backup.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Obtenção de backup de parâmetros",
-    "Extração dos backups"
-   ],
-   "de": "slide-equipment-backup.html › Obtenção de backups",
-   "para": "slide-equipment-backup.html › Extração dos backups",
-   "imagens": {
-    "total": 4,
-    "pesoTotal": "197 KB",
-    "amostra": [
-     {
-      "nome": "backup-1.jpeg",
-      "src": "assets/img/slides/se/equipment-backup/backup-1.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-backup/backup-1-200.webp",
-      "peso": "52 KB"
-     },
-     {
-      "nome": "backup-2.jpeg",
-      "src": "assets/img/slides/se/equipment-backup/backup-2.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-backup/backup-2-200.webp",
-      "peso": "31 KB"
-     },
-     {
-      "nome": "backup-3.jpeg",
-      "src": "assets/img/slides/se/equipment-backup/backup-3.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-backup/backup-3-200.webp",
-      "peso": "46 KB"
-     },
-     {
-      "nome": "backup-4.jpeg",
-      "src": "assets/img/slides/se/equipment-backup/backup-4.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-backup/backup-4-200.webp",
-      "peso": "69 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 4
-  },
-  {
-   "id": "ed56374-6",
-   "data": "03-06-26",
-   "hora": "11:58",
-   "commit": "ed56374",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Seccionadoras",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Medição de resistência de isolamento",
-    "Seccionadoras"
-   ],
-   "alvoAusente": true
-  },
-  {
-   "id": "ed56374-5",
-   "data": "03-06-26",
-   "hora": "11:58",
-   "commit": "ed56374",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Cubículo de 6,9 kV",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Medição de resistência de isolamento",
-    "Cubículo de 6,9 kV"
-   ],
-   "alvoAusente": true
-  },
-  {
-   "id": "ed56374-4",
-   "data": "03-06-26",
-   "hora": "11:58",
-   "commit": "ed56374",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Seccionadoras (micro-ohmímetro)",
    "breadcrumb": [
@@ -16038,16 +15177,18 @@
     "Medição de resistência de isolamento",
     "Seccionadoras (micro-ohmímetro)"
    ],
+   "de": "Seccionadoras",
+   "para": "Seccionadoras (micro-ohmímetro)",
    "alvoAusente": true
   },
   {
-   "id": "ed56374-3",
+   "id": "ed56374-2",
    "data": "03-06-26",
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
    "link": null,
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Cubículo de 6,9 kV (megômetro)",
    "breadcrumb": [
@@ -16055,10 +15196,12 @@
     "Medição de resistência de isolamento",
     "Cubículo de 6,9 kV (megômetro)"
    ],
+   "de": "Cubículo de 6,9 kV",
+   "para": "Cubículo de 6,9 kV (megômetro)",
    "alvoAusente": true
   },
   {
-   "id": "ed56374-2",
+   "id": "ed56374-1",
    "data": "03-06-26",
    "hora": "11:58",
    "commit": "ed56374",
@@ -16080,139 +15223,44 @@
    "alvoAusente": true
   },
   {
-   "id": "ed56374-1",
-   "data": "03-06-26",
-   "hora": "11:58",
-   "commit": "ed56374",
-   "aba": "conteudo",
-   "link": "slides/slide-equipment-backup.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Obtenção de backups",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Obtenção de backup de parâmetros",
-    "Obtenção de backups"
-   ]
-  },
-  {
    "id": "ed56374-0",
    "data": "03-06-26",
    "hora": "11:58",
    "commit": "ed56374",
    "aba": "conteudo",
    "link": "slides/slide-equipment-backup.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "Extração dos backups",
    "breadcrumb": [
     "SE — Subestação",
     "Obtenção de backup de parâmetros",
     "Extração dos backups"
-   ]
+   ],
+   "de": "Obtenção de backups",
+   "para": "Extração dos backups"
   },
   {
-   "id": "12c272a-16",
+   "id": "12c272a-12",
    "data": "03-06-26",
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
    "link": null,
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Buchas do transformador",
    "breadcrumb": [
     "SE — Subestação",
     "Limpeza e verificação de equipamentos",
     "Buchas do transformador"
    ],
-   "de": "slide-transformer-cleaning.html › Execução da limpeza",
-   "para": "slide-transformer-cleaning.html › Buchas do transformador",
-   "imagens": {
-    "total": 3,
-    "pesoTotal": "197 KB",
-    "amostra": [
-     {
-      "nome": "cleaning-1.jpeg",
-      "src": "assets/img/slides/se/transformer-cleaning/cleaning-1.jpeg",
-      "miniatura": "history/thumbs/12c272a-cleaning-1.webp",
-      "peso": "65 KB"
-     },
-     {
-      "nome": "cleaning-2.jpeg",
-      "src": "assets/img/slides/se/transformer-cleaning/cleaning-2.jpeg",
-      "miniatura": "history/thumbs/12c272a-cleaning-2.webp",
-      "peso": "63 KB"
-     },
-     {
-      "nome": "cleaning-3.jpeg",
-      "src": "assets/img/slides/se/transformer-cleaning/cleaning-3.jpeg",
-      "miniatura": "history/thumbs/12c272a-cleaning-3.webp",
-      "peso": "69 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 3,
+   "de": "Execução da limpeza",
+   "para": "Buchas do transformador",
    "alvoAusente": true
   },
   {
-   "id": "12c272a-15",
-   "data": "03-06-26",
-   "hora": "11:18",
-   "commit": "12c272a",
-   "aba": "conteudo",
-   "link": "slides/slide-tag-replacement.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "SE — Subestação",
-    "Reposição de etiquetas dos equipamentos",
-    "Etiquetas de identificação"
-   ],
-   "de": "slide-tag-replacement.html › Pátio energizado",
-   "para": "slide-tag-replacement.html › Etiquetas de identificação",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "170 KB",
-    "amostra": [
-     {
-      "nome": "tag-1.jpeg",
-      "src": "assets/img/slides/se/tag-replacement/tag-1.jpeg",
-      "miniatura": "assets/img/slides/se/tag-replacement/tag-1-200.webp",
-      "peso": "91 KB"
-     },
-     {
-      "nome": "tag-2.jpeg",
-      "src": "assets/img/slides/se/tag-replacement/tag-2.jpeg",
-      "miniatura": "assets/img/slides/se/tag-replacement/tag-2-200.webp",
-      "peso": "80 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "12c272a-14",
-   "data": "03-06-26",
-   "hora": "11:18",
-   "commit": "12c272a",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Execução da limpeza",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Limpeza e verificação de equipamentos",
-    "Execução da limpeza"
-   ],
-   "alvoAusente": true
-  },
-  {
-   "id": "12c272a-13",
+   "id": "12c272a-11",
    "data": "03-06-26",
    "hora": "11:18",
    "commit": "12c272a",
@@ -16256,7 +15304,7 @@
    "alvoAusente": true
   },
   {
-   "id": "12c272a-12",
+   "id": "12c272a-10",
    "data": "03-06-26",
    "hora": "11:18",
    "commit": "12c272a",
@@ -16373,7 +15421,7 @@
    "alvoAusente": true
   },
   {
-   "id": "12c272a-11",
+   "id": "12c272a-9",
    "data": "03-06-26",
    "hora": "11:18",
    "commit": "12c272a",
@@ -16435,24 +15483,7 @@
    "alvoAusente": true
   },
   {
-   "id": "12c272a-10",
-   "data": "03-06-26",
-   "hora": "11:18",
-   "commit": "12c272a",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "adição",
-   "tipo": "subtítulo",
-   "titulo": "Buchas do transformador",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Limpeza e verificação de equipamentos",
-    "Buchas do transformador"
-   ],
-   "alvoAusente": true
-  },
-  {
-   "id": "12c272a-9",
+   "id": "12c272a-8",
    "data": "03-06-26",
    "hora": "11:18",
    "commit": "12c272a",
@@ -16470,23 +15501,25 @@
    "alvoAusente": true
   },
   {
-   "id": "12c272a-8",
+   "id": "12c272a-7",
    "data": "03-06-26",
    "hora": "11:18",
    "commit": "12c272a",
    "aba": "conteudo",
    "link": "slides/slide-tag-replacement.html",
-   "acao": "deleção",
+   "acao": "modificação",
    "tipo": "subtítulo",
-   "titulo": "Pátio energizado",
+   "titulo": "Etiquetas de identificação",
    "breadcrumb": [
     "SE — Subestação",
     "Reposição de etiquetas dos equipamentos",
-    "Pátio energizado"
-   ]
+    "Etiquetas de identificação"
+   ],
+   "de": "Pátio energizado",
+   "para": "Etiquetas de identificação"
   },
   {
-   "id": "12c272a-7",
+   "id": "12c272a-6",
    "data": "03-06-26",
    "hora": "11:18",
    "commit": "12c272a",
@@ -16544,22 +15577,6 @@
      },
      "qtdImagens": 4
     }
-   ]
-  },
-  {
-   "id": "12c272a-6",
-   "data": "03-06-26",
-   "hora": "11:18",
-   "commit": "12c272a",
-   "aba": "conteudo",
-   "link": "slides/slide-tag-replacement.html",
-   "acao": "adição",
-   "tipo": "subtítulo",
-   "titulo": "Etiquetas de identificação",
-   "breadcrumb": [
-    "SE — Subestação",
-    "Reposição de etiquetas dos equipamentos",
-    "Etiquetas de identificação"
    ]
   },
   {
@@ -16688,134 +15705,6 @@
     "Reposição de meio-fio e canaleta"
    ],
    "resumo": "Processo fabricação e reposição",
-   "alvoAusente": true
-  },
-  {
-   "id": "1f12366-13",
-   "data": "02-06-26",
-   "hora": "16:15",
-   "commit": "1f12366",
-   "aba": "conteudo",
-   "link": "slides/slide-insulator-coating.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Óbices",
-    "Deterioração do esmalte vitrificado do isolador",
-    "SE-E4 — Polo A — SD6-01 (substituído)"
-   ],
-   "de": "slide-insulator-coating.html › SE-E4 — Polo A — SD6-01",
-   "para": "slide-insulator-coating.html › SE-E4 — Polo A — SD6-01 (substituído)",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "247 KB",
-    "amostra": [
-     {
-      "nome": "insulator-1.jpeg",
-      "src": "assets/img/slides/issues/insulator-coating/insulator-1.jpeg",
-      "miniatura": "assets/img/slides/issues/insulator-coating/insulator-1-200.webp",
-      "peso": "154 KB"
-     },
-     {
-      "nome": "insulator-2.jpeg",
-      "src": "assets/img/slides/issues/insulator-coating/insulator-2.jpeg",
-      "miniatura": "assets/img/slides/issues/insulator-coating/insulator-2-200.webp",
-      "peso": "94 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "1f12366-12",
-   "data": "02-06-26",
-   "hora": "16:15",
-   "commit": "1f12366",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "LD — Distribuição",
-    "Substituição de chave fusível",
-    "Execução"
-   ],
-   "de": "slide-fuse-switch.html › Equipamento substituído",
-   "para": "slide-fuse-switch.html › Execução",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "79 KB",
-    "amostra": [
-     {
-      "nome": "fuse-1.jpeg",
-      "src": "assets/img/slides/ld/fuse-switch/fuse-1.jpeg",
-      "miniatura": "history/thumbs/1f12366-fuse-1.webp",
-      "peso": "42 KB"
-     },
-     {
-      "nome": "fuse-2.jpeg",
-      "src": "assets/img/slides/ld/fuse-switch/fuse-2.jpeg",
-      "miniatura": "history/thumbs/1f12366-fuse-2.webp",
-      "peso": "37 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2,
-   "alvoAusente": true
-  },
-  {
-   "id": "1f12366-11",
-   "data": "02-06-26",
-   "hora": "16:15",
-   "commit": "1f12366",
-   "aba": "conteudo",
-   "link": null,
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "LT — Transmissão",
-    "Retensionamento de estai",
-    "Execução"
-   ],
-   "de": "slide-cable-retensioning.html › Processo do retensionamento",
-   "para": "slide-cable-retensioning.html › Execução",
-   "imagens": {
-    "total": 4,
-    "pesoTotal": "469 KB",
-    "amostra": [
-     {
-      "nome": "cable-4.jpg",
-      "src": "assets/img/slides/lt/cable-retensioning/cable-4.jpg",
-      "miniatura": "history/thumbs/1f12366-cable-4.webp",
-      "peso": "119 KB"
-     },
-     {
-      "nome": "cable-3.jpg",
-      "src": "assets/img/slides/lt/cable-retensioning/cable-3.jpg",
-      "miniatura": "history/thumbs/1f12366-cable-3.webp",
-      "peso": "83 KB"
-     },
-     {
-      "nome": "cable-1.jpg",
-      "src": "assets/img/slides/lt/cable-retensioning/cable-1.jpg",
-      "miniatura": "history/thumbs/1f12366-cable-1.webp",
-      "peso": "124 KB"
-     },
-     {
-      "nome": "cable-2.jpg",
-      "src": "assets/img/slides/lt/cable-retensioning/cable-2.jpg",
-      "miniatura": "history/thumbs/1f12366-cable-2.webp",
-      "peso": "143 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 4,
    "alvoAusente": true
   },
   {
@@ -17016,22 +15905,6 @@
    "commit": "1f12366",
    "aba": "conteudo",
    "link": "slides/slide-insulator-coating.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "SE-E4 — Polo A — SD6-01",
-   "breadcrumb": [
-    "Óbices",
-    "Deterioração do esmalte vitrificado do isolador",
-    "SE-E4 — Polo A — SD6-01"
-   ]
-  },
-  {
-   "id": "1f12366-5",
-   "data": "02-06-26",
-   "hora": "16:15",
-   "commit": "1f12366",
-   "aba": "conteudo",
-   "link": "slides/slide-insulator-coating.html",
    "acao": "adição",
    "breadcrumb": [
     "Óbices",
@@ -17039,15 +15912,12 @@
     "SE-E4 — Polo A — SD6-01 (substituído)"
    ],
    "titulo": "SE-E4 — Polo A — SD6-01 (substituído)",
-   "tipo": "subtítulo · imagens",
+   "tipo": "imagens · observação",
    "tipos": [
-    "subtítulo",
-    "imagens"
+    "imagens",
+    "observação"
    ],
    "partes": [
-    {
-     "tipo": "subtítulo"
-    },
     {
      "tipo": "imagens",
      "legendas": [
@@ -17094,8 +15964,49 @@
       "extras": 0
      },
      "qtdImagens": 2
+    },
+    {
+     "tipo": "observação",
+     "resumo": "antes",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "247 KB",
+      "amostra": [
+       {
+        "nome": "insulator-1.jpeg",
+        "src": "assets/img/slides/issues/insulator-coating/insulator-1.jpeg",
+        "miniatura": "assets/img/slides/issues/insulator-coating/insulator-1-200.webp",
+        "peso": "154 KB"
+       },
+       {
+        "nome": "insulator-2.jpeg",
+        "src": "assets/img/slides/issues/insulator-coating/insulator-2.jpeg",
+        "miniatura": "assets/img/slides/issues/insulator-coating/insulator-2-200.webp",
+        "peso": "94 KB"
+       }
+      ],
+      "extras": 0
+     }
     }
    ]
+  },
+  {
+   "id": "1f12366-5",
+   "data": "02-06-26",
+   "hora": "16:15",
+   "commit": "1f12366",
+   "aba": "conteudo",
+   "link": "slides/slide-insulator-coating.html",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "SE-E4 — Polo A — SD6-01 (substituído)",
+   "breadcrumb": [
+    "Óbices",
+    "Deterioração do esmalte vitrificado do isolador",
+    "SE-E4 — Polo A — SD6-01 (substituído)"
+   ],
+   "de": "SE-E4 — Polo A — SD6-01",
+   "para": "SE-E4 — Polo A — SD6-01 (substituído)"
   },
   {
    "id": "1f12366-4",
@@ -17135,14 +16046,35 @@
    "commit": "1f12366",
    "aba": "conteudo",
    "link": null,
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Equipamento substituído",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Execução",
    "breadcrumb": [
     "LD — Distribuição",
     "Substituição de chave fusível",
-    "Equipamento substituído"
+    "Execução"
    ],
+   "legendas": [],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "132 KB",
+    "amostra": [
+     {
+      "nome": "fuse-3.jpeg",
+      "src": "assets/img/slides/ld/fuse-switch/fuse-3.jpeg",
+      "miniatura": "history/thumbs/1f12366-fuse-3.webp",
+      "peso": "72 KB"
+     },
+     {
+      "nome": "fuse-4.jpeg",
+      "src": "assets/img/slides/ld/fuse-switch/fuse-4.jpeg",
+      "miniatura": "history/thumbs/1f12366-fuse-4.webp",
+      "peso": "59 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
    "alvoAusente": true
   },
   {
@@ -17152,47 +16084,16 @@
    "commit": "1f12366",
    "aba": "conteudo",
    "link": null,
-   "acao": "adição",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Execução",
    "breadcrumb": [
     "LD — Distribuição",
     "Substituição de chave fusível",
     "Execução"
    ],
-   "titulo": "Execução",
-   "tipo": "subtítulo · imagens",
-   "tipos": [
-    "subtítulo",
-    "imagens"
-   ],
-   "partes": [
-    {
-     "tipo": "subtítulo"
-    },
-    {
-     "tipo": "imagens",
-     "legendas": [],
-     "imagens": {
-      "total": 2,
-      "pesoTotal": "132 KB",
-      "amostra": [
-       {
-        "nome": "fuse-3.jpeg",
-        "src": "assets/img/slides/ld/fuse-switch/fuse-3.jpeg",
-        "miniatura": "history/thumbs/1f12366-fuse-3.webp",
-        "peso": "72 KB"
-       },
-       {
-        "nome": "fuse-4.jpeg",
-        "src": "assets/img/slides/ld/fuse-switch/fuse-4.jpeg",
-        "miniatura": "history/thumbs/1f12366-fuse-4.webp",
-        "peso": "59 KB"
-       }
-      ],
-      "extras": 0
-     },
-     "qtdImagens": 2
-    }
-   ],
+   "de": "Equipamento substituído",
+   "para": "Execução",
    "alvoAusente": true
   },
   {
@@ -17202,14 +16103,35 @@
    "commit": "1f12366",
    "aba": "conteudo",
    "link": null,
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Processo do retensionamento",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Execução",
    "breadcrumb": [
     "LT — Transmissão",
     "Retensionamento de estai",
-    "Processo do retensionamento"
+    "Execução"
    ],
+   "legendas": [],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "134 KB",
+    "amostra": [
+     {
+      "nome": "cable-5.jpeg",
+      "src": "assets/img/slides/lt/cable-retensioning/cable-5.jpeg",
+      "miniatura": "history/thumbs/1f12366-cable-5.webp",
+      "peso": "67 KB"
+     },
+     {
+      "nome": "cable-6.jpeg",
+      "src": "assets/img/slides/lt/cable-retensioning/cable-6.jpeg",
+      "miniatura": "history/thumbs/1f12366-cable-6.webp",
+      "peso": "67 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
    "alvoAusente": true
   },
   {
@@ -17219,47 +16141,16 @@
    "commit": "1f12366",
    "aba": "conteudo",
    "link": null,
-   "acao": "adição",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Execução",
    "breadcrumb": [
     "LT — Transmissão",
     "Retensionamento de estai",
     "Execução"
    ],
-   "titulo": "Execução",
-   "tipo": "subtítulo · imagens",
-   "tipos": [
-    "subtítulo",
-    "imagens"
-   ],
-   "partes": [
-    {
-     "tipo": "subtítulo"
-    },
-    {
-     "tipo": "imagens",
-     "legendas": [],
-     "imagens": {
-      "total": 2,
-      "pesoTotal": "134 KB",
-      "amostra": [
-       {
-        "nome": "cable-5.jpeg",
-        "src": "assets/img/slides/lt/cable-retensioning/cable-5.jpeg",
-        "miniatura": "history/thumbs/1f12366-cable-5.webp",
-        "peso": "67 KB"
-       },
-       {
-        "nome": "cable-6.jpeg",
-        "src": "assets/img/slides/lt/cable-retensioning/cable-6.jpeg",
-        "miniatura": "history/thumbs/1f12366-cable-6.webp",
-        "peso": "67 KB"
-       }
-      ],
-      "extras": 0
-     },
-     "qtdImagens": 2
-    }
-   ],
+   "de": "Processo do retensionamento",
+   "para": "Execução",
    "alvoAusente": true
   },
   {
@@ -17348,45 +16239,7 @@
    "qtdImagens": 2
   },
   {
-   "id": "b950280-5",
-   "data": "27-05-26",
-   "hora": "15:51",
-   "commit": "b950280",
-   "aba": "conteudo",
-   "link": "slides/slide-circuit-breaker-pins.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
-   "breadcrumb": [
-    "Óbices",
-    "Pinos encontrados no disjuntor DJ6-02",
-    "2 pinos dentro do disjuntor da SE-E2"
-   ],
-   "de": "slide-circuit-breaker-pins.html › Dois pinos encontrados dentro do disjuntor DJ6-02 da SE-E2",
-   "para": "slide-circuit-breaker-pins.html › 2 pinos dentro do disjuntor da SE-E2",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "203 KB",
-    "amostra": [
-     {
-      "nome": "pin-1.jpeg",
-      "src": "assets/img/slides/issues/circuit-breaker-pins/pin-1.jpeg",
-      "miniatura": "assets/img/slides/issues/circuit-breaker-pins/pin-1-200.webp",
-      "peso": "128 KB"
-     },
-     {
-      "nome": "pin-2.jpeg",
-      "src": "assets/img/slides/issues/circuit-breaker-pins/pin-2.jpeg",
-      "miniatura": "assets/img/slides/issues/circuit-breaker-pins/pin-2-200.webp",
-      "peso": "75 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
-  },
-  {
-   "id": "b950280-4",
+   "id": "b950280-3",
    "data": "27-05-26",
    "hora": "15:51",
    "commit": "b950280",
@@ -17403,11 +16256,11 @@
    "para": "Manutenção no GMG da SE-E3",
    "obsoleto": {
     "commit": "3442081",
-    "id": "3442081-11"
+    "id": "3442081-10"
    }
   },
   {
-   "id": "b950280-3",
+   "id": "b950280-2",
    "data": "27-05-26",
    "hora": "15:51",
    "commit": "b950280",
@@ -17424,36 +16277,22 @@
    "para": "Manutenção nos postes 001/48 e 002/48"
   },
   {
-   "id": "b950280-2",
-   "data": "27-05-26",
-   "hora": "15:51",
-   "commit": "b950280",
-   "aba": "conteudo",
-   "link": "slides/slide-circuit-breaker-pins.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Dois pinos encontrados dentro do disjuntor DJ6-02 da SE-E2",
-   "breadcrumb": [
-    "Óbices",
-    "Pinos encontrados no disjuntor DJ6-02",
-    "Dois pinos encontrados dentro do disjuntor DJ6-02 da SE-E2"
-   ]
-  },
-  {
    "id": "b950280-1",
    "data": "27-05-26",
    "hora": "15:51",
    "commit": "b950280",
    "aba": "conteudo",
    "link": "slides/slide-circuit-breaker-pins.html",
-   "acao": "adição",
+   "acao": "modificação",
    "tipo": "subtítulo",
    "titulo": "2 pinos dentro do disjuntor da SE-E2",
    "breadcrumb": [
     "Óbices",
     "Pinos encontrados no disjuntor DJ6-02",
     "2 pinos dentro do disjuntor da SE-E2"
-   ]
+   ],
+   "de": "Dois pinos encontrados dentro do disjuntor DJ6-02 da SE-E2",
+   "para": "2 pinos dentro do disjuntor da SE-E2"
   },
   {
    "id": "b950280-0",
@@ -17477,61 +16316,25 @@
    }
   },
   {
-   "id": "ff9a326-4",
+   "id": "ff9a326-2",
    "data": "27-05-26",
    "hora": "11:50",
    "commit": "ff9a326",
    "aba": "conteudo",
    "link": "slides/slide-insulator-coating.html",
-   "acao": "transferência",
-   "tipo": "imagens",
-   "titulo": null,
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "SE-E4 — Polo A — SD6-01",
    "breadcrumb": [
     "Óbices",
     "Deterioração do esmalte vitrificado do isolador",
     "SE-E4 — Polo A — SD6-01"
    ],
-   "de": "slide-insulator-coating.html › Deterioração no polo A da SD6-01",
-   "para": "slide-insulator-coating.html › SE-E4 — Polo A — SD6-01",
-   "imagens": {
-    "total": 2,
-    "pesoTotal": "247 KB",
-    "amostra": [
-     {
-      "nome": "insulator-1.jpeg",
-      "src": "assets/img/slides/issues/insulator-coating/insulator-1.jpeg",
-      "miniatura": "assets/img/slides/issues/insulator-coating/insulator-1-200.webp",
-      "peso": "154 KB"
-     },
-     {
-      "nome": "insulator-2.jpeg",
-      "src": "assets/img/slides/issues/insulator-coating/insulator-2.jpeg",
-      "miniatura": "assets/img/slides/issues/insulator-coating/insulator-2-200.webp",
-      "peso": "94 KB"
-     }
-    ],
-    "extras": 0
-   },
-   "qtdImagens": 2
+   "de": "Deterioração no polo A da SD6-01",
+   "para": "SE-E4 — Polo A — SD6-01"
   },
   {
-   "id": "ff9a326-3",
-   "data": "27-05-26",
-   "hora": "11:50",
-   "commit": "ff9a326",
-   "aba": "conteudo",
-   "link": "slides/slide-insulator-coating.html",
-   "acao": "deleção",
-   "tipo": "subtítulo",
-   "titulo": "Deterioração no polo A da SD6-01",
-   "breadcrumb": [
-    "Óbices",
-    "Deterioração do esmalte vitrificado do isolador",
-    "Deterioração no polo A da SD6-01"
-   ]
-  },
-  {
-   "id": "ff9a326-2",
+   "id": "ff9a326-1",
    "data": "27-05-26",
    "hora": "11:50",
    "commit": "ff9a326",
@@ -17577,22 +16380,6 @@
      },
      "qtdImagens": 2
     }
-   ]
-  },
-  {
-   "id": "ff9a326-1",
-   "data": "27-05-26",
-   "hora": "11:50",
-   "commit": "ff9a326",
-   "aba": "conteudo",
-   "link": "slides/slide-insulator-coating.html",
-   "acao": "adição",
-   "tipo": "subtítulo",
-   "titulo": "SE-E4 — Polo A — SD6-01",
-   "breadcrumb": [
-    "Óbices",
-    "Deterioração do esmalte vitrificado do isolador",
-    "SE-E4 — Polo A — SD6-01"
    ]
   },
   {
@@ -17754,7 +16541,7 @@
        {
         "nome": "cpisf-erosion-request.png",
         "src": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request.png",
-        "miniatura": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request-200.webp",
+        "miniatura": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request.png",
         "peso": "62 KB"
        }
       ],
@@ -17769,7 +16556,7 @@
      {
       "nome": "cpisf-erosion-request.png",
       "src": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request.png",
-      "miniatura": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request-200.webp",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/general/cpisf-erosion-request.png",
       "peso": "62 KB"
      },
      {

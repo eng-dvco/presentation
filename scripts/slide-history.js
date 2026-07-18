@@ -469,7 +469,7 @@
     //  • deleção de subtítulo (o "de" do de→para já mostra o subtítulo removido).
     const t = tiposDe(r);
     const semTitulo =
-      (r.acao === 'modificação' && (t.includes('título') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação') || (t.includes('imagens') && t.includes('observação')))) ||
+      (r.acao === 'modificação' && (t.includes('título') || t.includes('subtítulo') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação') || (t.includes('imagens') && t.includes('observação')))) ||
       (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens') || t.includes('slide'))) ||
       (r.acao === 'deleção' && t.includes('subtítulo'));
     if (r.titulo && !semTitulo) a.appendChild(el('h3', 'hist-card-title', r.titulo));

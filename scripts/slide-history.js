@@ -476,6 +476,7 @@
     //  • deleção de subtítulo (o "de" do de→para já mostra o subtítulo removido).
     const t = tiposDe(r);
     const semTitulo =
+      t.includes('detalhe') ||   // post-scriptum: o resumo/de→para + o subtítulo no breadcrumb já bastam
       (r.acao === 'modificação' && (t.includes('título') || t.includes('subtítulo') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação') || t.includes('imagens'))) ||
       (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens') || t.includes('slide'))) ||
       (r.acao === 'deleção' && t.includes('subtítulo'));

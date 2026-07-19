@@ -479,9 +479,9 @@ a.flex-logo-container {
 
 /* ── POST-SCRIPTUM de subseção — reaproveitado das snapshots (public/snapshots) ──────────────
    "Detalhe" logo abaixo das imagens de uma subseção: uma observação que valha manter, mas que
-   repetida sob cada miniatura poluiria o mosaico (as observações idênticas são ocultadas por
-   ocultaObsRedundantes() em slide-nav.js). Caixa tracejada, com o mesmo arredondamento das imagens
-   do mosaico; cores herdadas das snapshots. A variante .post-details é a VERDE (vedação das portas). */
+   repetida sob cada miniatura poluiria o mosaico (nesses casos as observações redundantes são
+   REMOVIDAS do HTML, não só ocultas). Caixa tracejada, com o mesmo arredondamento das imagens do
+   mosaico; cores herdadas das snapshots. A variante .post-details é a VERDE (vedação das portas). */
 .postscriptum-container {
   display: flex;
   flex-direction: column;
@@ -1542,6 +1542,15 @@ footer {
   .slide-sidebar { display: none; }
 }
 
+/* slide "container" de subpáginas (e seus sub-slides): a navegação embutida no corpo — o .title-header-h2
+   que CONTÉM a .nav-list (subtítulo "Serviços realizados" + <hr> + a lista) — MIGROU para a secnav e fica
+   SEMPRE oculta, em TODOS os viewports. Oculta por CSS ESTÁTICO (:has(.nav-list)), e NÃO por uma classe
+   adicionada via JS: assim some já no 1º paint, sem o "flash" em que a navegação do topo aparecia e sumia
+   ao (re)carregar. O <h2> permanece no HTML como METADADO — título de grupo das imagens no
+   lightbox/histórico (getGroupTitle) — e a .nav-list como fonte de dados do menu (ambos lidos via
+   querySelector, que ignora display:none). */
+.title-header-h2:has(.nav-list) { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .lightbox-overlay { transition: none; }
   .lightbox-close,
@@ -1913,6 +1922,97 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   overflow: hidden;
 }
 
+/* T3b: quando há sub-slides, "slides desta seção" vira DUAS caixas (.secnav-part-1 / .secnav-part-2) e o
+   menu complementar entra ENTRE elas como um 3º container irmão. Todos são cartões #fff+box-shadow do
+   .slide-secnav, separados pelo VAZIO de 4px do gap da secnav (o MESMO espaço, mostrando o fundo da
+   página, que separa "seções" ↔ "slides desta seção"). Cantos: as faces internas que encaram os vazios
+   ficam RETAS; só a base externa do conjunto (.secnav-part-2) é arredondada.
+   PARTE 1: cabeçalho + slide atual; altura natural, base reta (encara o vazio até os sub-slides). */
+.secnav-part-1 {
+  flex: 0 0 auto;
+  border-radius: 0;
+}
+/* PARTE 2: demais slides; herda flex:1 1 auto (cresce/rola) e o raio 0 0 R R (base externa arredondada,
+   topo reto encarando o vazio a partir dos sub-slides). */
+
+/* menu complementar "sub-slides": container PRÓPRIO entre a parte 1 e a parte 2, com VAZIOS reais de 4px
+   acima e abaixo (do gap do .slide-secnav). É um cartão como os demais (superfície #fff + box-shadow, SEM
+   borda), porém RETANGULAR (border-radius:0) — container do meio, ambas as faces encaram vazios. É também
+   uma GAVETA COLAPSÁVEL (como .secnav-all). Reusa .secnav-items-list/.secnav-item-link/.secnav-marker. */
+.secnav-items--sub {
+  flex: 0 0 auto;              /* altura natural: não cresce */
+  border-radius: 0;           /* RETANGULAR: container do meio (topo e base retos, encaram os vazios) */
+  background-color: var(--lt-surface-strong); /* #fff — mesmo cartão dos demais containers */
+  box-shadow: var(--lt-shadow);
+  padding: 12px;              /* IGUAL ao .secnav-section-content: alinha itens/marcador/cabeçalho com
+                                 os de "slides desta seção". A compactação vem dos ITENS (padding-block:4px
+                                 + gap:4px abaixo), não do padding do cartão. */
+}
+
+/* cabeçalho vira um TOGGLE (colapsa/expande como a gaveta "seções"); reset de botão sobre
+   .secnav-items-title (mantém uppercase/cor/padding herdados; troca baseline por center). O seletor
+   carrega AMBAS as classes (0,2,0) de propósito: .secnav-items-title { align-items:baseline } vem depois
+   no arquivo e, com especificidade igual, venceria — aqui a maior especificidade garante o center. */
+.secnav-items-title.secnav-subnav-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: var(--ink-4);        /* mesma cor do subtítulo */
+  align-items: center;
+  position: relative;
+  overflow: hidden;           /* contém o ripple */
+}
+
+/* contador (N) e seta ocupam o MESMO espaço (empilhados) — sem salto de layout. Ao pairar/focar o
+   bloco, o contador some e a seta aparece: reaproveita o espaço já usado, sem poluir o cabeçalho.
+   place-items:center → os dois CENTRALIZADOS na mesma célula (vertical e horizontal): seus centros
+   coincidem, tornando a transição número↔seta harmônica (um surge no exato centro do outro). */
+.secnav-subnav-switch {
+  flex-shrink: 0;
+  display: inline-grid;
+  place-items: center;
+}
+.secnav-subnav-switch > * {
+  grid-area: 1 / 1;           /* empilha contador e seta na mesma célula (largura = a do contador) */
+  transition: opacity 0.2s ease;
+}
+.secnav-subnav-chevron {
+  opacity: 0;                 /* escondida por padrão; surge no hover/focus do bloco */
+  font-size: var(--collapsible-icon-size);   /* MESMO ícone/tamanho da gaveta "seções" */
+  line-height: 1;
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.secnav-items--sub:hover .secnav-items-count,
+.secnav-subnav-toggle:focus-visible .secnav-items-count { opacity: 0; }
+.secnav-items--sub:hover .secnav-subnav-chevron,
+.secnav-subnav-toggle:focus-visible .secnav-subnav-chevron { opacity: 1; }
+/* expandida: seta girada (aponta p/ cima), igual à gaveta "seções" aberta */
+.secnav-items--sub.is-open .secnav-subnav-chevron { transform: rotate(180deg); }
+
+/* corpo colapsável: anima grid-template-rows 0fr↔1fr sem medir altura (igual a .secnav-all-list) */
+.secnav-subnav-collapse {
+  display: grid;
+  grid-template-rows: 1fr;    /* inicia expandida */
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.secnav-items--sub:not(.is-open) .secnav-subnav-collapse { grid-template-rows: 0fr; }
+.secnav-subnav-collapse-inner { min-height: 0; overflow: hidden; }
+
+/* lista interna: mostra TODOS os sub-slides (sem rolagem própria) e MAIS COMPACTA — itens com padding
+   vertical menor e menos espaço entre eles, aproximando-os. O padding lateral (2px) da lista é mantido
+   (o marcador .secnav-marker mede o afastamento a partir dele). */
+.secnav-items--sub .secnav-items-list {
+  flex: 0 0 auto;
+  overflow: visible;
+  gap: var(--gap-4);          /* itens mais próximos (4px em vez de 8px) */
+}
+.secnav-items--sub .secnav-item-link {
+  padding-block: 4px;         /* mais compacto que os 8px padrão (menor altura do clicável) */
+}
+
 .secnav-items-title {
   flex-shrink: 0;
   display: flex;
@@ -2278,7 +2378,9 @@ body:has(.has-sidebar) :is(#back-to-top, #go-to-bottom) {
   .secnav-btn { transition: none; }
   .secnav-marker { transition: none; }
   .secnav-all-chevron,
-  .secnav-all-list { transition: none; }
+  .secnav-all-list,
+  .secnav-subnav-switch > *,
+  .secnav-subnav-collapse { transition: none; }
   /* sem animação: o deslize e o esmaecimento mudam instantaneamente ao pairar */
   .secnav-item-name,
   .secnav-item-name-inner { transition: none; }

@@ -88,6 +88,15 @@ ul.nav-list {
   margin-top: 24px;
 }
 
+/* Nos sub-slides, o bloco "Serviços realizados" (o .title-header-h2 que contém a .nav-list) fica OCULTO
+   (migrou p/ a secnav — ver slide-style.css). O 1º subtítulo visível — o .title-header-h3 imediatamente
+   após ele — perde a margem superior de 24px para que o conteúdo (mosaico) alinhe pelo TOPO com a
+   navegação lateral entre seções. Os demais .title-header-h3 (entre grupos) a mantêm. Seletor ESTÁTICO
+   (:has) → alinha já no 1º paint, sem flash. Especificidade 0,3,0 > 0,2,0 da regra acima → vence. */
+.title-header-h2:has(.nav-list) + .title-header-h3 {
+  margin-top: 0;
+}
+
 .date-subtitle {
   width: 100%;
   grid-column: 1 / -1;

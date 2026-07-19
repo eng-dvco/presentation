@@ -120,13 +120,24 @@ function parseSections(doc) {
   return sections;
 }
 
+// SLUG do slide "CONTAINER" do grupo de sub-slides. Um sub-slide referencia seu container por um crumb do
+// breadcrumb que aponta para outro slide (o nível extra de breadcrumb dos sub-slides). Se não houver tal
+// crumb, o próprio slide é o container (ex.: o "geral") — devolve o próprio slug.
+function containerSlug(slug) {
+  const cont = Array.from(document.querySelectorAll('.breadcrumb .crumb a[href]'))
+    .map(a => a.getAttribute('href').split('/').pop())
+    .find(s => /^slide-.+\.html$/.test(s));
+  return cont || slug;
+}
+
 function findCurrentSectionIndex(sections, slug) {
   const i = sections.findIndex(s => s.items.some(it => it.slug === slug));
   if (i !== -1) return i;
-  // Sub-slides (ex.: slide-lt-maintenance-cpisf.html) não estão listados no
-  // index.html — herdam a seção do slide "geral" correspondente.
-  if (/^slide-lt-maintenance-/.test(slug)) {
-    return sections.findIndex(s => s.items.some(it => it.slug === 'slide-lt-maintenance-general.html'));
+  // Sub-slides não estão listados no index.html — herdam a seção do seu slide CONTAINER (indicado pelo
+  // breadcrumb). O container está indexado, então basta procurar a seção que o contém.
+  const cont = containerSlug(slug);
+  if (cont !== slug) {
+    return sections.findIndex(s => s.items.some(it => it.slug === cont));
   }
   return -1;
 }
@@ -135,7 +146,9 @@ function findCurrentSectionIndex(sections, slug) {
 // esmaecimento/truncamento (CSS .is-clamped::after) é exibido.
 function markClampedItems(list) {
   if (!list) return;
-  list.querySelectorAll('.secnav-item-link').forEach(link => {
+  // só os itens DIRETOS desta lista — não os do bloco "sub-slides" aninhado (que
+  // tem a própria lista e é processado à parte); evita processar em duplicidade.
+  list.querySelectorAll(':scope > .secnav-item-link').forEach(link => {
     const name = link.querySelector('.secnav-item-name');
     link.classList.remove('is-clamped');
     if (!name) return;
@@ -153,31 +166,104 @@ function markClampedItems(list) {
   });
 }
 
-// Navegação entre os itens da seção atual (lista abaixo dos botões de seção).
-// Para sub-slides (lt-maintenance-*), que não estão no index.html, usa a
-// sub-navegação (.nav-list) embutida na própria página.
+// Extrai os itens de uma .nav-list (sub-navegação embutida na página) como {slug, label}.
+function navListItems(navList) {
+  return Array.from(navList.querySelectorAll('a.item[href]'))
+    .map(a => ({ slug: a.getAttribute('href').split('/').pop(), label: a.textContent.trim() }))
+    .filter(it => /^slide-.+\.html$/.test(it.slug));
+}
+
+// Navegação entre os slides da seção atual (lista abaixo dos botões de seção): SEMPRE os itens da seção
+// (index.html) — inclusive nos sub-slides, para que a secnav fique idêntica à do container. Num sub-slide
+// nenhum item da seção é o atual → a lista aparece SEM item ativo (o marcador fica no menu "sub-slides");
+// o slide container continua sendo o ponto de divisão da lista (ver buildSectionNav).
 function buildItemNav(section, currentSlug) {
-  let items = section ? section.items.slice() : [];
-  let title = section ? section.title : '';
-  if (!items.some(it => it.slug === currentSlug)) {
-    const navList = document.querySelector('.nav-list');
-    if (navList) {
-      items = Array.from(navList.querySelectorAll('a.item[href]'))
-        .map(a => ({ slug: a.getAttribute('href').split('/').pop(), label: a.textContent.trim() }))
-        .filter(it => /^slide-.+\.html$/.test(it.slug));
-      title = document.querySelector('h1.title-h1')?.textContent.trim() || title;
-    }
+  const items = section ? section.items.slice() : [];
+  return buildItemsGroup(items, 'slides desta seção', currentSlug);
+}
+
+// Qualquer slide de um grupo de sub-slides (o CONTAINER — ex.: o "geral" da manutenção da LT — OU um de
+// seus sub-slides) traz a mesma .nav-list e ganha o menu complementar "sub-slides" em LISTA PLANA, que
+// vira um CONTAINER PRÓPRIO da secnav, FISICAMENTE entre a "parte 1" e a "parte 2" de "slides desta seção"
+// (ver buildSectionNav). Assim a secnav fica IDÊNTICA no container e em todos os sub-slides. Esse menu
+// MIGRA da página para a secnav em TODOS os tamanhos; a lista embutida no corpo (o .title-header-h2 que
+// contém a .nav-list) é ocultada por CSS ESTÁTICO — .title-header-h2:has(.nav-list) (ver slide-style.css) —
+// e NÃO por classe adicionada aqui, para não "piscar" ao carregar. A .nav-list segue como fonte de dados.
+function buildSubpageNav(currentSlug) {
+  const navList = document.querySelector('.nav-list');
+  if (!navList) return null;
+  const built = buildItemsGroup(navListItems(navList), 'sub-slides', currentSlug);
+  if (!built) return null;
+  makeSubCollapsible(built);                    // gaveta colapsável (como "seções"); inicia expandida
+  return built;
+}
+
+// Transforma o bloco "sub-slides" em gaveta colapsável (como .secnav-all): o cabeçalho vira um toggle e
+// a lista entra num corpo colapsável (grid 0fr↔1fr). Inicia EXPANDIDA. O contador (N) e a seta dividem o
+// MESMO espaço no cabeçalho — ao pairar/focar o bloco, o contador some e a seta (o MESMO ícone da gaveta
+// "seções") aparece; reaproveita o espaço, sem acumular funções nem poluir o cabeçalho.
+function makeSubCollapsible(built) {
+  const { group } = built;
+  const heading = group.querySelector('.secnav-items-title');
+  const label = heading.querySelector('span:not(.secnav-items-count)');
+  const count = heading.querySelector('.secnav-items-count');
+
+  // cabeçalho → botão toggle, com contador e seta empilhados num único slot (sem salto de layout)
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'secnav-items-title secnav-subnav-toggle';
+  const switcher = document.createElement('span');
+  switcher.className = 'secnav-subnav-switch';
+  const chevron = document.createElement('span');
+  chevron.className = 'secnav-subnav-chevron';
+  chevron.setAttribute('aria-hidden', 'true');
+  chevron.textContent = '▾';
+  switcher.appendChild(count);       // reaproveita o contador já criado
+  switcher.appendChild(chevron);
+  toggle.appendChild(label);
+  toggle.appendChild(switcher);
+  heading.replaceWith(toggle);
+
+  // lista → corpo colapsável (grid), com um inner que a recorta durante a animação
+  const collapse = document.createElement('div');
+  collapse.className = 'secnav-subnav-collapse';
+  const inner = document.createElement('div');
+  inner.className = 'secnav-subnav-collapse-inner';
+  built.list.replaceWith(collapse);
+  inner.appendChild(built.list);
+  collapse.appendChild(inner);
+
+  const bodyId = 'secnav-subnav-body';
+  collapse.id = bodyId;
+  toggle.setAttribute('aria-controls', bodyId);
+
+  let open = true;   // inicia EXPANDIDA (decisão do usuário)
+  const apply = () => {
+    group.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    collapse.inert = !open;   // colapsado: links fora da ordem de tabulação e da árvore de acessibilidade
+  };
+  apply();
+  toggle.addEventListener('click', () => { open = !open; apply(); });
+  if (!reducedMotion) {
+    toggle.addEventListener('mousedown', spawnRipple);
+    toggle.addEventListener('touchstart', spawnRipple, { passive: true });
   }
+}
+
+// Monta UMA caixa de navegação (.secnav-items): cabeçalho (rótulo + contador) + lista de itens com o
+// marcador deslizante. Reutilizada pela "slides desta seção" E pela caixa de subpáginas (container).
+function buildItemsGroup(items, headingLabel, currentSlug) {
   if (items.length < 2) return null;
 
   const group = document.createElement('div');
   group.className = 'secnav-items';
 
-  // cabeçalho: rótulo fixo à esquerda + total de slides (entre parênteses) à direita
+  // cabeçalho: rótulo à esquerda + total de itens (entre parênteses) à direita
   const heading = document.createElement('p');
   heading.className = 'secnav-items-title';
   const label = document.createElement('span');
-  label.textContent = 'slides desta seção';
+  label.textContent = headingLabel;
   const count = document.createElement('span');
   count.className = 'secnav-items-count';
   count.textContent = `(${items.length})`;
@@ -266,13 +352,14 @@ function moveMarkerTo(marker, el, animate) {
 
 // Na carga: fica direto no item ativo; se viemos de outro item da mesma lista
 // (clique anterior, gravado em sessionStorage), parte da origem e desliza até ele.
-function initMarker(itemNav) {
+// `from` é lido/limpo UMA vez em buildSectionNav e repassado a cada lista — assim cada uma acha o
+// próprio item de origem (senão a 1ª lista consumiria a chave e as demais perderiam a animação).
+function initMarker(itemNav, from) {
   const { marker, activeLink, list } = itemNav;
   if (!marker || !activeLink) return;
-  let from = null;
-  try { from = sessionStorage.getItem('secnav-from'); sessionStorage.removeItem('secnav-from'); } catch {}
+  // restringe a busca aos itens DIRETOS da lista (":scope >") — defensivo contra qualquer item aninhado.
   const fromLink = (from && from !== activeLink.getAttribute('href'))
-    ? list.querySelector(`.secnav-item-link[href="${from}"]`) : null;
+    ? list.querySelector(`:scope > .secnav-item-link[href="${from}"]`) : null;
   if (!reducedMotion && fromLink && fromLink !== activeLink) {
     moveMarkerTo(marker, fromLink, false);                               // origem (instantâneo)
     requestAnimationFrame(() => moveMarkerTo(marker, activeLink, true)); // desliza até o destino
@@ -417,17 +504,66 @@ function buildSectionNav(sections, currentIndex, currentSlug) {
   //   do painel colapsável do Container 1; agora cada um é uma caixa irmã/própria.
   // navegação entre os itens da seção atual — agora em seu PRÓPRIO container (irmão)
   const itemNav = buildItemNav(sections[currentIndex], currentSlug);
+  // menu de sub-slides (qualquer slide do grupo com .nav-list: container OU sub-slide) — 1 nível a mais
+  const subNav = buildSubpageNav(currentSlug);
   // a 1ª caixa sabe se há "slides desta seção" p/ decidir o estado inicial (item 5)
   const allNav = buildAllSectionsNav(sections, currentIndex, !!itemNav);
   if (allNav) nav.appendChild(allNav);
-  if (itemNav) {
-    // envolve o bloco de itens em uma caixa própria (Container 2), separada do
-    // Container 1 (navegação entre seções). O conteúdo interno (.secnav-items e
-    // seus filhos) é PRESERVADO — herda o look/feel atual (marcador, etc.).
-    const itemsBox = document.createElement('div');
-    itemsBox.className = 'secnav-section-content';
-    itemsBox.appendChild(itemNav.group);
-    nav.appendChild(itemsBox);
+  // Layout dos containers de "slides desta seção":
+  //  • sem sub-slides → UMA caixa (comportamento normal).
+  //  • com sub-slides → TRÊS caixas IRMÃS separadas por VAZIOS de 4px (o gap do .slide-secnav — o MESMO
+  //    espaço, mostrando o fundo da página, que separa "seções" ↔ "slides desta seção"):
+  //      [parte 1: cabeçalho + slide atual] · [sub-slides] · [parte 2: demais slides].
+  //    O menu complementar fica FISICAMENTE entre as duas partes (não mais aninhado na lista).
+  const extraLists = [];   // listas SEM marcador que ainda precisam de clamp de nomes longos (ex.: parte 2)
+  if (itemNav && subNav) {
+    subNav.group.classList.add('secnav-items--sub');   // .secnav-items--sub é, ele mesmo, um cartão
+    // ponto de divisão = o SLIDE CONTAINER (a parte-1 termina nele), esteja ele ATIVO ou não. No próprio
+    // container ele é o item ativo; num sub-slide, o container não é o slide atual, mas ainda é onde a
+    // lista se divide — por isso ancoramos pelo slug do container, não pelo item ativo.
+    const cont = containerSlug(currentSlug);
+    const anchor = itemNav.list.querySelector(`:scope > .secnav-item-link[href="${cont}"]`)
+      || (itemNav.activeLink && itemNav.activeLink.parentNode === itemNav.list ? itemNav.activeLink : null);
+    // parte-2: itens APÓS o ativo (o slide atual e o marcador ficam na parte-1)
+    const part2Items = [];
+    if (anchor) {
+      let node = anchor.nextElementSibling;
+      while (node) {
+        const next = node.nextElementSibling;
+        if (node.classList.contains('secnav-item-link')) part2Items.push(node);
+        node = next;
+      }
+    }
+    // caixa da PARTE 1 (cabeçalho "(N)" + slide atual + marcador)
+    const cardA = document.createElement('div');
+    cardA.className = 'secnav-section-content secnav-part-1';
+    cardA.appendChild(itemNav.group);
+    nav.appendChild(cardA);
+    // menu complementar SUB-SLIDES (cartão irmão, no meio, com vazios acima/abaixo)
+    nav.appendChild(subNav.group);
+    // caixa da PARTE 2 (demais slides, lista sem cabeçalho) — só se houver itens após o ativo
+    if (part2Items.length) {
+      const cardC = document.createElement('div');
+      cardC.className = 'secnav-section-content secnav-part-2';
+      const part2Group = document.createElement('div');
+      part2Group.className = 'secnav-items';
+      const part2List = document.createElement('div');
+      part2List.className = 'secnav-items-list';
+      part2Items.forEach(li => part2List.appendChild(li));
+      part2Group.appendChild(part2List);
+      cardC.appendChild(part2Group);
+      nav.appendChild(cardC);
+      extraLists.push(part2List);
+    }
+  } else if (itemNav) {
+    const box = document.createElement('div');
+    box.className = 'secnav-section-content';
+    box.appendChild(itemNav.group);
+    nav.appendChild(box);
+  } else if (subNav) {
+    // defensivo (sub-slides sem "slides desta seção" — ex.: seção de item único): cartão próprio
+    subNav.group.classList.add('secnav-items--sub');
+    nav.appendChild(subNav.group);
   }
 
   const container = document.querySelector('.content-container');
@@ -435,27 +571,38 @@ function buildSectionNav(sections, currentIndex, currentSlug) {
   container.insertAdjacentElement('afterbegin', nav);
   container.classList.add('has-sidebar');
 
+  // marcador: lê/limpa a origem UMA vez e a repassa a cada lista (cada uma acha o próprio item de
+  // origem); sem isso, a 1ª lista consumiria a chave e as demais perderiam a animação de deslize.
+  let markerFrom = null;
+  try { markerFrom = sessionStorage.getItem('secnav-from'); sessionStorage.removeItem('secnav-from'); } catch {}
+
+  const navs = [itemNav, subNav].filter(Boolean);
   const settle = () => {
-    if (itemNav) markClampedItems(itemNav.list);
-    if (itemNav && itemNav.activeLink) scrollActiveIntoNav(itemNav.activeLink);
+    navs.forEach(n => {
+      markClampedItems(n.list);
+      if (n.activeLink) scrollActiveIntoNav(n.activeLink);
+    });
+    extraLists.forEach(markClampedItems);
   };
   requestAnimationFrame(settle);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle);
 
-  if (itemNav && itemNav.marker) {
-    const initOnce = () => requestAnimationFrame(() => initMarker(itemNav));
+  navs.forEach(n => {
+    if (!n.marker) return;
+    const initOnce = () => requestAnimationFrame(() => initMarker(n, markerFrom));
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(initOnce);
     else initOnce();
-  }
+  });
 
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      if (itemNav) markClampedItems(itemNav.list);
-      if (itemNav && itemNav.marker && itemNav.activeLink) {
-        moveMarkerTo(itemNav.marker, itemNav.activeLink, false);
-      }
+      navs.forEach(n => {
+        markClampedItems(n.list);
+        if (n.marker && n.activeLink) moveMarkerTo(n.marker, n.activeLink, false);
+      });
+      extraLists.forEach(markClampedItems);
     }, 150);
   });
 }
@@ -1355,19 +1502,6 @@ if (backToTop) {
     window.scrollTo({ top: document.documentElement.scrollHeight, behavior: reducedMotion ? 'auto' : 'smooth' });
   });
 }
-
-// ---- observações REDUNDANTES ----------------------------------------------
-// Se TODAS as observações visíveis de uma mesma subseção (um .mosaic-container) forem idênticas, o
-// subtítulo já basta e a mesma frase repetida sob cada miniatura vira ruído — oculta-as. Só dispara
-// quando há 2+ observações e todas coincidem; observações que variam de imagem para imagem ficam.
-(function ocultaObsRedundantes() {
-  document.querySelectorAll('.mosaic-container').forEach(mos => {
-    const obs = [...mos.querySelectorAll('.obs')].filter(o => !o.classList.contains('invisible') && o.textContent.trim());
-    if (obs.length < 2) return;
-    const base = obs[0].textContent.trim();
-    if (obs.every(o => o.textContent.trim() === base)) obs.forEach(o => o.classList.add('invisible'));
-  });
-})();
 
 // ---- banner informativo EXPANSÍVEL ----------------------------------------
 // O texto do .note-banner tem teto de 3 linhas (-webkit-line-clamp); ao estreitar a viewport, ele pode

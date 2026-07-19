@@ -62,25 +62,32 @@
 
           <div class="hist-controls">
             <div class="hist-ctrlset">
-              <span class="hist-ctrlset-title">Exibir</span>
+              <span class="hist-ctrlset-title">Exibir<button type="button" class="hist-help" aria-label="O que exibir: o histórico de Conteúdo (imagens, observações e títulos dos slides) ou de Funções (novas funcionalidades, aperfeiçoamentos e descartes da apresentação)." title="O que exibir: o histórico de Conteúdo (imagens, observações e títulos dos slides) ou de Funções (novas funcionalidades, aperfeiçoamentos e descartes da apresentação).">?</button></span>
               <div class="hist-tabs" role="tablist" aria-label="Tipo de alteração">
                 <button type="button" class="hist-tab active" data-aba="conteudo" role="tab" aria-selected="true">Conteúdo</button>
                 <button type="button" class="hist-tab" data-aba="funcoes" role="tab" aria-selected="false">Funções</button>
               </div>
             </div>
             <div class="hist-ctrlset hist-ctrlset--push">
-              <span class="hist-ctrlset-title">Ordenar</span>
-              <div class="hist-groups" role="group" aria-label="Agrupamento">
-                <button type="button" class="hist-group-btn active" data-grupo="tempo" aria-pressed="true">Por tempo</button>
-                <button type="button" class="hist-group-btn" data-grupo="acao" aria-pressed="false">Por ação</button>
-                <button type="button" class="hist-group-btn" data-grupo="secao" aria-pressed="false" title="Exibição experimental" aria-label="Exibição por seção — experimental">Por seção<sup class="hist-exp-mark" aria-hidden="true">β</sup></button>
+              <span class="hist-ctrlset-title">Ordenação<button type="button" class="hist-help" aria-label="Como os registros são organizados: por Tempo (cronológico, por dia), por Ação (adição, modificação, deleção, transferência) ou por Seção da apresentação." title="Como os registros são organizados: por Tempo (cronológico, por dia), por Ação (adição, modificação, deleção, transferência) ou por Seção da apresentação.">?</button></span>
+              <div class="hist-groups" role="group" aria-label="Ordenação">
+                <button type="button" class="hist-group-btn active" data-grupo="tempo" aria-pressed="true">Tempo</button>
+                <button type="button" class="hist-group-btn" data-grupo="acao" aria-pressed="false">Ação</button>
+                <button type="button" class="hist-group-btn" data-grupo="secao" aria-pressed="false" title="Exibição experimental" aria-label="Ordenação por seção — experimental">Seção<sup class="hist-exp-mark" aria-hidden="true">β</sup></button>
               </div>
             </div>
             <div class="hist-ctrlset">
-              <span class="hist-ctrlset-title">Detalhamento</span>
+              <span class="hist-ctrlset-title">Detalhamento<button type="button" class="hist-help" aria-label="Nível de detalhe da lista: Máximo mostra cada registro por inteiro; Mínimo colapsa cada dia num resumo compacto." title="Nível de detalhe da lista: Máximo mostra cada registro por inteiro; Mínimo colapsa cada dia num resumo compacto.">?</button></span>
               <div class="hist-fold" role="group" aria-label="Expandir ou colapsar">
-                <button type="button" class="hist-fold-btn" id="hist-expand">Expandido</button>
-                <button type="button" class="hist-fold-btn" id="hist-collapse">Colapsado</button>
+                <button type="button" class="hist-fold-btn active" id="hist-expand" aria-pressed="true">Máximo</button>
+                <button type="button" class="hist-fold-btn" id="hist-collapse" aria-pressed="false">Mínimo</button>
+              </div>
+            </div>
+            <div class="hist-ctrlset">
+              <span class="hist-ctrlset-title">Agrupamento<button type="button" class="hist-help" aria-label="Empilha registros semelhantes (mesma ação e mesmo elemento) num bloco compacto para ocupar menos espaço; clique no grupo para expandir." title="Empilha registros semelhantes (mesma ação e mesmo elemento) num bloco compacto para ocupar menos espaço; clique no grupo para expandir.">?</button></span>
+              <div class="hist-agroup" role="group" aria-label="Agrupar registros semelhantes">
+                <button type="button" class="hist-agroup-btn active" data-agrupar="nao" aria-pressed="true">Não</button>
+                <button type="button" class="hist-agroup-btn" data-agrupar="sim" aria-pressed="false" title="Exibição experimental" aria-label="Agrupar semelhantes — experimental">Sim<sup class="hist-exp-mark" aria-hidden="true">β</sup></button>
               </div>
             </div>
           </div>

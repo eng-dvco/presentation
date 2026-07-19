@@ -55,7 +55,8 @@
 
 .hist-tabs,
 .hist-groups,
-.hist-fold {
+.hist-fold,
+.hist-agroup {
   display: flex;
   border: 1px solid var(--lt-border);
   border-radius: var(--border-general);
@@ -64,7 +65,8 @@
 
 .hist-tab,
 .hist-group-btn,
-.hist-fold-btn {
+.hist-fold-btn,
+.hist-agroup-btn {
   border: none;
   border-left: 1px solid var(--lt-border);
   background: var(--lt-surface-muted);
@@ -87,8 +89,40 @@
   }
 }
 
-/* colapsar/expandir não é um estado — é uma ação; não recebe .active */
+/* "Máximo"/"Mínimo" formam um par COM ESTADO: o último detalhamento aplicado fica .active (como os demais
+   controles); o :active dá o retorno momentâneo do clique. */
 .hist-fold-btn:active { background: var(--lt-surface-strong); }
+
+/* ícone de AJUDA (?) à direita de cada título de controle — explica o que aquele filtro altera. Tooltip
+   NATIVA (title, no hover) + rótulo p/ leitor de tela (aria-label), seguindo o padrão de ajuda da página. */
+.hist-help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35em;
+  height: 1.35em;
+  margin-left: 0.4em;
+  padding: 0;
+  vertical-align: middle;
+  border: 1px solid var(--lt-border-strong);
+  border-radius: 50%;
+  background: none;
+  color: var(--lt-text-faint);
+  font-family: var(--font-family-general);
+  font-size: 0.95em;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: help;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.hist-help:hover,
+.hist-help:focus-visible {
+  background: var(--lt-surface-strong);
+  color: var(--lt-text);
+  border-color: var(--lt-text-muted);
+}
 
 .hist-summary,
 .hist-source {
@@ -585,6 +619,59 @@
 
   &.is-evidenced.hist-card--delecao,
   &.is-evidenced.hist-card--descartada { --faixa: var(--hist-del); --faixa-2: var(--color-red-alpha-25); }
+}
+
+/* ── AGRUPAMENTO (experimental): pilha de registros semelhantes (mesma ação+tipo) ──
+   Empilhado, cada cartão cobre a metade de baixo do anterior — só o cabeçalho (ação → breadcrumb, até o
+   divisor tracejado) fica à mostra; o ÚLTIMO aparece INTEIRO como amostra. z-index crescente (do JS) põe
+   cada cartão sobre o de cima. Clicar expande para os cartões individuais e espaçados. */
+.hist-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);        /* expandido: mesmo espaçamento dos cartões soltos */
+  min-width: 0;
+}
+.hist-group.is-stacked {
+  position: relative;
+  gap: 0;
+  cursor: pointer;
+}
+/* empilhado, os cartões precisam da altura REAL (o palpite de 200px do content-visibility desalinharia a
+   pilha enquanto fora da tela) */
+.hist-group.is-stacked .hist-card { content-visibility: visible; }
+/* o selo ocupa o canto sup. direito do 1º cartão — esconde o código de commit dele (ficaria sob o selo) */
+.hist-group.is-stacked .hist-card:first-of-type .hist-topinfo { display: none; }
+/* todos menos o último: só o cabeçalho — oculta observação + imagens (tudo após o divisor tracejado) */
+.hist-group.is-stacked .hist-card:not(:last-of-type) { padding-bottom: var(--gap-8); }
+.hist-group.is-stacked .hist-card:not(:last-of-type) .hist-crumb-div ~ * { display: none; }
+/* sobreposição em baralho: cada cartão sobe sobre o de cima */
+.hist-group.is-stacked .hist-card + .hist-card { margin-top: calc(-1 * var(--gap-8)); }
+
+/* selo de contagem — pílula clicável no canto sup. direito da pilha; expandido, vai ao fim como "recolher" */
+.hist-group-badge {
+  position: absolute;
+  top: var(--gap-4);
+  right: var(--gap-8);
+  z-index: 999;
+  border: 1px solid var(--lt-border-strong);
+  border-radius: 99px;
+  background: var(--lt-surface-strong);
+  color: var(--lt-text-muted);
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: var(--gap-2) var(--gap-8);
+  box-shadow: var(--lt-shadow);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.hist-group-badge:hover { background: var(--lt-hover); color: var(--lt-text); }
+.hist-group:not(.is-stacked) .hist-group-badge {
+  position: static;
+  align-self: flex-end;
+  z-index: auto;
+  box-shadow: none;
 }
 
 /* registro INERTE: o slide-alvo foi removido, então o cartão não leva a lugar nenhum (ver

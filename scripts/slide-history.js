@@ -54,6 +54,10 @@
   let dados = null;
   let aba = 'conteudo';
   let agrupamento = 'tempo';
+  let agrupar = false;   // AGRUPAMENTO (experimental): empilha registros semelhantes (mesma ação+tipo)
+  // seletor dos cartões de um dia, INCLUINDO os que estão dentro de um grupo empilhado (agrupamento) —
+  // o marcador da timeline precisa achá-los mesmo aninhados num .hist-group.
+  const CARTAO_SEL = '.hist-tl-body > .hist-card, .hist-tl-body > .hist-group > .hist-card';
   // filtros MULTI-SELEÇÃO: conjuntos de ações e de elementos (vazio = todos). Um registro passa
   // se casar com QUALQUER ação marcada E QUALQUER elemento marcado (e a busca).
   const filtrosAcao = new Set();
@@ -586,6 +590,46 @@
   // e horários variam, cada dia tem a sua própria linha do tempo e o seu próprio marcador.
   // `titulo` é a data (por tempo/ação/seção→dia) ou o nome do slide (por seção→slide). Quando
   // `porSlide`, o marcador da linha do tempo exibe a DATA de cada registro em vez do horário.
+
+  // AGRUPAMENTO (experimental): empilha 3+ cartões semelhantes (mesma ação+tipo) num "baralho" — cada um
+  // cobre a metade de baixo do anterior (só o cabeçalho ação→breadcrumb, até o divisor tracejado, fica à
+  // mostra) e o ÚLTIMO aparece INTEIRO como amostra. Um selo mostra a contagem; clicar expande para os
+  // cartões individuais e espaçados (como sem o agrupamento). z-index crescente põe cada um sobre o de cima.
+  function pilhaSemelhantes(cards) {
+    const gid = 'hist-grp-' + (pilhaSemelhantes._n = (pilhaSemelhantes._n || 0) + 1);
+    const grupo = el('div', 'hist-group is-stacked');
+    grupo.id = gid;
+    grupo.setAttribute('role', 'group');
+    grupo.setAttribute('aria-label', cards.length + ' registros semelhantes agrupados');
+    // empilhado: os cartões saem da tabulação (o SELO é a via de teclado p/ expandir); voltam ao expandir
+    cards.forEach((c, k) => { c.style.zIndex = String(k + 1); c.tabIndex = -1; grupo.appendChild(c); });
+    const selo = el('button', 'hist-group-badge');
+    selo.type = 'button';
+    const rotulo = () => cards.length + ' semelhantes';
+    selo.setAttribute('aria-controls', gid);
+    // nome acessível e aria-expanded do selo acompanham o estado (evita "expandir" enquanto já expandido)
+    const marcaSelo = empilhado => {
+      selo.textContent = empilhado ? rotulo() : 'recolher';
+      selo.setAttribute('aria-expanded', String(!empilhado));
+      selo.setAttribute('aria-label', empilhado ? ('Expandir o grupo de ' + cards.length + ' registros semelhantes') : 'Recolher o grupo');
+    };
+    marcaSelo(true);
+    grupo.appendChild(selo);
+    const alterna = () => {
+      const empilhado = grupo.classList.toggle('is-stacked');
+      marcaSelo(empilhado);
+      cards.forEach(c => { if (empilhado) c.tabIndex = -1; else c.removeAttribute('tabindex'); });
+      requestAnimationFrame(() => { centraTodos(diasVisiveis()); atualizaMarcas(); });
+    };
+    // EMPILHADO: qualquer clique EXPANDE e NÃO navega (captura, antes do handler do cartão-link).
+    // EXPANDIDO: os cartões voltam a navegar; só o selo recolhe.
+    grupo.addEventListener('click', e => {
+      if (grupo.classList.contains('is-stacked')) { e.preventDefault(); e.stopPropagation(); alterna(); }
+      else if (e.target.closest('.hist-group-badge')) { e.preventDefault(); e.stopPropagation(); alterna(); }
+    }, true);
+    return grupo;
+  }
+
   function bloco(titulo, registros, porSlide) {
     const marcaDe = r => porSlide ? diaCurto(r.data) : horaBR(r.hora);
     // por seção o marcador exibe a DATA (1ª linha, DD/MM); o HORÁRIO (HHhMM) vai numa 2ª linha abaixo
@@ -608,13 +652,29 @@
     mark.appendChild(el('span', 'hist-dot'));
     rail.appendChild(mark);
     const corpo = el('div', 'hist-tl-body');
-    registros.forEach(r => {
+    const mkCard = r => {
       const c = cartao(r);
       c.dataset.hora = r.hora || '';
       c.dataset.marca = marcaDe(r);
       if (porSlide) c.dataset.marcaSub = marcaSubDe(r);
-      corpo.appendChild(c);
-    });
+      return c;
+    };
+    if (!agrupar) {
+      registros.forEach(r => corpo.appendChild(mkCard(r)));
+    } else {
+      // sequências de 3+ registros CONSECUTIVOS com a mesma (ação, tipo) viram uma pilha "baralho".
+      const chave = r => r.acao + '|' + r.tipo;
+      const podeAgrupar = r => r.acao !== 'transferência' && r.breadcrumb && r.breadcrumb.length;
+      let i = 0;
+      while (i < registros.length) {
+        if (!podeAgrupar(registros[i])) { corpo.appendChild(mkCard(registros[i])); i++; continue; }
+        let j = i + 1;
+        while (j < registros.length && podeAgrupar(registros[j]) && chave(registros[j]) === chave(registros[i])) j++;
+        if (j - i >= 3) corpo.appendChild(pilhaSemelhantes(registros.slice(i, j).map(mkCard)));
+        else for (let k = i; k < j; k++) corpo.appendChild(mkCard(registros[k]));
+        i = j;
+      }
+    }
     tl.appendChild(rail);
     tl.appendChild(corpo);
     if (registros[0]) setMark(mark, marcaDe(registros[0]), registros[0].acao, marcaSubDe(registros[0]));
@@ -640,7 +700,7 @@
     const leituras = [];
     dias.forEach(day => {
       const mark = day.querySelector('.hist-mark');
-      const card = day.querySelector('.hist-tl-body > .hist-card');
+      const card = day.querySelector(CARTAO_SEL);
       if (mark && card) leituras.push({ mark, ch: card.getBoundingClientRect().height, mh: mark.getBoundingClientRect().height });
     });
     leituras.forEach(({ mark, ch, mh }) => { mark.style.marginTop = Math.max(0, (ch - mh) / 2) + 'px'; });
@@ -662,7 +722,10 @@
     _obsCentro = new IntersectionObserver(entradas => {
       centraTodos(entradas.filter(e => e.isIntersecting).map(e => e.target.closest('.hist-day')).filter(Boolean));
     }, { rootMargin: '150px 0px' });
-    document.querySelectorAll('.hist-day:not(.is-collapsed) .hist-tl-body > .hist-card:first-child').forEach(c => _obsCentro.observe(c));
+    document.querySelectorAll('.hist-day:not(.is-collapsed)').forEach(day => {
+      const c = day.querySelector(CARTAO_SEL);   // 1º cartão do dia (direto ou dentro de um grupo)
+      if (c) _obsCentro.observe(c);
+    });
     centraTodos(diasVisiveis());   // pass imediato p/ os dias já visíveis (sem "pulo" no load)
   }
 
@@ -673,7 +736,7 @@
       const r = day.getBoundingClientRect();
       if (r.bottom <= 0 || r.top >= window.innerHeight) return;
       const mark = day.querySelector('.hist-mark');
-      const cards = day.querySelectorAll('.hist-tl-body > .hist-card');
+      const cards = day.querySelectorAll(CARTAO_SEL);
       if (!mark || !cards.length) return;
       const linha = mark.getBoundingClientRect().top + mark.offsetHeight / 2 + 1;
       let lo = 0, hi = cards.length - 1, at = 0;
@@ -1074,7 +1137,7 @@
 
   function render() {
     lista.innerHTML = '';
-    if (expNote) expNote.hidden = agrupamento !== 'secao';   // o aviso só acompanha a exibição experimental
+    if (expNote) expNote.hidden = agrupamento !== 'secao';   // a nota é específica da ordenação "por seção"
 
     const daAba = (dados.registros || []).filter(r => (r.aba || 'conteudo') === aba)
       .concat(aba === 'funcoes' ? (dados.funcoes || []) : []);
@@ -1183,6 +1246,8 @@
         lista.appendChild(caixa);
       });
     }
+    // a lista renasce EXPANDIDA (padrão) → o detalhamento "Máximo" volta a ser o estado ativo
+    marcaFold(true);
     // depois que o layout assenta, acerta os marcadores ao estado inicial da lista e centra cada
     // marcador no 1º registro do seu dia
     requestAnimationFrame(() => { atualizaCentragem(); atualizaMarcas(); });
@@ -1205,6 +1270,17 @@
     botoesGrupo.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-pressed', 'false'); });
     b.classList.add('active'); b.setAttribute('aria-pressed', 'true');
     agrupamento = b.dataset.grupo;
+    agendarRender();
+  }));
+
+  // toggle AGRUPAMENTO (experimental): Não / Sim — empilha registros semelhantes
+  const botoesAgrupar = document.querySelectorAll('.hist-agroup .hist-agroup-btn');
+  botoesAgrupar.forEach(b => b.addEventListener('click', () => {
+    const alvo = b.dataset.agrupar === 'sim';
+    if (alvo === agrupar) return;
+    botoesAgrupar.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-pressed', 'false'); });
+    b.classList.add('active'); b.setAttribute('aria-pressed', 'true');
+    agrupar = alvo;
     agendarRender();
   }));
 
@@ -1243,8 +1319,15 @@
   };
   const btnColapsar = document.querySelector('#hist-collapse');
   const btnExpandir = document.querySelector('#hist-expand');
-  if (btnColapsar) btnColapsar.addEventListener('click', () => todos(true));
-  if (btnExpandir) btnExpandir.addEventListener('click', () => todos(false));
+  // "Máximo"/"Mínimo" formam um par COM ESTADO: o último detalhamento aplicado fica .active (como os
+  // demais controles). expandido=true → "Máximo"; false → "Mínimo". Como a lista renasce EXPANDIDA, o
+  // render reativa "Máximo" a cada reconstrução (ver marcaFold(true) no fim de render).
+  const marcaFold = expandido => {
+    if (btnExpandir) { btnExpandir.classList.toggle('active', expandido); btnExpandir.setAttribute('aria-pressed', String(expandido)); }
+    if (btnColapsar) { btnColapsar.classList.toggle('active', !expandido); btnColapsar.setAttribute('aria-pressed', String(!expandido)); }
+  };
+  if (btnColapsar) btnColapsar.addEventListener('click', () => { todos(true); marcaFold(false); });
+  if (btnExpandir) btnExpandir.addEventListener('click', () => { todos(false); marcaFold(true); });
 
   // ── retorno ao ponto exato ──
   // O navegador restaura a rolagem ANTES de o JS montar os registros (a página nasce vazia) e a

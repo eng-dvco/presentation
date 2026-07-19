@@ -1,9 +1,532 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "19-07-26",
- "commits": 178,
- "total": 445,
+ "commits": 181,
+ "total": 455,
  "registros": [
+  {
+   "id": "f33c6ec-9",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "transferência",
+   "tipo": "imagens",
+   "titulo": null,
+   "breadcrumb": [
+    "Eventos",
+    "Aquisição de equipamentos de medição e inspeção",
+    "Câmera termográfica"
+   ],
+   "de": "Eventos › Aquisição de equipamentos de medição e inspeção › Maleta de teste para relé de proteção",
+   "para": "Eventos › Aquisição de equipamentos de medição e inspeção › Câmera termográfica",
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "132 KB",
+    "amostra": [
+     {
+      "nome": "equipment-9.jpeg",
+      "src": "assets/img/slides/events/equipment-acquisition/equipment-9.jpeg",
+      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-9-200.webp",
+      "peso": "132 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1
+  },
+  {
+   "id": "f33c6ec-8",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "transferência",
+   "tipo": "imagens",
+   "titulo": null,
+   "breadcrumb": [
+    "Eventos",
+    "Aquisição de equipamentos de medição e inspeção",
+    "Ferramentas adquiridas"
+   ],
+   "de": "Eventos › Aquisição de equipamentos de medição e inspeção › Maleta de teste para relé de proteção",
+   "para": "Eventos › Aquisição de equipamentos de medição e inspeção › Ferramentas adquiridas",
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "56 KB",
+    "amostra": [
+     {
+      "nome": "equipment-8.jpeg",
+      "src": "assets/img/slides/events/equipment-acquisition/equipment-8.jpeg",
+      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-8-200.webp",
+      "peso": "56 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1
+  },
+  {
+   "id": "f33c6ec-7",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Revitalização geral",
+    "Restauração da pintura da casa de comando"
+   ],
+   "titulo": "Restauração da pintura da casa de comando",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "resumo": "durante",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "94 KB",
+      "amostra": [
+       {
+        "nome": "building-1.jpeg",
+        "src": "assets/img/slides/se/substation-restoration/building-1.jpeg",
+        "miniatura": "assets/img/slides/se/substation-restoration/building-1-200.webp",
+        "peso": "51 KB"
+       },
+       {
+        "nome": "building-3.jpeg",
+        "src": "assets/img/slides/se/substation-restoration/building-3.jpeg",
+        "miniatura": "assets/img/slides/se/substation-restoration/building-3-200.webp",
+        "peso": "42 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "resumo": "após",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "108 KB",
+      "amostra": [
+       {
+        "nome": "building-2.jpeg",
+        "src": "assets/img/slides/se/substation-restoration/building-2.jpeg",
+        "miniatura": "assets/img/slides/se/substation-restoration/building-2-200.webp",
+        "peso": "58 KB"
+       },
+       {
+        "nome": "building-4.jpeg",
+        "src": "assets/img/slides/se/substation-restoration/building-4.jpeg",
+        "miniatura": "assets/img/slides/se/substation-restoration/building-4-200.webp",
+        "peso": "50 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "f33c6ec-6",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-silica-reservoir.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Limpeza do copo do desumidificador",
+    "Sílica-gel e óleo do desumidificador"
+   ],
+   "titulo": "Sílica-gel e óleo do desumidificador",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "de": "Copo do desumidificador antes da limpeza.",
+     "para": "Presença de sujidade",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "73 KB",
+      "amostra": [
+       {
+        "nome": "silica-1.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-1.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-1-200.webp",
+        "peso": "73 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Limpeza em andamento.",
+     "para": "Limpeza em andamento",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "392 KB",
+      "amostra": [
+       {
+        "nome": "silica-2.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-2.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-2-200.webp",
+        "peso": "392 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Copo do desumidificador após a limpeza.",
+     "para": "Limpo, sem impurezas",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "205 KB",
+      "amostra": [
+       {
+        "nome": "silica-3.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-3.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-3-200.webp",
+        "peso": "205 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Reposição do óleo do desumidificador.",
+     "para": "Reposição do óleo",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "51 KB",
+      "amostra": [
+       {
+        "nome": "silica-4.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-4.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-4-200.webp",
+        "peso": "51 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Reservatório preenchido com sílica-gel.",
+     "para": "Abastecimento de sílica-gel",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "53 KB",
+      "amostra": [
+       {
+        "nome": "silica-5.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-5.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-5-200.webp",
+        "peso": "53 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Reservatório reinstalado no transformador de potência.",
+     "para": "Reservatório reinstalado",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "35 KB",
+      "amostra": [
+       {
+        "nome": "silica-6.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-6.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-6-200.webp",
+        "peso": "35 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "f33c6ec-5",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "deleção",
+   "tipo": "observação",
+   "titulo": "Cubículo de 6,9 kV (megômetro)",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Cubículo de 6,9 kV (megômetro)"
+   ],
+   "resumo": "cabos de alimentação",
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "64 KB",
+    "amostra": [
+     {
+      "nome": "activity-16.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-16.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-16-200.webp",
+      "peso": "64 KB"
+     }
+    ],
+    "extras": 0
+   }
+  },
+  {
+   "id": "f33c6ec-4",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-psychosocial-risks.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Riscos psicossociais e saúde mental"
+   ],
+   "titulo": "Riscos psicossociais e saúde mental",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "de": "questionário de riscos psicossociais (Petrolândia-PE)",
+     "para": "Petrolândia-PE",
+     "imagens": {
+      "total": 3,
+      "pesoTotal": "286 KB",
+      "amostra": [
+       {
+        "nome": "risks-7.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-7.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-7-200.webp",
+        "peso": "32 KB"
+       },
+       {
+        "nome": "risks-8.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-8.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-8-200.webp",
+        "peso": "111 KB"
+       },
+       {
+        "nome": "risks-9.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-9.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-9-200.webp",
+        "peso": "143 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "questionário de riscos psicossociais (Salgueiro-PE)",
+     "para": "Salgueiro-PE",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "310 KB",
+      "amostra": [
+       {
+        "nome": "risks-10.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-10.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-10-200.webp",
+        "peso": "146 KB"
+       },
+       {
+        "nome": "risks-11.jpeg",
+        "src": "assets/img/slides/st/psychosocial-risks/risks-11.jpeg",
+        "miniatura": "assets/img/slides/st/psychosocial-risks/risks-11-200.webp",
+        "peso": "165 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "f33c6ec-3",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-psychosocial-risks.html",
+   "acao": "adição",
+   "tipo": "observação",
+   "titulo": "Riscos psicossociais e saúde mental",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Riscos psicossociais e saúde mental"
+   ],
+   "resumo": "Custódia-PE",
+   "imagens": {
+    "total": 6,
+    "pesoTotal": "2,3 MB",
+    "amostra": [
+     {
+      "nome": "risks-1.png",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-1.png",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-1-200.webp",
+      "peso": "393 KB"
+     },
+     {
+      "nome": "risks-2.png",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-2.png",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-2-200.webp",
+      "peso": "1,1 MB"
+     },
+     {
+      "nome": "risks-3.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-3.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-3-200.webp",
+      "peso": "233 KB"
+     },
+     {
+      "nome": "risks-4.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-4.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-4-200.webp",
+      "peso": "218 KB"
+     },
+     {
+      "nome": "risks-5.jpeg",
+      "src": "assets/img/slides/st/psychosocial-risks/risks-5.jpeg",
+      "miniatura": "assets/img/slides/st/psychosocial-risks/risks-5-200.webp",
+      "peso": "223 KB"
+     }
+    ],
+    "extras": 1
+   }
+  },
+  {
+   "id": "f33c6ec-2",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-fence-post-repair.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Substituição de mourões"
+   ],
+   "titulo": "Substituição de mourões",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "de": "mourões substituídos e chumbados",
+     "para": "Chumbamento",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "270 KB",
+      "amostra": [
+       {
+        "nome": "fence-4.jpeg",
+        "src": "assets/img/slides/se/fence-post-repair/fence-4.jpeg",
+        "miniatura": "assets/img/slides/se/fence-post-repair/fence-4-200.webp",
+        "peso": "270 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "mourões substituídos e chumbados",
+     "para": "Mourão chumbado",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "350 KB",
+      "amostra": [
+       {
+        "nome": "fence-5.jpeg",
+        "src": "assets/img/slides/se/fence-post-repair/fence-5.jpeg",
+        "miniatura": "assets/img/slides/se/fence-post-repair/fence-5-200.webp",
+        "peso": "350 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "mourões substituídos e chumbados",
+     "para": "Substituição completa",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "372 KB",
+      "amostra": [
+       {
+        "nome": "fence-6.jpeg",
+        "src": "assets/img/slides/se/fence-post-repair/fence-6.jpeg",
+        "miniatura": "assets/img/slides/se/fence-post-repair/fence-6-200.webp",
+        "peso": "372 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "f33c6ec-1",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "adição",
+   "tipo": "subtítulo",
+   "titulo": "Câmera termográfica",
+   "breadcrumb": [
+    "Eventos",
+    "Aquisição de equipamentos de medição e inspeção",
+    "Câmera termográfica"
+   ]
+  },
+  {
+   "id": "f33c6ec-0",
+   "data": "19-07-26",
+   "hora": "13:04",
+   "commit": "f33c6ec",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "adição",
+   "tipo": "subtítulo",
+   "titulo": "Ferramentas adquiridas",
+   "breadcrumb": [
+    "Eventos",
+    "Aquisição de equipamentos de medição e inspeção",
+    "Ferramentas adquiridas"
+   ]
+  },
   {
    "id": "e4ee7dc-5",
    "data": "19-07-26",
@@ -18350,6 +18873,36 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-49",
+   "aba": "funcoes",
+   "data": "19-07-26",
+   "hora": "13:02",
+   "acao": "aperfeiçoada",
+   "tipo": "usabilidade",
+   "titulo": "Controles do histórico mais claros, com ajuda",
+   "resumo": "Os controles ficaram mais legíveis: 'Ordenar' virou 'Ordenação' (Tempo · Ação · Seção) e o 'Detalhamento' passou a usar 'Máximo' e 'Mínimo' no lugar de 'Expandido' e 'Colapsado', já com 'Máximo' ativo por padrão. Cada grupo de controle recebeu um ícone circular de interrogação com uma tooltip explicando o que ele altera.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Filtros"
+   ]
+  },
+  {
+   "id": "fn-48",
+   "aba": "funcoes",
+   "data": "19-07-26",
+   "hora": "13:02",
+   "acao": "implementada",
+   "tipo": "filtro",
+   "titulo": "Agrupamento de registros semelhantes no histórico",
+   "resumo": "O histórico ganhou um controle de agrupamento (experimental): sequências de três ou mais registros com a mesma ação e o mesmo elemento se empilham num baralho compacto — só o topo de cada um (da ação até o breadcrumb) fica visível, ocupando menos espaço vertical. Um selo indica a contagem do grupo, e clicar nele expande de volta os registros individuais.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Filtros"
+   ]
+  },
   {
    "id": "fn-47",
    "aba": "funcoes",

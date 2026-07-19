@@ -644,8 +644,12 @@
 /* todos menos o último: só o cabeçalho — oculta observação + imagens (tudo após o divisor tracejado) */
 .hist-group.is-stacked .hist-card:not(:last-of-type) { padding-bottom: var(--gap-8); }
 .hist-group.is-stacked .hist-card:not(:last-of-type) .hist-crumb-div ~ * { display: none; }
-/* sobreposição em baralho: cada cartão sobe sobre o de cima */
-.hist-group.is-stacked .hist-card + .hist-card { margin-top: calc(-1 * var(--gap-8)); }
+/* sobreposição em baralho: cada cartão sobe sobre o de cima e projeta uma leve sombra PARA CIMA,
+   caindo sobre o registro anterior — dá continuidade e profundidade à pilha (o de cima tem z maior) */
+.hist-group.is-stacked .hist-card + .hist-card {
+  margin-top: calc(-1 * var(--gap-8));
+  box-shadow: 0 -4px 9px -3px rgba(0, 0, 0, 0.18), var(--lt-shadow);
+}
 
 /* selo de contagem — pílula clicável no canto sup. direito da pilha; expandido, vai ao fim como "recolher" */
 .hist-group-badge {
@@ -778,18 +782,42 @@
 }
 
 /* ── caminho até o conteúdo ── */
+/* INLINE, sem quebra de linha: o caminho fica sempre numa só linha. O ÚLTIMO segmento — onde a ação
+   ocorreu, o de maior valor — permanece INTACTO; o PENÚLTIMO é o primeiro a encolher, truncando seu
+   texto com reticências e, se faltar espaço, virando só "…". O limite é dinâmico: encolhe/expande
+   conforme a largura disponível (viewport). */
 .hist-crumbs {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: baseline;
-  /* linhas bem próximas na vertical, respiro só na horizontal: quando um segmento longo quebra,
-     não abre um vão grande entre as linhas do caminho */
+  min-width: 0;
+  overflow: hidden;
   gap: var(--gap-2) var(--gap-6);
   padding-top: var(--gap-4);
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
   line-height: 1.4;
   color: var(--lt-text-muted);
+}
+
+/* Cada segmento numa linha só e truncável: ao faltar espaço, encolhe mostrando o começo + "…"
+   (o min-width garante o glifo). O penúltimo cede primeiro; o último, o mais protegido. */
+.hist-crumb { white-space: nowrap; }
+.hist-crumbs > .hist-crumb {
+  min-width: 2ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* ORDEM em que os segmentos cedem espaço (maior fator = cede primeiro): PENÚLTIMO (o 1º a ceder) →
+   anteriores (breadcrumbs de 3+) → ÚLTIMO (o de maior valor, o mais protegido). */
+.hist-crumbs > .hist-crumb:not(:last-child) { flex: 0 1 auto; flex-shrink: 12; }
+.hist-crumbs > .hist-crumb:nth-last-child(2) { flex-shrink: 120; }
+/* ÚLTIMO: fica INTACTO enquanto os outros liberarem espaço; só cede por último e, mesmo assim, com
+   reticências limpas (min-width:0 permite absorver todo o excedente e caber, sem transbordar). */
+.hist-crumbs > .hist-crumb:last-child {
+  flex: 0 1 auto;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 /* o separador (›) vive DENTRO do segmento seguinte (ver slide-history.js): assim nunca fica órfão

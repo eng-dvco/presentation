@@ -1,9 +1,458 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "19-07-26",
- "commits": 181,
- "total": 455,
+ "commits": 184,
+ "total": 459,
  "registros": [
+  {
+   "id": "15345d1-3",
+   "data": "19-07-26",
+   "hora": "14:13",
+   "commit": "15345d1",
+   "aba": "conteudo",
+   "link": "slides/slide-silica-reservoir.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Limpeza do copo do desumidificador",
+    "Sílica-gel e óleo do desumidificador"
+   ],
+   "titulo": "Sílica-gel e óleo do desumidificador",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "de": "Presença de sujidade",
+     "para": "presença de sujidade",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "73 KB",
+      "amostra": [
+       {
+        "nome": "silica-1.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-1.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-1-200.webp",
+        "peso": "73 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-6",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "Copo do desumidificador antes da limpeza.",
+       "para": "Presença de sujidade"
+      }
+     ]
+    },
+    {
+     "tipo": "observação",
+     "de": "Limpeza em andamento",
+     "para": "limpeza em andamento",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "392 KB",
+      "amostra": [
+       {
+        "nome": "silica-2.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-2.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-2-200.webp",
+        "peso": "392 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-6",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "Limpeza em andamento.",
+       "para": "Limpeza em andamento"
+      }
+     ]
+    },
+    {
+     "tipo": "observação",
+     "de": "Limpo, sem impurezas",
+     "para": "limpo, sem impurezas",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "205 KB",
+      "amostra": [
+       {
+        "nome": "silica-3.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-3.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-3-200.webp",
+        "peso": "205 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-6",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "Copo do desumidificador após a limpeza.",
+       "para": "Limpo, sem impurezas"
+      }
+     ]
+    },
+    {
+     "tipo": "observação",
+     "de": "Reposição do óleo",
+     "para": "reposição do óleo",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "51 KB",
+      "amostra": [
+       {
+        "nome": "silica-4.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-4.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-4-200.webp",
+        "peso": "51 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-6",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "Reposição do óleo do desumidificador.",
+       "para": "Reposição do óleo"
+      }
+     ]
+    },
+    {
+     "tipo": "observação",
+     "de": "Abastecimento de sílica-gel",
+     "para": "abastecimento de sílica-gel",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "53 KB",
+      "amostra": [
+       {
+        "nome": "silica-5.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-5.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-5-200.webp",
+        "peso": "53 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-6",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "Reservatório preenchido com sílica-gel.",
+       "para": "Abastecimento de sílica-gel"
+      }
+     ]
+    },
+    {
+     "tipo": "observação",
+     "de": "Reservatório reinstalado",
+     "para": "reservatório reinstalado",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "35 KB",
+      "amostra": [
+       {
+        "nome": "silica-6.jpeg",
+        "src": "assets/img/slides/se/silica-reservoir/silica-6.jpeg",
+        "miniatura": "assets/img/slides/se/silica-reservoir/silica-6-200.webp",
+        "peso": "35 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-6",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "Reservatório reinstalado no transformador de potência.",
+       "para": "Reservatório reinstalado"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "15345d1-2",
+   "data": "19-07-26",
+   "hora": "14:13",
+   "commit": "15345d1",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Chave-seccionadora"
+   ],
+   "titulo": "Chave-seccionadora",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "de": "Ajuste dos conectores dos pulos em “T”",
+     "para": "ajuste dos conectores dos pulos em “T”",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "126 KB",
+      "amostra": [
+       {
+        "nome": "secc-1.jpeg",
+        "src": "assets/img/slides/se/equipment-cleaning/secc-1.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-1-200.webp",
+        "peso": "66 KB"
+       },
+       {
+        "nome": "secc-2.jpeg",
+        "src": "assets/img/slides/se/equipment-cleaning/secc-2.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-2-200.webp",
+        "peso": "60 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Verificação dos contrapinos (cupilhas)",
+     "para": "verificação dos contrapinos (cupilhas)",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "71 KB",
+      "amostra": [
+       {
+        "nome": "secc-3.jpeg",
+        "src": "assets/img/slides/se/equipment-cleaning/secc-3.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-3-200.webp",
+        "peso": "71 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Limpeza dos conectores e contatos",
+     "para": "limpeza dos conectores e contatos",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "60 KB",
+      "amostra": [
+       {
+        "nome": "secc-4.jpeg",
+        "src": "assets/img/slides/se/equipment-cleaning/secc-4.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-4-200.webp",
+        "peso": "60 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "15345d1-1",
+   "data": "19-07-26",
+   "hora": "14:13",
+   "commit": "15345d1",
+   "aba": "conteudo",
+   "link": "slides/slide-secc-flashing-signal.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Verificação de sinalização de seccionadora",
+    "Verificação da sinalização"
+   ],
+   "titulo": "Verificação da sinalização",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "de": "Parâmetro alterado para correção do sinal",
+     "para": "parâmetro alterado para correção do sinal",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "118 KB",
+      "amostra": [
+       {
+        "nome": "signal-1.jpeg",
+        "src": "assets/img/slides/se/secc-flashing-signal/signal-1.jpeg",
+        "miniatura": "assets/img/slides/se/secc-flashing-signal/signal-1-200.webp",
+        "peso": "118 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Chave sinalizando aberta",
+     "para": "chave sinalizando aberta",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "84 KB",
+      "amostra": [
+       {
+        "nome": "signal-2.jpeg",
+        "src": "assets/img/slides/se/secc-flashing-signal/signal-2.jpeg",
+        "miniatura": "assets/img/slides/se/secc-flashing-signal/signal-2-200.webp",
+        "peso": "84 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "tipo": "observação",
+     "de": "Chave sinalizando fechada",
+     "para": "chave sinalizando fechada",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "76 KB",
+      "amostra": [
+       {
+        "nome": "signal-3.jpeg",
+        "src": "assets/img/slides/se/secc-flashing-signal/signal-3.jpeg",
+        "miniatura": "assets/img/slides/se/secc-flashing-signal/signal-3-200.webp",
+        "peso": "76 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "15345d1-0",
+   "data": "19-07-26",
+   "hora": "14:13",
+   "commit": "15345d1",
+   "aba": "conteudo",
+   "link": "slides/slide-fence-post-repair.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Substituição de mourões"
+   ],
+   "titulo": "Substituição de mourões",
+   "tipo": "observação",
+   "tipos": [
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "observação",
+     "de": "Chumbamento",
+     "para": "chumbamento",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "270 KB",
+      "amostra": [
+       {
+        "nome": "fence-4.jpeg",
+        "src": "assets/img/slides/se/fence-post-repair/fence-4.jpeg",
+        "miniatura": "assets/img/slides/se/fence-post-repair/fence-4-200.webp",
+        "peso": "270 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-2",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "mourões substituídos e chumbados",
+       "para": "Chumbamento"
+      }
+     ]
+    },
+    {
+     "tipo": "observação",
+     "de": "Mourão chumbado",
+     "para": "mourão chumbado",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "350 KB",
+      "amostra": [
+       {
+        "nome": "fence-5.jpeg",
+        "src": "assets/img/slides/se/fence-post-repair/fence-5.jpeg",
+        "miniatura": "assets/img/slides/se/fence-post-repair/fence-5-200.webp",
+        "peso": "350 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-2",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "mourões substituídos e chumbados",
+       "para": "Mourão chumbado"
+      }
+     ]
+    },
+    {
+     "tipo": "observação",
+     "de": "Substituição completa",
+     "para": "substituição completa",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "372 KB",
+      "amostra": [
+       {
+        "nome": "fence-6.jpeg",
+        "src": "assets/img/slides/se/fence-post-repair/fence-6.jpeg",
+        "miniatura": "assets/img/slides/se/fence-post-repair/fence-6-200.webp",
+        "peso": "372 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "substitui": [
+      {
+       "commit": "f33c6ec",
+       "id": "f33c6ec-2",
+       "data": "19-07-26",
+       "hora": "13:04",
+       "de": "mourões substituídos e chumbados",
+       "para": "Substituição completa"
+      }
+     ]
+    }
+   ]
+  },
   {
    "id": "f33c6ec-9",
    "data": "19-07-26",
@@ -170,6 +619,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-3"
      }
     },
     {
@@ -188,6 +641,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-3"
      }
     },
     {
@@ -206,6 +663,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-3"
      }
     },
     {
@@ -224,6 +685,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-3"
      }
     },
     {
@@ -242,6 +707,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-3"
      }
     },
     {
@@ -260,6 +729,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-3"
      }
     }
    ]
@@ -455,6 +928,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-0"
      }
     },
     {
@@ -473,6 +950,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-0"
      }
     },
     {
@@ -491,6 +972,10 @@
        }
       ],
       "extras": 0
+     },
+     "obsoleto": {
+      "commit": "15345d1",
+      "id": "15345d1-0"
      }
     }
    ]
@@ -18873,6 +19358,35 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-51",
+   "aba": "funcoes",
+   "data": "19-07-26",
+   "hora": "14:11",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Profundidade na pilha de registros semelhantes",
+   "resumo": "Ao agrupar registros semelhantes, cada cartão da pilha passou a projetar uma leve sombra sobre o de cima, reforçando a sensação de continuidade e profundidade do baralho.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Filtros"
+   ]
+  },
+  {
+   "id": "fn-50",
+   "aba": "funcoes",
+   "data": "19-07-26",
+   "hora": "14:11",
+   "acao": "aperfeiçoada",
+   "tipo": "usabilidade",
+   "titulo": "Breadcrumb do histórico numa só linha, com truncamento inteligente",
+   "resumo": "O caminho de cada registro passou a caber sempre em uma única linha, sem quebra. Quando falta espaço, o penúltimo trecho é o primeiro a ceder — virando reticências (…) —, enquanto o último (onde a alteração ocorreu, o de maior valor) fica preservado ao máximo. O limite é dinâmico: ajusta-se conforme a largura da tela.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações"
+   ]
+  },
   {
    "id": "fn-49",
    "aba": "funcoes",

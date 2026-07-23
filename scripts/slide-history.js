@@ -287,8 +287,10 @@
     return head;
   }
 
-  // ── corpo de UMA parte (tipo + conteúdo). `r` dá o contexto de clique/href do cartão inteiro. ──
-  function corpoParte(a, r, p) {
+  // ── corpo de UMA parte (tipo + conteúdo). `a` é o CONTAINER onde o corpo entra (pode ser o cartão, um
+  //    bloco de parte ou a faixa 'obsoleto'); `cardHref` é o href do CARTÃO, usado para navegar (o container
+  //    pode ser um <div> sem href próprio). ──
+  function corpoParte(a, r, p, cardHref) {
     const temDelta = p.de != null && p.para != null && p.de !== p.para;
     // um elemento DEFASADO é ISOLADO numa faixa própria (que recebe o zebrado); as demais
     // partes seguem direto no cartão
@@ -331,7 +333,7 @@
           const irAoGrupo = e => {
             e.preventDefault(); e.stopPropagation();   // sobrepõe o clique geral do cartão
             salvaFoco(r, focoImgsGrupo(l.imagens), l.texto);
-            location.href = a.href;
+            if (cardHref) location.href = cardHref;
           };
           g.addEventListener('click', irAoGrupo);
           g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') irAoGrupo(e); });
@@ -525,20 +527,34 @@
     if (partes.length > 1) {
       const ehDelta = p => p.de != null && p.para != null && p.de !== p.para;
       // rotula cada alteração com o seu elemento SÓ quando há 2+ TIPOS de delta distintos (ex.: "nome
-      // do slide" vs "título", que de outra forma pareceriam duplicados). Casos visualmente distintos
-      // (imagens + observação) seguem sem rótulo, só espaçados pela distância do vão entre "de"/"para".
+      // do slide" vs "título", que de outra forma pareceriam duplicados).
       const rotular = new Set(partes.filter(ehDelta).map(p => p.tipo)).size > 1;
+      // CADA parte vira um bloco próprio e, quando o registro é navegável, CLICÁVEL individualmente:
+      // leva o usuário exatamente àquela alteração no slide (localiza as imagens + o texto DAQUELA parte),
+      // em vez de tratar as várias modificações como um bloco único. Um divisor tracejado separa as partes,
+      // e o "expandir histórico" de cada parte fica colado a ela (o divisor fica ABAIXO dele).
+      const navegavel = !r.alvoAusente;
       partes.forEach(p => {
-        if (rotular && ehDelta(p)) {
-          const w = el('div', 'hist-parte');
-          corpoParte(w, r, p);
-          if (w.childElementCount) { w.insertBefore(el('span', 'hist-parte-tipo', p.tipo), w.firstChild); alvo.appendChild(w); }
-        } else {
-          corpoParte(alvo, r, p);
+        const w = el('div', 'hist-parte' + (navegavel ? ' hist-parte--link' : ''));
+        corpoParte(w, r, p, a.href);
+        if (!w.childElementCount) return;   // parte sem corpo visível: pula
+        if (rotular && ehDelta(p)) w.insertBefore(el('span', 'hist-parte-tipo', p.tipo), w.firstChild);
+        if (navegavel) {
+          w.tabIndex = 0;
+          w.setAttribute('role', 'link');
+          w.title = 'Localizar esta alteração no slide';
+          const irAqui = e => {
+            e.preventDefault(); e.stopPropagation();   // sobrepõe o clique geral do cartão
+            salvaFoco(r, focoImgsGrupo(p.imagens), p.para != null ? p.para : (p.resumo || textoGeral));
+            location.href = a.href;
+          };
+          w.addEventListener('click', irAqui);
+          w.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') irAqui(e); });
         }
+        alvo.appendChild(w);
       });
     } else {
-      corpoParte(alvo, r, partes[0]);
+      corpoParte(alvo, r, partes[0], a.href);
     }
 
     if (r.curadoria) alvo.appendChild(el('p', 'hist-nota', r.curadoria));
@@ -632,6 +648,10 @@
     return grupo;
   }
 
+  // ícones de STATUS (mesmos das barras do Máximo): 'obsoleto' = relógio; 'slide indisponível' = vínculo quebrado
+  const SVG_OBSOLETO = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7.5 12 12 15.5 14"/></svg>';
+  const SVG_AUSENTE = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18.84 12.25 1.72-1.71a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="m5.17 11.75-1.71 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71"/><line x1="8" y1="2" x2="8" y2="5"/><line x1="2" y1="8" x2="5" y2="8"/><line x1="16" y1="19" x2="16" y2="22"/><line x1="19" y1="16" x2="22" y2="16"/></svg>';
+
   // ── DETALHAMENTO MÍNIMO: um registro por LINHA ──
   // [horário] [ícone da ação] [ação] [elemento (itálico)] "em" [local (itálico)] … [commit à direita].
   // É um <a> — leva ao conteúdo alterado (salvaFoco + realce/aura no destino), como o cartão; fica inerte
@@ -657,6 +677,16 @@
     if (local) {
       row.appendChild(el('span', 'hist-row-em', 'em'));
       row.appendChild(el('span', 'hist-row-local', local));
+    }
+    // STATUS (junto ao commit, à direita): 'slide indisponível' (vínculo quebrado) ou 'obsoleto' (relógio) —
+    // a MESMA indicação do detalhamento Máximo, para o dado ser consistente sob qualquer filtro.
+    const stSvg = r.alvoAusente ? SVG_AUSENTE : (partesDe(r).some(p => p.obsoleto) ? SVG_OBSOLETO : null);
+    if (stSvg) {
+      const st = el('span', 'hist-row-status hist-row-status--' + (r.alvoAusente ? 'ausente' : 'obsoleto'));
+      st.setAttribute('aria-hidden', 'true');
+      st.title = r.alvoAusente ? 'Slide indisponível' : 'Registro obsoleto';
+      st.innerHTML = stSvg;
+      row.appendChild(st);
     }
     row.appendChild(el('span', 'hist-row-commit', r.commit));
     return row;

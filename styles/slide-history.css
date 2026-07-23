@@ -634,6 +634,17 @@
   letter-spacing: 0.04em;
 }
 
+/* status (obsoleto / slide indisponível): ícone junto ao commit, à direita — mesma indicação do Máximo */
+.hist-row-status {
+  flex-shrink: 0;
+  margin-left: auto;   /* empurra o grupo status + commit para a direita */
+  display: inline-flex;
+  align-items: center;
+}
+.hist-row-status--ausente { color: var(--hist-del); }
+.hist-row-status--obsoleto { color: var(--lt-text-muted); }
+.hist-row-status + .hist-row-commit { margin-left: var(--gap-6); }   /* commit cola no status (o auto vai p/ o status) */
+
 /* AGRUPAMENTO no MÍNIMO: cabeçalho recolhível + linhas individuais indentadas abaixo */
 .hist-rowgroup { display: flex; flex-direction: column; gap: var(--gap-2); }
 .hist-rowgroup-head {
@@ -835,6 +846,23 @@
    pela MESMA distância que há entre os subcontainers "de" e "para" (gap-8). Deixa claro o que cada
    mudança representa — em vez de duas caixas de→para parecerem duplicadas. */
 .hist-parte { margin-top: var(--gap-8); }
+
+/* CADA parte de um registro consolidado é um bloco; quando navegável, é individualmente CLICÁVEL
+   (localiza aquela alteração específica no slide). Um divisor tracejado separa uma parte da seguinte —
+   assim o "expandir histórico" de cada parte fica colado a ela, ACIMA do divisor. */
+.hist-parte--link {
+  cursor: pointer;
+  border-radius: var(--border-smaller);
+  padding: var(--gap-6) var(--gap-8);
+  transition: background-color 0.15s ease;
+
+  &:hover,
+  &:focus-visible { background: var(--lt-hover); outline: none; }
+}
+.hist-parte + .hist-parte {
+  padding-top: var(--gap-12);
+  border-top: 1px dashed var(--lt-border-strong);
+}
 
 .hist-parte-tipo {
   display: block;
@@ -1419,7 +1447,8 @@
 .hist-hist {
   margin-top: var(--gap-12);
   padding-top: var(--gap-12);
-  border-top: 1px dashed var(--lt-border-strong);   /* DIVISOR tracejado, separando o histórico do conteúdo */
+  /* sem border-top: o "expandir histórico" agora se COLA à sua própria parte (o divisor tracejado fica
+     ABAIXO dele, entre as partes) em vez de parecer o início do registro de baixo */
   font-family: var(--font-family-general);
   font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxxs));
 }

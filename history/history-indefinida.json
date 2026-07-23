@@ -1,7 +1,7 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "19-07-26",
- "commits": 184,
+ "geradoEm": "23-07-26",
+ "commits": 187,
  "total": 459,
  "registros": [
   {
@@ -19358,6 +19358,66 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-55",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "15:07",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Histórico: agrupamento por padrão, faixa acima dos registros e menos títulos redundantes",
+   "resumo": "O agrupamento de semelhantes passou a vir ligado por padrão (sem a marca experimental); a faixa zebrada do topo de cada mês/seção passou a cobrir corretamente os registros mesmo agrupados; e as deleções deixaram de repetir o título já visível no de→para e no breadcrumb.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Filtros"
+   ]
+  },
+  {
+   "id": "fn-54",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "15:07",
+   "acao": "aperfeiçoada",
+   "tipo": "correção",
+   "titulo": "Histórico: o detalhamento vira estado, preservado entre os filtros",
+   "resumo": "Mudar o agrupamento, a ordenação ou a aba deixou de reativar o detalhamento Máximo quando o Mínimo estava escolhido — o nível de detalhe passou a ser um estado que o render respeita a cada reconstrução.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Detalhamento"
+   ]
+  },
+  {
+   "id": "fn-53",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "15:07",
+   "acao": "implementada",
+   "tipo": "usabilidade",
+   "titulo": "Histórico: detalhamento Mínimo (uma linha por registro)",
+   "resumo": "O detalhamento ganhou o modo Mínimo: cada alteração vira uma linha compacta — horário, ícone da ação, ação, elemento e local (em itálico) e o commit à direita —, clicável e com o mesmo realce no destino do modo Máximo. Com o agrupamento ligado, os semelhantes consecutivos ficam sob um mini-cabeçalho recolhível. Vale em todas as combinações de ordenação, aba e agrupamento.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Detalhamento"
+   ]
+  },
+  {
+   "id": "fn-52",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "14:19",
+   "acao": "implementada",
+   "tipo": "navegação",
+   "titulo": "Copiar link: caminho relativo no local, URL completa no remoto",
+   "resumo": "O botão de copiar link do breadcrumb passou a distinguir o servidor de desenvolvimento (localhost, rede local, file://) do site publicado: no local copia só o caminho servido (ex.: 'presentation/slides/history.html'); no GitHub Pages, a URL completa. Não expõe host/porta nem o caminho de disco.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Navegação"
+   ]
+  },
   {
    "id": "fn-51",
    "aba": "funcoes",

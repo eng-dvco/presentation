@@ -10,23 +10,32 @@ const clearBtn = document.getElementById('search-clear');
 const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
 const sections = document.querySelectorAll('[data-section]');
 const items = document.querySelectorAll('.item');
-let activeFilter = 'all';
+const activeFilters = new Set();   // vazio = "Todos" (mostra tudo); MULTI-seleção de seções
 
 // ---- filtro e busca -------------------------------------------------------
+
+// "Todos" fica ativo quando NENHUMA seção está marcada; cada seção fica ativa quando está no conjunto
+function syncFilterButtons() {
+  filterBtns.forEach(b => {
+    const v = b.dataset.filter;
+    b.classList.toggle('active', v === 'all' ? activeFilters.size === 0 : activeFilters.has(v));
+  });
+}
 
 function applyFilters() {
   const q = foldAccents(search.value.trim());
   clearBtn.hidden = !q;
+  const semSecao = activeFilters.size === 0;   // nenhuma seção marcada = "Todos"
 
   items.forEach(item => {
     const sec = item.closest('[data-section]');
-    const inFilter = activeFilter === 'all' || (sec && sec.dataset.section === activeFilter);
+    const inFilter = semSecao || (sec && activeFilters.has(sec.dataset.section));
     const inSearch = !q || foldAccents(item.textContent).includes(q);
     item.style.display = inFilter && inSearch ? '' : 'none';
   });
 
   sections.forEach(sec => {
-    const filterMatch = activeFilter === 'all' || sec.dataset.section === activeFilter;
+    const filterMatch = semSecao || activeFilters.has(sec.dataset.section);
     if (!filterMatch) { sec.style.display = 'none'; return; }
     sec.style.display = '';
     if (q) {
@@ -78,8 +87,12 @@ filterBtns.forEach(btn => {
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.classList.contains('is-empty')) return; // filtro indisponível: sem ação
-    activeFilter = btn.dataset.filter;
-    filterBtns.forEach(b => b.classList.toggle('active', b === btn));
+    const v = btn.dataset.filter;
+    // "Todos" LIMPA todas as seções; uma seção ALTERNA (add/remove) e desmarca "Todos" (multi-seleção)
+    if (v === 'all') activeFilters.clear();
+    else if (activeFilters.has(v)) activeFilters.delete(v);
+    else activeFilters.add(v);
+    syncFilterButtons();
     applyFilters();
   });
 });
@@ -89,12 +102,6 @@ filterBtns.forEach(btn => {
 // cada mudança de seção ou de busca (chamada por applyFilters). Cada ✕ remove só
 // aquele filtro; "Limpar" zera os dois. A linha fica oculta quando nada está ativo.
 const activeBar = document.querySelector('.index-active');
-
-// aplica um filtro de seção e sincroniza o estado ativo das pílulas ("Todos" = 'all')
-function setActiveFilter(value) {
-  activeFilter = value;
-  filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === value));
-}
 
 function makeChip(rotulo, aoRemover) {
   const chip = document.createElement('span');
@@ -118,19 +125,22 @@ function renderChips() {
   activeBar.textContent = '';
 
   const q = search.value.trim();
-  const secaoBtn = Array.from(filterBtns).find(b => b.dataset.filter === activeFilter);
-  const temSecao = activeFilter !== 'all' && !!secaoBtn;
+  const temSecao = activeFilters.size > 0;
   const temBusca = q !== '';
 
   if (!temSecao && !temBusca) { activeBar.hidden = true; return; }
   activeBar.hidden = false;
 
-  if (temSecao) {
-    activeBar.appendChild(makeChip('Seção: ' + secaoBtn.textContent.trim(), () => {
-      setActiveFilter('all');
+  // um chip por seção ativa, na ordem das pílulas (ST, SE, LT…); cada ✕ remove só aquela seção
+  filterBtns.forEach(btn => {
+    const v = btn.dataset.filter;
+    if (v === 'all' || !activeFilters.has(v)) return;
+    activeBar.appendChild(makeChip('Seção: ' + btn.textContent.trim(), () => {
+      activeFilters.delete(v);
+      syncFilterButtons();
       applyFilters();
     }));
-  }
+  });
   if (temBusca) {
     activeBar.appendChild(makeChip('Busca: “' + q + '”', () => {
       search.value = '';
@@ -143,7 +153,8 @@ function renderChips() {
   limpar.className = 'index-filter-clear';
   limpar.textContent = 'Limpar';
   limpar.addEventListener('click', () => {
-    setActiveFilter('all');
+    activeFilters.clear();
+    syncFilterButtons();
     search.value = '';
     applyFilters();
   });
@@ -168,7 +179,7 @@ let restoringFromSlide = false;
   // salva o estado atual ao sair da seleção (clique em item, breadcrumb, logo…)
   window.addEventListener('pagehide', () => {
     ss.set('indexScrollY', String(Math.round(window.scrollY)));
-    ss.set('indexFilter', activeFilter);
+    ss.set('indexFilter', [...activeFilters].join(','));
     ss.set('indexQuery', search.value);
   });
 
@@ -178,14 +189,14 @@ let restoringFromSlide = false;
 
   // 1) reaplica a busca e o filtro salvos antes de posicionar a rolagem
   const savedQuery = ss.get('indexQuery');
-  const savedFilter = ss.get('indexFilter', 'all');
+  const savedFilter = ss.get('indexFilter', '');
   if (savedQuery) search.value = savedQuery;
-  const btn = Array.from(filterBtns).find(b => b.dataset.filter === savedFilter && !b.classList.contains('is-empty'));
-  if (btn && savedFilter !== 'all') {
-    activeFilter = savedFilter;
-    filterBtns.forEach(b => b.classList.toggle('active', b === btn));
-  }
-  if (savedQuery || activeFilter !== 'all') applyFilters();
+  savedFilter.split(',').filter(Boolean).forEach(v => {
+    const b = Array.from(filterBtns).find(x => x.dataset.filter === v && !x.classList.contains('is-empty'));
+    if (b) activeFilters.add(v);
+  });
+  syncFilterButtons();
+  if (savedQuery || activeFilters.size > 0) applyFilters();
 
   // 2) restaura a rolagem depois que o layout filtrado já está aplicado
   const y = parseInt(ss.get('indexScrollY', '0'), 10) || 0;

@@ -54,7 +54,9 @@
   let dados = null;
   let aba = 'conteudo';
   let agrupamento = 'tempo';
-  let agrupar = false;   // AGRUPAMENTO (experimental): empilha registros semelhantes (mesma ação+tipo)
+  let agrupar = true;    // AGRUPAMENTO: empilha registros semelhantes (mesma ação+tipo). Ligado por padrão.
+  let detalhe = 'maximo';   // DETALHAMENTO: 'maximo' (cartão inteiro) | 'minimo' (uma linha por registro).
+                            // ESTADO persistente: sobrevive a mudanças de aba/ordenação/agrupamento (o render o respeita).
   // seletor dos cartões de um dia, INCLUINDO os que estão dentro de um grupo empilhado (agrupamento) —
   // o marcador da timeline precisa achá-los mesmo aninhados num .hist-group.
   const CARTAO_SEL = '.hist-tl-body > .hist-card, .hist-tl-body > .hist-group > .hist-card';
@@ -137,7 +139,7 @@
   // "localizar". Usado pelo aviso de registro DEFASADO para levar à versão vigente do elemento.
   function irParaRegistro(id) {
     if (!id) return;
-    const alvo = lista.querySelector('.hist-card[data-id="' + (window.CSS && CSS.escape ? CSS.escape(id) : id) + '"]');
+    const alvo = lista.querySelector('[data-id="' + (window.CSS && CSS.escape ? CSS.escape(id) : id) + '"]');
     if (!alvo) return;   // pode estar filtrado/oculto no momento
     alvo.scrollIntoView({ block: 'center' });
     alvo.classList.remove('hist-located'); void alvo.offsetWidth; alvo.classList.add('hist-located');
@@ -477,13 +479,13 @@
     //  • modificação de título, subtítulo ou NOME DO SLIDE (o "para" do de→para já é o novo valor), só de
     //    observação, ou de IMAGENS (a legenda das imagens já se identifica e o subtítulo já vem no breadcrumb);
     //  • adição de subtítulo, imagens ou SLIDE inteiro (o título repete a atividade/slide, já no breadcrumb);
-    //  • deleção de subtítulo (o "de" do de→para já mostra o subtítulo removido).
+    //  • deleção de QUALQUER elemento (o de→para/resumo removido + o subtítulo no breadcrumb já dizem o quê e onde).
     const t = tiposDe(r);
     const semTitulo =
       t.includes('detalhe') ||   // post-scriptum: o resumo/de→para + o subtítulo no breadcrumb já bastam
+      r.acao === 'deleção' ||    // deleção de qualquer elemento: o título só repetiria o já mostrado
       (r.acao === 'modificação' && (t.includes('título') || t.includes('subtítulo') || t.includes('nome do slide') || (t.length === 1 && t[0] === 'observação') || t.includes('imagens'))) ||
-      (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens') || t.includes('slide'))) ||
-      (r.acao === 'deleção' && t.includes('subtítulo'));
+      (r.acao === 'adição' && (t.includes('subtítulo') || t.includes('imagens') || t.includes('slide')));
     if (r.titulo && !semTitulo) a.appendChild(el('h3', 'hist-card-title', r.titulo));
 
     // a transferência não mostra breadcrumb: origem e destino já vêm por extenso em "de" e "para".
@@ -630,17 +632,108 @@
     return grupo;
   }
 
+  // ── DETALHAMENTO MÍNIMO: um registro por LINHA ──
+  // [horário] [ícone da ação] [ação] [elemento (itálico)] "em" [local (itálico)] … [commit à direita].
+  // É um <a> — leva ao conteúdo alterado (salvaFoco + realce/aura no destino), como o cartão; fica inerte
+  // quando o slide-alvo sumiu. O `local` é o último segmento legível do breadcrumb.
+  function linhaCompacta(r, marcaTempo) {
+    const inerte = !!r.alvoAusente;
+    const row = el(inerte ? 'div' : 'a', 'hist-row hist-row--' + slug(r.acao) + (inerte ? ' hist-row--inerte' : ''));
+    row.dataset.acao = r.acao;
+    if (r.id) row.dataset.id = r.id;   // permite localizar/realçar esta linha (mesma via do cartão)
+    if (!inerte) {
+      row.href = base + (r.link || 'slides/index.html');
+      const textoGeral = (r.tipo === 'título' ? (r.partes ? r.partes[0].para : r.para) : (r.breadcrumb || []).slice(-1)[0]) || null;
+      row.addEventListener('click', () => salvaFoco(r, focoImgs(r), textoGeral));
+    }
+    row.appendChild(el('span', 'hist-row-time', marcaTempo));
+    const ico = iconeAcao(r.acao);
+    if (ico) row.appendChild(ico);
+    row.appendChild(el('span', 'hist-row-acao', r.acao));
+    const qtd = partesDe(r).reduce((s, p) => s + (p.imagens ? p.imagens.total : 0), 0);
+    const elem = tiposDe(r).map(t => (t === 'imagens' && qtd) ? 'imagens (' + qtd + ')' : t).join(', ');
+    if (elem) row.appendChild(el('span', 'hist-row-elem', elem));
+    const local = (breadcrumbLegivel(r).slice(-1)[0] || '').toString().trim();
+    if (local) {
+      row.appendChild(el('span', 'hist-row-em', 'em'));
+      row.appendChild(el('span', 'hist-row-local', local));
+    }
+    row.appendChild(el('span', 'hist-row-commit', r.commit));
+    return row;
+  }
+
+  // AGRUPAMENTO no MÍNIMO ("mini-cabeçalho"): sequências de 3+ semelhantes (mesma ação+tipo) ficam sob um
+  // cabeçalho recolhível com a contagem; as linhas individuais listadas (indentadas) abaixo, expandidas.
+  function grupoMinimo(rows, sample) {
+    const g = el('div', 'hist-rowgroup');
+    const head = el('button', 'hist-rowgroup-head hist-row--' + slug(sample.acao));
+    head.type = 'button';
+    head.setAttribute('aria-expanded', 'true');
+    head.appendChild(el('span', 'hist-rowgroup-caret', '▾'));
+    const ico = iconeAcao(sample.acao);
+    if (ico) head.appendChild(ico);
+    head.appendChild(el('span', 'hist-rowgroup-acao', sample.acao));
+    head.appendChild(el('span', 'hist-rowgroup-elem', sample.tipo));
+    head.appendChild(el('span', 'hist-rowgroup-count', rows.length + ' registros'));
+    const body = el('div', 'hist-rowgroup-body');
+    rows.forEach(row => body.appendChild(row));
+    head.addEventListener('click', () => {
+      const col = g.classList.toggle('is-collapsed');
+      head.setAttribute('aria-expanded', String(!col));
+    });
+    g.appendChild(head);
+    g.appendChild(body);
+    return g;
+  }
+
+  // corpo do dia no MÍNIMO: uma linha por registro; com AGRUPAMENTO, runs de 3+ semelhantes viram grupos.
+  function corpoMinimo(registros, porSlide) {
+    const body = el('div', 'hist-day-items hist-daymin');
+    // por seção os registros abrangem vários dias → a linha traz DATA + horário; senão, só o horário
+    const marca = r => porSlide ? (diaCurto(r.data) + ' · ' + horaBR(r.hora)) : horaBR(r.hora);
+    const mkRow = r => linhaCompacta(r, marca(r));
+    if (!agrupar) {
+      registros.forEach(r => body.appendChild(mkRow(r)));
+    } else {
+      const chave = r => r.acao + '|' + r.tipo;
+      const podeAgrupar = r => r.acao !== 'transferência' && r.breadcrumb && r.breadcrumb.length;
+      let i = 0;
+      while (i < registros.length) {
+        if (!podeAgrupar(registros[i])) { body.appendChild(mkRow(registros[i])); i++; continue; }
+        let j = i + 1;
+        while (j < registros.length && podeAgrupar(registros[j]) && chave(registros[j]) === chave(registros[i])) j++;
+        if (j - i >= 3) body.appendChild(grupoMinimo(registros.slice(i, j).map(mkRow), registros[i]));
+        else for (let k = i; k < j; k++) body.appendChild(mkRow(registros[k]));
+        i = j;
+      }
+    }
+    return body;
+  }
+
   function bloco(titulo, registros, porSlide) {
-    const marcaDe = r => porSlide ? diaCurto(r.data) : horaBR(r.hora);
-    // por seção o marcador exibe a DATA (1ª linha, DD/MM); o HORÁRIO (HHhMM) vai numa 2ª linha abaixo
-    const marcaSubDe = r => porSlide ? horaBR(r.hora) : '';
-    const sec = el('section', 'hist-day' + (porSlide ? ' hist-day--slide' : ''));
+    const sec = el('section', 'hist-day' + (porSlide ? ' hist-day--slide' : '') + (detalhe === 'minimo' ? ' hist-day--min' : ''));
     const cab = el('button', 'hist-day-head');
     cab.type = 'button';
     cab.setAttribute('aria-expanded', 'true');
     cab.appendChild(el('span', 'hist-day-caret', '▾'));
     cab.appendChild(el('span', 'hist-day-date', titulo));
     cab.appendChild(el('span', 'hist-day-count', plural(registros.length, 'alteração')));
+
+    // MÍNIMO: uma linha por registro (sem linha do tempo/marcador); o cabeçalho do dia só recolhe/expande.
+    if (detalhe === 'minimo') {
+      cab.addEventListener('click', () => {
+        const fechado = sec.classList.toggle('is-collapsed');
+        cab.setAttribute('aria-expanded', String(!fechado));
+      });
+      sec.appendChild(cab);
+      sec.appendChild(corpoMinimo(registros, porSlide));
+      return sec;
+    }
+
+    // MÁXIMO: linha do tempo com marcador sticky + cartões inteiros (agrupáveis em baralho).
+    const marcaDe = r => porSlide ? diaCurto(r.data) : horaBR(r.hora);
+    // por seção o marcador exibe a DATA (1ª linha, DD/MM); o HORÁRIO (HHhMM) vai numa 2ª linha abaixo
+    const marcaSubDe = r => porSlide ? horaBR(r.hora) : '';
 
     const tl = el('div', 'hist-day-items hist-tl');
     const rail = el('div', 'hist-tl-rail');
@@ -1246,8 +1339,8 @@
         lista.appendChild(caixa);
       });
     }
-    // a lista renasce EXPANDIDA (padrão) → o detalhamento "Máximo" volta a ser o estado ativo
-    marcaFold(true);
+    // o detalhamento é ESTADO: o render apenas REFLETE o valor atual (não reativa "Máximo")
+    marcaFold(detalhe === 'maximo');
     // depois que o layout assenta, acerta os marcadores ao estado inicial da lista e centra cada
     // marcador no 1º registro do seu dia
     requestAnimationFrame(() => { atualizaCentragem(); atualizaMarcas(); });
@@ -1308,26 +1401,17 @@
   document.addEventListener('click', () => abreFunil(false));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') abreFunil(false); });
 
-  // colapsar / expandir tudo
-  const todos = (fechar) => {
-    document.querySelectorAll('.hist-day').forEach(s => {
-      s.classList.toggle('is-collapsed', fechar);
-      const h = s.querySelector('.hist-day-head');
-      if (h) h.setAttribute('aria-expanded', String(!fechar));
-    });
-    requestAnimationFrame(() => { atualizaCentragem(); atualizaMarcas(); });
+  // DETALHAMENTO — par COM ESTADO: "Máximo" (cartão inteiro) e "Mínimo" (uma linha por registro). É um
+  // MODO de renderização, não um colapso da lista: trocar de detalhamento RE-RENDERIZA, e o estado
+  // (detalhe) sobrevive a mudanças de aba/ordenação/agrupamento — o render o reflete (marcaFold no fim).
+  const btnMinimo = document.querySelector('#hist-collapse');
+  const btnMaximo = document.querySelector('#hist-expand');
+  const marcaFold = maximo => {
+    if (btnMaximo) { btnMaximo.classList.toggle('active', maximo); btnMaximo.setAttribute('aria-pressed', String(maximo)); }
+    if (btnMinimo) { btnMinimo.classList.toggle('active', !maximo); btnMinimo.setAttribute('aria-pressed', String(!maximo)); }
   };
-  const btnColapsar = document.querySelector('#hist-collapse');
-  const btnExpandir = document.querySelector('#hist-expand');
-  // "Máximo"/"Mínimo" formam um par COM ESTADO: o último detalhamento aplicado fica .active (como os
-  // demais controles). expandido=true → "Máximo"; false → "Mínimo". Como a lista renasce EXPANDIDA, o
-  // render reativa "Máximo" a cada reconstrução (ver marcaFold(true) no fim de render).
-  const marcaFold = expandido => {
-    if (btnExpandir) { btnExpandir.classList.toggle('active', expandido); btnExpandir.setAttribute('aria-pressed', String(expandido)); }
-    if (btnColapsar) { btnColapsar.classList.toggle('active', !expandido); btnColapsar.setAttribute('aria-pressed', String(!expandido)); }
-  };
-  if (btnColapsar) btnColapsar.addEventListener('click', () => { todos(true); marcaFold(false); });
-  if (btnExpandir) btnExpandir.addEventListener('click', () => { todos(false); marcaFold(true); });
+  if (btnMaximo) btnMaximo.addEventListener('click', () => { if (detalhe === 'maximo') return; detalhe = 'maximo'; marcaFold(true); agendarRender(); });
+  if (btnMinimo) btnMinimo.addEventListener('click', () => { if (detalhe === 'minimo') return; detalhe = 'minimo'; marcaFold(false); agendarRender(); });
 
   // ── retorno ao ponto exato ──
   // O navegador restaura a rolagem ANTES de o JS montar os registros (a página nasce vazia) e a
@@ -1349,7 +1433,7 @@
     // preferimos localizar o PRÓPRIO registro clicado: rola até ele e o pisca em verde (mesma
     // afordância do "localizar" no slide). Só caímos no scroll bruto se o registro não existir.
     if (rec) {
-      const alvo = lista.querySelector('.hist-card[data-id="' + (window.CSS && CSS.escape ? CSS.escape(rec) : rec) + '"]');
+      const alvo = lista.querySelector('[data-id="' + (window.CSS && CSS.escape ? CSS.escape(rec) : rec) + '"]');
       if (alvo) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
           alvo.scrollIntoView({ block: 'center' });

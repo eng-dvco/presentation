@@ -554,6 +554,122 @@
 .hist-day-sum-em { color: var(--lt-text-faint); }
 .hist-day-sum-local { color: var(--lt-text-muted); overflow-wrap: anywhere; }
 
+/* ── DETALHAMENTO MÍNIMO: uma linha por registro ──
+   Substitui a linha do tempo (rail + cartões) por linhas compactas:
+   [horário] [ícone da ação] [ação] [elemento (itálico)] "em" [local (itálico)] … [commit à direita].
+   Cada linha é um <a> que leva ao conteúdo (realce/aura no destino) — as afordâncias do cartão. */
+.hist-daymin {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2);
+  padding: var(--gap-4) var(--gap-8) 0;
+}
+
+.hist-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-6);
+  padding: var(--gap-6) var(--gap-8);
+  border-radius: var(--border-smaller);
+  background: var(--lt-surface-strong);
+  box-shadow: var(--lt-shadow);
+  color: var(--lt-text);
+  text-decoration: none;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  line-height: 1.35;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover,
+  &:focus-visible { background: var(--lt-hover); }
+
+  &.hist-row--inerte { cursor: default; color: var(--lt-text-muted); }
+}
+
+/* horário: dígitos tabulares para as linhas alinharem verticalmente */
+.hist-row-time {
+  flex-shrink: 0;
+  color: var(--lt-text-muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+}
+
+/* ícone da ação, colorido pelo tipo (mesma paleta dos pontos/badges) */
+.hist-row .hist-acao-icon,
+.hist-rowgroup-head .hist-acao-icon { flex-shrink: 0; align-self: center; }
+.hist-row--adicao .hist-acao-icon,
+.hist-row--implementada .hist-acao-icon { color: var(--hist-add); }
+.hist-row--modificacao .hist-acao-icon,
+.hist-row--aperfeicoada .hist-acao-icon { color: var(--hist-mod); }
+.hist-row--transferencia .hist-acao-icon { color: var(--hist-mov); }
+.hist-row--delecao .hist-acao-icon,
+.hist-row--descartada .hist-acao-icon { color: var(--hist-del); }
+
+.hist-row-acao {
+  flex-shrink: 0;
+  font-weight: var(--font-weight-boldest);
+  text-transform: lowercase;
+}
+
+/* elemento e local em ITÁLICO (pedido); o local absorve a folga e trunca numa linha só */
+.hist-row-elem { flex-shrink: 0; font-style: italic; color: var(--lt-text); }
+.hist-row-em { flex-shrink: 0; color: var(--lt-text-faint); }
+.hist-row-local {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-style: italic;
+  color: var(--lt-text-muted);
+}
+
+/* commit sempre à extrema direita, no mesmo container da linha */
+.hist-row-commit {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: var(--gap-8);
+  color: var(--lt-text-faint);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* AGRUPAMENTO no MÍNIMO: cabeçalho recolhível + linhas individuais indentadas abaixo */
+.hist-rowgroup { display: flex; flex-direction: column; gap: var(--gap-2); }
+.hist-rowgroup-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-6);
+  width: 100%;
+  padding: var(--gap-4) var(--gap-8);
+  border: none;
+  border-radius: var(--border-smaller);
+  background: var(--lt-surface-muted);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-family-general);
+  font-size: calc(var(--font-size-content) * var(--font-size-multiplier-xxs));
+  color: var(--lt-text-muted);
+}
+.hist-rowgroup-caret {
+  flex-shrink: 0;
+  font-size: var(--collapsible-icon-size);
+  line-height: 1;
+  color: var(--lt-text-faint);
+  transition: transform 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.hist-rowgroup.is-collapsed .hist-rowgroup-caret { transform: rotate(-90deg); }
+.hist-rowgroup.is-collapsed .hist-rowgroup-body { display: none; }
+.hist-rowgroup-acao { flex-shrink: 0; font-weight: var(--font-weight-boldest); text-transform: lowercase; color: var(--lt-text); }
+.hist-rowgroup-elem { flex-shrink: 0; font-style: italic; }
+.hist-rowgroup-count { margin-left: auto; padding-left: var(--gap-8); flex-shrink: 0; }
+.hist-rowgroup-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2);
+  padding-left: var(--gap-16);   /* indenta as linhas do grupo sob o cabeçalho */
+}
+
 /* ── o registro: o corpo INTEIRO é clicável ── */
 .hist-card {
   position: relative;
@@ -633,6 +749,8 @@
 }
 .hist-group.is-stacked {
   position: relative;
+  isolation: isolate;   /* contém os z-index internos do baralho (cartões + selo): sem isto eles sobem SOBRE a
+                           faixa zebrada .hist-gap (z:1), que deve cobrir o topo dos registros mesmo agrupados */
   gap: 0;
   cursor: pointer;
 }

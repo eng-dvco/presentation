@@ -1,7 +1,7 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "23-07-26",
- "commits": 190,
+ "commits": 192,
  "total": 459,
  "registros": [
   {
@@ -19358,6 +19358,21 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-60",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "16:13",
+   "acao": "aperfeiçoada",
+   "tipo": "filtro",
+   "titulo": "Índice: filtro de seção com multi-seleção",
+   "resumo": "O filtro de seção do índice passou a aceitar mais de uma seção ao mesmo tempo, acumulando um chip por seção (a grade mostra a união delas). Clicar numa seção já ativa a desmarca, o ✕ do chip remove uma, e 'Todos' limpa todas de uma vez.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Índice"
+   ]
+  },
   {
    "id": "fn-59",
    "aba": "funcoes",

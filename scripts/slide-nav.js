@@ -1431,15 +1431,48 @@ if (breadcrumb && navigator.clipboard) {
   const ICON_COPY = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>';
   const ICON_CHECK = '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
 
+  // Servidor LOCAL (Live Server, static-server…): loopback, IP de rede privada, sufixos de rede
+  // local (mDNS/roteador), qualquer hostname de rótulo único (localhost, DESKTOP-ABC…) e o esquema
+  // file://. Fora disso — GitHub Pages ou qualquer host público (com ponto no nome) — é REMOTO.
+  const ehServidorLocal = () => {
+    const h = location.hostname;
+    return location.protocol === 'file:'
+      || h === '0.0.0.0' || h === '::1' || h === '[::1]'
+      || /^127\./.test(h)                                 // loopback IPv4
+      || /^10\./.test(h)                                  // rede privada classe A
+      || /^192\.168\./.test(h)                            // rede privada classe C
+      || /^172\.(1[6-9]|2\d|3[01])\./.test(h)             // rede privada classe B (172.16–172.31)
+      || /\.(local|localhost|lan|home|internal)$/.test(h) // sufixos de rede local (mDNS/roteador)
+      || (!!h && !h.includes('.') && !h.includes(':'));   // rótulo único, sem ponto (intranet/LAN)
+  };
+
+  // No local, o link completo (http://127.0.0.1:5500/…) não interessa: copiamos só o CAMINHO
+  // servido — sem host/porta e sem a barra inicial, ex.: "presentation/slides/history.html" —, que
+  // basta para referenciar ONDE a página está. No remoto, copiamos a URL completa (GitHub Pages).
+  const linkDaPagina = () => {
+    if (!ehServidorLocal()) return location.href;
+    const semControle = s => s.replace(/\p{Cc}/gu, '');   // remove caracteres de controle
+    // file:// carrega o caminho ABSOLUTO em disco (com usuário, unidade…): não expõe isso — só o arquivo.
+    if (location.protocol === 'file:') {
+      let nome = location.pathname.split('/').pop() || '';
+      try { nome = decodeURIComponent(nome); } catch (e) { /* cru se malformado */ }
+      return semControle(nome);
+    }
+    let caminho = location.pathname;
+    try { caminho = decodeURIComponent(caminho); } catch (e) { /* cru se malformado */ }
+    caminho = semControle(caminho).replace(/^\/+/, '');
+    return caminho || location.href;   // nunca copia vazio (ex.: na raiz "/")
+  };
+
   const copyBtn = document.createElement('button');
   copyBtn.className = 'copy-url-btn';
-  copyBtn.setAttribute('aria-label', 'Copiar link desta página');
+  copyBtn.setAttribute('aria-label', ehServidorLocal() ? 'Copiar o caminho desta página' : 'Copiar o link desta página');
   copyBtn.innerHTML = ICON_COPY;
   breadcrumb.appendChild(copyBtn);
 
   let copyResetTimer = null;
   copyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
+    navigator.clipboard.writeText(linkDaPagina()).then(() => {
       copyBtn.classList.add('is-copied');
       copyBtn.innerHTML = ICON_CHECK;
       clearTimeout(copyResetTimer);

@@ -1,7 +1,7 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "23-07-26",
- "commits": 187,
+ "commits": 190,
  "total": 459,
  "registros": [
   {
@@ -19358,6 +19358,66 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-59",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "15:51",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Índice: filtragem no padrão do histórico, com chips de filtro ativo",
+   "resumo": "A filtragem do índice passou a seguir a formatação do histórico — botões e busca em pílula — e ganhou uma linha de chips removíveis mostrando a seção e a busca ativas, com um botão 'Limpar'.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Índice"
+   ]
+  },
+  {
+   "id": "fn-58",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "15:51",
+   "acao": "aperfeiçoada",
+   "tipo": "usabilidade",
+   "titulo": "Histórico: status de obsoleto e slide indisponível no detalhamento Mínimo",
+   "resumo": "No detalhamento Mínimo, as linhas de registros obsoletos (relógio) ou de slide indisponível (vínculo quebrado) passaram a exibir o ícone de status junto ao commit — a mesma indicação do Máximo, consistente sob qualquer combinação de filtros.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Detalhamento"
+   ]
+  },
+  {
+   "id": "fn-57",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "15:51",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Histórico: 'expandir histórico' colado à sua própria parte",
+   "resumo": "O 'expandir histórico' de cada parte deixou de aparecer sob um tracejado (parecendo pertencer ao registro de baixo) e passou a se colar à sua própria parte, com o divisor tracejado separando uma parte da seguinte.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Aparência"
+   ]
+  },
+  {
+   "id": "fn-56",
+   "aba": "funcoes",
+   "data": "23-07-26",
+   "hora": "15:51",
+   "acao": "aperfeiçoada",
+   "tipo": "usabilidade",
+   "titulo": "Histórico: cada modificação de um registro é localizável individualmente",
+   "resumo": "Num registro que reúne várias modificações do mesmo elemento, cada parte virou um bloco clicável por conta própria: leva o usuário exatamente àquela alteração no slide (localiza as imagens e o texto DAQUELA parte), em vez de tratar todas como um bloco único.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Navegação"
+   ]
+  },
   {
    "id": "fn-55",
    "aba": "funcoes",

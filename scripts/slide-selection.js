@@ -43,6 +43,8 @@ function applyFilters() {
   sections.forEach(sec => {
     sec.classList.toggle('section-expanded', shouldExpand && sec.style.display !== 'none');
   });
+
+  renderChips();
 }
 
 search.addEventListener('input', applyFilters);
@@ -81,6 +83,72 @@ filterBtns.forEach(btn => {
     applyFilters();
   });
 });
+
+// ---- chips de filtros ativos ----------------------------------------------
+// Espelha a barra de filtros ativos do histórico: reconstrói a linha de chips a
+// cada mudança de seção ou de busca (chamada por applyFilters). Cada ✕ remove só
+// aquele filtro; "Limpar" zera os dois. A linha fica oculta quando nada está ativo.
+const activeBar = document.querySelector('.index-active');
+
+// aplica um filtro de seção e sincroniza o estado ativo das pílulas ("Todos" = 'all')
+function setActiveFilter(value) {
+  activeFilter = value;
+  filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === value));
+}
+
+function makeChip(rotulo, aoRemover) {
+  const chip = document.createElement('span');
+  chip.className = 'index-chip';
+  const lbl = document.createElement('span');
+  lbl.className = 'index-chip-lbl';
+  lbl.textContent = rotulo;
+  chip.appendChild(lbl);
+  const x = document.createElement('button');
+  x.type = 'button';
+  x.className = 'index-chip-x';
+  x.setAttribute('aria-label', 'Remover ' + rotulo);
+  x.textContent = '✕';
+  x.addEventListener('click', aoRemover);
+  chip.appendChild(x);
+  return chip;
+}
+
+function renderChips() {
+  if (!activeBar) return;
+  activeBar.textContent = '';
+
+  const q = search.value.trim();
+  const secaoBtn = Array.from(filterBtns).find(b => b.dataset.filter === activeFilter);
+  const temSecao = activeFilter !== 'all' && !!secaoBtn;
+  const temBusca = q !== '';
+
+  if (!temSecao && !temBusca) { activeBar.hidden = true; return; }
+  activeBar.hidden = false;
+
+  if (temSecao) {
+    activeBar.appendChild(makeChip('Seção: ' + secaoBtn.textContent.trim(), () => {
+      setActiveFilter('all');
+      applyFilters();
+    }));
+  }
+  if (temBusca) {
+    activeBar.appendChild(makeChip('Busca: “' + q + '”', () => {
+      search.value = '';
+      applyFilters();
+    }));
+  }
+
+  const limpar = document.createElement('button');
+  limpar.type = 'button';
+  limpar.className = 'index-filter-clear';
+  limpar.textContent = 'Limpar';
+  limpar.addEventListener('click', () => {
+    setActiveFilter('all');
+    search.value = '';
+    applyFilters();
+  });
+  activeBar.appendChild(limpar);
+}
 
 // ---- persistência da seleção (rolagem + filtro + busca) ------------------
 // Ao voltar pelo "conteúdo" do breadcrumb de um slide, reabre a seleção no mesmo

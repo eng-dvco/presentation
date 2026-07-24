@@ -1086,7 +1086,11 @@
 /* o .content-wrapper centra os filhos (justify-items:center) e os dimensiona pelo conteúdo; a
    barra de busca e a lista precisam ESTICAR até a largura toda para a busca preencher o espaço. */
 .hist-filters,
-.hist-list { justify-self: stretch; width: 100%; }
+/* min-width:0 é ESSENCIAL: sem ele o item de grid assume min-width:auto (=min-content) e a
+   trilha do grid CRESCE até o conteúdo mais largo (uma linha nowrap do detalhamento Mínimo,
+   com nome de seção longo), estourando a largura da viewport no mobile. Com min-width:0 a
+   trilha fica presa à largura do container e as linhas encolhem/truncam por construção. */
+.hist-list { justify-self: stretch; width: 100%; min-width: 0; }
 
 .hist-filters {
   display: flex;
@@ -1749,6 +1753,11 @@
   .hist-controls { gap: var(--gap-8); }
   .hist-ctrlset--push { margin-left: 0; }
   .hist-commit { display: none; }
+  /* Detalhamento MÍNIMO no mobile: esconde o commit (como já se faz nos cartões) e deixa o
+     ELEMENTO também truncar, liberando espaço para o nome da seção/slide (o dado mais útil)
+     caber legível numa linha só, sem estourar a viewport. */
+  .hist-row-commit { display: none; }
+  .hist-row-elem { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .hist-thumb { width: 52px; height: 39px; }
   /* no máximo 3 miniaturas: esconde da 4ª em diante, troca o "+N" de desktop pelo de mobile (na 3ª) */
   .hist-thumbs .hist-thumb:nth-child(n+4) { display: none; }

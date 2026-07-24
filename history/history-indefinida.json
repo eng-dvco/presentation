@@ -1,7 +1,7 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "24-07-26",
- "commits": 200,
+ "commits": 203,
  "total": 473,
  "registros": [
   {
@@ -19957,6 +19957,21 @@
  ],
  "funcoes": [
   {
+   "id": "fn-62",
+   "aba": "funcoes",
+   "data": "24-07-26",
+   "hora": "13:39",
+   "acao": "aperfeiçoada",
+   "tipo": "correção",
+   "titulo": "Histórico: detalhamento Mínimo sem rolagem horizontal no mobile",
+   "resumo": "No celular, ativar o detalhamento Mínimo esticava a página horizontalmente (as linhas compactas não encolhiam) e o recuo de zoom do navegador ficava preso mesmo ao voltar para Máximo. Agora as linhas encolhem e truncam por construção, sem rolagem horizontal; no mobile o commit é ocultado e o nome da seção fica legível numa linha só.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Detalhamento"
+   ]
+  },
+  {
    "id": "fn-61",
    "aba": "funcoes",
    "data": "24-07-26",
@@ -19964,7 +19979,7 @@
    "acao": "aperfeiçoada",
    "tipo": "aparência",
    "titulo": "Mosaico: imagens da mesma fileira com a mesma altura",
-   "resumo": "Nas fileiras de fotos em pares (portrait-row), duas imagens com proporções ligeiramente diferentes exibiam alturas distintas, criando um degrau vertical. Agora a fileira iguala a altura das duas imagens e elimina o desalinhamento; o recorte é mínimo quando as proporções são próximas.",
+   "resumo": "As imagens de uma mesma fileira têm a MESMA altura garantida pela própria célula do mosaico (proporção fixa escolhida pela orientação das fotos), e não por um ajuste conferido depois. As fotos passaram a ser agrupadas por orientação — retratos, paisagens e panorâmicas —, sem degrau vertical e com recorte nulo ou mínimo.",
    "link": "slides/slide-tl-stay-recovery.html",
    "breadcrumb": [
     "Apresentação"

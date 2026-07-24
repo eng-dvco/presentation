@@ -1,9 +1,119 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "24-07-26",
- "commits": 197,
- "total": 471,
+ "commits": 200,
+ "total": 473,
  "registros": [
+  {
+   "id": "a9067f5-0",
+   "data": "24-07-26",
+   "hora": "11:33",
+   "commit": "a9067f5",
+   "aba": "conteudo",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Condição em que os estais foram encontrados",
+   "breadcrumb": [
+    "Linhas do Tempo",
+    "Recuperação estrutural dos estais",
+    "Condição em que os estais foram encontrados"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 8,
+    "pesoTotal": "2,2 MB",
+    "amostra": [
+     {
+      "nome": "stay-7.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-7.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-7-200.webp",
+      "peso": "372 KB"
+     },
+     {
+      "nome": "stay-8.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-8.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-8-200.webp",
+      "peso": "288 KB"
+     },
+     {
+      "nome": "stay-9.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-9.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-9-200.webp",
+      "peso": "292 KB"
+     },
+     {
+      "nome": "stay-10.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-10.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-10-200.webp",
+      "peso": "328 KB"
+     },
+     {
+      "nome": "stay-11.jpeg",
+      "src": "assets/img/slides/tl/lt-stay-recovery/stay-11.jpeg",
+      "miniatura": "assets/img/slides/tl/lt-stay-recovery/stay-11-200.webp",
+      "peso": "336 KB"
+     }
+    ],
+    "extras": 3
+   },
+   "qtdImagens": 8
+  },
+  {
+   "id": "ae63ef1-0",
+   "data": "24-07-26",
+   "hora": "11:33",
+   "commit": "ae63ef1",
+   "aba": "conteudo",
+   "link": "slides/slide-safety-equipment.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Equipamentos de segurança",
+    "Veículos reservados"
+   ],
+   "titulo": "Veículos reservados",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 3,
+      "pesoTotal": "722 KB",
+      "amostra": [
+       {
+        "nome": "car-1.jpeg",
+        "src": "assets/img/slides/st/safety-equipment/car-1.jpeg",
+        "miniatura": "assets/img/slides/st/safety-equipment/car-1-200.webp",
+        "peso": "181 KB"
+       },
+       {
+        "nome": "car-2.jpeg",
+        "src": "assets/img/slides/st/safety-equipment/car-2.jpeg",
+        "miniatura": "assets/img/slides/st/safety-equipment/car-2-200.webp",
+        "peso": "243 KB"
+       },
+       {
+        "nome": "car-3.jpeg",
+        "src": "assets/img/slides/st/safety-equipment/car-3.jpeg",
+        "miniatura": "assets/img/slides/st/safety-equipment/car-3-200.webp",
+        "peso": "298 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 3
+    }
+   ]
+  },
   {
    "id": "6e274c1-4",
    "data": "24-07-26",

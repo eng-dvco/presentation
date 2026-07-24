@@ -39,22 +39,23 @@
   }
 }
 
-/* fotos em RETRATO sempre em PARES — 2 por linha, cada uma ocupando METADE da largura (grade de 2
-   colunas 1fr), preenchendo TODA a largura do mosaico e alinhadas às demais linhas. Exibidas em
-   altura natural (SEM corte); duas por linha já reduzem bastante a altura ante a largura cheia. */
+/* fotos em PARES — 2 por linha, cada uma ocupando METADE da largura (grade de 2 colunas 1fr),
+   preenchendo TODA a largura do mosaico. As DUAS imagens da MESMA fileira têm sempre a MESMA
+   altura: o grid estica os itens da fileira (align-items:stretch) até a altura da mais alta e a
+   imagem preenche a célula (object-fit:cover herdado de `.img img`). Como os pares têm razões de
+   aspecto próximas, o recorte é mínimo (poucos px) — o suficiente para eliminar o degrau vertical
+   que dava aparência defeituosa quando as alturas naturais divergiam. */
 .mosaic-container.portrait-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  align-items: start;
+  align-items: stretch;
 
   & > .img {
     width: 100%;
+    /* a altura da fileira é definida pela imagem mais alta; o stretch iguala o par.
+       min-height:0 remove o piso de min-content do item de grid (robustez cross-browser). */
     height: auto;
-  }
-  & > .img img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+    min-height: 0;
   }
 }
 

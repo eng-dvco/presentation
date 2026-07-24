@@ -1,9 +1,496 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "23-07-26",
- "commits": 192,
- "total": 459,
+ "geradoEm": "24-07-26",
+ "commits": 197,
+ "total": 471,
  "registros": [
+  {
+   "id": "6e274c1-4",
+   "data": "24-07-26",
+   "hora": "10:53",
+   "commit": "6e274c1",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "deleção",
+   "tipo": "documento",
+   "titulo": "RDC — Controle dos Relatórios de Campo do CPISF",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "RDC — Controle dos Relatórios de Campo do CPISF"
+   ],
+   "documento": {
+    "versao": "v1.10",
+    "tamanho": "57 KB",
+    "paginas": "—",
+    "inserido": "18-06-26",
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa."
+   }
+  },
+  {
+   "id": "6e274c1-3",
+   "data": "24-07-26",
+   "hora": "10:53",
+   "commit": "6e274c1",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "deleção",
+   "tipo": "documento",
+   "titulo": "LD — Controle das bases recuperadas dos postes de 13,8 kV – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "LD — Controle das bases recuperadas dos postes de 13,8 kV – Norte e Leste"
+   ],
+   "documento": {
+    "versao": "v1.11",
+    "tamanho": "5,2 MB",
+    "paginas": "—",
+    "inserido": "16-06-26",
+    "descricao": "Controle de bases recuperadas dos postes 13,8 kV: resumo por WBS, conferência plano × fonte, controle de postes e fotos das estruturas."
+   }
+  },
+  {
+   "id": "6e274c1-2",
+   "data": "24-07-26",
+   "hora": "10:53",
+   "commit": "6e274c1",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "adição",
+   "tipo": "documento",
+   "titulo": "RDC — Controle dos Relatórios de Campo do CPISF – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "RDC — Controle dos Relatórios de Campo do CPISF – Norte e Leste"
+   ],
+   "resumo": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+   "documento": {
+    "versao": "v1.12",
+    "tamanho": "139 KB",
+    "paginas": "—",
+    "inserido": "18-06-26",
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+    "slide": "slides/slide-rdc-control.html"
+   }
+  },
+  {
+   "id": "6e274c1-1",
+   "data": "24-07-26",
+   "hora": "10:53",
+   "commit": "6e274c1",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "LT — Quantitativo de Placas Faltantes das Torres da Linha de Transmissão – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "LT — Quantitativo de Placas Faltantes das Torres da Linha de Transmissão – Norte e Leste"
+   ],
+   "resumo": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico.",
+   "documento": {
+    "versao": "v1.14",
+    "tamanho": "111 KB",
+    "paginas": "—",
+    "inserido": "15-06-26",
+    "descricao": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico.",
+    "slide": "slides/slide-tower-identification.html"
+   },
+   "campos": [
+    "versao",
+    "tamanho"
+   ],
+   "campoAlterado": "versao",
+   "de": "—",
+   "para": "v1.14",
+   "substitui": [
+    {
+     "commit": "5be3e82",
+     "id": "5be3e82-3",
+     "data": "08-07-26",
+     "hora": "09:35",
+     "de": "19 KB",
+     "para": "34 KB"
+    }
+   ]
+  },
+  {
+   "id": "6e274c1-0",
+   "data": "24-07-26",
+   "hora": "10:53",
+   "commit": "6e274c1",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "adição",
+   "tipo": "documento",
+   "titulo": "LD — Controle das bases e estais recuperados dos postes de 13,8 kV – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "LD — Controle das bases e estais recuperados dos postes de 13,8 kV – Norte e Leste"
+   ],
+   "resumo": "Controle de bases e estais recuperados dos postes 13,8 kV: resumo por WBS, conferência plano × fonte, controle de postes e fotos das estruturas.",
+   "documento": {
+    "versao": "v1.14",
+    "tamanho": "1,4 MB",
+    "paginas": "—",
+    "inserido": "16-06-26",
+    "descricao": "Controle de bases e estais recuperados dos postes 13,8 kV: resumo por WBS, conferência plano × fonte, controle de postes e fotos das estruturas."
+   }
+  },
+  {
+   "id": "e9981ea-0",
+   "data": "24-07-26",
+   "hora": "10:53",
+   "commit": "e9981ea",
+   "aba": "conteudo",
+   "link": "slides/slide-relay-testing.html",
+   "acao": "adição",
+   "tipo": "slide",
+   "titulo": "Ensaios em relés",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Ensaios em relés"
+   ],
+   "resumo": "Ensaios em relés da subestação",
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "359 KB",
+    "amostra": [
+     {
+      "nome": "relay-1.jpeg",
+      "src": "assets/img/slides/se/relay-testing/relay-1.jpeg",
+      "miniatura": "assets/img/slides/se/relay-testing/relay-1-200.webp",
+      "peso": "54 KB"
+     },
+     {
+      "nome": "relay-2.jpeg",
+      "src": "assets/img/slides/se/relay-testing/relay-2.jpeg",
+      "miniatura": "assets/img/slides/se/relay-testing/relay-2-200.webp",
+      "peso": "214 KB"
+     },
+     {
+      "nome": "relay-3.jpeg",
+      "src": "assets/img/slides/se/relay-testing/relay-3.jpeg",
+      "miniatura": "assets/img/slides/se/relay-testing/relay-3-200.webp",
+      "peso": "49 KB"
+     },
+     {
+      "nome": "relay-4.jpeg",
+      "src": "assets/img/slides/se/relay-testing/relay-4.jpeg",
+      "miniatura": "assets/img/slides/se/relay-testing/relay-4-200.webp",
+      "peso": "42 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4
+  },
+  {
+   "id": "5c80646-5",
+   "data": "24-07-26",
+   "hora": "10:51",
+   "commit": "5c80646",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Terminais de borne dos quadros e painéis",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Terminais de borne dos quadros e painéis"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "122 KB",
+    "amostra": [
+     {
+      "nome": "activity-44.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-44.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-44-200.webp",
+      "peso": "58 KB"
+     },
+     {
+      "nome": "activity-45.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-45.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-45-200.webp",
+      "peso": "63 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "5c80646-4",
+   "data": "24-07-26",
+   "hora": "10:51",
+   "commit": "5c80646",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Conectores do transformador de corrente",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Conectores do transformador de corrente"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "131 KB",
+    "amostra": [
+     {
+      "nome": "activity-42.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-42.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-42-200.webp",
+      "peso": "66 KB"
+     },
+     {
+      "nome": "activity-43.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-43.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-43-200.webp",
+      "peso": "65 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "5c80646-3",
+   "data": "24-07-26",
+   "hora": "10:51",
+   "commit": "5c80646",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Chave-seccionadora",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Chave-seccionadora"
+   ],
+   "legendas": [
+    {
+     "texto": "ajuste dos conectores dos pulos em “T”",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "126 KB",
+      "amostra": [
+       {
+        "nome": "activity-38.jpeg",
+        "src": "assets/img/slides/events/shutdown-timeline/activity-38.jpeg",
+        "miniatura": "assets/img/slides/events/shutdown-timeline/activity-38-200.webp",
+        "peso": "66 KB"
+       },
+       {
+        "nome": "activity-39.jpeg",
+        "src": "assets/img/slides/events/shutdown-timeline/activity-39.jpeg",
+        "miniatura": "assets/img/slides/events/shutdown-timeline/activity-39-200.webp",
+        "peso": "60 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "verificação dos contrapinos (cupilhas)",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "71 KB",
+      "amostra": [
+       {
+        "nome": "activity-40.jpeg",
+        "src": "assets/img/slides/events/shutdown-timeline/activity-40.jpeg",
+        "miniatura": "assets/img/slides/events/shutdown-timeline/activity-40-200.webp",
+        "peso": "71 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "limpeza dos conectores e contatos",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "60 KB",
+      "amostra": [
+       {
+        "nome": "activity-41.jpeg",
+        "src": "assets/img/slides/events/shutdown-timeline/activity-41.jpeg",
+        "miniatura": "assets/img/slides/events/shutdown-timeline/activity-41-200.webp",
+        "peso": "60 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "256 KB",
+    "amostra": [
+     {
+      "nome": "activity-38.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-38.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-38-200.webp",
+      "peso": "66 KB"
+     },
+     {
+      "nome": "activity-39.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-39.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-39-200.webp",
+      "peso": "60 KB"
+     },
+     {
+      "nome": "activity-40.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-40.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-40-200.webp",
+      "peso": "71 KB"
+     },
+     {
+      "nome": "activity-41.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-41.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-41-200.webp",
+      "peso": "60 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "5c80646-2",
+   "data": "24-07-26",
+   "hora": "10:51",
+   "commit": "5c80646",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Retificador",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Retificador"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "84 KB",
+    "amostra": [
+     {
+      "nome": "activity-36.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-36.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-36-200.webp",
+      "peso": "43 KB"
+     },
+     {
+      "nome": "activity-37.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-37.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-37-200.webp",
+      "peso": "41 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "5c80646-1",
+   "data": "24-07-26",
+   "hora": "10:51",
+   "commit": "5c80646",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "TC e isoladores",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "TC e isoladores"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 3,
+    "pesoTotal": "165 KB",
+    "amostra": [
+     {
+      "nome": "activity-33.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-33.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-33-200.webp",
+      "peso": "55 KB"
+     },
+     {
+      "nome": "activity-34.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-34.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-34-200.webp",
+      "peso": "59 KB"
+     },
+     {
+      "nome": "activity-35.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-35.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-35-200.webp",
+      "peso": "51 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 3,
+   "removidas": 3
+  },
+  {
+   "id": "5c80646-0",
+   "data": "24-07-26",
+   "hora": "10:51",
+   "commit": "5c80646",
+   "aba": "conteudo",
+   "link": "slides/slide-shutdown-timeline.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Buchas do transformador",
+   "breadcrumb": [
+    "Eventos",
+    "Cronograma de desligamentos das SEs",
+    "Buchas do transformador"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 3,
+    "pesoTotal": "197 KB",
+    "amostra": [
+     {
+      "nome": "activity-30.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-30.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-30-200.webp",
+      "peso": "65 KB"
+     },
+     {
+      "nome": "activity-31.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-31.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-31-200.webp",
+      "peso": "63 KB"
+     },
+     {
+      "nome": "activity-32.jpeg",
+      "src": "assets/img/slides/events/shutdown-timeline/activity-32.jpeg",
+      "miniatura": "assets/img/slides/events/shutdown-timeline/activity-32-200.webp",
+      "peso": "69 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 3,
+   "removidas": 3
+  },
   {
    "id": "15345d1-3",
    "data": "19-07-26",
@@ -223,13 +710,13 @@
        {
         "nome": "secc-1.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-1.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-1-200.webp",
+        "miniatura": "history/thumbs/15345d1-secc-1.webp",
         "peso": "66 KB"
        },
        {
         "nome": "secc-2.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-2.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-2-200.webp",
+        "miniatura": "history/thumbs/15345d1-secc-2.webp",
         "peso": "60 KB"
        }
       ],
@@ -247,7 +734,7 @@
        {
         "nome": "secc-3.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-3.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-3-200.webp",
+        "miniatura": "history/thumbs/15345d1-secc-3.webp",
         "peso": "71 KB"
        }
       ],
@@ -265,7 +752,7 @@
        {
         "nome": "secc-4.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-4.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-4-200.webp",
+        "miniatura": "history/thumbs/15345d1-secc-4.webp",
         "peso": "60 KB"
        }
       ],
@@ -4034,8 +4521,7 @@
     "tamanho": "57 KB",
     "paginas": "—",
     "inserido": "18-06-26",
-    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
-    "slide": "slides/slide-rdc-control.html"
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa."
    },
    "campos": [
     "tamanho"
@@ -4082,7 +4568,11 @@
    ],
    "campoAlterado": "tamanho",
    "de": "19 KB",
-   "para": "34 KB"
+   "para": "34 KB",
+   "obsoleto": {
+    "commit": "6e274c1",
+    "id": "6e274c1-1"
+   }
   },
   {
    "id": "5be3e82-2",
@@ -4739,8 +5229,7 @@
     "tamanho": "56 KB",
     "paginas": "—",
     "inserido": "18-06-26",
-    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
-    "slide": "slides/slide-rdc-control.html"
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa."
    },
    "campos": [
     "versao",
@@ -6174,13 +6663,13 @@
      {
       "nome": "screw-3.jpeg",
       "src": "assets/img/slides/se/screw-tightening/screw-3.jpeg",
-      "miniatura": "assets/img/slides/se/screw-tightening/screw-3-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-screw-3.webp",
       "peso": "58 KB"
      },
      {
       "nome": "screw-4.jpeg",
       "src": "assets/img/slides/se/screw-tightening/screw-4.jpeg",
-      "miniatura": "assets/img/slides/se/screw-tightening/screw-4-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-screw-4.webp",
       "peso": "63 KB"
      }
     ],
@@ -6210,13 +6699,13 @@
      {
       "nome": "screw-1.jpeg",
       "src": "assets/img/slides/se/screw-tightening/screw-1.jpeg",
-      "miniatura": "assets/img/slides/se/screw-tightening/screw-1-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-screw-1.webp",
       "peso": "66 KB"
      },
      {
       "nome": "screw-2.jpeg",
       "src": "assets/img/slides/se/screw-tightening/screw-2.jpeg",
-      "miniatura": "assets/img/slides/se/screw-tightening/screw-2-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-screw-2.webp",
       "peso": "65 KB"
      }
     ],
@@ -8977,13 +9466,13 @@
          {
           "nome": "screw-3.jpeg",
           "src": "assets/img/slides/se/screw-tightening/screw-3.jpeg",
-          "miniatura": "assets/img/slides/se/screw-tightening/screw-3-200.webp",
+          "miniatura": "history/thumbs/1827a19-screw-3.webp",
           "peso": "58 KB"
          },
          {
           "nome": "screw-4.jpeg",
           "src": "assets/img/slides/se/screw-tightening/screw-4.jpeg",
-          "miniatura": "assets/img/slides/se/screw-tightening/screw-4-200.webp",
+          "miniatura": "history/thumbs/1827a19-screw-4.webp",
           "peso": "63 KB"
          }
         ],
@@ -8998,13 +9487,13 @@
        {
         "nome": "screw-3.jpeg",
         "src": "assets/img/slides/se/screw-tightening/screw-3.jpeg",
-        "miniatura": "assets/img/slides/se/screw-tightening/screw-3-200.webp",
+        "miniatura": "history/thumbs/1827a19-screw-3.webp",
         "peso": "58 KB"
        },
        {
         "nome": "screw-4.jpeg",
         "src": "assets/img/slides/se/screw-tightening/screw-4.jpeg",
-        "miniatura": "assets/img/slides/se/screw-tightening/screw-4-200.webp",
+        "miniatura": "history/thumbs/1827a19-screw-4.webp",
         "peso": "63 KB"
        }
       ],
@@ -9049,13 +9538,13 @@
          {
           "nome": "screw-1.jpeg",
           "src": "assets/img/slides/se/screw-tightening/screw-1.jpeg",
-          "miniatura": "assets/img/slides/se/screw-tightening/screw-1-200.webp",
+          "miniatura": "history/thumbs/1827a19-screw-1.webp",
           "peso": "66 KB"
          },
          {
           "nome": "screw-2.jpeg",
           "src": "assets/img/slides/se/screw-tightening/screw-2.jpeg",
-          "miniatura": "assets/img/slides/se/screw-tightening/screw-2-200.webp",
+          "miniatura": "history/thumbs/1827a19-screw-2.webp",
           "peso": "65 KB"
          }
         ],
@@ -9070,13 +9559,13 @@
        {
         "nome": "screw-1.jpeg",
         "src": "assets/img/slides/se/screw-tightening/screw-1.jpeg",
-        "miniatura": "assets/img/slides/se/screw-tightening/screw-1-200.webp",
+        "miniatura": "history/thumbs/1827a19-screw-1.webp",
         "peso": "66 KB"
        },
        {
         "nome": "screw-2.jpeg",
         "src": "assets/img/slides/se/screw-tightening/screw-2.jpeg",
-        "miniatura": "assets/img/slides/se/screw-tightening/screw-2-200.webp",
+        "miniatura": "history/thumbs/1827a19-screw-2.webp",
         "peso": "65 KB"
        }
       ],
@@ -9121,13 +9610,13 @@
          {
           "nome": "secc-1.jpeg",
           "src": "assets/img/slides/se/equipment-cleaning/secc-1.jpeg",
-          "miniatura": "assets/img/slides/se/equipment-cleaning/secc-1-200.webp",
+          "miniatura": "history/thumbs/1827a19-secc-1.webp",
           "peso": "66 KB"
          },
          {
           "nome": "secc-2.jpeg",
           "src": "assets/img/slides/se/equipment-cleaning/secc-2.jpeg",
-          "miniatura": "assets/img/slides/se/equipment-cleaning/secc-2-200.webp",
+          "miniatura": "history/thumbs/1827a19-secc-2.webp",
           "peso": "60 KB"
          }
         ],
@@ -9143,7 +9632,7 @@
          {
           "nome": "secc-3.jpeg",
           "src": "assets/img/slides/se/equipment-cleaning/secc-3.jpeg",
-          "miniatura": "assets/img/slides/se/equipment-cleaning/secc-3-200.webp",
+          "miniatura": "history/thumbs/1827a19-secc-3.webp",
           "peso": "71 KB"
          }
         ],
@@ -9159,7 +9648,7 @@
          {
           "nome": "secc-4.jpeg",
           "src": "assets/img/slides/se/equipment-cleaning/secc-4.jpeg",
-          "miniatura": "assets/img/slides/se/equipment-cleaning/secc-4-200.webp",
+          "miniatura": "history/thumbs/1827a19-secc-4.webp",
           "peso": "60 KB"
          }
         ],
@@ -9174,25 +9663,25 @@
        {
         "nome": "secc-1.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-1.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-1-200.webp",
+        "miniatura": "history/thumbs/1827a19-secc-1.webp",
         "peso": "66 KB"
        },
        {
         "nome": "secc-2.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-2.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-2-200.webp",
+        "miniatura": "history/thumbs/1827a19-secc-2.webp",
         "peso": "60 KB"
        },
        {
         "nome": "secc-3.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-3.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-3-200.webp",
+        "miniatura": "history/thumbs/1827a19-secc-3.webp",
         "peso": "71 KB"
        },
        {
         "nome": "secc-4.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-4.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-4-200.webp",
+        "miniatura": "history/thumbs/1827a19-secc-4.webp",
         "peso": "60 KB"
        }
       ],
@@ -9247,13 +9736,13 @@
        {
         "nome": "rectifier-3.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/rectifier-3.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/rectifier-3-200.webp",
+        "miniatura": "history/thumbs/1827a19-rectifier-3.webp",
         "peso": "43 KB"
        },
        {
         "nome": "rectifier-4.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/rectifier-4.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/rectifier-4-200.webp",
+        "miniatura": "history/thumbs/1827a19-rectifier-4.webp",
         "peso": "41 KB"
        }
       ],
@@ -9296,19 +9785,19 @@
        {
         "nome": "cleaning-4.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/cleaning-4.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-4-200.webp",
+        "miniatura": "history/thumbs/1827a19-cleaning-4.webp",
         "peso": "55 KB"
        },
        {
         "nome": "cleaning-5.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/cleaning-5.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-5-200.webp",
+        "miniatura": "history/thumbs/1827a19-cleaning-5.webp",
         "peso": "59 KB"
        },
        {
         "nome": "cleaning-6.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/cleaning-6.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-6-200.webp",
+        "miniatura": "history/thumbs/1827a19-cleaning-6.webp",
         "peso": "51 KB"
        }
       ],
@@ -9351,19 +9840,19 @@
        {
         "nome": "cleaning-1.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/cleaning-1.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-1-200.webp",
+        "miniatura": "history/thumbs/1827a19-cleaning-1.webp",
         "peso": "65 KB"
        },
        {
         "nome": "cleaning-2.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/cleaning-2.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-2-200.webp",
+        "miniatura": "history/thumbs/1827a19-cleaning-2.webp",
         "peso": "63 KB"
        },
        {
         "nome": "cleaning-3.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/cleaning-3.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-3-200.webp",
+        "miniatura": "history/thumbs/1827a19-cleaning-3.webp",
         "peso": "69 KB"
        }
       ],
@@ -11465,8 +11954,7 @@
     "tamanho": "39 KB",
     "paginas": "—",
     "inserido": "18/06/2026",
-    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
-    "slide": "slides/slide-rdc-control.html"
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa."
    }
   },
   {
@@ -15247,13 +15735,13 @@
        {
         "nome": "secc-1.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-1.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-1-200.webp",
+        "miniatura": "history/thumbs/76d3a99-secc-1.webp",
         "peso": "66 KB"
        },
        {
         "nome": "secc-2.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-2.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-2-200.webp",
+        "miniatura": "history/thumbs/76d3a99-secc-2.webp",
         "peso": "60 KB"
        }
       ],
@@ -15269,7 +15757,7 @@
        {
         "nome": "secc-3.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-3.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-3-200.webp",
+        "miniatura": "history/thumbs/76d3a99-secc-3.webp",
         "peso": "71 KB"
        }
       ],
@@ -15285,7 +15773,7 @@
        {
         "nome": "secc-4.jpeg",
         "src": "assets/img/slides/se/equipment-cleaning/secc-4.jpeg",
-        "miniatura": "assets/img/slides/se/equipment-cleaning/secc-4-200.webp",
+        "miniatura": "history/thumbs/76d3a99-secc-4.webp",
         "peso": "60 KB"
        }
       ],
@@ -15300,25 +15788,25 @@
      {
       "nome": "secc-1.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/secc-1.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/secc-1-200.webp",
+      "miniatura": "history/thumbs/76d3a99-secc-1.webp",
       "peso": "66 KB"
      },
      {
       "nome": "secc-2.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/secc-2.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/secc-2-200.webp",
+      "miniatura": "history/thumbs/76d3a99-secc-2.webp",
       "peso": "60 KB"
      },
      {
       "nome": "secc-3.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/secc-3.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/secc-3-200.webp",
+      "miniatura": "history/thumbs/76d3a99-secc-3.webp",
       "peso": "71 KB"
      },
      {
       "nome": "secc-4.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/secc-4.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/secc-4-200.webp",
+      "miniatura": "history/thumbs/76d3a99-secc-4.webp",
       "peso": "60 KB"
      },
      {
@@ -15369,13 +15857,13 @@
      {
       "nome": "rectifier-3.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/rectifier-3.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/rectifier-3-200.webp",
+      "miniatura": "history/thumbs/76d3a99-rectifier-3.webp",
       "peso": "43 KB"
      },
      {
       "nome": "rectifier-4.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/rectifier-4.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/rectifier-4-200.webp",
+      "miniatura": "history/thumbs/76d3a99-rectifier-4.webp",
       "peso": "41 KB"
      }
     ],
@@ -16362,31 +16850,31 @@
      {
       "nome": "cleaning-1.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/cleaning-1.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-1-200.webp",
+      "miniatura": "history/thumbs/4ceac6f-cleaning-1.webp",
       "peso": "65 KB"
      },
      {
       "nome": "cleaning-2.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/cleaning-2.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-2-200.webp",
+      "miniatura": "history/thumbs/4ceac6f-cleaning-2.webp",
       "peso": "63 KB"
      },
      {
       "nome": "cleaning-3.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/cleaning-3.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-3-200.webp",
+      "miniatura": "history/thumbs/4ceac6f-cleaning-3.webp",
       "peso": "69 KB"
      },
      {
       "nome": "cleaning-4.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/cleaning-4.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-4-200.webp",
+      "miniatura": "history/thumbs/4ceac6f-cleaning-4.webp",
       "peso": "55 KB"
      },
      {
       "nome": "cleaning-5.jpeg",
       "src": "assets/img/slides/se/equipment-cleaning/cleaning-5.jpeg",
-      "miniatura": "assets/img/slides/se/equipment-cleaning/cleaning-5-200.webp",
+      "miniatura": "history/thumbs/4ceac6f-cleaning-5.webp",
       "peso": "59 KB"
      }
     ],
@@ -17157,25 +17645,25 @@
      {
       "nome": "screw-1.jpeg",
       "src": "assets/img/slides/se/screw-tightening/screw-1.jpeg",
-      "miniatura": "assets/img/slides/se/screw-tightening/screw-1-200.webp",
+      "miniatura": "history/thumbs/1f12366-screw-1.webp",
       "peso": "66 KB"
      },
      {
       "nome": "screw-2.jpeg",
       "src": "assets/img/slides/se/screw-tightening/screw-2.jpeg",
-      "miniatura": "assets/img/slides/se/screw-tightening/screw-2-200.webp",
+      "miniatura": "history/thumbs/1f12366-screw-2.webp",
       "peso": "65 KB"
      },
      {
       "nome": "screw-3.jpeg",
       "src": "assets/img/slides/se/screw-tightening/screw-3.jpeg",
-      "miniatura": "assets/img/slides/se/screw-tightening/screw-3-200.webp",
+      "miniatura": "history/thumbs/1f12366-screw-3.webp",
       "peso": "58 KB"
      },
      {
       "nome": "screw-4.jpeg",
       "src": "assets/img/slides/se/screw-tightening/screw-4.jpeg",
-      "miniatura": "assets/img/slides/se/screw-tightening/screw-4-200.webp",
+      "miniatura": "history/thumbs/1f12366-screw-4.webp",
       "peso": "63 KB"
      }
     ],
@@ -19358,6 +19846,20 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-61",
+   "aba": "funcoes",
+   "data": "24-07-26",
+   "hora": "10:55",
+   "acao": "aperfeiçoada",
+   "tipo": "aparência",
+   "titulo": "Mosaico: imagens da mesma fileira com a mesma altura",
+   "resumo": "Nas fileiras de fotos em pares (portrait-row), duas imagens com proporções ligeiramente diferentes exibiam alturas distintas, criando um degrau vertical. Agora a fileira iguala a altura das duas imagens e elimina o desalinhamento; o recorte é mínimo quando as proporções são próximas.",
+   "link": "slides/slide-tl-stay-recovery.html",
+   "breadcrumb": [
+    "Apresentação"
+   ]
+  },
   {
    "id": "fn-60",
    "aba": "funcoes",

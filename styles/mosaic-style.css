@@ -39,25 +39,30 @@
   }
 }
 
-/* fotos em PARES — 2 por linha, cada uma ocupando METADE da largura (grade de 2 colunas 1fr),
-   preenchendo TODA a largura do mosaico. As DUAS imagens da MESMA fileira têm sempre a MESMA
-   altura: o grid estica os itens da fileira (align-items:stretch) até a altura da mais alta e a
-   imagem preenche a célula (object-fit:cover herdado de `.img img`). Como os pares têm razões de
-   aspecto próximas, o recorte é mínimo (poucos px) — o suficiente para eliminar o degrau vertical
-   que dava aparência defeituosa quando as alturas naturais divergiam. */
-.mosaic-container.portrait-row {
+/* MOSAICO DE PROPORÇÃO FIXA — a PRÓPRIA CÉLULA dita a altura via `aspect-ratio` (não o
+   conteúdo). Como todas as células ficam idênticas por construção, as imagens de uma MESMA
+   fileira têm SEMPRE a mesma altura, por definição — a igualdade é GARANTIDA pelo elemento
+   que dispõe as imagens, sem depender de verificação pós-fato (check-row-align vira apenas
+   uma rede de segurança). Agrupe fotos da MESMA orientação num container e escolha a
+   proporção pela classe .ratio-* (padrão 3:4) e o nº de colunas por `--cols` (padrão 2); a
+   imagem preenche com object-fit:cover (herdado de `.img img`). Com a proporção da célula
+   próxima à das fotos, o recorte é nulo/mínimo. */
+.mosaic-container.fixed-ratio {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: stretch;
+  grid-template-columns: repeat(var(--cols, 2), 1fr);
 
   & > .img {
     width: 100%;
-    /* a altura da fileira é definida pela imagem mais alta; o stretch iguala o par.
-       min-height:0 remove o piso de min-content do item de grid (robustez cross-browser). */
-    height: auto;
-    min-height: 0;
+    height: auto;                            /* a altura vem do aspect-ratio abaixo */
+    aspect-ratio: var(--cell-ratio, 3 / 4);
+    min-height: 0;                           /* remove o piso de min-content do item de grid */
   }
 }
+.mosaic-container.ratio-9x16 { --cell-ratio: 9 / 16; }  /* retrato alto */
+.mosaic-container.ratio-3x4  { --cell-ratio: 3 / 4; }   /* retrato */
+.mosaic-container.ratio-4x3  { --cell-ratio: 4 / 3; }   /* paisagem */
+.mosaic-container.ratio-wide { --cell-ratio: 8 / 3; }   /* panorâmica */
+.mosaic-container.cols-1 { --cols: 1; }                 /* uma imagem por linha (largura total) */
 
 .img {
   align-items: flex-end;
@@ -285,4 +290,7 @@
      cortavam no mobile. */
   .mosaic-container.tri-column .img.img-stretch { height: auto; }
   .img img { height: auto; }
+  /* no single-column, a proporção fixa NÃO se aplica: a célula ajusta-se à imagem
+     inteira (aspect-ratio:auto + height:auto), sem corte. */
+  .mosaic-container.fixed-ratio > .img { aspect-ratio: auto; height: auto; }
 }

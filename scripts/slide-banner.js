@@ -15,26 +15,34 @@
    NB: o formato antigo (.post-link, com moldura chanfrada tracejada desenhada em SVG
    por __postLinkDraw, faixa de título e botão "exibir mais/menos") foi REMOVIDO — a
    lista de RDCs (slide-rdc-control.js) também passou a usar este mesmo componente. */
-(function noteBannerRdc() {
-  var banners = document.querySelectorAll('.note-banner--rdc[data-doc]');
+(function noteBannerDoc() {
+  var banners = document.querySelectorAll('.note-banner[data-doc]');
   if (!banners.length) return;
 
   banners.forEach(function (a) {
     var id = decodeURIComponent(a.getAttribute('data-doc') || '');
-    var code = id.replace(/^doc-/, '');
 
-    var codeEl = a.querySelector('.note-banner-code');
-    if (codeEl && code) {
-      var m = code.match(/^(.*?RDC)[-_]?(.*)$/i);
-      codeEl.textContent = '';
-      [m ? m[1] : code, m ? m[2] : ''].forEach(function (line) {
-        if (!line) return;
-        var s = document.createElement('span');
-        s.textContent = line;
-        codeEl.appendChild(s);
-      });
+    // Só quando o id É de fato um código de RDC (contém "RDC") o código é DERIVADO do id
+    // e quebrado em duas linhas no "RDC". Nos demais documentos (ex.: Cartas, cujo id é um
+    // slug) o `.note-banner-code` já vem escrito no HTML e é preservado — a variante visual
+    // (.note-banner--rdc) é reaproveitada só pelo estilo do cartão de vínculo.
+    if (/RDC/i.test(id)) {
+      var code = id.replace(/^doc-/, '');
+      var codeEl = a.querySelector('.note-banner-code');
+      if (codeEl && code) {
+        var m = code.match(/^(.*?RDC)[-_]?(.*)$/i);
+        codeEl.textContent = '';
+        [m ? m[1] : code, m ? m[2] : ''].forEach(function (line) {
+          if (!line) return;
+          var s = document.createElement('span');
+          s.textContent = line;
+          codeEl.appendChild(s);
+        });
+      }
     }
 
+    // Sincroniza a descrição viva de 'Documentos Recebidos' (fonte de verdade) no corpo
+    // do banner — vale para QUALQUER documento (RDC, Carta, etc.).
     var p = a.querySelector('.note-banner-text');
     if (!id || !p) return;
     fetch('index.html').then(function (r) { return r.text(); }).then(function (html) {

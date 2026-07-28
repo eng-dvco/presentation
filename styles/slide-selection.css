@@ -854,6 +854,14 @@ a.reunion--andamento:not(.disabled):hover {
 
 /* layout: ext-tag centralizado | linha 1: nome + metadados à direita */
 /*                               | linha 2: descrição                  */
+/* realce (flash verde, one-shot) ao chegar via deep-link #doc-... do banner de vínculo
+   de um slide — mesma afordância do "localizar" do histórico */
+.doc-items li.doc-located { animation: doc-locate-flash 2.4s ease-out; }
+@keyframes doc-locate-flash {
+  0%, 12% { background: color-mix(in srgb, var(--color-green) 20%, transparent); }
+  100%    { background: transparent; }
+}
+
 .doc-items li {
   position: relative;
   overflow: hidden;

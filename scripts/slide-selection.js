@@ -326,6 +326,25 @@ docGroups.forEach(group => {
   });
 });
 
+// deep-link a um documento: um #doc-... na URL (ex.: vindo do banner de vínculo de um
+// slide) ABRE o grupo que contém o card, ROLA até ele e o REALÇA brevemente.
+function irParaDocDoHash() {
+  const id = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+  if (!id) return;
+  const li = document.getElementById(id);
+  if (!li || !li.closest('.doc-items')) return;
+  const group = li.closest('.doc-group');
+  if (group && !group.open) group.open = true;
+  requestAnimationFrame(() => {
+    li.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+    li.classList.remove('doc-located');
+    void li.offsetWidth;                 // reinicia o flash se reclicar o mesmo destino
+    li.classList.add('doc-located');
+  });
+}
+if (location.hash) requestAnimationFrame(irParaDocDoHash);
+window.addEventListener('hashchange', irParaDocDoHash);
+
 if (!reducedMotion) {
   docGroups.forEach(group => {
     group.addEventListener('toggle', () => {

@@ -1,9 +1,258 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "24-07-26",
- "commits": 203,
- "total": 473,
+ "geradoEm": "28-07-26",
+ "commits": 208,
+ "total": 479,
  "registros": [
+  {
+   "id": "fbaecf5-0",
+   "data": "28-07-26",
+   "hora": "10:55",
+   "commit": "fbaecf5",
+   "aba": "conteudo",
+   "link": "slides/slide-subestation-camera.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Imagens do pátio (CFTV)",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Câmeras de monitoramento",
+    "Imagens do pátio (CFTV)"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "278 KB",
+    "amostra": [
+     {
+      "nome": "cam-5.jpeg",
+      "src": "assets/img/slides/se/subestation-camera/cam-5.jpeg",
+      "miniatura": "assets/img/slides/se/subestation-camera/cam-5-200.webp",
+      "peso": "79 KB"
+     },
+     {
+      "nome": "cam-6.jpeg",
+      "src": "assets/img/slides/se/subestation-camera/cam-6.jpeg",
+      "miniatura": "assets/img/slides/se/subestation-camera/cam-6-200.webp",
+      "peso": "199 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2
+  },
+  {
+   "id": "b07f150-0",
+   "data": "28-07-26",
+   "hora": "10:55",
+   "commit": "b07f150",
+   "aba": "conteudo",
+   "link": "slides/slide-atalho-connection.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Etapas do processo",
+   "breadcrumb": [
+    "LD — Distribuição",
+    "Energização de Atalho",
+    "Etapas do processo"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 3,
+    "pesoTotal": "4,5 MB",
+    "amostra": [
+     {
+      "nome": "atalho-5.jpeg",
+      "src": "assets/img/slides/ld/atalho-connection/atalho-5.jpeg",
+      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-5-200.webp",
+      "peso": "2,6 MB"
+     },
+     {
+      "nome": "atalho-6.jpeg",
+      "src": "assets/img/slides/ld/atalho-connection/atalho-6.jpeg",
+      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-6-200.webp",
+      "peso": "543 KB"
+     },
+     {
+      "nome": "atalho-7.jpeg",
+      "src": "assets/img/slides/ld/atalho-connection/atalho-7.jpeg",
+      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-7-200.webp",
+      "peso": "1,3 MB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 3
+  },
+  {
+   "id": "8fa9529-0",
+   "data": "28-07-26",
+   "hora": "10:55",
+   "commit": "8fa9529",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "Eventos",
+    "Aquisição de equipamentos de medição e inspeção",
+    "Oscilógrafo"
+   ],
+   "titulo": "Oscilógrafo",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 5,
+      "pesoTotal": "729 KB",
+      "amostra": [
+       {
+        "nome": "oscillograph-1.jpeg",
+        "src": "assets/img/slides/events/equipment-acquisition/oscillograph-1.jpeg",
+        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-1-200.webp",
+        "peso": "152 KB"
+       },
+       {
+        "nome": "oscillograph-2.jpeg",
+        "src": "assets/img/slides/events/equipment-acquisition/oscillograph-2.jpeg",
+        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-2-200.webp",
+        "peso": "178 KB"
+       },
+       {
+        "nome": "oscillograph-3.jpeg",
+        "src": "assets/img/slides/events/equipment-acquisition/oscillograph-3.jpeg",
+        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-3-200.webp",
+        "peso": "144 KB"
+       },
+       {
+        "nome": "oscillograph-4.jpeg",
+        "src": "assets/img/slides/events/equipment-acquisition/oscillograph-4.jpeg",
+        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-4-200.webp",
+        "peso": "121 KB"
+       },
+       {
+        "nome": "oscillograph-5.jpeg",
+        "src": "assets/img/slides/events/equipment-acquisition/oscillograph-5.jpeg",
+        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-5-200.webp",
+        "peso": "134 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 5
+    }
+   ]
+  },
+  {
+   "id": "fe3dadd-2",
+   "data": "28-07-26",
+   "hora": "10:54",
+   "commit": "fe3dadd",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "adição",
+   "tipo": "documento",
+   "titulo": "Carta Nº 075/2026 — Exemplar vegetal sob a LT",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "Carta Nº 075/2026 — Exemplar vegetal sob a LT"
+   ],
+   "resumo": "Exemplar vegetal (árvore) sob a linha de transmissão, motivando a poda de adequação.",
+   "documento": {
+    "versao": "—",
+    "tamanho": "862 KB",
+    "paginas": "6",
+    "inserido": "28-07-26",
+    "descricao": "Exemplar vegetal (árvore) sob a linha de transmissão, motivando a poda de adequação.",
+    "slide": "slides/slide-cemetery-tree.html"
+   }
+  },
+  {
+   "id": "fe3dadd-1",
+   "data": "28-07-26",
+   "hora": "10:54",
+   "commit": "fe3dadd",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "adição",
+   "tipo": "documento",
+   "titulo": "Carta Nº 076/2026 — Abertura de loteamento sob a LT",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "Carta Nº 076/2026 — Abertura de loteamento sob a LT"
+   ],
+   "resumo": "Comunicação sobre a abertura de loteamento sob a linha de transmissão.",
+   "documento": {
+    "versao": "—",
+    "tamanho": "686 KB",
+    "paginas": "5",
+    "inserido": "28-07-26",
+    "descricao": "Comunicação sobre a abertura de loteamento sob a linha de transmissão.",
+    "slide": "slides/slide-cemetery-tree.html"
+   }
+  },
+  {
+   "id": "fe3dadd-0",
+   "data": "28-07-26",
+   "hora": "10:54",
+   "commit": "fe3dadd",
+   "aba": "conteudo",
+   "link": "slides/slide-cemetery-tree.html",
+   "acao": "adição",
+   "tipo": "slide",
+   "titulo": "Poda de adequação de exemplar vegetal",
+   "breadcrumb": [
+    "Óbices",
+    "Poda de adequação de exemplar vegetal"
+   ],
+   "resumo": "ANTES DA PODA",
+   "imagens": {
+    "total": 6,
+    "pesoTotal": "8,0 MB",
+    "amostra": [
+     {
+      "nome": "tree-1.jpeg",
+      "src": "assets/img/slides/issues/cemetery-tree/tree-1.jpeg",
+      "miniatura": "assets/img/slides/issues/cemetery-tree/tree-1-200.webp",
+      "peso": "1,3 MB"
+     },
+     {
+      "nome": "tree-2.jpeg",
+      "src": "assets/img/slides/issues/cemetery-tree/tree-2.jpeg",
+      "miniatura": "assets/img/slides/issues/cemetery-tree/tree-2-200.webp",
+      "peso": "665 KB"
+     },
+     {
+      "nome": "tree-3.jpeg",
+      "src": "assets/img/slides/issues/cemetery-tree/tree-3.jpeg",
+      "miniatura": "assets/img/slides/issues/cemetery-tree/tree-3-200.webp",
+      "peso": "541 KB"
+     },
+     {
+      "nome": "tree-4.jpeg",
+      "src": "assets/img/slides/issues/cemetery-tree/tree-4.jpeg",
+      "miniatura": "assets/img/slides/issues/cemetery-tree/tree-4-200.webp",
+      "peso": "186 KB"
+     },
+     {
+      "nome": "tree-5.jpeg",
+      "src": "assets/img/slides/issues/cemetery-tree/tree-5.jpeg",
+      "miniatura": "assets/img/slides/issues/cemetery-tree/tree-5-200.webp",
+      "peso": "2,9 MB"
+     }
+    ],
+    "extras": 1
+   },
+   "qtdImagens": 6
+  },
   {
    "id": "a9067f5-0",
    "data": "24-07-26",
@@ -19956,6 +20205,21 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-63",
+   "aba": "funcoes",
+   "data": "28-07-26",
+   "hora": "10:47",
+   "acao": "aperfeiçoada",
+   "tipo": "navegação",
+   "titulo": "Banner de vínculo vale para qualquer documento, com ir até ele",
+   "resumo": "O banner que liga um slide a um documento deixou de ser exclusivo dos RDCs: agora vale para qualquer documento recebido (ex.: Cartas), sincronizando a descrição viva da lista. Ao clicar, além de abrir a lista de Documentos Recebidos, ele abre o grupo, ROLA até o card do documento e o realça.",
+   "link": "slides/index.html",
+   "breadcrumb": [
+    "Apresentação",
+    "Documentos Recebidos"
+   ]
+  },
   {
    "id": "fn-62",
    "aba": "funcoes",

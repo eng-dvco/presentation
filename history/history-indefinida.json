@@ -1,9 +1,148 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "28-07-26",
- "commits": 208,
- "total": 479,
+ "commits": 212,
+ "total": 482,
  "registros": [
+  {
+   "id": "6f9d68c-0",
+   "data": "28-07-26",
+   "hora": "14:44",
+   "commit": "6f9d68c",
+   "aba": "conteudo",
+   "link": "slides/slide-contact-label.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
+    "Etiqueta e bloqueio"
+   ],
+   "titulo": "Etiqueta e bloqueio",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [
+      {
+       "texto": "equipamento em manuseio",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "177 KB",
+        "amostra": [
+         {
+          "nome": "label-8.jpeg",
+          "src": "assets/img/slides/st/contact-label/label-8.jpeg",
+          "miniatura": "assets/img/slides/st/contact-label/label-8-200.webp",
+          "peso": "177 KB"
+         }
+        ],
+        "extras": 0
+       }
+      }
+     ],
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "177 KB",
+      "amostra": [
+       {
+        "nome": "label-8.jpeg",
+        "src": "assets/img/slides/st/contact-label/label-8.jpeg",
+        "miniatura": "assets/img/slides/st/contact-label/label-8-200.webp",
+        "peso": "177 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 1
+    }
+   ]
+  },
+  {
+   "id": "9c633b7-1",
+   "data": "28-07-26",
+   "hora": "14:44",
+   "commit": "9c633b7",
+   "aba": "conteudo",
+   "link": "slides/slide-cemetery-tree.html",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Antes da poda",
+   "breadcrumb": [
+    "Óbices",
+    "Poda de adequação de exemplar vegetal",
+    "Antes da poda"
+   ],
+   "de": "ANTES DA PODA",
+   "para": "Antes da poda"
+  },
+  {
+   "id": "9c633b7-0",
+   "data": "28-07-26",
+   "hora": "14:44",
+   "commit": "9c633b7",
+   "aba": "conteudo",
+   "link": "slides/slide-cemetery-tree.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "Óbices",
+    "Poda de adequação de exemplar vegetal",
+    "Após a poda"
+   ],
+   "titulo": "Após a poda",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "593 KB",
+      "amostra": [
+       {
+        "nome": "tree-7.jpeg",
+        "src": "assets/img/slides/issues/cemetery-tree/tree-7.jpeg",
+        "miniatura": "assets/img/slides/issues/cemetery-tree/tree-7-200.webp",
+        "peso": "159 KB"
+       },
+       {
+        "nome": "tree-8.jpeg",
+        "src": "assets/img/slides/issues/cemetery-tree/tree-8.jpeg",
+        "miniatura": "assets/img/slides/issues/cemetery-tree/tree-8-200.webp",
+        "peso": "126 KB"
+       },
+       {
+        "nome": "tree-9.jpeg",
+        "src": "assets/img/slides/issues/cemetery-tree/tree-9.jpeg",
+        "miniatura": "assets/img/slides/issues/cemetery-tree/tree-9-200.webp",
+        "peso": "150 KB"
+       },
+       {
+        "nome": "tree-10.jpeg",
+        "src": "assets/img/slides/issues/cemetery-tree/tree-10.jpeg",
+        "miniatura": "assets/img/slides/issues/cemetery-tree/tree-10-200.webp",
+        "peso": "158 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 4
+    }
+   ]
+  },
   {
    "id": "fbaecf5-0",
    "data": "28-07-26",

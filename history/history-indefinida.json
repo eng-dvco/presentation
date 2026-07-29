@@ -1,9 +1,95 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "28-07-26",
- "commits": 212,
- "total": 482,
+ "geradoEm": "29-07-26",
+ "commits": 215,
+ "total": 484,
  "registros": [
+  {
+   "id": "329e5c2-0",
+   "data": "29-07-26",
+   "hora": "14:01",
+   "commit": "329e5c2",
+   "aba": "conteudo",
+   "link": "slides/slide-contact-label.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Informativos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
+    "Informativos"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "141 KB",
+    "amostra": [
+     {
+      "nome": "label-9.jpeg",
+      "src": "assets/img/slides/st/contact-label/label-9.jpeg",
+      "miniatura": "assets/img/slides/st/contact-label/label-9-200.webp",
+      "peso": "141 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1
+  },
+  {
+   "id": "02f385f-0",
+   "data": "29-07-26",
+   "hora": "14:01",
+   "commit": "02f385f",
+   "aba": "conteudo",
+   "link": "slides/slide-subestation-camera.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Câmeras de monitoramento",
+    "Campainha e câmeras"
+   ],
+   "titulo": "Campainha e câmeras",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 3,
+      "pesoTotal": "601 KB",
+      "amostra": [
+       {
+        "nome": "cam-7.jpeg",
+        "src": "assets/img/slides/se/subestation-camera/cam-7.jpeg",
+        "miniatura": "assets/img/slides/se/subestation-camera/cam-7-200.webp",
+        "peso": "379 KB"
+       },
+       {
+        "nome": "cam-8.jpeg",
+        "src": "assets/img/slides/se/subestation-camera/cam-8.jpeg",
+        "miniatura": "assets/img/slides/se/subestation-camera/cam-8-200.webp",
+        "peso": "150 KB"
+       },
+       {
+        "nome": "cam-9.jpeg",
+        "src": "assets/img/slides/se/subestation-camera/cam-9.jpeg",
+        "miniatura": "assets/img/slides/se/subestation-camera/cam-9-200.webp",
+        "peso": "72 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 3
+    }
+   ]
+  },
   {
    "id": "6f9d68c-0",
    "data": "28-07-26",

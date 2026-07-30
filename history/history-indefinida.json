@@ -1,9 +1,165 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "29-07-26",
- "commits": 215,
- "total": 484,
+ "geradoEm": "30-07-26",
+ "commits": 218,
+ "total": 489,
  "registros": [
+  {
+   "id": "df412c0-4",
+   "data": "30-07-26",
+   "hora": "14:45",
+   "commit": "df412c0",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "adição",
+   "tipo": "documento",
+   "titulo": "Linha do tempo da recuperação estrutural dos estais",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "Linha do tempo da recuperação estrutural dos estais"
+   ],
+   "resumo": "Linha do tempo da recuperação estrutural dos estais das torres estaiadas, por eixo (Leste e Norte), com datas de início e término e dias úteis trabalhados por estrutura (42/3, 46/2, 50/1…).",
+   "documento": {
+    "versao": "—",
+    "tamanho": "70 KB",
+    "paginas": "1",
+    "inserido": "28-07-26",
+    "descricao": "Linha do tempo da recuperação estrutural dos estais das torres estaiadas, por eixo (Leste e Norte), com datas de início e término e dias úteis trabalhados por estrutura (42/3, 46/2, 50/1…).",
+    "slide": "slides/slide-tl-stay-recovery.html"
+   }
+  },
+  {
+   "id": "df412c0-3",
+   "data": "30-07-26",
+   "hora": "14:45",
+   "commit": "df412c0",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "adição",
+   "tipo": "documento",
+   "titulo": "SE — Histórico de Paradas Forçadas e Programadas – Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "SE — Histórico de Paradas Forçadas e Programadas – Leste"
+   ],
+   "resumo": "Histórico de paradas forçadas e programadas dos disjuntores das subestações do eixo Leste (SE-E1 a E6): data, estrutura, tipo, período (início e término) e causa de cada ocorrência.",
+   "documento": {
+    "versao": "v1.61",
+    "tamanho": "278 KB",
+    "paginas": "—",
+    "inserido": "28-07-26",
+    "descricao": "Histórico de paradas forçadas e programadas dos disjuntores das subestações do eixo Leste (SE-E1 a E6): data, estrutura, tipo, período (início e término) e causa de cada ocorrência.",
+    "slide": "slides/slide-shutdown-timeline.html"
+   }
+  },
+  {
+   "id": "df412c0-2",
+   "data": "30-07-26",
+   "hora": "14:45",
+   "commit": "df412c0",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "RDC — Controle dos Relatórios de Campo do CPISF – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "RDC — Controle dos Relatórios de Campo do CPISF – Norte e Leste"
+   ],
+   "resumo": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+   "documento": {
+    "versao": "v1.12",
+    "tamanho": "137 KB",
+    "paginas": "—",
+    "inserido": "18-06-26",
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+    "slide": "slides/slide-rdc-control.html"
+   },
+   "campos": [
+    "tamanho"
+   ],
+   "campoAlterado": "tamanho",
+   "de": "139 KB",
+   "para": "137 KB"
+  },
+  {
+   "id": "df412c0-1",
+   "data": "30-07-26",
+   "hora": "14:45",
+   "commit": "df412c0",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "LT — Quantitativo de Placas Faltantes das Torres da Linha de Transmissão – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "LT — Quantitativo de Placas Faltantes das Torres da Linha de Transmissão – Norte e Leste"
+   ],
+   "resumo": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico.",
+   "documento": {
+    "versao": "v1.14",
+    "tamanho": "110 KB",
+    "paginas": "—",
+    "inserido": "15-06-26",
+    "descricao": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico.",
+    "slide": "slides/slide-tower-identification.html"
+   },
+   "campos": [
+    "tamanho"
+   ],
+   "campoAlterado": "tamanho",
+   "de": "111 KB",
+   "para": "110 KB",
+   "substitui": [
+    {
+     "commit": "6e274c1",
+     "id": "6e274c1-1",
+     "data": "24-07-26",
+     "hora": "10:53",
+     "de": "—",
+     "para": "v1.14"
+    },
+    {
+     "commit": "5be3e82",
+     "id": "5be3e82-3",
+     "data": "08-07-26",
+     "hora": "09:35",
+     "de": "19 KB",
+     "para": "34 KB"
+    }
+   ]
+  },
+  {
+   "id": "df412c0-0",
+   "data": "30-07-26",
+   "hora": "14:45",
+   "commit": "df412c0",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "LT — Cronograma de Manutenção das Torres Estaiadas – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "LT — Cronograma de Manutenção das Torres Estaiadas – Norte e Leste"
+   ],
+   "resumo": "Cronograma das atividades de manutenção das torres estaiadas da linha.",
+   "documento": {
+    "versao": "v1.10",
+    "tamanho": "2,3 MB",
+    "paginas": "—",
+    "inserido": "15-06-26",
+    "descricao": "Cronograma das atividades de manutenção das torres estaiadas da linha.",
+    "slide": "slides/slide-tl-stay-recovery.html"
+   },
+   "campos": [
+    "tamanho"
+   ],
+   "campoAlterado": "tamanho",
+   "de": "782 KB",
+   "para": "2,3 MB"
+  },
   {
    "id": "329e5c2-0",
    "data": "29-07-26",
@@ -686,16 +842,10 @@
    "campoAlterado": "versao",
    "de": "—",
    "para": "v1.14",
-   "substitui": [
-    {
-     "commit": "5be3e82",
-     "id": "5be3e82-3",
-     "data": "08-07-26",
-     "hora": "09:35",
-     "de": "19 KB",
-     "para": "34 KB"
-    }
-   ]
+   "obsoleto": {
+    "commit": "df412c0",
+    "id": "df412c0-1"
+   }
   },
   {
    "id": "6e274c1-0",
@@ -5154,8 +5304,8 @@
    "de": "19 KB",
    "para": "34 KB",
    "obsoleto": {
-    "commit": "6e274c1",
-    "id": "6e274c1-1"
+    "commit": "df412c0",
+    "id": "df412c0-1"
    }
   },
   {

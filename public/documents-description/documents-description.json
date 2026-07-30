@@ -2,72 +2,74 @@
   {
     "nome": "LT — Cronograma de Manutenção das Torres Estaiadas v1.10 – Norte e Leste.xlsx",
     "descrição": "Cronograma das atividades de manutenção das torres estaiadas da linha.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LT — Cronograma de Manutenção das Torres Estaiadas v1.10 – Norte e Leste.xlsx"
-  },
-  {
-    "nome": "LD — Controle das bases recuperadas dos postes de 13,8 kV v1.11 – Norte e Leste.xlsx",
-    "descrição": "Controle de bases recuperadas dos postes 13,8 kV: resumo por WBS, conferência plano × fonte, controle de postes e fotos das estruturas.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LD — Controle das bases recuperadas dos postes de 13,8 kV v1.11 – Norte e Leste.xlsx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LT — Cronograma de Manutenção das Torres Estaiadas v1.10 – Norte e Leste.xlsx",
+    "hash": "04347a3bb1f6d519605e81bc7e6b0d3d2f548e72"
   },
   {
     "nome": "LT — Checklist de Execução de Atividades da Linha de Transmissão v1.94 – Norte e Leste.pdf",
     "descrição": "Checklist de execução de atividades por estrutura, com indicação de criticidade.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LT — Checklist de Execução de Atividades da Linha de Transmissão v1.94 – Norte e Leste.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LT — Checklist de Execução de Atividades da Linha de Transmissão v1.94 – Norte e Leste.pdf",
+    "hash": "417f49dd4ba3eaae8f50fe32f3d5eb40abdbf576"
   },
   {
     "nome": "LT — Controle de Serviços da Linha de Transmissão v1.94 – Norte e Leste.xlsx",
     "descrição": "Planilha mestra: paleta, lista de estruturas, checklist, fichas-modelo (v1.91/v1.94), esquema de pendências e lista de serviços com frequência e criticidade.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LT — Controle de Serviços da Linha de Transmissão v1.94 – Norte e Leste.xlsx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LT — Controle de Serviços da Linha de Transmissão v1.94 – Norte e Leste.xlsx",
+    "hash": "3a850ae9e61123d222d477d0c3f5a4ccc05b3b8e"
   },
   {
     "nome": "LT — Diagrama das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf",
     "descrição": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LT — Diagrama das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LT — Diagrama das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf",
+    "hash": "146e29c1b4f8311bd5c2fcf4d4c4fd5559eb12f5"
   },
   {
     "nome": "LT — Listagem das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf",
     "descrição": "Listagem das estruturas por trecho e tensão (230 kV e 69 kV), com identificação e modelo.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LT — Listagem das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LT — Listagem das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf",
+    "hash": "8353c109d24cddef4e118e99cb40479cd07df9ae"
   },
   {
     "nome": "LT — Manutenções nas Ancoragens das Torres Estaiadas v1.94 – Norte e Leste.pdf",
     "descrição": "Quantitativos de manutenções nas ancoragens das torres estaiadas, detalhados por trecho e eixo.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LT — Manutenções nas Ancoragens das Torres Estaiadas v1.94 – Norte e Leste.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LT — Manutenções nas Ancoragens das Torres Estaiadas v1.94 – Norte e Leste.pdf",
+    "hash": "c42375a273886a5b218cfca75336a6f5869b88e4"
   },
   {
     "nome": "LT — Manutenções nas Bases das Torres Estaiadas e Autoportantes v1.94 – Norte e Leste.pdf",
     "descrição": "Quantitativos de manutenções nas bases das torres estaiadas e autoportantes, por trecho e eixo.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LT — Manutenções nas Bases das Torres Estaiadas e Autoportantes v1.94 – Norte e Leste.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LT — Manutenções nas Bases das Torres Estaiadas e Autoportantes v1.94 – Norte e Leste.pdf",
+    "hash": "09e709fef69db85cb38eb59f55e63f8909c6a70b"
   },
   {
-    "nome": "LT — Quantitativo de Placas Faltantes das Torres da Linha de Transmissão – Norte e Leste.xlsx",
+    "nome": "LT — Quantitativo de Placas Faltantes das Torres da Linha de Transmissão v1.14 – Norte e Leste.xlsx",
     "descrição": "Controle das placas de identificação faltantes: dashboard, histórico de atividades de inspeção/execução e dados para gráfico.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\LT — Quantitativo de Placas Faltantes das Torres da Linha de Transmissão – Norte e Leste.xlsx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LT — Quantitativo de Placas Faltantes das Torres da Linha de Transmissão v1.14 – Norte e Leste.xlsx",
+    "hash": "ea71e666e9d641414c3b0e347f364f469d78978a"
   },
   {
     "nome": "Painel de Controle das Torres Autoportantes.xlsx",
     "descrição": "Painel de controle do reforço estrutural das torres autoportantes dos eixos Leste e Norte, com dashboards e status das bases.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Painel de Controle das Torres Autoportantes.xlsx"
-  },
-  {
-    "nome": "RDC — Controle dos Relatórios de Campo do CPISF v1.10.xlsx",
-    "descrição": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDC — Controle dos Relatórios de Campo do CPISF v1.10.xlsx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\Painel de Controle das Torres Autoportantes.xlsx",
+    "hash": "1434a1e797230c6c15c82de22d8070e63046bf88"
   },
   {
     "nome": "Recomendações eletromecânica — COP Elétrico.pdf",
     "descrição": "Recomendações de execução imediata (eletromecânica), como contenção de processo erosivo na faixa de servidão da LT 230 kV.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Recomendações eletromecânica — COP Elétrico.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\Recomendações eletromecânica — COP Elétrico.pdf",
+    "hash": "e6f68added5adf99aaa07ffe53228955dfeeed86"
   },
   {
     "nome": "SE — Recomposição de Brita das Subestações – Norte.xlsx",
     "descrição": "Controle do volume de brita recomposta nas subestações Norte (SE-N1, N2, N3), com registro de fotos antes e depois.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\SE — Recomposição de Brita das Subestações – Norte.xlsx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Subestações elétricas\\SE — Recomposição de Brita das Subestações – Norte.xlsx",
+    "hash": "1d6bf343690efb8ab76fbd204ba5a9179eb04bc7"
   },
   {
     "nome": "Tabela de km dos acessos manutenidos.xlsx",
     "descrição": "Tabela com a quilometragem dos acessos manutenidos.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Tabela de km dos acessos manutenidos.xlsx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\Tabela de km dos acessos manutenidos.xlsx",
+    "hash": "9ae544d452ebd7ed1391332e93a91f40b7d900c8"
   },
   {
     "nome": "meta-config.json",
@@ -82,101 +84,157 @@
   {
     "nome": "Analise de gases_e_Furfural.pptx",
     "descrição": "Apresentação didática sobre DGA (análise de gases dissolvidos) e furfural no óleo isolante de transformadores: geração de gases por temperatura e falhas detectáveis.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Analise de gases_e_Furfural.pptx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Analise de gases_e_Furfural.pptx",
+    "hash": "e442885639628ab1d03f6a41ef6f083a8eb549bd"
   },
   {
     "nome": "Relatorio_6TR1_N1_2026.pptx",
     "descrição": "Relatório de saúde do transformador 6TR1 (SE-N1): expectativa de vida, status de envelhecimento e diagnóstico de falha térmica.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Relatorio_6TR1_N1_2026.pptx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Relatorio_6TR1_N1_2026.pptx",
+    "hash": "8c658b0d3815a4f1c9101f6c5068e6cdb991c242"
   },
   {
     "nome": "Relatorio_6TR1_N2_2026.pptx",
     "descrição": "Relatório de saúde do transformador 6TR1 (SE-N2): expectativa de vida, status e diagnóstico via análise de gases dissolvidos.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Relatorio_6TR1_N2_2026.pptx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Relatorio_6TR1_N2_2026.pptx",
+    "hash": "ecf5d28ee22e19f2b34ef7e369f9cafae587b514"
   },
   {
     "nome": "Relatorio_6TR1_N3_2026.pptx",
     "descrição": "Relatório de saúde do transformador 6TR1 (SE-N3): expectativa de vida, status e diagnóstico via análise de gases dissolvidos.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Relatorio_6TR1_N3_2026.pptx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Relatorio_6TR1_N3_2026.pptx",
+    "hash": "3d269e517f5a4cdfc78b15459602e40f4306f12d"
   },
   {
     "nome": "Relatorio_6TR2_N3_2026.pptx",
     "descrição": "Relatório de saúde do transformador 6TR2 (SE-N3): expectativa de vida e diagnóstico de falha térmica T2 (ponto quente 300–700 °C).",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Relatorio_6TR2_N3_2026.pptx"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Análise de óleo isolante\\Relatorio_6TR2_N3_2026.pptx",
+    "hash": "545c9d8ca0e9d9cf0c33dcf9ab8c860cafd38cea"
   },
   {
     "nome": "LT — Diagrama das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf",
     "descrição": "Cópia do diagrama unifilar das estruturas, exibida na apresentação.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fatos relevantes exibidos na apresentação\\LT — Diagrama das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fatos relevantes exibidos na apresentação\\LT — Diagrama das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf",
+    "hash": "146e29c1b4f8311bd5c2fcf4d4c4fd5559eb12f5"
   },
   {
     "nome": "LT — Listagem das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf",
     "descrição": "Cópia da listagem das estruturas por trecho e tensão, exibida na apresentação.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fatos relevantes exibidos na apresentação\\LT — Listagem das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fatos relevantes exibidos na apresentação\\LT — Listagem das Estruturas da Linha de Transmissão v1.94 – Norte e Leste.pdf",
+    "hash": "8353c109d24cddef4e118e99cb40479cd07df9ae"
   },
   {
     "nome": "LT — Quantitativo de Estruturas da Linha de Transmissão v1.11 — Eixos Norte e Leste.jpg",
     "descrição": "Imagem com o quantitativo de estruturas da LT por tipo e trecho, nos eixos Norte e Leste.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fatos relevantes exibidos na apresentação\\LT — Quantitativo de Estruturas da Linha de Transmissão v1.11 — Eixos Norte e Leste.jpg"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fatos relevantes exibidos na apresentação\\LT — Quantitativo de Estruturas da Linha de Transmissão v1.11 — Eixos Norte e Leste.jpg",
+    "hash": "7560835af2724d95dbcd2e958cc8e96ded6208d1"
   },
   {
     "nome": "Ficha — Aplicação de vedapren em bases com trinca.pdf",
     "descrição": "Ficha de atividade: aplicação de vedapren para vedação de bases com trinca.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Aplicação de vedapren em bases com trinca.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Aplicação de vedapren em bases com trinca.pdf",
+    "hash": "90667c2439f7c1c9e2becceecc41f70eff99b30b"
   },
   {
     "nome": "Ficha — Emenda da malha de aterramento da torre 59-3.pdf",
     "descrição": "Ficha de atividade: emenda da malha de aterramento da torre 59-3.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Emenda da malha de aterramento da torre 59-3.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Emenda da malha de aterramento da torre 59-3.pdf",
+    "hash": "3fca056f078b6ce9994de8d119bac50107ab09b2"
   },
   {
     "nome": "Ficha — Instalação de placa de identificação da 49-1.pdf",
     "descrição": "Ficha de atividade: instalação de placa de identificação na torre 49-1.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Instalação de placa de identificação da 49-1.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Instalação de placa de identificação da 49-1.pdf",
+    "hash": "ef7ad05a1427c6310a6dcb9c689407e9bd119556"
   },
   {
     "nome": "Ficha — Instalação de placa de identificação.pdf",
     "descrição": "Ficha-modelo da atividade de instalação de placa de identificação.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Instalação de placa de identificação.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Instalação de placa de identificação.pdf",
+    "hash": "dbfc3b044e458a4640ce81c691cead52ca8d9408"
   },
   {
     "nome": "Ficha — Verificação de verticalidade.pdf",
     "descrição": "Ficha de atividade: verificação de verticalidade de estrutura da linha de transmissão.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Verificação de verticalidade.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Fichas de atividades da Linha\\Ficha — Verificação de verticalidade.pdf",
+    "hash": "ca7e70a81518824d60adcca4e6ce1a8766140482"
   },
   {
     "nome": "Eixo Leste Completo.kmz",
     "descrição": "Arquivo geográfico (Google Earth) com o traçado completo do eixo Leste da linha de transmissão.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\KMZ da linha de transmissão\\Eixo Leste Completo.kmz"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\KMZ\\Eixo Leste Completo.kmz",
+    "hash": "e7b9b11caa1417df80aa69affff5eeb541115b0f"
   },
   {
     "nome": "Eixo Norte Completo.kmz",
     "descrição": "Arquivo geográfico (Google Earth) com o traçado completo do eixo Norte da linha de transmissão.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\KMZ da linha de transmissão\\Eixo Norte Completo.kmz"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\KMZ\\Eixo Norte Completo.kmz",
+    "hash": "d938f5bc01ad9a5ace051f2ca4f8af01e9ea25c9"
   },
   {
     "nome": "2025-11-06_1379-RDC-2825-60-08-065-R00.pdf",
     "descrição": "Assunto: inspeção da LT 230 kV entre SE-E4 e SE-E6 (WBS 2825), estruturas 47 a 50. Sem anomalias estruturais; única não conformidade: ausência da placa de identificação superior nas torres 47/2 e 49/1.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDCs\\2025-11-06_1379-RDC-2825-60-08-065-R00.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDCs\\2025-11-06_1379-RDC-2825-60-08-065-R00.pdf",
+    "hash": "5ac2d4503a638ada567be5c3afc14a0b834575b3"
   },
   {
     "nome": "2026-03-23_1379-RDC-2817-60-08-013-R00.pdf",
     "descrição": "Assunto: inspeção técnica da Subestação SE-E5 (WBS 2817) para a Ficha de Inspeção Periódica FIP-010. Painéis, pátio e transformador conformes; não conformidade no transformador TRRD fora de operação, ninhos de pássaro e placas ilegíveis.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDCs\\2026-03-23_1379-RDC-2817-60-08-013-R00.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDCs\\2026-03-23_1379-RDC-2817-60-08-013-R00.pdf",
+    "hash": "4f504c9f2cdda8c62c00343fcb192fd747fe3a1d"
   },
   {
     "nome": "2026-04-28_1379-RDC-2825-20-04-099-R00.pdf",
     "descrição": "Assunto: inspeção de manutenção civil na Torre 43/2 da LT 230 kV (WBS 2825). Acompanhamento de fissuras nos blocos de fundação; surgimento de novas fissuras superficiais, com hipótese de retração hidráulica por falha de cura.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDCs\\2026-04-28_1379-RDC-2825-20-04-099-R00.pdf"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDCs\\2026-04-28_1379-RDC-2825-20-04-099-R00.pdf",
+    "hash": "f4c4b6772ea749ccbd807de0f6d6794ea53eb3af"
   },
   {
     "nome": "Pendências Gerais do PISF.png",
     "descrição": "Planilha de controle das pendências gerais de materiais e equipamentos do PISF: itens, criticidade, marca/modelo e quantidades por subestação (eixos Norte e Leste), com valores unitário e total.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Pendências Gerais do PISF\\Pendências Gerais do PISF.png"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Pendências Gerais do PISF\\Pendências Gerais do PISF.png",
+    "hash": "9309542b73ee426590e9ce1d806bcea4b3112c08"
   },
   {
     "nome": "Controle de relatórios de campo v1.10.jpg",
     "descrição": "Painel de controle dos relatórios de campo (RDC) por trecho e eixo (Norte e Leste), com totais por status: concluída, em execução e pendente.",
-    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Controle de relatórios de campo v1.10.jpg"
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDCs\\Controle de relatórios de campo v1.10.jpg",
+    "hash": "ccc55d4ebb7c937f88bd286b1511ed5ffc782767"
+  },
+  {
+    "nome": "Carta-515-2026-EL-Nº075-2026 - Exemplar vegetal sob a LT - Versão Final - Assinado.pdf",
+    "descrição": "Carta 075/2026 ao MIDR: comunica a existência de exemplar vegetal (árvore) sob a linha de transmissão, motivando a poda de adequação.",
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Cartas\\Carta-515-2026-EL-Nº075-2026 - Exemplar vegetal sob a LT - Versão Final - Assinado.pdf",
+    "hash": "7446edc49212136c8dbd669796769eb90c7922ff"
+  },
+  {
+    "nome": "Carta-515-2026-EL-Nº076-2026 - Abertura de loteamento sob LT - Versão Final - Assinado.pdf",
+    "descrição": "Carta 076/2026 ao MIDR: comunica a abertura de loteamento sob a faixa da linha de transmissão.",
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Cartas\\Carta-515-2026-EL-Nº076-2026 - Abertura de loteamento sob LT - Versão Final - Assinado.pdf",
+    "hash": "a771cc595388bd712a969e46f503debafac50d87"
+  },
+  {
+    "nome": "LD — Controle das bases e estais recuperados dos postes de 13.8 kV v1.14 – Norte e Leste.xlsx",
+    "descrição": "Controle das bases e estais recuperados dos postes de 13,8 kV: resumo por WBS, conferência plano × fonte, controle das estruturas e registro fotográfico (eixos Norte e Leste).",
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\LD — Controle das bases e estais recuperados dos postes de 13.8 kV v1.14 – Norte e Leste.xlsx",
+    "hash": "9d671453c29052a9f97fcc0006b672896b0d7d3c"
+  },
+  {
+    "nome": "Linha do tempo da recuperação estrutural dos estais.pptx",
+    "descrição": "Linha do tempo da recuperação estrutural dos estais das torres estaiadas, por eixo (Leste e Norte), com datas de início e término e dias úteis trabalhados por estrutura (42/3, 46/2, 50/1…).",
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Linha de transmissão e distribuição\\Linha do tempo da recuperação estrutural dos estais.pptx",
+    "hash": "8b217a43741930c2cfa7918befc33f0923d7c95a"
+  },
+  {
+    "nome": "RDC — Controle dos Relatórios de Campo do CPISF v1.12 – Norte e Leste.xlsx",
+    "descrição": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\RDCs\\RDC — Controle dos Relatórios de Campo do CPISF v1.12 – Norte e Leste.xlsx",
+    "hash": "27cbb5d98ab6240e08c30776434e27e78d794df2"
+  },
+  {
+    "nome": "SE — Histórico de Paradas Forçadas e Programadas v1.61 – Leste.xlsx",
+    "descrição": "Histórico de paradas forçadas e programadas dos disjuntores das subestações do eixo Leste (SE-E1 a E6): data, estrutura, tipo, período (início e término) e causa de cada ocorrência.",
+    "caminho": "C:\\Users\\engdv\\OneDrive\\Acervo\\dev\\projects\\presentation\\.documents\\Subestações elétricas\\SE — Histórico de Paradas Forçadas e Programadas v1.61 – Leste.xlsx",
+    "hash": "2f11a80002e522967c5ff891913d0ad0a5ba0944"
   }
 ]

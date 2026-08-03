@@ -1,9 +1,189 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "30-07-26",
- "commits": 218,
- "total": 489,
+ "geradoEm": "03-08-26",
+ "commits": 221,
+ "total": 491,
  "registros": [
+  {
+   "id": "4443276-0",
+   "data": "03-08-26",
+   "hora": "08:56",
+   "commit": "4443276",
+   "aba": "conteudo",
+   "link": "slides/slide-relay-testing.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Ensaios em relés",
+    "Relé de monitoramento de gases"
+   ],
+   "titulo": "Relé de monitoramento de gases",
+   "tipo": "subtítulo · imagens · detalhe",
+   "tipos": [
+    "subtítulo",
+    "imagens",
+    "detalhe"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "87 KB",
+      "amostra": [
+       {
+        "nome": "hydran-1.jpeg",
+        "src": "assets/img/slides/se/relay-testing/hydran-1.jpeg",
+        "miniatura": "assets/img/slides/se/relay-testing/hydran-1-200.webp",
+        "peso": "42 KB"
+       },
+       {
+        "nome": "hydran-2.jpeg",
+        "src": "assets/img/slides/se/relay-testing/hydran-2.jpeg",
+        "miniatura": "assets/img/slides/se/relay-testing/hydran-2-200.webp",
+        "peso": "45 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 2
+    },
+    {
+     "tipo": "detalhe",
+     "resumo": "Verificação e reaperto das conexões dos terminais do relé de monitoramento de gases."
+    }
+   ]
+  },
+  {
+   "id": "7cbfc6f-0",
+   "data": "03-08-26",
+   "hora": "08:56",
+   "commit": "7cbfc6f",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Revitalização geral",
+    "Restauração da pintura dos portões"
+   ],
+   "titulo": "Restauração da pintura dos portões",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [
+      {
+       "texto": "durante",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "72 KB",
+        "amostra": [
+         {
+          "nome": "door-1.jpeg",
+          "src": "assets/img/slides/se/substation-restoration/door-1.jpeg",
+          "miniatura": "assets/img/slides/se/substation-restoration/door-1-200.webp",
+          "peso": "72 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "após",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "60 KB",
+        "amostra": [
+         {
+          "nome": "door-2.jpeg",
+          "src": "assets/img/slides/se/substation-restoration/door-2.jpeg",
+          "miniatura": "assets/img/slides/se/substation-restoration/door-2-200.webp",
+          "peso": "60 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "durante",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "90 KB",
+        "amostra": [
+         {
+          "nome": "door-3.jpeg",
+          "src": "assets/img/slides/se/substation-restoration/door-3.jpeg",
+          "miniatura": "assets/img/slides/se/substation-restoration/door-3-200.webp",
+          "peso": "90 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "após",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "93 KB",
+        "amostra": [
+         {
+          "nome": "door-4.jpeg",
+          "src": "assets/img/slides/se/substation-restoration/door-4.jpeg",
+          "miniatura": "assets/img/slides/se/substation-restoration/door-4-200.webp",
+          "peso": "93 KB"
+         }
+        ],
+        "extras": 0
+       }
+      }
+     ],
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "315 KB",
+      "amostra": [
+       {
+        "nome": "door-1.jpeg",
+        "src": "assets/img/slides/se/substation-restoration/door-1.jpeg",
+        "miniatura": "assets/img/slides/se/substation-restoration/door-1-200.webp",
+        "peso": "72 KB"
+       },
+       {
+        "nome": "door-2.jpeg",
+        "src": "assets/img/slides/se/substation-restoration/door-2.jpeg",
+        "miniatura": "assets/img/slides/se/substation-restoration/door-2-200.webp",
+        "peso": "60 KB"
+       },
+       {
+        "nome": "door-3.jpeg",
+        "src": "assets/img/slides/se/substation-restoration/door-3.jpeg",
+        "miniatura": "assets/img/slides/se/substation-restoration/door-3-200.webp",
+        "peso": "90 KB"
+       },
+       {
+        "nome": "door-4.jpeg",
+        "src": "assets/img/slides/se/substation-restoration/door-4.jpeg",
+        "miniatura": "assets/img/slides/se/substation-restoration/door-4-200.webp",
+        "peso": "93 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 4
+    }
+   ]
+  },
   {
    "id": "df412c0-4",
    "data": "30-07-26",

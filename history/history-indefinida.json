@@ -1,9 +1,207 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "03-08-26",
- "commits": 221,
- "total": 491,
+ "geradoEm": "06-08-26",
+ "commits": 224,
+ "total": 496,
  "registros": [
+  {
+   "id": "460a624-0",
+   "data": "06-08-26",
+   "hora": "09:01",
+   "commit": "460a624",
+   "aba": "conteudo",
+   "link": "slides/slide-training.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Treinamentos internos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
+   ],
+   "legendas": [
+    {
+     "texto": "reciclagem da NR-35 (altura)",
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "1022 KB",
+      "amostra": [
+       {
+        "nome": "training-24.jpeg",
+        "src": "assets/img/slides/st/training/training-24.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-24-200.webp",
+        "peso": "397 KB"
+       },
+       {
+        "nome": "training-25.jpeg",
+        "src": "assets/img/slides/st/training/training-25.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-25-200.webp",
+        "peso": "301 KB"
+       },
+       {
+        "nome": "training-26.jpeg",
+        "src": "assets/img/slides/st/training/training-26.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-26-200.webp",
+        "peso": "169 KB"
+       },
+       {
+        "nome": "training-27.jpeg",
+        "src": "assets/img/slides/st/training/training-27.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-27-200.webp",
+        "peso": "155 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "1022 KB",
+    "amostra": [
+     {
+      "nome": "training-24.jpeg",
+      "src": "assets/img/slides/st/training/training-24.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-24-200.webp",
+      "peso": "397 KB"
+     },
+     {
+      "nome": "training-25.jpeg",
+      "src": "assets/img/slides/st/training/training-25.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-25-200.webp",
+      "peso": "301 KB"
+     },
+     {
+      "nome": "training-26.jpeg",
+      "src": "assets/img/slides/st/training/training-26.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-26-200.webp",
+      "peso": "169 KB"
+     },
+     {
+      "nome": "training-27.jpeg",
+      "src": "assets/img/slides/st/training/training-27.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-27-200.webp",
+      "peso": "155 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4
+  },
+  {
+   "id": "d9a4cbc-3",
+   "data": "06-08-26",
+   "hora": "09:01",
+   "commit": "d9a4cbc",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "transferência",
+   "tipo": "imagens",
+   "titulo": null,
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Identificação de torres",
+    "Quantitativo de placas pendentes e substituídas"
+   ],
+   "de": "LT — Transmissão › Identificação de torres › Placas instaladas",
+   "para": "LT — Transmissão › Identificação de torres › Quantitativo de placas pendentes e substituídas",
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "417 KB",
+    "amostra": [
+     {
+      "nome": "tower-0.jpg",
+      "src": "assets/img/slides/lt/tower-identification/tower-0.jpg",
+      "miniatura": "assets/img/slides/lt/tower-identification/tower-0-200.webp",
+      "peso": "417 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1
+  },
+  {
+   "id": "d9a4cbc-2",
+   "data": "06-08-26",
+   "hora": "09:01",
+   "commit": "d9a4cbc",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Etapas da substituição",
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Identificação de torres",
+    "Etapas da substituição"
+   ],
+   "de": "Placas instaladas",
+   "para": "Etapas da substituição"
+  },
+  {
+   "id": "d9a4cbc-1",
+   "data": "06-08-26",
+   "hora": "09:01",
+   "commit": "d9a4cbc",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Identificação de torres",
+    "Identificação das bases das torres"
+   ],
+   "titulo": "Identificação das bases das torres",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "439 KB",
+      "amostra": [
+       {
+        "nome": "tower-5.jpeg",
+        "src": "assets/img/slides/lt/tower-identification/tower-5.jpeg",
+        "miniatura": "assets/img/slides/lt/tower-identification/tower-5-200.webp",
+        "peso": "175 KB"
+       },
+       {
+        "nome": "tower-6.jpeg",
+        "src": "assets/img/slides/lt/tower-identification/tower-6.jpeg",
+        "miniatura": "assets/img/slides/lt/tower-identification/tower-6-200.webp",
+        "peso": "265 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 2
+    }
+   ]
+  },
+  {
+   "id": "d9a4cbc-0",
+   "data": "06-08-26",
+   "hora": "09:01",
+   "commit": "d9a4cbc",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "adição",
+   "tipo": "subtítulo",
+   "titulo": "Quantitativo de placas pendentes e substituídas",
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Identificação de torres",
+    "Quantitativo de placas pendentes e substituídas"
+   ]
+  },
   {
    "id": "4443276-0",
    "data": "03-08-26",

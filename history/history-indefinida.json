@@ -1,9 +1,76 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "06-08-26",
- "commits": 224,
- "total": 496,
+ "geradoEm": "11-08-26",
+ "commits": 226,
+ "total": 498,
  "registros": [
+  {
+   "id": "8fc9448-1",
+   "data": "11-08-26",
+   "hora": "09:57",
+   "commit": "8fc9448",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Execução geral",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Revitalização geral",
+    "Execução geral"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "1,0 MB",
+    "amostra": [
+     {
+      "nome": "paint-13.jpeg",
+      "src": "assets/img/slides/se/substation-restoration/paint-13.jpeg",
+      "miniatura": "assets/img/slides/se/substation-restoration/paint-13-200.webp",
+      "peso": "255 KB"
+     },
+     {
+      "nome": "paint-14.jpeg",
+      "src": "assets/img/slides/se/substation-restoration/paint-14.jpeg",
+      "miniatura": "assets/img/slides/se/substation-restoration/paint-14-200.webp",
+      "peso": "290 KB"
+     },
+     {
+      "nome": "paint-15.jpeg",
+      "src": "assets/img/slides/se/substation-restoration/paint-15.jpeg",
+      "miniatura": "assets/img/slides/se/substation-restoration/paint-15-200.webp",
+      "peso": "258 KB"
+     },
+     {
+      "nome": "paint-16.jpeg",
+      "src": "assets/img/slides/se/substation-restoration/paint-16.jpeg",
+      "miniatura": "assets/img/slides/se/substation-restoration/paint-16-200.webp",
+      "peso": "269 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4
+  },
+  {
+   "id": "8fc9448-0",
+   "data": "11-08-26",
+   "hora": "09:57",
+   "commit": "8fc9448",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Execução geral",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Revitalização geral",
+    "Execução geral"
+   ],
+   "de": "Execução",
+   "para": "Execução geral"
+  },
   {
    "id": "460a624-0",
    "data": "06-08-26",

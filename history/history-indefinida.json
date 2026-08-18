@@ -1,9 +1,183 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "11-08-26",
- "commits": 226,
- "total": 498,
+ "geradoEm": "18-08-26",
+ "commits": 229,
+ "total": 501,
  "registros": [
+  {
+   "id": "5c460da-0",
+   "data": "18-08-26",
+   "hora": "09:37",
+   "commit": "5c460da",
+   "aba": "conteudo",
+   "link": "slides/slide-contact-label.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Contatos e orientações",
+    "Reflexão sobre acidentes"
+   ],
+   "titulo": "Reflexão sobre acidentes",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "179 KB",
+      "amostra": [
+       {
+        "nome": "label-10.jpeg",
+        "src": "assets/img/slides/st/contact-label/label-10.jpeg",
+        "miniatura": "assets/img/slides/st/contact-label/label-10-200.webp",
+        "peso": "179 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 1
+    }
+   ]
+  },
+  {
+   "id": "150ab96-1",
+   "data": "18-08-26",
+   "hora": "09:37",
+   "commit": "150ab96",
+   "aba": "conteudo",
+   "link": "slides/slide-training.html",
+   "acao": "modificação",
+   "tipo": "observação",
+   "titulo": "Treinamentos internos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
+   ],
+   "de": "reciclagem da NR-35 (altura)",
+   "para": "reciclagem da NR-35 (Eixo Norte)",
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "1022 KB",
+    "amostra": [
+     {
+      "nome": "training-24.jpeg",
+      "src": "assets/img/slides/st/training/training-24.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-24-200.webp",
+      "peso": "397 KB"
+     },
+     {
+      "nome": "training-25.jpeg",
+      "src": "assets/img/slides/st/training/training-25.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-25-200.webp",
+      "peso": "301 KB"
+     },
+     {
+      "nome": "training-26.jpeg",
+      "src": "assets/img/slides/st/training/training-26.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-26-200.webp",
+      "peso": "169 KB"
+     },
+     {
+      "nome": "training-27.jpeg",
+      "src": "assets/img/slides/st/training/training-27.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-27-200.webp",
+      "peso": "155 KB"
+     }
+    ],
+    "extras": 0
+   }
+  },
+  {
+   "id": "150ab96-0",
+   "data": "18-08-26",
+   "hora": "09:37",
+   "commit": "150ab96",
+   "aba": "conteudo",
+   "link": "slides/slide-training.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Treinamentos internos",
+   "breadcrumb": [
+    "ST — Segurança do Trabalho",
+    "Treinamentos internos"
+   ],
+   "legendas": [
+    {
+     "texto": "reciclagem da NR-35 (Eixo Leste)",
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "995 KB",
+      "amostra": [
+       {
+        "nome": "training-28.jpeg",
+        "src": "assets/img/slides/st/training/training-28.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-28-200.webp",
+        "peso": "167 KB"
+       },
+       {
+        "nome": "training-29.jpeg",
+        "src": "assets/img/slides/st/training/training-29.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-29-200.webp",
+        "peso": "318 KB"
+       },
+       {
+        "nome": "training-30.jpeg",
+        "src": "assets/img/slides/st/training/training-30.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-30-200.webp",
+        "peso": "138 KB"
+       },
+       {
+        "nome": "training-31.jpeg",
+        "src": "assets/img/slides/st/training/training-31.jpeg",
+        "miniatura": "assets/img/slides/st/training/training-31-200.webp",
+        "peso": "372 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "995 KB",
+    "amostra": [
+     {
+      "nome": "training-28.jpeg",
+      "src": "assets/img/slides/st/training/training-28.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-28-200.webp",
+      "peso": "167 KB"
+     },
+     {
+      "nome": "training-29.jpeg",
+      "src": "assets/img/slides/st/training/training-29.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-29-200.webp",
+      "peso": "318 KB"
+     },
+     {
+      "nome": "training-30.jpeg",
+      "src": "assets/img/slides/st/training/training-30.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-30-200.webp",
+      "peso": "138 KB"
+     },
+     {
+      "nome": "training-31.jpeg",
+      "src": "assets/img/slides/st/training/training-31.jpeg",
+      "miniatura": "assets/img/slides/st/training/training-31-200.webp",
+      "peso": "372 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4
+  },
   {
    "id": "8fc9448-1",
    "data": "11-08-26",

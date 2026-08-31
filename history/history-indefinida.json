@@ -1,9 +1,258 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "31-08-26",
- "commits": 231,
- "total": 502,
+ "commits": 234,
+ "total": 509,
  "registros": [
+  {
+   "id": "f3acc08-6",
+   "data": "31-08-26",
+   "hora": "09:18",
+   "commit": "f3acc08",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "deleção",
+   "tipo": "documento",
+   "titulo": "Painel de Controle das Torres Autoportantes",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "Painel de Controle das Torres Autoportantes"
+   ],
+   "documento": {
+    "versao": "—",
+    "tamanho": "1,1 MB",
+    "paginas": "—",
+    "inserido": "15-06-26",
+    "descricao": "Painel de controle do reforço estrutural das torres autoportantes dos eixos Leste e Norte, com dashboards e status das bases."
+   }
+  },
+  {
+   "id": "f3acc08-5",
+   "data": "31-08-26",
+   "hora": "09:18",
+   "commit": "f3acc08",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "RDC — Controle dos Relatórios de Campo do CPISF – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "RDC — Controle dos Relatórios de Campo do CPISF – Norte e Leste"
+   ],
+   "resumo": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+   "documento": {
+    "versao": "v1.12",
+    "tamanho": "139 KB",
+    "paginas": "—",
+    "inserido": "18-06-26",
+    "descricao": "Controle dos relatórios diários de campo (RDC): atividades concluídas e pendentes, painel-resumo e contagem por empresa.",
+    "slide": "slides/slide-rdc-control.html"
+   },
+   "campos": [
+    "tamanho"
+   ],
+   "campoAlterado": "tamanho",
+   "de": "137 KB",
+   "para": "139 KB",
+   "substitui": [
+    {
+     "commit": "df412c0",
+     "id": "df412c0-2",
+     "data": "30-07-26",
+     "hora": "14:45",
+     "de": "139 KB",
+     "para": "137 KB"
+    }
+   ]
+  },
+  {
+   "id": "f3acc08-4",
+   "data": "31-08-26",
+   "hora": "09:18",
+   "commit": "f3acc08",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "LT — Controle de Serviços da Linha de Transmissão – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "LT — Controle de Serviços da Linha de Transmissão – Norte e Leste"
+   ],
+   "resumo": "Planilha mestra: paleta, lista de estruturas, checklist, fichas-modelo (v1.91/v1.94), esquema de pendências e lista de serviços com frequência e criticidade.",
+   "documento": {
+    "versao": "v1.94",
+    "tamanho": "4,5 MB",
+    "paginas": "—",
+    "inserido": "28-05-26",
+    "descricao": "Planilha mestra: paleta, lista de estruturas, checklist, fichas-modelo (v1.91/v1.94), esquema de pendências e lista de serviços com frequência e criticidade."
+   },
+   "campos": [
+    "tamanho"
+   ],
+   "campoAlterado": "tamanho",
+   "de": "4,2 MB",
+   "para": "4,5 MB",
+   "substitui": [
+    {
+     "commit": "5be3e82",
+     "id": "5be3e82-2",
+     "data": "08-07-26",
+     "hora": "09:35",
+     "de": "3,9 MB",
+     "para": "4,2 MB"
+    },
+    {
+     "commit": "ba09017",
+     "id": "ba09017-36",
+     "data": "19-06-26",
+     "hora": "14:06",
+     "de": "descrição não fornecida",
+     "para": "Planilha mestra: paleta, lista de estruturas, checklist, fichas-modelo (v1.91/v1.94), esquema de pendências e lista de serviços com frequência e criticidade."
+    }
+   ]
+  },
+  {
+   "id": "f3acc08-3",
+   "data": "31-08-26",
+   "hora": "09:18",
+   "commit": "f3acc08",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "LT — Cronograma de Manutenção das Torres Estaiadas – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "LT — Cronograma de Manutenção das Torres Estaiadas – Norte e Leste"
+   ],
+   "resumo": "Cronograma das atividades de manutenção das torres estaiadas da linha.",
+   "documento": {
+    "versao": "v1.10",
+    "tamanho": "1,5 MB",
+    "paginas": "—",
+    "inserido": "15-06-26",
+    "descricao": "Cronograma das atividades de manutenção das torres estaiadas da linha.",
+    "slide": "slides/slide-tl-stay-recovery.html"
+   },
+   "campos": [
+    "tamanho"
+   ],
+   "campoAlterado": "tamanho",
+   "de": "2,3 MB",
+   "para": "1,5 MB",
+   "substitui": [
+    {
+     "commit": "df412c0",
+     "id": "df412c0-0",
+     "data": "30-07-26",
+     "hora": "14:45",
+     "de": "782 KB",
+     "para": "2,3 MB"
+    }
+   ]
+  },
+  {
+   "id": "f3acc08-2",
+   "data": "31-08-26",
+   "hora": "09:18",
+   "commit": "f3acc08",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "LT — Diagrama das Estruturas da Linha de Transmissão – Norte e Leste",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "LT — Diagrama das Estruturas da Linha de Transmissão – Norte e Leste"
+   ],
+   "resumo": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste.",
+   "documento": {
+    "versao": "v1.95",
+    "tamanho": "829 KB",
+    "paginas": "5",
+    "inserido": "24-08-26",
+    "descricao": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste.",
+    "slide": "slides/slide-structures-diagram.html"
+   },
+   "campos": [
+    "versao"
+   ],
+   "campoAlterado": "versao",
+   "de": "v1.94",
+   "para": "v1.95",
+   "substitui": [
+    {
+     "commit": "ba09017",
+     "id": "ba09017-28",
+     "data": "19-06-26",
+     "hora": "14:06",
+     "de": "descrição não fornecida",
+     "para": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste."
+    }
+   ]
+  },
+  {
+   "id": "f3acc08-1",
+   "data": "31-08-26",
+   "hora": "09:18",
+   "commit": "f3acc08",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "Carta Nº 075/2026 — Exemplar vegetal sob a LT",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "Carta Nº 075/2026 — Exemplar vegetal sob a LT"
+   ],
+   "resumo": "Exemplar vegetal (árvore) sob a linha de transmissão, motivando a poda de adequação.",
+   "documento": {
+    "versao": "—",
+    "tamanho": "862 KB",
+    "paginas": "5",
+    "inserido": "28-07-26",
+    "descricao": "Exemplar vegetal (árvore) sob a linha de transmissão, motivando a poda de adequação.",
+    "slide": "slides/slide-cemetery-tree.html"
+   },
+   "campos": [
+    "paginas"
+   ],
+   "campoAlterado": "paginas",
+   "de": "6",
+   "para": "5"
+  },
+  {
+   "id": "f3acc08-0",
+   "data": "31-08-26",
+   "hora": "09:18",
+   "commit": "f3acc08",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "modificação",
+   "tipo": "documento",
+   "titulo": "Carta Nº 076/2026 — Abertura de loteamento sob a LT",
+   "breadcrumb": [
+    "Documentos recebidos",
+    "Carta Nº 076/2026 — Abertura de loteamento sob a LT"
+   ],
+   "resumo": "Comunicação sobre a abertura de loteamento sob a linha de transmissão.",
+   "documento": {
+    "versao": "—",
+    "tamanho": "686 KB",
+    "paginas": "4",
+    "inserido": "28-07-26",
+    "descricao": "Comunicação sobre a abertura de loteamento sob a linha de transmissão.",
+    "slide": "slides/slide-cemetery-tree.html"
+   },
+   "campos": [
+    "paginas"
+   ],
+   "campoAlterado": "paginas",
+   "de": "5",
+   "para": "4"
+  },
   {
    "id": "2c363fa-0",
    "data": "31-08-26",
@@ -730,7 +979,11 @@
    ],
    "campoAlterado": "tamanho",
    "de": "139 KB",
-   "para": "137 KB"
+   "para": "137 KB",
+   "obsoleto": {
+    "commit": "f3acc08",
+    "id": "f3acc08-5"
+   }
   },
   {
    "id": "df412c0-1",
@@ -808,7 +1061,11 @@
    ],
    "campoAlterado": "tamanho",
    "de": "782 KB",
-   "para": "2,3 MB"
+   "para": "2,3 MB",
+   "obsoleto": {
+    "commit": "f3acc08",
+    "id": "f3acc08-3"
+   }
   },
   {
    "id": "329e5c2-0",
@@ -5986,16 +6243,10 @@
    "campoAlterado": "tamanho",
    "de": "3,9 MB",
    "para": "4,2 MB",
-   "substitui": [
-    {
-     "commit": "ba09017",
-     "id": "ba09017-36",
-     "data": "19-06-26",
-     "hora": "14:06",
-     "de": "descrição não fornecida",
-     "para": "Planilha mestra: paleta, lista de estruturas, checklist, fichas-modelo (v1.91/v1.94), esquema de pendências e lista de serviços com frequência e criticidade."
-    }
-   ]
+   "obsoleto": {
+    "commit": "f3acc08",
+    "id": "f3acc08-4"
+   }
   },
   {
    "id": "5be3e82-1",
@@ -13428,8 +13679,8 @@
    "de": "descrição não fornecida",
    "para": "Planilha mestra: paleta, lista de estruturas, checklist, fichas-modelo (v1.91/v1.94), esquema de pendências e lista de serviços com frequência e criticidade.",
    "obsoleto": {
-    "commit": "5be3e82",
-    "id": "5be3e82-2"
+    "commit": "f3acc08",
+    "id": "f3acc08-4"
    }
   },
   {
@@ -13666,7 +13917,11 @@
    ],
    "campoAlterado": "descricao",
    "de": "descrição não fornecida",
-   "para": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste."
+   "para": "Diagrama unifilar das estruturas (torres e postes), com vãos, tipos e eixos Norte e Leste.",
+   "obsoleto": {
+    "commit": "f3acc08",
+    "id": "f3acc08-2"
+   }
   },
   {
    "id": "ba09017-27",

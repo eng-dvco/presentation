@@ -1,9 +1,344 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "31-08-26",
- "commits": 243,
- "total": 516,
+ "commits": 245,
+ "total": 522,
  "registros": [
+  {
+   "id": "0145382-5",
+   "data": "31-08-26",
+   "hora": "10:14",
+   "commit": "0145382",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Oscilógrafo",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis",
+    "Oscilógrafo"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 5,
+    "pesoTotal": "729 KB",
+    "amostra": [
+     {
+      "nome": "oscillograph-1.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/oscillograph-1.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/oscillograph-1-200.webp",
+      "peso": "152 KB"
+     },
+     {
+      "nome": "oscillograph-2.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/oscillograph-2.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/oscillograph-2-200.webp",
+      "peso": "178 KB"
+     },
+     {
+      "nome": "oscillograph-3.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/oscillograph-3.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/oscillograph-3-200.webp",
+      "peso": "144 KB"
+     },
+     {
+      "nome": "oscillograph-4.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/oscillograph-4.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/oscillograph-4-200.webp",
+      "peso": "121 KB"
+     },
+     {
+      "nome": "oscillograph-5.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/oscillograph-5.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/oscillograph-5-200.webp",
+      "peso": "134 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 5,
+   "removidas": 5
+  },
+  {
+   "id": "0145382-4",
+   "data": "31-08-26",
+   "hora": "10:14",
+   "commit": "0145382",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Instrumentação",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis",
+    "Instrumentação"
+   ],
+   "legendas": [
+    {
+     "texto": "medição de relação de transformadores",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "50 KB",
+      "amostra": [
+       {
+        "nome": "equipment-4.jpg",
+        "src": "assets/img/slides/se/equipment-acquisition/equipment-4.jpg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-4-200.webp",
+        "peso": "50 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "micro-ohmímetro 100 A",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "113 KB",
+      "amostra": [
+       {
+        "nome": "equipment-5.jpg",
+        "src": "assets/img/slides/se/equipment-acquisition/equipment-5.jpg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-5-200.webp",
+        "peso": "113 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "medidor de fator de potência",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "32 KB",
+      "amostra": [
+       {
+        "nome": "equipment-6.jpg",
+        "src": "assets/img/slides/se/equipment-acquisition/equipment-6.jpg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-6-200.webp",
+        "peso": "32 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "megômetro 20 kV",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "33 KB",
+      "amostra": [
+       {
+        "nome": "equipment-7.jpg",
+        "src": "assets/img/slides/se/equipment-acquisition/equipment-7.jpg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-7-200.webp",
+        "peso": "33 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "228 KB",
+    "amostra": [
+     {
+      "nome": "equipment-4.jpg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-4.jpg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-4-200.webp",
+      "peso": "50 KB"
+     },
+     {
+      "nome": "equipment-5.jpg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-5.jpg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-5-200.webp",
+      "peso": "113 KB"
+     },
+     {
+      "nome": "equipment-6.jpg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-6.jpg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-6-200.webp",
+      "peso": "32 KB"
+     },
+     {
+      "nome": "equipment-7.jpg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-7.jpg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-7-200.webp",
+      "peso": "33 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "0145382-3",
+   "data": "31-08-26",
+   "hora": "10:14",
+   "commit": "0145382",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Drone termográfico",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis",
+    "Drone termográfico"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 3,
+    "pesoTotal": "275 KB",
+    "amostra": [
+     {
+      "nome": "equipment-1.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-1.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-1-200.webp",
+      "peso": "73 KB"
+     },
+     {
+      "nome": "equipment-2.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-2.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-2-200.webp",
+      "peso": "138 KB"
+     },
+     {
+      "nome": "equipment-3.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-3.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-3-200.webp",
+      "peso": "64 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 3,
+   "removidas": 3
+  },
+  {
+   "id": "0145382-2",
+   "data": "31-08-26",
+   "hora": "10:14",
+   "commit": "0145382",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Câmera termográfica",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis",
+    "Câmera termográfica"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "132 KB",
+    "amostra": [
+     {
+      "nome": "equipment-9.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-9.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-9-200.webp",
+      "peso": "132 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1,
+   "removidas": 1
+  },
+  {
+   "id": "0145382-1",
+   "data": "31-08-26",
+   "hora": "10:14",
+   "commit": "0145382",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Ferramentas adquiridas",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis",
+    "Ferramentas adquiridas"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "56 KB",
+    "amostra": [
+     {
+      "nome": "equipment-8.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-8.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-8-200.webp",
+      "peso": "56 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1,
+   "removidas": 1
+  },
+  {
+   "id": "0145382-0",
+   "data": "31-08-26",
+   "hora": "10:14",
+   "commit": "0145382",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Maleta de teste para relé de proteção",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis",
+    "Maleta de teste para relé de proteção"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 7,
+    "pesoTotal": "377 KB",
+    "amostra": [
+     {
+      "nome": "equipment-10.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-10.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-10-200.webp",
+      "peso": "52 KB"
+     },
+     {
+      "nome": "equipment-11.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-11.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-11-200.webp",
+      "peso": "70 KB"
+     },
+     {
+      "nome": "equipment-12.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-12.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-12-200.webp",
+      "peso": "67 KB"
+     },
+     {
+      "nome": "equipment-13.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-13.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-13-200.webp",
+      "peso": "45 KB"
+     },
+     {
+      "nome": "equipment-14.jpeg",
+      "src": "assets/img/slides/se/equipment-acquisition/equipment-14.jpeg",
+      "miniatura": "assets/img/slides/se/equipment-acquisition/equipment-14-200.webp",
+      "peso": "43 KB"
+     }
+    ],
+    "extras": 2
+   },
+   "qtdImagens": 7,
+   "removidas": 7
+  },
   {
    "id": "a903b80-0",
    "data": "31-08-26",
@@ -1796,31 +2131,31 @@
        {
         "nome": "oscillograph-1.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/oscillograph-1.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-1-200.webp",
+        "miniatura": "history/thumbs/8fa9529-oscillograph-1.webp",
         "peso": "152 KB"
        },
        {
         "nome": "oscillograph-2.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/oscillograph-2.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-2-200.webp",
+        "miniatura": "history/thumbs/8fa9529-oscillograph-2.webp",
         "peso": "178 KB"
        },
        {
         "nome": "oscillograph-3.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/oscillograph-3.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-3-200.webp",
+        "miniatura": "history/thumbs/8fa9529-oscillograph-3.webp",
         "peso": "144 KB"
        },
        {
         "nome": "oscillograph-4.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/oscillograph-4.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-4-200.webp",
+        "miniatura": "history/thumbs/8fa9529-oscillograph-4.webp",
         "peso": "121 KB"
        },
        {
         "nome": "oscillograph-5.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/oscillograph-5.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/oscillograph-5-200.webp",
+        "miniatura": "history/thumbs/8fa9529-oscillograph-5.webp",
         "peso": "134 KB"
        }
       ],
@@ -2996,7 +3331,7 @@
      {
       "nome": "equipment-9.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-9.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-9-200.webp",
+      "miniatura": "history/thumbs/f33c6ec-equipment-9.webp",
       "peso": "132 KB"
      }
     ],
@@ -3028,7 +3363,7 @@
      {
       "nome": "equipment-8.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-8.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-8-200.webp",
+      "miniatura": "history/thumbs/f33c6ec-equipment-8.webp",
       "peso": "56 KB"
      }
     ],
@@ -7316,13 +7651,13 @@
      {
       "nome": "equipment-8.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-8.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-8-200.webp",
+      "miniatura": "history/thumbs/3326e02-equipment-8.webp",
       "peso": "56 KB"
      },
      {
       "nome": "equipment-9.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-9.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-9-200.webp",
+      "miniatura": "history/thumbs/3326e02-equipment-9.webp",
       "peso": "132 KB"
      }
     ],
@@ -7506,31 +7841,31 @@
        {
         "nome": "equipment-10.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/equipment-10.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-10-200.webp",
+        "miniatura": "history/thumbs/3326e02-equipment-10.webp",
         "peso": "52 KB"
        },
        {
         "nome": "equipment-11.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/equipment-11.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-11-200.webp",
+        "miniatura": "history/thumbs/3326e02-equipment-11.webp",
         "peso": "70 KB"
        },
        {
         "nome": "equipment-12.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/equipment-12.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-12-200.webp",
+        "miniatura": "history/thumbs/3326e02-equipment-12.webp",
         "peso": "67 KB"
        },
        {
         "nome": "equipment-13.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/equipment-13.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-13-200.webp",
+        "miniatura": "history/thumbs/3326e02-equipment-13.webp",
         "peso": "45 KB"
        },
        {
         "nome": "equipment-14.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/equipment-14.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-14-200.webp",
+        "miniatura": "history/thumbs/3326e02-equipment-14.webp",
         "peso": "43 KB"
        }
       ],
@@ -7844,7 +8179,7 @@
        {
         "nome": "equipment-8.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/equipment-8.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-8-200.webp",
+        "miniatura": "history/thumbs/fbbd09b-equipment-8.webp",
         "peso": "56 KB"
        }
       ],
@@ -7861,7 +8196,7 @@
        {
         "nome": "equipment-9.jpeg",
         "src": "assets/img/slides/events/equipment-acquisition/equipment-9.jpeg",
-        "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-9-200.webp",
+        "miniatura": "history/thumbs/fbbd09b-equipment-9.webp",
         "peso": "132 KB"
        }
       ],
@@ -10116,13 +10451,13 @@
      {
       "nome": "equipment-8.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-8.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-8-200.webp",
+      "miniatura": "history/thumbs/3442081-equipment-8.webp",
       "peso": "56 KB"
      },
      {
       "nome": "equipment-9.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-9.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-9-200.webp",
+      "miniatura": "history/thumbs/3442081-equipment-9.webp",
       "peso": "132 KB"
      }
     ],
@@ -10153,19 +10488,19 @@
      {
       "nome": "equipment-1.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-1.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-1-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-equipment-1.webp",
       "peso": "73 KB"
      },
      {
       "nome": "equipment-2.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-2.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-2-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-equipment-2.webp",
       "peso": "138 KB"
      },
      {
       "nome": "equipment-3.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-3.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-3-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-equipment-3.webp",
       "peso": "64 KB"
      }
     ],
@@ -12901,19 +13236,19 @@
      {
       "nome": "equipment-1.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-1.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-1-200.webp",
+      "miniatura": "history/thumbs/1827a19-equipment-1.webp",
       "peso": "73 KB"
      },
      {
       "nome": "equipment-2.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-2.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-2-200.webp",
+      "miniatura": "history/thumbs/1827a19-equipment-2.webp",
       "peso": "138 KB"
      },
      {
       "nome": "equipment-3.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-3.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-3-200.webp",
+      "miniatura": "history/thumbs/1827a19-equipment-3.webp",
       "peso": "64 KB"
      }
     ],
@@ -17923,31 +18258,31 @@
      {
       "nome": "equipment-1.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-1.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-1-200.webp",
+      "miniatura": "history/thumbs/76d3a99-equipment-1.webp",
       "peso": "73 KB"
      },
      {
       "nome": "equipment-2.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-2.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-2-200.webp",
+      "miniatura": "history/thumbs/76d3a99-equipment-2.webp",
       "peso": "138 KB"
      },
      {
       "nome": "equipment-3.jpeg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-3.jpeg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-3-200.webp",
+      "miniatura": "history/thumbs/76d3a99-equipment-3.webp",
       "peso": "64 KB"
      },
      {
       "nome": "equipment-4.jpg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-4.jpg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-4-200.webp",
+      "miniatura": "history/thumbs/76d3a99-equipment-4.webp",
       "peso": "50 KB"
      },
      {
       "nome": "equipment-5.jpg",
       "src": "assets/img/slides/events/equipment-acquisition/equipment-5.jpg",
-      "miniatura": "assets/img/slides/events/equipment-acquisition/equipment-5-200.webp",
+      "miniatura": "history/thumbs/76d3a99-equipment-5.webp",
       "peso": "113 KB"
      }
     ],

@@ -1,9 +1,70 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "31-08-26",
- "commits": 237,
- "total": 511,
+ "commits": 239,
+ "total": 512,
  "registros": [
+  {
+   "id": "f6f0e7b-0",
+   "data": "31-08-26",
+   "hora": "09:45",
+   "commit": "f6f0e7b",
+   "aba": "conteudo",
+   "link": "slides/slide-computer-replacement.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Instalação de computadores e periféricos",
+    "Substituição de periféricos"
+   ],
+   "titulo": "Substituição de periféricos",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "203 KB",
+      "amostra": [
+       {
+        "nome": "device-1.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-1.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-1-200.webp",
+        "peso": "49 KB"
+       },
+       {
+        "nome": "device-2.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-2.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-2-200.webp",
+        "peso": "54 KB"
+       },
+       {
+        "nome": "device-3.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-3.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-3-200.webp",
+        "peso": "45 KB"
+       },
+       {
+        "nome": "device-4.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-4.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-4-200.webp",
+        "peso": "56 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 4
+    }
+   ]
+  },
   {
    "id": "972012a-0",
    "data": "31-08-26",

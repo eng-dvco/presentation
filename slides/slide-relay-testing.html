@@ -101,6 +101,61 @@
               <p>Verificação e reaperto das conexões dos terminais do relé de monitoramento de gases.</p>
             </div>
           </div>
+          <div class="title-header-h2">
+            <h2 class="title-h2">Teste de proteção de relés (SE-E1)</h2>
+          </div>
+          <div class="mosaic-container">
+            <div class="img img-default">
+              <picture>
+                <source type="image/webp" srcset="../assets/img/slides/se/relay-testing/relay-5-200.webp 200w, ../assets/img/slides/se/relay-testing/relay-5-472.webp 472w" sizes="(max-width: 576px) 92vw, (max-width: 992px) 46vw, 468px" />
+                <img width="472" height="354" src="../assets/img/slides/se/relay-testing/relay-5.jpeg" alt="Teste de proteção de relés nos vãos AY e BX da SE-E1 (foto 1 de 6)" loading="lazy" />
+              </picture>
+              <p class="obs obs-default invisible"></p>
+            </div>
+            <div class="img img-default">
+              <picture>
+                <source type="image/webp" srcset="../assets/img/slides/se/relay-testing/relay-6-200.webp 200w, ../assets/img/slides/se/relay-testing/relay-6-472.webp 472w" sizes="(max-width: 576px) 92vw, (max-width: 992px) 46vw, 468px" />
+                <img width="472" height="354" src="../assets/img/slides/se/relay-testing/relay-6.jpeg" alt="Teste de proteção de relés nos vãos AY e BX da SE-E1 (foto 2 de 6)" loading="lazy" />
+              </picture>
+              <p class="obs obs-default invisible"></p>
+            </div>
+            <div class="img img-default">
+              <picture>
+                <source type="image/webp" srcset="../assets/img/slides/se/relay-testing/relay-7-200.webp 200w, ../assets/img/slides/se/relay-testing/relay-7-472.webp 472w" sizes="(max-width: 576px) 92vw, (max-width: 992px) 46vw, 468px" />
+                <img width="472" height="354" src="../assets/img/slides/se/relay-testing/relay-7.jpeg" alt="Teste de proteção de relés nos vãos AY e BX da SE-E1 (foto 3 de 6)" loading="lazy" />
+              </picture>
+              <p class="obs obs-default invisible"></p>
+            </div>
+            <div class="img img-default">
+              <picture>
+                <source type="image/webp" srcset="../assets/img/slides/se/relay-testing/relay-8-200.webp 200w, ../assets/img/slides/se/relay-testing/relay-8-472.webp 472w" sizes="(max-width: 576px) 92vw, (max-width: 992px) 46vw, 468px" />
+                <img width="472" height="354" src="../assets/img/slides/se/relay-testing/relay-8.jpeg" alt="Teste de proteção de relés nos vãos AY e BX da SE-E1 (foto 4 de 6)" loading="lazy" />
+              </picture>
+              <p class="obs obs-default invisible"></p>
+            </div>
+            <div class="img img-default">
+              <picture>
+                <source type="image/webp" srcset="../assets/img/slides/se/relay-testing/relay-9-200.webp 200w, ../assets/img/slides/se/relay-testing/relay-9-472.webp 472w" sizes="(max-width: 576px) 92vw, (max-width: 992px) 46vw, 468px" />
+                <img width="472" height="354" src="../assets/img/slides/se/relay-testing/relay-9.jpeg" alt="Teste de proteção de relés nos vãos AY e BX da SE-E1 (foto 5 de 6)" loading="lazy" />
+              </picture>
+              <p class="obs obs-default invisible"></p>
+            </div>
+            <div class="img img-default">
+              <picture>
+                <source type="image/webp" srcset="../assets/img/slides/se/relay-testing/relay-10-200.webp 200w, ../assets/img/slides/se/relay-testing/relay-10-472.webp 472w" sizes="(max-width: 576px) 92vw, (max-width: 992px) 46vw, 468px" />
+                <img width="472" height="354" src="../assets/img/slides/se/relay-testing/relay-10.jpeg" alt="Teste de proteção de relés nos vãos AY e BX da SE-E1 (foto 6 de 6)" loading="lazy" />
+              </picture>
+              <p class="obs obs-default invisible"></p>
+            </div>
+          </div>
+          <div class="postscriptum-container">
+            <div class="postscriptum-wrapper post-details">
+              <p>Na ocasião foi identificado que o LED (Target LED 6) que indica faltas à terra (REF) no UPC1BX não estava ficando aceso (Latch), sendo assim foi alterada sua condição para acender quando houver faltas correlatas à terra.</p>
+              <p>Foi identificado que a atuação da BO OUT301 de Desligamento/Proteção do disjuntor do TRRD, no IED UPC2BX, não estava aparecendo no log de eventos (SER) do SEL, sendo assim, foi realizada a implementação da alteração no SER Points para indicar essa alteração.</p>
+              <p>Ao testar a função diferencial 87 no UPC1BX, foi detectado que para as BOs serem atuadas é necessário recepção de goose através das CCIN01, 02 e 03, não podendo ser identificadas a partir da configuração 61850 do IED. Portanto, para o teste isolado do IED, foi negada temporariamente essa condição para que o teste pudesse ser realizado.</p>
+              <p>Por fim, durante os testes, foram coletados ainda relatórios das macros de teste na mala VEBKO, logs de evento do IED, oscilografias, printscreen de atuações das proteções na lista de alarmes e logs do SAGE.</p>
+            </div>
+          </div>
         </div>
       </div>
     </main>

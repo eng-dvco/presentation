@@ -32,9 +32,13 @@
     .then(function (r) { return r.text(); })
     .then(function (html) {
       var doc = new DOMParser().parseFromString(html, 'text/html');
-      // apenas os RDCs: <li> cujo id começa com "doc-" (as fichas/planilhas sem
-      // id ficam de fora). Na ordem em que aparecem no index.html.
-      var items = doc.querySelectorAll('li[id^="doc-"]');
+      // apenas os RDCs: <li> com id "doc-" contendo "RDC" — mesmo critério de
+      // scripts/slide-banner.js (outros documentos, como as Cartas, também têm
+      // id para deep-link, mas não pertencem a esta lista). Na ordem do index.html.
+      var items = Array.prototype.filter.call(
+        doc.querySelectorAll('li[id^="doc-"]'),
+        function (li) { return /RDC/i.test(li.id); }
+      );
       if (!items.length) return;
 
       var frag = document.createDocumentFragment();

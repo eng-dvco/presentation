@@ -1,9 +1,176 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "31-08-26",
- "commits": 234,
- "total": 509,
+ "commits": 237,
+ "total": 511,
  "registros": [
+  {
+   "id": "972012a-0",
+   "data": "31-08-26",
+   "hora": "09:42",
+   "commit": "972012a",
+   "aba": "conteudo",
+   "link": "slides/slide-computer-replacement.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Instalação de computadores e periféricos"
+   ],
+   "titulo": "Instalação de computadores e periféricos",
+   "tipo": "nome do slide · título",
+   "tipos": [
+    "nome do slide",
+    "título"
+   ],
+   "partes": [
+    {
+     "tipo": "nome do slide",
+     "de": "Instalação de computadores de engenharia",
+     "para": "Instalação de computadores e periféricos"
+    },
+    {
+     "tipo": "título",
+     "de": "Instalação de computadores",
+     "para": "Instalação de computadores e periféricos"
+    }
+   ]
+  },
+  {
+   "id": "70c4092-0",
+   "data": "31-08-26",
+   "hora": "09:42",
+   "commit": "70c4092",
+   "aba": "conteudo",
+   "link": "slides/slide-tag-replacement.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Reposição de etiquetas dos equipamentos",
+    "Aplicação das etiquetas"
+   ],
+   "titulo": "Aplicação das etiquetas",
+   "tipo": "imagens · observação",
+   "tipos": [
+    "imagens",
+    "observação"
+   ],
+   "partes": [
+    {
+     "tipo": "imagens",
+     "legendas": [
+      {
+       "texto": "cubículo de média tensão",
+       "imagens": {
+        "total": 2,
+        "pesoTotal": "96 KB",
+        "amostra": [
+         {
+          "nome": "tag-3.jpeg",
+          "src": "assets/img/slides/se/tag-replacement/tag-3.jpeg",
+          "miniatura": "assets/img/slides/se/tag-replacement/tag-3-200.webp",
+          "peso": "50 KB"
+         },
+         {
+          "nome": "tag-4.jpeg",
+          "src": "assets/img/slides/se/tag-replacement/tag-4.jpeg",
+          "miniatura": "assets/img/slides/se/tag-replacement/tag-4-200.webp",
+          "peso": "46 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "TSA",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "55 KB",
+        "amostra": [
+         {
+          "nome": "tag-5.jpeg",
+          "src": "assets/img/slides/se/tag-replacement/tag-5.jpeg",
+          "miniatura": "assets/img/slides/se/tag-replacement/tag-5-200.webp",
+          "peso": "55 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "USCA",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "46 KB",
+        "amostra": [
+         {
+          "nome": "tag-6.jpeg",
+          "src": "assets/img/slides/se/tag-replacement/tag-6.jpeg",
+          "miniatura": "assets/img/slides/se/tag-replacement/tag-6-200.webp",
+          "peso": "46 KB"
+         }
+        ],
+        "extras": 0
+       }
+      }
+     ],
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "197 KB",
+      "amostra": [
+       {
+        "nome": "tag-3.jpeg",
+        "src": "assets/img/slides/se/tag-replacement/tag-3.jpeg",
+        "miniatura": "assets/img/slides/se/tag-replacement/tag-3-200.webp",
+        "peso": "50 KB"
+       },
+       {
+        "nome": "tag-4.jpeg",
+        "src": "assets/img/slides/se/tag-replacement/tag-4.jpeg",
+        "miniatura": "assets/img/slides/se/tag-replacement/tag-4-200.webp",
+        "peso": "46 KB"
+       },
+       {
+        "nome": "tag-5.jpeg",
+        "src": "assets/img/slides/se/tag-replacement/tag-5.jpeg",
+        "miniatura": "assets/img/slides/se/tag-replacement/tag-5-200.webp",
+        "peso": "55 KB"
+       },
+       {
+        "nome": "tag-6.jpeg",
+        "src": "assets/img/slides/se/tag-replacement/tag-6.jpeg",
+        "miniatura": "assets/img/slides/se/tag-replacement/tag-6-200.webp",
+        "peso": "46 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 4
+    },
+    {
+     "tipo": "observação",
+     "resumo": "caixa de TC",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "170 KB",
+      "amostra": [
+       {
+        "nome": "tag-1.jpeg",
+        "src": "assets/img/slides/se/tag-replacement/tag-1.jpeg",
+        "miniatura": "assets/img/slides/se/tag-replacement/tag-1-200.webp",
+        "peso": "91 KB"
+       },
+       {
+        "nome": "tag-2.jpeg",
+        "src": "assets/img/slides/se/tag-replacement/tag-2.jpeg",
+        "miniatura": "assets/img/slides/se/tag-replacement/tag-2-200.webp",
+        "peso": "80 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ]
+  },
   {
    "id": "f3acc08-6",
    "data": "31-08-26",
@@ -12836,7 +13003,7 @@
    "titulo": "Instalação de computadores",
    "breadcrumb": [
     "SE — Subestação",
-    "Instalação de computadores de engenharia"
+    "Instalação de computadores e periféricos"
    ],
    "resumo": "Processo e resultado",
    "imagens": {

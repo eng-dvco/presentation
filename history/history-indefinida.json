@@ -1,9 +1,70 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "31-08-26",
- "commits": 245,
- "total": 522,
+ "commits": 247,
+ "total": 523,
  "registros": [
+  {
+   "id": "468b8f9-0",
+   "data": "31-08-26",
+   "hora": "10:24",
+   "commit": "468b8f9",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis",
+    "Indicador de curva de saturação"
+   ],
+   "titulo": "Indicador de curva de saturação",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "689 KB",
+      "amostra": [
+       {
+        "nome": "curve-1.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/curve-1.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/curve-1-200.webp",
+        "peso": "140 KB"
+       },
+       {
+        "nome": "curve-2.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/curve-2.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/curve-2-200.webp",
+        "peso": "266 KB"
+       },
+       {
+        "nome": "curve-3.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/curve-3.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/curve-3-200.webp",
+        "peso": "194 KB"
+       },
+       {
+        "nome": "curve-4.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/curve-4.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/curve-4-200.webp",
+        "peso": "88 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 4
+    }
+   ]
+  },
   {
    "id": "0145382-5",
    "data": "31-08-26",

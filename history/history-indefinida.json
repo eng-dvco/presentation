@@ -1,9 +1,26 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "31-08-26",
- "commits": 241,
- "total": 515,
+ "commits": 243,
+ "total": 516,
  "registros": [
+  {
+   "id": "a903b80-0",
+   "data": "31-08-26",
+   "hora": "10:10",
+   "commit": "a903b80",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis"
+   ],
+   "de": "Eventos › Equipamentos disponíveis",
+   "para": "SE — Subestação › Equipamentos disponíveis"
+  },
   {
    "id": "d8e41e2-2",
    "data": "31-08-26",
@@ -636,7 +653,7 @@
    "link": "slides/slide-equipment-acquisition.html",
    "acao": "modificação",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis"
    ],
    "titulo": "Equipamentos disponíveis",
@@ -1755,7 +1772,7 @@
    "link": "slides/slide-equipment-acquisition.html",
    "acao": "adição",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Oscilógrafo"
    ],
@@ -2966,7 +2983,7 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Câmera termográfica"
    ],
@@ -2998,7 +3015,7 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Ferramentas adquiridas"
    ],
@@ -3493,7 +3510,7 @@
    "tipo": "subtítulo",
    "titulo": "Câmera termográfica",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Câmera termográfica"
    ]
@@ -3509,7 +3526,7 @@
    "tipo": "subtítulo",
    "titulo": "Ferramentas adquiridas",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Ferramentas adquiridas"
    ]
@@ -7286,7 +7303,7 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Maleta de teste para relé de proteção"
    ],
@@ -7465,7 +7482,7 @@
    "link": "slides/slide-equipment-acquisition.html",
    "acao": "adição",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Maleta de teste para relé de proteção"
    ],
@@ -7808,7 +7825,7 @@
    "link": "slides/slide-equipment-acquisition.html",
    "acao": "adição",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis"
    ],
    "titulo": "Equipamentos disponíveis",
@@ -10088,7 +10105,7 @@
    "tipo": "imagens",
    "titulo": "Aquisição de equipamentos",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis"
    ],
    "legendas": [],
@@ -10124,7 +10141,7 @@
    "tipo": "observação",
    "titulo": "Drone termográfico",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Drone termográfico"
    ],
@@ -12872,7 +12889,7 @@
    "tipo": "observação",
    "titulo": "Drone termográfico",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis",
     "Drone termográfico"
    ],
@@ -17895,7 +17912,7 @@
    "tipo": "slide",
    "titulo": "Aquisição de equipamentos",
    "breadcrumb": [
-    "Eventos",
+    "SE — Subestação",
     "Equipamentos disponíveis"
    ],
    "resumo": "Drone termográfico · Instrumentação",

@@ -1,9 +1,40 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "18-08-26",
- "commits": 229,
- "total": 501,
+ "geradoEm": "31-08-26",
+ "commits": 231,
+ "total": 502,
  "registros": [
+  {
+   "id": "2c363fa-0",
+   "data": "31-08-26",
+   "hora": "09:15",
+   "commit": "2c363fa",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "modificação",
+   "breadcrumb": [
+    "Eventos",
+    "Equipamentos disponíveis"
+   ],
+   "titulo": "Equipamentos disponíveis",
+   "tipo": "nome do slide · título",
+   "tipos": [
+    "nome do slide",
+    "título"
+   ],
+   "partes": [
+    {
+     "tipo": "nome do slide",
+     "de": "Aquisição de equipamentos de medição e inspeção",
+     "para": "Equipamentos disponíveis"
+    },
+    {
+     "tipo": "título",
+     "de": "Aquisição de equipamentos",
+     "para": "Equipamentos disponíveis"
+    }
+   ]
+  },
   {
    "id": "5c460da-0",
    "data": "18-08-26",
@@ -1094,7 +1125,7 @@
    "acao": "adição",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Oscilógrafo"
    ],
    "titulo": "Oscilógrafo",
@@ -2305,7 +2336,7 @@
    "titulo": null,
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Câmera termográfica"
    ],
    "de": "Eventos › Aquisição de equipamentos de medição e inspeção › Maleta de teste para relé de proteção",
@@ -2337,7 +2368,7 @@
    "titulo": null,
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Ferramentas adquiridas"
    ],
    "de": "Eventos › Aquisição de equipamentos de medição e inspeção › Maleta de teste para relé de proteção",
@@ -2832,7 +2863,7 @@
    "titulo": "Câmera termográfica",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Câmera termográfica"
    ]
   },
@@ -2848,7 +2879,7 @@
    "titulo": "Ferramentas adquiridas",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Ferramentas adquiridas"
    ]
   },
@@ -6631,7 +6662,7 @@
    "titulo": null,
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Maleta de teste para relé de proteção"
    ],
    "de": "Eventos › Aquisição de equipamentos de medição e inspeção",
@@ -6810,7 +6841,7 @@
    "acao": "adição",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Maleta de teste para relé de proteção"
    ],
    "titulo": "Maleta de teste para relé de proteção",
@@ -7153,9 +7184,9 @@
    "acao": "adição",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção"
+    "Equipamentos disponíveis"
    ],
-   "titulo": "Aquisição de equipamentos de medição e inspeção",
+   "titulo": "Equipamentos disponíveis",
    "tipo": "observação",
    "tipos": [
     "observação"
@@ -9433,7 +9464,7 @@
    "titulo": "Aquisição de equipamentos",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção"
+    "Equipamentos disponíveis"
    ],
    "legendas": [],
    "imagens": {
@@ -9469,7 +9500,7 @@
    "titulo": "Drone termográfico",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Drone termográfico"
    ],
    "resumo": "drone termográfico",
@@ -12217,7 +12248,7 @@
    "titulo": "Drone termográfico",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção",
+    "Equipamentos disponíveis",
     "Drone termográfico"
    ],
    "resumo": "drone termográfico",
@@ -13359,8 +13390,7 @@
     "tamanho": "1,1 MB",
     "paginas": "—",
     "inserido": "15/06/2026",
-    "descricao": "Painel de controle do reforço estrutural das torres autoportantes dos eixos Leste e Norte, com dashboards e status das bases.",
-    "slide": "slides/slide-concrete-base-repair.html"
+    "descricao": "Painel de controle do reforço estrutural das torres autoportantes dos eixos Leste e Norte, com dashboards e status das bases."
    },
    "campos": [
     "descricao"
@@ -16074,8 +16104,7 @@
     "tamanho": "1,1 MB",
     "paginas": "—",
     "inserido": "15/06/2026",
-    "descricao": "descrição não fornecida",
-    "slide": "slides/slide-concrete-base-repair.html"
+    "descricao": "descrição não fornecida"
    }
   },
   {
@@ -17238,7 +17267,7 @@
    "titulo": "Aquisição de equipamentos",
    "breadcrumb": [
     "Eventos",
-    "Aquisição de equipamentos de medição e inspeção"
+    "Equipamentos disponíveis"
    ],
    "resumo": "Drone termográfico · Instrumentação",
    "imagens": {

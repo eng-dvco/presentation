@@ -1,9 +1,81 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "31-08-26",
- "commits": 247,
- "total": 523,
+ "commits": 249,
+ "total": 524,
  "registros": [
+  {
+   "id": "52bc0b7-0",
+   "data": "31-08-26",
+   "hora": "10:32",
+   "commit": "52bc0b7",
+   "aba": "conteudo",
+   "link": "slides/slide-relay-testing.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Ensaios em relés",
+    "Teste de proteção de relés (SE-E1)"
+   ],
+   "titulo": "Teste de proteção de relés (SE-E1)",
+   "tipo": "subtítulo · imagens · detalhe",
+   "tipos": [
+    "subtítulo",
+    "imagens",
+    "detalhe"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 6,
+      "pesoTotal": "288 KB",
+      "amostra": [
+       {
+        "nome": "relay-5.jpeg",
+        "src": "assets/img/slides/se/relay-testing/relay-5.jpeg",
+        "miniatura": "assets/img/slides/se/relay-testing/relay-5-200.webp",
+        "peso": "49 KB"
+       },
+       {
+        "nome": "relay-6.jpeg",
+        "src": "assets/img/slides/se/relay-testing/relay-6.jpeg",
+        "miniatura": "assets/img/slides/se/relay-testing/relay-6-200.webp",
+        "peso": "68 KB"
+       },
+       {
+        "nome": "relay-7.jpeg",
+        "src": "assets/img/slides/se/relay-testing/relay-7.jpeg",
+        "miniatura": "assets/img/slides/se/relay-testing/relay-7-200.webp",
+        "peso": "38 KB"
+       },
+       {
+        "nome": "relay-8.jpeg",
+        "src": "assets/img/slides/se/relay-testing/relay-8.jpeg",
+        "miniatura": "assets/img/slides/se/relay-testing/relay-8-200.webp",
+        "peso": "41 KB"
+       },
+       {
+        "nome": "relay-9.jpeg",
+        "src": "assets/img/slides/se/relay-testing/relay-9.jpeg",
+        "miniatura": "assets/img/slides/se/relay-testing/relay-9-200.webp",
+        "peso": "48 KB"
+       }
+      ],
+      "extras": 1
+     },
+     "qtdImagens": 6
+    },
+    {
+     "tipo": "detalhe",
+     "resumo": "Na ocasião foi identificado que o LED (Target LED 6) que indica faltas à terra (REF) no UPC1BX não estava ficando aceso (Latch), sendo assim foi alterada sua condição para acender quando houver faltas correlatas à terra."
+    }
+   ]
+  },
   {
    "id": "468b8f9-0",
    "data": "31-08-26",

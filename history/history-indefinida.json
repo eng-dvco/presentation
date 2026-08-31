@@ -1,9 +1,155 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "31-08-26",
- "commits": 239,
- "total": 512,
+ "commits": 241,
+ "total": 515,
  "registros": [
+  {
+   "id": "d8e41e2-2",
+   "data": "31-08-26",
+   "hora": "10:06",
+   "commit": "d8e41e2",
+   "aba": "conteudo",
+   "link": "slides/slide-computer-replacement.html",
+   "acao": "modificação",
+   "tipo": "subtítulo",
+   "titulo": "Substituição de periféricos (SE-E4)",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Instalação de computadores e periféricos",
+    "Substituição de periféricos (SE-E4)"
+   ],
+   "de": "Substituição de periféricos",
+   "para": "Substituição de periféricos (SE-E4)"
+  },
+  {
+   "id": "d8e41e2-1",
+   "data": "31-08-26",
+   "hora": "10:06",
+   "commit": "d8e41e2",
+   "aba": "conteudo",
+   "link": "slides/slide-computer-replacement.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Instalação de computadores e periféricos",
+    "Substituição de periféricos (SE-E6)"
+   ],
+   "titulo": "Substituição de periféricos (SE-E6)",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 6,
+      "pesoTotal": "293 KB",
+      "amostra": [
+       {
+        "nome": "device-9.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-9.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-9-200.webp",
+        "peso": "42 KB"
+       },
+       {
+        "nome": "device-10.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-10.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-10-200.webp",
+        "peso": "52 KB"
+       },
+       {
+        "nome": "device-11.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-11.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-11-200.webp",
+        "peso": "47 KB"
+       },
+       {
+        "nome": "device-12.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-12.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-12-200.webp",
+        "peso": "51 KB"
+       },
+       {
+        "nome": "monitor-1.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/monitor-1.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/monitor-1-200.webp",
+        "peso": "48 KB"
+       }
+      ],
+      "extras": 1
+     },
+     "qtdImagens": 6
+    }
+   ]
+  },
+  {
+   "id": "d8e41e2-0",
+   "data": "31-08-26",
+   "hora": "10:06",
+   "commit": "d8e41e2",
+   "aba": "conteudo",
+   "link": "slides/slide-computer-replacement.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Instalação de computadores e periféricos",
+    "Substituição de periféricos (SE-E5)"
+   ],
+   "titulo": "Substituição de periféricos (SE-E5)",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "207 KB",
+      "amostra": [
+       {
+        "nome": "device-5.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-5.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-5-200.webp",
+        "peso": "55 KB"
+       },
+       {
+        "nome": "device-6.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-6.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-6-200.webp",
+        "peso": "46 KB"
+       },
+       {
+        "nome": "device-7.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-7.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-7-200.webp",
+        "peso": "50 KB"
+       },
+       {
+        "nome": "device-8.jpeg",
+        "src": "assets/img/slides/se/computer-replacement/device-8.jpeg",
+        "miniatura": "assets/img/slides/se/computer-replacement/device-8-200.webp",
+        "peso": "56 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 4
+    }
+   ]
+  },
   {
    "id": "f6f0e7b-0",
    "data": "31-08-26",

@@ -1,32 +1,44 @@
 # Apresentação — Manutenção do PISF (CMT Engenharia)
 
-Site estático, em formato de slides, das atividades de operação e manutenção de subestações (SE), linhas de transmissão (LT) e de distribuição (LD) dos Eixos Norte e Leste do Projeto de Integração do Rio São Francisco (PISF). Reúne registros fotográficos de campo, segurança do trabalho, eventos, óbices e cronogramas, organizados por área e tópico, além de um glossário técnico e snapshots históricos.
+Site estático, em formato de slides, das atividades de operação e manutenção de subestações (SE), linhas de transmissão (LT) e de distribuição (LD) dos Eixos Norte e Leste do Projeto de Integração do Rio São Francisco (PISF). Reúne registros fotográficos de campo, segurança do trabalho, eventos, óbices e cronogramas, organizados por área e tópico, além de um glossário técnico, um histórico de modificações e snapshots históricos.
 
 ## Como executar
 
-Não há build. Sirva por HTTP a partir da **raiz** `presentation/` — não funciona via `file://`, pois as páginas usam caminhos relativos:
+Não há build. As páginas usam `fetch` e caminhos relativos, portanto **precisam ser servidas por HTTP** — via `file://` a navegação lateral, os banners e o histórico não carregam.
 
-```powershell
-python -m http.server 8000
-start http://localhost:8000/apresentação.html
-```
+- **Duplo clique em `abrir-apresentação.bat`** (Windows) — sobe um servidor local embutido (sem admin, só `localhost`) e abre o navegador em `http://localhost:8123/`. Mantenha a janela do console aberta durante a apresentação; feche-a para encerrar. É a forma recomendada ao distribuir a pasta para outros computadores.
+- Alternativa manual, a partir da raiz `presentation/`:
+
+  ```powershell
+  python -m http.server 8000
+  start http://localhost:8000/apresentação.html
+  ```
+
+## Publicação
+
+A versão online é servida pelo **GitHub Pages** a partir do branch `main`: <https://eng-dvco.github.io/presentation/apresentação.html>. Todo push publica; a página **Histórico de Modificações** (`slides/history.html`) é reconstruída a partir do log do git (`history/history-indefinida.json`) e deve ser regenerada e commitada antes de cada publicação.
 
 ## Estrutura
 
 ```text
 presentation/
-├── apresentação.html   # porta de entrada (landing)
-├── slides/             # index.html (grade de conteúdo) + slide-*.html + moldes (*-template.html)
-├── styles/             # CSS — tokens em variables.css (carregado primeiro)
-├── scripts/            # JS — navegação, lightbox, cronograma
-├── assets/             # imagens, ícones, logos e fontes
-└── public/             # definitions/ (glossário) e snapshots/ (cópias congeladas, imutáveis)
+├── apresentação.html         # porta de entrada (landing)
+├── abrir-apresentação.bat    # execução local (servidor embutido + navegador)
+├── slides/                   # index.html (grade de conteúdo) + slide-*.html + moldes (*-template.html)
+├── styles/                   # CSS — tokens em variables.css (carregado primeiro)
+├── scripts/                  # JS — navegação, lightbox, cronogramas, histórico
+├── assets/                   # imagens, ícones, logos, fontes e mídias
+├── history/                  # dados e miniaturas do Histórico de Modificações
+└── public/                   # definitions/ (glossário) e snapshots/ (cópias congeladas, imutáveis)
 ```
+
+Duas pastas de apoio existem apenas em disco e **não são versionadas**: `tools/` (otimização de imagens, geração do histórico e verificações) e `.documents/` (arquivo-fonte dos documentos listados em "documentos recebidos").
 
 ## Princípios
 
-- **Edição direta** — sem build, CI ou deploy; a publicação é manual e toda alteração é feita na raiz.
+- **Edição direta** — sem build; toda alteração é feita na raiz e publicada por push no `main`.
 - **Navegação automática** — a barra lateral é derivada de `slides/index.html` por `scripts/slide-nav.js`; para incluir, remover ou recategorizar um slide, edite a grade em `index.html`.
+- **Manifesto de imagens** — cada diretório de imagens de slide carrega um `descrição.txt` que descreve subseções, legendas e diretivas de layout das fotos.
 - **Snapshots imutáveis** — nunca edite `public/snapshots/`; são cópias históricas congeladas.
 
 ## Autoria

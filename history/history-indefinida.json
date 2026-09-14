@@ -1,9 +1,158 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "10-09-26",
- "commits": 261,
- "total": 525,
+ "geradoEm": "14-09-26",
+ "commits": 264,
+ "total": 527,
  "registros": [
+  {
+   "id": "e69bd61-0",
+   "data": "14-09-26",
+   "hora": "14:17",
+   "commit": "e69bd61",
+   "aba": "conteudo",
+   "link": "slides/slide-equipment-acquisition.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Equipamentos disponíveis",
+    "Testador de resistência interna"
+   ],
+   "titulo": "Testador de resistência interna",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 6,
+      "pesoTotal": "999 KB",
+      "amostra": [
+       {
+        "nome": "resistance-1.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/resistance-1.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/resistance-1-200.webp",
+        "peso": "175 KB"
+       },
+       {
+        "nome": "resistance-2.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/resistance-2.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/resistance-2-200.webp",
+        "peso": "201 KB"
+       },
+       {
+        "nome": "resistance-3.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/resistance-3.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/resistance-3-200.webp",
+        "peso": "190 KB"
+       },
+       {
+        "nome": "resistance-4.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/resistance-4.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/resistance-4-200.webp",
+        "peso": "209 KB"
+       },
+       {
+        "nome": "resistance-5.jpeg",
+        "src": "assets/img/slides/se/equipment-acquisition/resistance-5.jpeg",
+        "miniatura": "assets/img/slides/se/equipment-acquisition/resistance-5-200.webp",
+        "peso": "107 KB"
+       }
+      ],
+      "extras": 1
+     },
+     "qtdImagens": 6
+    }
+   ]
+  },
+  {
+   "id": "f9ed043-0",
+   "data": "14-09-26",
+   "hora": "14:17",
+   "commit": "f9ed043",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Identificação de torres",
+    "Identificação nas cantoneiras"
+   ],
+   "titulo": "Identificação nas cantoneiras",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [
+      {
+       "texto": "antes",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "88 KB",
+        "amostra": [
+         {
+          "nome": "tower-7.jpeg",
+          "src": "assets/img/slides/lt/tower-identification/tower-7.jpeg",
+          "miniatura": "assets/img/slides/lt/tower-identification/tower-7-200.webp",
+          "peso": "88 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "depois",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "84 KB",
+        "amostra": [
+         {
+          "nome": "tower-8.jpeg",
+          "src": "assets/img/slides/lt/tower-identification/tower-8.jpeg",
+          "miniatura": "assets/img/slides/lt/tower-identification/tower-8-200.webp",
+          "peso": "84 KB"
+         }
+        ],
+        "extras": 0
+       }
+      }
+     ],
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "172 KB",
+      "amostra": [
+       {
+        "nome": "tower-7.jpeg",
+        "src": "assets/img/slides/lt/tower-identification/tower-7.jpeg",
+        "miniatura": "assets/img/slides/lt/tower-identification/tower-7-200.webp",
+        "peso": "88 KB"
+       },
+       {
+        "nome": "tower-8.jpeg",
+        "src": "assets/img/slides/lt/tower-identification/tower-8.jpeg",
+        "miniatura": "assets/img/slides/lt/tower-identification/tower-8-200.webp",
+        "peso": "84 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 2
+    }
+   ]
+  },
   {
    "id": "df5067f-0",
    "data": "10-09-26",

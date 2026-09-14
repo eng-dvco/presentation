@@ -202,6 +202,11 @@ hr {
     mask-image: url(../assets/icons/obstacle.svg);
   }
 
+  &.icon-improvements {
+    -webkit-mask-image: url(../assets/icons/improvements.svg);
+    mask-image: url(../assets/icons/improvements.svg);
+  }
+
   &.icon-safety {
     -webkit-mask-image: url(../assets/icons/safety.svg);
     mask-image: url(../assets/icons/safety.svg);

@@ -358,6 +358,18 @@
   background-position: center 75%;
 }
 
+/* agrupa atividades de melhoria vindas de várias frentes (SE, LT, LD, óbices) */
+.section-improvements {
+  grid-area: auto / span 4 / auto / auto;
+  background-image: url("../assets/img/banner/se-view-2.jpg");
+  background-image: image-set(url("../assets/img/banner/se-view-2.webp") type("image/webp"), url("../assets/img/banner/se-view-2.jpg") type("image/jpeg"));
+  background-position: center 60%;
+
+  & .column-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* needs to update background image */
 .section-safety {
   grid-area: 1 / 1 / 2 / -1;
@@ -383,7 +395,7 @@
 
 .section-obstacles {
   min-width: max-content;
-  grid-area: 4 / 1 / 5 / -1;
+  grid-area: 5 / 1 / 6 / -1;   /* fixa após SE; era 4 antes da fileira Melhorias */
   background-image: url("../assets/img/banner/se-view-3.jpg");
   background-image: image-set(url("../assets/img/banner/se-view-3.webp") type("image/webp"), url("../assets/img/banner/se-view-3.jpg") type("image/jpeg"));
   background-position: 0% center;

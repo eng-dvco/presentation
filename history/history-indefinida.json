@@ -1,9 +1,1841 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "14-09-26",
- "commits": 264,
- "total": 527,
+ "commits": 274,
+ "total": 559,
  "registros": [
+  {
+   "id": "939988b-2",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "939988b",
+   "aba": "conteudo",
+   "link": "slides/slide-atalho-connection.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "Melhorias",
+    "Energização de Atalho"
+   ],
+   "de": "LD — Distribuição › Energização de Atalho",
+   "para": "Melhorias › Energização de Atalho"
+  },
+  {
+   "id": "939988b-1",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "939988b",
+   "aba": "conteudo",
+   "link": "slides/slide-atalho-connection.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Etapas do processo",
+   "breadcrumb": [
+    "Melhorias",
+    "Energização de Atalho",
+    "Etapas do processo"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 6,
+    "pesoTotal": "5,6 MB",
+    "amostra": [
+     {
+      "nome": "atalho-2.jpeg",
+      "src": "assets/img/slides/improvements/atalho-connection/atalho-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/atalho-connection/atalho-2-200.webp",
+      "peso": "336 KB"
+     },
+     {
+      "nome": "atalho-3.jpeg",
+      "src": "assets/img/slides/improvements/atalho-connection/atalho-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/atalho-connection/atalho-3-200.webp",
+      "peso": "306 KB"
+     },
+     {
+      "nome": "atalho-4.jpeg",
+      "src": "assets/img/slides/improvements/atalho-connection/atalho-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/atalho-connection/atalho-4-200.webp",
+      "peso": "553 KB"
+     },
+     {
+      "nome": "atalho-5.jpeg",
+      "src": "assets/img/slides/improvements/atalho-connection/atalho-5.jpeg",
+      "miniatura": "assets/img/slides/improvements/atalho-connection/atalho-5-200.webp",
+      "peso": "2,6 MB"
+     },
+     {
+      "nome": "atalho-6.jpeg",
+      "src": "assets/img/slides/improvements/atalho-connection/atalho-6.jpeg",
+      "miniatura": "assets/img/slides/improvements/atalho-connection/atalho-6-200.webp",
+      "peso": "543 KB"
+     }
+    ],
+    "extras": 1
+   },
+   "qtdImagens": 6,
+   "removidas": 6
+  },
+  {
+   "id": "939988b-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "939988b",
+   "aba": "conteudo",
+   "link": "slides/slide-atalho-connection.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Linha do tempo do serviço",
+   "breadcrumb": [
+    "Melhorias",
+    "Energização de Atalho",
+    "Linha do tempo do serviço"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "286 KB",
+    "amostra": [
+     {
+      "nome": "atalho-1.jpeg",
+      "src": "assets/img/slides/improvements/atalho-connection/atalho-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/atalho-connection/atalho-1-200.webp",
+      "peso": "286 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1,
+   "removidas": 1
+  },
+  {
+   "id": "0a76d81-4",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "0a76d81",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "Melhorias",
+    "Identificação de torres"
+   ],
+   "de": "LT — Transmissão › Identificação de torres",
+   "para": "Melhorias › Identificação de torres"
+  },
+  {
+   "id": "0a76d81-3",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "0a76d81",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Identificação nas cantoneiras",
+   "breadcrumb": [
+    "Melhorias",
+    "Identificação de torres",
+    "Identificação nas cantoneiras"
+   ],
+   "legendas": [
+    {
+     "texto": "antes",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "88 KB",
+      "amostra": [
+       {
+        "nome": "tower-7.jpeg",
+        "src": "assets/img/slides/improvements/tower-identification/tower-7.jpeg",
+        "miniatura": "assets/img/slides/improvements/tower-identification/tower-7-200.webp",
+        "peso": "88 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "depois",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "84 KB",
+      "amostra": [
+       {
+        "nome": "tower-8.jpeg",
+        "src": "assets/img/slides/improvements/tower-identification/tower-8.jpeg",
+        "miniatura": "assets/img/slides/improvements/tower-identification/tower-8-200.webp",
+        "peso": "84 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "172 KB",
+    "amostra": [
+     {
+      "nome": "tower-7.jpeg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-7.jpeg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-7-200.webp",
+      "peso": "88 KB"
+     },
+     {
+      "nome": "tower-8.jpeg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-8.jpeg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-8-200.webp",
+      "peso": "84 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "0a76d81-2",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "0a76d81",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Identificação das bases das torres",
+   "breadcrumb": [
+    "Melhorias",
+    "Identificação de torres",
+    "Identificação das bases das torres"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "439 KB",
+    "amostra": [
+     {
+      "nome": "tower-5.jpeg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-5.jpeg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-5-200.webp",
+      "peso": "175 KB"
+     },
+     {
+      "nome": "tower-6.jpeg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-6.jpeg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-6-200.webp",
+      "peso": "265 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "0a76d81-1",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "0a76d81",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Etapas da substituição",
+   "breadcrumb": [
+    "Melhorias",
+    "Identificação de torres",
+    "Etapas da substituição"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "656 KB",
+    "amostra": [
+     {
+      "nome": "tower-1.jpeg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-1-200.webp",
+      "peso": "161 KB"
+     },
+     {
+      "nome": "tower-2.jpeg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-2-200.webp",
+      "peso": "197 KB"
+     },
+     {
+      "nome": "tower-3.jpeg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-3-200.webp",
+      "peso": "139 KB"
+     },
+     {
+      "nome": "tower-4.jpeg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-4-200.webp",
+      "peso": "159 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "0a76d81-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "0a76d81",
+   "aba": "conteudo",
+   "link": "slides/slide-tower-identification.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Quantitativo de placas pendentes e substituídas",
+   "breadcrumb": [
+    "Melhorias",
+    "Identificação de torres",
+    "Quantitativo de placas pendentes e substituídas"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "417 KB",
+    "amostra": [
+     {
+      "nome": "tower-0.jpg",
+      "src": "assets/img/slides/improvements/tower-identification/tower-0.jpg",
+      "miniatura": "assets/img/slides/improvements/tower-identification/tower-0-200.webp",
+      "peso": "417 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1,
+   "removidas": 1
+  },
+  {
+   "id": "0d44fb6-2",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "0d44fb6",
+   "aba": "conteudo",
+   "link": "slides/slide-water-supply.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "Melhorias",
+    "Substituição da tubulação de abastecimento"
+   ],
+   "de": "Óbices › Substituição da tubulação de abastecimento",
+   "para": "Melhorias › Substituição da tubulação de abastecimento"
+  },
+  {
+   "id": "0d44fb6-1",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "0d44fb6",
+   "aba": "conteudo",
+   "link": "slides/slide-water-supply.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Subestação SE-E6",
+   "breadcrumb": [
+    "Melhorias",
+    "Substituição da tubulação de abastecimento",
+    "Subestação SE-E6"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 6,
+    "pesoTotal": "382 KB",
+    "amostra": [
+     {
+      "nome": "supply-7.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-7.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-7-200.webp",
+      "peso": "76 KB"
+     },
+     {
+      "nome": "supply-8.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-8.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-8-200.webp",
+      "peso": "81 KB"
+     },
+     {
+      "nome": "supply-9.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-9.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-9-200.webp",
+      "peso": "52 KB"
+     },
+     {
+      "nome": "supply-10.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-10.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-10-200.webp",
+      "peso": "70 KB"
+     },
+     {
+      "nome": "supply-11.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-11.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-11-200.webp",
+      "peso": "43 KB"
+     }
+    ],
+    "extras": 1
+   },
+   "qtdImagens": 6,
+   "removidas": 6
+  },
+  {
+   "id": "0d44fb6-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "0d44fb6",
+   "aba": "conteudo",
+   "link": "slides/slide-water-supply.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Subestação SE-E5",
+   "breadcrumb": [
+    "Melhorias",
+    "Substituição da tubulação de abastecimento",
+    "Subestação SE-E5"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 6,
+    "pesoTotal": "470 KB",
+    "amostra": [
+     {
+      "nome": "supply-1.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-1-200.webp",
+      "peso": "73 KB"
+     },
+     {
+      "nome": "supply-2.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-2-200.webp",
+      "peso": "82 KB"
+     },
+     {
+      "nome": "supply-3.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-3-200.webp",
+      "peso": "92 KB"
+     },
+     {
+      "nome": "supply-4.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-4-200.webp",
+      "peso": "78 KB"
+     },
+     {
+      "nome": "supply-5.jpeg",
+      "src": "assets/img/slides/improvements/water-supply/supply-5.jpeg",
+      "miniatura": "assets/img/slides/improvements/water-supply/supply-5-200.webp",
+      "peso": "95 KB"
+     }
+    ],
+    "extras": 1
+   },
+   "qtdImagens": 6,
+   "removidas": 6
+  },
+  {
+   "id": "892fc95-7",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "892fc95",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "Melhorias",
+    "Revitalização geral"
+   ],
+   "de": "SE — Subestação › Revitalização geral",
+   "para": "Melhorias › Revitalização geral"
+  },
+  {
+   "id": "892fc95-6",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "892fc95",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Restauração da pintura dos portões",
+   "breadcrumb": [
+    "Melhorias",
+    "Revitalização geral",
+    "Restauração da pintura dos portões"
+   ],
+   "legendas": [
+    {
+     "texto": "durante",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "72 KB",
+      "amostra": [
+       {
+        "nome": "door-1.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/door-1.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/door-1-200.webp",
+        "peso": "72 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "após",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "60 KB",
+      "amostra": [
+       {
+        "nome": "door-2.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/door-2.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/door-2-200.webp",
+        "peso": "60 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "durante",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "90 KB",
+      "amostra": [
+       {
+        "nome": "door-3.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/door-3.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/door-3-200.webp",
+        "peso": "90 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "após",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "93 KB",
+      "amostra": [
+       {
+        "nome": "door-4.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/door-4.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/door-4-200.webp",
+        "peso": "93 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "315 KB",
+    "amostra": [
+     {
+      "nome": "door-1.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/door-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/door-1-200.webp",
+      "peso": "72 KB"
+     },
+     {
+      "nome": "door-2.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/door-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/door-2-200.webp",
+      "peso": "60 KB"
+     },
+     {
+      "nome": "door-3.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/door-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/door-3-200.webp",
+      "peso": "90 KB"
+     },
+     {
+      "nome": "door-4.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/door-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/door-4-200.webp",
+      "peso": "93 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "892fc95-5",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "892fc95",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Vedação polimérica das portas",
+   "breadcrumb": [
+    "Melhorias",
+    "Revitalização geral",
+    "Vedação polimérica das portas"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "88 KB",
+    "amostra": [
+     {
+      "nome": "seal-1.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/seal-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/seal-1-200.webp",
+      "peso": "44 KB"
+     },
+     {
+      "nome": "seal-2.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/seal-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/seal-2-200.webp",
+      "peso": "44 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "892fc95-4",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "892fc95",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Restauração da pintura da casa de comando",
+   "breadcrumb": [
+    "Melhorias",
+    "Revitalização geral",
+    "Restauração da pintura da casa de comando"
+   ],
+   "legendas": [
+    {
+     "texto": "durante",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "51 KB",
+      "amostra": [
+       {
+        "nome": "building-1.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/building-1.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/building-1-200.webp",
+        "peso": "51 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "após",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "58 KB",
+      "amostra": [
+       {
+        "nome": "building-2.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/building-2.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/building-2-200.webp",
+        "peso": "58 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "durante",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "42 KB",
+      "amostra": [
+       {
+        "nome": "building-3.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/building-3.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/building-3-200.webp",
+        "peso": "42 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "após",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "50 KB",
+      "amostra": [
+       {
+        "nome": "building-4.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/building-4.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/building-4-200.webp",
+        "peso": "50 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "201 KB",
+    "amostra": [
+     {
+      "nome": "building-1.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/building-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/building-1-200.webp",
+      "peso": "51 KB"
+     },
+     {
+      "nome": "building-2.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/building-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/building-2-200.webp",
+      "peso": "58 KB"
+     },
+     {
+      "nome": "building-3.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/building-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/building-3-200.webp",
+      "peso": "42 KB"
+     },
+     {
+      "nome": "building-4.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/building-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/building-4-200.webp",
+      "peso": "50 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "892fc95-3",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "892fc95",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Reposição da pia da guarita",
+   "breadcrumb": [
+    "Melhorias",
+    "Revitalização geral",
+    "Reposição da pia da guarita"
+   ],
+   "legendas": [
+    {
+     "texto": "elemento danificado",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "84 KB",
+      "amostra": [
+       {
+        "nome": "sink-1.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/sink-1.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/sink-1-200.webp",
+        "peso": "84 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "elemento substituído",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "65 KB",
+      "amostra": [
+       {
+        "nome": "sink-2.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/sink-2.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/sink-2-200.webp",
+        "peso": "65 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "148 KB",
+    "amostra": [
+     {
+      "nome": "sink-1.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/sink-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/sink-1-200.webp",
+      "peso": "84 KB"
+     },
+     {
+      "nome": "sink-2.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/sink-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/sink-2-200.webp",
+      "peso": "65 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "892fc95-2",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "892fc95",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Restauração da pintura das calçadas",
+   "breadcrumb": [
+    "Melhorias",
+    "Revitalização geral",
+    "Restauração da pintura das calçadas"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "235 KB",
+    "amostra": [
+     {
+      "nome": "sidewalk-1.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/sidewalk-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/sidewalk-1-200.webp",
+      "peso": "68 KB"
+     },
+     {
+      "nome": "sidewalk-2.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/sidewalk-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/sidewalk-2-200.webp",
+      "peso": "53 KB"
+     },
+     {
+      "nome": "sidewalk-3.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/sidewalk-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/sidewalk-3-200.webp",
+      "peso": "59 KB"
+     },
+     {
+      "nome": "sidewalk-4.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/sidewalk-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/sidewalk-4-200.webp",
+      "peso": "55 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "892fc95-1",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "892fc95",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Reposição de meio-fio e canaleta",
+   "breadcrumb": [
+    "Melhorias",
+    "Revitalização geral",
+    "Reposição de meio-fio e canaleta"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "432 KB",
+    "amostra": [
+     {
+      "nome": "slab-1.jpg",
+      "src": "assets/img/slides/improvements/substation-restoration/slab-1.jpg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/slab-1-200.webp",
+      "peso": "122 KB"
+     },
+     {
+      "nome": "slab-2.jpg",
+      "src": "assets/img/slides/improvements/substation-restoration/slab-2.jpg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/slab-2-200.webp",
+      "peso": "92 KB"
+     },
+     {
+      "nome": "slab-3.jpg",
+      "src": "assets/img/slides/improvements/substation-restoration/slab-3.jpg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/slab-3-200.webp",
+      "peso": "113 KB"
+     },
+     {
+      "nome": "slab-4.jpg",
+      "src": "assets/img/slides/improvements/substation-restoration/slab-4.jpg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/slab-4-200.webp",
+      "peso": "105 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "892fc95-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "892fc95",
+   "aba": "conteudo",
+   "link": "slides/slide-substation-restoration.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Execução geral",
+   "breadcrumb": [
+    "Melhorias",
+    "Revitalização geral",
+    "Execução geral"
+   ],
+   "legendas": [
+    {
+     "texto": "meios-fios",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "143 KB",
+      "amostra": [
+       {
+        "nome": "paint-1.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-1.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-1-200.webp",
+        "peso": "72 KB"
+       },
+       {
+        "nome": "paint-2.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-2.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-2-200.webp",
+        "peso": "71 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "cabanas de extintores",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "134 KB",
+      "amostra": [
+       {
+        "nome": "paint-3.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-3.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-3-200.webp",
+        "peso": "63 KB"
+       },
+       {
+        "nome": "paint-4.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-4.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-4-200.webp",
+        "peso": "70 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "cubículo de média tensão",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "132 KB",
+      "amostra": [
+       {
+        "nome": "paint-5.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-5.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-5-200.webp",
+        "peso": "63 KB"
+       },
+       {
+        "nome": "paint-6.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-6.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-6-200.webp",
+        "peso": "70 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "degraus",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "45 KB",
+      "amostra": [
+       {
+        "nome": "paint-7.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-7.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-7-200.webp",
+        "peso": "45 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "rampas",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "50 KB",
+      "amostra": [
+       {
+        "nome": "paint-8.jpeg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-8.jpeg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-8-200.webp",
+        "peso": "50 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "portões de acesso",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "505 KB",
+      "amostra": [
+       {
+        "nome": "paint-9.jpg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-9.jpg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-9-200.webp",
+        "peso": "224 KB"
+       },
+       {
+        "nome": "paint-10.jpg",
+        "src": "assets/img/slides/improvements/substation-restoration/paint-10.jpg",
+        "miniatura": "assets/img/slides/improvements/substation-restoration/paint-10-200.webp",
+        "peso": "281 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 16,
+    "pesoTotal": "2,5 MB",
+    "amostra": [
+     {
+      "nome": "paint-1.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/paint-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/paint-1-200.webp",
+      "peso": "72 KB"
+     },
+     {
+      "nome": "paint-2.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/paint-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/paint-2-200.webp",
+      "peso": "71 KB"
+     },
+     {
+      "nome": "paint-3.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/paint-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/paint-3-200.webp",
+      "peso": "63 KB"
+     },
+     {
+      "nome": "paint-4.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/paint-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/paint-4-200.webp",
+      "peso": "70 KB"
+     },
+     {
+      "nome": "paint-5.jpeg",
+      "src": "assets/img/slides/improvements/substation-restoration/paint-5.jpeg",
+      "miniatura": "assets/img/slides/improvements/substation-restoration/paint-5-200.webp",
+      "peso": "63 KB"
+     }
+    ],
+    "extras": 11
+   },
+   "qtdImagens": 16,
+   "removidas": 16
+  },
+  {
+   "id": "1c3b1a7-1",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "1c3b1a7",
+   "aba": "conteudo",
+   "link": "slides/slide-fence-post-repair.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "Melhorias",
+    "Substituição de mourões"
+   ],
+   "de": "SE — Subestação › Substituição de mourões",
+   "para": "Melhorias › Substituição de mourões"
+  },
+  {
+   "id": "1c3b1a7-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "1c3b1a7",
+   "aba": "conteudo",
+   "link": "slides/slide-fence-post-repair.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Substituição de mourões",
+   "breadcrumb": [
+    "Melhorias",
+    "Substituição de mourões"
+   ],
+   "legendas": [
+    {
+     "texto": "mourões danificados",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "1,2 MB",
+      "amostra": [
+       {
+        "nome": "fence-1.jpeg",
+        "src": "assets/img/slides/improvements/fence-post-repair/fence-1.jpeg",
+        "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-1-200.webp",
+        "peso": "646 KB"
+       },
+       {
+        "nome": "fence-2.jpeg",
+        "src": "assets/img/slides/improvements/fence-post-repair/fence-2.jpeg",
+        "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-2-200.webp",
+        "peso": "568 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "mourões para substituição",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "555 KB",
+      "amostra": [
+       {
+        "nome": "fence-3.jpeg",
+        "src": "assets/img/slides/improvements/fence-post-repair/fence-3.jpeg",
+        "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-3-200.webp",
+        "peso": "555 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "chumbamento",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "270 KB",
+      "amostra": [
+       {
+        "nome": "fence-4.jpeg",
+        "src": "assets/img/slides/improvements/fence-post-repair/fence-4.jpeg",
+        "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-4-200.webp",
+        "peso": "270 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "mourão chumbado",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "350 KB",
+      "amostra": [
+       {
+        "nome": "fence-5.jpeg",
+        "src": "assets/img/slides/improvements/fence-post-repair/fence-5.jpeg",
+        "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-5-200.webp",
+        "peso": "350 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "substituição completa",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "372 KB",
+      "amostra": [
+       {
+        "nome": "fence-6.jpeg",
+        "src": "assets/img/slides/improvements/fence-post-repair/fence-6.jpeg",
+        "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-6-200.webp",
+        "peso": "372 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 6,
+    "pesoTotal": "2,7 MB",
+    "amostra": [
+     {
+      "nome": "fence-1.jpeg",
+      "src": "assets/img/slides/improvements/fence-post-repair/fence-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-1-200.webp",
+      "peso": "646 KB"
+     },
+     {
+      "nome": "fence-2.jpeg",
+      "src": "assets/img/slides/improvements/fence-post-repair/fence-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-2-200.webp",
+      "peso": "568 KB"
+     },
+     {
+      "nome": "fence-3.jpeg",
+      "src": "assets/img/slides/improvements/fence-post-repair/fence-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-3-200.webp",
+      "peso": "555 KB"
+     },
+     {
+      "nome": "fence-4.jpeg",
+      "src": "assets/img/slides/improvements/fence-post-repair/fence-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-4-200.webp",
+      "peso": "270 KB"
+     },
+     {
+      "nome": "fence-5.jpeg",
+      "src": "assets/img/slides/improvements/fence-post-repair/fence-5.jpeg",
+      "miniatura": "assets/img/slides/improvements/fence-post-repair/fence-5-200.webp",
+      "peso": "350 KB"
+     }
+    ],
+    "extras": 1
+   },
+   "qtdImagens": 6,
+   "removidas": 6
+  },
+  {
+   "id": "1926ab9-1",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "1926ab9",
+   "aba": "conteudo",
+   "link": "slides/slide-roof-repair.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "Melhorias",
+    "Reparo em telhado de fibrocimento"
+   ],
+   "de": "SE — Subestação › Reparo em telhado de fibrocimento",
+   "para": "Melhorias › Reparo em telhado de fibrocimento"
+  },
+  {
+   "id": "1926ab9-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "1926ab9",
+   "aba": "conteudo",
+   "link": "slides/slide-roof-repair.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Casa de comando",
+   "breadcrumb": [
+    "Melhorias",
+    "Reparo em telhado de fibrocimento",
+    "Casa de comando"
+   ],
+   "legendas": [
+    {
+     "texto": "telhado danificado",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "194 KB",
+      "amostra": [
+       {
+        "nome": "roof-1.jpeg",
+        "src": "assets/img/slides/improvements/roof-repair/roof-1.jpeg",
+        "miniatura": "assets/img/slides/improvements/roof-repair/roof-1-200.webp",
+        "peso": "194 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "reparo em andamento",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "303 KB",
+      "amostra": [
+       {
+        "nome": "roof-2.jpeg",
+        "src": "assets/img/slides/improvements/roof-repair/roof-2.jpeg",
+        "miniatura": "assets/img/slides/improvements/roof-repair/roof-2-200.webp",
+        "peso": "116 KB"
+       },
+       {
+        "nome": "roof-3.jpeg",
+        "src": "assets/img/slides/improvements/roof-repair/roof-3.jpeg",
+        "miniatura": "assets/img/slides/improvements/roof-repair/roof-3-200.webp",
+        "peso": "187 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "reparo concluído",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "153 KB",
+      "amostra": [
+       {
+        "nome": "roof-4.jpeg",
+        "src": "assets/img/slides/improvements/roof-repair/roof-4.jpeg",
+        "miniatura": "assets/img/slides/improvements/roof-repair/roof-4-200.webp",
+        "peso": "153 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "651 KB",
+    "amostra": [
+     {
+      "nome": "roof-1.jpeg",
+      "src": "assets/img/slides/improvements/roof-repair/roof-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/roof-repair/roof-1-200.webp",
+      "peso": "194 KB"
+     },
+     {
+      "nome": "roof-2.jpeg",
+      "src": "assets/img/slides/improvements/roof-repair/roof-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/roof-repair/roof-2-200.webp",
+      "peso": "116 KB"
+     },
+     {
+      "nome": "roof-3.jpeg",
+      "src": "assets/img/slides/improvements/roof-repair/roof-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/roof-repair/roof-3-200.webp",
+      "peso": "187 KB"
+     },
+     {
+      "nome": "roof-4.jpeg",
+      "src": "assets/img/slides/improvements/roof-repair/roof-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/roof-repair/roof-4-200.webp",
+      "peso": "153 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "571fbd4-1",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "571fbd4",
+   "aba": "conteudo",
+   "link": "slides/slide-tag-replacement.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "Melhorias",
+    "Reposição de etiquetas dos equipamentos"
+   ],
+   "de": "SE — Subestação › Reposição de etiquetas dos equipamentos",
+   "para": "Melhorias › Reposição de etiquetas dos equipamentos"
+  },
+  {
+   "id": "571fbd4-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "571fbd4",
+   "aba": "conteudo",
+   "link": "slides/slide-tag-replacement.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Aplicação das etiquetas",
+   "breadcrumb": [
+    "Melhorias",
+    "Reposição de etiquetas dos equipamentos",
+    "Aplicação das etiquetas"
+   ],
+   "legendas": [
+    {
+     "texto": "caixa de TC",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "170 KB",
+      "amostra": [
+       {
+        "nome": "tag-1.jpeg",
+        "src": "assets/img/slides/improvements/tag-replacement/tag-1.jpeg",
+        "miniatura": "assets/img/slides/improvements/tag-replacement/tag-1-200.webp",
+        "peso": "91 KB"
+       },
+       {
+        "nome": "tag-2.jpeg",
+        "src": "assets/img/slides/improvements/tag-replacement/tag-2.jpeg",
+        "miniatura": "assets/img/slides/improvements/tag-replacement/tag-2-200.webp",
+        "peso": "80 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "cubículo de média tensão",
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "96 KB",
+      "amostra": [
+       {
+        "nome": "tag-3.jpeg",
+        "src": "assets/img/slides/improvements/tag-replacement/tag-3.jpeg",
+        "miniatura": "assets/img/slides/improvements/tag-replacement/tag-3-200.webp",
+        "peso": "50 KB"
+       },
+       {
+        "nome": "tag-4.jpeg",
+        "src": "assets/img/slides/improvements/tag-replacement/tag-4.jpeg",
+        "miniatura": "assets/img/slides/improvements/tag-replacement/tag-4-200.webp",
+        "peso": "46 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "TSA",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "55 KB",
+      "amostra": [
+       {
+        "nome": "tag-5.jpeg",
+        "src": "assets/img/slides/improvements/tag-replacement/tag-5.jpeg",
+        "miniatura": "assets/img/slides/improvements/tag-replacement/tag-5-200.webp",
+        "peso": "55 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "USCA",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "46 KB",
+      "amostra": [
+       {
+        "nome": "tag-6.jpeg",
+        "src": "assets/img/slides/improvements/tag-replacement/tag-6.jpeg",
+        "miniatura": "assets/img/slides/improvements/tag-replacement/tag-6-200.webp",
+        "peso": "46 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 6,
+    "pesoTotal": "368 KB",
+    "amostra": [
+     {
+      "nome": "tag-1.jpeg",
+      "src": "assets/img/slides/improvements/tag-replacement/tag-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/tag-replacement/tag-1-200.webp",
+      "peso": "91 KB"
+     },
+     {
+      "nome": "tag-2.jpeg",
+      "src": "assets/img/slides/improvements/tag-replacement/tag-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/tag-replacement/tag-2-200.webp",
+      "peso": "80 KB"
+     },
+     {
+      "nome": "tag-3.jpeg",
+      "src": "assets/img/slides/improvements/tag-replacement/tag-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/tag-replacement/tag-3-200.webp",
+      "peso": "50 KB"
+     },
+     {
+      "nome": "tag-4.jpeg",
+      "src": "assets/img/slides/improvements/tag-replacement/tag-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/tag-replacement/tag-4-200.webp",
+      "peso": "46 KB"
+     },
+     {
+      "nome": "tag-5.jpeg",
+      "src": "assets/img/slides/improvements/tag-replacement/tag-5.jpeg",
+      "miniatura": "assets/img/slides/improvements/tag-replacement/tag-5-200.webp",
+      "peso": "55 KB"
+     }
+    ],
+    "extras": 1
+   },
+   "qtdImagens": 6,
+   "removidas": 6
+  },
+  {
+   "id": "188c8be-5",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "188c8be",
+   "aba": "conteudo",
+   "link": "slides/slide-crushed-stone.html",
+   "acao": "transferência",
+   "tipo": "seção do slide",
+   "titulo": null,
+   "breadcrumb": [
+    "Melhorias",
+    "Recomposição de brita das subestações"
+   ],
+   "de": "SE — Subestação › Recomposição de brita das subestações",
+   "para": "Melhorias › Recomposição de brita das subestações"
+  },
+  {
+   "id": "188c8be-4",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "188c8be",
+   "aba": "conteudo",
+   "link": "slides/slide-crushed-stone.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Execução",
+   "breadcrumb": [
+    "Melhorias",
+    "Recomposição de brita das subestações",
+    "Execução"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "544 KB",
+    "amostra": [
+     {
+      "nome": "stone-1.jpeg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-1-200.webp",
+      "peso": "127 KB"
+     },
+     {
+      "nome": "stone-2.jpeg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-2-200.webp",
+      "peso": "120 KB"
+     },
+     {
+      "nome": "stone-3.jpeg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-3-200.webp",
+      "peso": "150 KB"
+     },
+     {
+      "nome": "stone-4.jpeg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-4-200.webp",
+      "peso": "148 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4,
+   "removidas": 4
+  },
+  {
+   "id": "188c8be-3",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "188c8be",
+   "aba": "conteudo",
+   "link": "slides/slide-crushed-stone.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "Visão geral da recomposição",
+   "breadcrumb": [
+    "Melhorias",
+    "Recomposição de brita das subestações",
+    "Visão geral da recomposição"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "370 KB",
+    "amostra": [
+     {
+      "nome": "stone-0.jpg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-0.jpg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-0-200.webp",
+      "peso": "370 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1,
+   "removidas": 1
+  },
+  {
+   "id": "188c8be-2",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "188c8be",
+   "aba": "conteudo",
+   "link": "slides/slide-crushed-stone.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "SE-N3",
+   "breadcrumb": [
+    "Melhorias",
+    "Recomposição de brita das subestações",
+    "SE-N3"
+   ],
+   "legendas": [
+    {
+     "texto": "antes",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "240 KB",
+      "amostra": [
+       {
+        "nome": "stone-9.jpg",
+        "src": "assets/img/slides/improvements/crushed-stone/stone-9.jpg",
+        "miniatura": "assets/img/slides/improvements/crushed-stone/stone-9-200.webp",
+        "peso": "240 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "depois",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "169 KB",
+      "amostra": [
+       {
+        "nome": "stone-10.jpg",
+        "src": "assets/img/slides/improvements/crushed-stone/stone-10.jpg",
+        "miniatura": "assets/img/slides/improvements/crushed-stone/stone-10-200.webp",
+        "peso": "169 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "410 KB",
+    "amostra": [
+     {
+      "nome": "stone-9.jpg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-9.jpg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-9-200.webp",
+      "peso": "240 KB"
+     },
+     {
+      "nome": "stone-10.jpg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-10.jpg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-10-200.webp",
+      "peso": "169 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "188c8be-1",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "188c8be",
+   "aba": "conteudo",
+   "link": "slides/slide-crushed-stone.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "SE-N2",
+   "breadcrumb": [
+    "Melhorias",
+    "Recomposição de brita das subestações",
+    "SE-N2"
+   ],
+   "legendas": [
+    {
+     "texto": "antes",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "234 KB",
+      "amostra": [
+       {
+        "nome": "stone-7.jpg",
+        "src": "assets/img/slides/improvements/crushed-stone/stone-7.jpg",
+        "miniatura": "assets/img/slides/improvements/crushed-stone/stone-7-200.webp",
+        "peso": "234 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "depois",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "163 KB",
+      "amostra": [
+       {
+        "nome": "stone-8.jpg",
+        "src": "assets/img/slides/improvements/crushed-stone/stone-8.jpg",
+        "miniatura": "assets/img/slides/improvements/crushed-stone/stone-8-200.webp",
+        "peso": "163 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "397 KB",
+    "amostra": [
+     {
+      "nome": "stone-7.jpg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-7.jpg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-7-200.webp",
+      "peso": "234 KB"
+     },
+     {
+      "nome": "stone-8.jpg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-8.jpg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-8-200.webp",
+      "peso": "163 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "188c8be-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "188c8be",
+   "aba": "conteudo",
+   "link": "slides/slide-crushed-stone.html",
+   "acao": "modificação",
+   "tipo": "imagens",
+   "titulo": "SE-N1",
+   "breadcrumb": [
+    "Melhorias",
+    "Recomposição de brita das subestações",
+    "SE-N1"
+   ],
+   "legendas": [
+    {
+     "texto": "antes",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "217 KB",
+      "amostra": [
+       {
+        "nome": "stone-5.jpg",
+        "src": "assets/img/slides/improvements/crushed-stone/stone-5.jpg",
+        "miniatura": "assets/img/slides/improvements/crushed-stone/stone-5-200.webp",
+        "peso": "217 KB"
+       }
+      ],
+      "extras": 0
+     }
+    },
+    {
+     "texto": "depois",
+     "imagens": {
+      "total": 1,
+      "pesoTotal": "199 KB",
+      "amostra": [
+       {
+        "nome": "stone-6.jpg",
+        "src": "assets/img/slides/improvements/crushed-stone/stone-6.jpg",
+        "miniatura": "assets/img/slides/improvements/crushed-stone/stone-6-200.webp",
+        "peso": "199 KB"
+       }
+      ],
+      "extras": 0
+     }
+    }
+   ],
+   "imagens": {
+    "total": 2,
+    "pesoTotal": "416 KB",
+    "amostra": [
+     {
+      "nome": "stone-5.jpg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-5.jpg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-5-200.webp",
+      "peso": "217 KB"
+     },
+     {
+      "nome": "stone-6.jpg",
+      "src": "assets/img/slides/improvements/crushed-stone/stone-6.jpg",
+      "miniatura": "assets/img/slides/improvements/crushed-stone/stone-6-200.webp",
+      "peso": "199 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 2,
+   "removidas": 2
+  },
+  {
+   "id": "ebb41ea-0",
+   "data": "14-09-26",
+   "hora": "14:47",
+   "commit": "ebb41ea",
+   "aba": "conteudo",
+   "link": "slides/index.html",
+   "acao": "adição",
+   "tipo": "seção",
+   "titulo": "Melhorias",
+   "breadcrumb": [
+    "Melhorias"
+   ]
+  },
   {
    "id": "e69bd61-0",
    "data": "14-09-26",
@@ -80,7 +1912,7 @@
    "link": "slides/slide-tower-identification.html",
    "acao": "adição",
    "breadcrumb": [
-    "LT — Transmissão",
+    "Melhorias",
     "Identificação de torres",
     "Identificação nas cantoneiras"
    ],
@@ -106,7 +1938,7 @@
          {
           "nome": "tower-7.jpeg",
           "src": "assets/img/slides/lt/tower-identification/tower-7.jpeg",
-          "miniatura": "assets/img/slides/lt/tower-identification/tower-7-200.webp",
+          "miniatura": "history/thumbs/f9ed043-tower-7.webp",
           "peso": "88 KB"
          }
         ],
@@ -122,7 +1954,7 @@
          {
           "nome": "tower-8.jpeg",
           "src": "assets/img/slides/lt/tower-identification/tower-8.jpeg",
-          "miniatura": "assets/img/slides/lt/tower-identification/tower-8-200.webp",
+          "miniatura": "history/thumbs/f9ed043-tower-8.webp",
           "peso": "84 KB"
          }
         ],
@@ -137,13 +1969,13 @@
        {
         "nome": "tower-7.jpeg",
         "src": "assets/img/slides/lt/tower-identification/tower-7.jpeg",
-        "miniatura": "assets/img/slides/lt/tower-identification/tower-7-200.webp",
+        "miniatura": "history/thumbs/f9ed043-tower-7.webp",
         "peso": "88 KB"
        },
        {
         "nome": "tower-8.jpeg",
         "src": "assets/img/slides/lt/tower-identification/tower-8.jpeg",
-        "miniatura": "assets/img/slides/lt/tower-identification/tower-8-200.webp",
+        "miniatura": "history/thumbs/f9ed043-tower-8.webp",
         "peso": "84 KB"
        }
       ],
@@ -921,7 +2753,7 @@
    "link": "slides/slide-tag-replacement.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos",
     "Aplicação das etiquetas"
    ],
@@ -944,13 +2776,13 @@
          {
           "nome": "tag-3.jpeg",
           "src": "assets/img/slides/se/tag-replacement/tag-3.jpeg",
-          "miniatura": "assets/img/slides/se/tag-replacement/tag-3-200.webp",
+          "miniatura": "history/thumbs/70c4092-tag-3.webp",
           "peso": "50 KB"
          },
          {
           "nome": "tag-4.jpeg",
           "src": "assets/img/slides/se/tag-replacement/tag-4.jpeg",
-          "miniatura": "assets/img/slides/se/tag-replacement/tag-4-200.webp",
+          "miniatura": "history/thumbs/70c4092-tag-4.webp",
           "peso": "46 KB"
          }
         ],
@@ -966,7 +2798,7 @@
          {
           "nome": "tag-5.jpeg",
           "src": "assets/img/slides/se/tag-replacement/tag-5.jpeg",
-          "miniatura": "assets/img/slides/se/tag-replacement/tag-5-200.webp",
+          "miniatura": "history/thumbs/70c4092-tag-5.webp",
           "peso": "55 KB"
          }
         ],
@@ -982,7 +2814,7 @@
          {
           "nome": "tag-6.jpeg",
           "src": "assets/img/slides/se/tag-replacement/tag-6.jpeg",
-          "miniatura": "assets/img/slides/se/tag-replacement/tag-6-200.webp",
+          "miniatura": "history/thumbs/70c4092-tag-6.webp",
           "peso": "46 KB"
          }
         ],
@@ -997,25 +2829,25 @@
        {
         "nome": "tag-3.jpeg",
         "src": "assets/img/slides/se/tag-replacement/tag-3.jpeg",
-        "miniatura": "assets/img/slides/se/tag-replacement/tag-3-200.webp",
+        "miniatura": "history/thumbs/70c4092-tag-3.webp",
         "peso": "50 KB"
        },
        {
         "nome": "tag-4.jpeg",
         "src": "assets/img/slides/se/tag-replacement/tag-4.jpeg",
-        "miniatura": "assets/img/slides/se/tag-replacement/tag-4-200.webp",
+        "miniatura": "history/thumbs/70c4092-tag-4.webp",
         "peso": "46 KB"
        },
        {
         "nome": "tag-5.jpeg",
         "src": "assets/img/slides/se/tag-replacement/tag-5.jpeg",
-        "miniatura": "assets/img/slides/se/tag-replacement/tag-5-200.webp",
+        "miniatura": "history/thumbs/70c4092-tag-5.webp",
         "peso": "55 KB"
        },
        {
         "nome": "tag-6.jpeg",
         "src": "assets/img/slides/se/tag-replacement/tag-6.jpeg",
-        "miniatura": "assets/img/slides/se/tag-replacement/tag-6-200.webp",
+        "miniatura": "history/thumbs/70c4092-tag-6.webp",
         "peso": "46 KB"
        }
       ],
@@ -1033,13 +2865,13 @@
        {
         "nome": "tag-1.jpeg",
         "src": "assets/img/slides/se/tag-replacement/tag-1.jpeg",
-        "miniatura": "assets/img/slides/se/tag-replacement/tag-1-200.webp",
+        "miniatura": "history/thumbs/70c4092-tag-1.webp",
         "peso": "91 KB"
        },
        {
         "nome": "tag-2.jpeg",
         "src": "assets/img/slides/se/tag-replacement/tag-2.jpeg",
-        "miniatura": "assets/img/slides/se/tag-replacement/tag-2-200.webp",
+        "miniatura": "history/thumbs/70c4092-tag-2.webp",
         "peso": "80 KB"
        }
       ],
@@ -1513,7 +3345,7 @@
    "tipo": "imagens",
    "titulo": "Execução geral",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Execução geral"
    ],
@@ -1525,25 +3357,25 @@
      {
       "nome": "paint-13.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-13.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-13-200.webp",
+      "miniatura": "history/thumbs/8fc9448-paint-13.webp",
       "peso": "255 KB"
      },
      {
       "nome": "paint-14.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-14.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-14-200.webp",
+      "miniatura": "history/thumbs/8fc9448-paint-14.webp",
       "peso": "290 KB"
      },
      {
       "nome": "paint-15.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-15.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-15-200.webp",
+      "miniatura": "history/thumbs/8fc9448-paint-15.webp",
       "peso": "258 KB"
      },
      {
       "nome": "paint-16.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-16.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-16-200.webp",
+      "miniatura": "history/thumbs/8fc9448-paint-16.webp",
       "peso": "269 KB"
      }
     ],
@@ -1562,7 +3394,7 @@
    "tipo": "subtítulo",
    "titulo": "Execução geral",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Execução geral"
    ],
@@ -1663,7 +3495,7 @@
    "tipo": "imagens",
    "titulo": null,
    "breadcrumb": [
-    "LT — Transmissão",
+    "Melhorias",
     "Identificação de torres",
     "Quantitativo de placas pendentes e substituídas"
    ],
@@ -1676,7 +3508,7 @@
      {
       "nome": "tower-0.jpg",
       "src": "assets/img/slides/lt/tower-identification/tower-0.jpg",
-      "miniatura": "assets/img/slides/lt/tower-identification/tower-0-200.webp",
+      "miniatura": "history/thumbs/d9a4cbc-tower-0.webp",
       "peso": "417 KB"
      }
     ],
@@ -1695,7 +3527,7 @@
    "tipo": "subtítulo",
    "titulo": "Etapas da substituição",
    "breadcrumb": [
-    "LT — Transmissão",
+    "Melhorias",
     "Identificação de torres",
     "Etapas da substituição"
    ],
@@ -1711,7 +3543,7 @@
    "link": "slides/slide-tower-identification.html",
    "acao": "adição",
    "breadcrumb": [
-    "LT — Transmissão",
+    "Melhorias",
     "Identificação de torres",
     "Identificação das bases das torres"
    ],
@@ -1735,13 +3567,13 @@
        {
         "nome": "tower-5.jpeg",
         "src": "assets/img/slides/lt/tower-identification/tower-5.jpeg",
-        "miniatura": "assets/img/slides/lt/tower-identification/tower-5-200.webp",
+        "miniatura": "history/thumbs/d9a4cbc-tower-5.webp",
         "peso": "175 KB"
        },
        {
         "nome": "tower-6.jpeg",
         "src": "assets/img/slides/lt/tower-identification/tower-6.jpeg",
-        "miniatura": "assets/img/slides/lt/tower-identification/tower-6-200.webp",
+        "miniatura": "history/thumbs/d9a4cbc-tower-6.webp",
         "peso": "265 KB"
        }
       ],
@@ -1762,7 +3594,7 @@
    "tipo": "subtítulo",
    "titulo": "Quantitativo de placas pendentes e substituídas",
    "breadcrumb": [
-    "LT — Transmissão",
+    "Melhorias",
     "Identificação de torres",
     "Quantitativo de placas pendentes e substituídas"
    ]
@@ -1830,7 +3662,7 @@
    "link": "slides/slide-substation-restoration.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Restauração da pintura dos portões"
    ],
@@ -1856,7 +3688,7 @@
          {
           "nome": "door-1.jpeg",
           "src": "assets/img/slides/se/substation-restoration/door-1.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/door-1-200.webp",
+          "miniatura": "history/thumbs/7cbfc6f-door-1.webp",
           "peso": "72 KB"
          }
         ],
@@ -1872,7 +3704,7 @@
          {
           "nome": "door-2.jpeg",
           "src": "assets/img/slides/se/substation-restoration/door-2.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/door-2-200.webp",
+          "miniatura": "history/thumbs/7cbfc6f-door-2.webp",
           "peso": "60 KB"
          }
         ],
@@ -1888,7 +3720,7 @@
          {
           "nome": "door-3.jpeg",
           "src": "assets/img/slides/se/substation-restoration/door-3.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/door-3-200.webp",
+          "miniatura": "history/thumbs/7cbfc6f-door-3.webp",
           "peso": "90 KB"
          }
         ],
@@ -1904,7 +3736,7 @@
          {
           "nome": "door-4.jpeg",
           "src": "assets/img/slides/se/substation-restoration/door-4.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/door-4-200.webp",
+          "miniatura": "history/thumbs/7cbfc6f-door-4.webp",
           "peso": "93 KB"
          }
         ],
@@ -1919,25 +3751,25 @@
        {
         "nome": "door-1.jpeg",
         "src": "assets/img/slides/se/substation-restoration/door-1.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/door-1-200.webp",
+        "miniatura": "history/thumbs/7cbfc6f-door-1.webp",
         "peso": "72 KB"
        },
        {
         "nome": "door-2.jpeg",
         "src": "assets/img/slides/se/substation-restoration/door-2.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/door-2-200.webp",
+        "miniatura": "history/thumbs/7cbfc6f-door-2.webp",
         "peso": "60 KB"
        },
        {
         "nome": "door-3.jpeg",
         "src": "assets/img/slides/se/substation-restoration/door-3.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/door-3-200.webp",
+        "miniatura": "history/thumbs/7cbfc6f-door-3.webp",
         "peso": "90 KB"
        },
        {
         "nome": "door-4.jpeg",
         "src": "assets/img/slides/se/substation-restoration/door-4.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/door-4-200.webp",
+        "miniatura": "history/thumbs/7cbfc6f-door-4.webp",
         "peso": "93 KB"
        }
       ],
@@ -2384,7 +4216,7 @@
    "tipo": "imagens",
    "titulo": "Etapas do processo",
    "breadcrumb": [
-    "LD — Distribuição",
+    "Melhorias",
     "Energização de Atalho",
     "Etapas do processo"
    ],
@@ -2396,19 +4228,19 @@
      {
       "nome": "atalho-5.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-5.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-5-200.webp",
+      "miniatura": "history/thumbs/b07f150-atalho-5.webp",
       "peso": "2,6 MB"
      },
      {
       "nome": "atalho-6.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-6.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-6-200.webp",
+      "miniatura": "history/thumbs/b07f150-atalho-6.webp",
       "peso": "543 KB"
      },
      {
       "nome": "atalho-7.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-7.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-7-200.webp",
+      "miniatura": "history/thumbs/b07f150-atalho-7.webp",
       "peso": "1,3 MB"
      }
     ],
@@ -3530,7 +5362,7 @@
    "link": "slides/slide-fence-post-repair.html",
    "acao": "modificação",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Substituição de mourões"
    ],
    "titulo": "Substituição de mourões",
@@ -3550,7 +5382,7 @@
        {
         "nome": "fence-4.jpeg",
         "src": "assets/img/slides/se/fence-post-repair/fence-4.jpeg",
-        "miniatura": "assets/img/slides/se/fence-post-repair/fence-4-200.webp",
+        "miniatura": "history/thumbs/15345d1-fence-4.webp",
         "peso": "270 KB"
        }
       ],
@@ -3578,7 +5410,7 @@
        {
         "nome": "fence-5.jpeg",
         "src": "assets/img/slides/se/fence-post-repair/fence-5.jpeg",
-        "miniatura": "assets/img/slides/se/fence-post-repair/fence-5-200.webp",
+        "miniatura": "history/thumbs/15345d1-fence-5.webp",
         "peso": "350 KB"
        }
       ],
@@ -3606,7 +5438,7 @@
        {
         "nome": "fence-6.jpeg",
         "src": "assets/img/slides/se/fence-post-repair/fence-6.jpeg",
-        "miniatura": "assets/img/slides/se/fence-post-repair/fence-6-200.webp",
+        "miniatura": "history/thumbs/15345d1-fence-6.webp",
         "peso": "372 KB"
        }
       ],
@@ -3698,7 +5530,7 @@
    "link": "slides/slide-substation-restoration.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Restauração da pintura da casa de comando"
    ],
@@ -3718,13 +5550,13 @@
        {
         "nome": "building-1.jpeg",
         "src": "assets/img/slides/se/substation-restoration/building-1.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/building-1-200.webp",
+        "miniatura": "history/thumbs/f33c6ec-building-1.webp",
         "peso": "51 KB"
        },
        {
         "nome": "building-3.jpeg",
         "src": "assets/img/slides/se/substation-restoration/building-3.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/building-3-200.webp",
+        "miniatura": "history/thumbs/f33c6ec-building-3.webp",
         "peso": "42 KB"
        }
       ],
@@ -3741,13 +5573,13 @@
        {
         "nome": "building-2.jpeg",
         "src": "assets/img/slides/se/substation-restoration/building-2.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/building-2-200.webp",
+        "miniatura": "history/thumbs/f33c6ec-building-2.webp",
         "peso": "58 KB"
        },
        {
         "nome": "building-4.jpeg",
         "src": "assets/img/slides/se/substation-restoration/building-4.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/building-4-200.webp",
+        "miniatura": "history/thumbs/f33c6ec-building-4.webp",
         "peso": "50 KB"
        }
       ],
@@ -4075,7 +5907,7 @@
    "link": "slides/slide-fence-post-repair.html",
    "acao": "modificação",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Substituição de mourões"
    ],
    "titulo": "Substituição de mourões",
@@ -4095,7 +5927,7 @@
        {
         "nome": "fence-4.jpeg",
         "src": "assets/img/slides/se/fence-post-repair/fence-4.jpeg",
-        "miniatura": "assets/img/slides/se/fence-post-repair/fence-4-200.webp",
+        "miniatura": "history/thumbs/f33c6ec-fence-4.webp",
         "peso": "270 KB"
        }
       ],
@@ -4117,7 +5949,7 @@
        {
         "nome": "fence-5.jpeg",
         "src": "assets/img/slides/se/fence-post-repair/fence-5.jpeg",
-        "miniatura": "assets/img/slides/se/fence-post-repair/fence-5-200.webp",
+        "miniatura": "history/thumbs/f33c6ec-fence-5.webp",
         "peso": "350 KB"
        }
       ],
@@ -4139,7 +5971,7 @@
        {
         "nome": "fence-6.jpeg",
         "src": "assets/img/slides/se/fence-post-repair/fence-6.jpeg",
-        "miniatura": "assets/img/slides/se/fence-post-repair/fence-6-200.webp",
+        "miniatura": "history/thumbs/f33c6ec-fence-6.webp",
         "peso": "372 KB"
        }
       ],
@@ -4195,7 +6027,7 @@
    "tipo": "observação",
    "titulo": "Vedação polimérica das portas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Vedação polimérica das portas"
    ],
@@ -4207,13 +6039,13 @@
      {
       "nome": "seal-1.jpeg",
       "src": "assets/img/slides/se/substation-restoration/seal-1.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/seal-1-200.webp",
+      "miniatura": "history/thumbs/3bdf954-seal-1.webp",
       "peso": "44 KB"
      },
      {
       "nome": "seal-2.jpeg",
       "src": "assets/img/slides/se/substation-restoration/seal-2.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/seal-2-200.webp",
+      "miniatura": "history/thumbs/3bdf954-seal-2.webp",
       "peso": "44 KB"
      }
     ],
@@ -4231,7 +6063,7 @@
    "tipo": "observação",
    "titulo": "Restauração da pintura das calçadas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Restauração da pintura das calçadas"
    ],
@@ -4243,25 +6075,25 @@
      {
       "nome": "sidewalk-1.jpeg",
       "src": "assets/img/slides/se/substation-restoration/sidewalk-1.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-1-200.webp",
+      "miniatura": "history/thumbs/3bdf954-sidewalk-1.webp",
       "peso": "68 KB"
      },
      {
       "nome": "sidewalk-2.jpeg",
       "src": "assets/img/slides/se/substation-restoration/sidewalk-2.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-2-200.webp",
+      "miniatura": "history/thumbs/3bdf954-sidewalk-2.webp",
       "peso": "53 KB"
      },
      {
       "nome": "sidewalk-3.jpeg",
       "src": "assets/img/slides/se/substation-restoration/sidewalk-3.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-3-200.webp",
+      "miniatura": "history/thumbs/3bdf954-sidewalk-3.webp",
       "peso": "59 KB"
      },
      {
       "nome": "sidewalk-4.jpeg",
       "src": "assets/img/slides/se/substation-restoration/sidewalk-4.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-4-200.webp",
+      "miniatura": "history/thumbs/3bdf954-sidewalk-4.webp",
       "peso": "55 KB"
      }
     ],
@@ -4453,7 +6285,7 @@
    "tipo": "detalhe",
    "titulo": "Vedação polimérica das portas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Vedação polimérica das portas"
    ],
@@ -4488,7 +6320,7 @@
    "tipo": "slide",
    "titulo": "Substituição da tubulação de abastecimento",
    "breadcrumb": [
-    "Óbices",
+    "Melhorias",
     "Substituição da tubulação de abastecimento"
    ],
    "resumo": "Subestação SE-E5 · Subestação SE-E6",
@@ -4499,31 +6331,31 @@
      {
       "nome": "supply-1.jpeg",
       "src": "assets/img/slides/issues/water-supply/supply-1.jpeg",
-      "miniatura": "assets/img/slides/issues/water-supply/supply-1-200.webp",
+      "miniatura": "history/thumbs/cb39ca2-supply-1.webp",
       "peso": "73 KB"
      },
      {
       "nome": "supply-2.jpeg",
       "src": "assets/img/slides/issues/water-supply/supply-2.jpeg",
-      "miniatura": "assets/img/slides/issues/water-supply/supply-2-200.webp",
+      "miniatura": "history/thumbs/cb39ca2-supply-2.webp",
       "peso": "82 KB"
      },
      {
       "nome": "supply-3.jpeg",
       "src": "assets/img/slides/issues/water-supply/supply-3.jpeg",
-      "miniatura": "assets/img/slides/issues/water-supply/supply-3-200.webp",
+      "miniatura": "history/thumbs/cb39ca2-supply-3.webp",
       "peso": "92 KB"
      },
      {
       "nome": "supply-4.jpeg",
       "src": "assets/img/slides/issues/water-supply/supply-4.jpeg",
-      "miniatura": "assets/img/slides/issues/water-supply/supply-4-200.webp",
+      "miniatura": "history/thumbs/cb39ca2-supply-4.webp",
       "peso": "78 KB"
      },
      {
       "nome": "supply-5.jpeg",
       "src": "assets/img/slides/issues/water-supply/supply-5.jpeg",
-      "miniatura": "assets/img/slides/issues/water-supply/supply-5-200.webp",
+      "miniatura": "history/thumbs/cb39ca2-supply-5.webp",
       "peso": "95 KB"
      }
     ],
@@ -4588,7 +6420,7 @@
    "link": "slides/slide-substation-restoration.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Vedação polimérica das portas"
    ],
@@ -4614,13 +6446,13 @@
          {
           "nome": "seal-1.jpeg",
           "src": "assets/img/slides/se/substation-restoration/seal-1.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/seal-1-200.webp",
+          "miniatura": "history/thumbs/2d7fe87-seal-1.webp",
           "peso": "44 KB"
          },
          {
           "nome": "seal-2.jpeg",
           "src": "assets/img/slides/se/substation-restoration/seal-2.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/seal-2-200.webp",
+          "miniatura": "history/thumbs/2d7fe87-seal-2.webp",
           "peso": "44 KB"
          }
         ],
@@ -4635,13 +6467,13 @@
        {
         "nome": "seal-1.jpeg",
         "src": "assets/img/slides/se/substation-restoration/seal-1.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/seal-1-200.webp",
+        "miniatura": "history/thumbs/2d7fe87-seal-1.webp",
         "peso": "44 KB"
        },
        {
         "nome": "seal-2.jpeg",
         "src": "assets/img/slides/se/substation-restoration/seal-2.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/seal-2-200.webp",
+        "miniatura": "history/thumbs/2d7fe87-seal-2.webp",
         "peso": "44 KB"
        }
       ],
@@ -4660,7 +6492,7 @@
    "link": "slides/slide-substation-restoration.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Restauração da pintura da casa de comando"
    ],
@@ -4684,25 +6516,25 @@
        {
         "nome": "building-1.jpeg",
         "src": "assets/img/slides/se/substation-restoration/building-1.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/building-1-200.webp",
+        "miniatura": "history/thumbs/2d7fe87-building-1.webp",
         "peso": "51 KB"
        },
        {
         "nome": "building-2.jpeg",
         "src": "assets/img/slides/se/substation-restoration/building-2.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/building-2-200.webp",
+        "miniatura": "history/thumbs/2d7fe87-building-2.webp",
         "peso": "58 KB"
        },
        {
         "nome": "building-3.jpeg",
         "src": "assets/img/slides/se/substation-restoration/building-3.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/building-3-200.webp",
+        "miniatura": "history/thumbs/2d7fe87-building-3.webp",
         "peso": "42 KB"
        },
        {
         "nome": "building-4.jpeg",
         "src": "assets/img/slides/se/substation-restoration/building-4.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/building-4-200.webp",
+        "miniatura": "history/thumbs/2d7fe87-building-4.webp",
         "peso": "50 KB"
        }
       ],
@@ -5388,7 +7220,7 @@
    "tipo": "slide",
    "titulo": "Substituição de mourões",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Substituição de mourões"
    ],
    "resumo": null,
@@ -5399,31 +7231,31 @@
      {
       "nome": "fence-1.jpeg",
       "src": "assets/img/slides/se/fence-post-repair/fence-1.jpeg",
-      "miniatura": "assets/img/slides/se/fence-post-repair/fence-1-200.webp",
+      "miniatura": "history/thumbs/5349102-fence-1.webp",
       "peso": "646 KB"
      },
      {
       "nome": "fence-2.jpeg",
       "src": "assets/img/slides/se/fence-post-repair/fence-2.jpeg",
-      "miniatura": "assets/img/slides/se/fence-post-repair/fence-2-200.webp",
+      "miniatura": "history/thumbs/5349102-fence-2.webp",
       "peso": "568 KB"
      },
      {
       "nome": "fence-3.jpeg",
       "src": "assets/img/slides/se/fence-post-repair/fence-3.jpeg",
-      "miniatura": "assets/img/slides/se/fence-post-repair/fence-3-200.webp",
+      "miniatura": "history/thumbs/5349102-fence-3.webp",
       "peso": "555 KB"
      },
      {
       "nome": "fence-4.jpeg",
       "src": "assets/img/slides/se/fence-post-repair/fence-4.jpeg",
-      "miniatura": "assets/img/slides/se/fence-post-repair/fence-4-200.webp",
+      "miniatura": "history/thumbs/5349102-fence-4.webp",
       "peso": "270 KB"
      },
      {
       "nome": "fence-5.jpeg",
       "src": "assets/img/slides/se/fence-post-repair/fence-5.jpeg",
-      "miniatura": "assets/img/slides/se/fence-post-repair/fence-5-200.webp",
+      "miniatura": "history/thumbs/5349102-fence-5.webp",
       "peso": "350 KB"
      }
     ],
@@ -5440,7 +7272,7 @@
    "link": "slides/slide-substation-restoration.html",
    "acao": "modificação",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Reposição da pia da guarita"
    ],
@@ -5461,7 +7293,7 @@
        {
         "nome": "sink-1.jpeg",
         "src": "assets/img/slides/se/substation-restoration/sink-1.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/sink-1-200.webp",
+        "miniatura": "history/thumbs/d272791-sink-1.webp",
         "peso": "84 KB"
        }
       ],
@@ -5479,7 +7311,7 @@
        {
         "nome": "sink-2.jpeg",
         "src": "assets/img/slides/se/substation-restoration/sink-2.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/sink-2-200.webp",
+        "miniatura": "history/thumbs/d272791-sink-2.webp",
         "peso": "65 KB"
        }
       ],
@@ -5499,7 +7331,7 @@
    "tipo": "imagens",
    "titulo": "Restauração da pintura das calçadas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Restauração da pintura das calçadas"
    ],
@@ -5513,7 +7345,7 @@
        {
         "nome": "sidewalk-4.jpeg",
         "src": "assets/img/slides/se/substation-restoration/sidewalk-4.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-4-200.webp",
+        "miniatura": "history/thumbs/d272791-sidewalk-4.webp",
         "peso": "55 KB"
        }
       ],
@@ -5528,7 +7360,7 @@
      {
       "nome": "sidewalk-4.jpeg",
       "src": "assets/img/slides/se/substation-restoration/sidewalk-4.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-4-200.webp",
+      "miniatura": "history/thumbs/d272791-sidewalk-4.webp",
       "peso": "55 KB"
      }
     ],
@@ -5545,7 +7377,7 @@
    "link": "slides/slide-substation-restoration.html",
    "acao": "modificação",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral"
    ],
    "titulo": "Revitalização geral",
@@ -5576,7 +7408,7 @@
    "link": "slides/slide-roof-repair.html",
    "acao": "modificação",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reparo em telhado de fibrocimento"
    ],
    "titulo": "Reparo em telhado de fibrocimento",
@@ -5781,7 +7613,7 @@
    "tipo": "detalhe",
    "titulo": "Identificação de torres",
    "breadcrumb": [
-    "LT — Transmissão",
+    "Melhorias",
     "Identificação de torres"
    ],
    "resumo": "Assunto: inspeção da LT 230 kV entre SE-E4 e SE-E6 (WBS 2825), estruturas 47 a 50. Sem anomalias estruturais; única não conformidade: ausência da placa de identificação superior nas torres 47/2 e 49/1."
@@ -5829,7 +7661,7 @@
    "tipo": "detalhe",
    "titulo": "Reposição de etiquetas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos"
    ],
    "resumo": "Assunto: inspeção técnica da Subestação SE-E5 (WBS 2817) para a Ficha de Inspeção Periódica FIP-010. Painéis, pátio e transformador conformes; não conformidade no transformador TRRD fora de operação, ninhos de pássaro e placas ilegíveis."
@@ -5843,7 +7675,7 @@
    "link": "slides/slide-substation-restoration.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Reposição da pia da guarita"
    ],
@@ -5869,13 +7701,13 @@
          {
           "nome": "sink-1.jpeg",
           "src": "assets/img/slides/se/substation-restoration/sink-1.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/sink-1-200.webp",
+          "miniatura": "history/thumbs/e1b75a8-sink-1.webp",
           "peso": "84 KB"
          },
          {
           "nome": "sink-2.jpeg",
           "src": "assets/img/slides/se/substation-restoration/sink-2.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/sink-2-200.webp",
+          "miniatura": "history/thumbs/e1b75a8-sink-2.webp",
           "peso": "65 KB"
          }
         ],
@@ -5890,13 +7722,13 @@
        {
         "nome": "sink-1.jpeg",
         "src": "assets/img/slides/se/substation-restoration/sink-1.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/sink-1-200.webp",
+        "miniatura": "history/thumbs/e1b75a8-sink-1.webp",
         "peso": "84 KB"
        },
        {
         "nome": "sink-2.jpeg",
         "src": "assets/img/slides/se/substation-restoration/sink-2.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/sink-2-200.webp",
+        "miniatura": "history/thumbs/e1b75a8-sink-2.webp",
         "peso": "65 KB"
        }
       ],
@@ -5915,7 +7747,7 @@
    "link": "slides/slide-substation-restoration.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral",
     "Restauração da pintura das calçadas"
    ],
@@ -5941,19 +7773,19 @@
          {
           "nome": "sidewalk-1.jpeg",
           "src": "assets/img/slides/se/substation-restoration/sidewalk-1.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-1-200.webp",
+          "miniatura": "history/thumbs/e1b75a8-sidewalk-1.webp",
           "peso": "68 KB"
          },
          {
           "nome": "sidewalk-2.jpeg",
           "src": "assets/img/slides/se/substation-restoration/sidewalk-2.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-2-200.webp",
+          "miniatura": "history/thumbs/e1b75a8-sidewalk-2.webp",
           "peso": "53 KB"
          },
          {
           "nome": "sidewalk-3.jpeg",
           "src": "assets/img/slides/se/substation-restoration/sidewalk-3.jpeg",
-          "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-3-200.webp",
+          "miniatura": "history/thumbs/e1b75a8-sidewalk-3.webp",
           "peso": "59 KB"
          }
         ],
@@ -5968,19 +7800,19 @@
        {
         "nome": "sidewalk-1.jpeg",
         "src": "assets/img/slides/se/substation-restoration/sidewalk-1.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-1-200.webp",
+        "miniatura": "history/thumbs/e1b75a8-sidewalk-1.webp",
         "peso": "68 KB"
        },
        {
         "nome": "sidewalk-2.jpeg",
         "src": "assets/img/slides/se/substation-restoration/sidewalk-2.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-2-200.webp",
+        "miniatura": "history/thumbs/e1b75a8-sidewalk-2.webp",
         "peso": "53 KB"
        },
        {
         "nome": "sidewalk-3.jpeg",
         "src": "assets/img/slides/se/substation-restoration/sidewalk-3.jpeg",
-        "miniatura": "assets/img/slides/se/substation-restoration/sidewalk-3-200.webp",
+        "miniatura": "history/thumbs/e1b75a8-sidewalk-3.webp",
         "peso": "59 KB"
        }
       ],
@@ -7630,7 +9462,7 @@
    "tipo": "slide",
    "titulo": "Reparo em telhado metálico",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reparo em telhado de fibrocimento"
    ],
    "resumo": "Casa de comando",
@@ -7641,25 +9473,25 @@
      {
       "nome": "roof-1.jpeg",
       "src": "assets/img/slides/se/roof-repair/roof-1.jpeg",
-      "miniatura": "assets/img/slides/se/roof-repair/roof-1-200.webp",
+      "miniatura": "history/thumbs/3bd7e3d-roof-1.webp",
       "peso": "194 KB"
      },
      {
       "nome": "roof-2.jpeg",
       "src": "assets/img/slides/se/roof-repair/roof-2.jpeg",
-      "miniatura": "assets/img/slides/se/roof-repair/roof-2-200.webp",
+      "miniatura": "history/thumbs/3bd7e3d-roof-2.webp",
       "peso": "116 KB"
      },
      {
       "nome": "roof-3.jpeg",
       "src": "assets/img/slides/se/roof-repair/roof-3.jpeg",
-      "miniatura": "assets/img/slides/se/roof-repair/roof-3-200.webp",
+      "miniatura": "history/thumbs/3bd7e3d-roof-3.webp",
       "peso": "187 KB"
      },
      {
       "nome": "roof-4.jpeg",
       "src": "assets/img/slides/se/roof-repair/roof-4.jpeg",
-      "miniatura": "assets/img/slides/se/roof-repair/roof-4-200.webp",
+      "miniatura": "history/thumbs/3bd7e3d-roof-4.webp",
       "peso": "153 KB"
      }
     ],
@@ -8204,7 +10036,7 @@
    "tipo": "detalhe",
    "titulo": "Identificação de torres",
    "breadcrumb": [
-    "LT — Transmissão",
+    "Melhorias",
     "Identificação de torres"
    ],
    "resumo": "Assunto: inspeção da LT 230 kV entre SE-E4 e SE-E6 (WBS 2825), estruturas 47 a 50. Sem anomalias estruturais; única não conformidade: ausência da placa de identificação superior nas torres 47/2 e 49/1."
@@ -8220,7 +10052,7 @@
    "tipo": "detalhe",
    "titulo": "Reposição de etiquetas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos"
    ],
    "resumo": "Assunto: inspeção técnica da Subestação SE-E5 (WBS 2817) para a Ficha de Inspeção Periódica FIP-010. Painéis, pátio e transformador conformes; não conformidade no transformador TRRD fora de operação, ninhos de pássaro e placas ilegíveis."
@@ -8281,7 +10113,7 @@
    "tipo": "slide",
    "titulo": "Revitalização das estruturas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Revitalização geral"
    ],
    "resumo": "Execução · Reposição de meio-fio e canaleta",
@@ -8292,31 +10124,31 @@
      {
       "nome": "paint-1.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-1.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-1-200.webp",
+      "miniatura": "history/thumbs/fbbd09b-paint-1.webp",
       "peso": "72 KB"
      },
      {
       "nome": "paint-2.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-2.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-2-200.webp",
+      "miniatura": "history/thumbs/fbbd09b-paint-2.webp",
       "peso": "71 KB"
      },
      {
       "nome": "paint-3.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-3.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-3-200.webp",
+      "miniatura": "history/thumbs/fbbd09b-paint-3.webp",
       "peso": "63 KB"
      },
      {
       "nome": "paint-4.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-4.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-4-200.webp",
+      "miniatura": "history/thumbs/fbbd09b-paint-4.webp",
       "peso": "70 KB"
      },
      {
       "nome": "paint-5.jpeg",
       "src": "assets/img/slides/se/substation-restoration/paint-5.jpeg",
-      "miniatura": "assets/img/slides/se/substation-restoration/paint-5-200.webp",
+      "miniatura": "history/thumbs/fbbd09b-paint-5.webp",
       "peso": "63 KB"
      }
     ],
@@ -10994,7 +12826,7 @@
    "tipo": "observação",
    "titulo": "Etapas do processo",
    "breadcrumb": [
-    "LD — Distribuição",
+    "Melhorias",
     "Energização de Atalho",
     "Etapas do processo"
    ],
@@ -11006,19 +12838,19 @@
      {
       "nome": "atalho-2.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-2.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-2-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-atalho-2.webp",
       "peso": "336 KB"
      },
      {
       "nome": "atalho-3.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-3.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-3-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-atalho-3.webp",
       "peso": "306 KB"
      },
      {
       "nome": "atalho-4.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-4.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-4-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-atalho-4.webp",
       "peso": "553 KB"
      }
     ],
@@ -11036,7 +12868,7 @@
    "tipo": "observação",
    "titulo": "Linha do tempo do serviço",
    "breadcrumb": [
-    "LD — Distribuição",
+    "Melhorias",
     "Energização de Atalho",
     "Linha do tempo do serviço"
    ],
@@ -11048,7 +12880,7 @@
      {
       "nome": "atalho-1.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-1.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-1-200.webp",
+      "miniatura": "history/thumbs/c4f6d89-atalho-1.webp",
       "peso": "278 KB"
      }
     ],
@@ -13933,7 +15765,7 @@
    "tipo": "observação",
    "titulo": "Etapas do processo",
    "breadcrumb": [
-    "LD — Distribuição",
+    "Melhorias",
     "Energização de Atalho",
     "Etapas do processo"
    ],
@@ -13945,19 +15777,19 @@
      {
       "nome": "atalho-2.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-2.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-2-200.webp",
+      "miniatura": "history/thumbs/1827a19-atalho-2.webp",
       "peso": "336 KB"
      },
      {
       "nome": "atalho-3.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-3.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-3-200.webp",
+      "miniatura": "history/thumbs/1827a19-atalho-3.webp",
       "peso": "306 KB"
      },
      {
       "nome": "atalho-4.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-4.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-4-200.webp",
+      "miniatura": "history/thumbs/1827a19-atalho-4.webp",
       "peso": "553 KB"
      }
     ],
@@ -13975,7 +15807,7 @@
    "tipo": "observação",
    "titulo": "Linha do tempo do serviço",
    "breadcrumb": [
-    "LD — Distribuição",
+    "Melhorias",
     "Energização de Atalho",
     "Linha do tempo do serviço"
    ],
@@ -13987,7 +15819,7 @@
      {
       "nome": "atalho-1.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-1.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-1-200.webp",
+      "miniatura": "history/thumbs/1827a19-atalho-1.webp",
       "peso": "278 KB"
      }
     ],
@@ -15488,7 +17320,7 @@
    "tipo": "imagens",
    "titulo": "Placas instaladas",
    "breadcrumb": [
-    "LT — Transmissão",
+    "Melhorias",
     "Identificação de torres",
     "Placas instaladas"
    ],
@@ -15500,7 +17332,7 @@
      {
       "nome": "tower-0.jpg",
       "src": "assets/img/slides/lt/tower-identification/tower-0.jpg",
-      "miniatura": "assets/img/slides/lt/tower-identification/tower-0-200.webp",
+      "miniatura": "history/thumbs/ba09017-tower-0.webp",
       "peso": "417 KB"
      }
     ],
@@ -15696,7 +17528,7 @@
    "tipo": "subtítulo",
    "titulo": "Aplicação das etiquetas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos",
     "Aplicação das etiquetas"
    ],
@@ -15714,7 +17546,7 @@
    "tipo": "subtítulo",
    "titulo": "Meio-fio e canaleta",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos",
     "Meio-fio e canaleta"
    ]
@@ -15728,7 +17560,7 @@
    "link": "slides/slide-tag-replacement.html",
    "acao": "modificação",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos"
    ],
    "titulo": "Reposição de etiquetas dos equipamentos",
@@ -15877,7 +17709,7 @@
    "link": "slides/slide-crushed-stone.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Recomposição de brita das subestações",
     "Visão geral da recomposição"
    ],
@@ -15901,7 +17733,7 @@
        {
         "nome": "stone-0.jpg",
         "src": "assets/img/slides/se/crushed-stone/stone-0.jpg",
-        "miniatura": "assets/img/slides/se/crushed-stone/stone-0-200.webp",
+        "miniatura": "history/thumbs/ba09017-stone-0.webp",
         "peso": "370 KB"
        }
       ],
@@ -18617,7 +20449,7 @@
    "link": "slides/slide-crushed-stone.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Recomposição de brita das subestações",
     "SE-N3"
    ],
@@ -18643,7 +20475,7 @@
          {
           "nome": "stone-9.jpg",
           "src": "assets/img/slides/se/crushed-stone/stone-9.jpg",
-          "miniatura": "assets/img/slides/se/crushed-stone/stone-9-200.webp",
+          "miniatura": "history/thumbs/76d3a99-stone-9.webp",
           "peso": "240 KB"
          }
         ],
@@ -18659,7 +20491,7 @@
          {
           "nome": "stone-10.jpg",
           "src": "assets/img/slides/se/crushed-stone/stone-10.jpg",
-          "miniatura": "assets/img/slides/se/crushed-stone/stone-10-200.webp",
+          "miniatura": "history/thumbs/76d3a99-stone-10.webp",
           "peso": "169 KB"
          }
         ],
@@ -18674,13 +20506,13 @@
        {
         "nome": "stone-9.jpg",
         "src": "assets/img/slides/se/crushed-stone/stone-9.jpg",
-        "miniatura": "assets/img/slides/se/crushed-stone/stone-9-200.webp",
+        "miniatura": "history/thumbs/76d3a99-stone-9.webp",
         "peso": "240 KB"
        },
        {
         "nome": "stone-10.jpg",
         "src": "assets/img/slides/se/crushed-stone/stone-10.jpg",
-        "miniatura": "assets/img/slides/se/crushed-stone/stone-10-200.webp",
+        "miniatura": "history/thumbs/76d3a99-stone-10.webp",
         "peso": "169 KB"
        }
       ],
@@ -18699,7 +20531,7 @@
    "link": "slides/slide-crushed-stone.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Recomposição de brita das subestações",
     "SE-N2"
    ],
@@ -18725,7 +20557,7 @@
          {
           "nome": "stone-7.jpg",
           "src": "assets/img/slides/se/crushed-stone/stone-7.jpg",
-          "miniatura": "assets/img/slides/se/crushed-stone/stone-7-200.webp",
+          "miniatura": "history/thumbs/76d3a99-stone-7.webp",
           "peso": "228 KB"
          }
         ],
@@ -18741,7 +20573,7 @@
          {
           "nome": "stone-8.jpg",
           "src": "assets/img/slides/se/crushed-stone/stone-8.jpg",
-          "miniatura": "assets/img/slides/se/crushed-stone/stone-8-200.webp",
+          "miniatura": "history/thumbs/76d3a99-stone-8.webp",
           "peso": "163 KB"
          }
         ],
@@ -18756,13 +20588,13 @@
        {
         "nome": "stone-7.jpg",
         "src": "assets/img/slides/se/crushed-stone/stone-7.jpg",
-        "miniatura": "assets/img/slides/se/crushed-stone/stone-7-200.webp",
+        "miniatura": "history/thumbs/76d3a99-stone-7.webp",
         "peso": "228 KB"
        },
        {
         "nome": "stone-8.jpg",
         "src": "assets/img/slides/se/crushed-stone/stone-8.jpg",
-        "miniatura": "assets/img/slides/se/crushed-stone/stone-8-200.webp",
+        "miniatura": "history/thumbs/76d3a99-stone-8.webp",
         "peso": "163 KB"
        }
       ],
@@ -18781,7 +20613,7 @@
    "link": "slides/slide-crushed-stone.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Recomposição de brita das subestações",
     "SE-N1"
    ],
@@ -18807,7 +20639,7 @@
          {
           "nome": "stone-5.jpg",
           "src": "assets/img/slides/se/crushed-stone/stone-5.jpg",
-          "miniatura": "assets/img/slides/se/crushed-stone/stone-5-200.webp",
+          "miniatura": "history/thumbs/76d3a99-stone-5.webp",
           "peso": "217 KB"
          }
         ],
@@ -18823,7 +20655,7 @@
          {
           "nome": "stone-6.jpg",
           "src": "assets/img/slides/se/crushed-stone/stone-6.jpg",
-          "miniatura": "assets/img/slides/se/crushed-stone/stone-6-200.webp",
+          "miniatura": "history/thumbs/76d3a99-stone-6.webp",
           "peso": "199 KB"
          }
         ],
@@ -18838,13 +20670,13 @@
        {
         "nome": "stone-5.jpg",
         "src": "assets/img/slides/se/crushed-stone/stone-5.jpg",
-        "miniatura": "assets/img/slides/se/crushed-stone/stone-5-200.webp",
+        "miniatura": "history/thumbs/76d3a99-stone-5.webp",
         "peso": "217 KB"
        },
        {
         "nome": "stone-6.jpg",
         "src": "assets/img/slides/se/crushed-stone/stone-6.jpg",
-        "miniatura": "assets/img/slides/se/crushed-stone/stone-6-200.webp",
+        "miniatura": "history/thumbs/76d3a99-stone-6.webp",
         "peso": "199 KB"
        }
       ],
@@ -19070,7 +20902,7 @@
    "tipo": "slide",
    "titulo": "Energização de Atalho",
    "breadcrumb": [
-    "LD — Distribuição",
+    "Melhorias",
     "Energização de Atalho"
    ],
    "resumo": "Linha do tempo do serviço · Etapas do processo",
@@ -19081,25 +20913,25 @@
      {
       "nome": "atalho-1.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-1.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-1-200.webp",
+      "miniatura": "history/thumbs/76d3a99-atalho-1.webp",
       "peso": "278 KB"
      },
      {
       "nome": "atalho-2.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-2.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-2-200.webp",
+      "miniatura": "history/thumbs/76d3a99-atalho-2.webp",
       "peso": "336 KB"
      },
      {
       "nome": "atalho-3.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-3.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-3-200.webp",
+      "miniatura": "history/thumbs/76d3a99-atalho-3.webp",
       "peso": "306 KB"
      },
      {
       "nome": "atalho-4.jpeg",
       "src": "assets/img/slides/ld/atalho-connection/atalho-4.jpeg",
-      "miniatura": "assets/img/slides/ld/atalho-connection/atalho-4-200.webp",
+      "miniatura": "history/thumbs/76d3a99-atalho-4.webp",
       "peso": "553 KB"
      }
     ],
@@ -20059,7 +21891,7 @@
    "tipo": "subtítulo",
    "titulo": "Etiquetas de identificação",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos",
     "Etiquetas de identificação"
    ],
@@ -20075,7 +21907,7 @@
    "link": "slides/slide-tag-replacement.html",
    "acao": "adição",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos",
     "Meio-fio e canaleta"
    ],
@@ -20138,7 +21970,7 @@
    "tipo": "título",
    "titulo": "Reposição de etiquetas e canaletas",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Reposição de etiquetas dos equipamentos"
    ],
    "de": "Reposição de etiquetas de identificação",
@@ -21746,7 +23578,7 @@
    "tipo": "slide",
    "titulo": "Recomposição de brita das subestações",
    "breadcrumb": [
-    "SE — Subestação",
+    "Melhorias",
     "Recomposição de brita das subestações"
    ],
    "resumo": "Execução",
@@ -21757,25 +23589,25 @@
      {
       "nome": "stone-1.jpeg",
       "src": "assets/img/slides/se/crushed-stone/stone-1.jpeg",
-      "miniatura": "assets/img/slides/se/crushed-stone/stone-1-200.webp",
+      "miniatura": "history/thumbs/f026cc6-stone-1.webp",
       "peso": "127 KB"
      },
      {
       "nome": "stone-2.jpeg",
       "src": "assets/img/slides/se/crushed-stone/stone-2.jpeg",
-      "miniatura": "assets/img/slides/se/crushed-stone/stone-2-200.webp",
+      "miniatura": "history/thumbs/f026cc6-stone-2.webp",
       "peso": "120 KB"
      },
      {
       "nome": "stone-3.jpeg",
       "src": "assets/img/slides/se/crushed-stone/stone-3.jpeg",
-      "miniatura": "assets/img/slides/se/crushed-stone/stone-3-200.webp",
+      "miniatura": "history/thumbs/f026cc6-stone-3.webp",
       "peso": "150 KB"
      },
      {
       "nome": "stone-4.jpeg",
       "src": "assets/img/slides/se/crushed-stone/stone-4.jpeg",
-      "miniatura": "assets/img/slides/se/crushed-stone/stone-4-200.webp",
+      "miniatura": "history/thumbs/f026cc6-stone-4.webp",
       "peso": "148 KB"
      }
     ],

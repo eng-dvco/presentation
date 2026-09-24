@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../styles/slide-style.css" />
     <link rel="stylesheet" href="../styles/mosaic-style.css" />
     <link rel="stylesheet" href="../styles/slide-lt-maintenance.css" />
+    <link rel="stylesheet" href="../styles/slide-lt-maintenance-general.css" />
 
     <link rel="preload" href="../assets/fonts/roboto-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="../styles/fonts.css" />
@@ -96,13 +97,64 @@
               </li>
             </ul>
           </div>
-          <div class="mosaic-container">
-            <div class="img img-largest img-contain">
-              <picture>
-                <source type="image/webp" srcset="../assets/img/slides/lt/lt-maintenance/general/table-km-per-segment-finished-200.webp 200w, ../assets/img/slides/lt/lt-maintenance/general/table-km-per-segment-finished-640.webp 640w, ../assets/img/slides/lt/lt-maintenance/general/table-km-per-segment-finished-737.webp 737w" sizes="(max-width: 992px) 94vw, 960px" />
-                <img fetchpriority="high" width="737" height="569" src="../assets/img/slides/lt/lt-maintenance/general/table-km-per-segment-finished.png" alt="Tabela de km por trecho — concluída" loading="eager" />
-              </picture>
-              <p class="obs obs-default invisible"></p>
+          <div class="kmt-card">
+            <div class="kmt-cap">
+              <span id="kmt-title">Manutenção dos acessos da linha de transmissão</span>
+              <span class="kmt-cap-date" id="kmt-date">até 22/09/26</span>
+            </div>
+            <div class="kmt-scroll">
+              <table class="kmt-table" aria-labelledby="kmt-title kmt-date">
+                <thead>
+                  <tr>
+                    <th scope="col">Trecho</th>
+                    <th scope="col">Distância concluída (km)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="kmt-axis">
+                    <td colspan="2">Norte</td>
+                  </tr>
+                  <tr class="is-row-odd">
+                    <td class="kmt-trecho">SE-BNM — SE-N3</td>
+                    <td class="kmt-val">26,114</td>
+                  </tr>
+                  <tr class="is-row-even">
+                    <td class="kmt-trecho">SE-N3 — SE-N2</td>
+                    <td class="kmt-val is-zero">0,000</td>
+                  </tr>
+                  <tr class="is-row-odd">
+                    <td class="kmt-trecho">SE-N2 — SE-N1</td>
+                    <td class="kmt-val is-zero">0,000</td>
+                  </tr>
+                  <tr class="kmt-axis">
+                    <td colspan="2">Leste</td>
+                  </tr>
+                  <tr class="is-row-even">
+                    <td class="kmt-trecho">SE-E0 — SE-E1</td>
+                    <td class="kmt-val">2,600</td>
+                  </tr>
+                  <tr class="is-row-odd">
+                    <td class="kmt-trecho">SE-E0 — SE-E2</td>
+                    <td class="kmt-val">6,500</td>
+                  </tr>
+                  <tr class="is-row-even">
+                    <td class="kmt-trecho">SE-E2 — SE-E3</td>
+                    <td class="kmt-val">4,215</td>
+                  </tr>
+                  <tr class="is-row-odd">
+                    <td class="kmt-trecho">SE-E3 — SE-E4</td>
+                    <td class="kmt-val">10,450</td>
+                  </tr>
+                  <tr class="is-row-even">
+                    <td class="kmt-trecho">SE-E4 — SE-E6</td>
+                    <td class="kmt-val">2,400</td>
+                  </tr>
+                  <tr class="is-row-odd">
+                    <td class="kmt-trecho">SE-E6 — SE-E5</td>
+                    <td class="kmt-val is-zero">0,000</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
           <div class="title-header-h3">

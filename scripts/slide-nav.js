@@ -1390,6 +1390,11 @@ window.__openImgLightbox = function (imgEl) {
         if (h.textContent.trim() === foco.texto) alvos.push(h.closest('.title-header-h2') || h.closest('.title-header-h1') || h);
       });
     }
+    // Só realça o que TEM CAIXA na página. Num slide-contêiner o .title-header-h2 que embrulha a
+    // .nav-list é display:none por projeto (permanece no HTML como metadado), e um registro cujas
+    // imagens saíram do slide — uma deleção — cai justamente nesse invólucro: o realce era aplicado
+    // a um elemento invisível e a rolagem ia para lugar nenhum. Sem alvo visível, não realça nada.
+    alvos = alvos.filter(t => t.offsetParent !== null || t.getClientRects().length > 0);
     if (!alvos.length) return;
     alvos.forEach(t => { t.classList.remove('img-located'); void t.offsetWidth; t.classList.add('img-located'); });
     // O layout ainda CRESCE após o load em slides pesados (a linha do tempo é montada por JS; imagens

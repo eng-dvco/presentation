@@ -1,9 +1,40 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "24-09-26",
- "commits": 279,
- "total": 561,
+ "commits": 281,
+ "total": 562,
  "registros": [
+  {
+   "id": "510875b-0",
+   "data": "24-09-26",
+   "hora": "11:37",
+   "commit": "510875b",
+   "aba": "conteudo",
+   "link": "slides/slide-lt-maintenance-general.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Serviços realizados",
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "Serviços realizados"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "336 KB",
+    "amostra": [
+     {
+      "nome": "Trecho-4.jpg",
+      "src": "assets/img/slides/lt/lt-maintenance/E3-E4/Trecho-4.jpg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/E3-E4/Trecho-4-200.webp",
+      "peso": "336 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 1
+  },
   {
    "id": "2ab69ee-0",
    "data": "24-09-26",

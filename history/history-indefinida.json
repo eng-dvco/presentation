@@ -1,9 +1,94 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "14-09-26",
- "commits": 274,
- "total": 559,
+ "geradoEm": "24-09-26",
+ "commits": 279,
+ "total": 561,
  "registros": [
+  {
+   "id": "2ab69ee-0",
+   "data": "24-09-26",
+   "hora": "10:44",
+   "commit": "2ab69ee",
+   "aba": "conteudo",
+   "link": "slides/slide-lt-maintenance-general.html",
+   "acao": "adição",
+   "tipo": "imagens",
+   "titulo": "Serviços realizados",
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "Serviços realizados"
+   ],
+   "legendas": [],
+   "imagens": {
+    "total": 10,
+    "pesoTotal": "3,7 MB",
+    "amostra": [
+     {
+      "nome": "trecho-1.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-1.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-1-200.webp",
+      "peso": "473 KB"
+     },
+     {
+      "nome": "trecho-2.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-2.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-2-200.webp",
+      "peso": "398 KB"
+     },
+     {
+      "nome": "trecho-3.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-3.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-3-200.webp",
+      "peso": "368 KB"
+     },
+     {
+      "nome": "trecho-4.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-4.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-4-200.webp",
+      "peso": "376 KB"
+     },
+     {
+      "nome": "trecho-5.jpeg",
+      "src": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-5.jpeg",
+      "miniatura": "assets/img/slides/lt/lt-maintenance/BNM-N3/trecho-5-200.webp",
+      "peso": "330 KB"
+     }
+    ],
+    "extras": 5
+   },
+   "qtdImagens": 10
+  },
+  {
+   "id": "e8718e6-0",
+   "data": "24-09-26",
+   "hora": "08:51",
+   "commit": "e8718e6",
+   "aba": "conteudo",
+   "link": "slides/slide-lt-maintenance-general.html",
+   "acao": "deleção",
+   "tipo": "imagens",
+   "titulo": "Serviços realizados",
+   "breadcrumb": [
+    "LT — Transmissão",
+    "Manutenção dos acessos da LT",
+    "Serviços realizados"
+   ],
+   "qtdImagens": 1,
+   "imagens": {
+    "total": 1,
+    "pesoTotal": "20 KB",
+    "amostra": [
+     {
+      "nome": "table-km-per-segment-finished.png",
+      "src": "assets/img/slides/lt/lt-maintenance/general/table-km-per-segment-finished.png",
+      "miniatura": "history/thumbs/c7e5f73-table-km-per-segment-finished.webp",
+      "peso": "20 KB"
+     }
+    ],
+    "extras": 0
+   }
+  },
   {
    "id": "939988b-2",
    "data": "14-09-26",
@@ -22942,7 +23027,7 @@
      {
       "nome": "table-km-per-segment-finished.png",
       "src": "assets/img/slides/lt/lt-maintenance/general/table-km-per-segment-finished.png",
-      "miniatura": "assets/img/slides/lt/lt-maintenance/general/table-km-per-segment-finished-200.webp",
+      "miniatura": "history/thumbs/8b8082e-table-km-per-segment-finished.webp",
       "peso": "20 KB"
      }
     ],

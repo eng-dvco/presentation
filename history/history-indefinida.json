@@ -1,9 +1,57 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "24-09-26",
- "commits": 281,
- "total": 562,
+ "geradoEm": "28-09-26",
+ "commits": 284,
+ "total": 563,
  "registros": [
+  {
+   "id": "78467e9-0",
+   "data": "28-09-26",
+   "hora": "10:43",
+   "commit": "78467e9",
+   "aba": "conteudo",
+   "link": "slides/slide-base-repair.html",
+   "acao": "adição",
+   "tipo": "slide",
+   "titulo": "Reparo em bases de concreto do pátio",
+   "breadcrumb": [
+    "Melhorias",
+    "Reparo em bases de concreto do pátio"
+   ],
+   "resumo": null,
+   "imagens": {
+    "total": 4,
+    "pesoTotal": "342 KB",
+    "amostra": [
+     {
+      "nome": "repair-1.jpeg",
+      "src": "assets/img/slides/improvements/base-repair/repair-1.jpeg",
+      "miniatura": "assets/img/slides/improvements/base-repair/repair-1-200.webp",
+      "peso": "89 KB"
+     },
+     {
+      "nome": "repair-2.jpeg",
+      "src": "assets/img/slides/improvements/base-repair/repair-2.jpeg",
+      "miniatura": "assets/img/slides/improvements/base-repair/repair-2-200.webp",
+      "peso": "80 KB"
+     },
+     {
+      "nome": "repair-3.jpeg",
+      "src": "assets/img/slides/improvements/base-repair/repair-3.jpeg",
+      "miniatura": "assets/img/slides/improvements/base-repair/repair-3-200.webp",
+      "peso": "86 KB"
+     },
+     {
+      "nome": "repair-4.jpeg",
+      "src": "assets/img/slides/improvements/base-repair/repair-4.jpeg",
+      "miniatura": "assets/img/slides/improvements/base-repair/repair-4-200.webp",
+      "peso": "86 KB"
+     }
+    ],
+    "extras": 0
+   },
+   "qtdImagens": 4
+  },
   {
    "id": "510875b-0",
    "data": "24-09-26",

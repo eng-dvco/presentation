@@ -779,8 +779,8 @@
   box-shadow: 0 -4px 9px -3px rgba(0, 0, 0, 0.18), var(--lt-shadow);
 }
 
-/* selo — pílula no canto sup. direito: empilhado, "expandir N" (desagrupa); desagrupado, fica no
-   mesmo canto, acima dos cartões, como "agrupar N" (reempilha só este grupo) */
+/* selo — pílula no canto sup. direito: empilhado, "expandir N" (desagrupa); desagrupado, no mesmo canto,
+   "agrupar N" (reempilha só este grupo), exibido ao pairar sobre o 1º registro */
 .hist-group-badge {
   position: absolute;
   top: var(--gap-4);
@@ -800,11 +800,27 @@
   transition: background-color 0.15s, color 0.15s;
 }
 .hist-group-badge:hover { background: var(--lt-hover); color: var(--lt-text); }
+/* desagrupado: "agrupar N" fica no MESMO canto, sobre o 1º registro, e só aparece quando o cursor paira
+   sobre esse registro (ou sobre o próprio selo / foco de teclado). Sem hover (toque), fica sempre visível.
+   Enquanto visível, o código de commit do 1º registro (que ficaria sob o selo) é ocultado. */
+.hist-group:not(.is-stacked) {
+  position: relative;
+  isolation: isolate;   /* mesmo motivo do empilhado: o z-index do selo não sobe sobre a faixa .hist-gap */
+}
 .hist-group:not(.is-stacked) .hist-group-badge {
-  position: static;
-  align-self: flex-end;
-  z-index: auto;
-  box-shadow: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, background-color 0.15s, color 0.15s;
+}
+.hist-group:not(.is-stacked):has(> .hist-group-badge + .hist-card:hover, > .hist-group-badge:hover, > .hist-group-badge:focus-visible) {
+  & > .hist-group-badge { opacity: 1; pointer-events: auto; }
+  & > .hist-group-badge + .hist-card .hist-topinfo { visibility: hidden; }
+}
+@media (hover: none) {
+  .hist-group:not(.is-stacked) {
+    & > .hist-group-badge { opacity: 1; pointer-events: auto; }
+    & > .hist-group-badge + .hist-card .hist-topinfo { visibility: hidden; }
+  }
 }
 
 /* registro INERTE: o slide-alvo foi removido, então o cartão não leva a lugar nenhum (ver

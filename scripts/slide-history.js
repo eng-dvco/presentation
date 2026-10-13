@@ -614,7 +614,7 @@
   // mostra) e o ÚLTIMO aparece INTEIRO como amostra. z-index crescente põe cada um sobre o de cima.
   // Os cartões NAVEGAM normalmente mesmo empilhados (o clique leva ao registro clicado). Só o SELO do canto
   // sup. direito alterna o grupo: "expandir N" desagrupa; desagrupado, o mesmo lugar passa a exibir
-  // "agrupar N", que reempilha SÓ este grupo (o filtro "agrupamento" continua valendo para todos).
+  // (ao pairar sobre o 1º registro; sempre, no toque) "agrupar N", que reempilha SÓ este grupo (o filtro "agrupamento" continua valendo para todos).
   function pilhaSemelhantes(cards) {
     const gid = 'hist-grp-' + (pilhaSemelhantes._n = (pilhaSemelhantes._n || 0) + 1);
     const grupo = el('div', 'hist-group is-stacked');
@@ -633,7 +633,7 @@
         : 'Agrupar novamente os ' + cards.length + ' registros semelhantes');
     };
     marcaSelo(true);
-    grupo.appendChild(selo);   // 1º filho: desagrupado, fica no topo (canto direito), antes dos cartões
+    grupo.appendChild(selo);   // 1º filho: o CSS o encontra como irmão anterior do 1º cartão (hover)
     cards.forEach((c, k) => { c.style.zIndex = String(k + 1); grupo.appendChild(c); });
     selo.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();

@@ -611,40 +611,35 @@
 
   // AGRUPAMENTO (experimental): empilha 3+ cartões semelhantes (mesma ação+tipo) num "baralho" — cada um
   // cobre a metade de baixo do anterior (só o cabeçalho ação→breadcrumb, até o divisor tracejado, fica à
-  // mostra) e o ÚLTIMO aparece INTEIRO como amostra. Um selo mostra a contagem; clicar expande para os
-  // cartões individuais e espaçados (como sem o agrupamento). z-index crescente põe cada um sobre o de cima.
+  // mostra) e o ÚLTIMO aparece INTEIRO como amostra. z-index crescente põe cada um sobre o de cima.
+  // Os cartões NAVEGAM normalmente mesmo empilhados (o clique leva ao registro clicado). Só o SELO do canto
+  // sup. direito alterna o grupo: "N semelhantes" desagrupa; desagrupado, o mesmo lugar passa a exibir
+  // "agrupar N", que reempilha SÓ este grupo (o filtro "agrupamento" continua valendo para todos).
   function pilhaSemelhantes(cards) {
     const gid = 'hist-grp-' + (pilhaSemelhantes._n = (pilhaSemelhantes._n || 0) + 1);
     const grupo = el('div', 'hist-group is-stacked');
     grupo.id = gid;
     grupo.setAttribute('role', 'group');
     grupo.setAttribute('aria-label', cards.length + ' registros semelhantes agrupados');
-    // empilhado: os cartões saem da tabulação (o SELO é a via de teclado p/ expandir); voltam ao expandir
-    cards.forEach((c, k) => { c.style.zIndex = String(k + 1); c.tabIndex = -1; grupo.appendChild(c); });
     const selo = el('button', 'hist-group-badge');
     selo.type = 'button';
-    const rotulo = () => cards.length + ' semelhantes';
     selo.setAttribute('aria-controls', gid);
-    // nome acessível e aria-expanded do selo acompanham o estado (evita "expandir" enquanto já expandido)
+    // rótulo, nome acessível e aria-expanded do selo acompanham o estado
     const marcaSelo = empilhado => {
-      selo.textContent = empilhado ? rotulo() : 'recolher';
+      selo.textContent = empilhado ? cards.length + ' semelhantes' : 'agrupar ' + cards.length;
       selo.setAttribute('aria-expanded', String(!empilhado));
-      selo.setAttribute('aria-label', empilhado ? ('Expandir o grupo de ' + cards.length + ' registros semelhantes') : 'Recolher o grupo');
+      selo.setAttribute('aria-label', empilhado
+        ? 'Desagrupar os ' + cards.length + ' registros semelhantes'
+        : 'Agrupar novamente os ' + cards.length + ' registros semelhantes');
     };
     marcaSelo(true);
-    grupo.appendChild(selo);
-    const alterna = () => {
-      const empilhado = grupo.classList.toggle('is-stacked');
-      marcaSelo(empilhado);
-      cards.forEach(c => { if (empilhado) c.tabIndex = -1; else c.removeAttribute('tabindex'); });
+    grupo.appendChild(selo);   // 1º filho: desagrupado, fica no topo (canto direito), antes dos cartões
+    cards.forEach((c, k) => { c.style.zIndex = String(k + 1); grupo.appendChild(c); });
+    selo.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      marcaSelo(grupo.classList.toggle('is-stacked'));
       requestAnimationFrame(() => { centraTodos(diasVisiveis()); atualizaMarcas(); });
-    };
-    // EMPILHADO: qualquer clique EXPANDE e NÃO navega (captura, antes do handler do cartão-link).
-    // EXPANDIDO: os cartões voltam a navegar; só o selo recolhe.
-    grupo.addEventListener('click', e => {
-      if (grupo.classList.contains('is-stacked')) { e.preventDefault(); e.stopPropagation(); alterna(); }
-      else if (e.target.closest('.hist-group-badge')) { e.preventDefault(); e.stopPropagation(); alterna(); }
-    }, true);
+    });
     return grupo;
   }
 

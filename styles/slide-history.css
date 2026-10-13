@@ -751,7 +751,7 @@
 /* ── AGRUPAMENTO (experimental): pilha de registros semelhantes (mesma ação+tipo) ──
    Empilhado, cada cartão cobre a metade de baixo do anterior — só o cabeçalho (ação → breadcrumb, até o
    divisor tracejado) fica à mostra; o ÚLTIMO aparece INTEIRO como amostra. z-index crescente (do JS) põe
-   cada cartão sobre o de cima. Clicar expande para os cartões individuais e espaçados. */
+   cada cartão sobre o de cima. Os cartões navegam normalmente; só o selo desagrupa/reagrupa. */
 .hist-group {
   display: flex;
   flex-direction: column;
@@ -763,7 +763,6 @@
   isolation: isolate;   /* contém os z-index internos do baralho (cartões + selo): sem isto eles sobem SOBRE a
                            faixa zebrada .hist-gap (z:1), que deve cobrir o topo dos registros mesmo agrupados */
   gap: 0;
-  cursor: pointer;
 }
 /* empilhado, os cartões precisam da altura REAL (o palpite de 200px do content-visibility desalinharia a
    pilha enquanto fora da tela) */
@@ -780,7 +779,8 @@
   box-shadow: 0 -4px 9px -3px rgba(0, 0, 0, 0.18), var(--lt-shadow);
 }
 
-/* selo de contagem — pílula clicável no canto sup. direito da pilha; expandido, vai ao fim como "recolher" */
+/* selo — pílula no canto sup. direito: empilhado, "N semelhantes" (desagrupa); desagrupado, fica no
+   mesmo canto, acima dos cartões, como "agrupar N" (reempilha só este grupo) */
 .hist-group-badge {
   position: absolute;
   top: var(--gap-4);

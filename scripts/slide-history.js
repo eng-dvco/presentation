@@ -635,6 +635,11 @@
     marcaSelo(true);
     grupo.appendChild(selo);   // 1º filho: o CSS o encontra como irmão anterior do 1º cartão (hover)
     cards.forEach((c, k) => { c.style.zIndex = String(k + 1); grupo.appendChild(c); });
+    // a largura REAL do selo (muda com o rótulo, a fonte e o viewport) reserva espaço à direita do cabeçalho
+    // do 1º registro — o texto "ação · tipo" quebra linha em vez de passar por baixo do selo (ver CSS)
+    if (window.ResizeObserver) new ResizeObserver(() => {
+      if (selo.offsetWidth) grupo.style.setProperty('--hist-badge-w', selo.offsetWidth + 'px');
+    }).observe(selo);
     selo.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();
       marcaSelo(grupo.classList.toggle('is-stacked'));

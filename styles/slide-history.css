@@ -800,6 +800,13 @@
   transition: background-color 0.15s, color 0.15s;
 }
 .hist-group-badge:hover { background: var(--lt-hover); color: var(--lt-text); }
+/* o selo cobre o canto sup. direito do 1º registro: o cabeçalho dele ("ação · tipo") reserva a largura do
+   selo (--hist-badge-w, medida no JS) e QUEBRA LINHA antes de alcançá-lo — nos dois estados, para o texto
+   não saltar quando o "agrupar N" aparece ao pairar. Folga = distância do selo à borda + respiro. */
+.hist-group > .hist-group-badge + .hist-card .hist-card-top {
+  padding-right: calc(var(--hist-badge-w, 9em) + var(--gap-8));
+}
+
 /* desagrupado: "agrupar N" fica no MESMO canto, sobre o 1º registro, e só aparece quando o cursor paira
    sobre esse registro (ou sobre o próprio selo / foco de teclado). Sem hover (toque), fica sempre visível.
    Enquanto visível, o código de commit do 1º registro (que ficaria sob o selo) é ocultado. */

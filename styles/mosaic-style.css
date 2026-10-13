@@ -146,6 +146,18 @@
     object-position: center 0%;
   }
 
+  /* enquadramento horizontal p/ células estreitas (.tri-column + .img-stretch): mantém à
+     vista o conteúdo de interesse que fica à esquerda da foto (ex.: visor do medidor) */
+  &.img-left img {
+    object-fit: cover;
+    object-position: 0% 50%;
+  }
+
+  &.img-mid-left img {
+    object-fit: cover;
+    object-position: 25% 50%;
+  }
+
   &.img-mid-mid img {
     object-fit: cover;
     object-position: center 50%;

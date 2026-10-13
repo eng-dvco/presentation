@@ -1,7 +1,7 @@
 {
  "apresentacao": "indefinida",
  "geradoEm": "13-10-26",
- "commits": 286,
+ "commits": 292,
  "total": 566,
  "registros": [
   {
@@ -24753,6 +24753,21 @@
   }
  ],
  "funcoes": [
+  {
+   "id": "fn-64",
+   "aba": "funcoes",
+   "data": "13-10-26",
+   "hora": "11:21",
+   "acao": "aperfeiçoada",
+   "tipo": "usabilidade",
+   "titulo": "Grupos de semelhantes navegam e se alternam individualmente",
+   "resumo": "Nos grupos de registros semelhantes, clicar em qualquer cartão empilhado passou a levar direto ao registro clicado, sem expandir o grupo. Só o botão do canto superior direito alterna o agrupamento: 'EXPANDIR N' desagrupa e, no mesmo lugar, 'AGRUPAR N' reempilha apenas aquele grupo — antes era preciso alternar o filtro de agrupamento, o que mudava todos os grupos de uma vez.",
+   "link": "slides/history.html",
+   "breadcrumb": [
+    "Histórico de Modificações",
+    "Filtros"
+   ]
+  },
   {
    "id": "fn-63",
    "aba": "funcoes",

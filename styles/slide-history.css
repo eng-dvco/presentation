@@ -779,7 +779,7 @@
   box-shadow: 0 -4px 9px -3px rgba(0, 0, 0, 0.18), var(--lt-shadow);
 }
 
-/* selo — pílula no canto sup. direito: empilhado, "N semelhantes" (desagrupa); desagrupado, fica no
+/* selo — pílula no canto sup. direito: empilhado, "expandir N" (desagrupa); desagrupado, fica no
    mesmo canto, acima dos cartões, como "agrupar N" (reempilha só este grupo) */
 .hist-group-badge {
   position: absolute;

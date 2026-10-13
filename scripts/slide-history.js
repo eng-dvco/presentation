@@ -613,7 +613,7 @@
   // cobre a metade de baixo do anterior (só o cabeçalho ação→breadcrumb, até o divisor tracejado, fica à
   // mostra) e o ÚLTIMO aparece INTEIRO como amostra. z-index crescente põe cada um sobre o de cima.
   // Os cartões NAVEGAM normalmente mesmo empilhados (o clique leva ao registro clicado). Só o SELO do canto
-  // sup. direito alterna o grupo: "N semelhantes" desagrupa; desagrupado, o mesmo lugar passa a exibir
+  // sup. direito alterna o grupo: "expandir N" desagrupa; desagrupado, o mesmo lugar passa a exibir
   // "agrupar N", que reempilha SÓ este grupo (o filtro "agrupamento" continua valendo para todos).
   function pilhaSemelhantes(cards) {
     const gid = 'hist-grp-' + (pilhaSemelhantes._n = (pilhaSemelhantes._n || 0) + 1);
@@ -626,7 +626,7 @@
     selo.setAttribute('aria-controls', gid);
     // rótulo, nome acessível e aria-expanded do selo acompanham o estado
     const marcaSelo = empilhado => {
-      selo.textContent = empilhado ? cards.length + ' semelhantes' : 'agrupar ' + cards.length;
+      selo.textContent = (empilhado ? 'expandir ' : 'agrupar ') + cards.length;
       selo.setAttribute('aria-expanded', String(!empilhado));
       selo.setAttribute('aria-label', empilhado
         ? 'Desagrupar os ' + cards.length + ' registros semelhantes'

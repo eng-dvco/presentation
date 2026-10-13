@@ -1,9 +1,239 @@
 {
  "apresentacao": "indefinida",
- "geradoEm": "28-09-26",
- "commits": 284,
- "total": 563,
+ "geradoEm": "13-10-26",
+ "commits": 286,
+ "total": 566,
  "registros": [
+  {
+   "id": "7d3542c-2",
+   "data": "13-10-26",
+   "hora": "09:45",
+   "commit": "7d3542c",
+   "aba": "conteudo",
+   "link": "slides/slide-measurements.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Aferições em baterias",
+    "Medidor de bateria (Tensão e resistência)"
+   ],
+   "titulo": "Medidor de bateria (Tensão e resistência)",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 3,
+      "pesoTotal": "276 KB",
+      "amostra": [
+       {
+        "nome": "measurement-11.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-11.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-11-200.webp",
+        "peso": "95 KB"
+       },
+       {
+        "nome": "measurement-12.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-12.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-12-200.webp",
+        "peso": "95 KB"
+       },
+       {
+        "nome": "measurement-13.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-13.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-13-200.webp",
+        "peso": "87 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 3
+    }
+   ]
+  },
+  {
+   "id": "7d3542c-1",
+   "data": "13-10-26",
+   "hora": "09:45",
+   "commit": "7d3542c",
+   "aba": "conteudo",
+   "link": "slides/slide-measurements.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Aferições em baterias",
+    "Torquímetro"
+   ],
+   "titulo": "Torquímetro",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [],
+     "imagens": {
+      "total": 2,
+      "pesoTotal": "135 KB",
+      "amostra": [
+       {
+        "nome": "measurement-9.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-9.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-9-200.webp",
+        "peso": "61 KB"
+       },
+       {
+        "nome": "measurement-10.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-10.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-10-200.webp",
+        "peso": "74 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 2
+    }
+   ]
+  },
+  {
+   "id": "7d3542c-0",
+   "data": "13-10-26",
+   "hora": "09:45",
+   "commit": "7d3542c",
+   "aba": "conteudo",
+   "link": "slides/slide-measurements.html",
+   "acao": "adição",
+   "breadcrumb": [
+    "SE — Subestação",
+    "Aferições em baterias",
+    "Alicate amperímetro"
+   ],
+   "titulo": "Alicate amperímetro",
+   "tipo": "subtítulo · imagens",
+   "tipos": [
+    "subtítulo",
+    "imagens"
+   ],
+   "partes": [
+    {
+     "tipo": "subtítulo"
+    },
+    {
+     "tipo": "imagens",
+     "legendas": [
+      {
+       "texto": "aferição de temperatura",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "95 KB",
+        "amostra": [
+         {
+          "nome": "measurement-5.jpeg",
+          "src": "assets/img/slides/se/measurements/measurement-5.jpeg",
+          "miniatura": "assets/img/slides/se/measurements/measurement-5-200.webp",
+          "peso": "95 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "aferição de corrente CC",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "152 KB",
+        "amostra": [
+         {
+          "nome": "measurement-6.jpeg",
+          "src": "assets/img/slides/se/measurements/measurement-6.jpeg",
+          "miniatura": "assets/img/slides/se/measurements/measurement-6-200.webp",
+          "peso": "152 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "aferição de tensão CA",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "139 KB",
+        "amostra": [
+         {
+          "nome": "measurement-7.jpeg",
+          "src": "assets/img/slides/se/measurements/measurement-7.jpeg",
+          "miniatura": "assets/img/slides/se/measurements/measurement-7-200.webp",
+          "peso": "139 KB"
+         }
+        ],
+        "extras": 0
+       }
+      },
+      {
+       "texto": "aferição de tensão CC",
+       "imagens": {
+        "total": 1,
+        "pesoTotal": "142 KB",
+        "amostra": [
+         {
+          "nome": "measurement-8.jpeg",
+          "src": "assets/img/slides/se/measurements/measurement-8.jpeg",
+          "miniatura": "assets/img/slides/se/measurements/measurement-8-200.webp",
+          "peso": "142 KB"
+         }
+        ],
+        "extras": 0
+       }
+      }
+     ],
+     "imagens": {
+      "total": 4,
+      "pesoTotal": "529 KB",
+      "amostra": [
+       {
+        "nome": "measurement-5.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-5.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-5-200.webp",
+        "peso": "95 KB"
+       },
+       {
+        "nome": "measurement-6.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-6.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-6-200.webp",
+        "peso": "152 KB"
+       },
+       {
+        "nome": "measurement-7.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-7.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-7-200.webp",
+        "peso": "139 KB"
+       },
+       {
+        "nome": "measurement-8.jpeg",
+        "src": "assets/img/slides/se/measurements/measurement-8.jpeg",
+        "miniatura": "assets/img/slides/se/measurements/measurement-8-200.webp",
+        "peso": "142 KB"
+       }
+      ],
+      "extras": 0
+     },
+     "qtdImagens": 4
+    }
+   ]
+  },
   {
    "id": "78467e9-0",
    "data": "28-09-26",
